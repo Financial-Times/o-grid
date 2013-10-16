@@ -1,0 +1,77 @@
+/* Styles for presenting the grid. Not part of the grid code. */
+/* The viewport width at which to change between layout 1 and layout 2 */
+/* The viewport width at which to change between layout 1 and layout 2 */
+/* The viewport width at which to change between layout 3 and layout 4 */
+/**
+ * Writes media query selector for given layout
+ */
+/**
+ * Calculate column width as a percentage.
+ */
+/**
+ * Calculate column width as a percentage, but subtract the gutter
+ */
+#devHead {
+  margin: 0 0 20px 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+.dev-inner {
+  display: block;
+  margin: 0 0 20px 0;
+  min-height: 30px;
+  text-align: center;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  background-color: #ddd;
+}
+
+.dev-blue {
+  background-color: #ccf;
+}
+
+.dev-red {
+  background-color: #fcc;
+}
+
+.dev-green {
+  background-color: #cfc;
+}
+
+.dev-yellow {
+  background-color: #ffc;
+}
+
+.dev-prototype .grid-all-1 .dev-inner {
+  background-color: #ffc;
+}
+
+.dev-prototype .grid-all-12 h2 {
+  margin: 0 0 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  #devHead h1 span:after {
+    content: "small layout";
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  #devHead h1 span:after {
+    content: "medium layout";
+  }
+}
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
+  #devHead h1 span:after {
+    content: "large layout";
+  }
+}
+@media screen and (min-width: 1400px) {
+  #devHead h1 span:after {
+    content: "extra large layout";
+  }
+}

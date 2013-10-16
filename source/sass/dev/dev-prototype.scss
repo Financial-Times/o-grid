@@ -1,0 +1,73 @@
+/* Styles for presenting the grid. Not part of the grid code. */
+
+@import "../_variables.scss";
+@import "../_mixins.scss";
+@import "../_functions.scss";
+
+#devHead {
+	margin: 0 0 20px 0;
+    padding: 10px;
+	background-color: black;
+	color: white;
+}
+
+.dev-inner {
+	display: block;
+	margin: 0 0 20px 0;
+	min-height: 30px;
+	text-align: center;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #ddd;
+}
+
+.dev-blue {
+	background-color: #ccf;
+}
+
+.dev-red {
+	background-color: #fcc;
+}
+
+.dev-green {
+	background-color: #cfc;
+}
+
+.dev-yellow {
+	background-color: #ffc;
+}
+
+.dev-prototype .grid-all-1 .dev-inner {
+	background-color: #ffc;
+}
+
+.dev-prototype .grid-all-12 h2 {
+    margin: 0 0 10px 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+@include respondTo(s) {
+	#devHead h1 span:after {
+		content: "small layout";
+	}
+}
+
+@include respondTo(m) {
+	#devHead h1 span:after {
+		content: "medium layout";
+	}
+}
+
+@include respondTo(l) {
+	#devHead h1 span:after {
+		content: "large layout";
+	}
+}
+
+@include respondTo(xl) {
+	#devHead h1 span:after {
+		content: "extra large layout";
+	}
+}

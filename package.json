@@ -1,0 +1,24 @@
+{
+  "name": "module-grid",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "connect" : "2.x",
+    "express": "3.4.0",
+    "mu2": "~0.5.19"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-sass": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "*"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}

@@ -1,0 +1,105 @@
+/* The viewport width at which to change between layout 1 and layout 2 */
+/* The viewport width at which to change between layout 1 and layout 2 */
+/* The viewport width at which to change between layout 3 and layout 4 */
+/**
+ * Writes media query selector for given layout
+ */
+/**
+ * Calculate column width as a percentage.
+ */
+/**
+ * Calculate column width as a percentage, but subtract the gutter
+ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.grid-row {
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 37.5em;
+  min-width: 15em;
+}
+
+.grid-row .grid-row {
+  margin-left: -1%;
+  margin-right: -1%;
+  width: auto;
+}
+
+/* Default grid: Layout 1 FIXED (well, max-width) */
+[class*="grid-col"] {
+  float: left;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+[class*="-d0"],
+[class*="-s0"] {
+  display: none;
+}
+
+[class*="-d1"],
+[class*="-s1"] {
+  width: 6.33333%;
+}
+
+[class*="-d2"],
+[class*="-s2"] {
+  width: 14.66667%;
+}
+
+[class*="-d3"],
+[class*="-s3"] {
+  width: 23%;
+}
+
+[class*="-d4"],
+[class*="-s4"] {
+  width: 31.33333%;
+}
+
+[class*="-d5"],
+[class*="-s5"] {
+  width: 39.66667%;
+}
+
+[class*="-d6"],
+[class*="-s6"] {
+  width: 48%;
+}
+
+[class*="-d7"],
+[class*="-s7"] {
+  width: 56.33333%;
+}
+
+[class*="-d8"],
+[class*="-s8"] {
+  width: 64.66667%;
+}
+
+[class*="-d9"],
+[class*="-s9"] {
+  width: 73%;
+}
+
+[class*="-d10"],
+[class*="-s10"] {
+  width: 81.33333%;
+}
+
+[class*="-d11"],
+[class*="-s11"] {
+  width: 89.66667%;
+}
+
+[class*="-d12"],
+[class*="-s12"] {
+  float: none;
+  clear: both;
+  width: 98%;
+}

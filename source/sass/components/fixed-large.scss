@@ -1,0 +1,49 @@
+/* Layout 3 FIXED (for legacy desktops) */
+
+.#{$gridRow} {
+	width: $largeMaxWidth;
+	max-width: $largeMaxWidth;
+}
+
+.#{$gridRow} .#{$gridRow} {
+	margin-left: -$fixedLayout3HalfGutter;
+	margin-right: -$fixedLayout3HalfGutter;
+	width: auto;
+}
+
+[class*="#{$gridColumn}"] {
+	float: left;
+	padding-left: $fixedLayout3HalfGutter;
+	padding-right: $fixedLayout3HalfGutter;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; *behavior: url(/behavior/boxsizing.htc);
+}
+
+
+[class*="-#{$default}0"],
+[class*="-#{$large}0"] {
+	display: none;
+}
+
+@for $colWidth from 1 through 11 {
+			
+	[class*="-#{$default}#{$colWidth}"],
+	[class*="-#{$large}#{$colWidth}"] {
+		width: gridColumnWidth($colWidth);
+	}
+}
+
+[class*="-#{$default}12"],
+[class*="-#{$large}12"] {
+    float: none;
+    clear: both;
+	width: 100%;
+}
+
+[class*="-#{$large}hide"] {
+	display: none;
+}
+
+[class*="-#{$small}12"] {
+	clear: none;
+}

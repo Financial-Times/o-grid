@@ -1,0 +1,33 @@
+{{#dist}}
+	<link rel='stylesheet' href='/dist/css/grid.{{version}}.min.css' /> 
+	<script src="/dist/js/grid-legacy-test.{{version}}.min.js"></script>
+	<script>
+	// TODO put this in grid-legacy-test ??
+	if (ft.mustard.shouldGetFixedLayout3()) {
+		ft.mustard.loadCSS("/dist/css/grid-legacy.{{version}}.min.css");
+	}
+	</script>
+{{/dist}}
+
+{{^dist}}
+	<meta charset="utf-8" />
+	<title>Grid demo page - FT.com</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel='stylesheet' href='/css/grid-default.css' />
+	{{#legacy}}
+		<link rel='stylesheet' href='/css/grid-legacy.css' />
+	{{/legacy}}
+	{{#responsive}}
+		<link rel='stylesheet' href='/css/grid-responsive.css' /> 
+		<script src="/js/grid-legacy-test.js"></script>
+		<script>
+		// TODO put this in grid-legacy-test ??
+		if (ft.mustard.shouldGetFixedLayout3()) {
+			ft.mustard.loadCSS("/css/grid-legacy.css");
+		}
+		</script>
+	{{/responsive}}
+{{/dist}}
+
+
+<link rel='stylesheet' href='/css/dev-prototype.css' /> 

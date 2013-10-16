@@ -1,0 +1,47 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.#{$gridRow} {
+	clear: both;
+	margin: 0 auto;
+	width: 100%;
+	max-width: $smallMaxWidth; 
+	min-width: $globalMinWidth;
+}
+
+.#{$gridRow} .#{$gridRow} {
+	margin-left: -$fixedLayout1HalfGutter;
+	margin-right: -$fixedLayout1HalfGutter;
+	width: auto;
+}
+
+/* Default grid: Layout 1 FIXED (well, max-width) */
+[class*="#{$gridColumn}"] {
+	float: left;
+	padding-left: $fixedLayout1HalfGutter;
+	padding-right: $fixedLayout1HalfGutter;
+}
+
+[class*="-#{$default}0"],
+[class*="-#{$small}0"] {
+	display: none;
+}
+
+
+@for $colWidth from 1 through 11 {
+			
+	[class*="-#{$default}#{$colWidth}"],
+	[class*="-#{$small}#{$colWidth}"] {
+		width: gridColumnWidthMinusGutter($colWidth, $fixedLayout1HalfGutter);
+	}
+}
+
+[class*="-#{$default}12"],
+[class*="-#{$small}12"] {
+    float: none;
+    clear: both;
+	width: gridColumnWidthMinusGutter(12, $fixedLayout1HalfGutter);
+}

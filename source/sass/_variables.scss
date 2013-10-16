@@ -1,0 +1,26 @@
+$gridRow: grid-row;
+$gridColumn: grid-col;
+$small: s;
+$medium: m;
+$large: l;
+$extraLarge: xl;
+$default: d;
+$layoutShorthands: $small,$medium,$large,$extraLarge,$default; // small, medium, large, extra large, default
+
+// Gutters
+$gridHalfGutter: 0.625em;
+$fixedLayout1HalfGutter: 1%;
+$fixedLayout3HalfGutter: 5px;
+
+// Page widths
+$globalMinWidth: 15em;
+$smallMaxWidth: 37.5em;
+$mediumMaxWidth: 48.75em;
+$largeMaxWidth: 60em;
+$extraLargeMaxWidth: 85em;
+$maxWidths: $smallMaxWidth,$mediumMaxWidth,$largeMaxWidth,$extraLargeMaxWidth;
+
+// Breakpoints
+$smallToMediumBreak: 600px;   /* The viewport width at which to change between layout 1 and layout 2 */
+$mediumToLargeBreak: 1000px;   /* The viewport width at which to change between layout 1 and layout 2 */
+$largeToXLBreak: 1400px;  /* The viewport width at which to change between layout 3 and layout 4 */

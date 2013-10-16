@@ -1,0 +1,65 @@
+/**
+ * Writes media query selector for given layout
+ */
+@mixin respondTo ($layout) {
+	@if $layout == $small {
+		@media screen and (max-width:$smallToMediumBreak) { @content; }
+	} @else if $layout == $medium {
+		@media screen and (min-width:$smallToMediumBreak) and (max-width:$mediumToLargeBreak) { @content; }
+	} @else if $layout == $large {
+		@media screen and (min-width:$mediumToLargeBreak) and (max-width:$largeToXLBreak) { @content; }
+	} @else if $layout == $extraLarge {
+		@media screen and (min-width:$largeToXLBreak) { @content; }
+	} @else {
+		@media screen { @content; }
+	}
+}
+
+@mixin defineResponsiveGrid ($layoutSize, $maxWidth) {
+
+	@include respondTo($layoutSize) {
+
+		@if ($maxWidth) {
+			.#{$gridRow} {
+				max-width: $maxWidth;
+			}
+		}
+
+		[class*="-#{$layoutSize}hide"],
+		[class*="-#{$layoutSize}0"] {
+			display: none;
+		}
+
+		$selector: null;			
+
+		@for $colWidth from 1 through 11 {
+
+			$thisSelector: #{'[class*="-#{$layoutSize}#{$colWidth}"]'};
+			
+			#{$thisSelector} {
+				width: gridColumnWidth($colWidth);
+			}
+
+			@if ($selector) {
+				$selector: append($selector, $thisSelector, comma);
+			} @else {
+				$selector: $thisSelector;
+			}
+			
+		}
+		
+		// makes sure d12 and d0 can be over-ridden
+		#{$selector} {
+			float: left;
+			clear: none;
+			display: block;	
+		}
+
+		[class*="-#{$layoutSize}12"]{
+		    float: none;
+		    clear: both;
+			width: 100%;
+		}
+
+	}
+}

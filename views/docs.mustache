@@ -4,9 +4,9 @@
 		white-space: pre;
 		white-space: pre-wrap;
 	}
-
-	p pre,
-	li pre {
+	
+	p code,
+	li code {
 		display: inline;
 	}
 </style>
@@ -15,20 +15,20 @@
 <h3>Basic implementation</h3>
 <p>Grid styles are applied to page elements using two types of class declaration:</p>
 <ol>
-	<li>A <pre>grid-row</pre> class, added to the container element. It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)</li>
-	<li>A <pre>grid-col</pre> class, added to the element intended to have a width conforming to the grid. <pre>grid-col</pre> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <pre>grid-col-d6-s12</pre> (see below for more details)</li>
+	<li>A <code>grid-row</code> class, added to the container element. It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)</li>
+	<li>A <code>grid-col</code> class, added to the element intended to have a width conforming to the grid. <code>grid-col</code> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <code>grid-col-d6-s12</code> (see below for more details)</li>
 </ol>
 <h4>Example</h4>
-<code>
+<pre>
 	&lt;div class="grid-row"&gt;
 		&lt;div class="grid-col-d12"&gt;A full width column&lt;/div&gt;
 	&lt;/div&gt;
-</code>
+</pre>
 
 <h3>Column widths</h3>
-<p>The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of grid-columns. To do this append 'subclasses' to the <pre>grid-col</pre> class in the following format:</p>
-<pre> -{layout size identifier}{number of columns}</pre> e.g. <pre>grid-col-s5</pre></p>
-<p>The layout size identifiers are as follows:</p>
+<p>The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of grid-columns. To do this append 'subclasses' to the <code>grid-col</code> class in the following format:
+<code> -{layout size identifier}{number of columns}</code> e.g. <code>grid-col-s5</code></p>
+<h4>Layout size identifiers</h4>
 <dl>
  	<dt>s</dt>
  	<dd>Small - screen widths less than 600px wide, including pretty much all mobiles</dd>
@@ -42,11 +42,11 @@
  	<dd>All screen widths without an explicit rule defined using one of the above</dd>
 </dl> 
 <h4>Examples</h4>
-<code>
+<pre>
 	&lt;div class="grid-col-d12-xl9"&gt;A full width column for all sizes except large screens, where takes up 9 columns&lt;/div&gt;
 	&lt;div class="grid-col-d6-s12"&gt;A half width column for all sizes except small screens, where takes up full width&lt;/div&gt;
 	&lt;div class="grid-col-s4-m3-l2-xl1"&gt;A column which gradually takes up a greater portion of horizontal space as the screen gets smaller&lt;/div&gt;
-</code>
+</pre>
 
 
 <h3>Utilities</h3>

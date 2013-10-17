@@ -11,7 +11,7 @@ It supports all ['html5' browsers](link to ref), with a fixed-width fallback for
     Demonstrates the behaviour of a page using the recommended installation of ft-grid-module
 
 * [Default grid](demos/grid-default.html)  
-	Fluid grid with max width of 600px - mocks behaviour if media queries not supported
+    Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
 * [Legacy grid](demos/grid-legacy.html)  
 	Fixed grid with width of 960px - typically loaded if browser/feature detection suggest user is on ie7
@@ -50,12 +50,15 @@ Four layout sizes are defined:
 * **Small**  
 For screen widths less than 600px wide, including pretty much all mobiles  
 Top level grid rows are fluid, ranging from 240px to 600px in width
+
 * **Medium**  
 For screen widths between 600px and 1000px, small tablets and tablets in portrait mode  
 Top level grid rows are a fixed 780px width
+
 * **Large**  
 For screen widths between 1000px and 1400px, larger tablets and desktop  
 Top level grid rows are a fixed 960px width
+
 * **Extra Large**  
 For screen widths above 1400px, large desktop  
 Top level grid rows are a fixed 1360px width
@@ -70,6 +73,7 @@ Grid styles are applied to page elements using two types of class declaration:
 
 * A ``grid-row`` class, added to the container element.  
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
+
 * A ``grid-col`` class, added to the element intended to have a width conforming to the grid.  
 ``grid-col`` by itself does virtually nothing and needs to have specific width rules appended to it e.g. ``grid-col-d6-s12`` (see below for more details)  
 
@@ -88,13 +92,17 @@ The grid is divided into 12 columns and column instances can span any number of 
 
  * **s**  
  *Small* screens
+
  * **m**  
  *Medium* screens
- * **l**  
+
+* **l**  
  *Large* screens
- * **xl**  
+
+* **xl**  
  *Extra Large* screens
- * **d**  
+
+* **d**  
  All screen widths without an explicit rule defined using one of the above
 
 
@@ -112,4 +120,5 @@ As well as the column and row classes a handful of utilities are also included i
 e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes
 
 ##Gotchas
+
 * Using a different prefix instead of ``grid-col``, e.g. ``not-really-d6-a-column`` will still apply the grid width so in general it's best to avoid classes which contain ``-{letter}{number}`` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. ``ft-mymodule-d6`` to layout your module as this behaviour is just a side effect and not a supported feature

@@ -15,27 +15,3 @@ It supports all ['html5' browsers](link to ref), with a fixed-width fallback for
 
 * [Legacy grid](demos/grid-legacy.html)  
 	Fixed grid with width of 960px - typically loaded if browser/feature detection suggest user is on ie7
-
-
-##Installation
-
-###Add as a dependency using Bower
-
-Write this once we've defined where it sits etc.
-
-###Include in your app
-
-In your app's core stylesheet 
-
-    @include /path/to/bower/ft-grid-module/bundles/responsive.scss
-
-And in your app's ie7 stylesheet
-
-	@include /path/to/bower/ft-grid-module/bundles/legacy.scss
-
-
-Alternatively include the responsive grid and (optionally) the legacy grid css file in the html head directly (it's recommended a conditional comment is used to include for ie7 and below)
-
-
-	<link rel='stylesheet' href='/deps-directory/module-grid/css/grid-responsive.css' /> 
-	<!--[if lt IE 8]><link rel='stylesheet' href='/deps-directory/module-grid/css/grid-legacy.css' /><![endif]-->

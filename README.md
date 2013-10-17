@@ -33,15 +33,17 @@ And in your app's ie7 stylesheet
 
 	@include /path/to/bower/ft-grid-module/bundles/legacy.scss
 
-
 Alternatively include the responsive grid and (optionally) the legacy grid css file in the html head directly (it's recommended a conditional comment is used to include for ie7 and below)
 
 
-	<link rel='stylesheet' href='/deps-directory/module-grid/css/grid-responsive.css' /> 
-	<!--[if lt IE 8]><link rel='stylesheet' href='/deps-directory/module-grid/css/grid-legacy.css' /><![endif]-->
+	<link rel='stylesheet' href='/path/to/bower/ft-grid-module/css/grid-responsive.css' /> 
+	<!--[if lt IE 8]><link rel='stylesheet' href='/path/to/bower/ft-grid-module/css/grid-legacy.css' /><![endif]-->
 
+####Boxsizing.htc
+In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/ft-grid-module/behavior/boxsizing.htc`` will either
 
-**What to do about boxsizing.htc ???**
+* need to be copied (ideally by your build process) to ``/behavior/``
+* be pointed to using a http rewrite or similar
 
 ##Grid dimensions
 

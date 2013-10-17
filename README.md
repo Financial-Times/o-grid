@@ -3,7 +3,7 @@
 ##About
 
 ft-grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules.
-It supports all ['html5' browsers](link to ref), with a fixed-width fallback for browsers which don't support media queries
+It supports all , with a fixed-width fallback for browsers which don't support media queries
 
 ###Demos
 

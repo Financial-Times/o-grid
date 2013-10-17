@@ -1,7 +1,8 @@
 var pkg = require("../package.json"),
     connect = require("connect"),
     express = require("express"),
-    hbs = require('hbs');
+    hbs = require('hbs'),
+    ec = require('./examplesConfig.js');
 
 var app   = express(),
     port  = process.env.PORT || 3000;
@@ -31,14 +32,15 @@ app.get('/', function (req, res) {
 
 });
 
-app.get('/grid-*', function (req, res) {
+app.get('/grid-:name', function (req, res) {
     "use strict";
 
     var pageProps = {
-        version: pkg.version
+        version: pkg.version,
+        example: ec.getExamplesConfig()
     };
 
-    pageProps[req.url.substr(6)] = true;
+    pageProps[req.params.name] = true;
 
     res.render('grid', pageProps);
 });

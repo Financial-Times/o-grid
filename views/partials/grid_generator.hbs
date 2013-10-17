@@ -1,47 +1,29 @@
 
+{{#each example}}
+	
+	<div class="example">
 
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>The grid is always made up of 12 virtual columns. Actual columns can span a varying number of virtual columns depending on the layout mode.</h2>
+		<div class="grid-row">
+
+			<div class="grid-col-d12">
+				<h2>{{title}}</h2>
+				<p>{{description}}</p>
+			</div>
+
+			{{#each this.columns}}
+				<div class="grid-col-{{this}}">
+					<span class="dev-inner">
+						Column {{this}}
+					</span>
+				</div>
+			{{/each}}
+
 		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<div class="grid-col-d1">
-			<span class="dev-inner">Column</span>
-		</div>
-		<hr />
+
 	</div>
+
+{{/each}}
+
 
 	<div class="grid-row">
 		<div class="grid-col-d12">
@@ -82,75 +64,6 @@
 		</div>
 		<div class="grid-col-s4-m3-l2-xl1">
 			<span class="dev-inner dev-yellow">Column 12 content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4 and Layout 3: 2 columns, small: 1 column</h2>
-		</div>
-		<div class="grid-col-d6-s12">
-			<span class="dev-inner">Column 1 content</span>
-		</div>
-		<div class="grid-col-d6-s12">
-			<span class="dev-inner">Column 2 content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4 and Layout 3: 7 and 5, small: 1 column</h2>
-		</div>
-		<div class="grid-col-d7-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-		<div class="grid-col-d5-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4 and Layout 3: 8 and 4, small: 1 column</h2>
-		</div>
-		<div class="grid-col-d8-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-		<div class="grid-col-d4-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4 and Layout 3: 4, 4, 4. Layout 1: 6, 6 and 12</h2>
-		</div>
-		<div class="grid-col-d4-s6">
-			<span class="dev-inner dev-red">Column content</span>
-		</div>
-		<div class="grid-col-d4-s6">
-			<span class="dev-inner dev-blue">Column content</span>
-		</div>
-		<div class="grid-col-d4-s12">
-			<span class="dev-inner dev-green">Green! Column content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4 and Layout 3: 3, 3, 3, 3, small: 12s</h2>
-		</div>
-		<div class="grid-col-d3-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-		<div class="grid-col-d3-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-		<div class="grid-col-d3-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-		<div class="grid-col-d3-s12">
-			<span class="dev-inner">Column content</span>
 		</div>
 	</div>
 

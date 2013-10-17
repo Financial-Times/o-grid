@@ -4,23 +4,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      dist: {
-        options: {compress: true},
-        files: {
-          './build/dist/js/grid-legacy-test.<%= pkg.version %>.min.js': ['source/js/grid-legacy-test.js']
-        }
-      },
-      dev: {
-        options: {compress: false},
-        files: {
-          './build/js/grid-legacy-test.js': ['source/js/grid-legacy-test.js']
-        }
-      }
-    },
     watch: {
       sass: {
         files: ['source/sass/**/*'],
@@ -54,7 +37,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'source/js/**/*.js', 'node/**/*.js'],
+      files: ['Gruntfile.js', 'node/**/*.js'],
       jshintrc: './.jshintrc'
     }
   });
@@ -66,7 +49,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify', 'sass']);
+  grunt.registerTask('default', ['jshint', 'sass']);
 
   // grunt.registerTask('restart', 'Restarting node app', function () {
   //   // Need to look into how grunt can run the app as a child process

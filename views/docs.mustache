@@ -11,12 +11,23 @@
 	}
 </style>
 <h2>Documentation</h2>
-<h3>Responsive grids</h3>
+<h3>Including the grid in your app</h3>
+<h4>Add as a dependency using Bower</h4>
+<p>Write this once we've defined where it sits etc.</p>
+<h4>Include in the page</h4>
+<p>Include the responsive grid css file in the html head and (optionally) the legacy grid (it's recommended a conditional comment is used to include for ie7 and below)</p>
+<pre>
+	&lt;link rel='stylesheet' href='/deps-directory/module-grid/css/grid-responsive.css' /&gt; 
+	&lt;!--[if lt IE 8]&gt;&lt;link rel='stylesheet' href='/deps-directory/module-grid/css/grid-legacy.css' /&gt;&lt;![endif]--&gt;
+</pre>
+<h3>Grid dimensions</h3>
+
 <h3>Basic implementation</h3>
 <p>Grid styles are applied to page elements using two types of class declaration:</p>
 <ol>
 	<li>A <code>grid-row</code> class, added to the container element. It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)</li>
-	<li>A <code>grid-col</code> class, added to the element intended to have a width conforming to the grid. <code>grid-col</code> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <code>grid-col-d6-s12</code> (see below for more details)</li>
+	<li>A <code>grid-col</code> class, added to the element intended to have a width conforming to the grid. <code>grid-col</code> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <code>grid-col-d6-s12</code> (see below for more details)<br>
+	<em>Note: using a different prefix instead of grid-col, e.g. <code>not-grid-d6</code> will still apply the width so in general it's best to avoid classes which contain [hyphen][letter][number] in the rest of your page's styles</em></li>
 </ol>
 <h4>Example</h4>
 <pre>
@@ -50,3 +61,8 @@
 
 
 <h3>Utilities</h3>
+<p>As well as the column and row classes a handful of utilities are also included in the grid styles</p>
+<dl>
+	<dt>hide</dt>
+	<dd>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes</dd>
+</dl>

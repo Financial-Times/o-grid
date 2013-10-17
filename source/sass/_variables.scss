@@ -1,11 +1,8 @@
-$gridRow: grid-row;
-$gridColumn: grid-col;
-$small: s;
-$medium: m;
-$large: l;
-$extraLarge: xl;
-$default: d;
-$layoutShorthands: $small,$medium,$large,$extraLarge,$default; // small, medium, large, extra large, default
+// -------------------------------------------------------------------------------------
+//	DIMENSIONS
+//
+//	Do not change without sign-off on design and updating views/docs.mustache
+// -------------------------------------------------------------------------------------
 
 // Gutters
 $gridHalfGutter: 0.625em;
@@ -18,9 +15,36 @@ $smallMaxWidth: 37.5em;
 $mediumMaxWidth: 48.75em;
 $largeMaxWidth: 60em;
 $extraLargeMaxWidth: 85em;
-$maxWidths: $smallMaxWidth,$mediumMaxWidth,$largeMaxWidth,$extraLargeMaxWidth;
 
 // Breakpoints
-$smallToMediumBreak: 600px;   /* The viewport width at which to change between layout 1 and layout 2 */
-$mediumToLargeBreak: 1000px;   /* The viewport width at which to change between layout 1 and layout 2 */
-$largeToXLBreak: 1400px;  /* The viewport width at which to change between layout 3 and layout 4 */
+$smallToMediumBreak: 600px;
+$mediumToLargeBreak: 1000px;
+$largeToXLBreak: 1400px;
+
+
+// -------------------------------------------------------------------------------------
+// CLASS NAMES/PREFIXES
+//
+// Do not change unless either:
+// a) releasing as a new version
+// b) intention is to update class names in all apps using the grid
+// 
+// Also be sure to update views/docs.mustache
+// -------------------------------------------------------------------------------------
+
+$gridRow: grid-row;
+$gridColumn: grid-col;
+$small: s;
+$medium: m;
+$large: l;
+$extraLarge: xl;
+$default: d;
+
+
+// -------------------------------------------------------------------------------------
+// STRUCTURAL VARIABLES
+//
+// !!! DO NOT CHANGE UNLESS MAKING FUNDAMENTAL CHANGES TO HOW THE SASS IS STRUCTURED !!!
+// -------------------------------------------------------------------------------------
+$maxWidths: $smallMaxWidth,$mediumMaxWidth,$largeMaxWidth,$extraLargeMaxWidth;
+$layoutShorthands: $small,$medium,$large,$extraLarge,$default;

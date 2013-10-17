@@ -19,13 +19,7 @@
 	{{/legacy}}
 	{{#responsive}}
 		<link rel='stylesheet' href='/css/grid-responsive.css' /> 
-		<script src="/js/grid-legacy-test.js"></script>
-		<script>
-		// TODO put this in grid-legacy-test ??
-		if (ft.mustard.shouldGetFixedLayout3()) {
-			ft.mustard.loadCSS("/css/grid-legacy.css");
-		}
-		</script>
+		<!--[if IE 7]><link rel='stylesheet' href='/css/grid-legacy.css' /><![endif]-->
 	{{/responsive}}
 {{/dist}}
 

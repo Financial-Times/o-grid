@@ -3,7 +3,24 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    
+    concat: {
+      dist: {
+        src: ['source/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
+        dest: 'build/dist/behavior/boxsizing.htc'
+      },
+      dev: {
+        src: ['source/behavior/boxsizing/head', 'source/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
+        dest: 'build/behavior/boxsizing.htc'
+      }
+    },
+    uglify: {
+      dist: {
+        options: {compress: true},
+        files: {
+          './tmp/behavior/boxsizing/script.js': ['source/behavior/boxsizing/script.js']
+        }
+      }
+    },
     watch: {
       sass: {
         files: ['source/sass/**/*'],
@@ -47,9 +64,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'sass']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'sass']);
 
   // grunt.registerTask('restart', 'Restarting node app', function () {
   //   // Need to look into how grunt can run the app as a child process

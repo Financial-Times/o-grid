@@ -1,9 +1,3 @@
-<component lightWeight="true">
-<attach event="onpropertychange" onevent="checkPropertyChange()" />
-<attach event="ondetach" onevent="restore()" />
-<attach event="onresize" for="window" onevent="update()" />
-<script type="text/javascript">
-//<![CDATA[
 /**
 * box-sizing Polyfill
 * 
@@ -500,7 +494,3 @@ function updateBorderBoxHeight() {
 init();
 
 
-
-//]]>
-</script>
-</component>

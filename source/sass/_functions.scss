@@ -1,13 +1,18 @@
-/**
- * Calculate column width as a percentage.
- */
+//
+// Calculates column width as a percentage.
+//
+// @param $numCols {number} number of columns spanned
+//
 @function gridColumnWidth($numCols) {
 	@return (100%/12*$numCols)
 }
 
-/**
- * Calculate column width as a percentage, but subtract the gutter
- */
+//
+// Calculates column width as a percentage, but subtracts the gutter
+//
+// @param $numCols {number} number of columns spanned
+// @param $halfGutterWidth {number} half the width of column gutters
+//
 @function gridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
 	@return (gridColumnWidth($numCols)-($halfGutterWidth*2))
 }

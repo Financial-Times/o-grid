@@ -13,16 +13,16 @@ body {
 }
 
 .#{$gridRow} .#{$gridRow} {
-	margin-left: -$fixedLayout1HalfGutter;
-	margin-right: -$fixedLayout1HalfGutter;
+	margin-left: -$defaultLayoutHalfGutter;
+	margin-right: -$defaultLayoutHalfGutter;
 	width: auto;
 }
 
 /* Default grid: Layout 1 FIXED (well, max-width) */
 [class*="#{$gridColumn}"] {
 	float: left;
-	padding-left: $fixedLayout1HalfGutter;
-	padding-right: $fixedLayout1HalfGutter;
+	padding-left: $defaultLayoutHalfGutter;
+	padding-right: $defaultLayoutHalfGutter;
 }
 
 [class*="-#{$default}0"],
@@ -35,7 +35,7 @@ body {
 			
 	[class*="-#{$default}#{$colWidth}"],
 	[class*="-#{$small}#{$colWidth}"] {
-		width: gridColumnWidthMinusGutter($colWidth, $fixedLayout1HalfGutter);
+		width: gridColumnWidthMinusGutter($colWidth, $defaultLayoutHalfGutter);
 	}
 }
 
@@ -43,5 +43,5 @@ body {
 [class*="-#{$small}12"] {
     float: none;
     clear: both;
-	width: gridColumnWidthMinusGutter(12, $fixedLayout1HalfGutter);
+	width: gridColumnWidthMinusGutter(12, $defaultLayoutHalfGutter);
 }

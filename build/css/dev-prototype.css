@@ -1,13 +1,4 @@
 /* Styles for presenting the grid. Not part of the grid code. */
-/**
- * Writes media query selector for given layout
- */
-/**
- * Calculate column width as a percentage.
- */
-/**
- * Calculate column width as a percentage, but subtract the gutter
- */
 #devHead {
   margin: 0 0 20px 0;
   padding: 10px;

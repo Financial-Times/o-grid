@@ -6,15 +6,15 @@
 }
 
 .#{$gridRow} .#{$gridRow} {
-	margin-left: -$fixedLayout3HalfGutter;
-	margin-right: -$fixedLayout3HalfGutter;
+	margin-left: -$legacyLayoutHalfGutter;
+	margin-right: -$legacyLayoutHalfGutter;
 	width: auto;
 }
 
 [class*="#{$gridColumn}"] {
 	float: left;
-	padding-left: $fixedLayout3HalfGutter;
-	padding-right: $fixedLayout3HalfGutter;
+	padding-left: $legacyLayoutHalfGutter;
+	padding-right: $legacyLayoutHalfGutter;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box; *behavior: url(/behavior/boxsizing.htc);
 }

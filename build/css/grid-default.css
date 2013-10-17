@@ -1,12 +1,3 @@
-/**
- * Writes media query selector for given layout
- */
-/**
- * Calculate column width as a percentage.
- */
-/**
- * Calculate column width as a percentage, but subtract the gutter
- */
 html,
 body {
   margin: 0;

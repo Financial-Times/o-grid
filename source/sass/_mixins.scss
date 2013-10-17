@@ -1,20 +1,28 @@
-/**
- * Writes media query selector for given layout
- */
-@mixin respondTo ($layout) {
-	@if $layout == $small {
+//
+// Writes media query selector for given a layout size
+//
+// @param $layoutSize {string} name of layout size (s, m , l, xl)
+//
+@mixin respondTo ($layoutSize) {
+	@if $layoutSize == $small {
 		@media screen and (max-width:$smallToMediumBreak) { @content; }
-	} @else if $layout == $medium {
+	} @else if $layoutSize == $medium {
 		@media screen and (min-width:$smallToMediumBreak) and (max-width:$mediumToLargeBreak) { @content; }
-	} @else if $layout == $large {
+	} @else if $layoutSize == $large {
 		@media screen and (min-width:$mediumToLargeBreak) and (max-width:$largeToXLBreak) { @content; }
-	} @else if $layout == $extraLarge {
+	} @else if $layoutSize == $extraLarge {
 		@media screen and (min-width:$largeToXLBreak) { @content; }
 	} @else {
 		@media screen { @content; }
 	}
 }
 
+//
+// Defines styles for row and column widths for a given layout size
+//
+// @param $layoutSize {string} name of layout size (s, m , l, xl)
+// @param $maxWidth {number} maximum width of a row at this layout size
+//
 @mixin defineResponsiveGrid ($layoutSize, $maxWidth) {
 
 	@include respondTo($layoutSize) {
@@ -39,7 +47,8 @@
 			#{$thisSelector} {
 				width: gridColumnWidth($colWidth);
 			}
-
+			
+			// generates a comma separated selctor for each of the column widths from 1 to 11
 			@if ($selector) {
 				$selector: append($selector, $thisSelector, comma);
 			} @else {
@@ -48,7 +57,7 @@
 			
 		}
 		
-		// makes sure d12 and d0 can be over-ridden
+		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
 		#{$selector} {
 			float: left;
 			clear: none;

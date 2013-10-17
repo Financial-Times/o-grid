@@ -1,0 +1,68 @@
+<style>
+	pre,
+	code {
+		white-space: pre;
+		white-space: pre-wrap;
+	}
+	
+	p code,
+	li code {
+		display: inline;
+	}
+</style>
+<h2>Documentation</h2>
+<h3>Including the grid in your app</h3>
+<h4>Add as a dependency using Bower</h4>
+<p>Write this once we've defined where it sits etc.</p>
+<h4>Include in the page</h4>
+<p>Include the responsive grid css file in the html head and (optionally) the legacy grid (it's recommended a conditional comment is used to include for ie7 and below)</p>
+<pre>
+	&lt;link rel='stylesheet' href='/deps-directory/module-grid/css/grid-responsive.css' /&gt; 
+	&lt;!--[if lt IE 8]&gt;&lt;link rel='stylesheet' href='/deps-directory/module-grid/css/grid-legacy.css' /&gt;&lt;![endif]--&gt;
+</pre>
+<h3>Grid dimensions</h3>
+
+<h3>Basic implementation</h3>
+<p>Grid styles are applied to page elements using two types of class declaration:</p>
+<ol>
+	<li>A <code>grid-row</code> class, added to the container element. It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)</li>
+	<li>A <code>grid-col</code> class, added to the element intended to have a width conforming to the grid. <code>grid-col</code> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <code>grid-col-d6-s12</code> (see below for more details)<br>
+	<em>Note: using a different prefix instead of grid-col, e.g. <code>not-grid-d6</code> will still apply the width so in general it's best to avoid classes which contain [hyphen][letter][number] in the rest of your page's styles</em></li>
+</ol>
+<h4>Example</h4>
+<pre>
+	&lt;div class="grid-row"&gt;
+		&lt;div class="grid-col-d12"&gt;A full width column&lt;/div&gt;
+	&lt;/div&gt;
+</pre>
+
+<h3>Column widths</h3>
+<p>The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of grid-columns. To do this append 'subclasses' to the <code>grid-col</code> class in the following format:
+<code> -{layout size identifier}{number of columns}</code> e.g. <code>grid-col-s5</code></p>
+<h4>Layout size identifiers</h4>
+<dl>
+ 	<dt>s</dt>
+ 	<dd>Small - screen widths less than 600px wide, including pretty much all mobiles</dd>
+ 	<dt>m</dt>
+ 	<dd>Medium - screen widths between 600px and 1000px, small tablets and tablets in portrait mode</dd>
+ 	<dt>l</dt>
+ 	<dd>Large - screen widths between 1000px and 1400px, larger tablets and desktop</dd>
+ 	<dt>xl</dt>
+ 	<dd>Large - screen widths above 1400px, large desktop</dd>
+ 	<dt>d</dt>
+ 	<dd>All screen widths without an explicit rule defined using one of the above</dd>
+</dl> 
+<h4>Examples</h4>
+<pre>
+	&lt;div class="grid-col-d12-xl9"&gt;A full width column for all sizes except large screens, where takes up 9 columns&lt;/div&gt;
+	&lt;div class="grid-col-d6-s12"&gt;A half width column for all sizes except small screens, where takes up full width&lt;/div&gt;
+	&lt;div class="grid-col-s4-m3-l2-xl1"&gt;A column which gradually takes up a greater portion of horizontal space as the screen gets smaller&lt;/div&gt;
+</pre>
+
+
+<h3>Utilities</h3>
+<p>As well as the column and row classes a handful of utilities are also included in the grid styles</p>
+<dl>
+	<dt>hide</dt>
+	<dd>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes</dd>
+</dl>

@@ -1,13 +1,13 @@
 var pkg = require("../package.json"),
     connect = require("connect"),
     express = require("express"),
-    mu = require('mu2'),
-    mousetacheInit = require("./moustache-init.js");
+    hbs = require('hbs');
 
 var app   = express(),
     port  = process.env.PORT || 3000;
 
-mousetacheInit.init(app, mu);
+app.set('view engine', 'hbs');
+hbs.registerPartials('./views/partials');
 
 app.use(connect.compress());
 

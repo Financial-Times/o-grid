@@ -27,7 +27,8 @@ app.get('/', function (req, res) {
     "use strict";
 
     res.render("index", {
-        title: "Index page"
+        title: "Grid documentation",
+        responsive: true
     });
 
 });
@@ -36,7 +37,7 @@ app.get('/grid-:name', function (req, res) {
     "use strict";
 
     var pageProps = {
-        version: pkg.version,
+        title: "Grid example and demo",
         example: ec.getExamples()
     };
 

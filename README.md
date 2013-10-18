@@ -17,7 +17,7 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
 * [Legacy grid](demos/grid-legacy.html)  
-	Fixed grid with width of 960px - mocks behaviour if browser/feature detection suggest user is on ie7/8
+	Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
 
 ##Installation
 
@@ -86,22 +86,22 @@ In addition, for nested grids the parent element's width is divided into 12 colu
 ##Using the grid
 Grid styles are applied to page elements using two types of class declaration:
 
-* A ``grid-row`` class, added to the container element.  
+* A ``ft-grid-row`` class, added to the container element.  
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
 
-* A ``grid-col`` class, added to the element intended to have a width conforming to the grid.  
-``grid-col`` by itself does virtually nothing and needs to have specific width rules appended to it e.g. ``grid-col-d6-s12`` (see below for more details)  
+* A ``ft-grid-col`` class, added to the element intended to have a width conforming to the grid.  
+``ft-grid-col`` by itself does virtually nothing and needs to have specific width rules appended to it e.g. ``ft-grid-col-d6-s12`` (see below for more details)  
 
 
 ###Example
 
-	<div class="grid-row">
-		<div class="grid-col-d12">A full width column</div>
+	<div class="ft-grid-row">
+		<div class="ft-grid-col-d12">A full width column</div>
 	</div>
 
 
 ##Column widths
-The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of grid-columns. To do this append 'subclasses' to the ``grid-col`` class in the following format: `` -{layout size identifier}{number of columns}`` e.g. ``grid-col-s5``
+The grid is divided into 12 columns and column instances can span any number of these 'ft-grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of ft-grid-columns. To do this append 'subclasses' to the ``ft-grid-col`` class in the following format: `` -{layout size identifier}{number of columns}`` e.g. ``ft-grid-col-s5``
 
 ###Layout size identifiers
 
@@ -123,9 +123,9 @@ The grid is divided into 12 columns and column instances can span any number of 
 
 ###Examples
 
-	<div class="grid-col-d12-xl9">A full width column for all sizes except large screens, where takes up 9 columns</div>
-	<div class="grid-col-d6-s12">A half width column for all sizes except small screens, where takes up full width</div>
-	<div class="grid-col-s4-m3-l2-xl1">A column which gradually takes up a greater portion of horizontal space as the screen gets smaller</div>
+	<div class="ft-grid-col-d12-xl9">A full width column for all sizes except large screens, where takes up 9 columns</div>
+	<div class="ft-grid-col-d6-s12">A half width column for all sizes except small screens, where takes up full width</div>
+	<div class="ft-grid-col-s4-m3-l2-xl1">A column which gradually takes up a greater portion of horizontal space as the screen gets smaller</div>
 
 ###Utilities
 As well as the column and row classes a handful of utilities are also included in the grid styles
@@ -151,4 +151,4 @@ All the variables used by the grid are available in other stylesheets, but **car
 
 ##Gotchas
 
-* Using a different prefix instead of ``grid-col``, e.g. ``not-really-d6-a-column`` will still apply the grid width so in general it's best to avoid classes which contain ``-{letter}{number}`` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. ``ft-mymodule-d6`` to layout your module as this behaviour is just a side effect and not a supported feature
+* Using a different prefix instead of ``ft-grid-col``, e.g. ``not-really-d6-a-column`` will still apply the grid width so in general it's best to avoid classes which contain ``-{letter}{number}`` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. ``ft-mymodule-d6`` to layout your module as this behaviour is just a side effect and not a supported feature

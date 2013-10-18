@@ -3,12 +3,18 @@
 <head>
 	{{> head}}
 </head>
-<body class="dev-prototype">
+<body>
 
 	<div class="header">
 		<h1>{{#default}}Default{{/default}}{{#legacy}}Legacy{{/legacy}}{{#responsive}}Responsive <span>(<span class="mode"></span>)</span>{{/responsive}}</h1>
 	</div>
+
+	<div class="ft-grid-row">
+		<div class="ft-grid-col-d12 docs">
+			<p><a href="/">Back to documentation</a>.</p>
+		</div>
+	</div>
 	
-	{{> grid_generator}}
+	{{> examples}}
 </body>
 </html>

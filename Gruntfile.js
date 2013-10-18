@@ -40,7 +40,7 @@ module.exports = function(grunt) {
           './build/css/grid-default.css': './source/sass/bundles/default.scss', // 'destination': 'source'
           './build/css/grid-responsive.css': './source/sass/bundles/responsive-only.scss', // 'destination': 'source'
           './build/css/grid-legacy.css': './source/sass/bundles/legacy.scss', // 'destination': 'source'
-          './build/css/dev-prototype.css': './source/sass/dev/dev-prototype.scss'
+          './build/css/dev-prototype.css': './source/sass/docs/docs.scss'
         }
       },
       dist: {                            

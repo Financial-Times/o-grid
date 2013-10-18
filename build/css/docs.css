@@ -38,6 +38,12 @@
   font-weight: normal;
 }
 
+.docs h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 .docs p {
   margin: 0 0 10px 0;
   font-size: 14px;
@@ -75,7 +81,7 @@
 }
 
 [class*="grid-col"] [class*="grid-col"] .dev-inner {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   background-color: #fff;
 }
 

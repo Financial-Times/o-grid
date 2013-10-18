@@ -47,7 +47,7 @@ In order for the grid to work in ie7 a .htc polyfill is used, referenced from th
 
 ###For designers
 
-From terminal run the following command in your prototype's directory
+From terminal run the following command in your prototype's directory (you will need to have [bower](http://bower.io/) already installed)
 
 	bower install ft-grid-module
 

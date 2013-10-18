@@ -10,11 +10,11 @@ $defaultLayoutHalfGutter: 1%;
 $legacyLayoutHalfGutter: 5px;
 
 // Page widths
-$globalMinWidth: 15em;
-$smallMaxWidth: 37.5em;
-$mediumMaxWidth: 48.75em;
-$largeMaxWidth: 60em;
-$extraLargeMaxWidth: 85em;
+$globalMinWidth: 240px;
+$smallMaxWidth: 600px;
+$mediumMaxWidth: 780px;
+$largeMaxWidth: 960px;
+$extraLargeMaxWidth: 1360px;
 
 // Breakpoints
 $smallToMediumBreak: 600px;

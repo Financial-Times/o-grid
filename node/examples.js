@@ -61,7 +61,7 @@ exports.getExamples = function () {
 		},
 
 		{
-			title: "Complex responsive layouts",
+			title: "Complex variable layouts",
 			description: "Complex layouts can be created by using variable column spans in combination with nesting.",
 			columns: [
 				{

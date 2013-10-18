@@ -1,8 +1,5 @@
 <div class="grid-col-{{this.span}}">
-	
-	<span class="dev-inner">
-		{{@index}}: .grid-col-{{this.span}}
-	</span>
+	<span class="dev-inner"{{#if this.minHeight}} style="min-height:{{{this.minHeight}}}"{{/if}}>{{@index}}: .grid-col-{{this.span}}</span>
 	{{#if this.columns}}
 		<div class="grid-row">
 			{{#each this.columns}}
@@ -10,5 +7,4 @@
 			{{/each}}
 		</div>
 	{{/if}}
-
 </div>

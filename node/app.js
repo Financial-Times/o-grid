@@ -2,7 +2,7 @@ var pkg = require("../package.json"),
     connect = require("connect"),
     express = require("express"),
     hbs = require('hbs'),
-    ec = require('./examplesConfig.js');
+    ec = require('./examples.js');
 
 var app   = express(),
     port  = process.env.PORT || 3000;

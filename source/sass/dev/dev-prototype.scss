@@ -29,8 +29,14 @@
 	line-height: 18px;
 }
 
+.example code {
+	background-color: #ffe;
+	color: #885;
+}
+
 .dev-inner {
 	display: block;
+	margin-bottom: 10px;
 	min-height: 30px;
 	text-align: center;
 	overflow: hidden;

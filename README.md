@@ -43,9 +43,9 @@ Then include in your app's styles
 In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/ft-grid-module/dist/behavior/boxsizing.htc`` will either
 
 * need to be copied (ideally by your build process) to ``/behavior/boxsizing.htc``
-* be pointed to using a http rewrite or similar
+* be pointed to using a http rewrite or similar<a id="designer-installation">.</a>
 
-###For designers<a id="designer-installation">.</a>
+###For designers
 
 From terminal run the following command in your prototype's directory
 

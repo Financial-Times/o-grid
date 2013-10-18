@@ -56,7 +56,7 @@ exports.getExamples = function () {
 
 		{
 			title: "Variable column spans",
-			description: "For each layout mode, . These columns are set to default to 12 columns (full width), but span 6 at the large mode, and 4 at the extra-large mode.",
+			description: "These columns are set to default to 12 columns (full width), but span 6 at the large mode, and 4 at the extra-large mode.",
 			columns: [{ span: "d12-xl3-l6" }, { span: "d12-xl3-l6" }, { span: "d12-xl3-l6" }, { span: "d12-xl3-l6" }]
 		},
 

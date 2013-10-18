@@ -1,9 +1,20 @@
 /* Styles for presenting the grid. Not part of the grid code. */
-#devHead {
+.header {
   margin: 0 0 20px 0;
   padding: 10px;
   background-color: black;
   color: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 28px;
+}
+
+.header span {
+  font-weight: normal;
+  color: #bbb;
 }
 
 .example {
@@ -50,22 +61,22 @@
 }
 
 @media screen and (max-width: 600px) {
-  #devHead h1 span:after {
+  .header .mode:after {
     content: "small layout";
   }
 }
 @media screen and (min-width: 600px) and (max-width: 1000px) {
-  #devHead h1 span:after {
+  .header .mode:after {
     content: "medium layout";
   }
 }
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
-  #devHead h1 span:after {
+  .header .mode:after {
     content: "large layout";
   }
 }
 @media screen and (min-width: 1400px) {
-  #devHead h1 span:after {
+  .header .mode:after {
     content: "extra large layout";
   }
 }

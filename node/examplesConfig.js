@@ -1,29 +1,57 @@
-exports.getExamplesConfig = function () {
+exports.getExamples = function () {
 	"use strict";
 	var examples = [
 
 		{
-			title: "Example 1 title",
+			title: "The 12 column grid",
 			description: "The grid is made up of 12 virtual columns. Actual columns can span 1 to 12 virtual columns.",
-			columns: ["d1", "d1", "d1", "d1", "d1", "d1", "d1", "d1", "d1", "d1", "d1", "d1"]
+			columns: [{ span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }, { span: "d1" }]
 		},
 
 		{
-			title: "Example 2 title",
+			title: "Two equal columns",
 			description: "Two divs, each spanning 6 columns.",
-			columns: ["d6", "d6"]
+			columns: [{ span: "d6" }, { span: "d6"}]
 		},
 
 		{
-			title: "Example 3 title",
+			title: "Three equal columns",
 			description: "Three divs, each spanning 4 columns.",
-			columns: ["d4", "d4", "d4"]
+			columns: [{ span: "d4" }, { span: "d4"}, { span: "d4"}]
 		},
 
 		{
-			title: "Example 4 title",
+			title: "Four equal columns",
 			description: "Four divs, each spanning 3 columns.",
-			columns: ["d3", "d3", "d3", "d3"]
+			columns: [{ span: "d3" }, { span: "d3"}, { span: "d3"}, { span: "d3"}]
+		},
+
+		{
+			title: "A large and small column",
+			description: "Two divs, spanning 9 and 3 columns.",
+			columns: [{ span: "d9" }, { span: "d3"}]
+		},
+
+		{
+			title: "A large and small column",
+			description: "Two divs, spanning 7 and 5 columns.",
+			columns: [{ span: "d7" }, { span: "d5"}]
+		},
+
+		{
+			title: "Using nesting to create more complex layouts",
+			description: "Divs can be broken down into a further 12 columns, by nesting another <code>grid-row</code> containing more <code>grid-col</code>s",
+			columns: [
+				{
+					span: "d8",
+					columns: [{ span: "d4" }, { span: "d4" }, { span: "d4" }]
+				},
+				{
+					span: "d4",
+					columns: [{ span: "d6" }, { span: "d6" }]
+				}
+			]
+
 		}
 
 	];

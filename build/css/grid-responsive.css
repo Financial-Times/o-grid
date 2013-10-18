@@ -1,12 +1,12 @@
 /* Override fixed defaults for responsive grid */
 @media screen {
-  .grid-row .grid-row {
+  .ft-grid-row .ft-grid-row {
     margin-left: -0.625em;
     margin-right: -0.625em;
     width: auto;
   }
 
-  [class*="grid-col"] {
+  [class*="ft-grid-col"] {
     float: left;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -86,7 +86,7 @@
   }
 }
 @media screen and (max-width: 600px) {
-  .grid-row {
+  .ft-grid-row {
     max-width: 600px;
   }
 
@@ -153,7 +153,7 @@
   }
 }
 @media screen and (min-width: 600px) and (max-width: 1000px) {
-  .grid-row {
+  .ft-grid-row {
     max-width: 780px;
   }
 
@@ -220,7 +220,7 @@
   }
 }
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
-  .grid-row {
+  .ft-grid-row {
     max-width: 960px;
   }
 
@@ -287,7 +287,7 @@
   }
 }
 @media screen and (min-width: 1400px) {
-  .grid-row {
+  .ft-grid-row {
     max-width: 1360px;
   }
 

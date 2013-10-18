@@ -49,7 +49,7 @@ In order for the grid to work in ie7 a .htc polyfill is used, referenced from th
 
 From terminal run the following command in your prototype's directory (you will need to have [bower](http://bower.io/) already installed)
 
-	bower install grid-module
+	bower install http://git.svc.ft.com:9080/git/origami/grid-module.git
 
 Include the responsive grid css file in the html head directly
 

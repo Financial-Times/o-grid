@@ -1,5 +1,5 @@
 {
-    "name": "ft-grid-module",
+    "name": "grid-module",
     "version": "0.1.0",
     "main": ["source/sass", "dist"],
     "devDependencies": {

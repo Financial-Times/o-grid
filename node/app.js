@@ -37,7 +37,7 @@ app.get('/grid-:name', function (req, res) {
 
     var pageProps = {
         version: pkg.version,
-        example: ec.getExamplesConfig()
+        example: ec.getExamples()
     };
 
     pageProps[req.params.name] = true;

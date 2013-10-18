@@ -6,16 +6,12 @@
 		<div class="grid-row">
 
 			<div class="grid-col-d12">
-				<h2>{{title}}</h2>
-				<p>{{description}}</p>
+				<h2 class="example-title">{{title}}</h2>
+				<p class="example-description">{{{description}}}</p>
 			</div>
 
 			{{#each this.columns}}
-				<div class="grid-col-{{this}}">
-					<span class="dev-inner">
-						Column {{this}}
-					</span>
-				</div>
+				{{> column}}
 			{{/each}}
 
 		</div>
@@ -23,73 +19,3 @@
 	</div>
 
 {{/each}}
-
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>Layout 4: 12,  Layout 3: 6 columns, small: 3 columns (in 4 grid-rows)</h2>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-red">Column 1 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-blue">Column 2 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-green">Column 3 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-yellow">Column 4 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-red">Column 5 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-blue">Column 6 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-green">Column 7 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-yellow">Column 8 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-red">Column 9 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-blue">Column 10 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-green">Column 11 content</span>
-		</div>
-		<div class="grid-col-s4-m3-l2-xl1">
-			<span class="dev-inner dev-yellow">Column 12 content</span>
-		</div>
-	</div>
-
-	<div class="grid-row">
-		<div class="grid-col-d12">
-			<h2>With nesting. Layout 4 and Layout 3: 7 and 4, small: 12s</h2>
-		</div>
-		<div class="grid-col-d7-s12">
-			<span class="dev-inner">Column content</span>
-			<div class="grid-row">
-				<div class="grid-col-d12">
-					<h2>Layout 3: 4, 4, 4. Layout 1: 12s</h2>
-				</div>
-				<div class="grid-col-d4-s12">
-					<span class="dev-inner">Nested column content</span>
-				</div>
-				<div class="grid-col-d4-s12">
-					<span class="dev-inner">Nested column content</span>
-				</div>
-				<div class="grid-col-d4-s12">
-					<span class="dev-inner">Nested column content</span>
-				</div>
-			</div>
-		</div>
-		<div class="grid-col-d5-s12">
-			<span class="dev-inner">Column content</span>
-		</div>
-	</div>
-

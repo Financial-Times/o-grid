@@ -1,0 +1,14 @@
+<div class="grid-col-{{this.span}}">
+	
+	<span class="dev-inner">
+		{{@index}}: .grid-col-{{this.span}}
+	</span>
+	{{#if this.columns}}
+		<div class="grid-row">
+			{{#each this.columns}}
+				{{> column}}
+			{{/each}}
+		</div>
+	{{/if}}
+
+</div>

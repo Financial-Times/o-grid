@@ -106,19 +106,19 @@ The grid is divided into 12 columns and column instances can span any number of 
 ###Layout size identifiers
 
  * **s**  
- *Small* screens
+ *Small* layout
 
  * **m**  
- *Medium* screens
+ *Medium* layout
 
 * **l**  
- *Large* screens
+ *Large* layout
 
 * **xl**  
- *Extra Large* screens
+ *Extra Large* layout
 
-* **d**  
- All screen widths without an explicit rule defined using one of the above
+* **d** *[required unless all four of the above are specified]*  
+ Default for all layouts not-having an explicit rule defined using one of the above 
 
 
 ###Examples

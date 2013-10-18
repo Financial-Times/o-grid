@@ -16,6 +16,7 @@ body {
 	margin-left: -$defaultLayoutHalfGutter;
 	margin-right: -$defaultLayoutHalfGutter;
 	width: auto;
+	min-width: 0;
 }
 
 /* Default grid: Layout 1 FIXED (well, max-width) */

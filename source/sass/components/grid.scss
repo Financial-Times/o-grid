@@ -4,15 +4,20 @@ body {
 	padding: 0;
 }
 
-.#{$gridRow} {
+.#{$gridRow},
+.#{$gridBox} {
 	clear: both;
 	margin: 0 auto;
 	width: 100%;
+}
+
+.#{$gridRow} {
 	max-width: $smallMaxWidth; 
 	min-width: $globalMinWidth;
 }
 
-.#{$gridRow} .#{$gridRow} {
+.#{$gridRow} .#{$gridRow},
+.#{$gridBox} .#{$gridRow} {
 	margin-left: -$defaultLayoutHalfGutter;
 	margin-right: -$defaultLayoutHalfGutter;
 	width: auto;

@@ -61,6 +61,24 @@ exports.getExamples = function () {
 		},
 
 		{
+			title: "Usage on existing pages",
+			description: "The grid can be applied within components on a page which doesn't use grid-module for its global layout",
+			wrapper: {
+				start: "<div style=\"max-width: 700px; min-width: 300px; margin:auto; background:#ccc; min-height: 200px;\"><div class=\"ft-grid-box\"> ",
+				end: "</div></div>"
+			},
+			columns: [
+				{
+					span: "d8-s12",
+					columns: [{ span: "d4" }, { span: "d4" }, { span: "d4" }]
+				},
+				{
+					span: "d4-s12"
+				}
+			]
+		},
+
+		{
 			title: "Complex responsive layouts",
 			description: "Complex layouts can be created by using variable column spans in combination with nesting.",
 			columns: [
@@ -82,6 +100,8 @@ exports.getExamples = function () {
 				}
 			]
 		}
+
+
 
 	];
 	return examples;

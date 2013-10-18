@@ -5,7 +5,8 @@
 	max-width: $largeMaxWidth;
 }
 
-.#{$gridRow} .#{$gridRow} {
+.#{$gridRow} .#{$gridRow},
+.#{$gridBox} .#{$gridRow} {
 	margin-left: -$legacyLayoutHalfGutter;
 	margin-right: -$legacyLayoutHalfGutter;
 	width: auto;

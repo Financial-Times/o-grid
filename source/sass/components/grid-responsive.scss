@@ -2,7 +2,8 @@
 /* Override fixed defaults for responsive grid */
 @media screen {
 
-	.#{$gridRow} .#{$gridRow} {
+	.#{$gridRow} .#{$gridRow},
+	.#{$gridBox} .#{$gridRow} {
 		margin-left: -$gridHalfGutter;
 		margin-right: -$gridHalfGutter;
 		width: auto;

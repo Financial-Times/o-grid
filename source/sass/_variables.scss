@@ -5,7 +5,7 @@
 // -------------------------------------------------------------------------------------
 
 // Gutters
-$gridHalfGutter: 0.625em;
+$gridHalfGutter: 10px;
 $defaultLayoutHalfGutter: 1%;
 $legacyLayoutHalfGutter: 5px;
 
@@ -34,6 +34,7 @@ $largeToXLBreak: 1400px;
 
 $gridRow: grid-row;
 $gridColumn: grid-col;
+$gridBox: ft-grid-box;
 $small: s;
 $medium: m;
 $large: l;

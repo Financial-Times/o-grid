@@ -4,7 +4,8 @@
   max-width: 960px;
 }
 
-.grid-row .grid-row {
+.grid-row .grid-row,
+.ft-grid-box .grid-row {
   margin-left: -5px;
   margin-right: -5px;
   width: auto;

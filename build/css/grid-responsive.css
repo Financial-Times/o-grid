@@ -1,8 +1,9 @@
 /* Override fixed defaults for responsive grid */
 @media screen {
-  .grid-row .grid-row {
-    margin-left: -0.625em;
-    margin-right: -0.625em;
+  .grid-row .grid-row,
+  .ft-grid-box .grid-row {
+    margin-left: -10px;
+    margin-right: -10px;
     width: auto;
   }
 
@@ -10,8 +11,8 @@
     float: left;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-    padding-left: 0.625em;
-    padding-right: 0.625em;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   [class*="-s0"] {

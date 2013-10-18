@@ -2,9 +2,12 @@
 {{#each example}}
 	
 	<div class="example">
-
-		<div class="grid-row">
-
+		{{#wrapper}}
+			{{{start}}}
+		{{/wrapper}}
+		{{^wrapper}}
+			<div class="grid-row">
+		{{/wrapper}}
 			<div class="grid-col-d12">
 				<h2 class="example-title">{{title}}</h2>
 				<p class="example-description">{{{description}}}</p>
@@ -14,7 +17,12 @@
 				{{> column}}
 			{{/each}}
 
-		</div>
+		{{#wrapper}}
+			{{{end}}}
+		{{/wrapper}}
+		{{^wrapper}}
+			</div>
+		{{/wrapper}}
 
 	</div>
 

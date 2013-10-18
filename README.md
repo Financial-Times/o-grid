@@ -29,7 +29,7 @@ Add the following to your app's bower dependencies
    
    "grid-module": "~0.1.0"
 
-Then include in your app's styles
+Then include the following in your app's styles
 
 * core stylesheet  
 
@@ -130,8 +130,24 @@ The grid is divided into 12 columns and column instances can span any number of 
 ###Utilities
 As well as the column and row classes a handful of utilities are also included in the grid styles
 
+* **ft-grid-box**  
+When using a grid-module based component in a product that isn't layed out using grid-module wrapping the entire component in an element with the class ``ft-grid-box`` ensures the module will be laid out correctly using the grid
+
 * **hide**  
 e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes
+
+* **respondTo($layoutSize)**  
+To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$small``, ``$medium``, ``$large`` or ``$extraLarge`` depending on which layout size the style should apply to e.g.
+
+	    @include respondTo($small) {
+	    	.ft-example-module .item-subheading {
+	    		font-size: 0.5em
+	    	}
+	    }
+
+* **sass variables**  
+All the variables used by the grid are available in other stylesheets, but **care should be taken never to overwrite the values**. Also, if you're writing styles that use these values there's a good chance what you're trying to achieve can be done simply by using the existing classes in grid-module.
+
 
 ##Gotchas
 

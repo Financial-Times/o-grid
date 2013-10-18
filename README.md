@@ -1,9 +1,12 @@
 #ft-grid-module
 
+> Living off the grid and being kind of an outlaw brings a dangerous reality.  
+  *Ron Perlman*
+
 ##About
 
 ft-grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules.
-It supports all ['html5' browsers](link-to-bbc), with a fixed-width fallback for browsers which don't support media queries
+It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/cutting-the-mustard), with a [fixed-width fallback](https://docs.google.com/a/ft.com/drawings/d/14vmVJzuO8k3KxOwf19kWfd8mdKP1qVt8Wuqi-HvuioA/) for browsers that don't support media queries.
 
 ###Demos
 
@@ -16,34 +19,45 @@ It supports all ['html5' browsers](link-to-bbc), with a fixed-width fallback for
 * [Legacy grid](demos/grid-legacy.html)  
 	Fixed grid with width of 960px - typically loaded if browser/feature detection suggest user is on ie7
 
-
 ##Installation
 
-###Add as a dependency using Bower
+###For developers
 
-Write this once we've defined where it sits etc.
+[Skip to installation guide for designers](#designer-installation)
 
-###Include in your app
+Add the following to your app's bower dependencies
+   
+   "ft-grid-module": "~0.1.0"
 
-In your app's core stylesheet 
+Then include in your app's styles
 
-    @include /path/to/bower/ft-grid-module/bundles/responsive.scss
+* core stylesheet  
 
-And in your app's ie7 stylesheet
+    @import '/path/to/bower/ft-grid-module/bundles/responsive.scss';
 
-	@include /path/to/bower/ft-grid-module/bundles/legacy.scss
+* ie7 and ie8 stylesheets  
 
-Alternatively include the responsive grid and (optionally) the legacy grid css file in the html head directly (it's recommended a conditional comment is used to include for ie7 and below)
+	@import '/path/to/bower/ft-grid-module/bundles/legacy.scss';
 
+#####boxsizing.htc
+In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/ft-grid-module/dist/behavior/boxsizing.htc`` will either
 
-	<link rel='stylesheet' href='/path/to/bower/ft-grid-module/css/grid-responsive.css' /> 
-	<!--[if lt IE 8]><link rel='stylesheet' href='/path/to/bower/ft-grid-module/css/grid-legacy.css' /><![endif]-->
-
-####Boxsizing.htc
-In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/ft-grid-module/behavior/boxsizing.htc`` will either
-
-* need to be copied (ideally by your build process) to ``/behavior/``
+* need to be copied (ideally by your build process) to ``/behavior/boxsizing.htc``
 * be pointed to using a http rewrite or similar
+
+<a name="designer-installation"></a>
+###For designers
+
+From terminal run the following command in your prototype's directory
+
+	bower install ft-grid-module
+
+Include the responsive grid css file in the html head directly
+
+	<link rel='stylesheet' href='bower_components/ft-grid-module/dist/css/grid-responsive.css' /> 
+	<!-- Optionally include the ie7/8 stylesheet too -->
+	<!--[if lt IE 9]><link rel='stylesheet' href='bower_components/ft-grid-module/dist/css/grid-legacy.css' /><![endif]-->
+
 
 ##Grid dimensions
 
@@ -70,7 +84,7 @@ For each of these the available horizontal width is separated into 12 columns
 In addition, for nested grids the parent element's width is divided into 12 columns
 
 
-##Basic implementation
+##Using the grid
 Grid styles are applied to page elements using two types of class declaration:
 
 * A ``grid-row`` class, added to the container element.  
@@ -114,8 +128,7 @@ The grid is divided into 12 columns and column instances can span any number of 
 	<div class="grid-col-d6-s12">A half width column for all sizes except small screens, where takes up full width</div>
 	<div class="grid-col-s4-m3-l2-xl1">A column which gradually takes up a greater portion of horizontal space as the screen gets smaller</div>
 
-
-##Utilities
+###Utilities
 As well as the column and row classes a handful of utilities are also included in the grid styles
 
 * **hide**  

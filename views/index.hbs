@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{title}} - FT.com</title>
-  <link rel='stylesheet' href='/css/style.{{page.version}}.min.css' />
+  {{> head}}
 </head>
 <body>
   <h1>Financial Times</h1>
@@ -23,9 +22,6 @@
     <li><a href="/grid-legacy">Legacy Grid</a>
       Fixed grid with width of 960px. 
       Loaded if browser/feature detection suggest user is on ie7
-    </li>
-    <li><a href="/grid-dist">Distribution grid</a>
-      Example page demonstrating how to include the grid in a live app
     </li>
   </ul>
   {{> docs}}

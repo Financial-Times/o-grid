@@ -45,8 +45,7 @@ In order for the grid to work in ie7 a .htc polyfill is used, referenced from th
 * need to be copied (ideally by your build process) to ``/behavior/boxsizing.htc``
 * be pointed to using a http rewrite or similar
 
-<a id="designer-installation"></a>
-###For designers
+###For designers<a id="designer-installation">.</a>
 
 From terminal run the following command in your prototype's directory
 

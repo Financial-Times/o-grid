@@ -5,8 +5,8 @@
 </head>
 <body class="dev-prototype">
 
-	<div id="devHead">
-		<h1>Grid mode: <span></span></h1>
+	<div class="header">
+		<h1>{{#default}}Default{{/default}}{{#legacy}}Legacy{{/legacy}}{{#responsive}}Responsive <span>(<span class="mode"></span>)</span>{{/responsive}}</h1>
 	</div>
 	
 	{{> grid_generator}}

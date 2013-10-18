@@ -4,11 +4,22 @@
 @import "../_mixins.scss";
 @import "../_functions.scss";
 
-#devHead {
+.header {
 	margin: 0 0 20px 0;
     padding: 10px;
 	background-color: black;
 	color: white;
+}
+
+.header h1 {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 28px;
+}
+
+.header span {
+	font-weight: normal;
+	color: #bbb;
 }
 
 .example {
@@ -55,25 +66,25 @@
 }
 
 @include respondTo(s) {
-	#devHead h1 span:after {
+	.header .mode:after {
 		content: "small layout";
 	}
 }
 
 @include respondTo(m) {
-	#devHead h1 span:after {
+	.header .mode:after {
 		content: "medium layout";
 	}
 }
 
 @include respondTo(l) {
-	#devHead h1 span:after {
+	.header .mode:after {
 		content: "large layout";
 	}
 }
 
 @include respondTo(xl) {
-	#devHead h1 span:after {
+	.header .mode:after {
 		content: "extra large layout";
 	}
 }

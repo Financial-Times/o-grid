@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: ['source/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
-        dest: 'build/dist/behavior/boxsizing.htc'
+        dest: 'dist/behavior/boxsizing.htc'
       },
       dev: {
         src: ['source/behavior/boxsizing/head', 'source/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
@@ -48,8 +48,8 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          './build/dist/css/grid.<%= pkg.version %>.min.css': './source/sass/bundles/responsive.scss', // 'destination': 'source'
-          './build/dist/css/grid-legacy.<%= pkg.version %>.min.css': './source/sass/bundles/legacy.scss'
+          './dist/css/grid.<%= pkg.version %>.min.css': './source/sass/bundles/responsive.scss', // 'destination': 'source'
+          './dist/css/grid-legacy.<%= pkg.version %>.min.css': './source/sass/bundles/legacy.scss'
         }
       }
     },

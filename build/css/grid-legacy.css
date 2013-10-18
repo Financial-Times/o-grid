@@ -1,7 +1,7 @@
 /* Layout 3 FIXED (for legacy desktops) */
 .grid-row {
-  width: 60em;
-  max-width: 60em;
+  width: 960px;
+  max-width: 960px;
 }
 
 .grid-row .grid-row {

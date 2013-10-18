@@ -1,9 +1,9 @@
 {
-    "name": "module-grid",
-    "version": "0.0.1",
-    "main": ["source/sass", "build/dist"],
+    "name": "ft-grid-module",
+    "version": "0.1.0",
+    "main": ["source/sass", "dist"],
     "devDependencies": {
-
+    	
     }
 }
 

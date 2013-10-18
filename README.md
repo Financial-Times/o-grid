@@ -1,23 +1,23 @@
-#ft-grid-module
+#grid-module
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
 ##About
 
-ft-grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules.
+grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules.
 It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/cutting-the-mustard), with a [fixed-width fallback](https://docs.google.com/a/ft.com/drawings/d/14vmVJzuO8k3KxOwf19kWfd8mdKP1qVt8Wuqi-HvuioA/) for browsers that don't support media queries.
 
 ###Demos
 
 * [Responsive grid](demos/grid-responsive.html)  
-    Demonstrates the behaviour of a page using the recommended installation of ft-grid-module
+    Demonstrates the behaviour of a page using the recommended installation of grid-module
 
 * [Default grid](demos/grid-default.html)  
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
 * [Legacy grid](demos/grid-legacy.html)  
-	Fixed grid with width of 960px - typically loaded if browser/feature detection suggest user is on ie7
+	Fixed grid with width of 960px - mocks behaviour if browser/feature detection suggest user is on ie7/8
 
 ##Installation
 
@@ -27,20 +27,20 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 
 Add the following to your app's bower dependencies
    
-   "ft-grid-module": "~0.1.0"
+   "grid-module": "~0.1.0"
 
 Then include in your app's styles
 
 * core stylesheet  
 
-    @import '/path/to/bower/ft-grid-module/bundles/responsive.scss';
+    @import '/path/to/bower/grid-module/bundles/responsive.scss';
 
 * ie7 and ie8 stylesheets  
 
-	@import '/path/to/bower/ft-grid-module/bundles/legacy.scss';
+	@import '/path/to/bower/grid-module/bundles/legacy.scss';
 
 #####boxsizing.htc
-In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/ft-grid-module/dist/behavior/boxsizing.htc`` will either
+In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/grid-module/dist/behavior/boxsizing.htc`` will either
 
 * need to be copied (ideally by your build process) to ``/behavior/boxsizing.htc``
 * be pointed to using a http rewrite or similar<a id="designer-installation">.</a>
@@ -49,13 +49,13 @@ In order for the grid to work in ie7 a .htc polyfill is used, referenced from th
 
 From terminal run the following command in your prototype's directory (you will need to have [bower](http://bower.io/) already installed)
 
-	bower install ft-grid-module
+	bower install grid-module
 
 Include the responsive grid css file in the html head directly
 
-	<link rel='stylesheet' href='bower_components/ft-grid-module/dist/css/grid-responsive.css' /> 
+	<link rel='stylesheet' href='bower_components/grid-module/dist/css/grid-responsive.css' /> 
 	<!-- Optionally include the ie7/8 stylesheet too -->
-	<!--[if lt IE 9]><link rel='stylesheet' href='bower_components/ft-grid-module/dist/css/grid-legacy.css' /><![endif]-->
+	<!--[if lt IE 9]><link rel='stylesheet' href='bower_components/grid-module/dist/css/grid-legacy.css' /><![endif]-->
 
 
 ##Grid dimensions

@@ -1,5 +1,4 @@
-var pkg = require("../package.json"),
-    connect = require("connect"),
+var connect = require("connect"),
     express = require("express"),
     hbs = require('hbs'),
     examples = require('./examples.json');

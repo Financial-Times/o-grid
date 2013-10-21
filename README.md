@@ -149,7 +149,7 @@ To create styles that respond to the same breakpoints as the grid this sass mixi
 	    }
 
 * **sass variables**  
-All the variables used by the grid are available in other stylesheets, but **care should be taken never to overwrite the values**. Also, if you're writing styles that use these values there's a good chance what you're trying to achieve can be done simply by using the existing classes in grid-module.
+All the variables used by the grid are available in other stylesheets, and their default values can be overwritten by defining different values for them *before* the grid-module ``main.scss`` file is included.
 
 
 ##Gotchas

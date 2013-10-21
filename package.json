@@ -16,7 +16,11 @@
     "grunt-contrib-jshint": "*",
     "grunt-contrib-sass": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-concat": "*"
+    "grunt-contrib-concat": "*",
+    "grunt-templater": "*",
+    "grunt-markdown": "*",
+    "handlebars": "*",
+    "grunt-prettify": "*"
   },
   "engines": {
     "node": ">=0.10"

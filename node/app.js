@@ -2,7 +2,7 @@ var pkg = require("../package.json"),
     connect = require("connect"),
     express = require("express"),
     hbs = require('hbs'),
-    ec = require('./examples.js');
+    examples = require('./examples.json');
 
 var app   = express(),
     port  = process.env.PORT || 3000;
@@ -38,7 +38,7 @@ app.get('/grid-:name', function (req, res) {
 
     var pageProps = {
         title: "Grid example and demo",
-        example: ec.getExamples()
+        example: examples
     };
 
     pageProps[req.params.name] = true;

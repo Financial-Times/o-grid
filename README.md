@@ -27,17 +27,17 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 
 Add the following to your app's bower dependencies
    
-   "grid-module": "~0.1.0"
+   		"grid-module": "~0.1.0"
 
 Then include the following in your app's styles
 
 * core stylesheet  
 
-    @import '/path/to/bower/grid-module/bundles/responsive.scss';
+    	@import '/path/to/bower/grid-module/bundles/responsive.scss';
 
 * ie7 and ie8 stylesheets  
 
-	@import '/path/to/bower/grid-module/bundles/legacy.scss';
+		@import '/path/to/bower/grid-module/bundles/legacy.scss';
 
 #####boxsizing.htc
 In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/grid-module/dist/behavior/boxsizing.htc`` will either

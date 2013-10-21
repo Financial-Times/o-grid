@@ -25,10 +25,6 @@ module.exports = function(grunt) {
       sass: {
         files: ['source/sass/**/*'],
         tasks: ['sass']
-      },
-      js: {
-        files: ['source/js/**/*'],
-        tasks: ['jshint', 'concat', 'uglify']
       }
     },
     sass: {                              
@@ -56,6 +52,58 @@ module.exports = function(grunt) {
     jshint: {
       files: ['Gruntfile.js', 'node/**/*.js'],
       jshintrc: './.jshintrc'
+    },
+    template: {
+      responsive: {
+        src: './views/grid.hbs',
+        engine: "handlebars",
+        dest: './docs/grid-responsive.html',
+        variables: {
+          title: "Grid example and demo",
+          example: require('./node/examples.json'),
+          responsive: true
+        }
+      },
+      'default': {
+        src: './views/grid.hbs',
+        engine: "handlebars",
+        dest: './docs/grid-default.html',
+        variables: {
+          title: "Grid example and demo",
+          example: require('./node/examples.json'),
+          'default': true
+        }
+      },
+      legacy: {
+        src: './views/grid.hbs',
+        engine: "handlebars",
+        dest: './docs/grid-legacy.html',
+        variables: {
+          title: "Grid example and demo",
+          example: require('./node/examples.json'),
+          legacy: true
+        }
+      }
+    },
+    markdown: {
+      docs: {
+        files: [
+          {
+            expand: true,
+            src: 'README.md',
+            dest: './docs/',
+            ext: '.html'
+          }
+        ]
+      }
+    },
+    prettify: {
+      docs: {
+        expand: true,
+        cwd: './docs/',
+        src: ['*.html'],
+        dest: './docs/'
+      }
     }
   });
 
@@ -65,16 +113,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-templater');
+  grunt.loadNpmTasks('grunt-markdown');
+  grunt.loadNpmTasks('grunt-prettify');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'sass']);
 
-  // grunt.registerTask('restart', 'Restarting node app', function () {
-  //   // Need to look into how grunt can run the app as a child process
-  //   //
-  //   // http://web-archive-me.com/page/1254392/2013-01-29/http://cobbweb.me/blog/2012/06/07/using-grunt-dot-js-to-build-your-frontend-in-a-node-dot-js-slash-express-dot-js-app/
-  //   // http://stackoverflow.com/questions/15044026/running-node-app-through-grunt
-  //   // http://stackoverflow.com/questions/13889037/running-node-app-from-grunt-with-watch
-  // });
+  grunt.registerTask('docs', 'Generating static documentation files', function () {
+    var handlebars = require('handlebars');
+
+    handlebars.registerPartial('column', grunt.file.read('./views/partials/column.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('examples', grunt.file.read('./views/partials/examples.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('head', grunt.file.read('./views/partials/head.hbs', {encoding: 'utf8'}));
+
+    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs']);
+  });  
+
+
 
 };

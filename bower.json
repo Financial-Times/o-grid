@@ -1,9 +1,10 @@
 {
-    "name": "grid-module",
-    "version": "0.1.0",
     "main": ["source/sass", "dist"],
-    "devDependencies": {
-    	
-    }
+    "ignore": [
+    	"node",
+    	"node_modules",
+    	"tmp",
+    	"views"
+    ]
 }
 

@@ -5,11 +5,11 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
-        src: ['source/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
+        src: ['src/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
         dest: 'dist/behavior/boxsizing.htc'
       },
       dev: {
-        src: ['source/behavior/boxsizing/head', 'source/behavior/boxsizing/script.js', 'source/behavior/boxsizing/foot'],
+        src: ['src/behavior/boxsizing/head', 'src/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
         dest: 'build/behavior/boxsizing.htc'
       }
     },
@@ -17,18 +17,14 @@ module.exports = function(grunt) {
       dist: {
         options: {compress: true},
         files: {
-          './tmp/behavior/boxsizing/script.js': ['source/behavior/boxsizing/script.js']
+          './tmp/behavior/boxsizing/script.js': ['src/behavior/boxsizing/script.js']
         }
       }
     },
     watch: {
       sass: {
-        files: ['source/sass/**/*'],
+        files: ['src/scss/**/*'],
         tasks: ['sass']
-      },
-      js: {
-        files: ['source/js/**/*'],
-        tasks: ['jshint', 'concat', 'uglify']
       }
     },
     sass: {                              
@@ -37,10 +33,10 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          './build/css/grid-default.css': './source/sass/bundles/default.scss', // 'destination': 'source'
-          './build/css/grid-responsive.css': './source/sass/bundles/responsive-only.scss', // 'destination': 'source'
-          './build/css/grid-legacy.css': './source/sass/bundles/legacy.scss', // 'destination': 'source'
-          './build/css/docs.css': './source/sass/docs/docs.scss'
+          './build/css/grid-default.css': './src/scss/bundles/default.scss', // 'destination': 'source'
+          './build/css/grid-responsive.css': './src/scss/bundles/responsive-only.scss', // 'destination': 'source'
+          './build/css/grid-legacy.css': './src/scss/bundles/legacy.scss', // 'destination': 'source'
+          './build/css/docs.css': './src/scss/docs/docs.scss'
         }
       },
       dist: {                            
@@ -48,8 +44,8 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          './dist/css/grid.<%= pkg.version %>.min.css': './source/sass/bundles/responsive.scss', // 'destination': 'source'
-          './dist/css/grid-legacy.<%= pkg.version %>.min.css': './source/sass/bundles/legacy.scss'
+          './dist/css/grid.<%= pkg.version %>.min.css': './src/scss/bundles/responsive.scss', // 'destination': 'source'
+          './dist/css/grid-legacy.<%= pkg.version %>.min.css': './src/scss/bundles/legacy.scss'
         }
       }
     },

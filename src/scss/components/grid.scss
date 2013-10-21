@@ -21,6 +21,7 @@ body {
 	margin-left: -$defaultLayoutHalfGutter;
 	margin-right: -$defaultLayoutHalfGutter;
 	width: auto;
+	max-width: none; // needed for .grid-box .grid-row
 	min-width: 0;
 }
 

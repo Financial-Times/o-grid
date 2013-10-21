@@ -17,7 +17,7 @@
 	padding-left: $legacyLayoutHalfGutter;
 	padding-right: $legacyLayoutHalfGutter;
 	-moz-box-sizing: border-box;
-	box-sizing: border-box; *behavior: url(/legacy/boxsizing.htc);
+	box-sizing: border-box; *behavior: url(#{$pathToLegacy}boxsizing.htc);
 }
 
 

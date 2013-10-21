@@ -10,13 +10,13 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 
 ###Demos
 
-* [Responsive grid](demos/grid-responsive.html)  
+* [Responsive grid](grid-responsive.html)  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
 
-* [Default grid](demos/grid-default.html)  
+* [Default grid](grid-default.html)  
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
-* [Legacy grid](demos/grid-legacy.html)  
+* [Legacy grid](grid-legacy.html)  
 	Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
 
 ##Installation

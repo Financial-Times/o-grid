@@ -92,9 +92,17 @@ module.exports = function(grunt) {
             expand: true,
             src: 'README.md',
             dest: './docs/',
-            ext: '.html'
+            rename: function () {
+              return './docs/index.html';
+            }
           }
-        ]
+        ],
+        options: {
+          template: './docs-generator/markdown-wrapper.jst',
+          preCompile: function() {},
+          postCompile: function() {},
+          templateContext: {}
+        }
       }
     },
     prettify: {
@@ -115,6 +123,10 @@ module.exports = function(grunt) {
         }]
 
       } 
+    },
+    clean: {
+      before: ['./docs', './tmp'],
+      after: ['./tmp']
     }
   });
 
@@ -125,12 +137,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-templater');
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-prettify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'docs']);
+  grunt.registerTask('default', ['clean:before', 'jshint', 'uglify', 'concat', 'docs', 'clean:after']);
 
   grunt.registerTask('docs', 'Generating static documentation files', function () {
     var handlebars = require('handlebars');

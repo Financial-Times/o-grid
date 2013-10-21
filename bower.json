@@ -1,4 +1,5 @@
 {
+	"name": "grid-module",
     "main": ["main.scss", "main-legacy.scss"],
     "ignore": [
     	"node",

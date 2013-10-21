@@ -33,11 +33,13 @@ Then include the following in your app's styles
 
 * core stylesheet  
 
-    	@import '/path/to/bower/grid-module/bundles/responsive.scss';
+    	@import '/path/to/bower/grid-module/main.scss';
 
 * ie7 and ie8 stylesheets  
 
-		@import '/path/to/bower/grid-module/bundles/legacy.scss';
+		@import '/path/to/bower/grid-module/legacy/main.scss';
+
+You will also need to redirect requests to ``/path/to/bower/grid-module/legacy/boxsizing.htc``
 
 #####boxsizing.htc
 In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using ``/behavior/boxsizing.htc``. The file ``/path/to/bower/grid-module/dist/behavior/boxsizing.htc`` will either
@@ -53,9 +55,10 @@ From terminal run the following command in your prototype's directory (you will 
 
 Include the responsive grid css file in the html head directly
 
-	<link rel='stylesheet' href='bower_components/grid-module/dist/css/grid-responsive.css' /> 
+	<link rel='stylesheet' href='bower_components/grid-module/docs/css/grid-default.css' /> 
+	<link rel='stylesheet' href='bower_components/grid-module/docs/css/grid-responsive.css' /> 
 	<!-- Optionally include the ie7/8 stylesheet too -->
-	<!--[if lt IE 9]><link rel='stylesheet' href='bower_components/grid-module/dist/css/grid-legacy.css' /><![endif]-->
+	<!--[if lt IE 9]><link rel='stylesheet' href='bower_components/grid-module/docs/css/grid-legacy.css' /><![endif]-->
 
 
 ##Grid dimensions

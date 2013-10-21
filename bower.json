@@ -1,5 +1,5 @@
 {
-    "main": ["source/sass", "dist"],
+    "main": ["main.scss", "main-legacy.scss"],
     "ignore": [
     	"node",
     	"node_modules",

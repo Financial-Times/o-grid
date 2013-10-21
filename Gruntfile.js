@@ -104,6 +104,17 @@ module.exports = function(grunt) {
         src: ['*.html'],
         dest: './docs/'
       }
+    },
+    copy: {
+      cssToDocs: {
+        files: [{
+          expand: true, 
+          cwd: 'build/css/',
+          src: ['*'], 
+          dest: './docs/css/'
+        }]
+
+      } 
     }
   });
 
@@ -113,6 +124,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-templater');
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-prettify');
@@ -127,9 +139,8 @@ module.exports = function(grunt) {
     handlebars.registerPartial('examples', grunt.file.read('./views/partials/examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./views/partials/head.hbs', {encoding: 'utf8'}));
 
-    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs']);
+    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass', 'copy:cssToDocs']);
+    
   });  
-
-
 
 };

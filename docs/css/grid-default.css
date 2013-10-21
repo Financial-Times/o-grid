@@ -1,0 +1,99 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.ft-grid-row,
+.ft-grid-box {
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ft-grid-row {
+  max-width: 600px;
+  min-width: 240px;
+}
+
+.ft-grid-row .ft-grid-row,
+.ft-grid-box .ft-grid-row {
+  margin-left: -1%;
+  margin-right: -1%;
+  width: auto;
+  min-width: 0;
+}
+
+/* Default grid: Layout 1 FIXED (well, max-width) */
+[class*="ft-grid-col"] {
+  float: left;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+[class*="-d0"],
+[class*="-s0"] {
+  display: none;
+}
+
+[class*="-d1"],
+[class*="-s1"] {
+  width: 6.33333%;
+}
+
+[class*="-d2"],
+[class*="-s2"] {
+  width: 14.66667%;
+}
+
+[class*="-d3"],
+[class*="-s3"] {
+  width: 23%;
+}
+
+[class*="-d4"],
+[class*="-s4"] {
+  width: 31.33333%;
+}
+
+[class*="-d5"],
+[class*="-s5"] {
+  width: 39.66667%;
+}
+
+[class*="-d6"],
+[class*="-s6"] {
+  width: 48%;
+}
+
+[class*="-d7"],
+[class*="-s7"] {
+  width: 56.33333%;
+}
+
+[class*="-d8"],
+[class*="-s8"] {
+  width: 64.66667%;
+}
+
+[class*="-d9"],
+[class*="-s9"] {
+  width: 73%;
+}
+
+[class*="-d10"],
+[class*="-s10"] {
+  width: 81.33333%;
+}
+
+[class*="-d11"],
+[class*="-s11"] {
+  width: 89.66667%;
+}
+
+[class*="-d12"],
+[class*="-s12"] {
+  float: none;
+  clear: both;
+  width: 98%;
+}

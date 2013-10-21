@@ -50,37 +50,37 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'node/**/*.js'],
+      files: ['Gruntfile.js'],
       jshintrc: './.jshintrc'
     },
     template: {
       responsive: {
-        src: './views/grid.hbs',
+        src: './docs-generator/grid.hbs',
         engine: "handlebars",
         dest: './docs/grid-responsive.html',
         variables: {
-          title: "Grid example and demo",
-          example: require('./node/examples.json'),
+          title: "Grid example and demo - responsive",
+          example: require('./docs-generator/examples.json'),
           responsive: true
         }
       },
       'default': {
-        src: './views/grid.hbs',
+        src: './docs-generator/grid.hbs',
         engine: "handlebars",
         dest: './docs/grid-default.html',
         variables: {
-          title: "Grid example and demo",
-          example: require('./node/examples.json'),
+          title: "Grid example and demo - default",
+          example: require('./docs-generator/examples.json'),
           'default': true
         }
       },
       legacy: {
-        src: './views/grid.hbs',
+        src: './docs-generator/grid.hbs',
         engine: "handlebars",
         dest: './docs/grid-legacy.html',
         variables: {
-          title: "Grid example and demo",
-          example: require('./node/examples.json'),
+          title: "Grid example and demo - legacy fixed grid",
+          example: require('./docs-generator/examples.json'),
           legacy: true
         }
       }
@@ -130,14 +130,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-prettify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'sass']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'docs']);
 
   grunt.registerTask('docs', 'Generating static documentation files', function () {
     var handlebars = require('handlebars');
 
-    handlebars.registerPartial('column', grunt.file.read('./views/partials/column.hbs', {encoding: 'utf8'}));
-    handlebars.registerPartial('examples', grunt.file.read('./views/partials/examples.hbs', {encoding: 'utf8'}));
-    handlebars.registerPartial('head', grunt.file.read('./views/partials/head.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('column', grunt.file.read('./docs-generator/partials/column.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
     grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass', 'copy:cssToDocs']);
     

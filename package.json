@@ -5,11 +5,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "dependencies": {
-    "connect" : "2.x",
-    "express": "3.4.0",
-    "hbs": "2.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "*",

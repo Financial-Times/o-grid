@@ -64,7 +64,7 @@ exports.getExamples = function () {
 			title: "Usage on existing pages",
 			description: "The grid can be applied within components on a page which doesn't use grid-module for its global layout by wrapping in a container with class <code>ft-grid-box</code>",
 			wrapper: {
-				start: "<div style=\"max-width: 700px; min-width: 300px; margin:auto; background:#ccc;\"><div class=\"ft-grid-box\"> ",
+				start: "<div style=\"max-width: 700px; min-width: 300px; margin:auto;\"><div class=\"ft-grid-box\"> ",
 				end: "<div style=\"clear:both\"></div></div>"
 			},
 			columns: [

@@ -2,24 +2,26 @@
 //	DIMENSIONS
 //
 //	Do not change without sign-off on design and updating README.md
+//  If you need to use different values for these simply include different variable names
+//  in a .scss file included before this one
 // -------------------------------------------------------------------------------------
 
 // Gutters
-$gridHalfGutter: 10px;
-$defaultLayoutHalfGutter: 1%;
-$legacyLayoutHalfGutter: 5px;
+$gridHalfGutter: 10px !default;
+$defaultLayoutHalfGutter: 1% !default;
+$legacyLayoutHalfGutter: 5px !default;
 
 // Page widths
-$globalMinWidth: 240px;
-$smallMaxWidth: 600px;
-$mediumMaxWidth: 780px;
-$largeMaxWidth: 960px;
-$extraLargeMaxWidth: 1360px;
+$globalMinWidth: 240px !default;
+$smallMaxWidth: 600px !default;
+$mediumMaxWidth: 780px !default;
+$largeMaxWidth: 960px !default;
+$extraLargeMaxWidth: 1360px !default;
 
 // Breakpoints
-$smallToMediumBreak: 600px;
-$mediumToLargeBreak: 1000px;
-$largeToXLBreak: 1400px;
+$smallToMediumBreak: 600px !default;
+$mediumToLargeBreak: 1000px !default;
+$largeToXLBreak: 1400px !default;
 
 
 // -------------------------------------------------------------------------------------

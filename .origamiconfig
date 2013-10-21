@@ -1,0 +1,7 @@
+{		
+    "description": "Grid for component/page layout",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "Where a product developer can go for support on this component. Either an email address (which should be a group or role based address, nota named individual), or the URL of the component's bug or issue tracker (eg a GitHub issues URL, or other issue tracker such as Redmine).",	
+    "supportStatus": "active"
+}

@@ -8,7 +8,6 @@
     "grunt-contrib-sass": "*",
     "grunt-contrib-watch": "*",
     "grunt-contrib-concat": "*",
-    "grunt-contrib-copy": "*",
     "grunt-contrib-clean": "*",
     "grunt-templater": "*",
     "grunt-markdown": "*",

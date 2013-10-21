@@ -1,17 +1,19 @@
 {
-    "curly": true,
-    "eqeqeq": true,
-    "immed": true,
-    "latedef": true,
-    "newcap": true,
-    "noarg": true,
-    "sub": true,
-    "undef": true,
-    "boss": true,
-    "eqnull": true,
-    "browser": true,
-    "unused": true,
-    "strict": true,
-    "node": true,
-    "globals": {}
+  "forin": true,
+  "noarg": true,
+  "noempty": true,
+  "eqeqeq": true,
+  "bitwise": true,
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "curly": true,
+  "browser": true,
+  "newcap": true,
+  "immed": true,
+  "trailing": true,
+  "smarttabs": true,
+  "globals": {
+    "require": false
+  }
 }

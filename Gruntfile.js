@@ -1,20 +1,16 @@
 module.exports = function(grunt) {
   "use strict";
-  // Project configuration.
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      dist: {
+      boxSizing: {
         src: ['src/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
-        dest: 'dist/behavior/boxsizing.htc'
-      },
-      dev: {
-        src: ['src/behavior/boxsizing/head', 'src/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
-        dest: 'build/behavior/boxsizing.htc'
+        dest: 'legacy/boxsizing.htc'
       }
     },
     uglify: {
-      dist: {
+      boxSizing: {
         options: {compress: true},
         files: {
           './tmp/behavior/boxsizing/script.js': ['src/behavior/boxsizing/script.js']
@@ -28,24 +24,15 @@ module.exports = function(grunt) {
       }
     },
     sass: {                              
-      dev: {                            
+      docs: {                           
         options: {                       
           style: 'expanded'
         },
         files: {
-          './build/css/grid-default.css': './src/scss/bundles/default.scss', // 'destination': 'source'
-          './build/css/grid-responsive.css': './src/scss/bundles/responsive-only.scss', // 'destination': 'source'
-          './build/css/grid-legacy.css': './src/scss/bundles/legacy.scss', // 'destination': 'source'
-          './build/css/docs.css': './src/scss/docs/docs.scss'
-        }
-      },
-      dist: {                            
-        options: {                       
-          style: 'compressed'
-        },
-        files: {
-          './dist/css/grid.<%= pkg.version %>.min.css': './src/scss/bundles/responsive.scss', // 'destination': 'source'
-          './dist/css/grid-legacy.<%= pkg.version %>.min.css': './src/scss/bundles/legacy.scss'
+          './docs/css/grid-default.css': './src/scss/bundles/default.scss',
+          './docs/css/grid-responsive.css': './src/scss/bundles/responsive-only.scss',
+          './docs/css/grid-legacy.css': './src/scss/bundles/legacy.scss',
+          './docs/css/docs.css': './src/scss/docs/docs.scss'
         }
       }
     },
@@ -113,17 +100,6 @@ module.exports = function(grunt) {
         dest: './docs/'
       }
     },
-    copy: {
-      cssToDocs: {
-        files: [{
-          expand: true, 
-          cwd: 'build/css/',
-          src: ['*'], 
-          dest: './docs/css/'
-        }]
-
-      } 
-    },
     clean: {
       before: ['./docs', './tmp'],
       after: ['./tmp']
@@ -136,7 +112,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-templater');
   grunt.loadNpmTasks('grunt-markdown');
@@ -152,7 +127,7 @@ module.exports = function(grunt) {
     handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
-    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass', 'copy:cssToDocs']);
+    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass']);
     
   });  
 

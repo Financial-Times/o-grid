@@ -149,7 +149,7 @@ All the variables used by the grid are available in other stylesheets, and most 
     * **Dimensions** 
 
 		* *Gutters* - defines the space between columns
-			* ``$gridHalfGutter``: \[10px\]
+			* ``$reponsiveLayoutHalfGutter``: \[10px\]
 			* ``$defaultLayoutHalfGutter``: \[1%\]
 			* ``$fixedLayoutHalfGutter``: \[5px\]
 

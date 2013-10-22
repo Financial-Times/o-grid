@@ -452,6 +452,9 @@ body {
     width: 100%;
   }
 }
+.lt-ie9 {
+  /* ensures d12 and d0 can be over-ridden by styles for l layout */
+}
 .lt-ie9 .ft-grid-row {
   width: 960px;
   max-width: 960px;
@@ -470,62 +473,94 @@ body {
   box-sizing: border-box;
   *behavior: url(/polyfills/boxsizing.htc);
 }
-.lt-ie9 [class*="-d0"],
-.lt-ie9 [class*="-l0"] {
+.lt-ie9 [class*="-dhide"],
+.lt-ie9 [class*="-d0"] {
   display: none;
 }
-.lt-ie9 [class*="-d12"],
-.lt-ie9 [class*="-l12"] {
+.lt-ie9 [class*="-d1"] {
+  width: 8.33333%;
+}
+.lt-ie9 [class*="-d2"] {
+  width: 16.66667%;
+}
+.lt-ie9 [class*="-d3"] {
+  width: 25%;
+}
+.lt-ie9 [class*="-d4"] {
+  width: 33.33333%;
+}
+.lt-ie9 [class*="-d5"] {
+  width: 41.66667%;
+}
+.lt-ie9 [class*="-d6"] {
+  width: 50%;
+}
+.lt-ie9 [class*="-d7"] {
+  width: 58.33333%;
+}
+.lt-ie9 [class*="-d8"] {
+  width: 66.66667%;
+}
+.lt-ie9 [class*="-d9"] {
+  width: 75%;
+}
+.lt-ie9 [class*="-d10"] {
+  width: 83.33333%;
+}
+.lt-ie9 [class*="-d11"] {
+  width: 91.66667%;
+}
+.lt-ie9 [class*="-d12"] {
   float: none;
   clear: both;
   width: 100%;
 }
-.lt-ie9 [class*="-d1"],
+.lt-ie9 [class*="-lhide"],
+.lt-ie9 [class*="-l0"] {
+  display: none;
+}
 .lt-ie9 [class*="-l1"] {
   width: 8.33333%;
 }
-.lt-ie9 [class*="-d2"],
 .lt-ie9 [class*="-l2"] {
   width: 16.66667%;
 }
-.lt-ie9 [class*="-d3"],
 .lt-ie9 [class*="-l3"] {
   width: 25%;
 }
-.lt-ie9 [class*="-d4"],
 .lt-ie9 [class*="-l4"] {
   width: 33.33333%;
 }
-.lt-ie9 [class*="-d5"],
 .lt-ie9 [class*="-l5"] {
   width: 41.66667%;
 }
-.lt-ie9 [class*="-d6"],
 .lt-ie9 [class*="-l6"] {
   width: 50%;
 }
-.lt-ie9 [class*="-d7"],
 .lt-ie9 [class*="-l7"] {
   width: 58.33333%;
 }
-.lt-ie9 [class*="-d8"],
 .lt-ie9 [class*="-l8"] {
   width: 66.66667%;
 }
-.lt-ie9 [class*="-d9"],
 .lt-ie9 [class*="-l9"] {
   width: 75%;
 }
-.lt-ie9 [class*="-d10"],
 .lt-ie9 [class*="-l10"] {
   width: 83.33333%;
 }
-.lt-ie9 [class*="-d11"],
 .lt-ie9 [class*="-l11"] {
   width: 91.66667%;
 }
-.lt-ie9 [class*="-lhide"] {
-  display: none;
+.lt-ie9 [class*="-l1"], .lt-ie9 [class*="-l2"], .lt-ie9 [class*="-l3"], .lt-ie9 [class*="-l4"], .lt-ie9 [class*="-l5"], .lt-ie9 [class*="-l6"], .lt-ie9 [class*="-l7"], .lt-ie9 [class*="-l8"], .lt-ie9 [class*="-l9"], .lt-ie9 [class*="-l10"], .lt-ie9 [class*="-l11"] {
+  float: left;
+  clear: none;
+  display: block;
+}
+.lt-ie9 [class*="-l12"] {
+  float: none;
+  clear: both;
+  width: 100%;
 }
 .lt-ie9 [class*="-s12"] {
   clear: none;

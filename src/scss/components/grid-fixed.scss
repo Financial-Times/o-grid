@@ -24,30 +24,8 @@
 			box-sizing: border-box; *behavior: url(#{$pathToPolyfills}boxsizing.htc);
 		}
 
-
-		[class*="-#{$default}0"],
-		[class*="-#{$large}0"] {
-			display: none;
-		}
-
-		[class*="-#{$default}12"],
-		[class*="-#{$large}12"] {
-		    float: none;
-		    clear: both;
-			width: 100%;
-		}
-
-		@for $colWidth from 1 through 11 {
-					
-			[class*="-#{$default}#{$colWidth}"],
-			[class*="-#{$large}#{$colWidth}"] {
-				width: gridColumnWidth($colWidth);
-			}
-		}
-
-		[class*="-#{$large}hide"] {
-			display: none;
-		}
+		@include columnWidths($default);
+		@include columnWidths($large);
 
 		[class*="-#{$small}12"] {
 			clear: none;

@@ -26,10 +26,16 @@
 @mixin defineResponsiveGrid ($layoutSize, $maxWidth) {
 
 	@include respondTo($layoutSize) {
-
-		@if ($maxWidth) {
+		
+		@if ($isFluid) {
 			.#{$gridRow} {
-				max-width: $maxWidth;
+				max-width: none;
+			}
+		} @else {
+			@if ($maxWidth) {
+				.#{$gridRow} {
+					max-width: $maxWidth;
+				}
 			}
 		}
 

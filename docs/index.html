@@ -284,7 +284,7 @@
     <ol>
       <li>
         <p>Add the following to your module&#39;s bower dependencies</p>
-        <pre><code>    &quot;grid-module&quot;: &quot;0.2.x&quot;</code></pre>
+        <pre><code> &quot;grid-module&quot;: &quot;0.2.x&quot;</code></pre>
       </li>
       <li>
         <p>Include the following in your app&#39;s styles</p>
@@ -296,10 +296,13 @@
         <p>Specify an absolute path pointing to <code>/path/to/bower/grid-module/polyfills</code> as a value for <code>$pathToPolyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point <code>/polyfills/boxsizing.htc</code> to <code>/path/to/bower/grid-module/polyfills/boxsizing.htc</code>)</p>
       </li>
       <li>
-        <p>Ensure your product implements html5 boilerplate style classes for browser detection</p>
+        <p><em>(product/page developers only)</em> To support ie7 &amp; ie8 it&#39;s recommended you use the following conditional comments (see the <a href="#utilities/variables/selectors">utilities section</a> for how to use different approaches)</p>
+        <pre><code> &lt;!--[if IE 7]&gt; &lt;html class=&quot;no-js ie7 lt-ie9&quot;&gt; &lt;![endif]--&gt;
+ &lt;!--[if IE 8]&gt; &lt;html class=&quot;no-js ie8 lt-ie9&quot;&gt; &lt;![endif]--&gt;
+ &lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class=&quot;no-js&quot;&gt; &lt;!--&lt;![endif]--&gt;</code></pre>
       </li>
     </ol>
-    <h3>For designers</h3>
+    <h3>For designers<a id="designer-installation" style="visibility:hidden">&nbsp;</a></h3>
     <ol>
       <li>
         <p>From terminal run the following commands (you will need to have <a href="http://bower.io/">bower</a> already installed)</p>
@@ -454,7 +457,7 @@
               <li><code>$isFixedDesktop</code>: [false] Forces the site to always use the large layout (if <code>$isResponsive</code> is true then this value is ignored)</li>
             </ul>
           </li>
-          <li><strong>Selectors</strong>
+          <li><strong>Selectors</strong>  <a id="utilities/variables/selectors" style="visibility:hidden">&nbsp;</a>
             <ul>
               <li><code>$fixedLayoutSelector</code>: [&#39;.lt-ie9&#39;] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios, or to use your module in a product which uses different conventions for its internet explorer classes overwrite this variable with your own selector.</li>
             </ul>

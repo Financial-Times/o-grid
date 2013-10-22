@@ -20,7 +20,7 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
 * [Legacy grid](grid-legacy.html)  
-	Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
+    Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
 
 ##Installation
 
@@ -30,27 +30,31 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 
 1. Add the following to your module's bower dependencies
    
-   		"grid-module": "0.2.x"
+        "grid-module": "0.2.x"
 
 2. Include the following in your app's styles 
 
-    	@import '/path/to/bower/grid-module/main.scss';  
+        @import '/path/to/bower/grid-module/main.scss';  
   Depending on whether you're developing a product or a component where exactly you put this will vary. For a product you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/build-service/)
 
 3. Specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$pathToPolyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
 
-4. Ensure your product implements html5 boilerplate style classes for browser detection
+4. *(product/page developers only)* To support ie7 & ie8 it's recommended you use the following conditional comments (see the [utilities section](#utilities/variables/selectors) for how to use different approaches)
 
-###For designers
+        <!--[if IE 7]> <html class="no-js ie7 lt-ie9"> <![endif]-->
+        <!--[if IE 8]> <html class="no-js ie8 lt-ie9"> <![endif]-->
+        <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+###For designers<a id="designer-installation" style="visibility:hidden">&nbsp;</a>
 
 1. From terminal run the following commands (you will need to have [bower](http://bower.io/) already installed)
 
-		cd /Users/{your username}/the/directory/your/protoype/is/in
-		bower install http://git.svc.ft.com:9080/git/origami/grid-module.git
+        cd /Users/{your username}/the/directory/your/protoype/is/in
+        bower install http://git.svc.ft.com:9080/git/origami/grid-module.git
 
 2. Include the responsive grid css file in your html prototype's ``<head>`` directly
 
-		<link rel='stylesheet' href='bower_components/grid-module/docs/css/grid-responsive.css' /> 
+        <link rel='stylesheet' href='bower_components/grid-module/docs/css/grid-responsive.css' /> 
 
 ##Grid dimensions
 
@@ -89,9 +93,9 @@ It forces that element to extend to the maximum width available (either the maxi
 
 ###Example
 
-	<div class="ft-grid-row">
-		<div class="ft-grid-col-d12">A full width column</div>
-	</div>
+    <div class="ft-grid-row">
+        <div class="ft-grid-col-d12">A full width column</div>
+    </div>
 
 
 ##Column widths
@@ -116,15 +120,15 @@ The grid is divided into 12 columns and column instances can span any number of 
 
 
 ###Examples
-	
-	//A full width column for all sizes except large screens, where takes up 9 columns
-	<div class="ft-grid-col-d12-xl9"></div>  
+    
+    //A full width column for all sizes except large screens, where takes up 9 columns
+    <div class="ft-grid-col-d12-xl9"></div>  
   
-	//A half width column for all sizes except small screens, where takes up full width
-	<div class="ft-grid-col-d6-s12"></div>  
+    //A half width column for all sizes except small screens, where takes up full width
+    <div class="ft-grid-col-d6-s12"></div>  
   
-	//A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
-	<div class="ft-grid-col-s4-m3-l2-xl1"></div>  
+    //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
+    <div class="ft-grid-col-s4-m3-l2-xl1"></div>  
   
 ###Utilities
 As well as the column and row classes a handful of utilities are also included in the grid styles
@@ -138,39 +142,39 @@ e.g. ``grid-mhide-shide`` will hide the given element for medium and small scree
 * **respondTo($layoutSize)**  
 To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$small``, ``$medium``, ``$large`` or ``$extraLarge`` depending on which layout size the style should apply to e.g.
 
-	    @include respondTo($small) {
-	    	.ft-example-module .item-subheading {
-	    		font-size: 0.5em
-	    	}
-	    }
+        @include respondTo($small) {
+            .ft-example-module .item-subheading {
+                font-size: 0.5em
+            }
+        }
 
 * **sass variables** (default values in square brackets)  
 All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them *before* the grid-module ``main.scss`` file is included. **This must only be done on a page/product level and never at the component/module level.** 
     * **Dimensions** 
 
-		* *Gutters* - defines the space between columns
-			* ``$reponsiveLayoutHalfGutter``: \[10px\]
-			* ``$defaultLayoutHalfGutter``: \[1%\]
-			* ``$fixedLayoutHalfGutter``: \[5px\]
+        * *Gutters* - defines the space between columns
+            * ``$reponsiveLayoutHalfGutter``: \[10px\]
+            * ``$defaultLayoutHalfGutter``: \[1%\]
+            * ``$fixedLayoutHalfGutter``: \[5px\]
 
-		* *Page widths* - defines the widths of layouts when fluid layouts aren't used
-			* ``$globalMinWidth``: \[240px\]
-			* ``$smallMaxWidth``: \[600px\]
-			* ``$mediumMaxWidth``: \[780px\]
-			* ``$largeMaxWidth``: \[960px\]
-			* ``$extraLargeMaxWidth``: \[1360px\]
+        * *Page widths* - defines the widths of layouts when fluid layouts aren't used
+            * ``$globalMinWidth``: \[240px\]
+            * ``$smallMaxWidth``: \[600px\]
+            * ``$mediumMaxWidth``: \[780px\]
+            * ``$largeMaxWidth``: \[960px\]
+            * ``$extraLargeMaxWidth``: \[1360px\]
 
-		* *Breakpoints* - defines the screen widths at which layouts switch
-			* ``$smallToMediumBreak``: \[600px\]
-			* ``$mediumToLargeBreak``: \[1000px\]
-			* ``$largeToXLBreak``: \[1400px\]
+        * *Breakpoints* - defines the screen widths at which layouts switch
+            * ``$smallToMediumBreak``: \[600px\]
+            * ``$mediumToLargeBreak``: \[1000px\]
+            * ``$largeToXLBreak``: \[1400px\]
 
-	* **Flags**
-		* ``$isResponsive``: \[true\] If set to false only the default ('mobile') layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products
-		* ``$isFluid``: \[false\] Switches to fully fluid layouts
-		* ``$isFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$isResponsive`` is true then this value is ignored)
-	* **Selectors**
-		* ``$fixedLayoutSelector``: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios, or to use your module in a product which uses different conventions for its internet explorer classes overwrite this variable with your own selector.
+    * **Flags**
+        * ``$isResponsive``: \[true\] If set to false only the default ('mobile') layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products
+        * ``$isFluid``: \[false\] Switches to fully fluid layouts
+        * ``$isFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$isResponsive`` is true then this value is ignored)
+    * **Selectors** <a id="utilities/variables/selectors" style="visibility:hidden">&nbsp;</a>
+        * ``$fixedLayoutSelector``: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios, or to use your module in a product which uses different conventions for its internet explorer classes overwrite this variable with your own selector.
 
 
 ##Gotchas

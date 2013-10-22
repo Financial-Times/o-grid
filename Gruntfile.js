@@ -23,15 +23,14 @@ module.exports = function(grunt) {
         tasks: ['sass']
       }
     },
-    sass: {                              
-      docs: {                           
-        options: {                       
+    sass: {
+      docs: {
+        options: {
           style: 'expanded'
         },
         files: {
           './docs/css/grid-default.css': './src/scss/bundles/default.scss',
-          './docs/css/grid-responsive.css': './src/scss/bundles/responsive-only.scss',
-          './docs/css/grid-legacy.css': './src/scss/bundles/legacy.scss',
+          './docs/css/grid-responsive.css': './src/scss/bundles/responsive.scss',
           './docs/css/docs.css': './src/scss/docs/docs.scss'
         }
       }

@@ -1,13 +1,23 @@
-<meta charset="utf-8" />
-<title>{{title}} - FT.com</title>
-<meta name="viewport" content="width=device-width" />
-<link rel='stylesheet' href='css/grid-default.css' />
-{{#legacy}}
-	<link rel='stylesheet' href='css/grid-legacy.css' />
-{{/legacy}}
-{{#responsive}}
-	<link rel='stylesheet' href='css/grid-responsive.css' /> 
-	<!--[if IE 7]><link rel='stylesheet' href='css/grid-legacy.css' /><![endif]-->
-{{/responsive}}
 
-<link rel='stylesheet' href='css/docs.css' /> 
+<!DOCTYPE html>
+{{#legacy}}
+	<html class="lt-ie9">
+{{/legacy}}
+{{^legacy}}
+	<html>
+{{/legacy}}
+	<head>
+	<meta charset="utf-8" />
+	<title>{{title}} - FT.com</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel='stylesheet' href='css/grid-default.css' />
+	{{#responsive}}
+		<link rel='stylesheet' href='css/grid-responsive.css' /> 
+	{{/responsive}}
+
+	{{#legacy}}
+		<link rel='stylesheet' href='css/grid-responsive.css' /> 
+	{{/legacy}}
+
+	<link rel='stylesheet' href='css/docs.css' /> 
+	</head>

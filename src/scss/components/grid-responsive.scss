@@ -1,36 +1,37 @@
+@if ($isResponsive) {
+	/* Override fixed defaults for responsive grid */
+	@media screen {
 
-/* Override fixed defaults for responsive grid */
-@media screen {
+		.#{$gridRow} .#{$gridRow},
+		.#{$gridBox} .#{$gridRow} {
+			margin-left: -$gridHalfGutter;
+			margin-right: -$gridHalfGutter;
+			width: auto;
+		}
 
-	.#{$gridRow} .#{$gridRow},
-	.#{$gridBox} .#{$gridRow} {
-		margin-left: -$gridHalfGutter;
-		margin-right: -$gridHalfGutter;
-		width: auto;
+		[class*="#{$gridColumn}"] {
+			float: left;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding-left: $gridHalfGutter;
+			padding-right: $gridHalfGutter;
+		}
+
+
+		// Following rules undo styles applied by the fixed grid
+		[class*="-#{$small}0"] {
+		    display: block;
+		}
+
+		[class*="-#{$small}12"] {
+		    clear: none;
+		}
+
 	}
 
-	[class*="#{$gridColumn}"] {
-		float: left;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		padding-left: $gridHalfGutter;
-		padding-right: $gridHalfGutter;
+	@include defineResponsiveGrid($default, null);
+
+	@for $i from 1 through 4 {
+		@include defineResponsiveGrid(nth($layoutShorthands, $i), nth($maxWidths, $i));
 	}
-
-
-	// Following rules undo styles applied by the fixed grid
-	[class*="-#{$small}0"] {
-	    display: block;
-	}
-
-	[class*="-#{$small}12"] {
-	    clear: none;
-	}
-
-}
-
-@include defineResponsiveGrid($default, null);
-
-@for $i from 1 through 4 {
-	@include defineResponsiveGrid(nth($layoutShorthands, $i), nth($maxWidths, $i));
 }

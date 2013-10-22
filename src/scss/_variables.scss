@@ -23,6 +23,20 @@ $smallToMediumBreak: 600px !default;
 $mediumToLargeBreak: 1000px !default;
 $largeToXLBreak: 1400px !default;
 
+// -------------------------------------------------------------------------------------
+// FLAGS
+// -------------------------------------------------------------------------------------
+$isResponsive: true !default;
+$isFluid: false !default;
+//$isAlwaysFixed: false !default;
+//$isDefaultOnly: false !default;
+
+
+// -------------------------------------------------------------------------------------
+// PATHS
+// -------------------------------------------------------------------------------------
+$pathToLegacy: "/legacy/" !default;
+
 
 // -------------------------------------------------------------------------------------
 // CLASS NAMES/PREFIXES
@@ -43,6 +57,9 @@ $large: l;
 $extraLarge: xl;
 $default: d;
 
+$fixedLayoutSelector: '.lt-ie9' !default;
+//$fixedSize: $large !default;
+
 
 // -------------------------------------------------------------------------------------
 // STRUCTURAL VARIABLES
@@ -51,9 +68,3 @@ $default: d;
 // -------------------------------------------------------------------------------------
 $maxWidths: $smallMaxWidth,$mediumMaxWidth,$largeMaxWidth,$extraLargeMaxWidth;
 $layoutShorthands: $small,$medium,$large,$extraLarge,$default;
-
-
-// -------------------------------------------------------------------------------------
-// PATHS
-// -------------------------------------------------------------------------------------
-$pathToLegacy: "/legacy/" !default;

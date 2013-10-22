@@ -409,51 +409,53 @@
   }</code></pre>
       </li>
       <li>
-        <p><strong>sass variables</strong>
-          <br>All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them <em>before</em> the grid-module <code>main.scss</code> file is included. <strong>This must only be done on a page/product level and never at the component/module level.</strong> 
+        <p><strong>sass variables</strong> (default values in square brackets) All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them <em>before</em> the grid-module <code>main.scss</code> file is included. <strong>This must only be done on a page/product level and never at the component/module level.</strong> 
         </p>
         <ul>
           <li>
-            <p><strong>Dimensions</strong> (default values in square brackets)</p>
+            <p><strong>Dimensions</strong> 
+            </p>
             <ul>
               <li>
                 <p><em>Gutters</em> - defines the space between columns</p>
                 <ul>
-                  <li>$gridHalfGutter: [10px]</li>
-                  <li>$defaultLayoutHalfGutter: [1%]</li>
-                  <li>$fixedLayoutHalfGutter: [5px]</li>
+                  <li><code>$gridHalfGutter</code>: [10px]</li>
+                  <li><code>$defaultLayoutHalfGutter</code>: [1%]</li>
+                  <li><code>$fixedLayoutHalfGutter</code>: [5px]</li>
                 </ul>
               </li>
               <li>
                 <p><em>Page widths</em> - defines the widths of layouts when fluid layouts aren&#39;t used</p>
                 <ul>
-                  <li>$globalMinWidth: [240px]</li>
-                  <li>$smallMaxWidth: [600px]</li>
-                  <li>$mediumMaxWidth: [780px]</li>
-                  <li>$largeMaxWidth: [960px]</li>
-                  <li>$extraLargeMaxWidth: [1360px]</li>
+                  <li><code>$globalMinWidth</code>: [240px]</li>
+                  <li><code>$smallMaxWidth</code>: [600px]</li>
+                  <li><code>$mediumMaxWidth</code>: [780px]</li>
+                  <li><code>$largeMaxWidth</code>: [960px]</li>
+                  <li><code>$extraLargeMaxWidth</code>: [1360px]</li>
                 </ul>
               </li>
               <li>
                 <p><em>Breakpoints</em> - defines the screen widths at which layouts switch</p>
                 <ul>
-                  <li>$smallToMediumBreak: [600px]</li>
-                  <li>$mediumToLargeBreak: [1000px]</li>
-                  <li>$largeToXLBreak: [1400px]</li>
+                  <li><code>$smallToMediumBreak</code>: [600px]</li>
+                  <li><code>$mediumToLargeBreak</code>: [1000px]</li>
+                  <li><code>$largeToXLBreak</code>: [1400px]</li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li><strong>Flags</strong>
+          <li>
+            <p><strong>Flags</strong>
+            </p>
             <ul>
-              <li>$isResponsive: [true] If set to false only the default (&#39;mobile&#39;) layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products</li>
-              <li>$isFluid: [false] Switches to fully fluid layouts</li>
-              <li>$isFixedDesktop: [false] Forces the site to always use the large layout (if $isResponsive is true then this value is ignored)</li>
+              <li><code>$isResponsive</code>: [true] If set to false only the default (&#39;mobile&#39;) layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products</li>
+              <li><code>$isFluid</code>: [false] Switches to fully fluid layouts</li>
+              <li><code>$isFixedDesktop</code>: [false] Forces the site to always use the large layout (if <code>$isResponsive</code> is true then this value is ignored)</li>
             </ul>
           </li>
-          <li><strong>Class names</strong>
+          <li><strong>Selectors</strong>
             <ul>
-              <li>$fixedLayoutSelector: [&#39;.lt-ie9&#39;] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector.</li>
+              <li><code>$fixedLayoutSelector</code>: [&#39;.lt-ie9&#39;] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector.</li>
             </ul>
           </li>
         </ul>

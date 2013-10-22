@@ -144,32 +144,33 @@ To create styles that respond to the same breakpoints as the grid this sass mixi
 	    	}
 	    }
 
-* **sass variables**  
+* **sass variables** (default values in square brackets)
 All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them *before* the grid-module ``main.scss`` file is included. **This must only be done on a page/product level and never at the component/module level.** 
-    * **Dimensions** (default values in square brackets)
+    * **Dimensions** 
 
 		* *Gutters* - defines the space between columns
-			* $gridHalfGutter: \[10px\]
-			* $defaultLayoutHalfGutter: \[1%\]
-			* $fixedLayoutHalfGutter: \[5px\]
+			* ``$gridHalfGutter``: \[10px\]
+			* ``$defaultLayoutHalfGutter``: \[1%\]
+			* ``$fixedLayoutHalfGutter``: \[5px\]
 
 		* *Page widths* - defines the widths of layouts when fluid layouts aren't used
-			* $globalMinWidth: \[240px\]
-			* $smallMaxWidth: \[600px\]
-			* $mediumMaxWidth: \[780px\]
-			* $largeMaxWidth: \[960px\]
-			* $extraLargeMaxWidth: \[1360px\]
+			* ``$globalMinWidth``: \[240px\]
+			* ``$smallMaxWidth``: \[600px\]
+			* ``$mediumMaxWidth``: \[780px\]
+			* ``$largeMaxWidth``: \[960px\]
+			* ``$extraLargeMaxWidth``: \[1360px\]
 
 		* *Breakpoints* - defines the screen widths at which layouts switch
-			* $smallToMediumBreak: \[600px\]
-			* $mediumToLargeBreak: \[1000px\]
-			* $largeToXLBreak: \[1400px\]
+			* ``$smallToMediumBreak``: \[600px\]
+			* ``$mediumToLargeBreak``: \[1000px\]
+			* ``$largeToXLBreak``: \[1400px\]
+
 	* **Flags**
-		* $isResponsive: \[true\] If set to false only the default ('mobile') layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products
-		* $isFluid: \[false\] Switches to fully fluid layouts
-		* $isFixedDesktop: \[false\] Forces the site to always use the large layout (if $isResponsive is true then this value is ignored)
-	* **Class names**
-		* $fixedLayoutSelector: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector.
+		* ``$isResponsive``: \[true\] If set to false only the default ('mobile') layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products
+		* ``$isFluid``: \[false\] Switches to fully fluid layouts
+		* ``$isFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$isResponsive`` is true then this value is ignored)
+	* **Selectors**
+		* ``$fixedLayoutSelector``: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector.
 
 
 ##Gotchas

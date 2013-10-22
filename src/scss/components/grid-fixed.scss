@@ -1,5 +1,8 @@
-@if ($isResponsive) {
-	#{$fixedLayoutSelector} {
+@if ($isResponsive or $isFixedDesktop) {
+	@if ($isFixedDesktop) {
+		$fixedLayoutSelector: null;
+	}
+	@include wrapInSelector ($fixedLayoutSelector) {
 
 		.#{$gridRow} {
 			width: $largeMaxWidth;
@@ -8,15 +11,15 @@
 
 		.#{$gridRow} .#{$gridRow},
 		.#{$gridBox} .#{$gridRow} {
-			margin-left: -$legacyLayoutHalfGutter;
-			margin-right: -$legacyLayoutHalfGutter;
+			margin-left: -$fixedLayoutHalfGutter;
+			margin-right: -$fixedLayoutHalfGutter;
 			width: auto;
 		}
 
 		[class*="#{$gridColumn}"] {
 			float: left;
-			padding-left: $legacyLayoutHalfGutter;
-			padding-right: $legacyLayoutHalfGutter;
+			padding-left: $fixedLayoutHalfGutter;
+			padding-right: $fixedLayoutHalfGutter;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box; *behavior: url(#{$pathToPolyfills}boxsizing.htc);
 		}

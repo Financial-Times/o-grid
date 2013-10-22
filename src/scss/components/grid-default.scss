@@ -11,44 +11,46 @@ body {
 	width: 100%;
 }
 
-.#{$gridRow} {
-	max-width: $smallMaxWidth; 
-	min-width: $globalMinWidth;
-}
-
-.#{$gridRow} .#{$gridRow},
-.#{$gridBox} .#{$gridRow} {
-	margin-left: -$defaultLayoutHalfGutter;
-	margin-right: -$defaultLayoutHalfGutter;
-	width: auto;
-	max-width: none; // needed for .grid-box .grid-row
-	min-width: 0;
-}
-
-/* Default grid: Layout 1 FIXED (well, max-width) */
-[class*="#{$gridColumn}"] {
-	float: left;
-	padding-left: $defaultLayoutHalfGutter;
-	padding-right: $defaultLayoutHalfGutter;
-}
-
-[class*="-#{$default}0"],
-[class*="-#{$small}0"] {
-	display: none;
-}
-
-
-@for $colWidth from 1 through 11 {
-			
-	[class*="-#{$default}#{$colWidth}"],
-	[class*="-#{$small}#{$colWidth}"] {
-		width: gridColumnWidthMinusGutter($colWidth, $defaultLayoutHalfGutter);
+@if (not($isFixedDesktop and not $isResponsive)) {
+	.#{$gridRow} {
+		max-width: $smallMaxWidth; 
+		min-width: $globalMinWidth;
 	}
-}
 
-[class*="-#{$default}12"],
-[class*="-#{$small}12"] {
-    float: none;
-    clear: both;
-	width: gridColumnWidthMinusGutter(12, $defaultLayoutHalfGutter);
+	.#{$gridRow} .#{$gridRow},
+	.#{$gridBox} .#{$gridRow} {
+		margin-left: -$defaultLayoutHalfGutter;
+		margin-right: -$defaultLayoutHalfGutter;
+		width: auto;
+		max-width: none; // needed for .grid-box .grid-row
+		min-width: 0;
+	}
+
+	/* Default grid: Layout 1 FIXED (well, max-width) */
+	[class*="#{$gridColumn}"] {
+		float: left;
+		padding-left: $defaultLayoutHalfGutter;
+		padding-right: $defaultLayoutHalfGutter;
+	}
+
+	[class*="-#{$default}0"],
+	[class*="-#{$small}0"] {
+		display: none;
+	}
+
+
+	@for $colWidth from 1 through 11 {
+				
+		[class*="-#{$default}#{$colWidth}"],
+		[class*="-#{$small}#{$colWidth}"] {
+			width: gridColumnWidthMinusGutter($colWidth, $defaultLayoutHalfGutter);
+		}
+	}
+
+	[class*="-#{$default}12"],
+	[class*="-#{$small}12"] {
+	    float: none;
+	    clear: both;
+		width: gridColumnWidthMinusGutter(12, $defaultLayoutHalfGutter);
+	}
 }

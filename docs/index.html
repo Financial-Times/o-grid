@@ -281,37 +281,36 @@
     <h3>For developers</h3>
     <p><a href="#designer-installation">Skip to installation guide for designers</a>
     </p>
-    <p>Add the following to your app&#39;s bower dependencies</p>
-    <pre><code>       &quot;grid-module&quot;: &quot;~0.1.0&quot;</code></pre>
-    <p>Then include the following in your app&#39;s styles</p>
-    <ul>
+    <ol>
       <li>
-        <p>core stylesheet</p>
-        <pre><code>  @import &#39;/path/to/bower/grid-module/main.scss&#39;;</code></pre>
+        <p>Add the following to your module&#39;s bower dependencies</p>
+        <pre><code>    &quot;grid-module&quot;: &quot;0.2.x&quot;</code></pre>
       </li>
       <li>
-        <p>ie7 and ie8 stylesheets</p>
-        <pre><code>  @import &#39;/path/to/bower/grid-module/legacy/main.scss&#39;;</code></pre>
+        <p>Include the following in your app&#39;s styles</p>
+        <pre><code> @import &#39;/path/to/bower/grid-module/main.scss&#39;;  </code></pre>
+        <p>Depending on whether you&#39;re developing a product or a component where exactly you put this will vary. For a product you can also simply use the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a>
+        </p>
       </li>
-    </ul>
-    <p>You will also need to redirect requests to <code>/path/to/bower/grid-module/legacy/boxsizing.htc</code>
-    </p>
-    <h5>boxsizing.htc</h5>
-    <p>In order for the grid to work in ie7 a .htc polyfill is used, referenced from the stylesheets using <code>/behavior/boxsizing.htc</code>. The file <code>/path/to/bower/grid-module/dist/behavior/boxsizing.htc</code> will either</p>
-    <ul>
-      <li>need to be copied (ideally by your build process) to <code>/behavior/boxsizing.htc</code>
+      <li>
+        <p>Specify an absolute path pointing to <code>/path/to/bower/grid-module/polyfills</code> as a value for <code>$pathToPolyfills</code> in your sass</p>
       </li>
-      <li>be pointed to using a http rewrite or similar<a id="designer-installation">.</a>
+      <li>
+        <p>Ensure your product implements html5 boilerplate style classes for browser detection</p>
       </li>
-    </ul>
+    </ol>
     <h3>For designers</h3>
-    <p>From terminal run the following command in your prototype&#39;s directory (you will need to have <a href="http://bower.io/">bower</a> already installed)</p>
-    <pre><code>bower install http://git.svc.ft.com:9080/git/origami/grid-module.git</code></pre>
-    <p>Include the responsive grid css file in the html head directly</p>
-    <pre><code>&lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/grid-module/docs/css/grid-default.css&#39; /&gt; 
-&lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/grid-module/docs/css/grid-responsive.css&#39; /&gt; 
-&lt;!-- Optionally include the ie7/8 stylesheet too --&gt;
-&lt;!--[if lt IE 9]&gt;&lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/grid-module/docs/css/grid-legacy.css&#39; /&gt;&lt;![endif]--&gt;</code></pre>
+    <ol>
+      <li>
+        <p>From terminal run the following commands (you will need to have <a href="http://bower.io/">bower</a> already installed)</p>
+        <pre><code> cd /Users/{your username}/the/directory/your/protoype/is/in
+ bower install http://git.svc.ft.com:9080/git/origami/grid-module.git</code></pre>
+      </li>
+      <li>
+        <p>Include the responsive grid css file in your html prototype&#39;s <code>&lt;head&gt;</code> directly</p>
+        <pre><code> &lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/grid-module/docs/css/grid-responsive.css&#39; /&gt; </code></pre>
+      </li>
+    </ol>
     <h2>Grid dimensions</h2>
     <p>Four layout sizes are defined:</p>
     <ul>
@@ -337,9 +336,9 @@
       </li>
     </ul>
     <p>For each of these the available horizontal width is separated into 12 columns</p>
-    <p>In addition, for nested grids the parent element&#39;s width is divided into 12 columns</p>
+    <p>In addition, for nested grids the parent box&#39;s width is divided into 12 columns</p>
     <h2>Using the grid</h2>
-    <p>Grid styles are applied to page elements using two types of class declaration:</p>
+    <p>Grid styles are typically applied to page elements using two types of class declaration:</p>
     <ul>
       <li>
         <p>A <code>ft-grid-row</code> class, added to the container element.
@@ -383,15 +382,18 @@
       </li>
     </ul>
     <h3>Examples</h3>
-    <pre><code>&lt;div class=&quot;ft-grid-col-d12-xl9&quot;&gt;A full width column for all sizes except large screens, where takes up 9 columns&lt;/div&gt;
-&lt;div class=&quot;ft-grid-col-d6-s12&quot;&gt;A half width column for all sizes except small screens, where takes up full width&lt;/div&gt;
-&lt;div class=&quot;ft-grid-col-s4-m3-l2-xl1&quot;&gt;A column which gradually takes up a greater portion of horizontal space as the screen gets smaller&lt;/div&gt;</code></pre>
+    <pre><code>//A full width column for all sizes except large screens, where takes up 9 columns
+&lt;div class=&quot;ft-grid-col-d12-xl9&quot;&gt;&lt;/div&gt;  
+//A half width column for all sizes except small screens, where takes up full width
+&lt;div class=&quot;ft-grid-col-d6-s12&quot;&gt;&lt;/div&gt;  
+//A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
+&lt;div class=&quot;ft-grid-col-s4-m3-l2-xl1&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
     <p>As well as the column and row classes a handful of utilities are also included in the grid styles</p>
     <ul>
       <li>
         <p><strong>ft-grid-box</strong>
-          <br>When using a grid-module based component in a product that isn&#39;t layed out using grid-module wrapping the entire component in an element with the class <code>ft-grid-box</code> ensures the module will be laid out correctly using the grid</p>
+          <br>When using a grid-module based component in a product/page that isn&#39;t laid out using grid-module wrap the entire component in an element with the class <code>ft-grid-box</code> to ensure the module is laid out correctly using the grid</p>
       </li>
       <li>
         <p><strong>hide</strong>
@@ -408,8 +410,53 @@
       </li>
       <li>
         <p><strong>sass variables</strong>
-          <br>All the variables used by the grid are available in other stylesheets, and their default values can be overwritten by defining different values for them <em>before</em> the grid-module <code>main.scss</code> file is included. <strong>This must only be done on a page/product level and never on a component/module level.</strong>
+          <br>All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them <em>before</em> the grid-module <code>main.scss</code> file is included. <strong>This must only be done on a page/product level and never at the component/module level.</strong> 
         </p>
+        <ul>
+          <li>
+            <p><strong>Dimensions</strong> (default values in square brackets)</p>
+            <ul>
+              <li>
+                <p><em>Gutters</em> - defines the space between columns</p>
+                <ul>
+                  <li>$gridHalfGutter: [10px]</li>
+                  <li>$defaultLayoutHalfGutter: [1%]</li>
+                  <li>$fixedLayoutHalfGutter: [5px]</li>
+                </ul>
+              </li>
+              <li>
+                <p><em>Page widths</em> - defines the widths of layouts when fluid layouts aren&#39;t used</p>
+                <ul>
+                  <li>$globalMinWidth: [240px]</li>
+                  <li>$smallMaxWidth: [600px]</li>
+                  <li>$mediumMaxWidth: [780px]</li>
+                  <li>$largeMaxWidth: [960px]</li>
+                  <li>$extraLargeMaxWidth: [1360px]</li>
+                </ul>
+              </li>
+              <li>
+                <p><em>Breakpoints</em> - defines the screen widths at which layouts switch</p>
+                <ul>
+                  <li>$smallToMediumBreak: [600px]</li>
+                  <li>$mediumToLargeBreak: [1000px]</li>
+                  <li>$largeToXLBreak: [1400px]</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>Flags</strong>
+            <ul>
+              <li>$isResponsive: [true] If set to false only the default (&#39;mobile&#39;) layout is used. This greatly reduces the stylesheet file size and shoudl be used for mobile only products</li>
+              <li>$isFluid: [false] Switches to fully fluid layouts</li>
+              <li>$isFixedDesktop: [false] Forces the site to always use the large layout (if $isResponsive is true then this value is ignored)</li>
+            </ul>
+          </li>
+          <li><strong>Class names</strong>
+            <ul>
+              <li>$fixedLayoutSelector: [&#39;.lt-ie9&#39;] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector.</li>
+            </ul>
+          </li>
+        </ul>
       </li>
     </ul>
     <h2>Gotchas</h2>

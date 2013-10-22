@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         engine: "handlebars",
         dest: './docs/grid-responsive.html',
         variables: {
-          title: "Grid example and demo - responsive",
+          title: "Responsive grid examples",
           example: require('./docs-generator/examples.json'),
           responsive: true
         }
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
         engine: "handlebars",
         dest: './docs/grid-default.html',
         variables: {
-          title: "Grid example and demo - default",
+          title: "Default grid examples",
           example: require('./docs-generator/examples.json'),
           'default': true
         }
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
         engine: "handlebars",
         dest: './docs/grid-legacy.html',
         variables: {
-          title: "Grid example and demo - legacy fixed grid",
+          title: "Legacy grid examples",
           example: require('./docs-generator/examples.json'),
           legacy: true
         }
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
         engine: "handlebars",
         dest: './docs/grid-fluid.html',
         variables: {
-          title: "Grid example and demo - fluid grid",
+          title: "Fluid grid examples",
           example: require('./docs-generator/examples.json'),
           fluid: true
         }

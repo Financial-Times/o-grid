@@ -144,7 +144,7 @@ To create styles that respond to the same breakpoints as the grid this sass mixi
 	    	}
 	    }
 
-* **sass variables** (default values in square brackets)
+* **sass variables** (default values in square brackets)  
 All the variables used by the grid are available in other stylesheets, and most of their default values can be overridden by defining different values for them *before* the grid-module ``main.scss`` file is included. **This must only be done on a page/product level and never at the component/module level.** 
     * **Dimensions** 
 

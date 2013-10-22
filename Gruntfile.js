@@ -128,6 +128,6 @@ module.exports = function(grunt) {
 
     grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass']);
     
-  });  
+  });
 
 };

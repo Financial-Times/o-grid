@@ -1,3 +1,3 @@
 @import "default.scss";
-@import "responsive-only.scss";
-@import "legacy.scss";
+@import "../components/grid-responsive.scss";
+@import "../components/grid-fixed.scss"; 

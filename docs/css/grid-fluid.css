@@ -474,6 +474,12 @@ body {
 .lt-ie9 [class*="-l0"] {
   display: none;
 }
+.lt-ie9 [class*="-d12"],
+.lt-ie9 [class*="-l12"] {
+  float: none;
+  clear: both;
+  width: 100%;
+}
 .lt-ie9 [class*="-d1"],
 .lt-ie9 [class*="-l1"] {
   width: 8.33333%;
@@ -517,12 +523,6 @@ body {
 .lt-ie9 [class*="-d11"],
 .lt-ie9 [class*="-l11"] {
   width: 91.66667%;
-}
-.lt-ie9 [class*="-d12"],
-.lt-ie9 [class*="-l12"] {
-  float: none;
-  clear: both;
-  width: 100%;
 }
 .lt-ie9 [class*="-lhide"] {
   display: none;

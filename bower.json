@@ -1,11 +1,11 @@
 {
 	"name": "grid-module",
     "ignore": [
-    	"node",
     	"node_modules",
     	"tmp",
     	"docs-generator",
-    	"docs"
+    	"docs",
+    	"src/behavior"
     ]
 }
 

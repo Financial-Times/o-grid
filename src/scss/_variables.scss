@@ -9,7 +9,7 @@
 // Gutters
 $gridHalfGutter: 10px !default;
 $defaultLayoutHalfGutter: 1% !default;
-$legacyLayoutHalfGutter: 5px !default;
+$fixedLayoutHalfGutter: 5px !default;
 
 // Page widths
 $globalMinWidth: 240px !default;
@@ -28,7 +28,7 @@ $largeToXLBreak: 1400px !default;
 // -------------------------------------------------------------------------------------
 $isResponsive: true !default;
 $isFluid: false !default;
-//$isAlwaysFixed: false !default;
+$isFixedDesktop: false !default;
 //$isDefaultOnly: false !default;
 
 

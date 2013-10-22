@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     concat: {
       boxSizing: {
         src: ['src/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
-        dest: 'legacy/boxsizing.htc'
+        dest: 'polyfills/boxsizing.htc'
       }
     },
     uglify: {

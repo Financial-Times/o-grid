@@ -13,6 +13,9 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 * [Responsive grid](grid-responsive.html)  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
 
+* [Fluid grid](grid-fluid.html)  
+    Demonstrates the behaviour of a page using a fully fluid version of the responsive grid
+
 * [Default grid](grid-default.html)  
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 

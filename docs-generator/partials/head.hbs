@@ -13,7 +13,12 @@
 		<link rel='stylesheet' href='css/grid-default.css' />
 	{{/default}}
 	{{^default}}
-		<link rel='stylesheet' href='css/grid-responsive.css' />
+		{{#fluid}}
+			<link rel='stylesheet' href='css/grid-fluid.css' />
+		{{/fluid}}
+		{{^fluid}}
+			<link rel='stylesheet' href='css/grid-responsive.css' />
+		{{/fluid}}
 	{{/default}}
 		
 	<link rel='stylesheet' href='css/docs.css' /> 

@@ -31,6 +31,7 @@ module.exports = function(grunt) {
         files: {
           './docs/css/grid-default.css': './src/scss/bundles/default.scss',
           './docs/css/grid-responsive.css': './src/scss/bundles/responsive.scss',
+          './docs/css/grid-fluid.css': './src/scss/bundles/fluid.scss',
           './docs/css/docs.css': './src/scss/docs/docs.scss'
         }
       }
@@ -68,6 +69,16 @@ module.exports = function(grunt) {
           title: "Grid example and demo - legacy fixed grid",
           example: require('./docs-generator/examples.json'),
           legacy: true
+        }
+      },
+      fluid: {
+        src: './docs-generator/grid.hbs',
+        engine: "handlebars",
+        dest: './docs/grid-fluid.html',
+        variables: {
+          title: "Grid example and demo - fluid grid",
+          example: require('./docs-generator/examples.json'),
+          fluid: true
         }
       }
     },
@@ -126,7 +137,7 @@ module.exports = function(grunt) {
     handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
-    grunt.task.run(['template:responsive', 'template:default', 'template:legacy', 'markdown:docs', 'prettify:docs', 'sass']);
+    grunt.task.run(['template', 'markdown:docs', 'prettify:docs', 'sass']);
     
   });
 

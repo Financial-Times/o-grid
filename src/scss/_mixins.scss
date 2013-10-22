@@ -27,7 +27,7 @@
 
 	@include respondTo($layoutSize) {
 		
-		@if ($isFluid) {
+		@if ($isFluid and not ($layoutSize == $extraLarge)) {
 			.#{$gridRow} {
 				max-width: none;
 			}

@@ -16,11 +16,11 @@
 	@if $layoutSize == $small {
 		@media screen and (max-width:$smallToMediumBreak) { @content; }
 	} @else if $layoutSize == $medium {
-		@media screen and (min-width:$smallToMediumBreak) and (max-width:$mediumToLargeBreak) { @content; }
+		@media screen and (min-width:$smallToMediumBreak+1) and (max-width:$mediumToLargeBreak) { @content; }
 	} @else if $layoutSize == $large {
-		@media screen and (min-width:$mediumToLargeBreak) and (max-width:$largeToXLBreak) { @content; }
+		@media screen and (min-width:$mediumToLargeBreak+1) and (max-width:$largeToXLBreak) { @content; }
 	} @else if $layoutSize == $extraLarge {
-		@media screen and (min-width:$largeToXLBreak) { @content; }
+		@media screen and (min-width:$largeToXLBreak+1) { @content; }
 	} @else {
 		@media screen { @content; }
 	}

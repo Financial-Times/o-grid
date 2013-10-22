@@ -1,6 +1,5 @@
 {
 	"name": "grid-module",
-    "main": ["main.scss"],
     "ignore": [
     	"node",
     	"node_modules",

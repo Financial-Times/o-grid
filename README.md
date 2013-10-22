@@ -37,7 +37,7 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
     	@import '/path/to/bower/grid-module/main.scss';  
   Depending on whether you're developing a product or a component where exactly you put this will vary. For a product you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/build-service/)
 
-3. Specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$pathToPolyfills`` in your sass
+3. Specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$pathToPolyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
 
 4. Ensure your product implements html5 boilerplate style classes for browser detection
 

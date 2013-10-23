@@ -33,7 +33,9 @@ body {
 }
 
 [class*="-d0"],
-[class*="-s0"] {
+[class*="-s0"],
+[class*="-dhide"],
+[class*="-shide"] {
   display: none;
 }
 

@@ -34,7 +34,9 @@ body {
 	}
 
 	[class*="-#{$default}0"],
-	[class*="-#{$small}0"] {
+	[class*="-#{$small}0"],
+	[class*="-#{$default}hide"],
+	[class*="-#{$small}hide"] {
 		display: none;
 	}
 

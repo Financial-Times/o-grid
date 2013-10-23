@@ -179,20 +179,57 @@
     <div class="example docs">
       <div class="ft-grid-row">
         <div class="ft-grid-col-d12">
-          <h2>Variable column spans</h2>
-          <p>These columns are set to default to 12 columns (full width), but span 6 at the large mode, and 4 at the extra-large mode.</p>
+          <h2>Variable column spans (with large default and conditionally hidden column)</h2>
+          <p>These columns are set to default to 12 columns (full width), but span 4 at the large mode (with one hidden), and 3 at the extra large mode.</p>
         </div>
-        <div class="ft-grid-col-d12-xl3-l6">
-          <span class="dev-inner">0: .ft-grid-col-d12-xl3-l6</span>
+        <div class="ft-grid-col-d12-l4-xl3">
+          <span class="dev-inner">0: .ft-grid-col-d12-l4-xl3</span>
         </div>
-        <div class="ft-grid-col-d12-xl3-l6">
-          <span class="dev-inner">1: .ft-grid-col-d12-xl3-l6</span>
+        <div class="ft-grid-col-d12-l4-xl3">
+          <span class="dev-inner">1: .ft-grid-col-d12-l4-xl3</span>
         </div>
-        <div class="ft-grid-col-d12-xl3-l6">
-          <span class="dev-inner">2: .ft-grid-col-d12-xl3-l6</span>
+        <div class="ft-grid-col-d12-l4-xl3">
+          <span class="dev-inner">2: .ft-grid-col-d12-l4-xl3</span>
         </div>
-        <div class="ft-grid-col-d12-xl3-l6">
-          <span class="dev-inner">3: .ft-grid-col-d12-xl3-l6</span>
+        <div class="ft-grid-col-d12-l0-xl3">
+          <span class="dev-inner">3: .ft-grid-col-d12-l0-xl3</span>
+        </div>
+      </div>
+    </div>
+    <div class="example docs">
+      <div class="ft-grid-row">
+        <div class="ft-grid-col-d12">
+          <h2>Variable column spans (with small default and conditionally hidden column)</h2>
+          <p>These columns are set to default to 3 columns, but span 4 at the large mode (with one hidden), 6 at the and medium mode, and 12 at the small mode.</p>
+        </div>
+        <div class="ft-grid-col-d3-l4-m6-s12">
+          <span class="dev-inner">0: .ft-grid-col-d3-l4-m6-s12</span>
+        </div>
+        <div class="ft-grid-col-d3-l4-m6-s12">
+          <span class="dev-inner">1: .ft-grid-col-d3-l4-m6-s12</span>
+        </div>
+        <div class="ft-grid-col-d3-l4-m6-s12">
+          <span class="dev-inner">2: .ft-grid-col-d3-l4-m6-s12</span>
+        </div>
+        <div class="ft-grid-col-d3-l0-m6-s12">
+          <span class="dev-inner">3: .ft-grid-col-d3-l0-m6-s12</span>
+        </div>
+      </div>
+    </div>
+    <div class="example docs">
+      <div class="ft-grid-row">
+        <div class="ft-grid-col-d12">
+          <h2>Columns hidden by default which appear at larger layouts</h2>
+          <p>All but one of these columns are hidden on smaller screens. On larger screens they should all take up a third of the space available</p>
+        </div>
+        <div class="ft-grid-col-d0-l4-xl4">
+          <span class="dev-inner">0: .ft-grid-col-d0-l4-xl4</span>
+        </div>
+        <div class="ft-grid-col-dhide-l4-xl4">
+          <span class="dev-inner">1: .ft-grid-col-dhide-l4-xl4</span>
+        </div>
+        <div class="ft-grid-col-d12-l4-xl4">
+          <span class="dev-inner">2: .ft-grid-col-d12-l4-xl4</span>
         </div>
       </div>
     </div>

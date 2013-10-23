@@ -83,13 +83,32 @@
     },
     {
         "columns": [
-            {"span": "d12-xl3-l6"},
-            {"span": "d12-xl3-l6"},
-            {"span": "d12-xl3-l6"},
-            {"span": "d12-xl3-l6"}
+            {"span": "d12-l4-xl3"},
+            {"span": "d12-l4-xl3"},
+            {"span": "d12-l4-xl3"},
+            {"span": "d12-l0-xl3"}
         ],
-        "description": "These columns are set to default to 12 columns (full width), but span 6 at the large mode, and 4 at the extra-large mode.",
-        "title": "Variable column spans"
+        "description": "These columns are set to default to 12 columns (full width), but span 4 at the large mode (with one hidden), and 3 at the extra large mode.",
+        "title": "Variable column spans (with large default and conditionally hidden column)"
+    },
+    {
+        "columns": [
+            {"span": "d3-l4-m6-s12"},
+            {"span": "d3-l4-m6-s12"},
+            {"span": "d3-l4-m6-s12"},
+            {"span": "d3-l0-m6-s12"}
+        ],
+        "description": "These columns are set to default to 3 columns, but span 4 at the large mode (with one hidden), 6 at the and medium mode, and 12 at the small mode.",
+        "title": "Variable column spans (with small default and conditionally hidden column)"
+    },
+    {
+        "columns": [
+            {"span": "d0-l4-xl4"},
+            {"span": "dhide-l4-xl4"},
+            {"span": "d12-l4-xl4"}
+        ],
+        "description": "All but one of these columns are hidden on smaller screens. On larger screens they should all take up a third of the space available",
+        "title": "Columns hidden by default which appear at larger layouts"
     },
     {
         "columns": [

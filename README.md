@@ -102,7 +102,11 @@ It forces that element to extend to the maximum width available (either the maxi
 
 
 ###Specifying column widths
-The grid is divided into 12 columns and column instances can span any number of these 'ft-grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of ft-grid-columns. To do this append 'subclasses' to the ``ft-grid-col`` class in the following format: `` -{layout size identifier}{number of columns}`` e.g. ``ft-grid-col-s5``
+The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the ``ft-grid-col`` class in the following format: 
+
+    -{layout size identifier}{number of columns}
+
+e.g. ``ft-grid-col-d6-s12-xl4``
 
 ###Layout size identifiers
 
@@ -180,8 +184,8 @@ For ie7 you must also specify an absolute path pointing to ``/path/to/bower/grid
 
 
 
-###Things you can do (but in most cases probably shouldn't)
-The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module's main.scss file. A few notable uses are as follows
+###Things you *can* do (but in most cases probably shouldn't)
+The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module's main.scss file. A few notable uses are as follows:
 
 ####Changing how responsive the grid is
 The following flags can be used to change the responsive behaviour *\[defaults in square brackets\]*

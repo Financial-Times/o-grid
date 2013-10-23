@@ -12,14 +12,15 @@
 	{{#default}}
 		<link rel='stylesheet' href='css/grid-default.css' />
 	{{/default}}
-	{{^default}}
-		{{#fluid}}
-			<link rel='stylesheet' href='css/grid-fluid.css' />
-		{{/fluid}}
-		{{^fluid}}
-			<link rel='stylesheet' href='css/grid-responsive.css' />
-		{{/fluid}}
-	{{/default}}
+	{{#fluid}}
+		<link rel='stylesheet' href='css/grid-fluid.css' />
+	{{/fluid}}
+	{{#responsive}}
+		<link rel='stylesheet' href='css/grid-responsive.css' />
+	{{/responsive}}
+	{{#resized}}
+		<link rel='stylesheet' href='css/grid-resized.css' />
+	{{/resized}}
 		
 	<link rel='stylesheet' href='css/docs.css' /> 
 </head>

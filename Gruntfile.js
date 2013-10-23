@@ -32,6 +32,7 @@ module.exports = function(grunt) {
           './docs/css/grid-default.css': './src/scss/bundles/default.scss',
           './docs/css/grid-responsive.css': './src/scss/bundles/responsive.scss',
           './docs/css/grid-fluid.css': './src/scss/bundles/fluid.scss',
+          './docs/css/grid-resized.css': './src/scss/bundles/resized.scss',
           './docs/css/docs.css': './src/scss/docs/docs.scss'
         }
       }
@@ -79,6 +80,16 @@ module.exports = function(grunt) {
           title: "Fluid grid examples",
           example: require('./docs-generator/examples.json'),
           fluid: true
+        }
+      },
+      resized: {
+        src: './docs-generator/grid.hbs',
+        engine: "handlebars",
+        dest: './docs/grid-resized.html',
+        variables: {
+          title: "Resized grid examples",
+          example: require('./docs-generator/examples.json'),
+          resized: true
         }
       }
     },

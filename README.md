@@ -22,6 +22,9 @@ It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/
 * [Legacy grid](grid-legacy.html)  
     Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
 
+* [Resized grid](grid-resized.html)  
+    Responsive grid with breakpoints reallocated to 400px, 800px and 1200px
+
 ##Installation
 
 ###For developers

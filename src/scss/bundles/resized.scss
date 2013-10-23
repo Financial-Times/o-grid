@@ -1,0 +1,15 @@
+// Page widths
+$globalMinWidth: 240px;
+$smallMaxWidth: 400px;
+$mediumMaxWidth: 580px;
+$largeMaxWidth: 760px;
+$extraLargeMaxWidth: 1160px;
+
+// Breakpoints
+$smallToMediumBreak: 400px;
+$mediumToLargeBreak: 800px;
+$largeToXLBreak: 1200px;
+
+@import "default.scss";
+@import "../components/grid-responsive.scss";
+@import "../components/grid-fixed.scss"; 

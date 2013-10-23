@@ -19,7 +19,8 @@
 
 
 		// Following rules undo styles applied by the fixed grid
-		[class*="-#{$small}0"] {
+		[class*="-#{$small}0"],
+		[class*="-#{$small}hide"]  {
 		    display: block;
 		}
 

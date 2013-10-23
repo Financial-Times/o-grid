@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------------------
 
 // Gutters
-$reponsiveLayoutHalfGutter: 10px !default;
+$responsiveLayoutHalfGutter: 10px !default;
 $defaultLayoutHalfGutter: 1% !default;
 $fixedLayoutHalfGutter: 5px !default;
 
@@ -47,17 +47,25 @@ $pathToPolyfills: "/polyfills/" !default;
 // 
 // Also be sure to update README.md
 // -------------------------------------------------------------------------------------
+$lt-ie9: '.lt-ie9' !default;
+$ie8: '.ie8' !default;
+$ie7: '.ie7' !default;
+$globalNamespace: ft !default;
 
-$gridRow: ft-grid-row;
-$gridColumn: ft-grid-col;
-$gridBox: ft-grid-box;
+$moduleNamespace: $globalNamespace#{-grid-};
+
+$gridRow: $moduleNamespace + row;
+$gridColumn: $moduleNamespace + col;
+$gridBox: $moduleNamespace + box;
 $small: s;
 $medium: m;
 $large: l;
 $extraLarge: xl;
 $default: d;
 
-$fixedLayoutSelector: '.lt-ie9' !default;
+
+
+$fixedLayoutSelector: $lt-ie9 !default;
 //$fixedSize: $large !default;
 
 

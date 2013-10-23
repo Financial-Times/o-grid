@@ -153,7 +153,7 @@ All the variables used by the grid are available in other stylesheets, and most 
     * **Dimensions** 
 
         * *Gutters* - defines the space between columns
-            * ``$reponsiveLayoutHalfGutter``: \[10px\]
+            * ``$responsiveLayoutHalfGutter``: \[10px\]
             * ``$defaultLayoutHalfGutter``: \[1%\]
             * ``$fixedLayoutHalfGutter``: \[5px\]
 
@@ -174,7 +174,7 @@ All the variables used by the grid are available in other stylesheets, and most 
         * ``$isFluid``: \[false\] Switches to fully fluid layouts
         * ``$isFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$isResponsive`` is true then this value is ignored)
     * **Selectors** <a id="utilities/variables/selectors" style="visibility:hidden">&nbsp;</a>
-        * ``$fixedLayoutSelector``: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios, or to use your module in a product which uses different conventions for its internet explorer classes overwrite this variable with your own selector.
+        * ``$fixedLayoutSelector``: \['.lt-ie9'\] The typical use case for forcing use of the fixed large layout is on ie7/8, but to apply this style in more/other scenarios overwrite this variable with your own selector (or to use your module in a product which uses different conventions for its internet explorer classes overwrite ``$lt-ie9``)
 
 
 ##Gotchas

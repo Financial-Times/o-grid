@@ -4,8 +4,8 @@
 
 		.#{$gridRow} .#{$gridRow},
 		.#{$gridBox} .#{$gridRow} {
-			margin-left: -$reponsiveLayoutHalfGutter;
-			margin-right: -$reponsiveLayoutHalfGutter;
+			margin-left: -$responsiveLayoutHalfGutter;
+			margin-right: -$responsiveLayoutHalfGutter;
 			width: auto;
 		}
 
@@ -13,8 +13,8 @@
 			float: left;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
-			padding-left: $reponsiveLayoutHalfGutter;
-			padding-right: $reponsiveLayoutHalfGutter;
+			padding-left: $responsiveLayoutHalfGutter;
+			padding-right: $responsiveLayoutHalfGutter;
 		}
 
 

@@ -16,3 +16,4 @@
 @function gridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
 	@return (gridColumnWidth($numCols)-($halfGutterWidth*2))
 }
+

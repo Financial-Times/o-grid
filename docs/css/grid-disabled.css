@@ -12,7 +12,7 @@ body {
 }
 
 .ft-grid-row {
-  max-width: 400px;
+  max-width: 600px;
   min-width: 240px;
 }
 
@@ -183,9 +183,9 @@ body {
     width: 100%;
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .ft-grid-row {
-    max-width: 400px;
+    max-width: 600px;
   }
 
   [class*="-shide"],
@@ -250,9 +250,9 @@ body {
     width: 100%;
   }
 }
-@media screen and (min-width: 401px) and (max-width: 800px) {
+@media screen and (min-width: 601px) and (max-width: 1000px) {
   .ft-grid-row {
-    max-width: 580px;
+    max-width: 780px;
   }
 
   [class*="-mhide"],
@@ -317,9 +317,9 @@ body {
     width: 100%;
   }
 }
-@media screen and (min-width: 801px) and (max-width: 1200px) {
+@media screen and (min-width: 1001px) {
   .ft-grid-row {
-    max-width: 760px;
+    max-width: 960px;
   }
 
   [class*="-lhide"],
@@ -384,79 +384,12 @@ body {
     width: 100%;
   }
 }
-@media screen and (min-width: 1201px) {
-  .ft-grid-row {
-    max-width: 1160px;
-  }
-
-  [class*="-xlhide"],
-  [class*="-xl0"] {
-    display: none;
-  }
-
-  [class*="-xl1"] {
-    width: 8.33333%;
-  }
-
-  [class*="-xl2"] {
-    width: 16.66667%;
-  }
-
-  [class*="-xl3"] {
-    width: 25%;
-  }
-
-  [class*="-xl4"] {
-    width: 33.33333%;
-  }
-
-  [class*="-xl5"] {
-    width: 41.66667%;
-  }
-
-  [class*="-xl6"] {
-    width: 50%;
-  }
-
-  [class*="-xl7"] {
-    width: 58.33333%;
-  }
-
-  [class*="-xl8"] {
-    width: 66.66667%;
-  }
-
-  [class*="-xl9"] {
-    width: 75%;
-  }
-
-  [class*="-xl10"] {
-    width: 83.33333%;
-  }
-
-  [class*="-xl11"] {
-    width: 91.66667%;
-  }
-
-  /* ensures d12 and d0 can be over-ridden by styles for xl layout */
-  [class*="-xl1"], [class*="-xl2"], [class*="-xl3"], [class*="-xl4"], [class*="-xl5"], [class*="-xl6"], [class*="-xl7"], [class*="-xl8"], [class*="-xl9"], [class*="-xl10"], [class*="-xl11"] {
-    float: left;
-    clear: none;
-    display: block;
-  }
-
-  [class*="-xl12"] {
-    float: none;
-    clear: both;
-    width: 100%;
-  }
-}
 .lt-ie9 {
   /* ensures d12 and d0 can be over-ridden by styles for l layout */
 }
 .lt-ie9 .ft-grid-row {
-  width: 760px;
-  max-width: 760px;
+  width: 960px;
+  max-width: 960px;
 }
 .lt-ie9 .ft-grid-row .ft-grid-row,
 .lt-ie9 .ft-grid-box .ft-grid-row {

@@ -118,7 +118,8 @@ body {
     padding-right: 10px;
   }
 
-  [class*="-s0"] {
+  [class*="-s0"],
+  [class*="-shide"] {
     display: block;
   }
 

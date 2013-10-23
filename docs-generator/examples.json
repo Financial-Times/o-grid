@@ -112,6 +112,14 @@
     },
     {
         "columns": [
+            {"span": "lhide-xlhide"},
+            {"span": "shide-mhide"}
+        ],
+        "description": "Using the hide class without a default",
+        "title": "Using the hide class without a default"
+    },
+    {
+        "columns": [
             {
                 "columns": [
                     {"span": "d4"},

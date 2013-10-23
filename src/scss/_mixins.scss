@@ -1,27 +1,50 @@
-
-
-@mixin wrapInSelector ($selector) {
+//
+// Wraps a given block of styles in the given selector (if it exists)
+//
+// @param $selector {string|null} css selector to wrap the styles in
+//
+@mixin wrapInSelector ($selector:null) {
 	@if($selector) {
 		#{$selector} { @content }
 	} @else {
 		@content
 	}
 }
+
 //
-// Writes media query selector for given a layout size
+// Writes media query selector for a given layout size
 //
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 //
 @mixin respondTo ($layoutSize) {
 	@if $layoutSize == $small {
-		@media screen and (max-width:$smallToMediumBreak) { @content; }
+		@include maxMinMediaQuery(null, $smallToMediumBreak) { @content; }
 	} @else if $layoutSize == $medium {
-		@media screen and (min-width:$smallToMediumBreak+1) and (max-width:$mediumToLargeBreak) { @content; }
+		@include maxMinMediaQuery($smallToMediumBreak, $mediumToLargeBreak) { @content; }
 	} @else if $layoutSize == $large {
-		@media screen and (min-width:$mediumToLargeBreak+1) and (max-width:$largeToXLBreak) { @content; }
+		@include maxMinMediaQuery($mediumToLargeBreak, $largeToXLBreak) { @content; }
 	} @else if $layoutSize == $extraLarge {
-		@media screen and (min-width:$largeToXLBreak+1) { @content; }
+		@include maxMinMediaQuery($largeToXLBreak, null) { @content; }
 	} @else {
+		@include maxMinMediaQuery(null, null, true) { @content; }
+	}
+}
+
+//
+// Writes media query selector for given maximum and minimum screen widths
+//
+// @param $min {string|null} min-width for media query
+// @param $max {string|null} max-width for media query
+// @param $force {boolean} [false] if set to true will write out the styles wrapped in @media screen, otherwise writes nothing
+//
+@mixin maxMinMediaQuery($min, $max, $force:false) {
+	@if ($min and $max) {
+		@media screen and (min-width:$min+1) and (max-width:$max) { @content; }
+	} @else if ($min) {
+		@media screen and (min-width:$min+1) { @content; }
+	} @else if ($max) {
+		@media screen and  (max-width:$max) { @content; }
+	} @else if ($force) {
 		@media screen { @content; }
 	}
 }
@@ -52,13 +75,18 @@
 	}
 }
 
+//
+// Defines styles for column widths for a given layout size
+//
+// @param $layoutSize {string} name of layout size (s, m , l, xl)
+//
 @mixin columnWidths($layoutSize) {
 
 	[class*="-#{$layoutSize}hide"],
 	[class*="-#{$layoutSize}0"] {
 		display: none;
 	}
-// [class^="#{$gridColumn}"]
+
 	$selector: null;			
 
 	@for $colWidth from 1 through 11 {

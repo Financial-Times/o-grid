@@ -6,7 +6,17 @@
 <body>
 
 	<div class="header">
-		<h1>{{#default}}Default{{/default}}{{#legacy}}Legacy{{/legacy}}{{#responsive}}Responsive <span>(<span class="mode"></span>)</span>{{/responsive}}</h1>
+		<h1>
+			{{#default}}Default{{/default}}
+			{{#legacy}}Legacy{{/legacy}}
+			{{#isResponsive}}
+				{{#responsive}}Responsive{{/responsive}}
+				{{#resized}}Resized to use 400px, 800px and 1200px breakpoints{{/resized}}
+				{{#fluid}}Fluid{{/fluid}}
+				{{#disabled}}Extra large layout disabled{{/disabled}}
+				<span>(<span class="mode"></span>)</span>
+			{{/isResponsive}}
+		</h1>
 	</div>
 
 	<div class="ft-grid-row">

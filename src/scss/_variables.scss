@@ -47,16 +47,17 @@ $pathToPolyfills: "/polyfills/" !default;
 // 
 // Also be sure to update README.md
 // -------------------------------------------------------------------------------------
-$lt-ie9: '.lt-ie9' !default;
-$ie8: '.ie8' !default;
-$ie7: '.ie7' !default;
-$globalNamespace: ft !default;
+	
+	// candidates to put in a global-sass-variables module
+	$lt-ie9: '.lt-ie9' !default;
+	$ie8: '.ie8' !default;
+	$ie7: '.ie7' !default;
 
-$moduleNamespace: $globalNamespace#{-grid-};
+$gridNamespace: #{ft-grid-};
 
-$gridRow: $moduleNamespace + row;
-$gridColumn: $moduleNamespace + col;
-$gridBox: $moduleNamespace + box;
+$gridRow: $gridNamespace + row;
+$gridColumn: $gridNamespace + col;
+$gridBox: $gridNamespace + box;
 $small: s;
 $medium: m;
 $large: l;

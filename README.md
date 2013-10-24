@@ -52,6 +52,9 @@ For each of these the available horizontal width is separated into 12 columns. I
 * [Disabled breakpoint](grid-disabled.html)  
     Responsive grid with the extra large layout disabled
 
+* [Always fixed](grid-always-fixed.html)  
+    Fixed grid at 960px across all browsers and devices
+
 ##Installation
 
 ###For developers
@@ -185,7 +188,7 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 
 * ``$ftGridIsResponsive``: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
 * ``$ftGridIsFluid``: \[false\] Switches to fully fluid layouts
-* ``$ftGridIsFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$ftGridIsResponsive`` is true then this value is ignored)
+* ``$ftGridIsFixedDesktop``: \[false\] Forces the site to always use the large layout
 * ``$ftGridFixedLayoutSelector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 
 ####Resizing the grid
@@ -224,7 +227,8 @@ Then in terminal run ``grunt``
 
 4. Edit docs-generator/partials/head.hbs to include the correct stylesheet & classes when the variable ``widescreen`` is truthy (i.e wrap in ``{{#widescreen}}{{\widescreen}}``)
 5. In Gruntfile.js append ``widescreen`` to `` demoPageTypes``
-6. In terminal run the command ``grunt``
+6. Add a link to the demo page to the demos section of ``README.md``
+7. In terminal run the command ``grunt``
 
 
 ###Pre-release steps

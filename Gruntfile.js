@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   "use strict";
 
-  var demoPageTypes = 'responsive,default,legacy,fluid,resized,disabled'.split(',');
+  var demoPageTypes = 'responsive,default,legacy,fluid,resized,disabled,always-fixed'.split(',');
 
   function constructDemoPagesConfig () {
     var output = {};
@@ -132,9 +132,8 @@ module.exports = function(grunt) {
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
     grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup']);
-
-    
   });
+
   grunt.registerTask('finalDocsCleanup', function () {
     grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
   });

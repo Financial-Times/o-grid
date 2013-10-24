@@ -1,4 +1,4 @@
-@if ($ftGridIsResponsive) {
+@if ($ftGridIsResponsive and not $ftGridIsFixedDesktop) {
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 

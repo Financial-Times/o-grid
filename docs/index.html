@@ -339,6 +339,10 @@
         <p><a href="grid-disabled.html">Disabled breakpoint</a>
           <br>Responsive grid with the extra large layout disabled</p>
       </li>
+      <li>
+        <p><a href="grid-always-fixed.html">Always fixed</a>
+          <br>Fixed grid at 960px across all browsers and devices</p>
+      </li>
     </ul>
     <h2>Installation</h2>
     <h3>For developers</h3>
@@ -468,7 +472,7 @@
     <ul>
       <li><code>$ftGridIsResponsive</code>: [true] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products</li>
       <li><code>$ftGridIsFluid</code>: [false] Switches to fully fluid layouts</li>
-      <li><code>$ftGridIsFixedDesktop</code>: [false] Forces the site to always use the large layout (if <code>$ftGridIsResponsive</code> is true then this value is ignored)</li>
+      <li><code>$ftGridIsFixedDesktop</code>: [false] Forces the site to always use the large layout</li>
       <li><code>$ftGridFixedLayoutSelector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
     </ul>
     <h4>Resizing the grid</h4>
@@ -517,6 +521,8 @@
       </li>
       <li>In Gruntfile.js append <code>widescreen</code> to <code>demoPageTypes</code>
       </li>
+      <li>Add a link to the demo page to the demos section of <code>README.md</code>
+      </li>
       <li>In terminal run the command <code>grunt</code>
       </li>
     </ol>
@@ -555,7 +561,7 @@
     <script>
     $('#toc').toc(
     {
-      selectors: 'h1,h2,h3,h4',
+      selectors: 'h1,h2,h3,h4'
     });
     </script>
   </body>

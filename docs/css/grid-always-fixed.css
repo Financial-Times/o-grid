@@ -1,0 +1,244 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.ft-grid-row,
+.ft-grid-box {
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ft-grid-row {
+  max-width: 600px;
+  min-width: 240px;
+}
+
+.ft-grid-row .ft-grid-row,
+.ft-grid-box .ft-grid-row {
+  margin-left: -1%;
+  margin-right: -1%;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+}
+
+/* Default grid: Layout 1 FIXED (well, max-width) */
+[class*="ft-grid-col"] {
+  float: left;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+[class*="-d0"],
+[class*="-s0"],
+[class*="-dhide"],
+[class*="-shide"] {
+  display: none;
+}
+
+[class*="-d1"],
+[class*="-s1"] {
+  width: 6.33333%;
+}
+
+[class*="-d2"],
+[class*="-s2"] {
+  width: 14.66667%;
+}
+
+[class*="-d3"],
+[class*="-s3"] {
+  width: 23%;
+}
+
+[class*="-d4"],
+[class*="-s4"] {
+  width: 31.33333%;
+}
+
+[class*="-d5"],
+[class*="-s5"] {
+  width: 39.66667%;
+}
+
+[class*="-d6"],
+[class*="-s6"] {
+  width: 48%;
+}
+
+[class*="-d7"],
+[class*="-s7"] {
+  width: 56.33333%;
+}
+
+[class*="-d8"],
+[class*="-s8"] {
+  width: 64.66667%;
+}
+
+[class*="-d9"],
+[class*="-s9"] {
+  width: 73%;
+}
+
+[class*="-d10"],
+[class*="-s10"] {
+  width: 81.33333%;
+}
+
+[class*="-d11"],
+[class*="-s11"] {
+  width: 89.66667%;
+}
+
+[class*="-d12"],
+[class*="-s12"] {
+  float: none;
+  clear: both;
+  width: 98%;
+}
+
+.ft-grid-row {
+  width: 960px;
+  max-width: 960px;
+}
+
+.ft-grid-row .ft-grid-row,
+.ft-grid-box .ft-grid-row {
+  margin-left: -5px;
+  margin-right: -5px;
+  width: auto;
+}
+
+[class*="ft-grid-col"] {
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  *behavior: url(/polyfills/boxsizing.htc);
+}
+
+[class*="-dhide"],
+[class*="-d0"] {
+  display: none;
+}
+
+[class*="-d1"] {
+  width: 8.33333%;
+}
+
+[class*="-d2"] {
+  width: 16.66667%;
+}
+
+[class*="-d3"] {
+  width: 25%;
+}
+
+[class*="-d4"] {
+  width: 33.33333%;
+}
+
+[class*="-d5"] {
+  width: 41.66667%;
+}
+
+[class*="-d6"] {
+  width: 50%;
+}
+
+[class*="-d7"] {
+  width: 58.33333%;
+}
+
+[class*="-d8"] {
+  width: 66.66667%;
+}
+
+[class*="-d9"] {
+  width: 75%;
+}
+
+[class*="-d10"] {
+  width: 83.33333%;
+}
+
+[class*="-d11"] {
+  width: 91.66667%;
+}
+
+[class*="-d12"] {
+  float: none;
+  clear: both;
+  width: 100%;
+}
+
+[class*="-lhide"],
+[class*="-l0"] {
+  display: none;
+}
+
+[class*="-l1"] {
+  width: 8.33333%;
+}
+
+[class*="-l2"] {
+  width: 16.66667%;
+}
+
+[class*="-l3"] {
+  width: 25%;
+}
+
+[class*="-l4"] {
+  width: 33.33333%;
+}
+
+[class*="-l5"] {
+  width: 41.66667%;
+}
+
+[class*="-l6"] {
+  width: 50%;
+}
+
+[class*="-l7"] {
+  width: 58.33333%;
+}
+
+[class*="-l8"] {
+  width: 66.66667%;
+}
+
+[class*="-l9"] {
+  width: 75%;
+}
+
+[class*="-l10"] {
+  width: 83.33333%;
+}
+
+[class*="-l11"] {
+  width: 91.66667%;
+}
+
+/* ensures d12 and d0 can be over-ridden by styles for l layout */
+[class*="-l1"], [class*="-l2"], [class*="-l3"], [class*="-l4"], [class*="-l5"], [class*="-l6"], [class*="-l7"], [class*="-l8"], [class*="-l9"], [class*="-l10"], [class*="-l11"] {
+  float: left;
+  clear: none;
+  display: block;
+}
+
+[class*="-l12"] {
+  float: none;
+  clear: both;
+  width: 100%;
+}
+
+[class*="-s12"] {
+  clear: none;
+}

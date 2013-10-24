@@ -392,19 +392,19 @@
     <h3>Layout size identifiers</h3>
     <ul>
       <li>
-        <p><strong>s</strong> - <em>Small</em> layout (use sass variable <code>$small</code>)</p>
+        <p><strong>s</strong> - <em>Small</em> layout (use sass variable <code>$ftGridSmall</code>)</p>
       </li>
       <li>
-        <p><strong>m</strong> - <em>Medium</em> layout (use sass variable <code>$medium</code>)</p>
+        <p><strong>m</strong> - <em>Medium</em> layout (use sass variable <code>$ftGridMedium</code>)</p>
       </li>
       <li>
-        <p><strong>l</strong> - <em>Large</em> layout (use sass variable <code>$large</code>)</p>
+        <p><strong>l</strong> - <em>Large</em> layout (use sass variable <code>$ftGridLarge</code>)</p>
       </li>
       <li>
-        <p><strong>xl</strong> - <em>Extra Large</em> layout (use sass variable <code>$extraLarge</code>)</p>
+        <p><strong>xl</strong> - <em>Extra Large</em> layout (use sass variable <code>$ftGridExtraLarge</code>)</p>
       </li>
       <li>
-        <p><strong>d</strong> - <em>Default [required unless all four of the above are specified]</em> (use sass variable <code>$default</code>)</p>
+        <p><strong>d</strong> - <em>Default [required unless all four of the above are specified]</em> (use sass variable <code>$ftGridDefault</code>)</p>
       </li>
     </ul>
     <p>In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.</p>
@@ -436,8 +436,8 @@
         </p>
         <ul>
           <li>
-            <p><code>respondTo($layoutSize)</code> To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$small</code>, <code>$medium</code>, <code>$large</code> or <code>$extraLarge</code> depending on which layout size the style should apply to e.g.</p>
-            <pre><code>  @include respondTo($small) {
+            <p><code>ftGridRespondTo($layoutSize)</code> To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$ftGridSmall</code>, <code>$ftGridMedium</code>, <code>$ftGridLarge</code> or <code>$ftGridExtraLarge</code> depending on which layout size the style should apply to e.g.</p>
+            <pre><code>  @include ftGridRespondTo($ftGridSmall) {
       .ft-example-module .item-subheading {
           font-size: 0.5em
       }
@@ -466,24 +466,24 @@
 &lt;!--[if IE 8]&gt; &lt;html class=&quot;no-js ie8 lt-ie9&quot;&gt; &lt;![endif]--&gt;
 &lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class=&quot;no-js&quot;&gt; &lt;!--&lt;![endif]--&gt;</code></pre>
     <p>If your product/page already has other classes enforced for ie7/8 detection you can pass these in to the sass by including the following in your sass <em>before</em> including grid-module&#39;s main.scss</p>
-    <pre><code>$fixedLayoutSelector: &#39;{A selector which will target both ie7 &amp; ie8}&#39;;</code></pre>
+    <pre><code>$ftGridFixedLayoutSelector: &#39;{A selector which will target both ie7 &amp; ie8}&#39;;</code></pre>
     <h4>Boxsizing in ie7</h4>
-    <p>For ie7 you must also specify an absolute path pointing to <code>/path/to/bower/grid-module/polyfills</code> as a value for <code>$pathToPolyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>/path/to/bower/grid-module/polyfills/boxsizing.htc</code>)</p>
+    <p>For ie7 you must also specify an absolute path pointing to <code>/path/to/bower/grid-module/polyfills</code> as a value for <code>$ftGridPathToPolyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>/path/to/bower/grid-module/polyfills/boxsizing.htc</code>)</p>
     <h3>Things you <em>can</em> do (but in most cases probably shouldn&#39;t)</h3>
     <p>The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module&#39;s main.scss file. A few notable uses are as follows:</p>
     <h4>Changing how responsive the grid is</h4>
     <p>The following flags can be used to change the responsive behaviour <em>[defaults in square brackets]</em>
     </p>
     <ul>
-      <li><code>$isResponsive</code>: [true] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products</li>
-      <li><code>$isFluid</code>: [false] Switches to fully fluid layouts</li>
-      <li><code>$isFixedDesktop</code>: [false] Forces the site to always use the large layout (if <code>$isResponsive</code> is true then this value is ignored)</li>
-      <li><code>$fixedLayoutSelector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
+      <li><code>$ftGridIsResponsive</code>: [true] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products</li>
+      <li><code>$ftGridIsFluid</code>: [false] Switches to fully fluid layouts</li>
+      <li><code>$ftGridIsFixedDesktop</code>: [false] Forces the site to always use the large layout (if <code>$ftGridIsResponsive</code> is true then this value is ignored)</li>
+      <li><code>$ftGridFixedLayoutSelector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
     </ul>
     <h4>Resizing the grid</h4>
     <p>By overwriting the values of any of the <code>$...Width</code> or <code>$...Break</code> variables the width of the grid at any of the layout sizes can be decreased or increased as required</p>
     <h4>Disabling larger layouts</h4>
-    <p>By setting the value of a breakpoint (<code>$smallToMediumBreak</code>, <code>$mediumToLargeBreak</code> or <code>$largeToXLBreak</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$mediumToLargeBreak: false;</code> will have unexpected efects on your layout unless you also specify <code>$largeToXLBreak: false;</code>.</em>
+    <p>By setting the value of a breakpoint (<code>$ftGridSmallToMediumBreak</code>, <code>$ftGridMediumToLargeBreak</code> or <code>$ftGridlargeToXlBreak</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$ftGridMediumToLargeBreak: false;</code> will have unexpected efects on your layout unless you also specify <code>$ftGridlargeToXlBreak: false;</code>.</em>
     </p>
     <h2>Developing grid-module</h2>
     <h3>BDD/TDD</h3>

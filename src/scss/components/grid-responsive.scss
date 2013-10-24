@@ -1,38 +1,38 @@
-@if ($isResponsive) {
+@if ($ftGridIsResponsive) {
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 
-		.#{$gridRow} .#{$gridRow},
-		.#{$gridBox} .#{$gridRow} {
-			margin-left: -$responsiveLayoutHalfGutter;
-			margin-right: -$responsiveLayoutHalfGutter;
+		.#{$ftGridRow} .#{$ftGridRow},
+		.#{$ftGridBox} .#{$ftGridRow} {
+			margin-left: -$ftGridResponsiveHalfGutter;
+			margin-right: -$ftGridResponsiveHalfGutter;
 			width: auto;
 		}
 
-		[class*="#{$gridColumn}"] {
+		[class*="#{$ftGridColumn}"] {
 			float: left;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
-			padding-left: $responsiveLayoutHalfGutter;
-			padding-right: $responsiveLayoutHalfGutter;
+			padding-left: $ftGridResponsiveHalfGutter;
+			padding-right: $ftGridResponsiveHalfGutter;
 		}
 
 
 		// Following rules undo styles applied by the fixed grid
-		[class*="-#{$small}0"],
-		[class*="-#{$small}hide"]  {
+		[class*="-#{$ftGridSmall}0"],
+		[class*="-#{$ftGridSmall}hide"]  {
 		    display: block;
 		}
 
-		[class*="-#{$small}12"] {
+		[class*="-#{$ftGridSmall}12"] {
 		    clear: none;
 		}
 
 	}
 
-	@include defineResponsiveGrid($default, null);
+	@include ftGridDefineLayout($ftGridDefault, null);
 
 	@for $i from 1 through 4 {
-		@include defineResponsiveGrid(nth($layoutShorthands, $i), nth($maxWidths, $i));
+		@include ftGridDefineLayout(nth($ftGridLayoutShorthands, $i), nth($ftGridMaxWidths, $i));
 	}
 }

@@ -12,30 +12,11 @@
 }
 
 //
-// Writes media query selector for a given layout size
-//
-// @param $layoutSize {string} name of layout size (s, m , l, xl)
-//
-@mixin respondTo ($layoutSize) {
-	@if $layoutSize == $small {
-		@include maxMinMediaQuery(null, $smallToMediumBreak) { @content; }
-	} @else if $layoutSize == $medium {
-		@include maxMinMediaQuery($smallToMediumBreak, $mediumToLargeBreak) { @content; }
-	} @else if $layoutSize == $large {
-		@include maxMinMediaQuery($mediumToLargeBreak, $largeToXLBreak) { @content; }
-	} @else if $layoutSize == $extraLarge {
-		@include maxMinMediaQuery($largeToXLBreak, null) { @content; }
-	} @else {
-		@include maxMinMediaQuery(null, null, true) { @content; }
-	}
-}
-
-//
 // Writes media query selector for given maximum and minimum screen widths
 //
 // @param $min {string|null} min-width for media query
 // @param $max {string|null} max-width for media query
-// @param $force {boolean} [false] if set to true will write out the styles wrapped in @media screen, otherwise writes nothing
+// @param $force {boolean} [false] if set to true will then if $min and $max are undefined it will write out the styles wrapped in @media screen, otherwise writes nothing
 //
 @mixin maxMinMediaQuery($min, $max, $force:false) {
 	@if ($min and $max) {
@@ -50,28 +31,47 @@
 }
 
 //
+// Writes media query selector for a given layout size
+//
+// @param $layoutSize {string} name of layout size (s, m , l, xl)
+//
+@mixin ftGridRespondTo ($layoutSize) {
+	@if $layoutSize == $ftGridSmall {
+		@include maxMinMediaQuery(null, $ftGridSmallToMediumBreak) { @content; }
+	} @else if $layoutSize == $ftGridMedium {
+		@include maxMinMediaQuery($ftGridSmallToMediumBreak, $ftGridMediumToLargeBreak) { @content; }
+	} @else if $layoutSize == $ftGridLarge {
+		@include maxMinMediaQuery($ftGridMediumToLargeBreak, $ftGridlargeToXlBreak) { @content; }
+	} @else if $layoutSize == $ftGridExtraLarge {
+		@include maxMinMediaQuery($ftGridlargeToXlBreak, null) { @content; }
+	} @else {
+		@include maxMinMediaQuery(null, null, true) { @content; }
+	}
+}
+
+//
 // Defines styles for row and column widths for a given layout size
 //
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 // @param $maxWidth {number} maximum width of a row at this layout size
 //
-@mixin defineResponsiveGrid ($layoutSize, $maxWidth) {
+@mixin ftGridDefineLayout ($layoutSize, $maxWidth) {
 
-	@include respondTo($layoutSize) {
+	@include ftGridRespondTo($layoutSize) {
 		
-		@if ($isFluid and not ($layoutSize == $extraLarge)) {
-			.#{$gridRow} {
+		@if ($ftGridIsFluid and not ($layoutSize == $ftGridExtraLarge)) {
+			.#{$ftGridRow} {
 				max-width: none;
 			}
 		} @else {
 			@if ($maxWidth) {
-				.#{$gridRow} {
+				.#{$ftGridRow} {
 					max-width: $maxWidth;
 				}
 			}
 		}
 		
-		@include columnWidths($layoutSize);
+		@include ftGridColumnWidths($layoutSize);
 	}
 }
 
@@ -80,7 +80,7 @@
 //
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 //
-@mixin columnWidths($layoutSize) {
+@mixin ftGridColumnWidths($layoutSize) {
 
 	[class*="-#{$layoutSize}hide"],
 	[class*="-#{$layoutSize}0"] {
@@ -94,7 +94,7 @@
 		$thisSelector: #{'[class*="-#{$layoutSize}#{$colWidth}"]'};
 		
 		#{$thisSelector} {
-			width: gridColumnWidth($colWidth);
+			width: ftGridColumnWidth($colWidth);
 		}
 		
 		// generates a comma separated selector for each of the column widths from 1 to 11
@@ -106,7 +106,7 @@
 		
 	}
 	
-	@if ($layoutSize != $default) {
+	@if ($layoutSize != $ftGridDefault) {
 		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
 		#{$selector} {
 			float: left;

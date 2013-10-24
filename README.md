@@ -107,15 +107,15 @@ e.g. ``ft-grid-col-d6-s12-xl4``
 
 ###Layout size identifiers
 
-* **s** - *Small* layout (use sass variable ``$small``)
+* **s** - *Small* layout (use sass variable ``$ftGridSmall``)
 
-* **m** - *Medium* layout (use sass variable ``$medium``)
+* **m** - *Medium* layout (use sass variable ``$ftGridMedium``)
 
-* **l** - *Large* layout (use sass variable ``$large``)
+* **l** - *Large* layout (use sass variable ``$ftGridLarge``)
 
-* **xl** - *Extra Large* layout (use sass variable ``$extraLarge``)
+* **xl** - *Extra Large* layout (use sass variable ``$ftGridExtraLarge``)
 
-* **d** - *Default [required unless all four of the above are specified]* (use sass variable ``$default``)
+* **d** - *Default [required unless all four of the above are specified]* (use sass variable ``$ftGridDefault``)
  
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
 
@@ -141,10 +141,10 @@ In general prefer to set the default for larger layouts and override for smaller
     e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 * **Useful mixins**
-    * ``respondTo($layoutSize)`` 
-    To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$small``, ``$medium``, ``$large`` or ``$extraLarge`` depending on which layout size the style should apply to e.g.
+    * ``ftGridRespondTo($layoutSize)`` 
+    To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ftGridSmall``, ``$ftGridMedium``, ``$ftGridLarge`` or ``$ftGridExtraLarge`` depending on which layout size the style should apply to e.g.
 
-            @include respondTo($small) {
+            @include ftGridRespondTo($ftGridSmall) {
                 .ft-example-module .item-subheading {
                     font-size: 0.5em
                 }
@@ -172,10 +172,10 @@ To support ie7 & ie8 it's recommended you use the following conditional comments
 
 If your product/page already has other classes enforced for ie7/8 detection you can pass these in to the sass by including the following in your sass *before* including grid-module's main.scss
 
-    $fixedLayoutSelector: '{A selector which will target both ie7 & ie8}';
+    $ftGridFixedLayoutSelector: '{A selector which will target both ie7 & ie8}';
 
 ####Boxsizing in ie7
-For ie7 you must also specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$pathToPolyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
+For ie7 you must also specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$ftGridPathToPolyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
 
 ###Things you *can* do (but in most cases probably shouldn't)
 The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module's main.scss file. A few notable uses are as follows:
@@ -183,16 +183,16 @@ The grid is quite easy to configure by overwriting the default values of many of
 ####Changing how responsive the grid is
 The following flags can be used to change the responsive behaviour *\[defaults in square brackets\]*
 
-* ``$isResponsive``: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
-* ``$isFluid``: \[false\] Switches to fully fluid layouts
-* ``$isFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$isResponsive`` is true then this value is ignored)
-* ``$fixedLayoutSelector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* ``$ftGridIsResponsive``: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
+* ``$ftGridIsFluid``: \[false\] Switches to fully fluid layouts
+* ``$ftGridIsFixedDesktop``: \[false\] Forces the site to always use the large layout (if ``$ftGridIsResponsive`` is true then this value is ignored)
+* ``$ftGridFixedLayoutSelector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 
 ####Resizing the grid
 By overwriting the values of any of the ``$...Width`` or ``$...Break`` variables the width of the grid at any of the layout sizes can be decreased or increased as required
 
 ####Disabling larger layouts
-By setting the value of a breakpoint (``$smallToMediumBreak``, ``$mediumToLargeBreak`` or ``$largeToXLBreak``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$mediumToLargeBreak: false;`` will have unexpected efects on your layout unless you also specify ``$largeToXLBreak: false;``.*
+By setting the value of a breakpoint (``$ftGridSmallToMediumBreak``, ``$ftGridMediumToLargeBreak`` or ``$ftGridlargeToXlBreak``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$ftGridMediumToLargeBreak: false;`` will have unexpected efects on your layout unless you also specify ``$ftGridlargeToXlBreak: false;``.*
 
 ##Developing grid-module
 

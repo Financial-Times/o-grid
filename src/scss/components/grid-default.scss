@@ -4,55 +4,55 @@ body {
 	padding: 0;
 }
 
-.#{$gridRow},
-.#{$gridBox} {
+.#{$ftGridRow},
+.#{$ftGridBox} {
 	clear: both;
 	margin: 0 auto;
 	width: 100%;
 }
 
-@if (not($isFixedDesktop and not $isResponsive)) {
-	.#{$gridRow} {
-		max-width: $smallMaxWidth; 
-		min-width: $globalMinWidth;
+@if (not($ftGridIsFixedDesktop and not $ftGridIsResponsive)) {
+	.#{$ftGridRow} {
+		max-width: $ftGridSmallMaxWidth; 
+		min-width: $ftGridMinWidth;
 	}
 
-	.#{$gridRow} .#{$gridRow},
-	.#{$gridBox} .#{$gridRow} {
-		margin-left: -$defaultLayoutHalfGutter;
-		margin-right: -$defaultLayoutHalfGutter;
+	.#{$ftGridRow} .#{$ftGridRow},
+	.#{$ftGridBox} .#{$ftGridRow} {
+		margin-left: -$ftGridDefaultHalfGutter;
+		margin-right: -$ftGridDefaultHalfGutter;
 		width: auto;
 		max-width: none; // needed for .grid-box .grid-row
 		min-width: 0;
 	}
 
 	/* Default grid: Layout 1 FIXED (well, max-width) */
-	[class*="#{$gridColumn}"] {
+	[class*="#{$ftGridColumn}"] {
 		float: left;
-		padding-left: $defaultLayoutHalfGutter;
-		padding-right: $defaultLayoutHalfGutter;
+		padding-left: $ftGridDefaultHalfGutter;
+		padding-right: $ftGridDefaultHalfGutter;
 	}
 
-	[class*="-#{$default}0"],
-	[class*="-#{$small}0"],
-	[class*="-#{$default}hide"],
-	[class*="-#{$small}hide"] {
+	[class*="-#{$ftGridDefault}0"],
+	[class*="-#{$ftGridSmall}0"],
+	[class*="-#{$ftGridDefault}hide"],
+	[class*="-#{$ftGridSmall}hide"] {
 		display: none;
 	}
 
 
 	@for $colWidth from 1 through 11 {
 				
-		[class*="-#{$default}#{$colWidth}"],
-		[class*="-#{$small}#{$colWidth}"] {
-			width: gridColumnWidthMinusGutter($colWidth, $defaultLayoutHalfGutter);
+		[class*="-#{$ftGridDefault}#{$colWidth}"],
+		[class*="-#{$ftGridSmall}#{$colWidth}"] {
+			width: ftGridColumnWidthMinusGutter($colWidth, $ftGridDefaultHalfGutter);
 		}
 	}
 
-	[class*="-#{$default}12"],
-	[class*="-#{$small}12"] {
+	[class*="-#{$ftGridDefault}12"],
+	[class*="-#{$ftGridSmall}12"] {
 	    float: none;
 	    clear: both;
-		width: gridColumnWidthMinusGutter(12, $defaultLayoutHalfGutter);
+		width: ftGridColumnWidthMinusGutter(12, $ftGridDefaultHalfGutter);
 	}
 }

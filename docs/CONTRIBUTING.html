@@ -251,9 +251,12 @@
   </head>
   <body>
     <h1>grid-module development and testing guide</h1>
-    <p><em><a href="#development">Development</a>
-</em><a href="#testing">Testing</a>
-    </p>
+    <ul>
+      <li><a href="#development">Development</a>
+      </li>
+      <li><a href="#testing">Testing</a>
+      </li>
+    </ul>
     <h2>Development<a id="development" style="visibility:hidden">&nbsp;</a></h2>
     <h3>BDD/TDD</h3>
     <p>The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid&#39;s classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.</p>
@@ -305,15 +308,15 @@
       <li>Run grunt (to republish the docs)</li>
       <li>After commiting add a tag as follows and push (TODO - needs reviewing)
         <ul>
-          <li>incrementing the patch version for bug fixes</li>
-          <li>incrementing the minor version for changes to the grid&#39;s appearance</li>
-          <li>incrementing the major version for changes to how modules should implement the grid</li>
+          <li>increment the patch version for bug fixes</li>
+          <li>increment the minor version for changes to the grid&#39;s appearance</li>
+          <li>increment the major version for changes to how modules should implement the grid</li>
         </ul>
       </li>
     </ul>
     <h2>Testing<a id="testing" style="visibility:hidden">&nbsp;</a></h2>
-    <h3>Running the module locally</h3>
-    <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run grid-module&#39;s test pages locally (OSX normally have these installed by default)</p>
+    <h3>Running the demo pages locally</h3>
+    <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run grid-module&#39;s test pages locally (OSX normally has these installed by default)</p>
     <ol>
       <li>Open an instance of terminal</li>
       <li><code>cd /the/directory/you/want/to/install/in</code>

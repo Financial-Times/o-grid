@@ -1,7 +1,7 @@
 #grid-module development and testing guide
 
-*[Development](#development)
-*[Testing](#testing)
+* [Development](#development)
+* [Testing](#testing)
 
 ##Development<a id="development" style="visibility:hidden">&nbsp;</a>
 
@@ -41,16 +41,16 @@ Then in terminal run ``grunt``
 * Re-write ``README.md`` and ``CONTRIBUTING.md`` to reflect your changes
 * Run grunt (to republish the docs)
 * After commiting add a tag as follows and push (TODO - needs reviewing)
-	* incrementing the patch version for bug fixes
-	* incrementing the minor version for changes to the grid's appearance
-	* incrementing the major version for changes to how modules should implement the grid
+	* increment the patch version for bug fixes
+	* increment the minor version for changes to the grid's appearance
+	* increment the major version for changes to how modules should implement the grid
 
 
 ##Testing<a id="testing" style="visibility:hidden">&nbsp;</a>
 
-###Running the module locally
+###Running the demo pages locally
 
-You must already have [git](http://git-scm.com/downloads) and [python](http://www.python.org/download/) installed to run grid-module's test pages locally (OSX normally have these installed by default)
+You must already have [git](http://git-scm.com/downloads) and [python](http://www.python.org/download/) installed to run grid-module's test pages locally (OSX normally has these installed by default)
 
 1. Open an instance of terminal
 2. ``cd /the/directory/you/want/to/install/in``

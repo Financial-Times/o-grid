@@ -20,8 +20,7 @@
 			float: left;
 			padding-left: $fixedLayoutHalfGutter;
 			padding-right: $fixedLayoutHalfGutter;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box; *behavior: url(#{$pathToPolyfills}boxsizing.htc);
+			@include boxSizing(border-box);
 		}
 
 		@include columnWidths($default);

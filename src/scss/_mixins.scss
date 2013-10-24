@@ -121,3 +121,10 @@
 		width: 100%;
 	}
 }
+
+// Add cross-browser box-szing attribute
+@mixin boxSizing($value) {
+	-moz-box-sizing: $value;
+	box-sizing: $value;
+	*behavior: url(#{$pathToPolyfills}boxsizing.htc);
+}

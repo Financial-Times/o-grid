@@ -32,7 +32,7 @@ For each of these the available horizontal width is separated into 12 columns. I
 
 ###Demos
 
-*In order to view the demos you will need to [clone the git repo](CONTRIBUTING.html#testing)*
+*In order to view the demos you will need to [install grid-module locally](#local-setup)*
 
 * [Responsive grid](grid-responsive.html)  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
@@ -82,6 +82,7 @@ For other steps only relevant to product/page development see the [Product devel
 
 ##General use
 
+###Base classes
 Grid styles are typically applied to the html using two types of class declaration:
 
 * An ``ft-grid-row`` class, added to the container element.  
@@ -90,8 +91,7 @@ It forces that element to extend to the maximum width available (either the maxi
 * An ``ft-grid-col`` class, added to the element intended to conform to the grid's columns.  
 ``ft-grid-col`` by itself does virtually nothing and needs to have specific width rules appended to it e.g. ``ft-grid-col-d6-s12`` (see below for more details)  
 
-
-###Example
+So, for example
 
     <div class="ft-grid-row">
         <div class="ft-grid-col-d12">A full width column</div>
@@ -120,7 +120,7 @@ e.g. ``ft-grid-col-d6-s12-xl4``
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
 
 
-####Examples
+###Examples
     
     //A full width column for all sizes except large screens, where takes up 9 columns
     <div class="ft-grid-col-d12-xl9"></div>  
@@ -133,27 +133,27 @@ In general prefer to set the default for larger layouts and override for smaller
   
 ###Utilities
 
-* **Useful classes**  
-    * ``ft-grid-box``  
-    When using a grid-module based component in a product/page that isn't laid out using grid-module wrap the entire component in an element with the class ``ft-grid-box`` to ensure the module is laid out correctly using the grid
+####classes
+* ``ft-grid-box``  
+When using a grid-module based component in a product/page that isn't laid out using grid-module wrap the entire component in an element with the class ``ft-grid-box`` to ensure the module is laid out correctly using the grid
 
-    * ``hide``  
-    e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
+* ``hide``  
+e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
-* **Useful mixins**
-    * ``ftGridRespondTo($layoutSize)`` 
-    To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ftGridSmall``, ``$ftGridMedium``, ``$ftGridLarge`` or ``$ftGridExtraLarge`` depending on which layout size the style should apply to e.g.
+####mixins
+* ``ftGridRespondTo($layoutSize)`` 
+To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ftGridSmall``, ``$ftGridMedium``, ``$ftGridLarge`` or ``$ftGridExtraLarge`` depending on which layout size the style should apply to e.g.
 
-            @include ftGridRespondTo($ftGridSmall) {
-                .ft-example-module .item-subheading {
-                    font-size: 0.5em
-                }
+        @include ftGridRespondTo($ftGridSmall) {
+            .ft-example-module .item-subheading {
+                font-size: 0.5em
             }
+        }
 
-    * ``wrapInSelector($selector)``  
-    Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the ``$selector`` is undefined)
+* ``wrapInSelector($selector)``  
+Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the ``$selector`` is undefined)
 
-* **sass variables**  
+####variables
 All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *should never be over-written at the component/module level.*
 
 
@@ -239,18 +239,18 @@ Then in terminal run ``grunt``
 
 ##Testing grid-module
 
-###Running the demo pages locally
+###Running the demo pages and docs locally<a id="local-setup" style="visibility:hidden">&nbsp;</a>
 
 You must already have [git](http://git-scm.com/downloads) and [python](http://www.python.org/download/) installed to run grid-module's test pages locally (OSX normally has these installed by default)
 
 1. Open an instance of terminal
 2. ``cd /the/directory/you/want/to/install/in``
 3. ``git clone http://git.svc.ft.com:9080/git/origami/grid-module.git``
-4. ``cd grid-module/docs``
-5. ``python -m SimpleHTTPServer``
+4. Do one of the following
+    * ``cd grid-module/docs; python -m SimpleHTTPServer`` and go to http://localhost:8000 in your browser
+    * in finder open /the/directory/you/want/to/install/in/docs/index.html
 
-Then the docs (with links to each of the demo pages) should be available in your browser on http://localhost:8000
 
-The main test page is http://localhost:8000/grid-responsive.html and it should be tested across all available devices and browsers (resizing the window to test responsive behaviour). 
+The main test page is /grid-responsive.html and it should be tested across all available devices and browsers (resizing the window to test responsive behaviour). 
 
 The other demo pages are to demonstrate other possible configurations and need only be checked on desktop.

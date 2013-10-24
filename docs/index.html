@@ -312,7 +312,7 @@
     </ul>
     <p>For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box&#39;s width is divided into 12 columns</p>
     <h3>Demos</h3>
-    <p><em>In order to view the demos you will need to <a href="CONTRIBUTING.html#testing">clone the git repo</a></em>
+    <p><em>In order to view the demos you will need to <a href="#local-setup">install grid-module locally</a></em>
     </p>
     <ul>
       <li>
@@ -369,6 +369,7 @@
       </li>
     </ol>
     <h2>General use</h2>
+    <h3>Base classes</h3>
     <p>Grid styles are typically applied to the html using two types of class declaration:</p>
     <ul>
       <li>
@@ -380,7 +381,7 @@
           <br><code>ft-grid-col</code> by itself does virtually nothing and needs to have specific width rules appended to it e.g. <code>ft-grid-col-d6-s12</code> (see below for more details)</p>
       </li>
     </ul>
-    <h3>Example</h3>
+    <p>So, for example</p>
     <pre><code>&lt;div class=&quot;ft-grid-row&quot;&gt;
     &lt;div class=&quot;ft-grid-col-d12&quot;&gt;A full width column&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -408,7 +409,7 @@
       </li>
     </ul>
     <p>In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.</p>
-    <h4>Examples</h4>
+    <h3>Examples</h3>
     <pre><code>//A full width column for all sizes except large screens, where takes up 9 columns
 &lt;div class=&quot;ft-grid-col-d12-xl9&quot;&gt;&lt;/div&gt;  
 //A half width column for all sizes except small screens, where takes up full width
@@ -416,45 +417,35 @@
 //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
 &lt;div class=&quot;ft-grid-col-s4-m3-l2-xl1&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
+    <h4>classes</h4>
     <ul>
       <li>
-        <p><strong>Useful classes</strong> 
-        </p>
-        <ul>
-          <li>
-            <p><code>ft-grid-box</code>
-              <br>When using a grid-module based component in a product/page that isn&#39;t laid out using grid-module wrap the entire component in an element with the class <code>ft-grid-box</code> to ensure the module is laid out correctly using the grid</p>
-          </li>
-          <li>
-            <p><code>hide</code>
-              <br>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
-          </li>
-        </ul>
+        <p><code>ft-grid-box</code>
+          <br>When using a grid-module based component in a product/page that isn&#39;t laid out using grid-module wrap the entire component in an element with the class <code>ft-grid-box</code> to ensure the module is laid out correctly using the grid</p>
       </li>
       <li>
-        <p><strong>Useful mixins</strong>
-        </p>
-        <ul>
-          <li>
-            <p><code>ftGridRespondTo($layoutSize)</code> To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$ftGridSmall</code>, <code>$ftGridMedium</code>, <code>$ftGridLarge</code> or <code>$ftGridExtraLarge</code> depending on which layout size the style should apply to e.g.</p>
-            <pre><code>  @include ftGridRespondTo($ftGridSmall) {
+        <p><code>hide</code>
+          <br>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
+      </li>
+    </ul>
+    <h4>mixins</h4>
+    <ul>
+      <li>
+        <p><code>ftGridRespondTo($layoutSize)</code> To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$ftGridSmall</code>, <code>$ftGridMedium</code>, <code>$ftGridLarge</code> or <code>$ftGridExtraLarge</code> depending on which layout size the style should apply to e.g.</p>
+        <pre><code>  @include ftGridRespondTo($ftGridSmall) {
       .ft-example-module .item-subheading {
           font-size: 0.5em
       }
   }</code></pre>
-          </li>
-          <li>
-            <p><code>wrapInSelector($selector)</code>
-              <br>Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the <code>$selector</code> is undefined)</p>
-          </li>
-        </ul>
       </li>
       <li>
-        <p><strong>sass variables</strong>
-          <br>All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but <em>should never be over-written at the component/module level.</em>
-        </p>
+        <p><code>wrapInSelector($selector)</code>
+          <br>Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the <code>$selector</code> is undefined)</p>
       </li>
     </ul>
+    <h4>variables</h4>
+    <p>All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but <em>should never be over-written at the component/module level.</em>
+    </p>
     <h3>Gotchas</h3>
     <ul>
       <li>Using a different prefix instead of <code>ft-grid-col</code>, e.g. <code>not-really-d6-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>-{letter}{number}</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>ft-mymodule-d6</code> to layout your module as this behaviour is just a side effect and not a supported feature</li>
@@ -543,7 +534,7 @@
       </li>
     </ul>
     <h2>Testing grid-module</h2>
-    <h3>Running the demo pages locally</h3>
+    <h3>Running the demo pages and docs locally<a id="local-setup" style="visibility:hidden">&nbsp;</a></h3>
     <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run grid-module&#39;s test pages locally (OSX normally has these installed by default)</p>
     <ol>
       <li>Open an instance of terminal</li>
@@ -551,14 +542,14 @@
       </li>
       <li><code>git clone http://git.svc.ft.com:9080/git/origami/grid-module.git</code>
       </li>
-      <li><code>cd grid-module/docs</code>
-      </li>
-      <li><code>python -m SimpleHTTPServer</code>
+      <li>Do one of the following
+        <ul>
+          <li><code>cd grid-module/docs; python -m SimpleHTTPServer</code> and go to <a href="http://localhost:8000">http://localhost:8000</a> in your browser</li>
+          <li>in finder open /the/directory/you/want/to/install/in/docs/index.html</li>
+        </ul>
       </li>
     </ol>
-    <p>Then the docs (with links to each of the demo pages) should be available in your browser on <a href="http://localhost:8000">http://localhost:8000</a>
-    </p>
-    <p>The main test page is <a href="http://localhost:8000/grid-responsive.html">http://localhost:8000/grid-responsive.html</a> and it should be tested across all available devices and browsers (resizing the window to test responsive behaviour).</p>
+    <p>The main test page is /grid-responsive.html and it should be tested across all available devices and browsers (resizing the window to test responsive behaviour).</p>
     <p>The other demo pages are to demonstrate other possible configurations and need only be checked on desktop.</p>
     <script src="js/jquery.toc.min.js"></script>
     <script>

@@ -80,22 +80,6 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            src: './*.md',
-            dest: './docs/',
-            ext: '.html'
-          }
-        ],
-        options: {
-          template: './docs-generator/markdown-wrapper.jst',
-          preCompile: function() {},
-          postCompile: function() {},
-          templateContext: {}
-        }
-      },
-      index: {
-        files: [
-          {
-            expand: true,
             src: './README.md',
             dest: './docs/',
             ext: '.html',
@@ -147,12 +131,12 @@ module.exports = function(grunt) {
     handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
-    grunt.task.run(['template', 'markdown', 'deleteTmpReadme', 'prettify:docs', 'sass']);
+    grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup']);
 
     
   });
-  grunt.registerTask('deleteTmpReadme', function () {
-    grunt.file.delete('./docs/README.html');
+  grunt.registerTask('finalDocsCleanup', function () {
+    grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
   });
 
 };

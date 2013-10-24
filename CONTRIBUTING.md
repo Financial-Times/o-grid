@@ -19,6 +19,8 @@ Add a new object literal to ``docs-generator/examples.json`` with the following 
 * wrapper *[optional]*: Object defining the html to wrap the columsn in (defaults to ``<div class="ft-grid-row">{columns}</div>``)
 	* start: html to insert before the columns (opening tags)
 	* end: html to insert after the columns (closing tags)
+
+Then in terminal run ``grunt``
     
 ####Adding a new demo page
 1. Choose a one word name for your new demo page (let's call it 'spiffing' in this example)

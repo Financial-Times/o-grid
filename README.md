@@ -1,7 +1,7 @@
 #grid-module
 
 grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules.
-It supports all ['html5' browsers](http://responsivenews.co.uk/post/18948466399/cutting-the-mustard), with a [fixed-width fallback](https://docs.google.com/a/ft.com/drawings/d/14vmVJzuO8k3KxOwf19kWfd8mdKP1qVt8Wuqi-HvuioA/) for browsers that don't support media queries.
+It supports all browsers with support for *css media queries*, with a fixed-width fallback for browsers that don't support them (specifically ie7/8).
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
@@ -36,6 +36,8 @@ Top level grid rows are a fixed 1360px width
 For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns
 
 ##Demos<a id="demos" style="visibility:hidden">&nbsp;</a>
+
+*In order to view the demos you will need to [clone the git repo](CONTRIBUTING.html#testing)*
 
 * [Responsive grid](grid-responsive.html)  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
@@ -110,15 +112,15 @@ e.g. ``ft-grid-col-d6-s12-xl4``
 
 ###Layout size identifiers
 
- * **s** - *Small* layout
+ * **s** - *Small* layout (use sass variable ``$small``)
 
- * **m** - *Medium* layout
+ * **m** - *Medium* layout (use sass variable ``$medium``)
 
-* **l** - *Large* layout
+* **l** - *Large* layout (use sass variable ``$large``)
 
-* **xl** - *Extra Large* layout
+* **xl** - *Extra Large* layout (use sass variable ``$extraLarge``)
 
-* **d** - *Default [required unless all four of the above are specified]*
+* **d** - *Default [required unless all four of the above are specified]* (use sass variable ``$default``)
  
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
 

@@ -251,7 +251,7 @@
   </head>
   <body>
     <h1>grid-module</h1>
-    <p>grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules. It supports all <a href="http://responsivenews.co.uk/post/18948466399/cutting-the-mustard">&#39;html5&#39; browsers</a>, with a <a href="https://docs.google.com/a/ft.com/drawings/d/14vmVJzuO8k3KxOwf19kWfd8mdKP1qVt8Wuqi-HvuioA/">fixed-width fallback</a> for browsers that don&#39;t support media queries.</p>
+    <p>grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules. It supports all browsers with support for <em>css media queries</em>, with a fixed-width fallback for browsers that don&#39;t support them (specifically ie7/8).</p>
     <blockquote>
       <p>Living off the grid and being kind of an outlaw brings a dangerous reality.
         <br> <em>Ron Perlman</em>
@@ -297,6 +297,8 @@
     </ul>
     <p>For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box&#39;s width is divided into 12 columns</p>
     <h2>Demos<a id="demos" style="visibility:hidden">&nbsp;</a></h2>
+    <p><em>In order to view the demos you will need to <a href="CONTRIBUTING.html#testing">clone the git repo</a></em>
+    </p>
     <ul>
       <li>
         <p><a href="grid-responsive.html">Responsive grid</a>
@@ -375,22 +377,21 @@
     <h3>Layout size identifiers</h3>
     <ul>
       <li>
-        <p><strong>s</strong> - <em>Small</em> layout</p>
+        <p><strong>s</strong> - <em>Small</em> layout (use sass variable <code>$small</code>)</p>
       </li>
       <li>
-        <p><strong>m</strong> - <em>Medium</em> layout</p>
+        <p><strong>m</strong> - <em>Medium</em> layout (use sass variable <code>$medium</code>)</p>
       </li>
     </ul>
     <ul>
       <li>
-        <p><strong>l</strong> - <em>Large</em> layout</p>
+        <p><strong>l</strong> - <em>Large</em> layout (use sass variable <code>$large</code>)</p>
       </li>
       <li>
-        <p><strong>xl</strong> - <em>Extra Large</em> layout</p>
+        <p><strong>xl</strong> - <em>Extra Large</em> layout (use sass variable <code>$extraLarge</code>)</p>
       </li>
       <li>
-        <p><strong>d</strong> - <em>Default [required unless all four of the above are specified]</em>
-        </p>
+        <p><strong>d</strong> - <em>Default [required unless all four of the above are specified]</em> (use sass variable <code>$default</code>)</p>
       </li>
     </ul>
     <p>In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.</p>

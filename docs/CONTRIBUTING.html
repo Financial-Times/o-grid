@@ -251,7 +251,65 @@
   </head>
   <body>
     <h1>grid-module development and testing guide</h1>
-    <h2>Testing</h2>
+    <p><em><a href="#development">Development</a>
+</em><a href="#testing">Testing</a>
+    </p>
+    <h2>Development<a id="development" style="visibility:hidden">&nbsp;</a></h2>
+    <h3>BDD/TDD</h3>
+    <p>The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid&#39;s classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.</p>
+    <h4>Adding an example to all demo pages</h4>
+    <p>Add a new object literal to <code>docs-generator/examples.json</code> with the following properties</p>
+    <ul>
+      <li>columns: A (possibly nested) array of objects each of which is either
+        <ul>
+          <li>An object of the form <code>{&quot;tagname&quot;: &quot;class&quot;}</code>
+          </li>
+          <li>An object of the form <code>{&quot;columns&quot;: [An array of the same format as this one]}</code>
+          </li>
+        </ul>
+      </li>
+      <li>description: Description of how the elemnts in this grid should behave at various screen sizes</li>
+      <li>title: Short description of what this example is intended to illustrate,</li>
+      <li>wrapper <em>[optional]</em>: Object defining the html to wrap the columsn in (defaults to <code>&lt;div class=&quot;ft-grid-row&quot;&gt;{columns}&lt;/div&gt;</code>)
+        <ul>
+          <li>start: html to insert before the columns (opening tags)</li>
+          <li>end: html to insert after the columns (closing tags)</li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Adding a new demo page</h4>
+    <ol>
+      <li>Choose a one word name for your new demo page (let&#39;s call it &#39;spiffing&#39; in this example)</li>
+      <li>Create a new file <code>src/scss/bundles/spiffing.scss</code>
+      </li>
+      <li>
+        <p>Edit the contents of <code>spiffing.scss</code> to include the styles you need. You&#39;ll probably want to start it off with the content</p>
+        <pre><code> @import &quot;default.scss&quot;;
+ @import &quot;../components/grid-responsive.scss&quot;;
+ @import &quot;../components/grid-fixed.scss&quot;; </code></pre>
+      </li>
+      <li>
+        <p>Edit docs-generator/partials/head.hbs to include the correct stylesheet &amp; classes when the variable <code>spiffing</code> is truthy (i.e wrap in <code>{{#spiffing}}{{\spiffing}}</code>)</p>
+      </li>
+      <li>In Gruntfile.js append <code>spiffing</code> to <code>demoPageTypes</code>
+      </li>
+      <li>In terminal run the command <code>grunt</code>
+      </li>
+    </ol>
+    <h3>Pre-release steps</h3>
+    <ul>
+      <li>Comment any new mixins/functions in the sass</li>
+      <li>Re-write <code>README.md</code> and <code>CONTRIBUTING.md</code> to reflect your changes</li>
+      <li>Run grunt (to republish the docs)</li>
+      <li>After commiting add a tag as follows and push (TODO - needs reviewing)
+        <ul>
+          <li>incrementing the patch version for bug fixes</li>
+          <li>incrementing the minor version for changes to the grid&#39;s appearance</li>
+          <li>incrementing the major version for changes to how modules should implement the grid</li>
+        </ul>
+      </li>
+    </ul>
+    <h2>Testing<a id="testing" style="visibility:hidden">&nbsp;</a></h2>
     <h3>Running the module locally</h3>
     <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run grid-module&#39;s test pages locally (OSX normally have these installed by default)</p>
     <ol>

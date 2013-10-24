@@ -99,7 +99,7 @@ module.exports = function(grunt) {
             src: './README.md',
             dest: './docs/',
             ext: '.html',
-            rename: function (dest, src) {
+            rename: function () {
               return './docs/index.html';
             }
           }

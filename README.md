@@ -168,7 +168,7 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 
 ###Supporting legacy browsers
-To support ie7 & ie8 it's recommended you use the following conditional comments (see the [utilities section](#utilities/variables/selectors) for how to use different approaches)
+To support ie7 & ie8 it's recommended you use the following conditional comments.
 
     <!--[if IE 7]> <html class="no-js ie7 lt-ie9"> <![endif]-->
     <!--[if IE 8]> <html class="no-js ie8 lt-ie9"> <![endif]-->

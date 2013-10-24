@@ -8,7 +8,7 @@ body{
   line-height:1.5em;
   background:#fefefe;
   width: 45em;
-  margin: 10px auto;
+  margin: 10px auto 10px 310px;
   padding: 1em;
   outline: 1300px solid #FAFAFA;
 }
@@ -120,4 +120,34 @@ body{font-size:16px;}
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
-</style><title>grid-module documentation</title></head><body><%=content%></body></html>
+
+#toc {
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: fixed;
+  width: 300px;
+  padding-top: 20px;
+}
+
+#toc ul {
+  list-style: none;
+  padding: 0 10px;
+}
+
+.toc-h1 {
+  text-transform: uppercase;
+}
+
+.toc-h2 {
+  padding-left: 10px;
+}
+.toc-h3 {
+  padding-left: 20px;
+  font-size: 0.9em;
+}
+.toc-h4 {
+  padding-left: 30px;
+  font-size: 0.8em;
+}
+</style><title>grid-module documentation</title><script src="http://cdn.jque.re/js/jquery-2.0.0.min.js"></script></head><body><div id="toc"></div><%=content%><script src="js/jquery.toc.min.js"></script><script>$('#toc').toc({selectors: 'h1,h2,h3,h4',});</script></body></html>

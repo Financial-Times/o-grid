@@ -3,7 +3,7 @@
 //
 // @param $numCols {number} number of columns spanned
 //
-@function gridColumnWidth($numCols) {
+@function ftGridColumnWidth($numCols) {
 	@return (100%/12*$numCols)
 }
 
@@ -13,7 +13,7 @@
 // @param $numCols {number} number of columns spanned
 // @param $halfGutterWidth {number} half the width of column gutters
 //
-@function gridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
-	@return (gridColumnWidth($numCols)-($halfGutterWidth*2))
+@function ftGridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
+	@return (ftGridColumnWidth($numCols)-($halfGutterWidth*2))
 }
 

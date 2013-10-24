@@ -7,35 +7,34 @@
 // -------------------------------------------------------------------------------------
 
 // Gutters
-$responsiveLayoutHalfGutter: 10px !default;
-$defaultLayoutHalfGutter: 1% !default;
-$fixedLayoutHalfGutter: 5px !default;
+$ftGridResponsiveHalfGutter: 10px !default;
+$ftGridDefaultHalfGutter: 1% !default;
+$ftGridFixedHalfGutter: 5px !default;
 
 // Page widths
-$globalMinWidth: 240px !default;
-$smallMaxWidth: 600px !default;
-$mediumMaxWidth: 780px !default;
-$largeMaxWidth: 960px !default;
-$extraLargeMaxWidth: 1360px !default;
+$ftGridMinWidth: 240px !default;
+$ftGridSmallMaxWidth: 600px !default;
+$ftGridMediumMaxWidth: 780px !default;
+$ftGridLargeMaxWidth: 960px !default;
+$ftGridExtraLargeMaxWidth: 1360px !default;
 
 // Breakpoints
-$smallToMediumBreak: 600px !default;
-$mediumToLargeBreak: 1000px !default;
-$largeToXLBreak: 1400px !default;
+$ftGridSmallToMediumBreak: 600px !default;
+$ftGridMediumToLargeBreak: 1000px !default;
+$ftGridlargeToXlBreak: 1400px !default;
 
 // -------------------------------------------------------------------------------------
 // FLAGS
 // -------------------------------------------------------------------------------------
-$isResponsive: true !default;
-$isFluid: false !default;
-$isFixedDesktop: false !default;
-//$isDefaultOnly: false !default;
+$ftGridIsResponsive: true !default;
+$ftGridIsFluid: false !default;
+$ftGridIsFixedDesktop: false !default;
 
 
 // -------------------------------------------------------------------------------------
 // PATHS
 // -------------------------------------------------------------------------------------
-$pathToPolyfills: "/polyfills/" !default;
+$ftGridPathToPolyfills: "/polyfills/" !default;
 
 
 // -------------------------------------------------------------------------------------
@@ -53,19 +52,19 @@ $pathToPolyfills: "/polyfills/" !default;
 	$ie8: '.ie8' !default;
 	$ie7: '.ie7' !default;
 
-$gridNamespace: #{ft-grid-};
+$ftGridNamespace: #{ft-grid-};
 
-$gridRow: $gridNamespace + row;
-$gridColumn: $gridNamespace + col;
-$gridBox: $gridNamespace + box;
-$small: s;
-$medium: m;
-$large: l;
-$extraLarge: xl;
-$default: d;
+$ftGridRow: $ftGridNamespace + row;
+$ftGridColumn: $ftGridNamespace + col;
+$ftGridBox: $ftGridNamespace + box;
+$ftGridSmall: s;
+$ftGridMedium: m;
+$ftGridLarge: l;
+$ftGridExtraLarge: xl;
+$ftGridDefault: d;
 
-$fixedLayoutSelector: $lt-ie9 !default;
-//$fixedSize: $large !default;
+$ftGridFixedLayoutSelector: $lt-ie9 !default;
+//$ftGridFixedSize: $ftGridLarge !default;
 
 
 // -------------------------------------------------------------------------------------
@@ -77,5 +76,5 @@ $fixedLayoutSelector: $lt-ie9 !default;
 //     inadvisable to do so as components will not typically define styles for 
 //     your new layout)
 // -------------------------------------------------------------------------------------
-$maxWidths: $smallMaxWidth,$mediumMaxWidth,$largeMaxWidth,$extraLargeMaxWidth !default;
-$layoutShorthands: $small,$medium,$large,$extraLarge,$default !default;
+$ftGridMaxWidths: $ftGridSmallMaxWidth,$ftGridMediumMaxWidth,$ftGridLargeMaxWidth,$ftGridExtraLargeMaxWidth !default;
+$ftGridLayoutShorthands: $ftGridSmall,$ftGridMedium,$ftGridLarge,$ftGridExtraLarge,$ftGridDefault !default;

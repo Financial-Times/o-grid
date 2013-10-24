@@ -1,14 +1,14 @@
 // Page widths
-$globalMinWidth: 240px;
-$smallMaxWidth: 400px;
-$mediumMaxWidth: 580px;
-$largeMaxWidth: 760px;
-$extraLargeMaxWidth: 1160px;
+$ftGridMinWidth: 240px;
+$ftGridSmallMaxWidth: 400px;
+$ftGridMediumMaxWidth: 580px;
+$ftGridLargeMaxWidth: 760px;
+$ftGridExtraLargeMaxWidth: 1160px;
 
 // Breakpoints
-$smallToMediumBreak: 400px;
-$mediumToLargeBreak: 800px;
-$largeToXLBreak: 1200px;
+$ftGridSmallToMediumBreak: 400px;
+$ftGridMediumToLargeBreak: 800px;
+$ftGridlargeToXlBreak: 1200px;
 
 @import "default.scss";
 @import "../components/grid-responsive.scss";

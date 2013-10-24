@@ -90,25 +90,25 @@
 	background-color: #fff;
 }
 
-@include respondTo(s) {
+@include ftGridRespondTo(s) {
 	.header .mode:after {
 		content: "small layout";
 	}
 }
 
-@include respondTo(m) {
+@include ftGridRespondTo(m) {
 	.header .mode:after {
 		content: "medium layout";
 	}
 }
 
-@include respondTo(l) {
+@include ftGridRespondTo(l) {
 	.header .mode:after {
 		content: "large layout";
 	}
 }
 
-@include respondTo(xl) {
+@include ftGridRespondTo(xl) {
 	.header .mode:after {
 		content: "extra large layout";
 	}

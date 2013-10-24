@@ -1,32 +1,39 @@
-@if ($isResponsive or $isFixedDesktop) {
-	@if ($isFixedDesktop) {
-		$fixedLayoutSelector: null;
+@if ($ftGridIsResponsive or $ftGridIsFixedDesktop) {
+	@if ($ftGridIsFixedDesktop) {
+		$ftGridFixedLayoutSelector: null;
 	}
-	@include wrapInSelector ($fixedLayoutSelector) {
+	@include wrapInSelector ($ftGridFixedLayoutSelector) {
 
-		.#{$gridRow} {
-			width: $largeMaxWidth;
-			max-width: $largeMaxWidth;
+		.#{$ftGridRow} {
+			width: $ftGridLargeMaxWidth;
+			max-width: $ftGridLargeMaxWidth;
 		}
 
-		.#{$gridRow} .#{$gridRow},
-		.#{$gridBox} .#{$gridRow} {
-			margin-left: -$fixedLayoutHalfGutter;
-			margin-right: -$fixedLayoutHalfGutter;
+		.#{$ftGridRow} .#{$ftGridRow},
+		.#{$ftGridBox} .#{$ftGridRow} {
+			margin-left: -$ftGridFixedHalfGutter;
+			margin-right: -$ftGridFixedHalfGutter;
 			width: auto;
 		}
 
-		[class*="#{$gridColumn}"] {
+		[class*="#{$ftGridColumn}"] {
 			float: left;
+<<<<<<< HEAD
 			padding-left: $fixedLayoutHalfGutter;
 			padding-right: $fixedLayoutHalfGutter;
 			@include boxSizing(border-box);
+=======
+			padding-left: $ftGridFixedHalfGutter;
+			padding-right: $ftGridFixedHalfGutter;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box; *behavior: url(#{$ftGridPathToPolyfills}boxsizing.htc);
+>>>>>>> 1eba11f92d3ef4575180364664a8234b144ce885
 		}
 
-		@include columnWidths($default);
-		@include columnWidths($large);
+		@include ftGridColumnWidths($ftGridDefault);
+		@include ftGridColumnWidths($ftGridLarge);
 
-		[class*="-#{$small}12"] {
+		[class*="-#{$ftGridSmall}12"] {
 			clear: none;
 		}
 	}

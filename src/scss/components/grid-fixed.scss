@@ -20,8 +20,7 @@
 			float: left;
 			padding-left: $ftGridFixedHalfGutter;
 			padding-right: $ftGridFixedHalfGutter;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box; *behavior: url(#{$ftGridPathToPolyfills}boxsizing.htc);
+			@include boxSizing(border-box);
 		}
 
 		@include ftGridColumnWidths($ftGridDefault);

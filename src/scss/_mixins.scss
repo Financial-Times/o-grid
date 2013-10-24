@@ -30,6 +30,13 @@
 	}
 }
 
+// Add cross-browser box-sizing attribute
+@mixin boxSizing($value) {
+	-moz-box-sizing: $value;
+	box-sizing: $value;
+	*behavior: url(#{$ftGridPathToPolyfills}boxsizing.htc);
+}
+
 //
 // Writes media query selector for a given layout size
 //
@@ -121,3 +128,5 @@
 		width: 100%;
 	}
 }
+
+

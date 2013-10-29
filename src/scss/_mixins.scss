@@ -67,12 +67,14 @@
 	@include ftGridRespondTo($layoutSize) {
 		
 		@if ($ftGridIsFluid and not ($layoutSize == $ftGridExtraLarge)) {
-			.#{$ftGridRow} {
+			.#{$ftGridRow},
+			.#{$ftGridPage} {
 				max-width: none;
 			}
 		} @else {
 			@if ($maxWidth) {
-				.#{$ftGridRow} {
+				.#{$ftGridRow},
+				.#{$ftGridPage} {
 					max-width: $maxWidth;
 				}
 			}

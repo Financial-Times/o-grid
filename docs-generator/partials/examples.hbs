@@ -7,21 +7,23 @@
 			{{{start}}}
 		{{/wrapper}}
 		{{^wrapper}}
-			<div class="ft-grid-row">
+			<div class="ft-grid-page">
+				<div class="ft-grid-row">
 		{{/wrapper}}
-			<div class="ft-grid-col-d12">
-				<h2>{{title}}</h2>
-				<p>{{{description}}}</p>
-			</div>
+					<div class="ft-grid-col-d12">
+						<h2>{{title}}</h2>
+						<p>{{{description}}}</p>
+					</div>
 
-			{{#each this.columns}}
-				{{> column}}
-			{{/each}}
+					{{#each this.columns}}
+						{{> column}}
+					{{/each}}
 
 		{{#wrapper}}
 			{{{end}}}
 		{{/wrapper}}
 		{{^wrapper}}
+				</div>
 			</div>
 		{{/wrapper}}
 

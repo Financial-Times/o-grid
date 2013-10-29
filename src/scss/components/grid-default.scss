@@ -5,14 +5,16 @@ body {
 }
 
 .#{$ftGridRow},
-.#{$ftGridBox} {
+.#{$ftGridBox},
+.#{$ftGridPage} {
 	clear: both;
 	margin: 0 auto;
 	width: 100%;
 }
 
 @if (not($ftGridIsFixedDesktop and not $ftGridIsResponsive)) {
-	.#{$ftGridRow} {
+	.#{$ftGridRow},
+	.#{$ftGridPage}  {
 		max-width: $ftGridSmallMaxWidth; 
 		min-width: $ftGridMinWidth;
 	}
@@ -25,6 +27,11 @@ body {
 		max-width: none; // needed for .grid-box .grid-row
 		min-width: 0;
 	}
+
+	// .#{$ftGridPage} > .#{$ftGridRow} {
+	// 	margin-left: 0;
+	// 	margin-right: 0;
+	// }
 
 	/* Default grid: Layout 1 FIXED (well, max-width) */
 	[class*="#{$ftGridColumn}"] {

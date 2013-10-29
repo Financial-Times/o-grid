@@ -4,7 +4,8 @@
 	}
 	@include wrapInSelector ($ftGridFixedLayoutSelector) {
 
-		.#{$ftGridRow} {
+		.#{$ftGridRow},
+		.#{$ftGridPage} {
 			width: $ftGridLargeMaxWidth;
 			max-width: $ftGridLargeMaxWidth;
 		}

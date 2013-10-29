@@ -1,4 +1,3 @@
-
 {{#each example}}
 	
 	<div class="example docs">
@@ -8,25 +7,38 @@
 		{{/wrapper}}
 		{{^wrapper}}
 			<div class="ft-grid-page">
-				<div class="ft-grid-row">
+				
 		{{/wrapper}}
-					<div class="ft-grid-col-d12">
-						<h2>{{title}}</h2>
-						<p>{{{description}}}</p>
-					</div>
-
+			<div class="ft-grid-row">
+				<div class="ft-grid-col-d12">
+					<h2>{{title}}</h2>
+					<p>{{{description}}}</p>
+				</div>
+			</div>
+		{{#if this.rows}}
+			{{#each this.rows}}
+				<div class="ft-grid-row">
 					{{#each this.columns}}
 						{{> column}}
 					{{/each}}
+				</div>
+			{{/each}}
+		{{else}}
+			<div class="ft-grid-row">
+				{{#each this.columns}}
+					{{> column}}
+				{{/each}}
+			</div>
+		{{/if}}
 
 		{{#wrapper}}
 			{{{end}}}
 		{{/wrapper}}
 		{{^wrapper}}
-				</div>
 			</div>
 		{{/wrapper}}
 
 	</div>
+
 
 {{/each}}

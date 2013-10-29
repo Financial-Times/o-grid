@@ -25,6 +25,34 @@
         "description": "Two divs, each spanning 6 columns.",
         "title": "Two equal columns"
     },
+
+    {
+        "columns": [
+            {"span": "d6"},
+            {"minHeight": "100px", "span": "d6"}
+        ],
+        "description": "Two divs of different heights in a container that expands vertically to contain them both",
+        "title": "Rows clear their own contents"
+    },
+
+    {
+        "rows": [
+            {
+                "columns": [
+                    {"span": "d6"},
+                    {"minHeight": "100px", "span": "d6"}
+                ]
+            },
+            {
+                "columns": [
+                    {"span": "d3"},
+                    {"span": "d9"}
+                ]
+            }
+        ],
+        "description": "Two divs, each spanning 6 columns, with a new row clearing them",
+        "title": "New rows clear existing columns"
+    },
     {
         "columns": [
             {"span": "d4"},
@@ -133,7 +161,7 @@
         "description": "The grid can be applied within components on a page which doesn't use grid-module for its global layout by wrapping in a container with class <code>ft-grid-box</code>",
         "title": "Usage on existing pages",
         "wrapper": {
-            "end": "<div style=\"clear:both\"></div></div>",
+            "end": "</div></div>",
             "start": "<div style=\"max-width: 700px; min-width: 300px; margin:auto;\"><div class=\"ft-grid-box\"> "
         }
     },

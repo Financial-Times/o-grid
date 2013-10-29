@@ -136,6 +136,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('finalDocsCleanup', function () {
     grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
+    grunt.file.copy('./polyfills/boxsizing.htc', './docs/polyfills/boxsizing.htc');
   });
 
 };

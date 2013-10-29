@@ -76,11 +76,16 @@
   background-color: #ddd;
 }
 
-.dev-inner + .grid-row {
+.ft-grid-row {
+  background-color: #eee;
+  padding-bottom: 10px;
+}
+
+.dev-inner + .ft-grid-row {
   margin-top: 10px;
 }
 
-[class*="grid-col"] [class*="grid-col"] .dev-inner {
+[class*="ft-grid-col"] [class*="ft-grid-col"] .dev-inner {
   border: 1px solid #cccccc;
   background-color: #fff;
 }

@@ -7,9 +7,18 @@ body {
 .ft-grid-row,
 .ft-grid-box,
 .ft-grid-page {
-  clear: both;
   margin: 0 auto;
+}
+
+.ft-grid-row {
+  clear: both;
   width: 100%;
+}
+
+.ft-grid-row:after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
 .ft-grid-row,

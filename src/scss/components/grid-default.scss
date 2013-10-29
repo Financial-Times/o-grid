@@ -7,9 +7,18 @@ body {
 .#{$ftGridRow},
 .#{$ftGridBox},
 .#{$ftGridPage} {
-	clear: both;
 	margin: 0 auto;
+}
+
+.#{$ftGridRow} {
+	clear: both;
 	width: 100%;
+}
+
+.#{$ftGridRow}:after {
+	content: '';
+	display: block;
+	clear: both;
 }
 
 @if (not($ftGridIsFixedDesktop and not $ftGridIsResponsive)) {

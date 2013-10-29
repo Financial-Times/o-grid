@@ -9,6 +9,14 @@
 			width: auto;
 		}
 
+		%ftGridNoLeftGutter {
+			margin-left: -$ftGridResponsiveHalfGutter;
+		}
+
+		%ftGridNoRightGutter {
+			margin-right: -$ftGridResponsiveHalfGutter;
+		}
+
 		[class*="#{$ftGridColumn}"] {
 			float: left;
 			padding-left: $ftGridResponsiveHalfGutter;

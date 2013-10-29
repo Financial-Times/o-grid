@@ -438,12 +438,22 @@
 //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
 &lt;div class=&quot;ft-grid-col-s4-m3-l2-xl1&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
-    <h4>classes</h4>
-    <ul>
-      <li><code>hide</code>
-        <br>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</li>
-    </ul>
-    <h4>mixins</h4>
+    <h4>Hiding elements</h4>
+    <p>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
+    <h4>Gutterless columns</h4>
+    <p>To remove either the left or the right gutter from a column <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">placeholder classes</a> can be extended. <em>Note - don&#39;t use these inside a media query - the placeholder classes are alreay included within the appropriate media query</em>
+    </p>
+    <pre><code>    // no left gutter at large and extra large layouts
+    .my-component {
+        @extend %ftGridNoLeftGutter-l;
+        @extend %ftGridNoLeftGutter-xl;
+    }
+    //No gutter at any size
+    .my-other-component {
+        @extend %ftGridNoRightGutter;
+        @extend %ftGridNoLeftGutter;
+    }  </code></pre>
+    <h4>Mixins</h4>
     <ul>
       <li>
         <p><code>ftGridRespondTo($layoutSize)</code> To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$ftGridSmall</code>, <code>$ftGridMedium</code>, <code>$ftGridLarge</code> or <code>$ftGridExtraLarge</code> depending on which layout size the style should apply to e.g.</p>
@@ -458,7 +468,7 @@
           <br>Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the <code>$selector</code> is undefined)</p>
       </li>
     </ul>
-    <h4>variables</h4>
+    <h4>Variables</h4>
     <p>All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but <em>should never be over-written at the component/module level.</em>
     </p>
     <h3>Gotchas</h3>

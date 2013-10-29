@@ -152,12 +152,26 @@ In general prefer to set the default for larger layouts and override for smaller
   
 ###Utilities
 
-####classes
+####Hiding elements
 
-* ``hide``  
 e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
-####mixins
+####Gutterless columns  
+To remove either the left or the right gutter from a column [placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended. *Note - don't use these inside a media query - the placeholder classes are alreay included within the appropriate media query*
+
+        // no left gutter at large and extra large layouts
+        .my-component {
+            @extend %ftGridNoLeftGutter-l;
+            @extend %ftGridNoLeftGutter-xl;
+        }
+
+        //No gutter at any size
+        .my-other-component {
+            @extend %ftGridNoRightGutter;
+            @extend %ftGridNoLeftGutter;
+        }  
+
+####Mixins
 * ``ftGridRespondTo($layoutSize)`` 
 To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ftGridSmall``, ``$ftGridMedium``, ``$ftGridLarge`` or ``$ftGridExtraLarge`` depending on which layout size the style should apply to e.g.
 
@@ -170,7 +184,7 @@ To create styles that respond to the same breakpoints as the grid this sass mixi
 * ``wrapInSelector($selector)``  
 Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the ``$selector`` is undefined)
 
-####variables
+####Variables
 All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *should never be over-written at the component/module level.*
 
 

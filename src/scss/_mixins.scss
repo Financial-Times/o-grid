@@ -79,6 +79,14 @@
 				}
 			}
 		}
+
+		%ftGridNoLeftGutter#{-$layoutSize} {
+			margin-left: -$ftGridResponsiveHalfGutter;
+		}
+
+		%ftGridNoRightGutter#{-$layoutSize} {
+			margin-right: -$ftGridResponsiveHalfGutter;
+		}
 		
 		@include ftGridColumnWidths($layoutSize);
 	}

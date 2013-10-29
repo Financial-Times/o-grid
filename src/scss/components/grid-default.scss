@@ -28,6 +28,16 @@ body {
 		min-width: 0;
 	}
 
+	%ftGridNoLeftGutter,
+	%ftGridNoLeftGutter-s {
+		margin-left: -$ftGridDefaultHalfGutter;
+	}
+
+	%ftGridNoRightGutter,
+	%ftGridNoRightGutter-s {
+		margin-right: -$ftGridDefaultHalfGutter;
+	}
+
 	// .#{$ftGridPage} > .#{$ftGridRow} {
 	// 	margin-left: 0;
 	// 	margin-right: 0;

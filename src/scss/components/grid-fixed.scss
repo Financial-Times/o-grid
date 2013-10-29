@@ -17,6 +17,16 @@
 			width: auto;
 		}
 
+		%ftGridNoLeftGutter,
+		%ftGridNoLeftGutter-l {
+			margin-left: -$ftGridFixedHalfGutter;
+		}
+
+		%ftGridNoRightGutter,
+		%ftGridNoRightGutter-l {
+			margin-right: -$ftGridFixedHalfGutter;
+		}
+
 		[class*="#{$ftGridColumn}"] {
 			float: left;
 			padding-left: $ftGridFixedHalfGutter;

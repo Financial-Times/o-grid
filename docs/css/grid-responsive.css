@@ -138,6 +138,58 @@ body {
   [class*="-s12"] {
     clear: none;
   }
+
+  [class*="-s0"] {
+    width: auto;
+  }
+
+  [class*="-s1"] {
+    width: auto;
+  }
+
+  [class*="-s2"] {
+    width: auto;
+  }
+
+  [class*="-s3"] {
+    width: auto;
+  }
+
+  [class*="-s4"] {
+    width: auto;
+  }
+
+  [class*="-s5"] {
+    width: auto;
+  }
+
+  [class*="-s6"] {
+    width: auto;
+  }
+
+  [class*="-s7"] {
+    width: auto;
+  }
+
+  [class*="-s8"] {
+    width: auto;
+  }
+
+  [class*="-s9"] {
+    width: auto;
+  }
+
+  [class*="-s10"] {
+    width: auto;
+  }
+
+  [class*="-s11"] {
+    width: auto;
+  }
+
+  [class*="-s12"] {
+    width: auto;
+  }
 }
 @media screen {
   [class*="-dhide"],

@@ -47,11 +47,6 @@ body {
 		margin-right: -$ftGridDefaultHalfGutter;
 	}
 
-	// .#{$ftGridPage} > .#{$ftGridRow} {
-	// 	margin-left: 0;
-	// 	margin-right: 0;
-	// }
-
 	/* Default grid: Layout 1 FIXED (well, max-width) */
 	[class*="#{$ftGridColumn}"] {
 		float: left;

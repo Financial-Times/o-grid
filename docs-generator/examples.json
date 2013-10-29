@@ -64,6 +64,18 @@
     },
     {
         "columns": [
+            {"span": "m4-s6"},
+            {"span": "m4-s6"},
+            {"span": "m4-s6"},
+            {"span": "m4-s6"},
+            {"span": "m4-s6"},
+            {"span": "m4-s6"}
+        ],
+        "description": "Six divs, each expanding to contain their content, but taking up third width at medum size and half width at small size",
+        "title": "Columns without a specified width"
+    },
+    {
+        "columns": [
             {"span": "d3"},
             {"span": "d3"},
             {"span": "d3"},

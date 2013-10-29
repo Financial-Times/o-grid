@@ -35,6 +35,12 @@
 		    clear: none;
 		}
 
+		@for $colWidth from 0 through 12 {
+					
+			[class*="-#{$ftGridSmall}#{$colWidth}"] {
+				width: auto;
+			}
+		}
 	}
 
 	@include ftGridDefineLayout($ftGridDefault, null);

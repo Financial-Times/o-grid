@@ -34,17 +34,11 @@ For each of these the available horizontal width is separated into 12 columns. I
 
 *In order to view the demos you will need to [install grid-module locally](#local-setup)*
 
-* [Responsive grid](grid-responsive.html)  
+* [Responsive grid](grid-responsive.html)  *Use this for cross-device testing*  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
 
 * [Fluid grid](grid-fluid.html)  
     Demonstrates the behaviour of a page using a fully fluid version of the responsive grid
-
-* [Default grid](grid-default.html)  
-    Fluid grid with max width of 600px - mocks behaviour if media queries not supported
-
-* [Legacy grid](grid-legacy.html)  
-    Fixed grid with width of 960px. Should be loaded if media queries are not supported and the viewport is large enough.
 
 * [Resized grid](grid-resized.html)  
     Responsive grid with breakpoints reallocated to 400px, 800px and 1200px
@@ -54,6 +48,15 @@ For each of these the available horizontal width is separated into 12 columns. I
 
 * [Always fixed](grid-always-fixed.html)  
     Fixed grid at 960px across all browsers and devices
+
+*The following two demos mock behaviour of the grid when browsers meet certain conditions, and are included purely as a convenient resource for developers*
+
+* [Default grid](grid-default.html)  
+    Fluid grid with max width of 600px - mocks behaviour if media queries not supported
+
+* [Legacy grid](grid-legacy.html)  
+    Fixed grid with width of 960px - mocks behaviour if media queries are not supported and the viewport is large enough for a desktop experience
+
 
 ##Installation
 
@@ -108,7 +111,7 @@ Grid styles are typically applied to the html using two types of class declarati
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
 
 * An ``ft-grid-col`` class, added to the element intended to conform to the grid's columns.  
-``ft-grid-col`` by itself does virtually nothing and needs to have specific width rules appended to it e.g. ``ft-grid-col-d6-s12`` (see below for more details)  
+``ft-grid-col`` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. ``ft-grid-col-d6-s12`` (see below for more details)  
 
 So, for example
 
@@ -126,18 +129,18 @@ e.g. ``ft-grid-col-d6-s12-xl4``
 
 ###Layout size identifiers
 
-* **s** - *Small* layout (use sass variable ``$ftGridSmall``)
+* **d** - *Default value* - if unspecified the element will simply take ``width:auto`` 
 
-* **m** - *Medium* layout (use sass variable ``$ftGridMedium``)
+* **s** - *Small* layout
 
-* **l** - *Large* layout (use sass variable ``$ftGridLarge``)
+* **m** - *Medium* layout
 
-* **xl** - *Extra Large* layout (use sass variable ``$ftGridExtraLarge``)
+* **l** - *Large* layout
 
-* **d** - *Default [required unless all four of the above are specified]* (use sass variable ``$ftGridDefault``)
- 
+* **xl** - *Extra Large* layout
+
+
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
-
 
 ###Examples
     
@@ -149,6 +152,9 @@ In general prefer to set the default for larger layouts and override for smaller
   
     //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
     <div class="ft-grid-col-s4-m3-l2-xl1"></div>  
+
+    //A column which has width:auto except on small screens, where it takes up half the available width
+    <div class="ft-grid-col-s6"></div>  
   
 ###Utilities
 
@@ -157,7 +163,7 @@ In general prefer to set the default for larger layouts and override for smaller
 e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 ####Gutterless columns  
-To remove either the left or the right gutter from a column [placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended. *Note - don't use these inside a media query - the placeholder classes are alreay included within the appropriate media query*
+To remove either the left or the right gutter from a column [placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended. *Note - don't use these inside a media query - the placeholder classes are already included within the appropriate media query*
 
         // no left gutter at large and extra large layouts
         .my-component {
@@ -242,14 +248,18 @@ The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar ro
 ####Adding an example to all demo pages
 Add a new object literal to ``docs-generator/examples.json`` with the following properties
 
-* columns: A (possibly nested) array of objects each of which is either  
-    * An object of the form ``{"tagname": "class"}``
-    * An object of the form ``{"columns": [An array of the same format as this one]}``
 * description: Description of how the elemnts in this grid should behave at various screen sizes 
 * title: Short description of what this example is intended to illustrate,
 * wrapper *[optional]*: Object defining the html to wrap the columns in (defaults to ``<div class="ft-grid-page"><div class="ft-grid-row">{columns}</div></div>``)
     * start: html to insert before the columns (opening tags)
     * end: html to insert after the columns (closing tags)
+
+and one of the following:
+
+* columns: A (possibly nested) array of objects each of which is either  
+    * An object of the form ``{"tagname": "class"}``
+    * An object of the form ``{"columns": [An array of the same format as this one]}``
+* rows: An array of 'columns' arrays (as defined above)
 
 Then in terminal run ``grunt``
     

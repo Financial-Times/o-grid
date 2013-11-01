@@ -4,76 +4,76 @@ body {
 	padding: 0;
 }
 
-.#{$ftGridRow},
-.#{$ftGridBox},
-.#{$ftGridPage} {
+.#{$ft-grid-row},
+.#{$ft-grid-box},
+.#{$ft-grid-page} {
 	margin: 0 auto;
 }
 
-.#{$ftGridRow} {
+.#{$ft-grid-row} {
 	clear: both;
 	width: 100%;
 }
 
-.#{$ftGridRow}:after {
+.#{$ft-grid-row}:after {
 	content: '';
 	display: block;
 	clear: both;
 }
 
-@if (not($ftGridIsFixedDesktop and not $ftGridIsResponsive)) {
-	.#{$ftGridRow},
-	.#{$ftGridPage}  {
-		max-width: $ftGridSmallMaxWidth; 
-		min-width: $ftGridMinWidth;
+@if (not($ft-grid-is-fixed-desktop and not $ft-grid-is-responsive)) {
+	.#{$ft-grid-row},
+	.#{$ft-grid-page}  {
+		max-width: $ft-grid-small-max-width; 
+		min-width: $ft-grid-min-width;
 	}
 
-	.#{$ftGridRow} .#{$ftGridRow},
-	.#{$ftGridBox} .#{$ftGridRow} {
-		margin-left: -$ftGridDefaultHalfGutter;
-		margin-right: -$ftGridDefaultHalfGutter;
+	.#{$ft-grid-row} .#{$ft-grid-row},
+	.#{$ft-grid-box} .#{$ft-grid-row} {
+		margin-left: -$ft-grid-default-half-gutter;
+		margin-right: -$ft-grid-default-half-gutter;
 		width: auto;
 		max-width: none; // needed for .grid-box .grid-row
 		min-width: 0;
 	}
 
-	%ftGridNoLeftGutter,
-	%ftGridNoLeftGutter-s {
-		margin-left: -$ftGridDefaultHalfGutter;
+	%ft-grid-no-left-gutter,
+	%ft-grid-no-left-gutter-s {
+		margin-left: -$ft-grid-default-half-gutter;
 	}
 
-	%ftGridNoRightGutter,
-	%ftGridNoRightGutter-s {
-		margin-right: -$ftGridDefaultHalfGutter;
+	%ft-grid-no-right-gutter,
+	%ft-grid-no-right-gutter-s {
+		margin-right: -$ft-grid-default-half-gutter;
 	}
 
 	/* Default grid: Layout 1 FIXED (well, max-width) */
-	[class*="#{$ftGridColumn}"] {
+	[class*="#{$ft-grid-column}"] {
 		float: left;
-		padding-left: $ftGridDefaultHalfGutter;
-		padding-right: $ftGridDefaultHalfGutter;
+		padding-left: $ft-grid-default-half-gutter;
+		padding-right: $ft-grid-default-half-gutter;
 	}
 
-	[class*="-#{$ftGridDefault}0"],
-	[class*="-#{$ftGridSmall}0"],
-	[class*="-#{$ftGridDefault}hide"],
-	[class*="-#{$ftGridSmall}hide"] {
+	[class*="-#{$ft-grid-default}0"],
+	[class*="-#{$ft-grid-small}0"],
+	[class*="-#{$ft-grid-default}hide"],
+	[class*="-#{$ft-grid-small}hide"] {
 		display: none;
 	}
 
 
 	@for $colWidth from 1 through 11 {
 				
-		[class*="-#{$ftGridDefault}#{$colWidth}"],
-		[class*="-#{$ftGridSmall}#{$colWidth}"] {
-			width: ftGridColumnWidthMinusGutter($colWidth, $ftGridDefaultHalfGutter);
+		[class*="-#{$ft-grid-default}#{$colWidth}"],
+		[class*="-#{$ft-grid-small}#{$colWidth}"] {
+			width: ftGridColumnWidthMinusGutter($colWidth, $ft-grid-default-half-gutter);
 		}
 	}
 
-	[class*="-#{$ftGridDefault}12"],
-	[class*="-#{$ftGridSmall}12"] {
+	[class*="-#{$ft-grid-default}12"],
+	[class*="-#{$ft-grid-small}12"] {
 	    float: none;
 	    clear: both;
-		width: ftGridColumnWidthMinusGutter(12, $ftGridDefaultHalfGutter);
+		width: ftGridColumnWidthMinusGutter(12, $ft-grid-default-half-gutter);
 	}
 }

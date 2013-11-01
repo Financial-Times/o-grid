@@ -167,21 +167,21 @@ To remove either the left or the right gutter from a column [placeholder classes
 
         // no left gutter at large and extra large layouts
         .my-component {
-            @extend %ftGridNoLeftGutter-l;
-            @extend %ftGridNoLeftGutter-xl;
+            @extend %ft-grid-no-left-gutter-l;
+            @extend %ft-grid-no-left-gutter-xl;
         }
 
         //No gutter at any size
         .my-other-component {
-            @extend %ftGridNoRightGutter;
-            @extend %ftGridNoLeftGutter;
+            @extend %ft-grid-no-right-gutter;
+            @extend %ft-grid-no-left-gutter;
         }  
 
 ####Mixins
-* ``ftGridRespondTo($layoutSize)`` 
-To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ftGridSmall``, ``$ftGridMedium``, ``$ftGridLarge`` or ``$ftGridExtraLarge`` depending on which layout size the style should apply to e.g.
+* ``ftGridRespondTo($layoutSize)``  
+To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed ``$ft-grid-small``, ``$ft-grid-medium``, ``$ft-grid-large`` or ``$ft-grid-extra-large`` depending on which layout size the style should apply to e.g.
 
-        @include ftGridRespondTo($ftGridSmall) {
+        @include ftGridRespondTo($ft-grid-small) {
             .ft-example-module .item-subheading {
                 font-size: 0.5em
             }
@@ -207,7 +207,7 @@ If your entire page is to be laid out using the grid add the class ``ft-grid-pag
 
 1. Wrap the entire component in an element with the class ``ft-grid-box`` to ensure the module is laid out correctly. 
 
-2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set ``$ftGridIsResponsive: false`` to prevent the component behaving in a responsive manner
+2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set ``$ft-grid-is-responsive: false`` to prevent the component behaving in a responsive manner
 
 ###Supporting legacy browsers
 To support ie7 & ie8 it's recommended you use the following conditional comments.
@@ -221,7 +221,7 @@ If your product/page already has other classes enforced for ie7/8 detection you 
     $lt-ie9: '{A selector which will target both ie7 & ie8}';
 
 ####Boxsizing in ie7
-For ie7 you must also specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$ftGridPathToPolyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
+For ie7 you must also specify an absolute path pointing to ``/path/to/bower/grid-module/polyfills`` as a value for ``$ft-grid-path-to-polyfills`` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path ``/polyfills/boxsizing.htc`` to ``/path/to/bower/grid-module/polyfills/boxsizing.htc``)
 
 ###Things you *can* do (but in most cases probably shouldn't)
 The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module's main.scss file. A few notable uses are as follows:
@@ -229,16 +229,16 @@ The grid is quite easy to configure by overwriting the default values of many of
 ####Changing how responsive the grid is
 The following flags can be used to change the responsive behaviour *\[defaults in square brackets\]*
 
-* ``$ftGridIsResponsive``: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
-* ``$ftGridIsFluid``: \[false\] Switches to fully fluid layouts
-* ``$ftGridIsFixedDesktop``: \[false\] Forces the site to always use the large layout
-* ``$ftGridFixedLayoutSelector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* ``$ft-grid-is-responsive``: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
+* ``$ft-grid-is-fluid``: \[false\] Switches to fully fluid layouts
+* ``$ft-grid-is-fixed-desktop``: \[false\] Forces the site to always use the large layout
+* ``$ft-grid-fixed-layout-selector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 
 ####Resizing the grid
 By overwriting the values of any of the ``$...Width`` or ``$...Break`` variables the width of the grid at any of the layout sizes can be decreased or increased as required
 
 ####Disabling larger layouts
-By setting the value of a breakpoint (``$ftGridSmallToMediumBreak``, ``$ftGridMediumToLargeBreak`` or ``$ftGridlargeToXlBreak``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$ftGridMediumToLargeBreak: false;`` will have unexpected efects on your layout unless you also specify ``$ftGridlargeToXlBreak: false;``.*
+By setting the value of a breakpoint (``$ft-grid-small-to-medium-break``, ``$ft-grid-medium-to-large-break`` or ``$ft-grid-large-to-xl-break``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$ft-grid-medium-to-large-break: false;`` will have unexpected efects on your layout unless you also specify ``$ft-grid-large-to-xl-break: false;``.*
 
 ##Developing grid-module
 

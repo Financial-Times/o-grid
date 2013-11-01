@@ -1,51 +1,51 @@
-@if ($ftGridIsResponsive and not $ftGridIsFixedDesktop) {
+@if ($ft-grid-is-responsive and not $ft-grid-is-fixed-desktop) {
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 
-		.#{$ftGridRow} .#{$ftGridRow},
-		.#{$ftGridBox} .#{$ftGridRow} {
-			margin-left: -$ftGridResponsiveHalfGutter;
-			margin-right: -$ftGridResponsiveHalfGutter;
+		.#{$ft-grid-row} .#{$ft-grid-row},
+		.#{$ft-grid-box} .#{$ft-grid-row} {
+			margin-left: -$ft-grid-responsive-half-gutter;
+			margin-right: -$ft-grid-responsive-half-gutter;
 			width: auto;
 		}
 
-		%ftGridNoLeftGutter {
-			margin-left: -$ftGridResponsiveHalfGutter;
+		%ft-grid-no-left-gutter {
+			margin-left: -$ft-grid-responsive-half-gutter;
 		}
 
-		%ftGridNoRightGutter {
-			margin-right: -$ftGridResponsiveHalfGutter;
+		%ft-grid-no-right-gutter {
+			margin-right: -$ft-grid-responsive-half-gutter;
 		}
 
-		[class*="#{$ftGridColumn}"] {
+		[class*="#{$ft-grid-column}"] {
 			float: left;
-			padding-left: $ftGridResponsiveHalfGutter;
-			padding-right: $ftGridResponsiveHalfGutter;
+			padding-left: $ft-grid-responsive-half-gutter;
+			padding-right: $ft-grid-responsive-half-gutter;
 			@include boxSizing(border-box);
 		}
 
 
 		// Following rules undo styles applied by the fixed grid
-		[class*="-#{$ftGridSmall}0"],
-		[class*="-#{$ftGridSmall}hide"]  {
+		[class*="-#{$ft-grid-small}0"],
+		[class*="-#{$ft-grid-small}hide"]  {
 		    display: block;
 		}
 
-		[class*="-#{$ftGridSmall}12"] {
+		[class*="-#{$ft-grid-small}12"] {
 		    clear: none;
 		}
 
 		@for $colWidth from 0 through 12 {
 					
-			[class*="-#{$ftGridSmall}#{$colWidth}"] {
+			[class*="-#{$ft-grid-small}#{$colWidth}"] {
 				width: auto;
 			}
 		}
 	}
 
-	@include ftGridDefineLayout($ftGridDefault, null);
+	@include ftGridDefineLayout($ft-grid-default, null);
 
 	@for $i from 1 through 4 {
-		@include ftGridDefineLayout(nth($ftGridLayoutShorthands, $i), nth($ftGridMaxWidths, $i));
+		@include ftGridDefineLayout(nth($ft-grid-layout-shorthands, $i), nth($ft-grid-max-widths, $i));
 	}
 }

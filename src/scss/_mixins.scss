@@ -40,19 +40,22 @@
 //
 // Writes media query selector for a given layout size
 //
-// @param $layoutSize {string} name of layout size (s, m , l, xl)
+// @param $layoutSizes {string|list} name[s] of layout size[s] (s, m , l, xl)
 //
-@mixin ftGridRespondTo ($layoutSize) {
-	@if $layoutSize == $ft-grid-small {
-		@include maxMinMediaQuery(null, $ft-grid-small-to-medium-break) { @content; }
-	} @else if $layoutSize == $ft-grid-medium {
-		@include maxMinMediaQuery($ft-grid-small-to-medium-break, $ft-grid-medium-to-large-break) { @content; }
-	} @else if $layoutSize == $ft-grid-large {
-		@include maxMinMediaQuery($ft-grid-medium-to-large-break, $ft-gridlarge-to-xl-break) { @content; }
-	} @else if $layoutSize == $ft-grid-extra-large {
-		@include maxMinMediaQuery($ft-gridlarge-to-xl-break, null) { @content; }
-	} @else {
-		@include maxMinMediaQuery(null, null, true) { @content; }
+@mixin ftGridRespondTo ($layoutSizes) {
+
+	@each $layoutSize in $layoutSizes {
+		@if $layoutSize == $ft-grid-small {
+			@include maxMinMediaQuery(null, $ft-grid-small-to-medium-break) { @content; }
+		} @else if $layoutSize == $ft-grid-medium {
+			@include maxMinMediaQuery($ft-grid-small-to-medium-break, $ft-grid-medium-to-large-break) { @content; }
+		} @else if $layoutSize == $ft-grid-large {
+			@include maxMinMediaQuery($ft-grid-medium-to-large-break, $ft-gridlarge-to-xl-break) { @content; }
+		} @else if $layoutSize == $ft-grid-extra-large {
+			@include maxMinMediaQuery($ft-gridlarge-to-xl-break, null) { @content; }
+		} @else {
+			@include maxMinMediaQuery(null, null, true) { @content; }
+		}
 	}
 }
 

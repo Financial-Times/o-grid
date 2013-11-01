@@ -186,6 +186,13 @@ To create styles that respond to the same breakpoints as the grid this sass mixi
                 font-size: 0.5em
             }
         }
+More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts). To do this combine the styles in a [list variable](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists) beforehand.
+        $my-module-large-layouts: $ft-grid-large,$ft-grid-extra-large;
+        @include ftGridRespondTo($my-module-large-layouts) {
+            .ft-example-module .item-subheading {
+                font-size: 0.5em
+            }
+        }
 
 * ``wrapInSelector($selector)``  
 Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the ``$selector`` is undefined)

@@ -509,9 +509,24 @@
     <p>All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but <em>should never be over-written at the component/module level.</em>
     </p>
     <h3>Gotchas</h3>
-    <ul>
-      <li>Using a different prefix instead of <code>ft-grid-col</code>, e.g. <code>not-really-d6-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>-{letter}{number}</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>ft-mymodule-d6</code> to layout your module as this behaviour is just a side effect and not a supported feature</li>
-    </ul>
+    <h4>&#39;Leaky&#39; selectors</h4>
+    <p>Using a different prefix instead of <code>ft-grid-col</code>, e.g. <code>not-really-d6-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>-{letter}{number}</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>ft-mymodule-d6</code> to layout your module as this behaviour is just a side effect and not a supported feature</p>
+    <h4>Fixed/Absolute positioning</h4>
+    <p>The grid specifies widths in percentages, so applying fixed or absolute positioning to an element (e.g. to make a sticky navbar) will cause it to expand horizontally to contain its content. To avoid having to hard-code pixel values for the widths use the <code>ftGridPixelWidthOfColumn</code> function as follows:</p>
+    <pre><code>    // for fixed position elements in the default (mobile) layout
+    .your-position-fixed-element {
+        $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
+        max-width: ftGridPixelWidthOfColumn($ft-grid-small-max-width, $colHierarchy, $ft-grid-default-half-gutter);
+    }
+    // for fixed position elements in responsive layouts
+    @include ftGridRespondTo ($ft-grid-large) {
+        .your-position-fixed-element {
+            $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
+            width: ftGridPixelWidthOfColumn($ft-grid-large-max-width, $colHierarchy);
+        }
+    }</code></pre>
+    <p><em>This hasn&#39;t been widely tested so use with caution and please report any use cases where it fails to the <a href="mailto:web-team@ft.com">web-team</a>.</em>
+    </p>
     <h2>Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a></h2>
     <h3>Laying out entire pages with the grid</h3>
     <p>If your entire page is to be laid out using the grid add the class <code>ft-grid-page</code> to the <code>body</code>/ wrapper and then build up the layout using nested rows and columns.</p>

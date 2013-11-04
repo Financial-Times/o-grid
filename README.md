@@ -233,7 +233,28 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 
 ###Gotchas
 
-* Using a different prefix instead of ``ft-grid-col``, e.g. ``not-really-d6-a-column`` will still apply the grid width so in general it's best to avoid classes which contain ``-{letter}{number}`` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. ``ft-mymodule-d6`` to layout your module as this behaviour is just a side effect and not a supported feature
+####'Leaky' selectors
+Using a different prefix instead of ``ft-grid-col``, e.g. ``not-really-d6-a-column`` will still apply the grid width so in general it's best to avoid classes which contain ``-{letter}{number}`` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. ``ft-mymodule-d6`` to layout your module as this behaviour is just a side effect and not a supported feature
+
+####Fixed/Absolute positioning
+The grid specifies widths in percentages, so applying fixed or absolute positioning to an element (e.g. to make a sticky navbar) will cause it to expand horizontally to contain its content. To avoid having to hard-code pixel values for the widths use the ``ftGridPixelWidthOfColumn`` function as follows:
+        
+        // for fixed position elements in the default (mobile) layout
+        .your-position-fixed-element {
+            $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
+            max-width: ftGridPixelWidthOfColumn($ft-grid-small-max-width, $colHierarchy, $ft-grid-default-half-gutter);
+        }
+
+        // for fixed position elements in responsive layouts
+        @include ftGridRespondTo ($ft-grid-large) {
+            .your-position-fixed-element {
+                $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
+                width: ftGridPixelWidthOfColumn($ft-grid-large-max-width, $colHierarchy);
+            }
+        }
+
+*This hasn't been widely tested so use with caution and please report any use cases where it fails to the [web-team](mailto:web-team@ft.com).*
+
 
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 

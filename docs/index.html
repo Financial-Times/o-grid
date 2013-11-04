@@ -447,9 +447,31 @@
     <h3>Utilities</h3>
     <h4>Hiding elements</h4>
     <p>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
-    <h4>Gutterless columns</h4>
-    <p>To remove either the left or the right gutter from a column <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">placeholder classes</a> can be extended. <em>Note - don&#39;t use these inside a media query - the placeholder classes are already included within the appropriate media query</em>
+    <h4>Placeholder classes</h4>
+    <p><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">Placeholder classes</a> can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. <em>Note - don&#39;t use these inside a media query - the placeholder classes are already included within the appropriate media query</em>
     </p>
+    <h5>Applying column layouts</h5>
+    <p>These placeholders are of the format <code>%ft-grid-{layout identifier}{number of columns|hide}</code> e.g.</p>
+    <pre><code>    // hides secondary images on small screens
+    .main-article img:not(.primary) {
+        @extend .ft-grid-col;
+        @extend %ft-grid-shide;
+    }</code></pre>
+    <p>Placeholder classes only contain a single layout+column combination, but multiple placeholder classes can be extended at once e.g.</p>
+    <pre><code>    // spreads a video across the 2nd to 11th column
+    .main-article video {
+        @extend .ft-grid-col;
+        @extend %ft-grid-l10
+        @extend %ft-grid-xl10
+    }
+    .main-article video:before {
+        @extend .ft-grid-col;
+        @extend %ft-grid-l1
+        @extend %ft-grid-xl1
+        content: &#39;&#39;;
+    }</code></pre>
+    <h5>Gutterless columns</h5>
+    <p>To remove either the left or the right gutter from a column extend thesee placeholders.</p>
     <pre><code>    // no left gutter at large and extra large layouts
     .my-component {
         @extend %ft-grid-no-left-gutter-l;
@@ -525,7 +547,7 @@
     <h4>Resizing the grid</h4>
     <p>By overwriting the values of any of the <code>$...Width</code> or <code>$...Break</code> variables the width of the grid at any of the layout sizes can be decreased or increased as required</p>
     <h4>Disabling larger layouts</h4>
-    <p>By setting the value of a breakpoint (<code>$ft-grid-small-to-medium-break</code>, <code>$ft-grid-medium-to-large-break</code> or <code>$ft-grid-large-to-xl-break</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$ft-grid-medium-to-large-break: false;</code> will have unexpected efects on your layout unless you also specify <code>$ft-grid-large-to-xl-break: false;</code>.</em>
+    <p>By setting the value of a breakpoint (<code>$ft-grid-small-to-medium-break</code>, <code>$ft-grid-medium-to-large-break</code> or <code>$ft-grid-large-to-extra-large-break</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$ft-grid-medium-to-large-break: false;</code> will have unexpected efects on your layout unless you also specify <code>$ft-grid-large-to-extra-large-break: false;</code>.</em>
     </p>
     <h2>Developing grid-module</h2>
     <h3>BDD/TDD</h3>

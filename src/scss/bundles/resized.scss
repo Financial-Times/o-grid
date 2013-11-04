@@ -8,7 +8,7 @@ $ft-grid-extra-large-max-width: 1160px;
 // Breakpoints
 $ft-grid-small-to-medium-break: 400px;
 $ft-grid-medium-to-large-break: 800px;
-$ft-gridlarge-to-xl-break: 1200px;
+$ft-grid-large-to-extra-large-break: 1200px;
 
 @import "default.scss";
 @import "../components/grid-responsive.scss";

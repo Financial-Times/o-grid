@@ -162,8 +162,38 @@ In general prefer to set the default for larger layouts and override for smaller
 
 e.g. ``grid-mhide-shide`` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
-####Gutterless columns  
-To remove either the left or the right gutter from a column [placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended. *Note - don't use these inside a media query - the placeholder classes are already included within the appropriate media query*
+
+
+####Placeholder classes
+
+[Placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. *Note - don't use these inside a media query - the placeholder classes are already included within the appropriate media query*
+
+#####Applying column layouts
+These placeholders are of the format ``%ft-grid-{layout identifier}{number of columns|hide}`` e.g.
+        
+        // hides secondary images on small screens
+        .main-article img:not(.primary) {
+            @extend .ft-grid-col;
+            @extend %ft-grid-shide;
+        }
+Placeholder classes only contain a single layout+column combination, but multiple placeholder classes can be extended at once e.g.
+        
+        // spreads a video across the 2nd to 11th column
+        .main-article video {
+            @extend .ft-grid-col;
+            @extend %ft-grid-l10
+            @extend %ft-grid-xl10
+        }
+
+        .main-article video:before {
+            @extend .ft-grid-col;
+            @extend %ft-grid-l1
+            @extend %ft-grid-xl1
+            content: '';
+        }
+
+#####Gutterless columns  
+To remove either the left or the right gutter from a column extend thesee placeholders. 
 
         // no left gutter at large and extra large layouts
         .my-component {
@@ -245,7 +275,7 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 By overwriting the values of any of the ``$...Width`` or ``$...Break`` variables the width of the grid at any of the layout sizes can be decreased or increased as required
 
 ####Disabling larger layouts
-By setting the value of a breakpoint (``$ft-grid-small-to-medium-break``, ``$ft-grid-medium-to-large-break`` or ``$ft-grid-large-to-xl-break``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$ft-grid-medium-to-large-break: false;`` will have unexpected efects on your layout unless you also specify ``$ft-grid-large-to-xl-break: false;``.*
+By setting the value of a breakpoint (``$ft-grid-small-to-medium-break``, ``$ft-grid-medium-to-large-break`` or ``$ft-grid-large-to-extra-large-break``) to ``false`` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. ``$ft-grid-medium-to-large-break: false;`` will have unexpected efects on your layout unless you also specify ``$ft-grid-large-to-extra-large-break: false;``.*
 
 ##Developing grid-module
 

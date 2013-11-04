@@ -57,7 +57,11 @@ body {
 	[class*="-#{$ft-grid-default}0"],
 	[class*="-#{$ft-grid-small}0"],
 	[class*="-#{$ft-grid-default}hide"],
-	[class*="-#{$ft-grid-small}hide"] {
+	[class*="-#{$ft-grid-small}hide"],
+	%ft-grid-s0,
+	%ft-grid-shide,
+	%ft-grid-d0,
+	%ft-grid-dhide {
 		display: none;
 	}
 
@@ -65,13 +69,17 @@ body {
 	@for $colWidth from 1 through 11 {
 				
 		[class*="-#{$ft-grid-default}#{$colWidth}"],
-		[class*="-#{$ft-grid-small}#{$colWidth}"] {
+		[class*="-#{$ft-grid-small}#{$colWidth}"],
+		%ft-grid-d#{$colWidth},
+		%ft-grid-s#{$colWidth} {
 			width: ftGridColumnWidthMinusGutter($colWidth, $ft-grid-default-half-gutter);
 		}
 	}
 
 	[class*="-#{$ft-grid-default}12"],
-	[class*="-#{$ft-grid-small}12"] {
+	[class*="-#{$ft-grid-small}12"],
+	%ft-grid-s12,
+	%ft-grid-d12 {
 	    float: none;
 	    clear: both;
 		width: ftGridColumnWidthMinusGutter(12, $ft-grid-default-half-gutter);

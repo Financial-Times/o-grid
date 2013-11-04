@@ -50,9 +50,9 @@
 		} @else if $layoutSize == $ft-grid-medium {
 			@include maxMinMediaQuery($ft-grid-small-to-medium-break, $ft-grid-medium-to-large-break) { @content; }
 		} @else if $layoutSize == $ft-grid-large {
-			@include maxMinMediaQuery($ft-grid-medium-to-large-break, $ft-gridlarge-to-xl-break) { @content; }
+			@include maxMinMediaQuery($ft-grid-medium-to-large-break, $ft-grid-large-to-extra-large-break) { @content; }
 		} @else if $layoutSize == $ft-grid-extra-large {
-			@include maxMinMediaQuery($ft-gridlarge-to-xl-break, null) { @content; }
+			@include maxMinMediaQuery($ft-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
 			@include maxMinMediaQuery(null, null, true) { @content; }
 		}
@@ -103,39 +103,46 @@
 @mixin ftGridColumnWidths($layoutSize) {
 
 	[class*="-#{$layoutSize}hide"],
-	[class*="-#{$layoutSize}0"] {
+	[class*="-#{$layoutSize}0"],
+	%ft-grid-#{$layoutSize}0,
+	%ft-grid-#{$layoutSize}hide {
 		display: none;
 	}
 
-	$selector: null;			
+	$aggregatedSelector: null;			
 
 	@for $colWidth from 1 through 11 {
 
-		$thisSelector: #{'[class*="-#{$layoutSize}#{$colWidth}"]'};
+		$attrSelector: #{'[class*="-#{$layoutSize}#{$colWidth}"]'};
+		$placeholderSelector: #{'%ft-grid-#{$layoutSize}#{$colWidth}'};
+
 		
-		#{$thisSelector} {
+		#{$attrSelector},
+		#{$placeholderSelector} {
 			width: ftGridColumnWidth($colWidth);
 		}
 		
 		// generates a comma separated selector for each of the column widths from 1 to 11
-		@if ($selector) {
-			$selector: append($selector, $thisSelector, comma);
+		@if ($aggregatedSelector) {
+			$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
+			$aggregatedSelector: append($aggregatedSelector, $placeholderSelector, comma);
 		} @else {
-			$selector: $thisSelector;
+			$aggregatedSelector: $attrSelector, $placeholderSelector;
 		}
 		
 	}
 	
 	@if ($layoutSize != $ft-grid-default) {
 		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
-		#{$selector} {
+		#{$aggregatedSelector} {
 			float: left;
 			clear: none;
 			display: block;	
 		}
 	}
 
-	[class*="-#{$layoutSize}12"]{
+	[class*="-#{$layoutSize}12"],
+	%ft-grid-#{$layoutSize}12 {
 	    float: none;
 	    clear: both;
 		width: 100%;

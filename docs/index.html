@@ -357,8 +357,8 @@
       </li>
       <li>
         <p>Include the following in your app&#39;s styles</p>
-        <pre><code> @import &quot;/path/to/bower/grid-module/main.scss&quot;;  </code></pre>
-        <p>Depending on whether you&#39;re developing a product or a component where exactly you put this will vary. For a product you can also simply use the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a>
+        <pre><code> @import &quot;grid-module/main.scss&quot;;  </code></pre>
+        <p>Make sure that <code>grid-module</code> is in your sass include path (see the <a href="http://financial-times.github.io/ft-origami/docs/syntax/scss/">origami docs</a> for more details). For products you can also simply use the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a>
         </p>
       </li>
     </ol>
@@ -446,30 +446,20 @@
 &lt;div class=&quot;ft-grid-col-s6&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
     <h4>Hiding elements</h4>
-    <p>e.g. <code>grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
-    <h4>Placeholder classes</h4>
+    <p>e.g. <code>ft-grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
+    <h4>Placeholder classes/<code>@extend</code></h4>
     <p><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">Placeholder classes</a> can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. <em>Note - don&#39;t use these inside a media query - the placeholder classes are already included within the appropriate media query</em>
     </p>
     <h5>Applying column layouts</h5>
     <p>These placeholders are of the format <code>%ft-grid-{layout identifier}{number of columns|hide}</code> e.g.</p>
-    <pre><code>    // hides secondary images on small screens
+    <pre><code>    // hides secondary images on small and medium sized displays
     .main-article img:not(.primary) {
         @extend .ft-grid-col;
         @extend %ft-grid-shide;
+        @extend %ft-grid-mhide;
     }</code></pre>
-    <p>Placeholder classes only contain a single layout+column combination, but multiple placeholder classes can be extended at once e.g.</p>
-    <pre><code>    // spreads a video across the 2nd to 11th column
-    .main-article video {
-        @extend .ft-grid-col;
-        @extend %ft-grid-l10
-        @extend %ft-grid-xl10
-    }
-    .main-article video:before {
-        @extend .ft-grid-col;
-        @extend %ft-grid-l1
-        @extend %ft-grid-xl1
-        content: &#39;&#39;;
-    }</code></pre>
+    <p><em>In general use <code>ft-grid-col-...</code> classes and only use <code>@extend</code> for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.</em>
+    </p>
     <h5>Gutterless columns</h5>
     <p>To remove either the left or the right gutter from a column extend thesee placeholders.</p>
     <pre><code>    // no left gutter at large and extra large layouts
@@ -541,14 +531,11 @@
       </li>
     </ol>
     <h3>Supporting legacy browsers</h3>
-    <p>To support ie7 &amp; ie8 it&#39;s recommended you use the following conditional comments.</p>
-    <pre><code>&lt;!--[if IE 7]&gt; &lt;html class=&quot;no-js ie7 lt-ie9&quot;&gt; &lt;![endif]--&gt;
-&lt;!--[if IE 8]&gt; &lt;html class=&quot;no-js ie8 lt-ie9&quot;&gt; &lt;![endif]--&gt;
-&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class=&quot;no-js&quot;&gt; &lt;!--&lt;![endif]--&gt;</code></pre>
-    <p>If your product/page already has other classes enforced for ie7/8 detection you can pass these in to the sass by including the following in your sass <em>before</em> including grid-module&#39;s main.scss</p>
+    <p>ie7/8 don&#39;t support media queries. If your product uses some kind of browser detection to add classes to the <code>&lt;html&gt;</code> tag (such as <a href="https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7">older versions of html5 boilerplate</a> did) the large layout will be displayed to the user. The default value expected by grid-module is <code>lt-ie9</code>, but this can be configured by defining the following sass variable <em>before</em> including grid-module&#39;s main.scss:</p>
     <pre><code>$lt-ie9: &#39;{A selector which will target both ie7 &amp; ie8}&#39;;</code></pre>
+    <p>If your product does not target ie7 &amp; 8 in this way they will be served the default small screen layout.</p>
     <h4>Boxsizing in ie7</h4>
-    <p>For ie7 you must also specify an absolute path pointing to <code>/path/to/bower/grid-module/polyfills</code> as a value for <code>$ft-grid-path-to-polyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>/path/to/bower/grid-module/polyfills/boxsizing.htc</code>)</p>
+    <p>For ie7 you must also specify an absolute path pointing to <code>grid-module/polyfills</code> as a value for <code>$ft-grid-path-to-polyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>grid-module/polyfills/boxsizing.htc</code>)</p>
     <h3>Things you <em>can</em> do (but in most cases probably shouldn&#39;t)</h3>
     <p>The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module&#39;s main.scss file. A few notable uses are as follows:</p>
     <h4>Changing how responsive the grid is</h4>

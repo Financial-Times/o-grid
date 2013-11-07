@@ -66,10 +66,10 @@ For each of these the available horizontal width is separated into 12 columns. I
    
         "grid-module": "0.2.x"
 
-2. Include the following in your app's styles 
+2. Include the following in your app's styles
 
-        @import "/path/to/bower/grid-module/main.scss";  
-  Depending on whether you're developing a product or a component where exactly you put this will vary. For a product you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/build-service/)
+        @import "grid-module/main.scss";  
+  Make sure that `grid-module` is in your sass include path (see the [origami docs](http://financial-times.github.io/ft-origami/docs/syntax/scss/) for more details). For products you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/build-service/)
 
 For other steps only relevant to product/page development see the [Product developers guide](#product-developers-guide)
 
@@ -160,37 +160,26 @@ In general prefer to set the default for larger layouts and override for smaller
 
 ####Hiding elements
 
-e.g. `grid-mhide-shide` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
+e.g. `ft-grid-mhide-shide` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 
 
-####Placeholder classes
+####Placeholder classes/`@extend`
 
 [Placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. *Note - don't use these inside a media query - the placeholder classes are already included within the appropriate media query*
 
 #####Applying column layouts
+
 These placeholders are of the format `%ft-grid-{layout identifier}{number of columns|hide}` e.g.
         
-        // hides secondary images on small screens
+        // hides secondary images on small and medium sized displays
         .main-article img:not(.primary) {
             @extend .ft-grid-col;
             @extend %ft-grid-shide;
-        }
-Placeholder classes only contain a single layout+column combination, but multiple placeholder classes can be extended at once e.g.
-        
-        // spreads a video across the 2nd to 11th column
-        .main-article video {
-            @extend .ft-grid-col;
-            @extend %ft-grid-l10
-            @extend %ft-grid-xl10
+            @extend %ft-grid-mhide;
         }
 
-        .main-article video:before {
-            @extend .ft-grid-col;
-            @extend %ft-grid-l1
-            @extend %ft-grid-xl1
-            content: '';
-        }
+*In general use `ft-grid-col-...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
 
 #####Gutterless columns  
 To remove either the left or the right gutter from a column extend thesee placeholders. 
@@ -269,18 +258,14 @@ If your entire page is to be laid out using the grid add the class `ft-grid-page
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$ft-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
 ###Supporting legacy browsers
-To support ie7 & ie8 it's recommended you use the following conditional comments.
-
-    <!--[if IE 7]> <html class="no-js ie7 lt-ie9"> <![endif]-->
-    <!--[if IE 8]> <html class="no-js ie8 lt-ie9"> <![endif]-->
-    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-
-If your product/page already has other classes enforced for ie7/8 detection you can pass these in to the sass by including the following in your sass *before* including grid-module's main.scss
+ie7/8 don't support media queries. If your product uses some kind of browser detection to add classes to the `<html>` tag (such as [older versions of html5 boilerplate](https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7) did) the large layout will be displayed to the user. The default value expected by grid-module is `lt-ie9`, but this can be configured by defining the following sass variable *before* including grid-module's main.scss:
 
     $lt-ie9: '{A selector which will target both ie7 & ie8}';
 
+If your product does not target ie7 & 8 in this way they will be served the default small screen layout.
+
 ####Boxsizing in ie7
-For ie7 you must also specify an absolute path pointing to `/path/to/bower/grid-module/polyfills` as a value for `$ft-grid-path-to-polyfills` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path `/polyfills/boxsizing.htc` to `/path/to/bower/grid-module/polyfills/boxsizing.htc`)
+For ie7 you must also specify an absolute path pointing to `grid-module/polyfills` as a value for `$ft-grid-path-to-polyfills` in your sass (or, if using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path `/polyfills/boxsizing.htc` to `grid-module/polyfills/boxsizing.htc`)
 
 ###Things you *can* do (but in most cases probably shouldn't)
 The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module's main.scss file. A few notable uses are as follows:

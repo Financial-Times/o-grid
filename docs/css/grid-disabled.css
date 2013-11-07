@@ -4,6 +4,12 @@ body {
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 .ft-grid-row,
 .ft-grid-box,
 .ft-grid-page {

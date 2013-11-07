@@ -255,11 +255,12 @@ The grid specifies widths in percentages, so applying fixed or absolute position
 
 *This hasn't been widely tested so use with caution and please report any use cases where it fails to the [web-team](mailto:web-team@ft.com).*
 
-
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 
 ###Laying out entire pages with the grid
-If your entire page is to be laid out using the grid add the class ``ft-grid-page`` to the ``body``/ wrapper and then build up the layout using nested rows and columns.
+If your entire page is to be laid out using the grid add the class ``ft-grid-page`` to the ``body``/ wrapper and then build up the layout using nested rows and columns. The html head *must* include the following metatag (or equivalent) to disable user scaling
+
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 ###Including grid-based components in an existing, non-grid page
 
@@ -291,6 +292,7 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * ``$ft-grid-is-fluid``: \[false\] Switches to fully fluid layouts
 * ``$ft-grid-is-fixed-desktop``: \[false\] Forces the site to always use the large layout
 * ``$ft-grid-fixed-layout-selector``: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* ``$ft-grid-normalize-body``: \[true\] Sets margin and padding on `html` and `body` to `0`.
 
 ####Resizing the grid
 By overwriting the values of any of the ``$...Width`` or ``$...Break`` variables the width of the grid at any of the layout sizes can be decreased or increased as required

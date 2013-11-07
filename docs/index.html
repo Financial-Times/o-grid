@@ -529,7 +529,8 @@
     </p>
     <h2>Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a></h2>
     <h3>Laying out entire pages with the grid</h3>
-    <p>If your entire page is to be laid out using the grid add the class <code>ft-grid-page</code> to the <code>body</code>/ wrapper and then build up the layout using nested rows and columns.</p>
+    <p>If your entire page is to be laid out using the grid add the class <code>ft-grid-page</code> to the <code>body</code>/ wrapper and then build up the layout using nested rows and columns. The html head <em>must</em> include the following metatag (or equivalent) to disable user scaling</p>
+    <pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot;&gt;</code></pre>
     <h3>Including grid-based components in an existing, non-grid page</h3>
     <ol>
       <li>
@@ -558,6 +559,7 @@
       <li><code>$ft-grid-is-fluid</code>: [false] Switches to fully fluid layouts</li>
       <li><code>$ft-grid-is-fixed-desktop</code>: [false] Forces the site to always use the large layout</li>
       <li><code>$ft-grid-fixed-layout-selector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
+      <li><code>$ft-grid-normalize-body</code>: [true] Sets margin and padding on <code>html</code> and <code>body</code> to <code>0</code>.</li>
     </ul>
     <h4>Resizing the grid</h4>
     <p>By overwriting the values of any of the <code>$...Width</code> or <code>$...Break</code> variables the width of the grid at any of the layout sizes can be decreased or increased as required</p>

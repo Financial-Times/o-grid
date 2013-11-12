@@ -325,7 +325,7 @@
       </li>
       <li>
         <p><a href="grid-resized.html">Resized grid</a>
-          <br>Responsive grid with breakpoints reallocated to 400px, 800px and 1200px</p>
+          <br>Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved</p>
       </li>
       <li>
         <p><a href="grid-disabled.html">Disabled breakpoint</a>
@@ -461,16 +461,18 @@
     <p><em>In general use <code>ft-grid-col-...</code> classes and only use <code>@extend</code> for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.</em>
     </p>
     <h5>Gutterless columns</h5>
-    <p>To remove either the left or the right gutter from a column extend thesee placeholders.</p>
-    <pre><code>    // no left gutter at large and extra large layouts
+    <p>To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).</p>
+    <pre><code>%ft-grid-no[-(left|right)]-gutter[-(s|m|l|xl)]</code></pre>
+    <p>e.g.</p>
+    <pre><code>    // no left gutter at large and extra large layouts. No gutter at all at small size
     .my-component {
         @extend %ft-grid-no-left-gutter-l;
         @extend %ft-grid-no-left-gutter-xl;
+        @extend %ft-grid-no-gutter-s;
     }
     //No gutter at any size
     .my-other-component {
-        @extend %ft-grid-no-right-gutter;
-        @extend %ft-grid-no-left-gutter;
+        @extend %ft-grid-no-gutter;
     }  </code></pre>
     <h4>Mixins</h4>
     <ul>

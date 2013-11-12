@@ -10,6 +10,11 @@ $ft-grid-small-to-medium-break: 400px;
 $ft-grid-medium-to-large-break: 800px;
 $ft-grid-large-to-extra-large-break: 1200px;
 
+//gutters
+$ft-grid-responsive-half-gutter: 5px;
+$ft-grid-default-half-gutter: 0.5%;
+$ft-grid-fixed-half-gutter: 2px;
+
 @import "default.scss";
 @import "../components/grid-responsive.scss";
 @import "../components/grid-fixed.scss"; 

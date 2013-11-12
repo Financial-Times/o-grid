@@ -75,6 +75,8 @@ html {
 		width: ftGridColumnWidthMinusGutter(12, $ft-grid-default-half-gutter);
 	}
 
+	%ft-grid-no-gutter,
+	%ft-grid-no-gutter-s,
 	%ft-grid-no-left-gutter,
 	%ft-grid-no-left-gutter-s {
 		padding-left: 0;
@@ -84,6 +86,8 @@ html {
 		}
 	}
 
+	%ft-grid-no-gutter,
+	%ft-grid-no-gutter-s,
 	%ft-grid-no-right-gutter,
 	%ft-grid-no-right-gutter-s {
 		padding-right: 0;

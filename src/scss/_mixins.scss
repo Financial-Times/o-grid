@@ -83,6 +83,7 @@
 			}
 		}
 
+		%ft-grid-no-gutter#{-$layoutSize},
 		%ft-grid-no-left-gutter#{-$layoutSize} {
 			padding-left: 0;
 			&> .#{$ft-grid-row} {
@@ -90,6 +91,7 @@
 			}
 		}
 
+		%ft-grid-no-gutter#{-$layoutSize},
 		%ft-grid-no-right-gutter#{-$layoutSize} {
 			padding-right: 0;
 			&> .#{$ft-grid-row} {

@@ -31,7 +31,9 @@
 		%ft-grid-s12 {
 			clear: none;
 		}
-
+		
+		%ft-grid-no-gutter,
+		%ft-grid-no-gutter-l,
 		%ft-grid-no-left-gutter,
 		%ft-grid-no-left-gutter-l {
 			padding-left: 0;
@@ -41,6 +43,8 @@
 			}
 		}
 
+		%ft-grid-no-gutter,
+		%ft-grid-no-gutter-l,
 		%ft-grid-no-right-gutter,
 		%ft-grid-no-right-gutter-l {
 			padding-right: 0;

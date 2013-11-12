@@ -3,7 +3,30 @@
 @import "../_functions.scss";
 @import "../components/grid-default.scss";
 
-// [class*="ft-grid-col"] {
-// 	@extend %ft-grid-no-left-gutter;
-// 	@extend %ft-grid-no-right-gutter;
-// }
+.ft-grid-no-gutter {
+	@extend %ft-grid-no-gutter;
+}
+.ft-grid-no-left-gutter {
+	@extend %ft-grid-no-left-gutter;
+}
+.ft-grid-no-right-gutter {
+	@extend %ft-grid-no-right-gutter;
+}
+.ft-grid-no-gutter-s {
+	@extend %ft-grid-no-gutter-s;
+}
+.ft-grid-no-left-gutter-m {
+	@extend %ft-grid-no-left-gutter-m;
+}
+.ft-grid-no-right-gutter-l {
+	@extend %ft-grid-no-right-gutter-l;
+}
+.ft-grid-no-left-gutter {
+	@extend %ft-grid-no-left-gutter;
+}
+.ft-grid-no-gutter {
+	@extend %ft-grid-no-gutter;
+}
+.ft-grid-no-right-gutter {
+	@extend %ft-grid-no-right-gutter;
+}

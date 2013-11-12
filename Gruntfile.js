@@ -129,6 +129,7 @@ module.exports = function(grunt) {
 
     handlebars.registerPartial('column', grunt.file.read('./docs-generator/partials/column.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('custom-examples', grunt.file.read('./docs-generator/partials/custom-examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
     grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup']);

@@ -41,7 +41,7 @@ For each of these the available horizontal width is separated into 12 columns. I
     Demonstrates the behaviour of a page using a fully fluid version of the responsive grid
 
 * [Resized grid](grid-resized.html)  
-    Responsive grid with breakpoints reallocated to 400px, 800px and 1200px
+    Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved
 
 * [Disabled breakpoint](grid-disabled.html)  
     Responsive grid with the extra large layout disabled
@@ -182,18 +182,22 @@ These placeholders are of the format `%ft-grid-{layout identifier}{number of col
 *In general use `ft-grid-col-...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
 
 #####Gutterless columns  
-To remove either the left or the right gutter from a column extend thesee placeholders. 
+To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).
 
-        // no left gutter at large and extra large layouts
+    %ft-grid-no[-(left|right)]-gutter[-(s|m|l|xl)]
+
+e.g. 
+
+        // no left gutter at large and extra large layouts. No gutter at all at small size
         .my-component {
             @extend %ft-grid-no-left-gutter-l;
             @extend %ft-grid-no-left-gutter-xl;
+            @extend %ft-grid-no-gutter-s;
         }
 
         //No gutter at any size
         .my-other-component {
-            @extend %ft-grid-no-right-gutter;
-            @extend %ft-grid-no-left-gutter;
+            @extend %ft-grid-no-gutter;
         }  
 
 ####Mixins

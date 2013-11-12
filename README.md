@@ -116,9 +116,8 @@ It forces that element to extend to the maximum width available (either the maxi
 So, for example
 
     <div class="ft-grid-row">
-        <div class="ft-grid-col-d12">A full width column</div>
+        <div class="ft-grid-col-d6">A div spanning 6 grid columns</div>
     </div>
-
 
 ###Specifying column widths
 The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `ft-grid-col` class in the following format: 
@@ -139,7 +138,6 @@ e.g. `ft-grid-col-d6-s12-xl4`
 
 * **xl** - *Extra Large* layout
 
-
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
 
 ###Examples
@@ -157,6 +155,19 @@ In general prefer to set the default for larger layouts and override for smaller
     <div class="ft-grid-col-s6"></div>  
   
 ###Utilities
+
+####Shorthand for single column layout
+To avoid having to use the following inefficient markup
+
+    <div class="ft-grid-row">
+       <div class="ft-grid-col-d12">
+       </div>
+    </div>
+
+The following markup can be used instead
+
+    <div class="ft-grid-row-col">
+    </div>
 
 ####Hiding elements
 
@@ -184,7 +195,7 @@ These placeholders are of the format `%ft-grid-{layout identifier}{number of col
 #####Gutterless columns  
 To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).
 
-    %ft-grid-no[-(left|right)]-gutter[-(s|m|l|xl)]
+    %ft-grid-no[-{left|right}]-gutter[-{s|m|l|xl}]
 
 e.g. 
 
@@ -262,7 +273,7 @@ If your entire page is to be laid out using the grid add the class `ft-grid-page
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$ft-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
 ###Supporting legacy browsers
-ie7/8 don't support media queries. If your product uses some kind of browser detection to add classes to the `<html>` tag (such as [older versions of html5 boilerplate](https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7) did) the large layout will be displayed to the user. The default value expected by grid-module is `lt-ie9`, but this can be configured by defining the following sass variable *before* including grid-module's main.scss:
+ie7/8 don't support media queries. If your product uses some kind of browser detection to add classes to the `<html>` tag (such as [older versions of html5 boilerplate](https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7) did) the large layout will be displayed to the user. The default value of this class expected by grid-module is `lt-ie9`, but this can be configured by defining the following sass variable *before* including grid-module's main.scss:
 
     $lt-ie9: '{A selector which will target both ie7 & ie8}';
 
@@ -283,7 +294,7 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * `$ft-grid-fixed-layout-selector`: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 
 ####Resizing the grid
-By overwriting the values of any of the `$...Width` or `$...Break` variables the width of the grid at any of the layout sizes can be decreased or increased as required
+By overwriting the values of any of the `$...Width`, `$...Break` or `$...Gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
 
 ####Disabling larger layouts
 By setting the value of a breakpoint (`$ft-grid-small-to-medium-break`, `$ft-grid-medium-to-large-break` or `$ft-grid-large-to-extra-large-break`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$ft-grid-medium-to-large-break: false;` will have unexpected efects on your layout unless you also specify `$ft-grid-large-to-extra-large-break: false;`.*

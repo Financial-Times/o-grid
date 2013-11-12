@@ -32,7 +32,7 @@ For each of these the available horizontal width is separated into 12 columns. I
 
 ###Demos
 
-*In order to view the demos you will need to [install grid-module locally](#local-setup)*
+*In order to view the demos you will need to [install grid-module locally](#local-setup)*. To force the demos to respond to resizing of your browser window you will need to enable [device metrics overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports).
 
 * [Responsive grid](grid-responsive.html)  *Use this for cross-device testing*  
     Demonstrates the behaviour of a page using the recommended installation of grid-module

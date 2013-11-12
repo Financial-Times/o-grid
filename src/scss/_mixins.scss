@@ -20,11 +20,11 @@
 //
 @mixin maxMinMediaQuery($min, $max, $force:false) {
 	@if ($min and $max) {
-		@media screen and (min-width:$min+1) and (max-width:$max) { @content; }
+		@media screen and (min-device-width:$min+1) and (max-device-width:$max) { @content; }
 	} @else if ($min) {
-		@media screen and (min-width:$min+1) { @content; }
+		@media screen and (min-device-width:$min+1) { @content; }
 	} @else if ($max) {
-		@media screen and  (max-width:$max) { @content; }
+		@media screen and  (max-device-width:$max) { @content; }
 	} @else if ($force) {
 		@media screen { @content; }
 	}

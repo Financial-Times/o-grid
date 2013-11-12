@@ -32,7 +32,7 @@ For each of these the available horizontal width is separated into 12 columns. I
 
 ###Demos
 
-*In order to view the demos you will need to [install grid-module locally](#local-setup)*. To force the demos to respond to resizing of your browser window you will need to enable [device metrics overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports).
+In order to view the demos you will need to [install grid-module locally](#local-setup). To force the demos to respond to resizing of your desktop browser window you will need to enable [device metrics overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports).
 
 * [Responsive grid](grid-responsive.html)  *Use this for cross-device testing*  
     Demonstrates the behaviour of a page using the recommended installation of grid-module
@@ -231,6 +231,17 @@ More than one layout can be passed in at once (enabling applying the same styles
 * `wrapInSelector($selector)`  
 Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the `$selector` is undefined)
 
+####Functions
+* `ftGridPixelWidthOfColumn`  
+This retrieves the actual pixel width of a column for use in defining other css values. *It doesn't work at the `small` layout size and won't work at all if `$ft-grid-is-fluid` is set to `true`.*
+        
+        @include ftGridRespondTo ($ft-grid-large) {
+            .golden-ratio {
+                $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
+                height: ftGridPixelWidthOfColumn($ft-grid-large-max-width, $colHierarchy) / 1.618;
+            }
+        }
+
 ####Variables
 All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *should never be over-written at the component/module level.*
 
@@ -241,23 +252,7 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 Using a different prefix instead of `ft-grid-col`, e.g. `not-really-d6-a-column` will still apply the grid width so in general it's best to avoid classes which contain `-{letter}{number}` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule-d6` to layout your module as this behaviour is just a side effect and not a supported feature
 
 ####Fixed/Absolute positioning
-The grid specifies widths in percentages, so applying fixed or absolute positioning to an element (e.g. to make a sticky navbar) will cause it to expand horizontally to contain its content. To avoid having to hard-code pixel values for the widths use the `ftGridPixelWidthOfColumn` function as follows:
-        
-        // for fixed position elements in the default (mobile) layout
-        .your-position-fixed-element {
-            $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
-            max-width: ftGridPixelWidthOfColumn($ft-grid-small-max-width, $colHierarchy, $ft-grid-default-half-gutter);
-        }
-
-        // for fixed position elements in responsive layouts
-        @include ftGridRespondTo ($ft-grid-large) {
-            .your-position-fixed-element {
-                $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
-                width: ftGridPixelWidthOfColumn($ft-grid-large-max-width, $colHierarchy);
-            }
-        }
-
-*This hasn't been widely tested so use with caution and please report any use cases where it fails to the [web-team](mailto:web-team@ft.com).*
+The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements. To avoid having to hard-code pixel values for the widths the `ftGridPixelWidthOfColumn` function can be used in a limited range of circumstances (non-fluid layouts where the element isn't fixed/absolute at the `small` layout size). Otherwise handle with javascript (and consider submitting your solution to the [web team](mailto:web.team@ft.com) for inclusion in later releases of `grid-module`).
 
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 

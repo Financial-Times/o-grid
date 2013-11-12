@@ -90,22 +90,22 @@
   background-color: #fff;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-device-width: 600px) {
   .header .mode:after {
     content: "small layout";
   }
 }
-@media screen and (min-width: 601px) and (max-width: 1000px) {
+@media screen and (min-device-width: 601px) and (max-device-width: 1000px) {
   .header .mode:after {
     content: "medium layout";
   }
 }
-@media screen and (min-width: 1001px) and (max-width: 1400px) {
+@media screen and (min-device-width: 1001px) and (max-device-width: 1400px) {
   .header .mode:after {
     content: "large layout";
   }
 }
-@media screen and (min-width: 1401px) {
+@media screen and (min-device-width: 1401px) {
   .header .mode:after {
     content: "extra large layout";
   }

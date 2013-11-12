@@ -2,3 +2,8 @@
 @import "../_mixins.scss";
 @import "../_functions.scss";
 @import "../components/grid-default.scss";
+
+// [class*="ft-grid-col"] {
+// 	@extend %ft-grid-no-left-gutter;
+// 	@extend %ft-grid-no-right-gutter;
+// }

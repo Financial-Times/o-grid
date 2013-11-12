@@ -9,21 +9,12 @@
 			width: auto;
 		}
 
-		%ft-grid-no-left-gutter {
-			margin-left: -$ft-grid-responsive-half-gutter;
-		}
-
-		%ft-grid-no-right-gutter {
-			margin-right: -$ft-grid-responsive-half-gutter;
-		}
-
 		[class*="#{$ft-grid-column}"] {
 			float: left;
 			padding-left: $ft-grid-responsive-half-gutter;
 			padding-right: $ft-grid-responsive-half-gutter;
 			@include boxSizing(border-box);
 		}
-
 
 		// Following rules undo styles applied by the fixed grid
 		[class*="-#{$ft-grid-small}0"],
@@ -43,6 +34,22 @@
 			[class*="-#{$ft-grid-small}#{$colWidth}"],
 			%ft-grid-s#{$colWidth} {
 				width: auto;
+			}
+		}
+
+		%ft-grid-no-left-gutter {
+			padding-left: 0;
+
+			&> .#{$ft-grid-row} {
+				margin-left: 0;
+			}
+		}
+
+		%ft-grid-no-right-gutter {
+			padding-right: 0;
+
+			&> .#{$ft-grid-row} {
+				margin-right: 0;
 			}
 		}
 	}

@@ -84,11 +84,17 @@
 		}
 
 		%ft-grid-no-left-gutter#{-$layoutSize} {
-			margin-left: -$ft-grid-responsive-half-gutter;
+			padding-left: 0;
+			&> .#{$ft-grid-row} {
+				margin-left: 0;
+			}
 		}
 
 		%ft-grid-no-right-gutter#{-$layoutSize} {
-			margin-right: -$ft-grid-responsive-half-gutter;
+			padding-right: 0;
+			&> .#{$ft-grid-row} {
+				margin-right: 0;
+			}
 		}
 		
 		@include ftGridColumnWidths($layoutSize);

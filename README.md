@@ -277,7 +277,6 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * `$ft-grid-is-fluid`: \[false\] Switches to fully fluid layouts
 * `$ft-grid-is-fixed-desktop`: \[false\] Forces the site to always use the large layout
 * `$ft-grid-fixed-layout-selector`: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
-* `$ft-grid-normalize-body`: \[false\] Sets margin and padding on `html` and `body` to `0`.
 
 ####Resizing the grid
 By overwriting the values of any of the `$...Width` or `$...Break` variables the width of the grid at any of the layout sizes can be decreased or increased as required

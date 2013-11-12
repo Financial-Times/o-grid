@@ -408,7 +408,7 @@
     </ul>
     <p>So, for example</p>
     <pre><code>&lt;div class=&quot;ft-grid-row&quot;&gt;
-    &lt;div class=&quot;ft-grid-col-d12&quot;&gt;A full width column&lt;/div&gt;
+    &lt;div class=&quot;ft-grid-col-d6&quot;&gt;A div spanning 6 grid columns&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     <h3>Specifying column widths</h3>
     <p>The grid is divided into 12 columns and column instances can span any number of these &#39;grid-columns&#39;. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more &#39;subclasses&#39; to the <code>ft-grid-col</code> class in the following format:</p>
@@ -445,6 +445,15 @@
 //A column which has width:auto except on small screens, where it takes up half the available width
 &lt;div class=&quot;ft-grid-col-s6&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
+    <h4>Shorthand for single column layout</h4>
+    <p>To avoid having to use the following inefficient markup</p>
+    <pre><code>&lt;div class=&quot;ft-grid-row&quot;&gt;
+   &lt;div class=&quot;ft-grid-col-d12&quot;&gt;
+   &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p>The following markup can be used instead</p>
+    <pre><code>&lt;div class=&quot;ft-grid-row-col&quot;&gt;
+&lt;/div&gt;</code></pre>
     <h4>Hiding elements</h4>
     <p>e.g. <code>ft-grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
     <h4>Placeholder classes/<code>@extend</code></h4>
@@ -462,7 +471,7 @@
     </p>
     <h5>Gutterless columns</h5>
     <p>To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).</p>
-    <pre><code>%ft-grid-no[-(left|right)]-gutter[-(s|m|l|xl)]</code></pre>
+    <pre><code>%ft-grid-no[-{left|right}]-gutter[-{s|m|l|xl}]</code></pre>
     <p>e.g.</p>
     <pre><code>    // no left gutter at large and extra large layouts. No gutter at all at small size
     .my-component {
@@ -533,7 +542,7 @@
       </li>
     </ol>
     <h3>Supporting legacy browsers</h3>
-    <p>ie7/8 don&#39;t support media queries. If your product uses some kind of browser detection to add classes to the <code>&lt;html&gt;</code> tag (such as <a href="https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7">older versions of html5 boilerplate</a> did) the large layout will be displayed to the user. The default value expected by grid-module is <code>lt-ie9</code>, but this can be configured by defining the following sass variable <em>before</em> including grid-module&#39;s main.scss:</p>
+    <p>ie7/8 don&#39;t support media queries. If your product uses some kind of browser detection to add classes to the <code>&lt;html&gt;</code> tag (such as <a href="https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7">older versions of html5 boilerplate</a> did) the large layout will be displayed to the user. The default value of this class expected by grid-module is <code>lt-ie9</code>, but this can be configured by defining the following sass variable <em>before</em> including grid-module&#39;s main.scss:</p>
     <pre><code>$lt-ie9: &#39;{A selector which will target both ie7 &amp; ie8}&#39;;</code></pre>
     <p>If your product does not target ie7 &amp; 8 in this way they will be served the default small screen layout.</p>
     <h4>Boxsizing in ie7</h4>
@@ -550,7 +559,7 @@
       <li><code>$ft-grid-fixed-layout-selector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
     </ul>
     <h4>Resizing the grid</h4>
-    <p>By overwriting the values of any of the <code>$...Width</code> or <code>$...Break</code> variables the width of the grid at any of the layout sizes can be decreased or increased as required</p>
+    <p>By overwriting the values of any of the <code>$...Width</code>, <code>$...Break</code> or <code>$...Gutter</code> variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required</p>
     <h4>Disabling larger layouts</h4>
     <p>By setting the value of a breakpoint (<code>$ft-grid-small-to-medium-break</code>, <code>$ft-grid-medium-to-large-break</code> or <code>$ft-grid-large-to-extra-large-break</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$ft-grid-medium-to-large-break: false;</code> will have unexpected efects on your layout unless you also specify <code>$ft-grid-large-to-extra-large-break: false;</code>.</em>
     </p>

@@ -166,13 +166,12 @@ To avoid having to use the following inefficient markup
 
 The following markup can be used instead
 
-    <div class="ft-grid-row-col">
+    <div class="ft-grid-row-col ft-grid-col-d12">
     </div>
 
 ####Hiding elements
 
 e.g. `ft-grid-mhide-shide` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
-
 
 
 ####Placeholder classes/`@extend`

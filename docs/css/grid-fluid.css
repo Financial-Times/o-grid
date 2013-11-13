@@ -608,7 +608,7 @@ html {
 .lt-ie9 .ft-grid-row, .lt-ie9 .ft-grid-row-col,
 .lt-ie9 .ft-grid-page {
   width: 960px;
-  max-width: 960px;
+  max-width: none;
 }
 .lt-ie9 .ft-grid-row .ft-grid-row, .lt-ie9 .ft-grid-row-col .ft-grid-row, .lt-ie9 .ft-grid-row .ft-grid-row-col, .lt-ie9 .ft-grid-row-col .ft-grid-row-col,
 .lt-ie9 .ft-grid-box .ft-grid-row,

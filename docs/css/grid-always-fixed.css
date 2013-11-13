@@ -137,7 +137,7 @@ html {
 .ft-grid-row,
 .ft-grid-page {
   width: 960px;
-  max-width: 960px;
+  max-width: none;
 }
 
 .ft-grid-row .ft-grid-row,

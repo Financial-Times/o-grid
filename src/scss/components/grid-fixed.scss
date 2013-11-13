@@ -7,7 +7,7 @@
 		.#{$ft-grid-row},
 		.#{$ft-grid-page} {
 			width: $ft-grid-large-max-width;
-			max-width: $ft-grid-large-max-width;
+			max-width: none;
 		}
 
 		.#{$ft-grid-row} .#{$ft-grid-row},
@@ -27,7 +27,7 @@
 		@include ftGridColumnWidths($ft-grid-default);
 		@include ftGridColumnWidths($ft-grid-large);
 
-		[class*="-#{$ft-grid-small}12"],
+		[class*=".#{$ft-grid-small}12"],
 		%ft-grid-s12 {
 			clear: none;
 		}

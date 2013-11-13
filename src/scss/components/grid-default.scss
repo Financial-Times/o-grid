@@ -23,7 +23,7 @@ html {
 
 .#{$ft-grid-row + -col} {
 	@extend .#{$ft-grid-row};
-	@extend [class*="-#{$ft-grid-default}12"];
+	@extend [class*=":12"];
 	@extend [class*="#{$ft-grid-column}"];
 }
 
@@ -50,32 +50,32 @@ html {
 		padding-right: $ft-grid-default-half-gutter;
 	}
 
-	[class*="-#{$ft-grid-default}0"],
-	[class*="-#{$ft-grid-small}0"],
-	[class*="-#{$ft-grid-default}hide"],
-	[class*="-#{$ft-grid-small}hide"],
-	%ft-grid-s0,
+	[class*=":0"],
+	[class*=".#{$ft-grid-small}0"],
+	[class*=":hide"],
+	[class*=".#{$ft-grid-small}hide"],
+	%ft-grid.s0,
 	%ft-grid-shide,
-	%ft-grid-d0,
-	%ft-grid-dhide {
+	%ft-grid-0,
+	%ft-grid-hide {
 		display: none;
 	}
 
 
 	@for $colWidth from 1 through 11 {
 				
-		[class*="-#{$ft-grid-default}#{$colWidth}"],
-		[class*="-#{$ft-grid-small}#{$colWidth}"],
-		%ft-grid-d#{$colWidth},
+		[class*=":#{$colWidth}"],
+		[class*=".#{$ft-grid-small}#{$colWidth}"],
+		%ft-grid-#{$colWidth},
 		%ft-grid-s#{$colWidth} {
 			width: ftGridColumnWidthMinusGutter($colWidth, $ft-grid-default-half-gutter);
 		}
 	}
 
-	[class*="-#{$ft-grid-default}12"],
-	[class*="-#{$ft-grid-small}12"],
+	[class*=":12"],
+	[class*=".#{$ft-grid-small}12"],
 	%ft-grid-s12,
-	%ft-grid-d12 {
+	%ft-grid-12 {
 	    float: none;
 	    clear: both;
 		width: ftGridColumnWidthMinusGutter(12, $ft-grid-default-half-gutter);

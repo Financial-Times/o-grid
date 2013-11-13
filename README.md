@@ -111,20 +111,20 @@ Grid styles are typically applied to the html using two types of class declarati
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
 
 * An `ft-grid-col` class, added to the element intended to conform to the grid's columns.  
-`ft-grid-col` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. `ft-grid-col-d6-s12` (see below for more details)  
+`ft-grid-col` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. `ft-grid-col:6.s12` (see below for more details)  
 
 So, for example
 
     <div class="ft-grid-row">
-        <div class="ft-grid-col-d6">A div spanning 6 grid columns</div>
+        <div class="ft-grid-col:6">A div spanning 6 grid columns</div>
     </div>
 
 ###Specifying column widths
 The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `ft-grid-col` class in the following format: 
 
-    -{layout size identifier}{number of columns}
+    ft-grid-col[:{default width}][.layout size identifier}{number of columns}
 
-e.g. `ft-grid-col-d6-s12-xl4`
+e.g. `ft-grid-col:6.s12.xl4`
 
 ###Layout size identifiers
 
@@ -143,16 +143,16 @@ In general prefer to set the default for larger layouts and override for smaller
 ###Examples
     
     //A full width column for all sizes except large screens, where takes up 9 columns
-    <div class="ft-grid-col-d12-xl9"></div>  
+    <div class="ft-grid-col:12.xl9"></div>  
   
     //A half width column for all sizes except small screens, where takes up full width
-    <div class="ft-grid-col-d6-s12"></div>  
+    <div class="ft-grid-col:6.s12"></div>  
   
     //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
-    <div class="ft-grid-col-s4-m3-l2-xl1"></div>  
+    <div class="ft-grid-col.s4.m3.l2.xl1"></div>  
 
     //A column which has width:auto except on small screens, where it takes up half the available width
-    <div class="ft-grid-col-s6"></div>  
+    <div class="ft-grid-col.s6"></div>  
   
 ###Utilities
 
@@ -160,7 +160,7 @@ In general prefer to set the default for larger layouts and override for smaller
 To avoid having to use the following inefficient markup
 
     <div class="ft-grid-row">
-       <div class="ft-grid-col-d12">
+       <div class="ft-grid-col:12">
        </div>
     </div>
 
@@ -249,7 +249,7 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 ###Gotchas
 
 ####'Leaky' selectors
-Using a different prefix instead of `ft-grid-col`, e.g. `not-really-d6-a-column` will still apply the grid width so in general it's best to avoid classes which contain `-{letter}{number}` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule-d6` to layout your module as this behaviour is just a side effect and not a supported feature
+Using a different prefix instead of `ft-grid-col`, e.g. `not-really:6-a-column` will still apply the grid width so in general it's best to avoid classes which contain `-{letter}{number}` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule:6` to layout your module as this behaviour is just a side effect and not a supported feature
 
 ####Fixed/Absolute positioning
 The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements. To avoid having to hard-code pixel values for the widths the `ftGridPixelWidthOfColumn` function can be used in a limited range of circumstances (non-fluid layouts where the element isn't fixed/absolute at the `small` layout size). Otherwise handle with javascript (and consider submitting your solution to the [web team](mailto:web.team@ft.com) for inclusion in later releases of `grid-module`).

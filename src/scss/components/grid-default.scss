@@ -21,12 +21,6 @@ html {
 	clear: both;
 }
 
-.#{$ft-grid-row + -col} {
-	@extend .#{$ft-grid-row};
-	@extend [class*=":12"];
-	@extend [class*="#{$ft-grid-column}"];
-}
-
 @if (not($ft-grid-is-fixed-desktop and not $ft-grid-is-responsive)) {
 	.#{$ft-grid-row},
 	.#{$ft-grid-page}  {

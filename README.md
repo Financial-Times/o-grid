@@ -8,6 +8,8 @@ It supports all browsers with support for *css media queries*, with a fixed-widt
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
+[Report a bug](https://github.com/Financial-Times/grid-module/issues)
+
 ###Grid dimensions
 
 Four layout sizes are defined:
@@ -166,13 +168,12 @@ To avoid having to use the following inefficient markup
 
 The following markup can be used instead
 
-    <div class="ft-grid-row-col">
+    <div class="ft-grid-row-col ft-grid-col-d12">
     </div>
 
 ####Hiding elements
 
 e.g. `ft-grid-mhide-shide` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
-
 
 
 ####Placeholder classes/`@extend`
@@ -231,17 +232,6 @@ More than one layout can be passed in at once (enabling applying the same styles
 * `wrapInSelector($selector)`  
 Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the `$selector` is undefined)
 
-####Functions
-* `ftGridPixelWidthOfColumn`  
-This retrieves the actual pixel width of a column for use in defining other css values. *It doesn't work at the `small` layout size and won't work at all if `$ft-grid-is-fluid` is set to `true`.*
-        
-        @include ftGridRespondTo ($ft-grid-large) {
-            .golden-ratio {
-                $colHierarchy: 8,4; // representing a width 4 column inside a width 8 column - can be nested as deep as you need
-                height: ftGridPixelWidthOfColumn($ft-grid-large-max-width, $colHierarchy) / 1.618;
-            }
-        }
-
 ####Variables
 All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *should never be over-written at the component/module level.*
 
@@ -252,7 +242,7 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 Using a different prefix instead of `ft-grid-col`, e.g. `not-really:6-a-column` will still apply the grid width so in general it's best to avoid classes which contain `-{letter}{number}` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule:6` to layout your module as this behaviour is just a side effect and not a supported feature
 
 ####Fixed/Absolute positioning
-The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements. To avoid having to hard-code pixel values for the widths the `ftGridPixelWidthOfColumn` function can be used in a limited range of circumstances (non-fluid layouts where the element isn't fixed/absolute at the `small` layout size). Otherwise handle with javascript (and consider submitting your solution to the [web team](mailto:web.team@ft.com) for inclusion in later releases of `grid-module`).
+The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/grid-module/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
 
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 

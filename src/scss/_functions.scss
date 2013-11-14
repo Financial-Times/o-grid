@@ -1,19 +1,10 @@
 //
-// Calculates column width as a percentage (but leaves out the '%' sign)
-//
-// @param $numCols {number} number of columns spanned
-//
-@function ftGridColumnWidthRaw($numCols) {
-	@return (100/12*$numCols);
-}
-
-//
 // Calculates column width as a percentage.
 //
 // @param $numCols {number} number of columns spanned
 //
 @function ftGridColumnWidth($numCols) {
-	@return ftGridColumnWidthRaw($numCols)#{'%'};
+	@return (100%/12*$numCols);
 }
 
 //
@@ -24,28 +15,4 @@
 //
 @function ftGridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
 	@return (ftGridColumnWidthRaw($numCols)-($halfGutterWidth*2))
-}
-
-//
-// Calculates column width of a column in pixels
-//
-// @param $layoutWidth {number} Global max width available (should typically be ``$ft-grid-{layout size}-max-width``)
-// @param $columnHierarchy {list} hierarchical list of column spanned e.g. a width 3 column inside a width 8 column would get the value 8,3
-// @param $halfGutterWidth {number} half the width of column gutters (only needed when calculating for the default layout)
-//
-@function ftGridPixelWidthOfColumn($layoutWidth, $columnHierarchy, $halfGutterWidth: null) {
-	$percentage: 100;
-
-	@if ($halfGutterWidth) {
-		$halfGutterWidth: $halfGutterWidth / 1%;
-		@each $column in $columnHierarchy {
-			$percentage: $percentage * ftGridColumnWidthMinusGutter($column, $halfGutterWidth)/100
-		}	
-	} @else {
-		@each $column in $columnHierarchy {
-			$percentage: $percentage * ftGridColumnWidthRaw($column)/100
-		}		
-	}
-
-	@return $percentage * $layoutWidth/100; 
 }

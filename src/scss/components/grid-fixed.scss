@@ -7,7 +7,7 @@
 		.#{$ft-grid-row},
 		.#{$ft-grid-page} {
 			width: $ft-grid-large-max-width;
-			max-width: none;
+			max-width: none; // must be 'none' rather than $ft-grid-large-max-width in order to avoid a very obscure ie7 bug
 		}
 
 		.#{$ft-grid-row} .#{$ft-grid-row},

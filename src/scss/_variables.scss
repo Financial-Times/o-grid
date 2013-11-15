@@ -31,6 +31,7 @@ $ft-grid-is-fluid: false !default;
 $ft-grid-is-fixed-desktop: false !default;
 
 
+
 // -------------------------------------------------------------------------------------
 // PATHS
 // -------------------------------------------------------------------------------------
@@ -67,6 +68,7 @@ $ft-grid-extra-large: xl;
 $ft-grid-default: d;
 
 $ft-grid-fixed-layout-selector: $lt-ie9 !default;
+$ft-grid-mq-type:device-width !default;
 //$ft-grid-fixed-size: $ft-grid-large !default;
 
 

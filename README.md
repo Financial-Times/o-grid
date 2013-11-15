@@ -53,6 +53,9 @@ In order to view the demos you will need to [install grid-module locally](#local
 
 *The following two demos mock behaviour of the grid when browsers meet certain conditions, and are included purely as a convenient resource for developers*
 
+* [Always responsive grid](grid-always-responsive.html)  
+    Responsive grid that responds to window rather than device width (mainly to make development easier)
+
 * [Default grid](grid-default.html)  
     Fluid grid with max width of 600px - mocks behaviour if media queries not supported
 
@@ -70,6 +73,10 @@ In order to view the demos you will need to [install grid-module locally](#local
 
 2. Include the following in your app's styles
 
+        // makes the grid respond to window rather than device width, so useful for development. 
+        // For modules, and most products, this should be removed in production
+        $ft-grid-mq-type: width; 
+        
         @import "grid-module/main.scss";  
   Make sure that `grid-module` is in your sass include path (see the [origami docs](http://financial-times.github.io/ft-origami/docs/syntax/scss/) for more details). For products you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/build-service/)
 
@@ -277,6 +284,7 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * `$ft-grid-is-fluid`: \[false\] Switches to fully fluid layouts
 * `$ft-grid-is-fixed-desktop`: \[false\] Forces the site to always use the large layout
 * `$ft-grid-fixed-layout-selector`: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* `$ft-grid-mq-type` : \[device-width\] By default only responds to device rather than window width. To change this set this variable to `width`
 
 ####Resizing the grid
 By overwriting the values of any of the `$...Width`, `$...Break` or `$...Gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required

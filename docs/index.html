@@ -341,6 +341,10 @@
     </p>
     <ul>
       <li>
+        <p><a href="grid-always-responsive.html">Always responsive grid</a>
+          <br>Responsive grid that responds to window rather than device width (mainly to make development easier)</p>
+      </li>
+      <li>
         <p><a href="grid-default.html">Default grid</a>
           <br>Fluid grid with max width of 600px - mocks behaviour if media queries not supported</p>
       </li>
@@ -358,7 +362,10 @@
       </li>
       <li>
         <p>Include the following in your app&#39;s styles</p>
-        <pre><code> @import &quot;grid-module/main.scss&quot;;  </code></pre>
+        <pre><code> // makes the grid respond to window rather than device width, so useful for development. 
+ // For modules, and most products, this should be removed in production
+ $ft-grid-mq-type: width; 
+ @import &quot;grid-module/main.scss&quot;;  </code></pre>
         <p>Make sure that <code>grid-module</code> is in your sass include path (see the <a href="http://financial-times.github.io/ft-origami/docs/syntax/scss/">origami docs</a> for more details). For products you can also simply use the <a href="http://financial-times.github.io/ft-origami/docs/build-service/">build service</a>
         </p>
       </li>
@@ -544,6 +551,8 @@
       <li><code>$ft-grid-is-fluid</code>: [false] Switches to fully fluid layouts</li>
       <li><code>$ft-grid-is-fixed-desktop</code>: [false] Forces the site to always use the large layout</li>
       <li><code>$ft-grid-fixed-layout-selector</code>: [$lt-ie9] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8</li>
+      <li><code>$ft-grid-mq-type</code> : [device-width] By default only responds to device rather than window width. To change this set this variable to <code>width</code>
+      </li>
     </ul>
     <h4>Resizing the grid</h4>
     <p>By overwriting the values of any of the <code>$...Width</code>, <code>$...Break</code> or <code>$...Gutter</code> variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required</p>

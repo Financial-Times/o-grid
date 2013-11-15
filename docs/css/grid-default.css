@@ -52,64 +52,64 @@ html {
 
 [class*="-d1"],
 [class*="-s1"] {
-  width: ftGridColumnWidthRaw(1)-2%;
+  width: 6.33333%;
 }
 
 [class*="-d2"],
 [class*="-s2"] {
-  width: ftGridColumnWidthRaw(2)-2%;
+  width: 14.66667%;
 }
 
 [class*="-d3"],
 [class*="-s3"] {
-  width: ftGridColumnWidthRaw(3)-2%;
+  width: 23%;
 }
 
 [class*="-d4"],
 [class*="-s4"] {
-  width: ftGridColumnWidthRaw(4)-2%;
+  width: 31.33333%;
 }
 
 [class*="-d5"],
 [class*="-s5"] {
-  width: ftGridColumnWidthRaw(5)-2%;
+  width: 39.66667%;
 }
 
 [class*="-d6"],
 [class*="-s6"] {
-  width: ftGridColumnWidthRaw(6)-2%;
+  width: 48%;
 }
 
 [class*="-d7"],
 [class*="-s7"] {
-  width: ftGridColumnWidthRaw(7)-2%;
+  width: 56.33333%;
 }
 
 [class*="-d8"],
 [class*="-s8"] {
-  width: ftGridColumnWidthRaw(8)-2%;
+  width: 64.66667%;
 }
 
 [class*="-d9"],
 [class*="-s9"] {
-  width: ftGridColumnWidthRaw(9)-2%;
+  width: 73%;
 }
 
 [class*="-d10"],
 [class*="-s10"] {
-  width: ftGridColumnWidthRaw(10)-2%;
+  width: 81.33333%;
 }
 
 [class*="-d11"],
 [class*="-s11"] {
-  width: ftGridColumnWidthRaw(11)-2%;
+  width: 89.66667%;
 }
 
 [class*="-d12"],
 [class*="-s12"] {
   float: none;
   clear: both;
-  width: ftGridColumnWidthRaw(12)-2%;
+  width: 98%;
 }
 
 .ft-grid-no-gutter,

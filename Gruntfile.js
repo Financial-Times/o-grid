@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   "use strict";
 
-  var demoPageTypes = 'responsive,default,legacy,fluid,resized,disabled,always-fixed'.split(',');
+  var demoPageTypes = 'responsive,default,legacy,fluid,resized,disabled,always-fixed,always-responsive'.split(',');
 
   function constructDemoPagesConfig () {
     var output = {};

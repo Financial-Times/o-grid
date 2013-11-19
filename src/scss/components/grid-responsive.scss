@@ -17,21 +17,21 @@
 		}
 
 		// Following rules undo styles applied by the fixed grid
-		[class*=".#{$ft-grid-small}0"],
-		[class*=".#{$ft-grid-small}hide"],
+		[class*="|#{$ft-grid-small}0|"],
+		[class*="|#{$ft-grid-small}hide|"],
 		%ft-grid-s0,
 		%ft-grid-shide  {
 		    display: block;
 		}
 
-		[class*=".#{$ft-grid-small}12"],
+		[class*="|#{$ft-grid-small}12|"],
 		%ft-grid-s12 {
 		    clear: none;
 		}
 
 		@for $colWidth from 0 through 12 {
 					
-			[class*=".#{$ft-grid-small}#{$colWidth}"],
+			[class*="|#{$ft-grid-small}#{$colWidth}|"],
 			%ft-grid-s#{$colWidth} {
 				width: auto;
 			}

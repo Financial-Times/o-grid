@@ -44,10 +44,10 @@ html {
 		padding-right: $ft-grid-default-half-gutter;
 	}
 
-	[class*=":0"],
-	[class*=".#{$ft-grid-small}0"],
-	[class*=":hide"],
-	[class*=".#{$ft-grid-small}hide"],
+	[class*="|0|"],
+	[class*="|#{$ft-grid-small}0|"],
+	[class*="|hide|"],
+	[class*="|#{$ft-grid-small}hide|"],
 	%ft-grid.s0,
 	%ft-grid-shide,
 	%ft-grid-0,
@@ -58,16 +58,16 @@ html {
 
 	@for $colWidth from 1 through 11 {
 				
-		[class*=":#{$colWidth}"],
-		[class*=".#{$ft-grid-small}#{$colWidth}"],
+		[class*="|#{$colWidth}|"],
+		[class*="|#{$ft-grid-small}#{$colWidth}|"],
 		%ft-grid-#{$colWidth},
 		%ft-grid-s#{$colWidth} {
 			width: ftGridColumnWidthMinusGutter($colWidth, $ft-grid-default-half-gutter);
 		}
 	}
 
-	[class*=":12"],
-	[class*=".#{$ft-grid-small}12"],
+	[class*="|12|"],
+	[class*="|#{$ft-grid-small}12|"],
 	%ft-grid-s12,
 	%ft-grid-12 {
 	    float: none;

@@ -27,7 +27,7 @@
 		@include ftGridColumnWidths($ft-grid-default);
 		@include ftGridColumnWidths($ft-grid-large);
 
-		[class*=".#{$ft-grid-small}12"],
+		[class*="|#{$ft-grid-small}12|"],
 		%ft-grid-s12 {
 			clear: none;
 		}

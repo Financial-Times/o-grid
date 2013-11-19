@@ -110,18 +110,16 @@
 //
 @mixin ftGridColumnWidths($layoutSize) {
 
-	$placeholder-prefix: -#{$layoutSize};
-	$attribute-prefix: #{#{"."}$layoutSize};
+	$prefix: $layoutSize;
 
 	@if ($layoutSize == $ft-grid-default) {
-		$placeholder-prefix: "-";
-		$attribute-prefix: ":";
+		$prefix: "";
 	} 
 
-	[class*=".#{$layoutSize}hide"],
-	[class*=".#{$layoutSize}0"],
-	%ft-grid-#{$layoutSize}0,
-	%ft-grid-#{$layoutSize}hide {
+	[class*="|#{$prefix}hide|"],
+	[class*="|#{$prefix}0|"],
+	%ft-grid-#{$prefix}0,
+	%ft-grid-#{$prefix}hide {
 		display: none;
 	}
 
@@ -129,8 +127,8 @@
 
 	@for $colWidth from 1 through 11 {
 
-		$attrSelector: #{'[class*="#{$attribute-prefix}#{$colWidth}"]'};
-		$placeholderSelector: #{'%ft-grid#{$placeholder-prefix}#{$colWidth}'};
+		$attrSelector: #{'[class*="|#{$prefix}#{$colWidth}|"]'};
+		$placeholderSelector: #{'%ft-grid-#{$prefix}#{$colWidth}'};
 
 		
 		#{$attrSelector},
@@ -157,8 +155,8 @@
 		}
 	}
 
-	[class*="#{$attribute-prefix}12"],
-	%ft-grid#{$placeholder-prefix}12 {
+	[class*="|#{$prefix}12|"],
+	%ft-grid-#{$prefix}12 {
 	    float: none;
 	    clear: both;
 		width: 100%;

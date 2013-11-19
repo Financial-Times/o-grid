@@ -411,24 +411,20 @@
       </li>
       <li>
         <p>An <code>ft-grid-col</code> class, added to the element intended to conform to the grid&#39;s columns.
-          <br><code>ft-grid-col</code> by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. <code>ft-grid-col:6.s12</code> (see below for more details)</p>
+          <br><code>ft-grid-col</code> by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. <code>ft-grid-col|6|s12|</code> (see below for more details)</p>
       </li>
     </ul>
     <p>So, for example</p>
     <pre><code>&lt;div class=&quot;ft-grid-row&quot;&gt;
-    &lt;div class=&quot;ft-grid-col:6&quot;&gt;A div spanning 6 grid columns&lt;/div&gt;
+    &lt;div class=&quot;ft-grid-col|6|&quot;&gt;A div spanning 6 grid columns&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     <h3>Specifying column widths</h3>
-    <p>The grid is divided into 12 columns and column instances can span any number of these &#39;grid-columns&#39;. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more &#39;subclasses&#39; to the <code>ft-grid-col</code> class in the following format:</p>
-    <pre><code>ft-grid-col[:{default width}][.layout size identifier}{number of columns}</code></pre>
-    <p>e.g. <code>ft-grid-col:6.s12.xl4</code>
+    <p>The grid is divided into 12 columns and column instances can span any number of these &#39;grid-columns&#39;. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more &#39;subclasses&#39; to the <code>ft-grid-col</code> using the following structure:</p>
+    <pre><code>ft-grid-col[|{default width}|][layout size identifier}{number of columns}|]</code></pre>
+    <p>i.e. <code>ft-grid-col</code> followed by an optional default width and widths for specific layouts, all separated (and trailed) by &#39;|&#39; characters, e.g. <code>ft-grid-col|6|s12|xl4|</code>
     </p>
     <h3>Layout size identifiers</h3>
     <ul>
-      <li>
-        <p><strong>d</strong> - <em>Default value</em> - if unspecified the element will simply take <code>width:auto</code> 
-        </p>
-      </li>
       <li>
         <p><strong>s</strong> - <em>Small</em> layout</p>
       </li>
@@ -442,28 +438,28 @@
         <p><strong>xl</strong> - <em>Extra Large</em> layout</p>
       </li>
     </ul>
-    <p>In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.</p>
+    <p>In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take <code>width:auto</code> at any layout for which an explicic rule is not defined.</p>
     <h3>Examples</h3>
     <pre><code>//A full width column for all sizes except large screens, where takes up 9 columns
-&lt;div class=&quot;ft-grid-col:12.xl9&quot;&gt;&lt;/div&gt;  
+&lt;div class=&quot;ft-grid-col|12|xl9|&quot;&gt;&lt;/div&gt;  
 //A half width column for all sizes except small screens, where takes up full width
-&lt;div class=&quot;ft-grid-col:6.s12&quot;&gt;&lt;/div&gt;  
+&lt;div class=&quot;ft-grid-col|6|s12|&quot;&gt;&lt;/div&gt;  
 //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
-&lt;div class=&quot;ft-grid-col.s4.m3.l2.xl1&quot;&gt;&lt;/div&gt;  
+&lt;div class=&quot;ft-grid-col|s4|m3|l2|xl1|&quot;&gt;&lt;/div&gt;  
 //A column which has width:auto except on small screens, where it takes up half the available width
-&lt;div class=&quot;ft-grid-col.s6&quot;&gt;&lt;/div&gt;  </code></pre>
+&lt;div class=&quot;ft-grid-col|s6|&quot;&gt;&lt;/div&gt;  </code></pre>
     <h3>Utilities</h3>
     <h4>Shorthand for single column layout</h4>
     <p>To avoid having to use the following inefficient markup</p>
     <pre><code>&lt;div class=&quot;ft-grid-row&quot;&gt;
-   &lt;div class=&quot;ft-grid-col:12&quot;&gt;
+   &lt;div class=&quot;ft-grid-col|12|&quot;&gt;
    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     <p>The following markup can be used instead</p>
-    <pre><code>&lt;div class=&quot;ft-grid-row-col ft-grid-col-d12&quot;&gt;
+    <pre><code>&lt;div class=&quot;ft-grid-row-col ft-grid-col|12|&quot;&gt;
 &lt;/div&gt;</code></pre>
     <h4>Hiding elements</h4>
-    <p>e.g. <code>ft-grid-mhide-shide</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
+    <p>e.g. <code>ft-grid|mhide|shide|</code> will hide the given element for medium and small screen sizes even if the element isn&#39;t laid out as a column</p>
     <h4>Placeholder classes/<code>@extend</code></h4>
     <p><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">Placeholder classes</a> can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. <em>Note - don&#39;t use these inside a media query - the placeholder classes are already included within the appropriate media query</em>
     </p>
@@ -471,11 +467,10 @@
     <p>These placeholders are of the format <code>%ft-grid-{layout identifier}{number of columns|hide}</code> e.g.</p>
     <pre><code>    // hides secondary images on small and medium sized displays
     .main-article img:not(.primary) {
-        @extend .ft-grid-col;
         @extend %ft-grid-shide;
         @extend %ft-grid-mhide;
     }</code></pre>
-    <p><em>In general use <code>ft-grid-col-...</code> classes and only use <code>@extend</code> for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.</em>
+    <p><em>In general use <code>ft-grid-col|...</code> classes and only use <code>@extend</code> for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.</em>
     </p>
     <h5>Gutterless columns</h5>
     <p>To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).</p>
@@ -519,7 +514,7 @@
     </p>
     <h3>Gotchas</h3>
     <h4>&#39;Leaky&#39; selectors</h4>
-    <p>Using a different prefix instead of <code>ft-grid-col</code>, e.g. <code>not-really:6-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>-{letter}{number}</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>ft-mymodule:6</code> to layout your module as this behaviour is just a side effect and not a supported feature</p>
+    <p>Using a different prefix instead of <code>ft-grid-col</code>, e.g. <code>not-really|6|-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>|{letter}{number}|</code> or <code>|{number}|</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>ft-mymodule|6|</code> to layout your module as this behaviour is just a side effect and not a supported feature</p>
     <h4>Fixed/Absolute positioning</h4>
     <p>The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the <a href="https://github.com/Financial-Times/grid-module/issues/9">github issue</a>. If you develop your own solution to the problem (you&#39;ll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn&#39;t assume that the configuration of the grid module will be consistent from product to product (see below).</p>
     <h2>Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a></h2>

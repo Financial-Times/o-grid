@@ -120,24 +120,22 @@ Grid styles are typically applied to the html using two types of class declarati
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
 
 * An `ft-grid-col` class, added to the element intended to conform to the grid's columns.  
-`ft-grid-col` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. `ft-grid-col:6.s12` (see below for more details)  
+`ft-grid-col` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. `ft-grid-col|6|s12|` (see below for more details)  
 
 So, for example
 
     <div class="ft-grid-row">
-        <div class="ft-grid-col:6">A div spanning 6 grid columns</div>
+        <div class="ft-grid-col|6|">A div spanning 6 grid columns</div>
     </div>
 
 ###Specifying column widths
-The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `ft-grid-col` class in the following format: 
+The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `ft-grid-col` using the following structure:
 
-    ft-grid-col[:{default width}][.layout size identifier}{number of columns}
+    ft-grid-col[|{default width}|][layout size identifier}{number of columns}|]
 
-e.g. `ft-grid-col:6.s12.xl4`
+i.e. `ft-grid-col` followed by an optional default width and widths for specific layouts, all separated (and trailed) by '|' characters, e.g. `ft-grid-col|6|s12|xl4|`
 
 ###Layout size identifiers
-
-* **d** - *Default value* - if unspecified the element will simply take `width:auto` 
 
 * **s** - *Small* layout
 
@@ -147,21 +145,21 @@ e.g. `ft-grid-col:6.s12.xl4`
 
 * **xl** - *Extra Large* layout
 
-In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts.
+In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicic rule is not defined.
 
 ###Examples
     
     //A full width column for all sizes except large screens, where takes up 9 columns
-    <div class="ft-grid-col:12.xl9"></div>  
+    <div class="ft-grid-col|12|xl9|"></div>  
   
     //A half width column for all sizes except small screens, where takes up full width
-    <div class="ft-grid-col:6.s12"></div>  
+    <div class="ft-grid-col|6|s12|"></div>  
   
     //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
-    <div class="ft-grid-col.s4.m3.l2.xl1"></div>  
+    <div class="ft-grid-col|s4|m3|l2|xl1|"></div>  
 
     //A column which has width:auto except on small screens, where it takes up half the available width
-    <div class="ft-grid-col.s6"></div>  
+    <div class="ft-grid-col|s6|"></div>  
   
 ###Utilities
 
@@ -169,18 +167,18 @@ In general prefer to set the default for larger layouts and override for smaller
 To avoid having to use the following inefficient markup
 
     <div class="ft-grid-row">
-       <div class="ft-grid-col:12">
+       <div class="ft-grid-col|12|">
        </div>
     </div>
 
 The following markup can be used instead
 
-    <div class="ft-grid-row-col ft-grid-col-d12">
+    <div class="ft-grid-row-col ft-grid-col|12|">
     </div>
 
 ####Hiding elements
 
-e.g. `ft-grid-mhide-shide` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
+e.g. `ft-grid|mhide|shide|` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 
 ####Placeholder classes/`@extend`
@@ -193,12 +191,11 @@ These placeholders are of the format `%ft-grid-{layout identifier}{number of col
         
         // hides secondary images on small and medium sized displays
         .main-article img:not(.primary) {
-            @extend .ft-grid-col;
             @extend %ft-grid-shide;
             @extend %ft-grid-mhide;
         }
 
-*In general use `ft-grid-col-...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
+*In general use `ft-grid-col|...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
 
 #####Gutterless columns  
 To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).
@@ -246,7 +243,7 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 ###Gotchas
 
 ####'Leaky' selectors
-Using a different prefix instead of `ft-grid-col`, e.g. `not-really:6-a-column` will still apply the grid width so in general it's best to avoid classes which contain `-{letter}{number}` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule:6` to layout your module as this behaviour is just a side effect and not a supported feature
+Using a different prefix instead of `ft-grid-col`, e.g. `not-really|6|-a-column` will still apply the grid width so in general it's best to avoid classes which contain `|{letter}{number}|` or `|{number}|` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `ft-mymodule|6|` to layout your module as this behaviour is just a side effect and not a supported feature
 
 ####Fixed/Absolute positioning
 The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/grid-module/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).

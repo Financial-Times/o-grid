@@ -75,6 +75,8 @@
   line-height: 30px;
   background-color: #ddd;
   outline: 1px solid #ccc;
+  white-space: pre;
+  font-family: monospace;
 }
 
 .ft-grid-row {

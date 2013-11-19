@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       
     });
 
-    output['./docs/css/docs.css'] = ['./src/scss/docs/docs.scss'];
+    output['./docs/css/docs.css'] = ['./docs-generator/scss/docs.scss'];
     return output;
   }
 

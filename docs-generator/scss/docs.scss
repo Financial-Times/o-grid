@@ -1,8 +1,8 @@
 /* Styles for presenting the grid. Not part of the grid code. */
 
-@import "../_variables.scss";
-@import "../_mixins.scss";
-@import "../_functions.scss";
+@import "../../src/scss/_variables.scss";
+@import "../../src/scss/_mixins.scss";
+@import "../../src/scss/_functions.scss";
 
 .header {
 	margin: 0 0 20px 0;
@@ -65,10 +65,35 @@
 	color: #885;
 }
 
+.examples {
+	opacity: 0.75;
+	background: white;
+	position: relative;
+}
+
+.underlay {
+	position: fixed;
+	left: 8px;
+	right: 8px;
+	height: 100%;
+
+	.ft-grid-row,
+	.col,
+	.col > div {
+		height: 100%;
+	}
+	
+	.col > div {
+		background: pink;
+	}
+}
+
 .example {
 	margin-bottom: 20px;
 	overflow: hidden;
 }
+
+
 
 .dev-inner {
 	display: block;
@@ -79,7 +104,7 @@
 	font-size: 10px;
 	line-height: 30px;
 	background-color: #ddd;
-	outline: 1px solid #ccc;
+	border: 1px solid #ccc;
 	white-space: pre;
 	font-family: monospace;
 }

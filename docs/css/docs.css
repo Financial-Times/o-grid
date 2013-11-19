@@ -60,6 +60,27 @@
   color: #885;
 }
 
+.examples {
+  opacity: 0.75;
+  background: white;
+  position: relative;
+}
+
+.underlay {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  height: 100%;
+}
+.underlay .ft-grid-row,
+.underlay .col,
+.underlay .col > div {
+  height: 100%;
+}
+.underlay .col > div {
+  background: pink;
+}
+
 .example {
   margin-bottom: 20px;
   overflow: hidden;
@@ -74,7 +95,7 @@
   font-size: 10px;
   line-height: 30px;
   background-color: #ddd;
-  outline: 1px solid #ccc;
+  border: 1px solid #ccc;
   white-space: pre;
   font-family: monospace;
 }

@@ -28,14 +28,14 @@
 		@include ftGridColumnWidths($ft-grid-large);
 
 		[class*="|#{$ft-grid-small}12|"],
-		%ft-grid-s12 {
+		%ft-grid-#{$ft-grid-small}12 {
 			clear: none;
 		}
 		
 		%ft-grid-no-gutter,
-		%ft-grid-no-gutter-l,
+		%ft-grid-no-gutter-#{$ft-grid-large},
 		%ft-grid-no-left-gutter,
-		%ft-grid-no-left-gutter-l {
+		%ft-grid-no-left-gutter-#{$ft-grid-large} {
 			padding-left: 0;
 
 			&> .#{$ft-grid-row} {
@@ -44,9 +44,9 @@
 		}
 
 		%ft-grid-no-gutter,
-		%ft-grid-no-gutter-l,
+		%ft-grid-no-gutter-#{$ft-grid-large},
 		%ft-grid-no-right-gutter,
-		%ft-grid-no-right-gutter-l {
+		%ft-grid-no-right-gutter-#{$ft-grid-large} {
 			padding-right: 0;
 
 			&> .#{$ft-grid-row} {

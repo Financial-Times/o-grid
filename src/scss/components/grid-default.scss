@@ -48,8 +48,8 @@ html {
 	[class*="|#{$ft-grid-small}0|"],
 	[class*="|hide|"],
 	[class*="|#{$ft-grid-small}hide|"],
-	%ft-grid.s0,
-	%ft-grid-shide,
+	%ft-grid.#{$ft-grid-small}0,
+	%ft-grid-#{$ft-grid-small}hide,
 	%ft-grid-0,
 	%ft-grid-hide {
 		display: none;
@@ -61,14 +61,14 @@ html {
 		[class*="|#{$colWidth}|"],
 		[class*="|#{$ft-grid-small}#{$colWidth}|"],
 		%ft-grid-#{$colWidth},
-		%ft-grid-s#{$colWidth} {
+		%ft-grid-#{$ft-grid-small}#{$colWidth} {
 			width: ftGridColumnWidthMinusGutter($colWidth, $ft-grid-default-half-gutter);
 		}
 	}
 
 	[class*="|12|"],
 	[class*="|#{$ft-grid-small}12|"],
-	%ft-grid-s12,
+	%ft-grid-#{$ft-grid-small}12,
 	%ft-grid-12 {
 	    float: none;
 	    clear: both;
@@ -76,9 +76,9 @@ html {
 	}
 
 	%ft-grid-no-gutter,
-	%ft-grid-no-gutter-s,
+	%ft-grid-no-gutter-#{$ft-grid-small},
 	%ft-grid-no-left-gutter,
-	%ft-grid-no-left-gutter-s {
+	%ft-grid-no-left-gutter-#{$ft-grid-small} {
 		padding-left: 0;
 
 		&> .#{$ft-grid-row} {
@@ -87,9 +87,9 @@ html {
 	}
 
 	%ft-grid-no-gutter,
-	%ft-grid-no-gutter-s,
+	%ft-grid-no-gutter-#{$ft-grid-small},
 	%ft-grid-no-right-gutter,
-	%ft-grid-no-right-gutter-s {
+	%ft-grid-no-right-gutter-#{$ft-grid-small} {
 		padding-right: 0;
 
 		&> .#{$ft-grid-row} {

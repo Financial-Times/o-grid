@@ -161,55 +161,7 @@ html {
     clear: none;
   }
 
-  [class*="|s0|"] {
-    width: auto;
-  }
-
-  [class*="|s1|"] {
-    width: auto;
-  }
-
-  [class*="|s2|"] {
-    width: auto;
-  }
-
-  [class*="|s3|"] {
-    width: auto;
-  }
-
-  [class*="|s4|"] {
-    width: auto;
-  }
-
-  [class*="|s5|"] {
-    width: auto;
-  }
-
-  [class*="|s6|"] {
-    width: auto;
-  }
-
-  [class*="|s7|"] {
-    width: auto;
-  }
-
-  [class*="|s8|"] {
-    width: auto;
-  }
-
-  [class*="|s9|"] {
-    width: auto;
-  }
-
-  [class*="|s10|"] {
-    width: auto;
-  }
-
-  [class*="|s11|"] {
-    width: auto;
-  }
-
-  [class*="|s12|"] {
+  [class*="|s0|"], [class*="|s1|"], [class*="|s2|"], [class*="|s3|"], [class*="|s4|"], [class*="|s5|"], [class*="|s6|"], [class*="|s7|"], [class*="|s8|"], [class*="|s9|"], [class*="|s10|"], [class*="|s11|"], [class*="|s12|"] {
     width: auto;
   }
 

@@ -72,7 +72,7 @@
   right: 8px;
   height: 100%;
 }
-.underlay .ft-grid-row,
+.underlay .o-grid-row,
 .underlay .col,
 .underlay .col > div {
   height: 100%;
@@ -100,16 +100,16 @@
   font-family: monospace;
 }
 
-.ft-grid-row {
+.o-grid-row {
   background-color: #eee;
   padding-bottom: 10px;
 }
 
-.dev-inner + .ft-grid-row {
+.dev-inner + .o-grid-row {
   margin-top: 10px;
 }
 
-[class*="ft-grid-col"] [class*="ft-grid-col"] .dev-inner {
+[class*="o-grid-col"] [class*="o-grid-col"] .dev-inner {
   background-color: #fff;
 }
 

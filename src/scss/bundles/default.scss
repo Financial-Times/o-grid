@@ -3,30 +3,30 @@
 @import "../_functions.scss";
 @import "../components/grid-default.scss";
 
-.ft-grid-no-gutter {
-	@extend %ft-grid-no-gutter !optional;
+.o-grid-no-gutter {
+	@extend %o-grid-no-gutter !optional;
 }
-.ft-grid-no-left-gutter {
-	@extend %ft-grid-no-left-gutter !optional;
+.o-grid-no-left-gutter {
+	@extend %o-grid-no-left-gutter !optional;
 }
-.ft-grid-no-right-gutter {
-	@extend %ft-grid-no-right-gutter !optional;
+.o-grid-no-right-gutter {
+	@extend %o-grid-no-right-gutter !optional;
 }
-.ft-grid-no-gutter-s {
-	@extend %ft-grid-no-gutter-s !optional;
+.o-grid-no-gutter-s {
+	@extend %o-grid-no-gutter-s !optional;
 }
-.ft-grid-no-left-gutter-m {
-	@extend %ft-grid-no-left-gutter-m !optional;
+.o-grid-no-left-gutter-m {
+	@extend %o-grid-no-left-gutter-m !optional;
 }
-.ft-grid-no-right-gutter-l {
-	@extend %ft-grid-no-right-gutter-l !optional;
+.o-grid-no-right-gutter-l {
+	@extend %o-grid-no-right-gutter-l !optional;
 }
-.ft-grid-no-left-gutter {
-	@extend %ft-grid-no-left-gutter !optional;
+.o-grid-no-left-gutter {
+	@extend %o-grid-no-left-gutter !optional;
 }
-.ft-grid-no-gutter {
-	@extend %ft-grid-no-gutter !optional;
+.o-grid-no-gutter {
+	@extend %o-grid-no-gutter !optional;
 }
-.ft-grid-no-right-gutter {
-	@extend %ft-grid-no-right-gutter !optional;
+.o-grid-no-right-gutter {
+	@extend %o-grid-no-right-gutter !optional;
 }

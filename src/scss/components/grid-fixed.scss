@@ -1,55 +1,55 @@
-@if ($ft-grid-is-responsive or $ft-grid-is-fixed-desktop) {
-	@if ($ft-grid-is-fixed-desktop) {
-		$ft-grid-fixed-layout-selector: null;
+@if ($o-grid-is-responsive or $o-grid-is-fixed-desktop) {
+	@if ($o-grid-is-fixed-desktop) {
+		$o-grid-fixed-layout-selector: null;
 	}
-	@include wrapInSelector ($ft-grid-fixed-layout-selector) {
+	@include oWrapInSelector ($o-grid-fixed-layout-selector) {
 
-		.#{$ft-grid-row},
-		.#{$ft-grid-page} {
-			width: $ft-grid-large-max-width;
-			max-width: none; // must be 'none' rather than $ft-grid-large-max-width in order to avoid a very obscure ie7 bug
+		.#{$o-grid-row},
+		.#{$o-grid-page} {
+			width: $o-grid-large-max-width;
+			max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 		}
 
-		.#{$ft-grid-row} .#{$ft-grid-row},
-		.#{$ft-grid-box} .#{$ft-grid-row} {
-			margin-left: -$ft-grid-fixed-half-gutter;
-			margin-right: -$ft-grid-fixed-half-gutter;
+		.#{$o-grid-row} .#{$o-grid-row},
+		.#{$o-grid-box} .#{$o-grid-row} {
+			margin-left: -$o-grid-fixed-half-gutter;
+			margin-right: -$o-grid-fixed-half-gutter;
 			width: auto;
 		}
 
-		[class*="#{$ft-grid-column}"] {
+		[class*="#{$o-grid-column}"] {
 			float: left;
-			padding-left: $ft-grid-fixed-half-gutter;
-			padding-right: $ft-grid-fixed-half-gutter;
-			@include boxSizing(border-box);
+			padding-left: $o-grid-fixed-half-gutter;
+			padding-right: $o-grid-fixed-half-gutter;
+			@include oBoxSizing(border-box);
 		}
 
-		@include ftGridColumnWidths($ft-grid-default);
-		@include ftGridColumnWidths($ft-grid-large);
+		@include oGridColumnWidths($o-grid-default);
+		@include oGridColumnWidths($o-grid-large);
 
-		[class*="|#{$ft-grid-small}12|"],
-		%ft-grid-#{$ft-grid-small}12 {
+		[class*="|#{$o-grid-small}12|"],
+		%o-grid-#{$o-grid-small}12 {
 			clear: none;
 		}
 		
-		%ft-grid-no-gutter,
-		%ft-grid-no-gutter-#{$ft-grid-large},
-		%ft-grid-no-left-gutter,
-		%ft-grid-no-left-gutter-#{$ft-grid-large} {
+		%o-grid-no-gutter,
+		%o-grid-no-gutter-#{$o-grid-large},
+		%o-grid-no-left-gutter,
+		%o-grid-no-left-gutter-#{$o-grid-large} {
 			padding-left: 0;
 
-			&> .#{$ft-grid-row} {
+			&> .#{$o-grid-row} {
 				margin-left: 0;
 			}
 		}
 
-		%ft-grid-no-gutter,
-		%ft-grid-no-gutter-#{$ft-grid-large},
-		%ft-grid-no-right-gutter,
-		%ft-grid-no-right-gutter-#{$ft-grid-large} {
+		%o-grid-no-gutter,
+		%o-grid-no-gutter-#{$o-grid-large},
+		%o-grid-no-right-gutter,
+		%o-grid-no-right-gutter-#{$o-grid-large} {
 			padding-right: 0;
 
-			&> .#{$ft-grid-row} {
+			&> .#{$o-grid-row} {
 				margin-right: 0;
 			}
 		}

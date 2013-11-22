@@ -1,19 +1,19 @@
 // Page widths
-$ft-grid-min-width: 240px;
-$ft-grid-small-max-width: 400px;
-$ft-grid-medium-max-width: 580px;
-$ft-grid-large-max-width: 760px;
-$ft-grid-extra-large-max-width: 1160px;
+$o-grid-min-width: 240px;
+$o-grid-small-max-width: 400px;
+$o-grid-medium-max-width: 580px;
+$o-grid-large-max-width: 760px;
+$o-grid-extra-large-max-width: 1160px;
 
 // Breakpoints
-$ft-grid-small-to-medium-break: 400px;
-$ft-grid-medium-to-large-break: 800px;
-$ft-grid-large-to-extra-large-break: 1200px;
+$o-grid-small-to-medium-break: 400px;
+$o-grid-medium-to-large-break: 800px;
+$o-grid-large-to-extra-large-break: 1200px;
 
 //gutters
-$ft-grid-responsive-half-gutter: 5px;
-$ft-grid-default-half-gutter: 0.5%;
-$ft-grid-fixed-half-gutter: 2px;
+$o-grid-responsive-half-gutter: 5px;
+$o-grid-default-half-gutter: 0.5%;
+$o-grid-fixed-half-gutter: 2px;
 
 @import "default.scss";
 @import "../components/grid-responsive.scss";

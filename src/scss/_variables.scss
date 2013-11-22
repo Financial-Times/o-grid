@@ -7,35 +7,35 @@
 // -------------------------------------------------------------------------------------
 
 // Gutters
-$ft-grid-responsive-half-gutter: 10px !default;
-$ft-grid-default-half-gutter: 1% !default;
-$ft-grid-fixed-half-gutter: 5px !default;
+$o-grid-responsive-half-gutter: 10px !default;
+$o-grid-default-half-gutter: 1% !default;
+$o-grid-fixed-half-gutter: 5px !default;
 
 // Page widths
-$ft-grid-min-width: 240px !default;
-$ft-grid-small-max-width: 600px !default;
-$ft-grid-medium-max-width: 780px !default;
-$ft-grid-large-max-width: 960px !default;
-$ft-grid-extra-large-max-width: 1360px !default;
+$o-grid-min-width: 240px !default;
+$o-grid-small-max-width: 600px !default;
+$o-grid-medium-max-width: 780px !default;
+$o-grid-large-max-width: 960px !default;
+$o-grid-extra-large-max-width: 1360px !default;
 
 // Breakpoints
-$ft-grid-small-to-medium-break: 600px !default;
-$ft-grid-medium-to-large-break: 1000px !default;
-$ft-grid-large-to-extra-large-break: 1400px !default;
+$o-grid-small-to-medium-break: 600px !default;
+$o-grid-medium-to-large-break: 1000px !default;
+$o-grid-large-to-extra-large-break: 1400px !default;
 
 // -------------------------------------------------------------------------------------
 // FLAGS
 // -------------------------------------------------------------------------------------
-$ft-grid-is-responsive: true !default;
-$ft-grid-is-fluid: false !default;
-$ft-grid-is-fixed-desktop: false !default;
+$o-grid-is-responsive: true !default;
+$o-grid-is-fluid: false !default;
+$o-grid-is-fixed-desktop: false !default;
 
 
 
 // -------------------------------------------------------------------------------------
 // PATHS
 // -------------------------------------------------------------------------------------
-$ft-grid-path-to-polyfills: "/polyfills/" !default;
+$o-grid-path-to-polyfills: "/polyfills/" !default;
 
 
 // -------------------------------------------------------------------------------------
@@ -53,23 +53,23 @@ $ft-grid-path-to-polyfills: "/polyfills/" !default;
 	$ie8: '.ie8' !default;
 	$ie7: '.ie7' !default;
 
-$ft-grid-namespace: #{ft-grid-};
+$o-grid-namespace: #{o-grid-};
 
 
-$ft-grid-page: $ft-grid-namespace + page;
-$ft-grid-row: $ft-grid-namespace + row;
-$ft-grid-column: $ft-grid-namespace + col;
-$ft-grid-box: $ft-grid-namespace + box;
+$o-grid-page: $o-grid-namespace + page;
+$o-grid-row: $o-grid-namespace + row;
+$o-grid-column: $o-grid-namespace + col;
+$o-grid-box: $o-grid-namespace + box;
 
-$ft-grid-small: s;
-$ft-grid-medium: m;
-$ft-grid-large: l;
-$ft-grid-extra-large: xl;
-$ft-grid-default: d;
+$o-grid-small: s;
+$o-grid-medium: m;
+$o-grid-large: l;
+$o-grid-extra-large: xl;
+$o-grid-default: d;
 
-$ft-grid-fixed-layout-selector: $lt-ie9 !default;
-$ft-grid-mq-type:device-width !default;
-//$ft-grid-fixed-size: $ft-grid-large !default;
+$o-grid-fixed-layout-selector: $lt-ie9 !default;
+$o-grid-mq-type:device-width !default;
+//$o-grid-fixed-size: $o-grid-large !default;
 
 
 // -------------------------------------------------------------------------------------
@@ -81,5 +81,5 @@ $ft-grid-mq-type:device-width !default;
 //     inadvisable to do so as components will not typically define styles for 
 //     your new layout)
 // -------------------------------------------------------------------------------------
-$ft-grid-max-widths: $ft-grid-small-max-width,$ft-grid-medium-max-width,$ft-grid-large-max-width,$ft-grid-extra-large-max-width !default;
-$ft-grid-layout-shorthands: $ft-grid-small,$ft-grid-medium,$ft-grid-large,$ft-grid-extra-large,$ft-grid-default !default;
+$o-grid-max-widths: $o-grid-small-max-width,$o-grid-medium-max-width,$o-grid-large-max-width,$o-grid-extra-large-max-width !default;
+$o-grid-layout-shorthands: $o-grid-small,$o-grid-medium,$o-grid-large,$o-grid-extra-large,$o-grid-default !default;

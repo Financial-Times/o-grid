@@ -6,25 +6,25 @@
 			{{{start}}}
 		{{/wrapper}}
 		{{^wrapper}}
-			<div class="ft-grid-page">
+			<div class="o-grid-page">
 				
 		{{/wrapper}}
-			<div class="ft-grid-row">
-				<div class="ft-grid-col|12|">
+			<div class="o-grid-row">
+				<div class="o-grid-col|12|">
 					<h2>{{title}}</h2>
 					<p>{{{description}}}</p>
 				</div>
 			</div>
 		{{#if this.rows}}
 			{{#each this.rows}}
-				<div class="ft-grid-row">
+				<div class="o-grid-row">
 					{{#each this.columns}}
 						{{> column}}
 					{{/each}}
 				</div>
 			{{/each}}
 		{{else}}
-			<div class="ft-grid-row">
+			<div class="o-grid-row">
 				{{#each this.columns}}
 					{{> column}}
 				{{/each}}

@@ -170,11 +170,11 @@
             },
             {"span": "|4|s12|"}
         ],
-        "description": "The grid can be applied within components on a page which doesn't use grid-module for its global layout by wrapping in a container with class <code>ft-grid-box</code>",
+        "description": "The grid can be applied within components on a page which doesn't use grid-module for its global layout by wrapping in a container with class <code>o-grid-box</code>",
         "title": "Usage on existing pages",
         "wrapper": {
             "end": "</div></div>",
-            "start": "<div style=\"max-width: 700px; min-width: 300px; margin:auto;\"><div class=\"ft-grid-box\"> "
+            "start": "<div style=\"max-width: 700px; min-width: 300px; margin:auto;\"><div class=\"o-grid-box\"> "
         }
     },
     {

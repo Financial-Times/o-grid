@@ -77,7 +77,7 @@
 	right: 8px;
 	height: 100%;
 
-	.ft-grid-row,
+	.o-grid-row,
 	.col,
 	.col > div {
 		height: 100%;
@@ -108,38 +108,38 @@
 	white-space: pre;
 	font-family: monospace;
 }
-.ft-grid-row {
+.o-grid-row {
 	background-color: #eee;
 	padding-bottom: 10px;
 }
 
-.dev-inner + .ft-grid-row {
+.dev-inner + .o-grid-row {
 	margin-top: 10px;
 }
 
-[class*="ft-grid-col"] [class*="ft-grid-col"] .dev-inner {
+[class*="o-grid-col"] [class*="o-grid-col"] .dev-inner {
 	background-color: #fff;
 }
 
-@include ftGridRespondTo(s) {
+@include oGridRespondTo(s) {
 	.header .mode:after {
 		content: "small layout";
 	}
 }
 
-@include ftGridRespondTo(m) {
+@include oGridRespondTo(m) {
 	.header .mode:after {
 		content: "medium layout";
 	}
 }
 
-@include ftGridRespondTo(l) {
+@include oGridRespondTo(l) {
 	.header .mode:after {
 		content: "large layout";
 	}
 }
 
-@include ftGridRespondTo(xl) {
+@include oGridRespondTo(xl) {
 	.header .mode:after {
 		content: "extra large layout";
 	}

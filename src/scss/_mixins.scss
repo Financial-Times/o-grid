@@ -3,7 +3,7 @@
 //
 // @param $selector {string|null} css selector to wrap the styles in
 //
-@mixin wrapInSelector ($selector:null) {
+@mixin oWrapInSelector ($selector:null) {
 	@if($selector) {
 		#{$selector} { @content }
 	} @else {
@@ -18,23 +18,23 @@
 // @param $max {string|null} max-width for media query
 // @param $force {boolean} [false] if set to true will then if $min and $max are undefined it will write out the styles wrapped in @media screen, otherwise writes nothing
 //
-@mixin maxMinMediaQuery($min, $max, $force:false) {
+@mixin oMaxMinMediaQuery($min, $max, $force:false) {
 	@if ($min and $max) {
-		@media screen and (min-#{$ft-grid-mq-type}:$min+1) and (max-#{$ft-grid-mq-type}:$max) { @content; }
+		@media screen and (min-#{$o-grid-mq-type}:$min+1) and (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($min) {
-		@media screen and (min-#{$ft-grid-mq-type}:$min+1) { @content; }
+		@media screen and (min-#{$o-grid-mq-type}:$min+1) { @content; }
 	} @else if ($max) {
-		@media screen and  (max-#{$ft-grid-mq-type}:$max) { @content; }
+		@media screen and  (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($force) {
 		@media screen { @content; }
 	}
 }
 
 // Add cross-browser box-sizing attribute
-@mixin boxSizing($value) {
+@mixin oBoxSizing($value) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	*behavior: url(#{$ft-grid-path-to-polyfills}boxsizing.htc);
+	*behavior: url(#{$o-grid-path-to-polyfills}boxsizing.htc);
 }
 
 //
@@ -42,19 +42,19 @@
 //
 // @param $layoutSizes {string|list} name[s] of layout size[s] (s, m , l, xl)
 //
-@mixin ftGridRespondTo ($layoutSizes) {
+@mixin oGridRespondTo ($layoutSizes) {
 
 	@each $layoutSize in $layoutSizes {
-		@if $layoutSize == $ft-grid-small {
-			@include maxMinMediaQuery(null, $ft-grid-small-to-medium-break) { @content; }
-		} @else if $layoutSize == $ft-grid-medium {
-			@include maxMinMediaQuery($ft-grid-small-to-medium-break, $ft-grid-medium-to-large-break) { @content; }
-		} @else if $layoutSize == $ft-grid-large {
-			@include maxMinMediaQuery($ft-grid-medium-to-large-break, $ft-grid-large-to-extra-large-break) { @content; }
-		} @else if $layoutSize == $ft-grid-extra-large {
-			@include maxMinMediaQuery($ft-grid-large-to-extra-large-break, null) { @content; }
+		@if $layoutSize == $o-grid-small {
+			@include oMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
+		} @else if $layoutSize == $o-grid-medium {
+			@include oMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
+		} @else if $layoutSize == $o-grid-large {
+			@include oMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
+		} @else if $layoutSize == $o-grid-extra-large {
+			@include oMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
-			@include maxMinMediaQuery(null, null, true) { @content; }
+			@include oMaxMinMediaQuery(null, null, true) { @content; }
 		}
 	}
 }
@@ -65,41 +65,41 @@
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 // @param $maxWidth {number} maximum width of a row at this layout size
 //
-@mixin ftGridDefineLayout ($layoutSize, $maxWidth) {
+@mixin oGridDefineLayout ($layoutSize, $maxWidth) {
 
-	@include ftGridRespondTo($layoutSize) {
+	@include oGridRespondTo($layoutSize) {
 		
-		@if ($ft-grid-is-fluid and not ($layoutSize == $ft-grid-extra-large)) {
-			.#{$ft-grid-row},
-			.#{$ft-grid-page} {
+		@if ($o-grid-is-fluid and not ($layoutSize == $o-grid-extra-large)) {
+			.#{$o-grid-row},
+			.#{$o-grid-page} {
 				max-width: none;
 			}
 		} @else {
 			@if ($maxWidth) {
-				.#{$ft-grid-row},
-				.#{$ft-grid-page} {
+				.#{$o-grid-row},
+				.#{$o-grid-page} {
 					max-width: $maxWidth;
 				}
 			}
 		}
 
-		%ft-grid-no-gutter#{-$layoutSize},
-		%ft-grid-no-left-gutter#{-$layoutSize} {
+		%o-grid-no-gutter#{-$layoutSize},
+		%o-grid-no-left-gutter#{-$layoutSize} {
 			padding-left: 0;
-			&> .#{$ft-grid-row} {
+			&> .#{$o-grid-row} {
 				margin-left: 0;
 			}
 		}
 
-		%ft-grid-no-gutter#{-$layoutSize},
-		%ft-grid-no-right-gutter#{-$layoutSize} {
+		%o-grid-no-gutter#{-$layoutSize},
+		%o-grid-no-right-gutter#{-$layoutSize} {
 			padding-right: 0;
-			&> .#{$ft-grid-row} {
+			&> .#{$o-grid-row} {
 				margin-right: 0;
 			}
 		}
 		
-		@include ftGridColumnWidths($layoutSize);
+		@include oGridColumnWidths($layoutSize);
 	}
 }
 
@@ -108,18 +108,18 @@
 //
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 //
-@mixin ftGridColumnWidths($layoutSize) {
+@mixin oGridColumnWidths($layoutSize) {
 
 	$prefix: $layoutSize;
 
-	@if ($layoutSize == $ft-grid-default) {
+	@if ($layoutSize == $o-grid-default) {
 		$prefix: "";
 	} 
 
 	[class*="|#{$prefix}hide|"],
 	[class*="|#{$prefix}0|"],
-	%ft-grid-#{$prefix}0,
-	%ft-grid-#{$prefix}hide {
+	%o-grid-#{$prefix}0,
+	%o-grid-#{$prefix}hide {
 		display: none;
 	}
 
@@ -128,7 +128,7 @@
 	@for $colWidth from 1 through 11 {
 
 		$attrSelector: #{'[class*="|#{$prefix}#{$colWidth}|"]'};
-		$placeholderSelector: #{'%ft-grid-#{$prefix}#{$colWidth}'};
+		$placeholderSelector: #{'%o-grid-#{$prefix}#{$colWidth}'};
 
 		
 		#{$attrSelector},
@@ -146,7 +146,7 @@
 		
 	}
 	
-	@if ($layoutSize != $ft-grid-default) {
+	@if ($layoutSize != $o-grid-default) {
 		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
 		#{$aggregatedSelector} {
 			float: left;
@@ -156,7 +156,7 @@
 	}
 
 	[class*="|#{$prefix}12|"],
-	%ft-grid-#{$prefix}12 {
+	%o-grid-#{$prefix}12 {
 	    float: none;
 	    clear: both;
 		width: 100%;

@@ -133,7 +133,7 @@
 		
 		#{$attrSelector},
 		#{$placeholderSelector} {
-			width: ftGridColumnWidth($colWidth);
+			width: oGridColumnWidth($colWidth);
 		}
 		
 		// generates a comma separated selector for each of the column widths from 1 to 11

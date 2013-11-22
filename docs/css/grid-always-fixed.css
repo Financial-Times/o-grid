@@ -52,64 +52,64 @@ html {
 
 [class*="|1|"],
 [class*="|s1|"] {
-  width: ftGridColumnWidthMinusGutter(1, 1%);
+  width: 6.33333%;
 }
 
 [class*="|2|"],
 [class*="|s2|"] {
-  width: ftGridColumnWidthMinusGutter(2, 1%);
+  width: 14.66667%;
 }
 
 [class*="|3|"],
 [class*="|s3|"] {
-  width: ftGridColumnWidthMinusGutter(3, 1%);
+  width: 23%;
 }
 
 [class*="|4|"],
 [class*="|s4|"] {
-  width: ftGridColumnWidthMinusGutter(4, 1%);
+  width: 31.33333%;
 }
 
 [class*="|5|"],
 [class*="|s5|"] {
-  width: ftGridColumnWidthMinusGutter(5, 1%);
+  width: 39.66667%;
 }
 
 [class*="|6|"],
 [class*="|s6|"] {
-  width: ftGridColumnWidthMinusGutter(6, 1%);
+  width: 48%;
 }
 
 [class*="|7|"],
 [class*="|s7|"] {
-  width: ftGridColumnWidthMinusGutter(7, 1%);
+  width: 56.33333%;
 }
 
 [class*="|8|"],
 [class*="|s8|"] {
-  width: ftGridColumnWidthMinusGutter(8, 1%);
+  width: 64.66667%;
 }
 
 [class*="|9|"],
 [class*="|s9|"] {
-  width: ftGridColumnWidthMinusGutter(9, 1%);
+  width: 73%;
 }
 
 [class*="|10|"],
 [class*="|s10|"] {
-  width: ftGridColumnWidthMinusGutter(10, 1%);
+  width: 81.33333%;
 }
 
 [class*="|11|"],
 [class*="|s11|"] {
-  width: ftGridColumnWidthMinusGutter(11, 1%);
+  width: 89.66667%;
 }
 
 [class*="|12|"],
 [class*="|s12|"] {
   float: none;
   clear: both;
-  width: ftGridColumnWidthMinusGutter(12, 1%);
+  width: 98%;
 }
 
 .o-grid-no-gutter,
@@ -162,47 +162,47 @@ html {
 }
 
 [class*="|1|"] {
-  width: ftGridColumnWidth(1);
+  width: 8.33333%;
 }
 
 [class*="|2|"] {
-  width: ftGridColumnWidth(2);
+  width: 16.66667%;
 }
 
 [class*="|3|"] {
-  width: ftGridColumnWidth(3);
+  width: 25%;
 }
 
 [class*="|4|"] {
-  width: ftGridColumnWidth(4);
+  width: 33.33333%;
 }
 
 [class*="|5|"] {
-  width: ftGridColumnWidth(5);
+  width: 41.66667%;
 }
 
 [class*="|6|"] {
-  width: ftGridColumnWidth(6);
+  width: 50%;
 }
 
 [class*="|7|"] {
-  width: ftGridColumnWidth(7);
+  width: 58.33333%;
 }
 
 [class*="|8|"] {
-  width: ftGridColumnWidth(8);
+  width: 66.66667%;
 }
 
 [class*="|9|"] {
-  width: ftGridColumnWidth(9);
+  width: 75%;
 }
 
 [class*="|10|"] {
-  width: ftGridColumnWidth(10);
+  width: 83.33333%;
 }
 
 [class*="|11|"] {
-  width: ftGridColumnWidth(11);
+  width: 91.66667%;
 }
 
 [class*="|12|"] {
@@ -217,47 +217,47 @@ html {
 }
 
 [class*="|l1|"] {
-  width: ftGridColumnWidth(1);
+  width: 8.33333%;
 }
 
 [class*="|l2|"] {
-  width: ftGridColumnWidth(2);
+  width: 16.66667%;
 }
 
 [class*="|l3|"] {
-  width: ftGridColumnWidth(3);
+  width: 25%;
 }
 
 [class*="|l4|"] {
-  width: ftGridColumnWidth(4);
+  width: 33.33333%;
 }
 
 [class*="|l5|"] {
-  width: ftGridColumnWidth(5);
+  width: 41.66667%;
 }
 
 [class*="|l6|"] {
-  width: ftGridColumnWidth(6);
+  width: 50%;
 }
 
 [class*="|l7|"] {
-  width: ftGridColumnWidth(7);
+  width: 58.33333%;
 }
 
 [class*="|l8|"] {
-  width: ftGridColumnWidth(8);
+  width: 66.66667%;
 }
 
 [class*="|l9|"] {
-  width: ftGridColumnWidth(9);
+  width: 75%;
 }
 
 [class*="|l10|"] {
-  width: ftGridColumnWidth(10);
+  width: 83.33333%;
 }
 
 [class*="|l11|"] {
-  width: ftGridColumnWidth(11);
+  width: 91.66667%;
 }
 
 /* ensures d12 and d0 can be over-ridden by styles for l layout */

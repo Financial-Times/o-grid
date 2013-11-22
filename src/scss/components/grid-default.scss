@@ -62,7 +62,7 @@ html {
 		[class*="|#{$o-grid-small}#{$colWidth}|"],
 		%o-grid-#{$colWidth},
 		%o-grid-#{$o-grid-small}#{$colWidth} {
-			width: ftGridColumnWidthMinusGutter($colWidth, $o-grid-default-half-gutter);
+			width: oGridColumnWidthMinusGutter($colWidth, $o-grid-default-half-gutter);
 		}
 	}
 
@@ -72,7 +72,7 @@ html {
 	%o-grid-12 {
 	    float: none;
 	    clear: both;
-		width: ftGridColumnWidthMinusGutter(12, $o-grid-default-half-gutter);
+		width: oGridColumnWidthMinusGutter(12, $o-grid-default-half-gutter);
 	}
 
 	%o-grid-no-gutter,

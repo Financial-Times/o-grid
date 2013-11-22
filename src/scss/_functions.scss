@@ -14,5 +14,5 @@
 // @param $halfGutterWidth {number} half the width of column gutters
 //
 @function oGridColumnWidthMinusGutter($numCols, $halfGutterWidth) {
-	@return (ftGridColumnWidth($numCols)-($halfGutterWidth*2))
+	@return (oGridColumnWidth($numCols)-($halfGutterWidth*2))
 }

@@ -5,7 +5,10 @@
     	"tmp",
     	"docs-generator",
     	"docs",
-    	"src/behavior"
+    	"Gruntfile.js",
+    	".jshintrc",
+    	"src/behavior",
+        "src/scss/bundles"
     ]
 }
 

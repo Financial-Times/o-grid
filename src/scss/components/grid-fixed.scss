@@ -4,11 +4,7 @@
 	}
 	@include oWrapInSelector ($o-grid-fixed-layout-selector) {
 
-		.#{$o-grid-row},
-		.#{$o-grid-page} {
-			width: $o-grid-large-max-width;
-			max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
-		}
+		
 
 		.#{$o-grid-row} .#{$o-grid-row},
 		.#{$o-grid-box} .#{$o-grid-row} {
@@ -27,6 +23,12 @@
 		@include oGridColumnWidths($o-grid-default);
 		@include oGridColumnWidths($o-grid-large);
 
+		.#{$o-grid-row},
+		.#{$o-grid-page} {
+			width: $o-grid-large-max-width;
+			max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
+		}
+		
 		[class*="|#{$o-grid-small}12|"],
 		%o-grid-#{$o-grid-small}12 {
 			clear: none;

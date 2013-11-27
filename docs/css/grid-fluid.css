@@ -547,11 +547,6 @@ html {
 .lt-ie9 {
   /* ensures d12 and d0 can be over-ridden by styles for l layout */
 }
-.lt-ie9 .o-grid-row,
-.lt-ie9 .o-grid-page {
-  width: 960px;
-  max-width: none;
-}
 .lt-ie9 .o-grid-row .o-grid-row,
 .lt-ie9 .o-grid-box .o-grid-row {
   margin-left: -5px;
@@ -654,6 +649,11 @@ html {
   float: none;
   clear: both;
   width: 100%;
+}
+.lt-ie9 .o-grid-row,
+.lt-ie9 .o-grid-page {
+  width: 960px;
+  max-width: none;
 }
 .lt-ie9 [class*="|s12|"] {
   clear: none;

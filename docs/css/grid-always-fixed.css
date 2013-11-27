@@ -134,12 +134,6 @@ html {
   margin-right: 0;
 }
 
-.o-grid-row,
-.o-grid-page {
-  width: 960px;
-  max-width: none;
-}
-
 .o-grid-row .o-grid-row,
 .o-grid-box .o-grid-row {
   margin-left: -5px;
@@ -271,6 +265,12 @@ html {
   float: none;
   clear: both;
   width: 100%;
+}
+
+.o-grid-row,
+.o-grid-page {
+  width: 960px;
+  max-width: none;
 }
 
 [class*="|s12|"] {

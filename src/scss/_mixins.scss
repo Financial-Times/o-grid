@@ -45,13 +45,13 @@
 @mixin oGridRespondTo ($layoutSizes) {
 
 	@each $layoutSize in $layoutSizes {
-		@if $layoutSize == $o-grid-small {
+		@if $layoutSize == s {
 			@include oMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
-		} @else if $layoutSize == $o-grid-medium {
+		} @else if $layoutSize == m {
 			@include oMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
-		} @else if $layoutSize == $o-grid-large {
+		} @else if $layoutSize == l {
 			@include oMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
-		} @else if $layoutSize == $o-grid-extra-large {
+		} @else if $layoutSize == xl {
 			@include oMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
 			@include oMaxMinMediaQuery(null, null, true) { @content; }
@@ -69,15 +69,15 @@
 
 	@include oGridRespondTo($layoutSize) {
 		
-		@if ($o-grid-is-fluid and not ($layoutSize == $o-grid-extra-large)) {
-			.#{$o-grid-row},
-			.#{$o-grid-page} {
+		@if ($o-grid-is-fluid and not ($layoutSize == xl)) {
+			.o-grid-row,
+			.o-grid-page {
 				max-width: none;
 			}
 		} @else {
 			@if ($maxWidth) {
-				.#{$o-grid-row},
-				.#{$o-grid-page} {
+				.o-grid-row,
+				.o-grid-page {
 					max-width: $maxWidth;
 				}
 			}
@@ -86,7 +86,7 @@
 		%o-grid-no-gutter#{-$layoutSize},
 		%o-grid-no-left-gutter#{-$layoutSize} {
 			padding-left: 0;
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-left: 0;
 			}
 		}
@@ -94,7 +94,7 @@
 		%o-grid-no-gutter#{-$layoutSize},
 		%o-grid-no-right-gutter#{-$layoutSize} {
 			padding-right: 0;
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-right: 0;
 			}
 		}
@@ -112,7 +112,7 @@
 
 	$prefix: $layoutSize;
 
-	@if ($layoutSize == $o-grid-default) {
+	@if ($layoutSize == default) {
 		$prefix: "";
 	} 
 
@@ -146,7 +146,7 @@
 		
 	}
 	
-	@if ($layoutSize != $o-grid-default) {
+	@if ($layoutSize != default) {
 		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
 		#{$aggregatedSelector} {
 			float: left;

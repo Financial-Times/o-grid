@@ -51,17 +51,6 @@ $o-grid-path-to-polyfills: "/polyfills/" !default;
 	$ie8: '.ie8' !default;
 	$ie7: '.ie7' !default;
 
-$o-grid-page: o-grid-page;
-$o-grid-row: o-grid-row;
-$o-grid-column: o-grid-col;
-$o-grid-box: o-grid-box;
-
-$o-grid-small: s;
-$o-grid-medium: m;
-$o-grid-large: l;
-$o-grid-extra-large: xl;
-$o-grid-default: d;
-
 $o-grid-fixed-layout-selector: $lt-ie9 !default;
 $o-grid-mq-type: device-width !default;
 //$o-grid-fixed-size: $o-grid-large !default;
@@ -77,4 +66,4 @@ $o-grid-mq-type: device-width !default;
 //     your new layout)
 // -------------------------------------------------------------------------------------
 $_o-grid-max-widths: $o-grid-small-max-width,$o-grid-medium-max-width,$o-grid-large-max-width,$o-grid-extra-large-max-width !default;
-$_o-grid-layout-shorthands: $o-grid-small,$o-grid-medium,$o-grid-large,$o-grid-extra-large,$o-grid-default !default;
+$_o-grid-layout-shorthands: s m l xl !default;

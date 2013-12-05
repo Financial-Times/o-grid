@@ -4,32 +4,32 @@ html {
 	text-size-adjust: 100%;
 }
 
-.#{$o-grid-row},
-.#{$o-grid-box},
-.#{$o-grid-page} {
+.o-grid-row,
+.o-grid-box,
+.o-grid-page {
 	margin: 0 auto;
 }
 
-.#{$o-grid-row} {
+.o-grid-row {
 	clear: both;
 	width: 100%;
 }
 
-.#{$o-grid-row}:after {
+.o-grid-row:after {
 	content: '';
 	display: block;
 	clear: both;
 }
 
 @if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {
-	.#{$o-grid-row},
-	.#{$o-grid-page}  {
+	.o-grid-row,
+	.o-grid-page  {
 		max-width: $o-grid-small-max-width; 
 		min-width: $o-grid-min-width;
 	}
 
-	.#{$o-grid-row} .#{$o-grid-row},
-	.#{$o-grid-box} .#{$o-grid-row} {
+	.o-grid-row .o-grid-row,
+	.o-grid-box .o-grid-row {
 		margin-left: -$o-grid-default-half-gutter;
 		margin-right: -$o-grid-default-half-gutter;
 		width: auto;
@@ -38,18 +38,18 @@ html {
 	}
 
 	/* Default grid: Layout 1 FIXED (well, max-width) */
-	[class*="#{$o-grid-column}"] {
+	[class*="o-grid-col"] {
 		float: left;
 		padding-left: $o-grid-default-half-gutter;
 		padding-right: $o-grid-default-half-gutter;
 	}
 
 	[class*="|0|"],
-	[class*="|#{$o-grid-small}0|"],
+	[class*="|s0|"],
 	[class*="|hide|"],
-	[class*="|#{$o-grid-small}hide|"],
-	%o-grid.#{$o-grid-small}0,
-	%o-grid-#{$o-grid-small}hide,
+	[class*="|shide|"],
+	%o-grid.s0,
+	%o-grid-shide,
 	%o-grid-0,
 	%o-grid-hide {
 		display: none;
@@ -59,16 +59,16 @@ html {
 	@for $colWidth from 1 through 11 {
 				
 		[class*="|#{$colWidth}|"],
-		[class*="|#{$o-grid-small}#{$colWidth}|"],
+		[class*="|s#{$colWidth}|"],
 		%o-grid-#{$colWidth},
-		%o-grid-#{$o-grid-small}#{$colWidth} {
+		%o-grid-s#{$colWidth} {
 			width: oGridColumnWidthMinusGutter($colWidth, $o-grid-default-half-gutter);
 		}
 	}
 
 	[class*="|12|"],
-	[class*="|#{$o-grid-small}12|"],
-	%o-grid-#{$o-grid-small}12,
+	[class*="|s12|"],
+	%o-grid-s12,
 	%o-grid-12 {
 	    float: none;
 	    clear: both;
@@ -76,23 +76,23 @@ html {
 	}
 
 	%o-grid-no-gutter,
-	%o-grid-no-gutter-#{$o-grid-small},
+	%o-grid-no-gutter-s,
 	%o-grid-no-left-gutter,
-	%o-grid-no-left-gutter-#{$o-grid-small} {
+	%o-grid-no-left-gutter-s {
 		padding-left: 0;
 
-		&> .#{$o-grid-row} {
+		&> .o-grid-row {
 			margin-left: 0;
 		}
 	}
 
 	%o-grid-no-gutter,
-	%o-grid-no-gutter-#{$o-grid-small},
+	%o-grid-no-gutter-s,
 	%o-grid-no-right-gutter,
-	%o-grid-no-right-gutter-#{$o-grid-small} {
+	%o-grid-no-right-gutter-s {
 		padding-right: 0;
 
-		&> .#{$o-grid-row} {
+		&> .o-grid-row {
 			margin-right: 0;
 		}
 	}

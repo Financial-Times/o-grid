@@ -206,8 +206,8 @@ e.g.
 
         // no left gutter at large and extra large layouts. No gutter at all at small size
         .my-component {
-            @extend %o-grid-no-leo-gutter-l;
-            @extend %o-grid-no-leo-gutter-xl;
+            @extend %o-grid-no-left-gutter-l;
+            @extend %o-grid-no-left-gutter-xl;
             @extend %o-grid-no-gutter-s;
         }
 
@@ -218,16 +218,16 @@ e.g.
 
 ####Mixins
 * `oGridRespondTo($layoutSize)`  
-To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `$o-grid-small`, `$o-grid-medium`, `$o-grid-large` or `$o-grid-extra-large` depending on which layout size the style should apply to e.g.
+To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `s`, `m`, `l` or `xl` depending on which layout size the style should apply to e.g.
 
-        @include oGridRespondTo($o-grid-small) {
+        @include oGridRespondTo(s) {
             .o-example-module .item-subheading {
                 font-size: 0.5em
             }
         }
 More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts). To do this combine the styles in a [list variable](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists) beforehand.
-        $my-module-large-layouts: $o-grid-large,$o-grid-extra-large;
-        @include oGridRespondTo($my-module-large-layouts) {
+        
+        @include oGridRespondTo((l xl)) {
             .o-example-module .item-subheading {
                 font-size: 0.5em
             }

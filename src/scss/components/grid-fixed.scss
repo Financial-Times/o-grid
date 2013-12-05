@@ -4,54 +4,52 @@
 	}
 	@include oWrapInSelector ($o-grid-fixed-layout-selector) {
 
-		
-
-		.#{$o-grid-row} .#{$o-grid-row},
-		.#{$o-grid-box} .#{$o-grid-row} {
+		.o-grid-row .o-grid-row,
+		.o-grid-box .o-grid-row {
 			margin-left: -$o-grid-fixed-half-gutter;
 			margin-right: -$o-grid-fixed-half-gutter;
 			width: auto;
 		}
 
-		[class*="#{$o-grid-column}"] {
+		[class*="o-grid-col"] {
 			float: left;
 			padding-left: $o-grid-fixed-half-gutter;
 			padding-right: $o-grid-fixed-half-gutter;
 			@include oBoxSizing(border-box);
 		}
 
-		@include oGridColumnWidths($o-grid-default);
-		@include oGridColumnWidths($o-grid-large);
+		@include oGridColumnWidths(default);
+		@include oGridColumnWidths(l);
 
-		.#{$o-grid-row},
-		.#{$o-grid-page} {
+		.o-grid-row,
+		.o-grid-page {
 			width: $o-grid-large-max-width;
 			max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 		}
 		
-		[class*="|#{$o-grid-small}12|"],
-		%o-grid-#{$o-grid-small}12 {
+		[class*="|s12|"],
+		%o-grid-s12 {
 			clear: none;
 		}
 		
 		%o-grid-no-gutter,
-		%o-grid-no-gutter-#{$o-grid-large},
+		%o-grid-no-gutter-l,
 		%o-grid-no-left-gutter,
-		%o-grid-no-left-gutter-#{$o-grid-large} {
+		%o-grid-no-left-gutter-l {
 			padding-left: 0;
 
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-left: 0;
 			}
 		}
 
 		%o-grid-no-gutter,
-		%o-grid-no-gutter-#{$o-grid-large},
+		%o-grid-no-gutter-l,
 		%o-grid-no-right-gutter,
-		%o-grid-no-right-gutter-#{$o-grid-large} {
+		%o-grid-no-right-gutter-l {
 			padding-right: 0;
 
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-right: 0;
 			}
 		}

@@ -2,14 +2,14 @@
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 
-		.#{$o-grid-row} .#{$o-grid-row},
-		.#{$o-grid-box} .#{$o-grid-row} {
+		.o-grid-row .o-grid-row,
+		.o-grid-box .o-grid-row {
 			margin-left: -$o-grid-responsive-half-gutter;
 			margin-right: -$o-grid-responsive-half-gutter;
 			width: auto;
 		}
 
-		[class*="#{$o-grid-column}"] {
+		[class*="o-grid-col"] {
 			float: left;
 			padding-left: $o-grid-responsive-half-gutter;
 			padding-right: $o-grid-responsive-half-gutter;
@@ -17,15 +17,15 @@
 		}
 
 		// Following rules undo styles applied by the fixed grid
-		[class*="|#{$o-grid-small}0|"],
-		[class*="|#{$o-grid-small}hide|"],
-		%o-grid-#{$o-grid-small}0,
-		%o-grid-#{$o-grid-small}hide  {
+		[class*="|s0|"],
+		[class*="|shide|"],
+		%o-grid-s0,
+		%o-grid-shide  {
 		    display: block;
 		}
 
-		[class*="|#{$o-grid-small}12|"],
-		%o-grid-#{$o-grid-small}12 {
+		[class*="|s12|"],
+		%o-grid-s12 {
 		    clear: none;
 		}
 
@@ -33,8 +33,8 @@
 
 		@for $colWidth from 0 through 12 {
 
-			$attrSelector: #{'[class*="|#{$o-grid-small}#{$colWidth}|"]'};
-			$placeholderSelector: #{'%o-grid-#{$o-grid-small}#{$colWidth}'};
+			$attrSelector: #{'[class*="|s#{$colWidth}|"]'};
+			$placeholderSelector: #{'%o-grid-s#{$colWidth}'};
 
 			// generates a comma separated selector for each of the column widths from 1 to 11
 			@if ($aggregatedSelector) {
@@ -55,7 +55,7 @@
 		%o-grid-no-left-gutter {
 			padding-left: 0;
 
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-left: 0;
 			}
 		}
@@ -64,13 +64,13 @@
 		%o-grid-no-right-gutter {
 			padding-right: 0;
 
-			&> .#{$o-grid-row} {
+			&> .o-grid-row {
 				margin-right: 0;
 			}
 		}
 	}
 
-	@include oGridDefineLayout($o-grid-default, null);
+	@include oGridDefineLayout(default, null);
 
 	@for $i from 1 through 4 {
 		@include oGridDefineLayout(nth($_o-grid-layout-shorthands, $i), nth($_o-grid-max-widths, $i));

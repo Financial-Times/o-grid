@@ -1,6 +1,11 @@
+@import "assets-module/main";
 @import "../_variables.scss";
 @import "../_mixins.scss";
 @import "../_functions.scss";
+
+$o-assets-global-path: "";
+$o-grid-assets-path: null;
+
 @import "../components/grid-default.scss";
 
 .o-grid-no-gutter {

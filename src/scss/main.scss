@@ -1,7 +1,8 @@
-@import "_variables.scss";
-@import "_mixins.scss";
-@import "_functions.scss";
+@import "assets-module/main";
+@import "_variables";
+@import "_mixins";
+@import "_functions";
 
-@import "components/grid-default.scss";
-@import "components/grid-responsive.scss";	
-@import "components/grid-fixed.scss";
+@import "components/grid-default";
+@import "components/grid-responsive";	
+@import "components/grid-fixed";

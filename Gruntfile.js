@@ -65,7 +65,8 @@ module.exports = function(grunt) {
     sass: {
       docs: {
         options: {
-          style: 'expanded'
+          style: 'expanded',
+          loadPath: ['.', './bower_components/']
         },
         files: constructDemoPagesSassConfig()
       }

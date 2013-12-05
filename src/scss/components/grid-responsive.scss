@@ -73,6 +73,6 @@
 	@include oGridDefineLayout($o-grid-default, null);
 
 	@for $i from 1 through 4 {
-		@include oGridDefineLayout(nth($o-grid-layout-shorthands, $i), nth($o-grid-max-widths, $i));
+		@include oGridDefineLayout(nth($_o-grid-layout-shorthands, $i), nth($_o-grid-max-widths, $i));
 	}
 }

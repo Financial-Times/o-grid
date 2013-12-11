@@ -1,5 +1,5 @@
 {
-  "name": "grid-module",
+  "name": "o-grid",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.1",

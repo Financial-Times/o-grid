@@ -170,7 +170,7 @@
             },
             {"span": "|4|s12|"}
         ],
-        "description": "The grid can be applied within components on a page which doesn't use grid-module for its global layout by wrapping in a container with class <code>o-grid-box</code>",
+        "description": "The grid can be applied within components on a page which doesn't use o-grid for its global layout by wrapping in a container with class <code>o-grid-box</code>",
         "title": "Usage on existing pages",
         "wrapper": {
             "end": "</div></div>",

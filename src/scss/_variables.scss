@@ -30,11 +30,13 @@ $o-grid-is-responsive: true !default;
 $o-grid-is-fluid: false !default;
 $o-grid-is-fixed-desktop: false !default;
 
+
 // -------------------------------------------------------------------------------------
 // PATHS
 // -------------------------------------------------------------------------------------
-$o-grid-path-to-polyfills: "/polyfills/" !default;
-
+$o-grid-name: o-grid;
+$o-grid-version: null !default;
+$o-grid-assets-path: $o-grid-name !default;
 
 // -------------------------------------------------------------------------------------
 // CLASS NAMES/PREFIXES

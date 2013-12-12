@@ -34,7 +34,7 @@
 @mixin oBoxSizing($value) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	*behavior: url(#{$o-grid-path-to-polyfills}boxsizing.htc);
+	*behavior: url(oAssetsUse("polyfills/boxsizing.htc", $o-grid-assets-path, $o-grid-version));
 }
 
 //

@@ -9,6 +9,9 @@
     	".jshintrc",
     	"src/behavior",
         "src/scss/bundles"
-    ]
+    ],
+    "dependencies": {
+        "assets-module": "http://git.svc.ft.com:9080/git/origami/assets-module.git#>=0.1.1"
+    }
 }
 

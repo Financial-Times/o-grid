@@ -273,20 +273,20 @@
       font-size: 0.8em;
     }
     </style>
-    <title>grid-module documentation</title>
+    <title>o-grid documentation</title>
     <script src="http://cdn.jque.re/js/jquery-2.0.0.min.js"></script>
   </head>
   <body>
     <div id="toc"></div>
-    <h1>grid-module</h1>
+    <h1>o-grid</h1>
     <h2>About</h2>
-    <p>grid-module defines a 12 column responsive, nestable grid system for laying out html pages and modules. It supports all browsers with support for <em>css media queries</em>, with a fixed-width fallback for browsers that don&#39;t support them (specifically ie7/8).</p>
+    <p>o-grid defines a 12 column responsive, nestable grid system for laying out html pages and modules. It supports all browsers with support for <em>css media queries</em>, with a fixed-width fallback for browsers that don&#39;t support them (specifically ie7/8).</p>
     <blockquote>
       <p>Living off the grid and being kind of an outlaw brings a dangerous reality.
         <br> <em>Ron Perlman</em>
       </p>
     </blockquote>
-    <p><a href="https://github.com/Financial-Times/grid-module/issues">Report a bug</a>
+    <p><a href="https://github.com/Financial-Times/o-grid/issues">Report a bug</a>
     </p>
     <h3>Grid dimensions</h3>
     <p>Four layout sizes are defined:</p>
@@ -314,11 +314,11 @@
     </ul>
     <p>For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box&#39;s width is divided into 12 columns</p>
     <h3>Demos</h3>
-    <p>In order to view the demos you will need to <a href="#local-setup">install grid-module locally</a>. To force the demos to respond to resizing of your desktop browser window you will need to enable <a href="https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports">device metrics overrides</a>.</p>
+    <p>In order to view the demos you will need to <a href="#local-setup">install o-grid locally</a>. To force the demos to respond to resizing of your desktop browser window you will need to enable <a href="https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports">device metrics overrides</a>.</p>
     <ul>
       <li>
         <p><a href="grid-responsive.html">Responsive grid</a>  <em>Use this for cross-device testing</em>
-          <br>Demonstrates the behaviour of a page using the recommended installation of grid-module</p>
+          <br>Demonstrates the behaviour of a page using the recommended installation of o-grid</p>
       </li>
       <li>
         <p><a href="grid-fluid.html">Fluid grid</a>
@@ -358,15 +358,15 @@
     <ol>
       <li>
         <p>Add the following to your module&#39;s bower dependencies</p>
-        <pre><code> &quot;grid-module&quot;: &quot;0.2.x&quot;</code></pre>
+        <pre><code> &quot;o-grid&quot;: &quot;0.2.x&quot;</code></pre>
       </li>
       <li>
         <p>Include the following in your app&#39;s styles</p>
         <pre><code> // makes the grid respond to window rather than device width, so useful for development. 
  // For modules, and most products, this should be removed in production
  $o-grid-mq-type: width; 
- @import &quot;grid-module/main.scss&quot;;  </code></pre>
-        <p>Make sure that <code>grid-module</code> is in your sass include path (see the <a href="http://financial-times.github.io/o-origami/docs/syntax/scss/">origami docs</a> for more details). For products you can also simply use the <a href="http://financial-times.github.io/o-origami/docs/build-service/">build service</a>
+ @import &quot;o-grid/main.scss&quot;;  </code></pre>
+        <p>Make sure that <code>o-grid</code> is in your sass include path (see the <a href="http://financial-times.github.io/o-origami/docs/syntax/scss/">origami docs</a> for more details). For products you can also simply use the <a href="http://financial-times.github.io/o-origami/docs/build-service/">build service</a>
         </p>
       </li>
     </ol>
@@ -377,24 +377,24 @@
       <li>
         <p>From terminal run the following commands (you will need to have <a href="http://bower.io/">bower</a> already installed)</p>
         <pre><code> cd /Users/{your username}/the/directory/your/protoype/is/in
- bower install http://git.svc.ft.com:9080/git/origami/grid-module.git</code></pre>
+ bower install http://git.svc.ft.com:9080/git/origami/o-grid.git</code></pre>
       </li>
       <li>
         <p>Include the responsive grid css file in your html prototype&#39;s <code>&lt;head&gt;</code> directly</p>
-        <pre><code> &lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/grid-module/docs/css/grid-responsive.css&#39; /&gt; </code></pre>
+        <pre><code> &lt;link rel=&#39;stylesheet&#39; href=&#39;bower_components/o-grid/docs/css/grid-responsive.css&#39; /&gt; </code></pre>
       </li>
     </ol>
     <h3>For testers</h3>
-    <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run grid-module&#39;s test pages locally (OSX normally has these installed by default)</p>
+    <p>You must already have <a href="http://git-scm.com/downloads">git</a> and <a href="http://www.python.org/download/">python</a> installed to run o-grid&#39;s test pages locally (OSX normally has these installed by default)</p>
     <ol>
       <li>Open an instance of terminal</li>
       <li><code>cd /the/directory/you/want/to/install/in</code>
       </li>
-      <li><code>git clone http://git.svc.ft.com:9080/git/origami/grid-module.git</code>
+      <li><code>git clone http://git.svc.ft.com:9080/git/origami/o-grid.git</code>
       </li>
       <li>Do one of the following
         <ul>
-          <li><code>cd grid-module/docs; python -m SimpleHTTPServer</code> and go to <a href="http://localhost:8000">http://localhost:8000</a> in your browser (necessary to access the demos over wifi)</li>
+          <li><code>cd o-grid/docs; python -m SimpleHTTPServer</code> and go to <a href="http://localhost:8000">http://localhost:8000</a> in your browser (necessary to access the demos over wifi)</li>
           <li>in finder open /the/directory/you/want/to/install/in/docs/index.html</li>
         </ul>
       </li>
@@ -478,8 +478,8 @@
     <p>e.g.</p>
     <pre><code>    // no left gutter at large and extra large layouts. No gutter at all at small size
     .my-component {
-        @extend %o-grid-no-leo-gutter-l;
-        @extend %o-grid-no-leo-gutter-xl;
+        @extend %o-grid-no-left-gutter-l;
+        @extend %o-grid-no-left-gutter-xl;
         @extend %o-grid-no-gutter-s;
     }
     //No gutter at any size
@@ -490,15 +490,14 @@
     <ul>
       <li>
         <p><code>oGridRespondTo($layoutSize)</code>
-          <br>To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>$o-grid-small</code>, <code>$o-grid-medium</code>, <code>$o-grid-large</code> or <code>$o-grid-extra-large</code> depending on which layout size the style should apply to e.g.</p>
-        <pre><code>  @include oGridRespondTo($o-grid-small) {
+          <br>To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed <code>s</code>, <code>m</code>, <code>l</code> or <code>xl</code> depending on which layout size the style should apply to e.g.</p>
+        <pre><code>  @include oGridRespondTo(s) {
       .o-example-module .item-subheading {
           font-size: 0.5em
       }
   }</code></pre>
         <p>More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts). To do this combine the styles in a <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists">list variable</a> beforehand.</p>
-        <pre><code>  $my-module-large-layouts: $o-grid-large,$o-grid-extra-large;
-  @include oGridRespondTo($my-module-large-layouts) {
+        <pre><code>  @include oGridRespondTo((l xl)) {
       .o-example-module .item-subheading {
           font-size: 0.5em
       }
@@ -516,7 +515,7 @@
     <h4>&#39;Leaky&#39; selectors</h4>
     <p>Using a different prefix instead of <code>o-grid-col</code>, e.g. <code>not-really|6|-a-column</code> will still apply the grid width so in general it&#39;s best to avoid classes which contain <code>|{letter}{number}|</code> or <code>|{number}|</code> in your module&#39;s class names. Conversely, don&#39;t use this feature/bug deliberately by using e.g. <code>o-mymodule|6|</code> to layout your module as this behaviour is just a side effect and not a supported feature</p>
     <h4>Fixed/Absolute positioning</h4>
-    <p>The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the <a href="https://github.com/Financial-Times/grid-module/issues/9">github issue</a>. If you develop your own solution to the problem (you&#39;ll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn&#39;t assume that the configuration of the grid module will be consistent from product to product (see below).</p>
+    <p>The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the <a href="https://github.com/Financial-Times/o-grid/issues/9">github issue</a>. If you develop your own solution to the problem (you&#39;ll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn&#39;t assume that the configuration of the grid module will be consistent from product to product (see below).</p>
     <h2>Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a></h2>
     <h3>Laying out entire pages with the grid</h3>
     <p>If your entire page is to be laid out using the grid add the class <code>o-grid-page</code> to the <code>body</code>/ wrapper and then build up the layout using nested rows and columns. The html head <em>must</em> include the following metatag (or equivalent) to disable user scaling</p>
@@ -531,13 +530,13 @@
       </li>
     </ol>
     <h3>Supporting legacy browsers</h3>
-    <p>ie7/8 don&#39;t support media queries. If your product uses some kind of browser detection to add classes to the <code>&lt;html&gt;</code> tag (such as <a href="https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7">older versions of html5 boilerplate</a> did) the large layout will be displayed to the user. The default value of this class expected by grid-module is <code>lt-ie9</code>, but this can be configured by defining the following sass variable <em>before</em> including grid-module&#39;s main.scss:</p>
+    <p>ie7/8 don&#39;t support media queries. If your product uses some kind of browser detection to add classes to the <code>&lt;html&gt;</code> tag (such as <a href="https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7">older versions of html5 boilerplate</a> did) the large layout will be displayed to the user. The default value of this class expected by o-grid is <code>lt-ie9</code>, but this can be configured by defining the following sass variable <em>before</em> including o-grid&#39;s main.scss:</p>
     <pre><code>$lt-ie9: &#39;{A selector which will target both ie7 &amp; ie8}&#39;;</code></pre>
     <p>If your product does not target ie7 &amp; 8 in this way they will be served the default small screen layout.</p>
     <h4>Boxsizing in ie7</h4>
-    <p>For ie7 you must also specify an absolute path pointing to <code>grid-module/polyfills</code> as a value for <code>$o-grid-path-to-polyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/o-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>grid-module/polyfills/boxsizing.htc</code>)</p>
+    <p>For ie7 you must also specify an absolute path pointing to <code>o-grid/polyfills</code> as a value for <code>$o-grid-path-to-polyfills</code> in your sass (or, if using the <a href="http://financial-times.github.io/o-origami/docs/build-service/">build service</a> (and hence not having access to sass) use a method of your choice to point the default path <code>/polyfills/boxsizing.htc</code> to <code>o-grid/polyfills/boxsizing.htc</code>)</p>
     <h3>Things you <em>can</em> do (but in most cases probably shouldn&#39;t)</h3>
-    <p>The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include grid-module&#39;s main.scss file. A few notable uses are as follows:</p>
+    <p>The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid&#39;s main.scss file. A few notable uses are as follows:</p>
     <h4>Changing how responsive the grid is</h4>
     <p>The following flags can be used to change the responsive behaviour <em>[defaults in square brackets]</em>
     </p>
@@ -554,7 +553,7 @@
     <h4>Disabling larger layouts</h4>
     <p>By setting the value of a breakpoint (<code>$o-grid-small-to-medium-break</code>, <code>$o-grid-medium-to-large-break</code> or <code>$o-grid-large-to-extra-large-break</code>) to <code>false</code> the breakpoint is disabled, and its styles will not be included. <em>This only works when disabling a breakpoint <strong>and</strong> all those larger than it so, e.g. <code>$o-grid-medium-to-large-break: false;</code> will have unexpected efects on your layout unless you also specify <code>$o-grid-large-to-extra-large-break: false;</code>.</em>
     </p>
-    <h2>Developing grid-module</h2>
+    <h2>Developing o-grid</h2>
     <h3>BDD/TDD</h3>
     <p>The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid&#39;s classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.</p>
     <h4>Adding an example to all demo pages</h4>

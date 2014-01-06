@@ -8,7 +8,7 @@ It supports all browsers with support for *css media queries*, with a fixed-widt
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
-[Report a bug](https://github.com/Financial-Times/o-grid/issues)
+[Report a bug](https://github.com/Financial-Times/o-grid-issues/issues)
 
 ###Grid dimensions
 
@@ -246,14 +246,14 @@ All the variables used by the grid (see src/scss/_variables.scss) can be used in
 Using a different prefix instead of `o-grid-col`, e.g. `not-really|6|-a-column` will still apply the grid width so in general it's best to avoid classes which contain `|{letter}{number}|` or `|{number}|` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `o-mymodule|6|` to layout your module as this behaviour is just a side effect and not a supported feature
 
 ####Fixed/Absolute positioning
-The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/o-grid/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
+The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/o-grid-issues/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
 
 ##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 
 ###Laying out entire pages with the grid
 If your entire page is to be laid out using the grid add the class `o-grid-page` to the `body`/ wrapper and then build up the layout using nested rows and columns. The html head *must* include the following metatag (or equivalent) to disable user scaling
 
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 ###Including grid-based components in an existing, non-grid page
 

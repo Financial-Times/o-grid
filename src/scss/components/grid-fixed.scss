@@ -11,11 +11,24 @@
 			width: auto;
 		}
 
+		.o-grid-row.o-grid-row-compact,
+		#{$lt-ie9} .o-grid-row.o-grid-row-compact,
+		.o-grid-row .o-grid-row.o-grid-row-compact,
+		#{$lt-ie9} .o-grid-row .o-grid-row.o-grid-row-compact {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
 		[class*="o-grid-col"] {
 			float: left;
 			padding-left: $o-grid-fixed-half-gutter;
 			padding-right: $o-grid-fixed-half-gutter;
 			@include oBoxSizing(border-box);
+		}
+
+		.o-grid-row-compact > [class*="o-grid-col"] {
+			padding-left: 0;
+			padding-right: 0;
 		}
 
 		@include oGridColumnWidths(default);

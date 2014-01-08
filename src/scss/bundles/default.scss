@@ -1,12 +1,14 @@
 @import "o-assets/main";
-@import "../_variables.scss";
-@import "../_mixins.scss";
-@import "../_functions.scss";
+@import "o-useragent/main";
+@import "../_variables";
+@import "../_mixins";
+@import "../_functions";
 
 $o-assets-global-path: "/";
 $o-grid-assets-path: null;
+$o-grid-fixed-layout-selector: '.lt-ie9';
 
-@import "../components/grid-default.scss";
+@import "../components/grid-default";
 
 .o-grid-no-gutter {
 	@extend %o-grid-no-gutter !optional;

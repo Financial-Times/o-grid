@@ -15,6 +15,6 @@ $o-grid-responsive-half-gutter: 5px;
 $o-grid-default-half-gutter: 0.5%;
 $o-grid-fixed-half-gutter: 2px;
 
-@import "default.scss";
-@import "../components/grid-responsive.scss";
-@import "../components/grid-fixed.scss"; 
+@import "default";
+@import "../components/grid-responsive";
+@import "../components/grid-fixed"; 

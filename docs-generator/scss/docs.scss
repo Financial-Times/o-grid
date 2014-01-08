@@ -1,8 +1,9 @@
 /* Styles for presenting the grid. Not part of the grid code. */
 
-@import "../../src/scss/_variables.scss";
-@import "../../src/scss/_mixins.scss";
-@import "../../src/scss/_functions.scss";
+@import "o-useragent/main";
+@import "../../src/scss/_variables";
+@import "../../src/scss/_mixins";
+@import "../../src/scss/_functions";
 
 .header {
 	margin: 0 0 20px 0;

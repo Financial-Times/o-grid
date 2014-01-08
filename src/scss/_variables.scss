@@ -48,12 +48,7 @@ $o-grid-assets-path: $o-grid-name !default;
 // Also be sure to update README.md
 // -------------------------------------------------------------------------------------
 	
-	// candidates to put in a global-sass-variables module
-	$lt-ie9: '.lt-ie9' !default;
-	$ie8: '.ie8' !default;
-	$ie7: '.ie7' !default;
-
-$o-grid-fixed-layout-selector: $lt-ie9 !default;
+$o-grid-fixed-layout-selector: #{$o-useragent-ie8}, #{$o-useragent-ie7} !default;
 $o-grid-mq-type: device-width !default;
 //$o-grid-fixed-size: $o-grid-large !default;
 

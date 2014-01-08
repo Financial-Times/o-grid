@@ -3,12 +3,13 @@
 //
 // @param $selector {string|null} css selector to wrap the styles in
 //
-@mixin oWrapInSelector ($selector:null) {
-	@if($selector) {
-		#{$selector} { @content }
-	} @else {
+@mixin oWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
+	@if (not $selector or $alwaysOutputPlainToo) {
 		@content
 	}
+	@if($selector) {
+		#{$selector} { @content }
+	} 
 }
 
 //

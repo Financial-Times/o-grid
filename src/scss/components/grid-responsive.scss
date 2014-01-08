@@ -8,13 +8,13 @@
 			margin-right: -$o-grid-responsive-half-gutter;
 			width: auto;
 		}
-
-		.o-grid-row.o-grid-row-compact,
-		#{$lt-ie9} .o-grid-row.o-grid-row-compact,
-		.o-grid-row .o-grid-row.o-grid-row-compact,
-		#{$lt-ie9} .o-grid-row .o-grid-row.o-grid-row-compact {
-			margin-left: 0;
-			margin-right: 0;
+		
+		@include oWrapInSelector ($o-grid-fixed-layout-selector, true) {
+			.o-grid-row.o-grid-row-compact,
+			.o-grid-row .o-grid-row.o-grid-row-compact {
+				margin-left: 0;
+				margin-right: 0;
+			}
 		}
 
 		[class*="o-grid-col"] {

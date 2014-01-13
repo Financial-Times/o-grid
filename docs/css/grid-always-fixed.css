@@ -1,3 +1,7 @@
+/**
+
+
+**/
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -38,12 +42,6 @@ html {
 
 .o-grid-row.o-grid-row-compact,
 .o-grid-row .o-grid-row.o-grid-row-compact {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.lt-ie9 .o-grid-row.o-grid-row-compact,
-.lt-ie9 .o-grid-row .o-grid-row.o-grid-row-compact {
   margin-left: 0;
   margin-right: 0;
 }
@@ -170,7 +168,7 @@ html {
   padding-right: 5px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  *behavior: url(/polyfills/boxsizing.htc);
+  *behavior: url(/o-useragent/polyfills/boxsizing.htc);
 }
 
 .o-grid-row-compact > [class*="o-grid-col"] {

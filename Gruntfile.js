@@ -42,20 +42,6 @@ module.exports = function(grunt) {
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      boxSizing: {
-        src: ['src/behavior/boxsizing/head', 'tmp/behavior/boxsizing/script.js', 'src/behavior/boxsizing/foot'],
-        dest: 'polyfills/boxsizing.htc'
-      }
-    },
-    uglify: {
-      boxSizing: {
-        options: {compress: true},
-        files: {
-          './tmp/behavior/boxsizing/script.js': ['src/behavior/boxsizing/script.js']
-        }
-      }
-    },
     watch: {
       sass: {
         files: ['src/scss/**/*'],
@@ -112,18 +98,16 @@ module.exports = function(grunt) {
   });
 
   // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-templater');
   grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-prettify');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean:before', 'jshint', 'uglify', 'concat', 'docs', 'clean:after']);
+  grunt.registerTask('default', ['clean:before', 'jshint', 'docs', 'clean:after']);
 
   grunt.registerTask('docs', 'Generating static documentation files', function () {
     var handlebars = require('handlebars');

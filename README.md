@@ -1,16 +1,16 @@
-#o-grid
+# o-grid
 
-##About
+## About
 
 o-grid defines a 12 column responsive, nestable grid system for laying out html pages and modules.
-It supports all browsers with support for *css media queries*, with a fixed-width fallback for browsers that don't support them (specifically ie7/8).
+It supports all browsers with support for *css media queries*, with two sizes of fixed-width fallback for browsers that don't support them (specifically ie7/8).
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
 [Report a bug](https://github.com/Financial-Times/o-grid-issues/issues)
 
-###Grid dimensions
+### Grid dimensions
 
 Four layout sizes are defined:
 
@@ -32,7 +32,7 @@ Top level grid rows are a fixed 1360px width
 
 For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns
 
-###Demos
+### Demos
 
 In order to view the demos you will need to [install o-grid locally](#local-setup). To force the demos to respond to resizing of your desktop browser window you will need to enable [device metrics overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports).
 
@@ -63,9 +63,9 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
     Fixed grid with width of 960px - mocks behaviour if media queries are not supported and the viewport is large enough for a desktop experience
 
 
-##Installation
+## Installation
 
-###For developers
+### For developers
 
 1. Add the following to your module's bower dependencies
    
@@ -94,7 +94,7 @@ For other steps only relevant to product/page development see the [Product devel
         <link rel='stylesheet' href='bower_components/o-grid/docs/css/grid-responsive.css' /> 
 
 
-###For testers
+### For testers
 
 You must already have [git](http://git-scm.com/downloads) and [python](http://www.python.org/download/) installed to run o-grid's test pages locally (OSX normally has these installed by default)
 
@@ -111,9 +111,9 @@ The main test page is /grid-responsive.html and it should be tested across all a
 The other demo pages are to demonstrate other possible configurations and need only be checked on desktop.
 
 
-##General use
+## General use
 
-###Base classes
+### Base classes
 Grid styles are typically applied to the html using two types of class declaration:
 
 * An `o-grid-row` class, added to the container element.  
@@ -128,14 +128,14 @@ So, for example
         <div class="o-grid-col|6|">A div spanning 6 grid columns</div>
     </div>
 
-###Specifying column widths
+### Specifying column widths
 The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `o-grid-col` using the following structure:
 
     o-grid-col[|{default width}|][layout size identifier}{number of columns}|]
 
 i.e. `o-grid-col` followed by an optional default width and widths for specific layouts, all separated (and trailed) by '|' characters, e.g. `o-grid-col|6|s12|xl4|`
 
-###Layout size identifiers
+### Layout size identifiers
 
 * **s** - *Small* layout
 
@@ -147,7 +147,7 @@ i.e. `o-grid-col` followed by an optional default width and widths for specific 
 
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicic rule is not defined.
 
-###Examples
+### Examples
     
     //A full width column for all sizes except large screens, where takes up 9 columns
     <div class="o-grid-col|12|xl9|"></div>  
@@ -161,9 +161,9 @@ In general prefer to set the default for larger layouts and override for smaller
     //A column which has width:auto except on small screens, where it takes up half the available width
     <div class="o-grid-col|s6|"></div>  
   
-###Utilities
+### Utilities
 
-####Shorthand for single column layout
+#### Shorthand for single column layout
 To avoid having to use the following inefficient markup
 
     <div class="o-grid-row">
@@ -176,16 +176,16 @@ The following markup can be used instead
     <div class="o-grid-row-col o-grid-col|12|">
     </div>
 
-####Hiding elements
+#### Hiding elements
 
 e.g. `o-grid|mhide|shide|` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 
-####Placeholder classes/`@extend`
+#### Placeholder classes/`@extend`
 
 [Placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. *Note - don't use these inside a media query - the placeholder classes are already included within the appropriate media query*
 
-#####Applying column layouts
+##### Applying column layouts
 
 These placeholders are of the format `%o-grid-{layout identifier}{number of columns|hide}` e.g.
         
@@ -197,7 +197,7 @@ These placeholders are of the format `%o-grid-{layout identifier}{number of colu
 
 *In general use `o-grid-col|...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
 
-#####Gutterless columns  
+##### Gutterless columns  
 To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).
 
     %o-grid-no[-{left|right}]-gutter[-{s|m|l|xl}]
@@ -216,7 +216,7 @@ e.g.
             @extend %o-grid-no-gutter;
         }  
 
-####Mixins
+#### Mixins
 * `oGridRespondTo($layoutSize)`  
 To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `s`, `m`, `l` or `xl` depending on which layout size the style should apply to e.g.
 
@@ -233,48 +233,44 @@ More than one layout can be passed in at once (enabling applying the same styles
             }
         }
 
-* `oGridWrapInSelector($selector)`  
-Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the `$selector` is undefined)
-
-####Variables
-All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *should never be over-written at the component/module level.*
+#### Variables
+All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *must not* be over-written at the component/module level.*
 
 
-###Gotchas
+### Gotchas
 
-####'Leaky' selectors
+#### 'Leaky' selectors
 Using a different prefix instead of `o-grid-col`, e.g. `not-really|6|-a-column` will still apply the grid width so in general it's best to avoid classes which contain `|{letter}{number}|` or `|{number}|` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `o-mymodule|6|` to layout your module as this behaviour is just a side effect and not a supported feature
 
-####Fixed/Absolute positioning
+#### Fixed/Absolute positioning
 The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/o-grid-issues/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
 
-##Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
+## Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 
-###Laying out entire pages with the grid
+### Laying out entire pages with the grid
 If your entire page is to be laid out using the grid add the class `o-grid-page` to the `body`/ wrapper and then build up the layout using nested rows and columns. The html head *must* include the following metatag (or equivalent) to disable user scaling
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-###Including grid-based components in an existing, non-grid page
+### Including grid-based components in an existing, non-grid page
 
 1. Wrap the entire component in an element with the class `o-grid-box` to ensure the module is laid out correctly. 
 
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
-###Supporting legacy browsers
-ie7/8 don't support media queries. If your product uses some kind of browser detection to add classes to the `<html>` tag (such as [older versions of html5 boilerplate](https://github.com/h5bp/html5-boilerplate/commit/13f17a737a7429bc102fe5f0991313f9f9162da7) did) the large layout will be displayed to the user. The default value of this class expected by o-grid is `lt-ie9`, but this can be configured by defining the following sass variable *before* including o-grid's main.scss:
+### Supporting legacy browsers
+By default, any browser that doesn't support media queries will be served the small layout. This can be over-ridden so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
 
-    $lt-ie9: '{A selector which will target both ie7 & ie8}';
+* `$o-grid-fixed-layout-useragents: ie7 ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
+* `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will be used instead of the useragent targeting
 
-If your product does not target ie7 & 8 in this way they will be served the default small screen layout.
+#### Box sizing in ie7
+For ie7 the `boxsizing.htc` polyfil provided by [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD) is also needed. See [o-assets](http://git.svc.ft.com/tree/origami%2Fo-assets.git/HEAD) for details of how to configure the path to this file.
 
-####Boxsizing in ie7
-For ie7 you must also specify an absolute path pointing to `o-grid/polyfills` as a value for `$o-grid-path-to-polyfills` in your sass (or, if using the [build service](http://financial-times.github.io/o-origami/docs/build-service/) (and hence not having access to sass) use a method of your choice to point the default path `/polyfills/boxsizing.htc` to `o-grid/polyfills/boxsizing.htc`)
-
-###Things you *can* do (but in most cases probably shouldn't)
+### Things you *can* do (but in most cases probably shouldn't)
 The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid's main.scss file. A few notable uses are as follows:
 
-####Changing how responsive the grid is
+#### Changing how responsive the grid is
 The following flags can be used to change the responsive behaviour *\[defaults in square brackets\]*
 
 * `$o-grid-is-responsive`: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
@@ -283,18 +279,18 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * `$o-grid-fixed-layout-selector`: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 * `$o-grid-mq-type` : \[device-width\] By default only responds to device rather than window width. To change this set this variable to `width`
 
-####Resizing the grid
+#### Resizing the grid
 By overwriting the values of any of the `$...Width`, `$...Break` or `$...Gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
 
-####Disabling larger layouts
+#### Disabling larger layouts
 By setting the value of a breakpoint (`$o-grid-small-to-medium-break`, `$o-grid-medium-to-large-break` or `$o-grid-large-to-extra-large-break`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-to-large-break: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-to-extra-large-break: false;`.*
 
-##Developing o-grid
+## Developing o-grid
 
-###BDD/TDD
+### TDD
 The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid's classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.
 
-####Adding an example to all demo pages
+#### Adding an example to all demo pages
 Add a new object literal to `docs-generator/examples.json` with the following properties
 
 * description: Description of how the elemnts in this grid should behave at various screen sizes 
@@ -312,7 +308,7 @@ and one of the following:
 
 Then in terminal run `grunt`
     
-####Adding a new demo page
+#### Adding a new demo page
 1. Choose a one word name for your new demo page (let's call it 'widescreen' in this example)
 2. Create a new file `src/scss/bundles/widescreen.scss`
 3. Edit the contents of `widescreen.scss` to include the styles you need. You'll probably want to start it off with the content
@@ -327,7 +323,7 @@ Then in terminal run `grunt`
 7. In terminal run the command `grunt`
 
 
-###Pre-release steps
+### Pre-release steps
 * Comment any new mixins/functions in the sass
 * Re-write `README.md` to reflect your changes
 * Run `grunt` (to republish the docs)

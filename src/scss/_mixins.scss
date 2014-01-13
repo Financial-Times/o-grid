@@ -1,5 +1,5 @@
 @mixin oGridTargetAtFixedLayout ($outputPlainToo: false) {
-	@if ($outputPlainToo) {
+	@if ($outputPlainToo or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;
 	}
 	@if ($o-grid-fixed-layout-selector) {

@@ -47,7 +47,7 @@ html {
 		min-width: 0;
 	}
 	
-	@include oGridWrapInSelector ($o-grid-fixed-layout-selector, true) {
+	@include oGridTargetAtFixedLayout(true) {
 		.o-grid-row.o-grid-row-compact,
 		.o-grid-row .o-grid-row.o-grid-row-compact {
 			margin-left: 0;

@@ -1,14 +1,15 @@
-//
-// Wraps a given block of styles in the given selector (if it exists)
-//
-// @param $selector {string|null} css selector to wrap the styles in
-//
-@mixin oGridWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
-	@if (not $selector or $alwaysOutputPlainToo) {
-		@content
+@mixin oGridTargetAtFixedLayout ($outputPlainToo: false) {
+	@if ($outputPlainToo) {
+		@content;
 	}
-	@if($selector) {
-		#{$selector} { @content }
+	@if ($o-grid-fixed-layout-selector) {
+		#{$o-grid-fixed-layout-selector} {
+			@content;
+		}		
+	} @else if ($o-grid-fixed-layout-useragents) {
+		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
+			@content;
+		}	
 	} 
 }
 
@@ -164,17 +165,7 @@
 	}
 }
 
-@mixin oGridTargetAtFixedLayout () {
-	@if ($o-grid-fixed-layout-useragents) {
-		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
-			@content;
-		}	
-	} @else {
-		@include oGridWrapInSelector ($o-grid-fixed-layout-selector) {
-			@content;
-		}		
-	}
-}
+
 
 @mixin oGridFixedGridStyles () {
 	.o-grid-row .o-grid-row,

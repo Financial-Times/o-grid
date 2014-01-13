@@ -1,5 +1,6 @@
 {
   "name": "o-grid",
+  "private": true,
   "devDependencies": {
     "grunt-contrib-sass": "~0.6.0",
     "grunt-contrib-clean": "~0.5.0",

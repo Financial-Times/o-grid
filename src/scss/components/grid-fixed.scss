@@ -1,69 +1,8 @@
 @if ($o-grid-is-responsive or $o-grid-is-fixed-desktop) {
-	@if ($o-grid-is-fixed-desktop) {
-		$o-grid-fixed-layout-selector: null;
+
+	@include oGridTargetAtFixedLayout () {
+		@include oGridFixedGridStyles ();
 	}
-	@include oWrapInSelector ($o-grid-fixed-layout-selector) {
 
-		.o-grid-row .o-grid-row,
-		.o-grid-box .o-grid-row {
-			margin-left: -$o-grid-fixed-half-gutter;
-			margin-right: -$o-grid-fixed-half-gutter;
-			width: auto;
-		}
-		@include oWrapInSelector ($o-grid-fixed-layout-selector, true) {
-			.o-grid-row.o-grid-row-compact,
-			.o-grid-row .o-grid-row.o-grid-row-compact {
-				margin-left: 0;
-				margin-right: 0;
-			}
-		}
-
-		[class*="o-grid-col"] {
-			float: left;
-			padding-left: $o-grid-fixed-half-gutter;
-			padding-right: $o-grid-fixed-half-gutter;
-			@include oBoxSizing(border-box);
-		}
-
-		.o-grid-row-compact > [class*="o-grid-col"] {
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		@include oGridColumnWidths(default);
-		@include oGridColumnWidths(l);
-
-		.o-grid-row,
-		.o-grid-page {
-			width: $o-grid-large-max-width;
-			max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
-		}
-		
-		[class*="|s12|"],
-		%o-grid-s12 {
-			clear: none;
-		}
-		
-		%o-grid-no-gutter,
-		%o-grid-no-gutter-l,
-		%o-grid-no-left-gutter,
-		%o-grid-no-left-gutter-l {
-			padding-left: 0;
-
-			&> .o-grid-row {
-				margin-left: 0;
-			}
-		}
-
-		%o-grid-no-gutter,
-		%o-grid-no-gutter-l,
-		%o-grid-no-right-gutter,
-		%o-grid-no-right-gutter-l {
-			padding-right: 0;
-
-			&> .o-grid-row {
-				margin-right: 0;
-			}
-		}
-	}
 }
+

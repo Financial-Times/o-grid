@@ -9,7 +9,7 @@
 			width: auto;
 		}
 		
-		@include oWrapInSelector ($o-grid-fixed-layout-selector, true) {
+		@include oGridWrapInSelector ($o-grid-fixed-layout-selector, true) {
 			.o-grid-row.o-grid-row-compact,
 			.o-grid-row .o-grid-row.o-grid-row-compact {
 				margin-left: 0;
@@ -21,7 +21,7 @@
 			float: left;
 			padding-left: $o-grid-responsive-half-gutter;
 			padding-right: $o-grid-responsive-half-gutter;
-			@include oBoxSizing(border-box);
+			@include oGridBoxSizing(border-box);
 		}
 
 		.o-grid-row-compact > [class*="o-grid-col"] {

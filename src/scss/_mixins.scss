@@ -3,7 +3,7 @@
 //
 // @param $selector {string|null} css selector to wrap the styles in
 //
-@mixin oWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
+@mixin oGridWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
 	@if (not $selector or $alwaysOutputPlainToo) {
 		@content
 	}
@@ -19,7 +19,7 @@
 // @param $max {string|null} max-width for media query
 // @param $force {boolean} [false] if set to true will then if $min and $max are undefined it will write out the styles wrapped in @media screen, otherwise writes nothing
 //
-@mixin oMaxMinMediaQuery($min, $max, $force:false) {
+@mixin oGridMaxMinMediaQuery($min, $max, $force:false) {
 	@if ($min and $max) {
 		@media screen and (min-#{$o-grid-mq-type}:$min+1) and (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($min) {
@@ -32,10 +32,10 @@
 }
 
 // Add cross-browser box-sizing attribute
-@mixin oBoxSizing($value) {
+@mixin oGridBoxSizing($value) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	*behavior: url(oAssetsUse("polyfills/boxsizing.htc", $o-grid-assets-path, $o-grid-version));
+	@include oUseragentIe7BoxSizing();
 }
 
 //
@@ -47,15 +47,15 @@
 
 	@each $layoutSize in $layoutSizes {
 		@if $layoutSize == s {
-			@include oMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
+			@include oGridMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
 		} @else if $layoutSize == m {
-			@include oMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
 		} @else if $layoutSize == l {
-			@include oMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
 		} @else if $layoutSize == xl {
-			@include oMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
-			@include oMaxMinMediaQuery(null, null, true) { @content; }
+			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
 		}
 	}
 }
@@ -161,6 +161,81 @@
 	    float: none;
 	    clear: both;
 		width: 100%;
+	}
+}
+
+@mixin oGridTargetAtFixedLayout () {
+	@if ($o-grid-fixed-layout-useragents) {
+		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
+			@content;
+		}	
+	} @else {
+		@include oGridWrapInSelector ($o-grid-fixed-layout-selector) {
+			@content;
+		}		
+	}
+}
+
+@mixin oGridFixedGridStyles () {
+	.o-grid-row .o-grid-row,
+	.o-grid-box .o-grid-row {
+		margin-left: -$o-grid-fixed-half-gutter;
+		margin-right: -$o-grid-fixed-half-gutter;
+		width: auto;
+	}
+
+	.o-grid-row.o-grid-row-compact,
+	.o-grid-row .o-grid-row.o-grid-row-compact {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	[class*="o-grid-col"] {
+		float: left;
+		padding-left: $o-grid-fixed-half-gutter;
+		padding-right: $o-grid-fixed-half-gutter;
+		@include oGridBoxSizing(border-box);
+	}
+
+	.o-grid-row-compact > [class*="o-grid-col"] {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@include oGridColumnWidths(default);
+	@include oGridColumnWidths(l);
+
+	.o-grid-row,
+	.o-grid-page {
+		width: $o-grid-large-max-width;
+		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
+	}
+	
+	[class*="|s12|"],
+	%o-grid-s12 {
+		clear: none;
+	}
+	
+	%o-grid-no-gutter,
+	%o-grid-no-gutter-l,
+	%o-grid-no-left-gutter,
+	%o-grid-no-left-gutter-l {
+		padding-left: 0;
+
+		&> .o-grid-row {
+			margin-left: 0;
+		}
+	}
+
+	%o-grid-no-gutter,
+	%o-grid-no-gutter-l,
+	%o-grid-no-right-gutter,
+	%o-grid-no-right-gutter-l {
+		padding-right: 0;
+
+		&> .o-grid-row {
+			margin-right: 0;
+		}
 	}
 }
 

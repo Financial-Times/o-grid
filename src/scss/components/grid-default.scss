@@ -21,6 +21,16 @@ html {
 	clear: both;
 }
 
+
+@if ($o-grid-is-fixed-desktop) {
+	$o-grid-fixed-layout-selector: null;
+	$o-grid-fixed-layout-useragents: null;
+}
+
+@if ($o-grid-fixed-layout-selector) {
+	$o-grid-fixed-layout-useragents: null;
+}
+
 @if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {
 	.o-grid-row,
 	.o-grid-page  {
@@ -37,7 +47,7 @@ html {
 		min-width: 0;
 	}
 	
-	@include oWrapInSelector ($o-grid-fixed-layout-selector, true) {
+	@include oGridWrapInSelector ($o-grid-fixed-layout-selector, true) {
 		.o-grid-row.o-grid-row-compact,
 		.o-grid-row .o-grid-row.o-grid-row-compact {
 			margin-left: 0;

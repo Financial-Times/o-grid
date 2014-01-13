@@ -233,7 +233,7 @@ More than one layout can be passed in at once (enabling applying the same styles
             }
         }
 
-* `oWrapInSelector($selector)`  
+* `oGridWrapInSelector($selector)`  
 Wraps a block of styles in the given selector (or just outputs the styles unwrapped if the `$selector` is undefined)
 
 ####Variables

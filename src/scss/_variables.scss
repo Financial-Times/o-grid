@@ -47,8 +47,9 @@ $o-grid-assets-path: $o-grid-name !default;
 // 
 // Also be sure to update README.md
 // -------------------------------------------------------------------------------------
-	
-$o-grid-fixed-layout-selector: #{$o-useragent-ie8}, #{$o-useragent-ie7} !default;
+
+$o-grid-fixed-layout-useragents: ie7 ie8;	
+$o-grid-fixed-layout-selector: null !default;
 $o-grid-mq-type: device-width !default;
 //$o-grid-fixed-size: $o-grid-large !default;
 

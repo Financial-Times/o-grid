@@ -1,18 +1,15 @@
 {
 	"name": "o-grid",
     "ignore": [
-    	"node_modules",
-    	"tmp",
     	"docs-generator",
     	"docs",
     	"Gruntfile.js",
+        "package.json",
     	".jshintrc",
-    	"src/behavior",
         "src/scss/bundles"
     ],
     "dependencies": {
-        "o-assets": "http://git.svc.ft.com:9080/git/origami/o-assets.git#~0.2.0",
-        "o-useragent": "http://git.svc.ft.com:9080/git/origami/o-useragent.git#>=0.1.0"
+        "o-useragent": "http://git.svc.ft.com:9080/git/origami/o-useragent.git#>=0.2.0"
     }
 }
 

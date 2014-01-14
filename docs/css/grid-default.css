@@ -57,12 +57,6 @@ html {
   margin-right: 0;
 }
 
-.lt-ie9 .o-grid-row.o-grid-row-compact,
-.lt-ie9 .o-grid-row .o-grid-row.o-grid-row-compact {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 [class*="|hide|"], [class*="|0|"] {
   display: none;
 }

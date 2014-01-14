@@ -43,10 +43,12 @@
 }
 
 // Add cross-browser box-sizing attribute
-@mixin oGridBoxSizing($value) {
+@mixin oGridBoxSizing($value, $polyfill: false) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	@include oUseragentIe7BoxSizing();
+	@if ($polyfill) {
+		@include oUseragentIe7BoxSizing();		
+	}
 }
 
 //
@@ -183,23 +185,14 @@
 		width: auto;
 	}
 
-	.o-grid-row.o-grid-row-compact,
-	.o-grid-row .o-grid-row.o-grid-row-compact {
-		margin-left: 0;
-		margin-right: 0;
-	}
-
 	[class*="o-grid-col"] {
 		float: left;
 		padding-left: $o-grid-fixed-half-gutter;
 		padding-right: $o-grid-fixed-half-gutter;
-		@include oGridBoxSizing(border-box);
+		@include oGridBoxSizing(border-box, true);
 	}
 
-	.o-grid-row-compact > [class*="o-grid-col"] {
-		padding-left: 0;
-		padding-right: 0;
-	}
+	@include oGridAddCompactOverrides(false);
 
 	@include oGridColumnWidths(default, 12);
 	@include oGridColumnWidths(l, 12);
@@ -291,18 +284,28 @@
 	}
 }
 
-@mixin oGridAddCompactOverrides ($ignore-if-useragent: false) {
+@mixin oGridAddCompactOverrides ($wrapped: false) {
 	.o-grid-row-compact > [class*="o-grid-col"] {
 		padding-left: 0;
 		padding-right: 0;
 	}
 
-	@include oGridTargetAtFixedLayout(true, $ignore-if-useragent) {
+	@if ($wrapped) {
+		@include oGridTargetAtFixedLayout(true) {
+			.o-grid-row.o-grid-row-compact,
+			.o-grid-row .o-grid-row.o-grid-row-compact {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}	
+	} @else {
 		.o-grid-row.o-grid-row-compact,
 		.o-grid-row .o-grid-row.o-grid-row-compact {
 			margin-left: 0;
 			margin-right: 0;
-		}
+		}		
 	}
+
+
 }
 

@@ -77,27 +77,27 @@
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 // @param $maxWidth {number} maximum width of a row at this layout size
 //
-@mixin oGridDefineLayout ($layoutSize, $maxWidth) {
+@mixin oGridDefineLayout ($layout-size, $max-width) {
 
-	@include oGridRespondTo($layoutSize) {
+	@include oGridRespondTo($layout-size) {
 		
-		@if ($o-grid-is-fluid and not ($layoutSize == xl)) {
+		@if ($o-grid-is-fluid and not ($layout-size == xl)) {
 			.o-grid-row,
 			.o-grid-page {
 				max-width: none;
 			}
 		} @else {
-			@if ($maxWidth) {
+			@if ($max-width) {
 				.o-grid-row,
 				.o-grid-page {
-					max-width: $maxWidth;
+					max-width: $max-width;
 				}
 			}
 		}
 
-		@include oGridAddGutterOverrides($layoutSize);
+		@include oGridAddGutterOverrides($layout-size);
 		
-		@include oGridColumnWidths($layoutSize);
+		@include oGridColumnWidths($layout-size, 12);
 	}
 }
 
@@ -106,7 +106,7 @@
 //
 // @param $layoutSize {string} name of layout size (s, m , l, xl)
 //
-@mixin oGridColumnWidths($layoutSize) {
+@mixin oGridColumnWidths($layoutSize, $column-count) {
 
 	$prefix: $layoutSize;
 
@@ -122,15 +122,16 @@
 	}
 
 	$aggregatedSelector: null;			
+	$column-count-minus-one: $column-count - 1;
 
-	@for $colWidth from 1 through 11 {
+	@for $colspan from 1 through $column-count-minus-one {
 
-		$attrSelector: #{'[class*="|#{$prefix}#{$colWidth}|"]'};
-		$placeholderSelector: #{'%o-grid-#{$prefix}#{$colWidth}'};
+		$attrSelector: #{'[class*="|#{$prefix}#{$colspan}|"]'};
+		$placeholderSelector: #{'%o-grid-#{$prefix}#{$colspan}'};
 		
 		#{$attrSelector},
 		#{$placeholderSelector} {
-			width: oGridColumnWidth($colWidth, 12);
+			width: oGridColumnWidth($colspan, $column-count);
 		}
 		
 		$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
@@ -146,8 +147,8 @@
 		}
 	}
 
-	[class*="|#{$prefix}12|"],
-	%o-grid-#{$prefix}12 {
+	[class*="|#{$prefix}#{$column-count}|"],
+	%o-grid-#{$prefix}#{$column-count} {
 	    float: none;
 	    clear: both;
 		width: 100%;
@@ -182,8 +183,8 @@
 		padding-right: 0;
 	}
 
-	@include oGridColumnWidths(default);
-	@include oGridColumnWidths(l);
+	@include oGridColumnWidths(default, 12);
+	@include oGridColumnWidths(l, 12);
 
 	.o-grid-row,
 	.o-grid-page {

@@ -8,9 +8,7 @@ html {
   text-size-adjust: 100%;
 }
 
-.o-grid-row,
-.o-grid-box,
-.o-grid-page {
+.o-grid-row, .o-grid-box, .o-grid-page {
   margin: 0 auto;
 }
 
@@ -25,14 +23,12 @@ html {
   clear: both;
 }
 
-.o-grid-row,
-.o-grid-page {
+.o-grid-row, .o-grid-page {
   max-width: 400px;
   min-width: 240px;
 }
 
-.o-grid-row .o-grid-row,
-.o-grid-box .o-grid-row {
+.o-grid-row .o-grid-row, .o-grid-box .o-grid-row {
   margin-left: -0.5%;
   margin-right: -0.5%;
   width: auto;
@@ -165,10 +161,41 @@ html {
   width: 99%;
 }
 
+.o-grid-no-gutter-s {
+  padding-left: 0;
+}
+.o-grid-no-gutter-s > .o-grid-row {
+  margin-left: 0;
+}
+
+.o-grid-no-gutter-s {
+  padding-right: 0;
+}
+.o-grid-no-gutter-s > .o-grid-row {
+  margin-right: 0;
+}
+
+.o-grid-no-gutter,
+.o-grid-no-left-gutter {
+  padding-left: 0;
+}
+.o-grid-no-gutter > .o-grid-row,
+.o-grid-no-left-gutter > .o-grid-row {
+  margin-left: 0;
+}
+
+.o-grid-no-gutter,
+.o-grid-no-right-gutter {
+  padding-right: 0;
+}
+.o-grid-no-gutter > .o-grid-row,
+.o-grid-no-right-gutter > .o-grid-row {
+  margin-right: 0;
+}
+
 /* Override fixed defaults for responsive grid */
 @media screen {
-  .o-grid-row .o-grid-row,
-  .o-grid-box .o-grid-row {
+  .o-grid-row .o-grid-row, .o-grid-box .o-grid-row {
     margin-left: -5px;
     margin-right: -5px;
     width: auto;
@@ -209,6 +236,24 @@ html {
 
   [class*="|s0|"], [class*="|s1|"], [class*="|s2|"], [class*="|s3|"], [class*="|s4|"], [class*="|s5|"], [class*="|s6|"], [class*="|s7|"], [class*="|s8|"], [class*="|s9|"], [class*="|s10|"], [class*="|s11|"], [class*="|s12|"] {
     width: auto;
+  }
+
+  .o-grid-no-gutter,
+  .o-grid-no-left-gutter {
+    padding-left: 0;
+  }
+  .o-grid-no-gutter > .o-grid-row,
+  .o-grid-no-left-gutter > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .o-grid-no-gutter,
+  .o-grid-no-right-gutter {
+    padding-right: 0;
+  }
+  .o-grid-no-gutter > .o-grid-row,
+  .o-grid-no-right-gutter > .o-grid-row {
+    margin-right: 0;
   }
 }
 @media screen {
@@ -267,9 +312,22 @@ html {
   }
 }
 @media screen and (max-device-width: 400px) {
-  .o-grid-row,
-  .o-grid-page {
+  .o-grid-row, .o-grid-page {
     max-width: 400px;
+  }
+
+  .o-grid-no-gutter-s {
+    padding-left: 0;
+  }
+  .o-grid-no-gutter-s > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .o-grid-no-gutter-s {
+    padding-right: 0;
+  }
+  .o-grid-no-gutter-s > .o-grid-row {
+    margin-right: 0;
   }
 
   [class*="|shide|"], [class*="|s0|"] {
@@ -334,9 +392,15 @@ html {
   }
 }
 @media screen and (min-device-width: 401px) and (max-device-width: 800px) {
-  .o-grid-row,
-  .o-grid-page {
+  .o-grid-row, .o-grid-page {
     max-width: 580px;
+  }
+
+  .o-grid-no-left-gutter-m {
+    padding-left: 0;
+  }
+  .o-grid-no-left-gutter-m > .o-grid-row {
+    margin-left: 0;
   }
 
   [class*="|mhide|"], [class*="|m0|"] {
@@ -401,9 +465,15 @@ html {
   }
 }
 @media screen and (min-device-width: 801px) and (max-device-width: 1200px) {
-  .o-grid-row,
-  .o-grid-page {
+  .o-grid-row, .o-grid-page {
     max-width: 760px;
+  }
+
+  .o-grid-no-right-gutter-l {
+    padding-right: 0;
+  }
+  .o-grid-no-right-gutter-l > .o-grid-row {
+    margin-right: 0;
   }
 
   [class*="|lhide|"], [class*="|l0|"] {
@@ -468,8 +538,7 @@ html {
   }
 }
 @media screen and (min-device-width: 1201px) {
-  .o-grid-row,
-  .o-grid-page {
+  .o-grid-row, .o-grid-page {
     max-width: 1160px;
   }
 
@@ -537,8 +606,7 @@ html {
 .lt-ie9 {
   /* ensures d12 and d0 can be over-ridden by styles for l layout */
 }
-.lt-ie9 .o-grid-row .o-grid-row,
-.lt-ie9 .o-grid-box .o-grid-row {
+.lt-ie9 .o-grid-row .o-grid-row, .lt-ie9 .o-grid-box .o-grid-row {
   margin-left: -2px;
   margin-right: -2px;
   width: auto;
@@ -647,11 +715,32 @@ html {
   clear: both;
   width: 100%;
 }
-.lt-ie9 .o-grid-row,
-.lt-ie9 .o-grid-page {
+.lt-ie9 .o-grid-row, .lt-ie9 .o-grid-page {
   width: 760px;
   max-width: none;
 }
 .lt-ie9 [class*="|s12|"] {
   clear: none;
+}
+.lt-ie9 .o-grid-no-right-gutter-l {
+  padding-right: 0;
+}
+.lt-ie9 .o-grid-no-right-gutter-l > .o-grid-row {
+  margin-right: 0;
+}
+.lt-ie9 .o-grid-no-gutter,
+.lt-ie9 .o-grid-no-left-gutter {
+  padding-left: 0;
+}
+.lt-ie9 .o-grid-no-gutter > .o-grid-row,
+.lt-ie9 .o-grid-no-left-gutter > .o-grid-row {
+  margin-left: 0;
+}
+.lt-ie9 .o-grid-no-gutter,
+.lt-ie9 .o-grid-no-right-gutter {
+  padding-right: 0;
+}
+.lt-ie9 .o-grid-no-gutter > .o-grid-row,
+.lt-ie9 .o-grid-no-right-gutter > .o-grid-row {
+  margin-right: 0;
 }

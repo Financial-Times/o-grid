@@ -37,6 +37,7 @@ $o-grid-is-fixed-desktop: false !default;
 $o-grid-name: o-grid;
 $o-grid-version: null !default;
 $o-grid-assets-path: $o-grid-name !default;
+$o-grid-is-silent: false;
 
 // -------------------------------------------------------------------------------------
 // CLASS NAMES/PREFIXES

@@ -2,8 +2,7 @@
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 
-		.o-grid-row .o-grid-row,
-		.o-grid-box .o-grid-row {
+		@include oGridClass((row row, box row), true) {
 			margin-left: -$o-grid-responsive-half-gutter;
 			margin-right: -$o-grid-responsive-half-gutter;
 			width: auto;

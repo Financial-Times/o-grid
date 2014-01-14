@@ -2,10 +2,49 @@
 	@if (not $selector or $include-unwrapped) {
 		@content
 	}
+
 	@if($selector) {
 		#{$selector} { @content }
  	} 
- }
+}
+
+
+@function oGridClass ($classes, $complex: false) {
+	$aggregated-selector: ();	
+	
+	@each $class in $classes {
+
+		@if ($complex) {
+			$loud-complex-selector: null;
+			$silent-complex-selector: null;
+			@each $part in $class {
+				$silent-complex-selector: append($silent-complex-selector, #{'%o-grid-#{$part}'});
+		    }
+		    $aggregated-selector: append($aggregated-selector, $silent-complex-selector, comma);
+			@if (not $o-grid-is-silent) {
+				@each $part in $class {
+					$loud-complex-selector: append($loud-complex-selector, #{'.o-grid-#{$part}'});
+				}
+				$aggregated-selector: append($aggregated-selector, $loud-complex-selector, comma);
+			}				
+		} @else {
+
+			$aggregated-selector: append($aggregated-selector, #{'%o-grid-#{$class}'}, comma);
+		  
+			@if (not $o-grid-is-silent) {
+				$aggregated-selector: append($aggregated-selector, #{'.o-grid-#{$class}'}, comma);
+			}
+		}
+	}
+
+	@return #{$aggregated-selector};
+}
+
+@mixin oGridClass ($classes, $complex: false) {
+	@include oGridWrapInSelector(oGridClass($classes, $complex)) { 
+		@content 
+	}
+}
 
 
 @mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
@@ -84,14 +123,12 @@
 	@include oGridRespondTo($layout-size) {
 		
 		@if ($o-grid-is-fluid and not ($layout-size == xl)) {
-			.o-grid-row,
-			.o-grid-page {
+			@include oGridClass(row page) {
 				max-width: none;
 			}
 		} @else {
 			@if ($max-width) {
-				.o-grid-row,
-				.o-grid-page {
+				@include oGridClass(row page) {
 					max-width: $max-width;
 				}
 			}
@@ -107,8 +144,12 @@
 
 	$selector: null;
 
-	@if not $layout-size {
-		$selector: #{'[class*="o-grid-col"]'};
+	@if (not $layout-size) {
+		@if (not $o-grid-is-silent) {
+			$selector: append($selector, #{'[class*="o-grid-col"]'}, comma);
+		}
+		$selector: append($selector, #{'%o-grid-col'}, comma);
+		
 	} @else {
 		$prefix: $layout-size;
 
@@ -118,7 +159,9 @@
 
 		@each $colspan in $colspans {
 
-			$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
+			@if (not $o-grid-is-silent) {
+				$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
+			}
 			$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
 		}		
 	} 
@@ -127,7 +170,7 @@
 }
 
 @mixin oGridColumnSelector ($layout-size: null, $colspan: null) {
-	#{oGridColumnSelector($layout-size, $colspan)} { 
+	@include oGridWrapInSelector(oGridColumnSelector($layout-size, $colspan)) { 
 		@content 
 	}
 }
@@ -183,8 +226,7 @@
 
 
 @mixin oGridFixedGridStyles () {
-	.o-grid-row .o-grid-row,
-	.o-grid-box .o-grid-row {
+	@include oGridClass((row row, box row), true) {
 		margin-left: -$o-grid-fixed-half-gutter;
 		margin-right: -$o-grid-fixed-half-gutter;
 		width: auto;
@@ -202,8 +244,7 @@
 	@include oGridColumnWidths(default, 12);
 	@include oGridColumnWidths(l, 12);
 
-	.o-grid-row,
-	.o-grid-page {
+	@include oGridClass(row page) {
 		width: $o-grid-large-max-width;
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 	}
@@ -283,27 +324,34 @@
 }
 
 @mixin oGridCompactStyles ($wrapped: false) {
-	.o-grid-row-compact > [class*="o-grid-col"] {
+	.o-grid-row-compact > #{oGridColumnSelector()} {
 		padding-left: 0;
 		padding-right: 0;
 	}
 
 	@if ($wrapped) {
 		@include oGridTargetAtFixedLayout(true) {
-			.o-grid-row.o-grid-row-compact,
-			.o-grid-row .o-grid-row.o-grid-row-compact {
-				margin-left: 0;
-				margin-right: 0;
-			}
+			@include oGridCompactMargins();
 		}	
 	} @else {
-		.o-grid-row.o-grid-row-compact,
-		.o-grid-row .o-grid-row.o-grid-row-compact {
-			margin-left: 0;
-			margin-right: 0;
-		}		
+		@include oGridCompactMargins();	
 	}
 
 
 }
 
+@mixin oGridCompactMargins() {
+	.o-grid-row%o-grid-row-compact,
+	.o-grid-row .o-grid-row%o-grid-row-compact {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	@if (not $o-grid-is-silent) {
+		.o-grid-row.o-grid-row-compact,
+		.o-grid-row .o-grid-row.o-grid-row-compact {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}

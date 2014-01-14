@@ -1,0 +1,40 @@
+@import "o-assets/main";
+@import "o-useragent/main";
+@import "../../../src/scss/_variables";
+@import "../../../src/scss/_mixins";
+@import "../../../src/scss/_functions";
+
+$o-assets-global-path: "/";
+$o-grid-assets-path: null;
+$o-grid-fixed-layout-selector: '.lt-ie9';
+$o-grid-is-silent: true;
+
+@import "../../../src/scss/components/grid-default";
+
+// .o-grid-no-gutter {
+// 	@extend %o-grid-no-gutter !optional;
+// }
+// .o-grid-no-left-gutter {
+// 	@extend %o-grid-no-left-gutter !optional;
+// }
+// .o-grid-no-right-gutter {
+// 	@extend %o-grid-no-right-gutter !optional;
+// }
+// .o-grid-no-gutter-s {
+// 	@extend %o-grid-no-gutter-s !optional;
+// }
+// .o-grid-no-left-gutter-m {
+// 	@extend %o-grid-no-left-gutter-m !optional;
+// }
+// .o-grid-no-right-gutter-l {
+// 	@extend %o-grid-no-right-gutter-l !optional;
+// }
+// .o-grid-no-left-gutter {
+// 	@extend %o-grid-no-left-gutter !optional;
+// }
+// .o-grid-no-gutter {
+// 	@extend %o-grid-no-gutter !optional;
+// }
+// .o-grid-no-right-gutter {
+// 	@extend %o-grid-no-right-gutter !optional;
+// }

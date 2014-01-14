@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     var output = {};
     demoPageTypes.map(function (type) {
       if (type !== 'legacy') {
-        output['./docs/css/grid-' + type + '.css'] = './src/scss/bundles/' + type + '.scss';
+        output['./docs/css/grid-' + type + '.css'] = './docs-generator/scss/bundles/' + type + '.scss';
       }
       
     });

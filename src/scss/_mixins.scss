@@ -131,21 +131,14 @@
 
 		$attrSelector: #{'[class*="|#{$prefix}#{$colWidth}|"]'};
 		$placeholderSelector: #{'%o-grid-#{$prefix}#{$colWidth}'};
-
 		
 		#{$attrSelector},
 		#{$placeholderSelector} {
 			width: oGridColumnWidth($colWidth);
 		}
 		
-		// generates a comma separated selector for each of the column widths from 1 to 11
-		@if ($aggregatedSelector) {
-			$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
-			$aggregatedSelector: append($aggregatedSelector, $placeholderSelector, comma);
-		} @else {
-			$aggregatedSelector: $attrSelector, $placeholderSelector;
-		}
-		
+		$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
+		$aggregatedSelector: append($aggregatedSelector, $placeholderSelector, comma);	
 	}
 	
 	@if ($layoutSize != default) {

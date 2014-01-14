@@ -98,7 +98,7 @@
 	$selector: null;
 
 	@if not $layout-size {
-		$selector: #{'[class*="o-grid-col"]'};
+		$selector: #{'[data-o-grid-colspan]'};
 	} @else {
 		$prefix: $layout-size;
 
@@ -108,8 +108,8 @@
 
 		@each $colspan in $colspans {
 
-			$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
-			$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
+			$selector: append($selector, #{'[data-o-grid-colspan~="#{$prefix}#{$colspan}"]'}, comma);
+			$selector: append($selector, #{'%o-grid-colspan-#{$prefix}#{$colspan}'}, comma);
 		}		
 	} 
 	

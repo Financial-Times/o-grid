@@ -1,5 +1,5 @@
-<div class="o-grid-col{{this.span}}">
-	<span class="dev-inner"{{#if this.minHeight}} style="min-height:{{{this.minHeight}}}"{{/if}}>{{@index}}: .o-grid-col{{this.span}}</span>
+<div data-o-grid-colspan="{{this.span}}">
+	<span class="dev-inner"{{#if this.minHeight}} style="min-height:{{{this.minHeight}}}"{{/if}}>{{@index}}: data-o-grid-colspan="{{this.span}}"</span>
 	{{#if this.columns}}
 		<div class="o-grid-row">
 			{{#each this.columns}}

@@ -1,13 +1,3 @@
-@mixin oGridWrapInSelector ($selector:null, $include-unwrapped: false) {
-	@if (not $selector or $include-unwrapped) {
-		@content
-	}
-	@if($selector) {
-		#{$selector} { @content }
- 	} 
- }
-
-
 @mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
 	@if ($include-unwrapped or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;
@@ -277,7 +267,7 @@
 		
 	}
 
-	@include oGridWrapInSelector($aggregated-selector) {
+	#{$aggregated-selector} {
 		width: auto;
 	}
 }

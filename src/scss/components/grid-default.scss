@@ -55,7 +55,6 @@ html {
 		}
 	}
 
-	/* Default grid: Layout 1 FIXED (well, max-width) */
 	[class*="o-grid-col"] {
 		float: left;
 		padding-left: $o-grid-default-half-gutter;
@@ -69,25 +68,6 @@ html {
 
 	@include oGridDefineDefaultColumns(12);
 
-	%o-grid-no-gutter,
-	%o-grid-no-gutter-s,
-	%o-grid-no-left-gutter,
-	%o-grid-no-left-gutter-s {
-		padding-left: 0;
-
-		&> .o-grid-row {
-			margin-left: 0;
-		}
-	}
-
-	%o-grid-no-gutter,
-	%o-grid-no-gutter-s,
-	%o-grid-no-right-gutter,
-	%o-grid-no-right-gutter-s {
-		padding-right: 0;
-
-		&> .o-grid-row {
-			margin-right: 0;
-		}
-	}
+	@include oGridAddGutterOverrides(s, true);
+	
 }

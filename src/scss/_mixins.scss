@@ -95,21 +95,7 @@
 			}
 		}
 
-		%o-grid-no-gutter#{-$layoutSize},
-		%o-grid-no-left-gutter#{-$layoutSize} {
-			padding-left: 0;
-			&> .o-grid-row {
-				margin-left: 0;
-			}
-		}
-
-		%o-grid-no-gutter#{-$layoutSize},
-		%o-grid-no-right-gutter#{-$layoutSize} {
-			padding-right: 0;
-			&> .o-grid-row {
-				margin-right: 0;
-			}
-		}
+		@include oGridAddGutterOverrides($layoutSize);
 		
 		@include oGridColumnWidths($layoutSize);
 	}
@@ -210,27 +196,7 @@
 		clear: none;
 	}
 	
-	%o-grid-no-gutter,
-	%o-grid-no-gutter-l,
-	%o-grid-no-left-gutter,
-	%o-grid-no-left-gutter-l {
-		padding-left: 0;
-
-		&> .o-grid-row {
-			margin-left: 0;
-		}
-	}
-
-	%o-grid-no-gutter,
-	%o-grid-no-gutter-l,
-	%o-grid-no-right-gutter,
-	%o-grid-no-right-gutter-l {
-		padding-right: 0;
-
-		&> .o-grid-row {
-			margin-right: 0;
-		}
-	}
+	@include oGridAddGutterOverrides(l, true);
 }
 
 @mixin oGridDefineDefaultColumns ($column-count) {
@@ -266,6 +232,50 @@
 	    clear: both;
 		width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
 	}
+}
+
+@mixin oGridAddGutterOverrides ($layout-sizes, $include-default: false) {
+
+	@each $layout in $layout-sizes {
+		%o-grid-no-gutter-#{$layout},
+		%o-grid-no-left-gutter-#{$layout} {
+			padding-left: 0;
+
+			&> .o-grid-row {
+				margin-left: 0;
+			}
+		}
+
+		%o-grid-no-gutter-#{$layout},
+		%o-grid-no-right-gutter-#{$layout} {
+			padding-right: 0;
+
+			&> .o-grid-row {
+				margin-right: 0;
+			}
+		}
+	}
+
+	@if ($include-default) {
+		%o-grid-no-gutter,
+		%o-grid-no-left-gutter {
+			padding-left: 0;
+
+			&> .o-grid-row {
+				margin-left: 0;
+			}
+		}
+
+		%o-grid-no-gutter,
+		%o-grid-no-right-gutter {
+			padding-right: 0;
+
+			&> .o-grid-row {
+				margin-right: 0;
+			}
+		}		
+	}
+
 }
 
 

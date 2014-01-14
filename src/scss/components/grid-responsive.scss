@@ -17,7 +17,7 @@
 
 		@include oGridCompactStyles(true);
 		@include oGridOverrideDefaultGrid();
-		@include oGridGutterOverrides((), true);
+		@include oGridGutterOverrides(default);
 	}
 
 	@include oGridDefineLayout(default, null);

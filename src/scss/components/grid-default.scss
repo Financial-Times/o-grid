@@ -55,5 +55,6 @@
 	@include oGridCompactStyles();
 	@include oGridColumnWidths(default, 12, true);
 	@include oGridColumnWidths(s, 12, true);
-	@include oGridGutterOverrides(s, true);
+	@include oGridGutterOverrides(s);
+	@include oGridGutterOverrides(default);
 }

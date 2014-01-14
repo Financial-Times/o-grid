@@ -3,6 +3,10 @@
 
 
 **/
+/* 
+	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
+	output a string or to wrap some style rules in a selector
+*/
 .header {
   margin: 0 0 20px 0;
   padding: 10px;

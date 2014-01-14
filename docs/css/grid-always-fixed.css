@@ -2,6 +2,10 @@
 
 
 **/
+/* 
+	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
+	output a string or to wrap some style rules in a selector
+*/
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;

@@ -1,21 +1,33 @@
+/* 
+	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
+	output a string or to wrap some style rules in a selector
+*/
 
-@function oGridClass ($classes, $complex: false) {
+//
+// Prefixes and generates both silent placeholders and, if $o-grid-is-silent == false, concrete classes for a list of classnames
+// If $compound is set to true it will handle compund selectors too
+//
+// oGridClass(row) => .o-grid-row, %o-grid-row
+// oGridClass(row col) => .o-grid-row, %o-grid-row, .o-grid-col, %o-grid-col
+// oGridClass((row col, box), true) => .o-grid-row .o-grid-col, %o-grid-row %o-grid-col, .o-grid-box, %o-grid-box
+//
+@function oGridClass ($classes, $compound: false) {
 	$aggregated-selector: ();	
 	
 	@each $class in $classes {
 
-		@if ($complex) {
-			$loud-complex-selector: null;
-			$silent-complex-selector: null;
+		@if ($compound) {
+			$loud-compound-selector: null;
+			$silent-compound-selector: null;
 			@each $part in $class {
-				$silent-complex-selector: append($silent-complex-selector, #{'%o-grid-#{$part}'});
+				$silent-compound-selector: append($silent-compound-selector, #{'%o-grid-#{$part}'});
 		    }
-		    $aggregated-selector: append($aggregated-selector, $silent-complex-selector, comma);
+		    $aggregated-selector: append($aggregated-selector, $silent-compound-selector, comma);
 			@if (not $o-grid-is-silent) {
 				@each $part in $class {
-					$loud-complex-selector: append($loud-complex-selector, #{'.o-grid-#{$part}'});
+					$loud-compound-selector: append($loud-compound-selector, #{'.o-grid-#{$part}'});
 				}
-				$aggregated-selector: append($aggregated-selector, $loud-complex-selector, comma);
+				$aggregated-selector: append($aggregated-selector, $loud-compound-selector, comma);
 			}				
 		} @else {
 
@@ -30,14 +42,24 @@
 	@return #{$aggregated-selector};
 }
 
-@mixin oGridClass ($classes, $complex: false) {
-	@include oGridWrapInSelector(oGridClass($classes, $complex)) { 
+//
+// Same as above but is immediately used to wrap some styles in the generated selector
+//
+@mixin oGridClass ($classes, $compound: false) {
+	@include oGridWrapInSelector(oGridClass($classes, $compound)) { 
 		@content 
 	}
 }
 
 
-
+//
+// Generates both silent placeholders and, if $o-grid-is-silent == false, concrete selectors for a given layout size and list of column widths
+// If no $layout-size is specified the default selector for a column with no width specified is outputted
+//
+// oGridColumnSelector() => [class*="o-grid-col"], %o-grid-col
+// oGridColumnSelector(s, 0 1) => [class*="|s0|"], [class*="|s1|"], %o-grid-s0, %o-grid-s1
+// oGridClass(default, 8) => [class*="|8|"], %o-grid-8
+//
 @function oGridColumnSelector ($layout-size: null, $colspans: null) {
 
 	$selector: null;
@@ -67,52 +89,40 @@
 	@return $selector;
 }
 
+//
+// Same as above but is immediately used to wrap some styles in the generated selector
+//
 @mixin oGridColumnSelector ($layout-size: null, $colspan: null) {
 	@include oGridWrapInSelector(oGridColumnSelector($layout-size, $colspan)) { 
 		@content 
 	}
 }
 
-@mixin oGridGutterOverrides ($layout-sizes, $include-default: false) {
+//
+// Adds placeholder classes to enable overriding of gutters at a given layout size
+//
+@mixin oGridGutterOverrides ($layout-size) {
+	$suffix: -$layout-size;
+	@if ($layout-size == default) {
+		$suffix: "";
+	}
 
-	@each $layout in $layout-sizes {
-		%o-grid-no-gutter-#{$layout},
-		%o-grid-no-left-gutter-#{$layout} {
-			padding-left: 0;
+	%o-grid-no-gutter#{$suffix},
+	%o-grid-no-left-gutter#{$suffix} {
+		padding-left: 0;
 
-			&> .o-grid-row {
-				margin-left: 0;
-			}
-		}
-
-		%o-grid-no-gutter-#{$layout},
-		%o-grid-no-right-gutter-#{$layout} {
-			padding-right: 0;
-
-			&> .o-grid-row {
-				margin-right: 0;
-			}
+		&> .o-grid-row {
+			margin-left: 0;
 		}
 	}
 
-	@if ($include-default) {
-		%o-grid-no-gutter,
-		%o-grid-no-left-gutter {
-			padding-left: 0;
+	%o-grid-no-gutter#{$suffix},
+	%o-grid-no-right-gutter#{$suffix} {
+		padding-right: 0;
 
-			&> .o-grid-row {
-				margin-left: 0;
-			}
+		&> .o-grid-row {
+			margin-right: 0;
 		}
-
-		%o-grid-no-gutter,
-		%o-grid-no-right-gutter {
-			padding-right: 0;
-
-			&> .o-grid-row {
-				margin-right: 0;
-			}
-		}		
 	}
 
 }

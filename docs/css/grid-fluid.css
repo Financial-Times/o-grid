@@ -2,6 +2,10 @@
 
 
 **/
+/* 
+	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
+	output a string or to wrap some style rules in a selector
+*/
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -259,6 +263,24 @@ html {
 @media screen {
   .o-grid-row, .o-grid-page {
     max-width: none;
+  }
+
+  .o-grid-no-gutter,
+  .o-grid-no-left-gutter {
+    padding-left: 0;
+  }
+  .o-grid-no-gutter > .o-grid-row,
+  .o-grid-no-left-gutter > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .o-grid-no-gutter,
+  .o-grid-no-right-gutter {
+    padding-right: 0;
+  }
+  .o-grid-no-gutter > .o-grid-row,
+  .o-grid-no-right-gutter > .o-grid-row {
+    margin-right: 0;
   }
 
   [class*="|hide|"], [class*="|0|"] {

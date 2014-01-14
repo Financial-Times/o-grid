@@ -40,12 +40,6 @@ html {
   min-width: 0;
 }
 
-.o-grid-row.o-grid-row-compact,
-.o-grid-row .o-grid-row.o-grid-row-compact {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 [class*="o-grid-col"] {
   float: left;
   padding-left: 1%;
@@ -55,6 +49,12 @@ html {
 .o-grid-row-compact > [class*="o-grid-col"] {
   padding-left: 0;
   padding-right: 0;
+}
+
+.o-grid-row.o-grid-row-compact,
+.o-grid-row .o-grid-row.o-grid-row-compact {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 [class*="|hide|"], [class*="|0|"] {

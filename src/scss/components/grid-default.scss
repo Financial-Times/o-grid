@@ -47,13 +47,7 @@ html {
 		min-width: 0;
 	}
 	
-	@include oGridTargetAtFixedLayout(true) {
-		.o-grid-row.o-grid-row-compact,
-		.o-grid-row .o-grid-row.o-grid-row-compact {
-			margin-left: 0;
-			margin-right: 0;
-		}
-	}
+
 
 	[class*="o-grid-col"] {
 		float: left;
@@ -61,11 +55,8 @@ html {
 		padding-right: $o-grid-default-half-gutter;
 	}
 
-	.o-grid-row-compact > [class*="o-grid-col"] {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
+	@include oGridAddCompactOverrides();
+	
 	@include oGridDefineDefaultColumns(12);
 
 	@include oGridAddGutterOverrides(s, true);

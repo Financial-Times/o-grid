@@ -8,7 +8,7 @@
  }
 
 
-@mixin oGridTargetAtFixedLayout ($outputPlainToo: false) {
+@mixin oGridTargetAtFixedLayout ($outputPlainToo: false, $ignore-if-useragent: false) {
 	@if ($outputPlainToo or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;
 	}
@@ -16,7 +16,7 @@
 		#{$o-grid-fixed-layout-selector} {
 			@content;
 		}		
-	} @else if ($o-grid-fixed-layout-useragents) {
+	} @else if ($o-grid-fixed-layout-useragents and not $ignore-if-useragent) {
 		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
 			@content;
 		}	
@@ -268,4 +268,41 @@
 
 }
 
+@mixin oGridOverrideDefaultGrid () {
+	@include oGridColumnSelector(s, 0 hide) {
+	    display: block;
+	}
+
+	@include oGridColumnSelector(s, 12) {
+	    clear: none;
+	}
+
+	$aggregatedSelector: null;			
+
+	@for $colWidth from 0 through 12 {
+
+		// generates a comma separated selector for each of the column widths from 1 to 11
+		$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector(s, $colWidth), comma);
+		
+	}
+
+	@include oGridWrapInSelector($aggregatedSelector) {
+		width: auto;
+	}
+}
+
+@mixin oGridAddCompactOverrides ($ignore-if-useragent: false) {
+	.o-grid-row-compact > [class*="o-grid-col"] {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@include oGridTargetAtFixedLayout(true, $ignore-if-useragent) {
+		.o-grid-row.o-grid-row-compact,
+		.o-grid-row .o-grid-row.o-grid-row-compact {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
 

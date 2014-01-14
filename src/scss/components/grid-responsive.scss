@@ -8,14 +8,6 @@
 			margin-right: -$o-grid-responsive-half-gutter;
 			width: auto;
 		}
-		
-		@include oGridTargetAtFixedLayout(true) {
-			.o-grid-row.o-grid-row-compact,
-			.o-grid-row .o-grid-row.o-grid-row-compact {
-				margin-left: 0;
-				margin-right: 0;
-			}
-		}
 
 		[class*="o-grid-col"] {
 			float: left;
@@ -24,33 +16,8 @@
 			@include oGridBoxSizing(border-box);
 		}
 
-		.o-grid-row-compact > [class*="o-grid-col"] {
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		// Following rules undo styles applied by the fixed grid
-		@include oGridColumnSelector(s, 0 hide) {
-		    display: block;
-		}
-
-		@include oGridColumnSelector(s, 12) {
-		    clear: none;
-		}
-
-		$aggregatedSelector: null;			
-
-		@for $colWidth from 0 through 12 {
-
-			// generates a comma separated selector for each of the column widths from 1 to 11
-			$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector(s, $colWidth), comma);
-			
-		}
-
-		#{$aggregatedSelector} {
-			width: auto;
-		}
-	
+		@include oGridAddCompactOverrides(true);
+		@include oGridOverrideDefaultGrid();
 		@include oGridAddGutterOverrides((), true);
 	}
 

@@ -1,3 +1,13 @@
+@mixin oGridWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
+	@if (not $selector or $alwaysOutputPlainToo) {
+		@content
+	}
+	@if($selector) {
+		#{$selector} { @content }
+ 	} 
+ }
+
+
 @mixin oGridTargetAtFixedLayout ($outputPlainToo: false) {
 	@if ($outputPlainToo or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;

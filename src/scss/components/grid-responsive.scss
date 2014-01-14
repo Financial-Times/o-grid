@@ -16,9 +16,9 @@
 			@include oGridBoxSizing(border-box);
 		}
 
-		@include oGridAddCompactOverrides(true);
+		@include oGridCompactStyles(true);
 		@include oGridOverrideDefaultGrid();
-		@include oGridAddGutterOverrides((), true);
+		@include oGridGutterOverrides((), true);
 	}
 
 	@include oGridDefineLayout(default, null);

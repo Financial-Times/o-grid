@@ -1,5 +1,5 @@
-@mixin oGridWrapInSelector ($selector:null, $alwaysOutputPlainToo: false) {
-	@if (not $selector or $alwaysOutputPlainToo) {
+@mixin oGridWrapInSelector ($selector:null, $include-unwrapped: false) {
+	@if (not $selector or $include-unwrapped) {
 		@content
 	}
 	@if($selector) {
@@ -8,15 +8,15 @@
  }
 
 
-@mixin oGridTargetAtFixedLayout ($outputPlainToo: false, $ignore-if-useragent: false) {
-	@if ($outputPlainToo or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
+@mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
+	@if ($include-unwrapped or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;
 	}
 	@if ($o-grid-fixed-layout-selector) {
 		#{$o-grid-fixed-layout-selector} {
 			@content;
 		}		
-	} @else if ($o-grid-fixed-layout-useragents and not $ignore-if-useragent) {
+	} @else if ($o-grid-fixed-layout-useragents) {
 		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
 			@content;
 		}	
@@ -54,18 +54,18 @@
 //
 // Writes media query selector for a given layout size
 //
-// @param $layoutSizes {string|list} name[s] of layout size[s] (s, m , l, xl)
+// @param $layout-sizes {string|list} name[s] of layout size[s] (s, m , l, xl)
 //
-@mixin oGridRespondTo ($layoutSizes) {
+@mixin oGridRespondTo ($layout-sizes) {
 
-	@each $layoutSize in $layoutSizes {
-		@if $layoutSize == s {
+	@each $layout-size in $layout-sizes {
+		@if $layout-size == s {
 			@include oGridMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
-		} @else if $layoutSize == m {
+		} @else if $layout-size == m {
 			@include oGridMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
-		} @else if $layoutSize == l {
+		} @else if $layout-size == l {
 			@include oGridMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
-		} @else if $layoutSize == xl {
+		} @else if $layout-size == xl {
 			@include oGridMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
 			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
@@ -76,7 +76,7 @@
 //
 // Defines styles for row and column widths for a given layout size
 //
-// @param $layoutSize {string} name of layout size (s, m , l, xl)
+// @param $layout-size {string} name of layout size (s, m , l, xl)
 // @param $maxWidth {number} maximum width of a row at this layout size
 //
 @mixin oGridDefineLayout ($layout-size, $max-width) {
@@ -97,31 +97,36 @@
 			}
 		}
 
-		@include oGridAddGutterOverrides($layout-size);
+		@include oGridGutterOverrides($layout-size);
 		
 		@include oGridColumnWidths($layout-size, 12);
 	}
 }
 
-@function oGridColumnSelector ($layout-size, $colspans) {
+@function oGridColumnSelector ($layout-size: null, $colspans: null) {
+
 	$selector: null;
-	
-	$prefix: $layout-size;
 
-	@if ($layout-size == default) {
-		$prefix: "";
-	} 
+	// @if not $layout-size {
+	// 	$selector: #{'[class*="o-grid-col"]'};
+	// } @else {
+		$prefix: $layout-size;
 
-	@each $colspan in $colspans {
+		@if ($layout-size == default) {
+			$prefix: "";
+		} 
 
-		$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
-		$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
-	}
+		@each $colspan in $colspans {
+
+			$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
+			$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
+		}		
+	// } 
 	
 	@return $selector;
 }
 
-@mixin oGridColumnSelector ($layout-size, $colspan) {
+@mixin oGridColumnSelector ($layout-size: null, $colspan: null) {
 	#{oGridColumnSelector($layout-size, $colspan)} { 
 		@content 
 	}
@@ -130,21 +135,21 @@
 //
 // Defines styles for column widths for a given layout size
 //
-// @param $layoutSize {string} name of layout size (s, m , l, xl)
+// @param $layout-size {string} name of layout size (s, m , l, xl)
 //
-@mixin oGridColumnWidths($layoutSize, $column-count, $default: false) {
+@mixin oGridColumnWidths($layout-size, $column-count, $default: false) {
 
-	@include oGridColumnSelector($layoutSize, hide 0) {
+	@include oGridColumnSelector($layout-size, hide 0) {
 		display: none;
 	}
 
 
-	$aggregatedSelector: null;			
+	$aggregated-selector: null;			
 	$column-count-minus-one: $column-count - 1;
 
 	@for $colspan from 1 through $column-count-minus-one {
 
-		@include oGridColumnSelector($layoutSize, $colspan) {
+		@include oGridColumnSelector($layout-size, $colspan) {
 			@if ($default) {
 				width: oGridColumnWidthMinusGutter($colspan, $column-count, $o-grid-default-half-gutter);
 			} @else {
@@ -153,18 +158,18 @@
 			
 		}
 		
-		$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector($layoutSize, $colspan), comma);
+		$aggregated-selector: append($aggregated-selector, oGridColumnSelector($layout-size, $colspan), comma);
 	}
 	
-	@if (not $default and $layoutSize != default) {
-		/* ensures d12 and d0 can be over-ridden by styles for #{$layoutSize} layout */
-		#{$aggregatedSelector} {
+	@if (not $default and $layout-size != default) {
+		/* ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout */
+		#{$aggregated-selector} {
 			float: left;
 			clear: none;
 			display: block;	
 		}
 	}
-	@include oGridColumnSelector($layoutSize, $column-count) {
+	@include oGridColumnSelector($layout-size, $column-count) {
 	    float: none;
 	    clear: both;
 		@if ($default) {
@@ -192,7 +197,7 @@
 		@include oGridBoxSizing(border-box, true);
 	}
 
-	@include oGridAddCompactOverrides(false);
+	@include oGridCompactStyles(false);
 
 	@include oGridColumnWidths(default, 12);
 	@include oGridColumnWidths(l, 12);
@@ -207,17 +212,10 @@
 		clear: none;
 	}
 	
-	@include oGridAddGutterOverrides(l, true);
+	@include oGridGutterOverrides(l, true);
 }
 
-@mixin oGridDefineDefaultColumns ($column-count) {
-	
-	@include oGridColumnWidths(default, 12, true);
-	@include oGridColumnWidths(s, 12, true);
-
-}
-
-@mixin oGridAddGutterOverrides ($layout-sizes, $include-default: false) {
+@mixin oGridGutterOverrides ($layout-sizes, $include-default: false) {
 
 	@each $layout in $layout-sizes {
 		%o-grid-no-gutter-#{$layout},
@@ -270,21 +268,21 @@
 	    clear: none;
 	}
 
-	$aggregatedSelector: null;			
+	$aggregated-selector: null;			
 
 	@for $colWidth from 0 through 12 {
 
 		// generates a comma separated selector for each of the column widths from 1 to 11
-		$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector(s, $colWidth), comma);
+		$aggregated-selector: append($aggregated-selector, oGridColumnSelector(s, $colWidth), comma);
 		
 	}
 
-	@include oGridWrapInSelector($aggregatedSelector) {
+	@include oGridWrapInSelector($aggregated-selector) {
 		width: auto;
 	}
 }
 
-@mixin oGridAddCompactOverrides ($wrapped: false) {
+@mixin oGridCompactStyles ($wrapped: false) {
 	.o-grid-row-compact > [class*="o-grid-col"] {
 		padding-left: 0;
 		padding-right: 0;

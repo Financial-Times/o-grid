@@ -57,69 +57,110 @@ html {
   padding-right: 0;
 }
 
-[class*="|0|"],
-[class*="|s0|"],
 [class*="|hide|"],
-[class*="|shide|"] {
+[class*="|0|"] {
   display: none;
 }
 
-[class*="|1|"],
+[class*="|1|"] {
+  width: 6.33333%;
+}
+
+[class*="|2|"] {
+  width: 14.66667%;
+}
+
+[class*="|3|"] {
+  width: 23%;
+}
+
+[class*="|4|"] {
+  width: 31.33333%;
+}
+
+[class*="|5|"] {
+  width: 39.66667%;
+}
+
+[class*="|6|"] {
+  width: 48%;
+}
+
+[class*="|7|"] {
+  width: 56.33333%;
+}
+
+[class*="|8|"] {
+  width: 64.66667%;
+}
+
+[class*="|9|"] {
+  width: 73%;
+}
+
+[class*="|10|"] {
+  width: 81.33333%;
+}
+
+[class*="|11|"] {
+  width: 89.66667%;
+}
+
+[class*="|12|"] {
+  float: none;
+  clear: both;
+  width: 98%;
+}
+
+[class*="|shide|"],
+[class*="|s0|"] {
+  display: none;
+}
+
 [class*="|s1|"] {
   width: 6.33333%;
 }
 
-[class*="|2|"],
 [class*="|s2|"] {
   width: 14.66667%;
 }
 
-[class*="|3|"],
 [class*="|s3|"] {
   width: 23%;
 }
 
-[class*="|4|"],
 [class*="|s4|"] {
   width: 31.33333%;
 }
 
-[class*="|5|"],
 [class*="|s5|"] {
   width: 39.66667%;
 }
 
-[class*="|6|"],
 [class*="|s6|"] {
   width: 48%;
 }
 
-[class*="|7|"],
 [class*="|s7|"] {
   width: 56.33333%;
 }
 
-[class*="|8|"],
 [class*="|s8|"] {
   width: 64.66667%;
 }
 
-[class*="|9|"],
 [class*="|s9|"] {
   width: 73%;
 }
 
-[class*="|10|"],
 [class*="|s10|"] {
   width: 81.33333%;
 }
 
-[class*="|11|"],
 [class*="|s11|"] {
   width: 89.66667%;
 }
 
-[class*="|12|"],
 [class*="|s12|"] {
   float: none;
   clear: both;

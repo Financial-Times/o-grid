@@ -9,7 +9,7 @@
 			width: auto;
 		}
 
-		[class*="o-grid-col"] {
+		@include oGridColumnSelector() {
 			float: left;
 			padding-left: $o-grid-responsive-half-gutter;
 			padding-right: $o-grid-responsive-half-gutter;

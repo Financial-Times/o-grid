@@ -107,9 +107,9 @@
 
 	$selector: null;
 
-	// @if not $layout-size {
-	// 	$selector: #{'[class*="o-grid-col"]'};
-	// } @else {
+	@if not $layout-size {
+		$selector: #{'[class*="o-grid-col"]'};
+	} @else {
 		$prefix: $layout-size;
 
 		@if ($layout-size == default) {
@@ -121,7 +121,7 @@
 			$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
 			$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
 		}		
-	// } 
+	} 
 	
 	@return $selector;
 }
@@ -190,7 +190,7 @@
 		width: auto;
 	}
 
-	[class*="o-grid-col"] {
+	@include oGridColumnSelector() {
 		float: left;
 		padding-left: $o-grid-fixed-half-gutter;
 		padding-right: $o-grid-fixed-half-gutter;

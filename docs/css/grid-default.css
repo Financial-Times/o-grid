@@ -63,8 +63,7 @@ html {
   padding-right: 0;
 }
 
-[class*="|hide|"],
-[class*="|0|"] {
+[class*="|hide|"], [class*="|0|"] {
   display: none;
 }
 
@@ -118,8 +117,7 @@ html {
   width: 98%;
 }
 
-[class*="|shide|"],
-[class*="|s0|"] {
+[class*="|shide|"], [class*="|s0|"] {
   display: none;
 }
 

@@ -30,15 +30,11 @@
 		}
 
 		// Following rules undo styles applied by the fixed grid
-		[class*="|s0|"],
-		[class*="|shide|"],
-		%o-grid-s0,
-		%o-grid-shide  {
+		@include oGridColumnSelector(s, 0 hide) {
 		    display: block;
 		}
 
-		[class*="|s12|"],
-		%o-grid-s12 {
+		@include oGridColumnSelector(s, 12) {
 		    clear: none;
 		}
 
@@ -46,16 +42,8 @@
 
 		@for $colWidth from 0 through 12 {
 
-			$attrSelector: #{'[class*="|s#{$colWidth}|"]'};
-			$placeholderSelector: #{'%o-grid-s#{$colWidth}'};
-
 			// generates a comma separated selector for each of the column widths from 1 to 11
-			@if ($aggregatedSelector) {
-				$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
-				$aggregatedSelector: append($aggregatedSelector, $placeholderSelector, comma);
-			} @else {
-				$aggregatedSelector: $attrSelector, $placeholderSelector;
-			}
+			$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector(s, $colWidth), comma);
 			
 		}
 
@@ -63,24 +51,7 @@
 			width: auto;
 		}
 	
-
-		%o-grid-no-gutter,
-		%o-grid-no-left-gutter {
-			padding-left: 0;
-
-			&> .o-grid-row {
-				margin-left: 0;
-			}
-		}
-
-		%o-grid-no-gutter,
-		%o-grid-no-right-gutter {
-			padding-right: 0;
-
-			&> .o-grid-row {
-				margin-right: 0;
-			}
-		}
+		@include oGridAddGutterOverrides((), true);
 	}
 
 	@include oGridDefineLayout(default, null);

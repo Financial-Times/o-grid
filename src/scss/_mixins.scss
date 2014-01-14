@@ -101,6 +101,30 @@
 	}
 }
 
+@function oGridColumnSelector ($layout-size, $colspans) {
+	$selector: null;
+	
+	$prefix: $layout-size;
+
+	@if ($layout-size == default) {
+		$prefix: "";
+	} 
+
+	@each $colspan in $colspans {
+
+		$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
+		$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
+	}
+	
+	@return $selector;
+}
+
+@mixin oGridColumnSelector ($layout-size, $colspan) {
+	#{oGridColumnSelector($layout-size, $colspan)} { 
+		@content 
+	}
+}
+
 //
 // Defines styles for column widths for a given layout size
 //
@@ -108,29 +132,17 @@
 //
 @mixin oGridColumnWidths($layoutSize, $column-count, $default: false) {
 
-	$prefix: $layoutSize;
-
-	@if ($layoutSize == default) {
-		$prefix: "";
-	} 
-
-	[class*="|#{$prefix}hide|"],
-	[class*="|#{$prefix}0|"],
-	%o-grid-#{$prefix}0,
-	%o-grid-#{$prefix}hide {
+	@include oGridColumnSelector($layoutSize, hide 0) {
 		display: none;
 	}
+
 
 	$aggregatedSelector: null;			
 	$column-count-minus-one: $column-count - 1;
 
 	@for $colspan from 1 through $column-count-minus-one {
 
-		$attrSelector: #{'[class*="|#{$prefix}#{$colspan}|"]'};
-		$placeholderSelector: #{'%o-grid-#{$prefix}#{$colspan}'};
-		
-		#{$attrSelector},
-		#{$placeholderSelector} {
+		@include oGridColumnSelector($layoutSize, $colspan) {
 			@if ($default) {
 				width: oGridColumnWidthMinusGutter($colspan, $column-count, $o-grid-default-half-gutter);
 			} @else {
@@ -139,8 +151,7 @@
 			
 		}
 		
-		$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
-		$aggregatedSelector: append($aggregatedSelector, $placeholderSelector, comma);	
+		$aggregatedSelector: append($aggregatedSelector, oGridColumnSelector($layoutSize, $colspan), comma);
 	}
 	
 	@if (not $default and $layoutSize != default) {
@@ -151,9 +162,7 @@
 			display: block;	
 		}
 	}
-
-	[class*="|#{$prefix}#{$column-count}|"],
-	%o-grid-#{$prefix}#{$column-count} {
+	@include oGridColumnSelector($layoutSize, $column-count) {
 	    float: none;
 	    clear: both;
 		@if ($default) {
@@ -201,8 +210,7 @@
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 	}
 	
-	[class*="|s12|"],
-	%o-grid-s12 {
+	@include oGridColumnSelector(s, 12) {
 		clear: none;
 	}
 	

@@ -1,0 +1,169 @@
+
+
+//
+// Defines styles for row and column widths for a given layout size
+//
+// @param $layout-size {string} name of layout size (s, m , l, xl)
+// @param $maxWidth {number} maximum width of a row at this layout size
+//
+@mixin oGridDefineLayout ($layout-size, $max-width) {
+
+	@include oGridRespondTo($layout-size) {
+		
+		@if ($o-grid-is-fluid and not ($layout-size == xl)) {
+			@include oGridClass(row page) {
+				max-width: none;
+			}
+		} @else {
+			@if ($max-width) {
+				@include oGridClass(row page) {
+					max-width: $max-width;
+				}
+			}
+		}
+
+		@include oGridGutterOverrides($layout-size);
+		
+		@include oGridColumnWidths($layout-size, 12);
+	}
+}
+
+
+//
+// Defines styles for column widths for a given layout size
+//
+// @param $layout-size {string} name of layout size (s, m , l, xl)
+//
+@mixin oGridColumnWidths($layout-size, $column-count, $default: false) {
+
+	@include oGridColumnSelector($layout-size, hide 0) {
+		display: none;
+	}
+
+
+	$aggregated-selector: null;			
+	$column-count-minus-one: $column-count - 1;
+
+	@for $colspan from 1 through $column-count-minus-one {
+
+		@include oGridColumnSelector($layout-size, $colspan) {
+			@if ($default) {
+				width: oGridColumnWidthMinusGutter($colspan, $column-count, $o-grid-default-half-gutter);
+			} @else {
+				width: oGridColumnWidth($colspan, $column-count);
+			}
+			
+		}
+		
+		$aggregated-selector: append($aggregated-selector, oGridColumnSelector($layout-size, $colspan), comma);
+	}
+	
+	@if (not $default and $layout-size != default) {
+		/* ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout */
+		#{$aggregated-selector} {
+			float: left;
+			clear: none;
+			display: block;	
+		}
+	}
+	@include oGridColumnSelector($layout-size, $column-count) {
+	    float: none;
+	    clear: both;
+		@if ($default) {
+			width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
+		} @else {
+			width: 100%;
+		}
+	}
+}
+
+
+
+@mixin oGridFixedGridStyles () {
+	@include oGridClass((row row, box row), true) {
+		margin-left: -$o-grid-fixed-half-gutter;
+		margin-right: -$o-grid-fixed-half-gutter;
+		width: auto;
+	}
+
+	@include oGridColumnSelector() {
+		float: left;
+		padding-left: $o-grid-fixed-half-gutter;
+		padding-right: $o-grid-fixed-half-gutter;
+		@include oGridBoxSizing(border-box, true);
+	}
+
+	@include oGridCompactStyles(false);
+
+	@include oGridColumnWidths(default, 12);
+	@include oGridColumnWidths(l, 12);
+
+	@include oGridClass(row page) {
+		width: $o-grid-large-max-width;
+		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
+	}
+	
+	@include oGridColumnSelector(s, 12) {
+		clear: none;
+	}
+	
+	@include oGridGutterOverrides(l, true);
+}
+
+
+
+@mixin oGridOverrideDefaultGrid () {
+	@include oGridColumnSelector(s, 0 hide) {
+	    display: block;
+	}
+
+	@include oGridColumnSelector(s, 12) {
+	    clear: none;
+	}
+
+	$aggregated-selector: null;			
+
+	@for $colWidth from 0 through 12 {
+
+		// generates a comma separated selector for each of the column widths from 1 to 11
+		$aggregated-selector: append($aggregated-selector, oGridColumnSelector(s, $colWidth), comma);
+		
+	}
+
+	@include oGridWrapInSelector($aggregated-selector) {
+		width: auto;
+	}
+}
+
+@mixin oGridCompactStyles ($wrapped: false) {
+	.o-grid-row-compact > #{oGridColumnSelector()} {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@if ($wrapped) {
+		@include oGridTargetAtFixedLayout(true) {
+			@include oGridSilenceableCompactMargins();
+		}	
+	} @else {
+		@include oGridSilenceableCompactMargins();	
+	}
+
+
+}
+
+@mixin oGridSilenceableCompactMargins() {
+	.o-grid-row%o-grid-row-compact,
+	.o-grid-row .o-grid-row%o-grid-row-compact {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	@if (not $o-grid-is-silent) {
+		.o-grid-row.o-grid-row-compact,
+		.o-grid-row .o-grid-row.o-grid-row-compact {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}

@@ -24,12 +24,16 @@ $o-grid-medium-to-large-break: 1000px !default;
 $o-grid-large-to-extra-large-break: 1400px !default;
 
 // -------------------------------------------------------------------------------------
-// FLAGS
+// Responsive behaviour configuration
 // -------------------------------------------------------------------------------------
+$o-grid-is-silent: false !default;
 $o-grid-is-responsive: true !default;
 $o-grid-is-fluid: false !default;
 $o-grid-is-fixed-desktop: false !default;
-
+$o-grid-fixed-layout-useragents: ie7 ie8;	
+$o-grid-fixed-layout-selector: null !default;
+$o-grid-mq-type: device-width !default;
+//$o-grid-fixed-size: $o-grid-large !default;
 
 // -------------------------------------------------------------------------------------
 // PATHS
@@ -37,22 +41,6 @@ $o-grid-is-fixed-desktop: false !default;
 $o-grid-name: o-grid;
 $o-grid-version: null !default;
 $o-grid-assets-path: $o-grid-name !default;
-$o-grid-is-silent: false;
-
-// -------------------------------------------------------------------------------------
-// CLASS NAMES/PREFIXES
-//
-// Do not change unless either:
-// a) releasing as a new version
-// b) intention is to update class names in all apps using the grid
-// 
-// Also be sure to update README.md
-// -------------------------------------------------------------------------------------
-
-$o-grid-fixed-layout-useragents: ie7 ie8;	
-$o-grid-fixed-layout-selector: null !default;
-$o-grid-mq-type: device-width !default;
-//$o-grid-fixed-size: $o-grid-large !default;
 
 
 // -------------------------------------------------------------------------------------

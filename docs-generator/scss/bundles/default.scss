@@ -1,8 +1,9 @@
 @import "o-assets/main";
 @import "o-useragent/main";
 @import "../../../src/scss/_variables";
-@import "../../../src/scss/_mixins";
-@import "../../../src/scss/_functions";
+@import "../../../src/scss/_utils";
+@import "../../../src/scss/_selectors";
+@import "../../../src/scss/_grid-generators";
 
 $o-assets-global-path: "/";
 $o-grid-assets-path: null;

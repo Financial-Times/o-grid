@@ -1,3 +1,12 @@
+@if ($o-grid-is-fixed-desktop) {
+	$o-grid-fixed-layout-selector: null;
+	$o-grid-fixed-layout-useragents: null;
+}
+
+@if ($o-grid-fixed-layout-selector) {
+	$o-grid-fixed-layout-useragents: null;
+}
+
 @if (not $o-grid-is-silent) {
 	html {
 		-webkit-text-size-adjust: 100%;
@@ -21,16 +30,6 @@
 		display: block;
 		clear: both;
 	}
-}
-
-
-@if ($o-grid-is-fixed-desktop) {
-	$o-grid-fixed-layout-selector: null;
-	$o-grid-fixed-layout-useragents: null;
-}
-
-@if ($o-grid-fixed-layout-selector) {
-	$o-grid-fixed-layout-useragents: null;
 }
 
 @if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {

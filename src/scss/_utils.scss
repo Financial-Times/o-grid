@@ -1,0 +1,98 @@
+//
+// Calculates column width as a percentage.
+//
+// @param $numCols {number} number of columns spanned
+//
+@function oGridColumnWidth($colspan, $total-cols) {
+	@return (100% / $total-cols * $colspan);
+}
+
+//
+// Calculates column width as a percentage, but subtracts the gutter
+//
+// @param $colspan {number} number of columns spanned
+// @param $halfGutterWidth {number} half the width of column gutters
+//
+@function oGridColumnWidthMinusGutter($colspan, $total-cols: 12, $half-gutter-width: null) {
+	@return (oGridColumnWidth($colspan, $total-cols) - ($half-gutter-width * 2));
+}
+
+@mixin oGridWrapInSelector ($selector:null, $include-unwrapped: false) {
+	@if (not $selector or $include-unwrapped) {
+		@content
+	}
+
+	@if($selector) {
+		#{$selector} { @content }
+ 	} 
+}
+
+
+
+
+@mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
+	@if ($include-unwrapped or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
+		@content;
+	}
+	@if ($o-grid-fixed-layout-selector) {
+		#{$o-grid-fixed-layout-selector} {
+			@content;
+		}		
+	} @else if ($o-grid-fixed-layout-useragents) {
+		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
+			@content;
+		}	
+	} 
+}
+
+
+
+//
+// Writes media query selector for given maximum and minimum screen widths
+//
+// @param $min {string|null} min-width for media query
+// @param $max {string|null} max-width for media query
+// @param $force {boolean} [false] if set to true will then if $min and $max are undefined it will write out the styles wrapped in @media screen, otherwise writes nothing
+//
+@mixin oGridMaxMinMediaQuery($min, $max, $force:false) {
+	@if ($min and $max) {
+		@media screen and (min-#{$o-grid-mq-type}:$min+1) and (max-#{$o-grid-mq-type}:$max) { @content; }
+	} @else if ($min) {
+		@media screen and (min-#{$o-grid-mq-type}:$min+1) { @content; }
+	} @else if ($max) {
+		@media screen and  (max-#{$o-grid-mq-type}:$max) { @content; }
+	} @else if ($force) {
+		@media screen { @content; }
+	}
+}
+
+// Add cross-browser box-sizing attribute
+@mixin oGridBoxSizing($value, $polyfill: false) {
+	-moz-box-sizing: $value;
+	box-sizing: $value;
+	@if ($polyfill) {
+		@include oUseragentIe7BoxSizing();		
+	}
+}
+
+//
+// Writes media query selector for a given layout size
+//
+// @param $layout-sizes {string|list} name[s] of layout size[s] (s, m , l, xl)
+//
+@mixin oGridRespondTo ($layout-sizes) {
+
+	@each $layout-size in $layout-sizes {
+		@if $layout-size == s {
+			@include oGridMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
+		} @else if $layout-size == m {
+			@include oGridMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
+		} @else if $layout-size == l {
+			@include oGridMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
+		} @else if $layout-size == xl {
+			@include oGridMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
+		} @else {
+			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
+		}
+	}
+}

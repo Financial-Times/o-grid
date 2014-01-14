@@ -1,8 +1,9 @@
 @import "o-assets/main";
 @import "o-useragent/main";
 @import "_variables";
-@import "_mixins";
-@import "_functions";
+@import "_utils";
+@import "_selectors";
+@import "_grid-generators";
 
 
 @import "components/grid-default";

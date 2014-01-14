@@ -1,0 +1,118 @@
+
+@function oGridClass ($classes, $complex: false) {
+	$aggregated-selector: ();	
+	
+	@each $class in $classes {
+
+		@if ($complex) {
+			$loud-complex-selector: null;
+			$silent-complex-selector: null;
+			@each $part in $class {
+				$silent-complex-selector: append($silent-complex-selector, #{'%o-grid-#{$part}'});
+		    }
+		    $aggregated-selector: append($aggregated-selector, $silent-complex-selector, comma);
+			@if (not $o-grid-is-silent) {
+				@each $part in $class {
+					$loud-complex-selector: append($loud-complex-selector, #{'.o-grid-#{$part}'});
+				}
+				$aggregated-selector: append($aggregated-selector, $loud-complex-selector, comma);
+			}				
+		} @else {
+
+			$aggregated-selector: append($aggregated-selector, #{'%o-grid-#{$class}'}, comma);
+		  
+			@if (not $o-grid-is-silent) {
+				$aggregated-selector: append($aggregated-selector, #{'.o-grid-#{$class}'}, comma);
+			}
+		}
+	}
+
+	@return #{$aggregated-selector};
+}
+
+@mixin oGridClass ($classes, $complex: false) {
+	@include oGridWrapInSelector(oGridClass($classes, $complex)) { 
+		@content 
+	}
+}
+
+
+
+@function oGridColumnSelector ($layout-size: null, $colspans: null) {
+
+	$selector: null;
+
+	@if (not $layout-size) {
+		@if (not $o-grid-is-silent) {
+			$selector: append($selector, #{'[class*="o-grid-col"]'}, comma);
+		}
+		$selector: append($selector, #{'%o-grid-col'}, comma);
+		
+	} @else {
+		$prefix: $layout-size;
+
+		@if ($layout-size == default) {
+			$prefix: "";
+		} 
+
+		@each $colspan in $colspans {
+
+			@if (not $o-grid-is-silent) {
+				$selector: append($selector, #{'[class*="|#{$prefix}#{$colspan}|"]'}, comma);
+			}
+			$selector: append($selector, #{'%o-grid-#{$prefix}#{$colspan}'}, comma);
+		}		
+	} 
+	
+	@return $selector;
+}
+
+@mixin oGridColumnSelector ($layout-size: null, $colspan: null) {
+	@include oGridWrapInSelector(oGridColumnSelector($layout-size, $colspan)) { 
+		@content 
+	}
+}
+
+@mixin oGridGutterOverrides ($layout-sizes, $include-default: false) {
+
+	@each $layout in $layout-sizes {
+		%o-grid-no-gutter-#{$layout},
+		%o-grid-no-left-gutter-#{$layout} {
+			padding-left: 0;
+
+			&> .o-grid-row {
+				margin-left: 0;
+			}
+		}
+
+		%o-grid-no-gutter-#{$layout},
+		%o-grid-no-right-gutter-#{$layout} {
+			padding-right: 0;
+
+			&> .o-grid-row {
+				margin-right: 0;
+			}
+		}
+	}
+
+	@if ($include-default) {
+		%o-grid-no-gutter,
+		%o-grid-no-left-gutter {
+			padding-left: 0;
+
+			&> .o-grid-row {
+				margin-left: 0;
+			}
+		}
+
+		%o-grid-no-gutter,
+		%o-grid-no-right-gutter {
+			padding-right: 0;
+
+			&> .o-grid-row {
+				margin-right: 0;
+			}
+		}		
+	}
+
+}

@@ -134,7 +134,7 @@
 		
 		#{$attrSelector},
 		#{$placeholderSelector} {
-			width: oGridColumnWidth($colWidth);
+			width: oGridColumnWidth($colWidth, 12);
 		}
 		
 		$aggregatedSelector: append($aggregatedSelector, $attrSelector, comma);
@@ -220,6 +220,41 @@
 		&> .o-grid-row {
 			margin-right: 0;
 		}
+	}
+}
+
+@mixin oGridDefineDefaultColumns ($column-count) {
+	
+	[class*="|0|"],
+	[class*="|s0|"],
+	[class*="|hide|"],
+	[class*="|shide|"],
+	%o-grid.s0,
+	%o-grid-shide,
+	%o-grid-0,
+	%o-grid-hide {
+		display: none;
+	}
+
+	$column-count-minus-one: $column-count - 1;
+
+	@for $colspan from 1 through $column-count-minus-one {
+		
+		[class*="|#{$colspan}|"],
+		[class*="|s#{$colspan}|"],
+		%o-grid-#{$colspan},
+		%o-grid-s#{$colspan} {
+			width: oGridColumnWidthMinusGutter($colspan, $column-count, $o-grid-default-half-gutter);
+		}
+	}
+
+	[class*="|#{$column-count}|"],
+	[class*="|s#{$column-count}|"],
+	%o-grid-s#{$column-count},
+	%o-grid-#{$column-count} {
+	    float: none;
+	    clear: both;
+		width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
 	}
 }
 

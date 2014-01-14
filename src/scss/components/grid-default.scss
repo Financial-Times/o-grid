@@ -67,36 +67,7 @@ html {
 		padding-right: 0;
 	}
 
-	[class*="|0|"],
-	[class*="|s0|"],
-	[class*="|hide|"],
-	[class*="|shide|"],
-	%o-grid.s0,
-	%o-grid-shide,
-	%o-grid-0,
-	%o-grid-hide {
-		display: none;
-	}
-
-
-	@for $colWidth from 1 through 11 {
-				
-		[class*="|#{$colWidth}|"],
-		[class*="|s#{$colWidth}|"],
-		%o-grid-#{$colWidth},
-		%o-grid-s#{$colWidth} {
-			width: oGridColumnWidthMinusGutter($colWidth, $o-grid-default-half-gutter);
-		}
-	}
-
-	[class*="|12|"],
-	[class*="|s12|"],
-	%o-grid-s12,
-	%o-grid-12 {
-	    float: none;
-	    clear: both;
-		width: oGridColumnWidthMinusGutter(12, $o-grid-default-half-gutter);
-	}
+	@include oGridDefineDefaultColumns(12);
 
 	%o-grid-no-gutter,
 	%o-grid-no-gutter-s,

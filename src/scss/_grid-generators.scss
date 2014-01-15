@@ -92,8 +92,12 @@
 	@include oGridCompactStyles(false);
 
 	@include oGridColumnWidths(default, 12);
-	@include oGridColumnWidths(l, 12);
-
+	
+	// if the grid is responsive then the respondTo mixin adds the following styles, but if not we need to do it here
+	@if ($o-grid-is-fixed-desktop) {
+		@include oGridColumnWidths(l, 12);
+	}
+	
 	@include oGridClass(row page) {
 		width: $o-grid-large-max-width;
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug

@@ -136,6 +136,10 @@
     content: "large layout";
   }
 }
+.o-useragent-ie7 .header .mode:after, .o-useragent-ie8 .header .mode:after {
+  content: "large layout";
+}
+
 @media screen and (min-device-width: 1401px) {
   .header .mode:after {
     content: "extra large layout";

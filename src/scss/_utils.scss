@@ -91,5 +91,9 @@
 		} @else {
 			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
 		}
+
+		@if $layout-size == l {
+			@include oGridTargetAtFixedLayout() { @content; }
+		}
 	}
 }

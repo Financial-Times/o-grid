@@ -262,6 +262,10 @@ html {
   }
 }
 @media screen {
+  .o-grid-row, .o-grid-page {
+    max-width: none;
+  }
+
   .o-grid-no-gutter,
   .o-grid-no-left-gutter {
     padding-left: 0;
@@ -336,7 +340,7 @@ html {
 }
 @media screen and (max-width: 600px) {
   .o-grid-row, .o-grid-page {
-    max-width: 600px;
+    max-width: none;
   }
 
   .o-grid-no-gutter-s {
@@ -416,7 +420,7 @@ html {
 }
 @media screen and (min-width: 601px) and (max-width: 1000px) {
   .o-grid-row, .o-grid-page {
-    max-width: 780px;
+    max-width: none;
   }
 
   .o-grid-no-left-gutter-m {
@@ -489,7 +493,7 @@ html {
 }
 @media screen and (min-width: 1001px) and (max-width: 1400px) {
   .o-grid-row, .o-grid-page {
-    max-width: 960px;
+    max-width: none;
   }
 
   .o-grid-no-right-gutter-l {
@@ -564,7 +568,7 @@ html {
   /* ensures d12 and d0 can be over-ridden by styles for l layout */
 }
 .o-useragent-ie7 .o-grid-row, .o-useragent-ie7 .o-grid-page, .o-useragent-ie8 .o-grid-row, .o-useragent-ie8 .o-grid-page {
-  max-width: 960px;
+  max-width: none;
 }
 .o-useragent-ie7 .o-grid-no-right-gutter-l,
 .o-useragent-ie8 .o-grid-no-right-gutter-l {

@@ -39,8 +39,8 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
 * [Responsive grid](grid-responsive.html)  *Use this for cross-device testing*  
     Demonstrates the behaviour of a page using the recommended installation of o-grid
 
-* [Fluid grid](grid-fluid.html)  
-    Demonstrates the behaviour of a page using a fully fluid version of the responsive grid
+* [Non-fluid grid](grid-non-fluid.html)  
+    Demonstrates the behaviour of a page using a non-fluid version of the responsive grid
 
 * [Resized grid](grid-resized.html)  
     Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved

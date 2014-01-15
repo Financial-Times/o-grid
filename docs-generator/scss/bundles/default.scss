@@ -7,6 +7,7 @@
 
 $o-assets-global-path: "/";
 $o-grid-assets-path: null;
+$o-grid-is-silent: false;
 
 @import "../../../src/scss/components/grid-default";
 

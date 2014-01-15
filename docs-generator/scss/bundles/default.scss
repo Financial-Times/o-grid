@@ -7,8 +7,6 @@
 
 $o-assets-global-path: "/";
 $o-grid-assets-path: null;
-$o-grid-fixed-layout-selector: '.lt-ie9';
-// $o-grid-is-silent: true;
 
 @import "../../../src/scss/components/grid-default";
 

@@ -80,19 +80,19 @@
 @mixin oGridRespondTo ($layout-sizes) {
 
 	@each $layout-size in $layout-sizes {
-		@if $layout-size == s {
+		@if $layout-size == S {
 			@include oGridMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
-		} @else if $layout-size == m {
+		} @else if $layout-size == M {
 			@include oGridMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
-		} @else if $layout-size == l {
+		} @else if $layout-size == L {
 			@include oGridMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
-		} @else if $layout-size == xl {
+		} @else if $layout-size == XL {
 			@include oGridMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
 		} @else {
 			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
 		}
 
-		@if $layout-size == l {
+		@if $layout-size == L {
 			@include oGridTargetAtFixedLayout() { @content; }
 		}
 	}

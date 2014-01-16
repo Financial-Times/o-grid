@@ -95,7 +95,7 @@
 	
 	// if the grid is responsive then the respondTo mixin adds the following styles, but if not we need to do it here
 	@if ($o-grid-is-fixed-desktop) {
-		@include oGridColumnWidths(l, 12);
+		@include oGridColumnWidths(L, 12);
 	}
 	
 	@include oGridClass(row page) {
@@ -103,22 +103,22 @@
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 	}
 	
-	@include oGridColumnSelector(s, 12) {
+	@include oGridColumnSelector(S, 12) {
 		clear: none;
 	}
 	
-	@include oGridGutterOverrides(l);
+	@include oGridGutterOverrides(L);
 	@include oGridGutterOverrides(default);
 }
 
 
 
 @mixin oGridOverrideDefaultGrid () {
-	@include oGridColumnSelector(s, 0 hide) {
+	@include oGridColumnSelector(S, 0 hide) {
 	    display: block;
 	}
 
-	@include oGridColumnSelector(s, 12) {
+	@include oGridColumnSelector(S, 12) {
 	    clear: none;
 	}
 

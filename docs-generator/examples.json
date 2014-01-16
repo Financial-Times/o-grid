@@ -64,12 +64,12 @@
     },
     {
         "columns": [
-            {"span": "m4 s6"},
-            {"span": "m4 s6"},
-            {"span": "m4 s6"},
-            {"span": "m4 s6"},
-            {"span": "m4 s6"},
-            {"span": "m4 s6"}
+            {"span": "M4 S6"},
+            {"span": "M4 S6"},
+            {"span": "M4 S6"},
+            {"span": "M4 S6"},
+            {"span": "M4 S6"},
+            {"span": "M4 S6"}
         ],
         "description": "Six divs, each expanding to contain their content, but taking up third width at medum size and half width at small size",
         "title": "Columns without a specified width"
@@ -123,37 +123,37 @@
     },
     {
         "columns": [
-            {"span": "12 l4 xl3"},
-            {"span": "12 l4 xl3"},
-            {"span": "12 l4 xl3"},
-            {"span": "12 l0 xl3"}
+            {"span": "12 L4 XL3"},
+            {"span": "12 L4 XL3"},
+            {"span": "12 L4 XL3"},
+            {"span": "12 L0 XL3"}
         ],
         "description": "These columns are set to default to 12 columns (full width), but span 4 at the large mode (with one hidden), and 3 at the extra large mode.",
         "title": "Variable column spans (with large default and conditionally hidden column)"
     },
     {
         "columns": [
-            {"span": "3 l4 m6 s12"},
-            {"span": "3 l4 m6 s12"},
-            {"span": "3 l4 m6 s12"},
-            {"span": "3 l0 m6 s12"}
+            {"span": "3 L4 M6 S12"},
+            {"span": "3 L4 M6 S12"},
+            {"span": "3 L4 M6 S12"},
+            {"span": "3 L0 M6 S12"}
         ],
         "description": "These columns are set to default to 3 columns, but span 4 at the large mode (with one hidden), 6 at the and medium mode, and 12 at the small mode.",
         "title": "Variable column spans (with small default and conditionally hidden column)"
     },
     {
         "columns": [
-            {"span": "0 l4 xl4"},
-            {"span": "hide l4 xl4"},
-            {"span": "12 l4 xl4"}
+            {"span": "0 L4 XL4"},
+            {"span": "hide L4 XL4"},
+            {"span": "12 L4 XL4"}
         ],
         "description": "All but one of these columns are hidden on smaller screens. On larger screens they should all take up a third of the space available",
         "title": "Columns hidden by default which appear at larger layouts"
     },
     {
         "columns": [
-            {"span": "lhide xlhide"},
-            {"span": "shide mhide"}
+            {"span": "Lhide XLhide"},
+            {"span": "Shide Mhide"}
         ],
         "description": "Using the hide class without a default",
         "title": "Using the hide class without a default"
@@ -166,9 +166,9 @@
                     {"span": "4"},
                     {"span": "4"}
                 ],
-                "span": "8 s12"
+                "span": "8 S12"
             },
-            {"span": "4 s12"}
+            {"span": "4 S12"}
         ],
         "description": "The grid can be applied within components on a page which doesn't use o-grid for its global layout by wrapping in a container with class <code>o-grid-box</code>",
         "title": "Usage on existing pages",
@@ -183,17 +183,17 @@
                 "columns": [
                     {
                         "columns": [
-                            {"span": "12 m4 s4"},
-                            {"span": "12 m4 s4"},
-                            {"span": "12 m4 s4"}
+                            {"span": "12 M4 S4"},
+                            {"span": "12 M4 S4"},
+                            {"span": "12 M4 S4"}
                         ],
-                        "span": "2 m12 s12"
+                        "span": "2 M12 S12"
                     },
                     {
                         "minHeight": "210px",
-                        "span": "8 m10 s12"
+                        "span": "8 M10 S12"
                     },
-                    {"span": "2 s12"}
+                    {"span": "2 S12"}
                 ],
                 "span": "8"
             },

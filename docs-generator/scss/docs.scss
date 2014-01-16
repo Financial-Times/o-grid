@@ -123,25 +123,25 @@
 	background-color: #fff;
 }
 
-@include oGridRespondTo(s) {
+@include oGridRespondTo(S) {
 	.header .mode:after {
 		content: "small layout";
 	}
 }
 
-@include oGridRespondTo(m) {
+@include oGridRespondTo(M) {
 	.header .mode:after {
 		content: "medium layout";
 	}
 }
 
-@include oGridRespondTo(l) {
+@include oGridRespondTo(L) {
 	.header .mode:after {
 		content: "large layout";
 	}
 }
 
-@include oGridRespondTo(xl) {
+@include oGridRespondTo(XL) {
 	.header .mode:after {
 		content: "extra large layout";
 	}

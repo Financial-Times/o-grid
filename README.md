@@ -67,9 +67,11 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
 
 ### For developers
 
-1. Add the following to your module's bower dependencies
+1. Run the following in your project's root directory
    
-        "o-grid": "0.2.x"
+        bower install o-grid=http://git.svc.ft.com:9080/git/origami/o-grid.git
+    
+    (If your project doesn't already contain a bower.json file you will need to create one first with the content `{"name": "your-project-name"}`)
 
 2. Include the following in your app's styles
 
@@ -78,11 +80,13 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
         $o-grid-mq-type: width; 
         
         @import "o-grid/main.scss";  
-  Make sure that `o-grid` is in your sass include path (see the [origami docs](http://financial-times.github.io/o-origami/docs/syntax/scss/) for more details). For products you can also simply use the [build service](http://financial-times.github.io/o-origami/docs/build-service/)
+  Make sure that `o-grid` is in your sass include path (see the [origami docs](http://financial-times.github.io/ft-origami/docs/syntax/scss/) for more details). For products you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/developer-guide/build-service/)
 
 For other steps only relevant to product/page development see the [Product developers guide](#product-developers-guide)
 
 ###For designers
+
+**TODO** change to use buildservice
 
 1. From terminal run the following commands (you will need to have [bower](http://bower.io/) already installed)
 
@@ -114,52 +118,44 @@ The other demo pages are to demonstrate other possible configurations and need o
 ## General use
 
 ### Base classes
-Grid styles are typically applied to the html using two types of class declaration:
+Grid styles are typically applied to the html using two types declaration:
 
-* An `o-grid-row` class, added to the container element.  
+* A `o-grid-row` class, added to the container element.  
 It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
 
-* An `o-grid-col` class, added to the element intended to conform to the grid's columns.  
-`o-grid-col` by itself floats and element to the left. To make it conform to the grid additional width rules need to be appended to it e.g. `o-grid-col|6|s12|` (see below for more details)  
+* A `data-o-grid-colspan` attribute, added to the element intended to conform to the grid's columns.  
+`data-o-grid-colspan=""` by itself floats an element to the left. Specific widths are specified by setting the value of the attribute (see below for more details)  
 
 So, for example
 
     <div class="o-grid-row">
-        <div class="o-grid-col|6|">A div spanning 6 grid columns</div>
+        <div data-o-grid-colspan="6">A div spanning 6 grid columns</div>
     </div>
 
 ### Specifying column widths
-The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually, as well as a default number of columns. To do this append one or more 'subclasses' to the `o-grid-col` using the following structure:
+The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually.
+    
+    * {0-12} - specifies the number of columns to span by default
+    * S{0-12} - specifies the number of columns to span at the small layout
+    * M{0-12} - specifies the number of columns to span at the medium layout
+    * L{0-12} - specifies the number of columns to span at the large layout
+    * XL{0-12} - specifies the number of columns to span at the extra large layout
 
-    o-grid-col[|{default width}|][layout size identifier}{number of columns}|]
-
-i.e. `o-grid-col` followed by an optional default width and widths for specific layouts, all separated (and trailed) by '|' characters, e.g. `o-grid-col|6|s12|xl4|`
-
-### Layout size identifiers
-
-* **s** - *Small* layout
-
-* **m** - *Medium* layout
-
-* **l** - *Large* layout
-
-* **xl** - *Extra Large* layout
-
-In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicic rule is not defined.
+In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicit rule is not defined.
 
 ### Examples
     
     //A full width column for all sizes except large screens, where takes up 9 columns
-    <div class="o-grid-col|12|xl9|"></div>  
+    <div data-o-grid-colspan="12 XL9"></div>  
   
     //A half width column for all sizes except small screens, where takes up full width
-    <div class="o-grid-col|6|s12|"></div>  
+    <div data-o-grid-colspan="6 S12"></div>  
   
     //A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
-    <div class="o-grid-col|s4|m3|l2|xl1|"></div>  
+    <div data-o-grid-colspan="S4 M3 l2 XL1"></div>  
 
     //A column which has width:auto except on small screens, where it takes up half the available width
-    <div class="o-grid-col|s6|"></div>  
+    <div data-o-grid-colspan="S6"></div>  
   
 ### Utilities
 
@@ -167,18 +163,18 @@ In general prefer to set the default for larger layouts and override for smaller
 To avoid having to use the following inefficient markup
 
     <div class="o-grid-row">
-       <div class="o-grid-col|12|">
+       <div data-o-grid-colspan="12">
        </div>
     </div>
 
 The following markup can be used instead
 
-    <div class="o-grid-row-col o-grid-col|12|">
+    <div class="o-grid-row-col" data-o-grid-colspan="12">
     </div>
 
 #### Hiding elements
 
-e.g. `o-grid|mhide|shide|` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
+e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 
 #### Placeholder classes/`@extend`
@@ -187,28 +183,34 @@ e.g. `o-grid|mhide|shide|` will hide the given element for medium and small scre
 
 ##### Applying column layouts
 
-These placeholders are of the format `%o-grid-{layout identifier}{number of columns|hide}` e.g.
+These placeholders are of the format `%o-grid-[{S|M|L|XL}]{0-12|hide}` e.g.
         
         // hides secondary images on small and medium sized displays
         .main-article img:not(.primary) {
-            @extend %o-grid-shide;
-            @extend %o-grid-mhide;
+            @extend %o-grid-Shide;
+            @extend %o-grid-Mhide;
         }
 
-*In general use `o-grid-col|...` classes and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
+        // hides secondary images on small and medium sized displays
+        .main-article  {
+            @extend %o-grid-7
+            @extend %o-grid-S12;
+        }
+
+*In general use `data-o-grid-colspan` and only use `@extend` for cases where significant simplification of code is achieved or editing the templates is not possible. Be very careful your css does not become bloated as a result.*
 
 ##### Gutterless columns  
 To remove either the left or the right gutter from a column extend these placeholders which have the following structure (the parts in square brackets are optional).
 
-    %o-grid-no[-{left|right}]-gutter[-{s|m|l|xl}]
+    %o-grid-no[-{left|right}]-gutter[-{S|M|L|XL}]
 
 e.g. 
 
         // no left gutter at large and extra large layouts. No gutter at all at small size
         .my-component {
-            @extend %o-grid-no-left-gutter-l;
-            @extend %o-grid-no-left-gutter-xl;
-            @extend %o-grid-no-gutter-s;
+            @extend %o-grid-no-left-gutter-L;
+            @extend %o-grid-no-left-gutter-XL;
+            @extend %o-grid-no-gutter-S;
         }
 
         //No gutter at any size
@@ -218,32 +220,29 @@ e.g.
 
 #### Mixins
 * `oGridRespondTo($layoutSize)`  
-To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `s`, `m`, `l` or `xl` depending on which layout size the style should apply to e.g.
+To create styles that respond to the same breakpoints as the grid this sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `S`, `M`, `L` or `XL` depending on which layout size the style should apply to e.g.
 
-        @include oGridRespondTo(s) {
+        @include oGridRespondTo(S) {
             .o-example-module .item-subheading {
                 font-size: 0.5em
             }
         }
-More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts). To do this combine the styles in a [list variable](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists) beforehand.
+More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts).
         
-        @include oGridRespondTo((l xl)) {
+        @include oGridRespondTo(L XL) {
             .o-example-module .item-subheading {
                 font-size: 0.5em
             }
         }
 
 #### Variables
-All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *must not* be over-written at the component/module level.*
+All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *must not* be over-written at the component/module level.
 
 
 ### Gotchas
 
-#### 'Leaky' selectors
-Using a different prefix instead of `o-grid-col`, e.g. `not-really|6|-a-column` will still apply the grid width so in general it's best to avoid classes which contain `|{letter}{number}|` or `|{number}|` in your module's class names. Conversely, don't use this feature/bug deliberately by using e.g. `o-mymodule|6|` to layout your module as this behaviour is just a side effect and not a supported feature
-
 #### Fixed/Absolute positioning
-The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). Currently supporting fixed/absolute positioning is considered out of scope. If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/o-grid-issues/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
+The grid specifies widths in percentages, which will not work for fixed or absolute positioned elements (The grid can still be used to layout elements within an absolute/fixed position container). If you need to support fixed/absolutely position elements please leave a comment on the [github issue](https://github.com/Financial-Times/o-grid-issues/issues/9). If you develop your own solution to the problem (you'll probably need to use javascript) please leave a comment and it will be considered for inclusion in a future release. Be aware that if developing a solution for a module already/likely to be included in multiple projects your solution shouldn't assume that the configuration of the grid module will be consistent from product to product (see below).
 
 ## Product developers guide<a id="product-developers-guide" style="visibility:hidden">&nbsp;</a>
 
@@ -262,25 +261,24 @@ If your entire page is to be laid out using the grid add the class `o-grid-page`
 By default, any browser that doesn't support media queries will be served the small layout. This can be over-ridden so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
 
 * `$o-grid-fixed-layout-useragents: ie7 ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
-* `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will be used instead of the useragent targeting
+* `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will override the useragent targeting
 
-#### Box sizing in ie7
 For ie7 the `boxsizing.htc` polyfil provided by [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD) is also needed. See [o-assets](http://git.svc.ft.com/tree/origami%2Fo-assets.git/HEAD) for details of how to configure the path to this file.
 
 ### Things you *can* do (but in most cases probably shouldn't)
-The grid is quite easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid's main.scss file. A few notable uses are as follows:
+The grid is easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid's main.scss file. A few notable uses are as follows:
 
 #### Changing how responsive the grid is
 The following flags can be used to change the responsive behaviour *\[defaults in square brackets\]*
 
 * `$o-grid-is-responsive`: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
-* `$o-grid-is-fluid`: \[false\] Switches to fully fluid layouts
+* `$o-grid-is-fluid`: \[true\] Switches between fully fluid and snapped grid layouts
 * `$o-grid-is-fixed-desktop`: \[false\] Forces the site to always use the large layout
-* `$o-grid-fixed-layout-selector`: \[$lt-ie9\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* `$o-grid-fixed-layout-selector`: \[null\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
 * `$o-grid-mq-type` : \[device-width\] By default only responds to device rather than window width. To change this set this variable to `width`
 
 #### Resizing the grid
-By overwriting the values of any of the `$...Width`, `$...Break` or `$...Gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
+By overwriting the values of any of the `$...width`, `$...break` or `$...gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
 
 #### Disabling larger layouts
 By setting the value of a breakpoint (`$o-grid-small-to-medium-break`, `$o-grid-medium-to-large-break` or `$o-grid-large-to-extra-large-break`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-to-large-break: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-to-extra-large-break: false;`.*

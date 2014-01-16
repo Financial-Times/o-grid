@@ -52,5 +52,5 @@ $o-grid-assets-path: $o-grid-name !default;
 //     inadvisable to do so as components will not typically define styles for 
 //     your new layout)
 // -------------------------------------------------------------------------------------
-$_o-grid-max-widths: $o-grid-small-max-width,$o-grid-medium-max-width,$o-grid-large-max-width,$o-grid-extra-large-max-width !default;
-$_o-grid-layout-shorthands: s m l xl !default;
+$_o-grid-max-widths: $o-grid-small-max-width $o-grid-medium-max-width $o-grid-large-max-width $o-grid-extra-large-max-width;
+$_o-grid-layout-shorthands: s m l xl;

@@ -1,0 +1,1 @@
+module.exports = 'responsive,default,legacy,non-fluid,resized,disabled,always-fixed,always-responsive'.split(',');

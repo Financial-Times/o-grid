@@ -108,6 +108,7 @@ html {
 [data-o-grid-colspan~="12"] {
   float: none;
   clear: both;
+  display: block;
   width: 98%;
 }
 
@@ -162,6 +163,7 @@ html {
 [data-o-grid-colspan~="S12"] {
   float: none;
   clear: both;
+  display: block;
   width: 98%;
 }
 
@@ -260,6 +262,7 @@ html {
 [data-o-grid-colspan~="12"] {
   float: none;
   clear: both;
+  display: block;
   width: 100%;
 }
 
@@ -321,6 +324,7 @@ html {
 [data-o-grid-colspan~="L12"] {
   float: none;
   clear: both;
+  display: block;
   width: 100%;
 }
 

@@ -108,6 +108,7 @@ html {
 [data-o-grid-colspan~="12"] {
   float: none;
   clear: both;
+  display: block;
   width: 98%;
 }
 
@@ -162,6 +163,7 @@ html {
 [data-o-grid-colspan~="S12"] {
   float: none;
   clear: both;
+  display: block;
   width: 98%;
 }
 
@@ -321,6 +323,7 @@ html {
   [data-o-grid-colspan~="12"] {
     float: none;
     clear: both;
+    display: block;
     width: 100%;
   }
 }
@@ -387,6 +390,7 @@ html {
   [data-o-grid-colspan~="S12"] {
     float: none;
     clear: both;
+    display: block;
     width: 100%;
   }
 }
@@ -453,6 +457,7 @@ html {
   [data-o-grid-colspan~="M12"] {
     float: none;
     clear: both;
+    display: block;
     width: 100%;
   }
 }
@@ -519,6 +524,7 @@ html {
   [data-o-grid-colspan~="L12"] {
     float: none;
     clear: both;
+    display: block;
     width: 100%;
   }
 }
@@ -572,6 +578,7 @@ html {
 .o-useragent-ie7 [data-o-grid-colspan~="L12"], .o-useragent-ie8 [data-o-grid-colspan~="L12"] {
   float: none;
   clear: both;
+  display: block;
   width: 100%;
 }
 
@@ -637,6 +644,7 @@ html {
 .o-useragent-ie7 [data-o-grid-colspan~="12"], .o-useragent-ie8 [data-o-grid-colspan~="12"] {
   float: none;
   clear: both;
+  display: block;
   width: 100%;
 }
 .o-useragent-ie7 .o-grid-row, .o-useragent-ie7 .o-grid-page, .o-useragent-ie8 .o-grid-row, .o-useragent-ie8 .o-grid-page {

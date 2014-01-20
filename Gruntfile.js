@@ -26,6 +26,37 @@ module.exports = function(grunt) {
     return output;
   }
 
+
+// var spans = [0, 12, 11, 10, 9],
+//   prefixes = ['', 'S', 'M', 'L', 'XL'];
+
+// var selector = spans.map(function (span, index) {
+//   if (typeof span != 'undefined') {
+//     return prefixes[index] + span;
+//   }
+// }).filter(function (span) {
+//   return typeof span != 'undefined';
+// }).join(' ');
+
+// var comparitors = spans.map(function (span, index) {
+//   var selector;
+//   if (index > 0 && typeof span != 'undefined') {
+//     selector = prefixes.slice(1).filter(function (prefix) {
+//       return prefix != prefixes[index];
+//     }).map(function (item) {
+//       return item + '0';
+//     })
+//     selector.push(span);
+//     return selector.join(' ');
+//   } else {
+//     return undefined
+//   }
+  
+// }).filter(function (span) {
+//   return typeof span != 'undefined';
+// });
+
+
   function constructDemoPagesSassConfig () {
     var output = {};
     demoPageTypes.map(function (type) {
@@ -115,6 +146,8 @@ module.exports = function(grunt) {
     handlebars.registerPartial('column', grunt.file.read('./docs-generator/partials/column.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('examples', grunt.file.read('./docs-generator/partials/examples.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('custom-examples', grunt.file.read('./docs-generator/partials/custom-examples.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('unresponsive', grunt.file.read('./docs-generator/partials/unresponsive.hbs', {encoding: 'utf8'}));
+    handlebars.registerPartial('overrides', grunt.file.read('./docs-generator/partials/overrides.hbs', {encoding: 'utf8'}));
     handlebars.registerPartial('head', grunt.file.read('./docs-generator/partials/head.hbs', {encoding: 'utf8'}));
 
     grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup']);
@@ -124,5 +157,4 @@ module.exports = function(grunt) {
     grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
     grunt.file.copy('./bower_components/o-useragent/polyfills/boxsizing.htc', './docs/polyfills/boxsizing.htc');
   });
-
 };

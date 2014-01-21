@@ -11,30 +11,28 @@ $o-grid-is-silent: false;
 
 @import "../../../src/scss/components/grid-default";
 
-.o-grid-no-gutter {
+$o-grid-test-sizes: S M L XL;
+
+@each $size in $o-grid-test-sizes {
+	.gut-#{$size} {
+	@extend %o-grid-no-gutter-#{$size} !optional;
+	}
+	.gut-l-#{$size} {
+		@extend %o-grid-no-left-gutter-#{$size} !optional;
+	}
+	.gut-r-#{$size} {
+		@extend %o-grid-no-right-gutter-#{$size} !optional;
+	}
+}
+
+.gut {
 	@extend %o-grid-no-gutter !optional;
 }
-.o-grid-no-left-gutter {
+.gut-l {
 	@extend %o-grid-no-left-gutter !optional;
 }
-.o-grid-no-right-gutter {
+.gut-r {
 	@extend %o-grid-no-right-gutter !optional;
 }
-.o-grid-no-gutter-s {
-	@extend %o-grid-no-gutter-s !optional;
-}
-.o-grid-no-left-gutter-m {
-	@extend %o-grid-no-left-gutter-m !optional;
-}
-.o-grid-no-right-gutter-l {
-	@extend %o-grid-no-right-gutter-l !optional;
-}
-.o-grid-no-left-gutter {
-	@extend %o-grid-no-left-gutter !optional;
-}
-.o-grid-no-gutter {
-	@extend %o-grid-no-gutter !optional;
-}
-.o-grid-no-right-gutter {
-	@extend %o-grid-no-right-gutter !optional;
-}
+
+@import "../docs";

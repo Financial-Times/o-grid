@@ -108,8 +108,12 @@
   font-family: monospace;
 }
 
-.error .dev-inner {
+[class*='error'] .dev-inner {
   background-color: #faa;
+}
+
+.selected-stylesheet {
+  background: #aaf;
 }
 
 .o-grid-row {
@@ -148,4 +152,35 @@
   .header .mode:after {
     content: "extra large layout";
   }
+}
+.comment {
+  display: none;
+}
+
+.stylesheet-default .comment.default {
+  display: block;
+}
+
+.stylesheet-device-width-mq .comment.device-width-mq {
+  display: block;
+}
+
+.stylesheet-width-mq .comment.width-mq {
+  display: block;
+}
+
+.stylesheet-non-fluid .comment.non-fluid {
+  display: block;
+}
+
+.stylesheet-resized .comment.resized {
+  display: block;
+}
+
+.stylesheet-disabled .comment.disabled {
+  display: block;
+}
+
+.stylesheet-always-fixed .comment.always-fixed {
+  display: block;
 }

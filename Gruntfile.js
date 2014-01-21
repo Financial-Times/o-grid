@@ -17,12 +17,11 @@ module.exports = function(grunt) {
     grunt.file.expand('./docs-generator/partials/*.hbs').forEach(function(path) {
         handlebars.registerPartial(path.split('/').pop().split('.').shift(), grunt.file.read(path, {encoding: 'utf8'}));
     });
-    grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup']);
+    grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup', 'browserify']);
   });
 
   grunt.registerTask('finalDocsCleanup', function () {
     grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
-    grunt.file.copy('./docs-generator/js/test.js', './docs/js/test.js');
     grunt.file.copy('./bower_components/o-useragent/polyfills/boxsizing.htc', './docs/polyfills/boxsizing.htc');
   });
 

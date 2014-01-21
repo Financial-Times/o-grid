@@ -110,9 +110,14 @@
 	white-space: pre;
 	font-family: monospace;
 
-}	 .error .dev-inner {
-	 	background-color: #faa;
-	 }
+}	 
+[class*='error'] .dev-inner {
+ 	background-color: #faa;
+ }
+
+.selected-stylesheet {
+	background: #aaf;
+}
 .o-grid-row {
 	background-color: #eee;
 	padding-bottom: 10px;
@@ -147,5 +152,16 @@
 @include oGridRespondTo(XL) {
 	.header .mode:after {
 		content: "extra large layout";
+	}
+}
+
+.comment {
+	display: none;
+}
+@each $type in default device-width-mq width-mq non-fluid resized disabled always-fixed {
+	#{'.stylesheet-#{$type}'} {
+		#{'.comment.#{$type}'} {
+			display: block;
+		}
 	}
 }

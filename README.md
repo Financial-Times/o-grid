@@ -32,36 +32,9 @@ Top level grid rows are a fixed 1360px width
 
 For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns
 
-### Demos
+### [Demos](demos.html)
 
-In order to view the demos you will need to [install o-grid locally](#local-setup). To force the demos to respond to resizing of your desktop browser window you will need to enable [device metrics overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#emulate-device-viewports).
-
-* [Responsive grid](grid-responsive.html)  *Use this for cross-device testing*  
-    Demonstrates the behaviour of a page using the recommended installation of o-grid
-
-* [Non-fluid grid](grid-non-fluid.html)  
-    Demonstrates the behaviour of a page using a non-fluid version of the responsive grid
-
-* [Resized grid](grid-resized.html)  
-    Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved
-
-* [Disabled breakpoint](grid-disabled.html)  
-    Responsive grid with the extra large layout disabled
-
-* [Always fixed](grid-always-fixed.html)  
-    Fixed grid at 960px across all browsers and devices
-
-*The following two demos mock behaviour of the grid when browsers meet certain conditions, and are included purely as a convenient resource for developers*
-
-* [Always responsive grid](grid-always-responsive.html)  
-    Responsive grid that responds to window rather than device width (mainly to make development easier)
-
-* [Default grid](grid-default.html)  
-    Fluid grid with max width of 600px - mocks behaviour if media queries not supported
-
-* [Legacy grid](grid-legacy.html)  
-    Fixed grid with width of 960px - mocks behaviour if media queries are not supported and the viewport is large enough for a desktop experience
-
+In order to view the demos you will need to [install o-grid locally](#local-setup).
 
 ## Installation
 
@@ -181,7 +154,8 @@ The following markup can be used instead
 e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 #### Compact, gutterless rows
-To remove gutters from all columns in a row use the class `o-grid-row-compact` e.g.
+*(Note: unimplemented for the default media-queryless layout)*
+To remove gutters from all columns in a row use the class `o-grid-row-compact`  e.g.
 
     <div class="o-grid-row o-grid-row-compact"></div>
 
@@ -209,6 +183,7 @@ Placeholders for column selectors are of the format `%o-grid-[{S|M|L|XL}]{0-12|h
 There is no need to use these inside a media query - the placeholder classes are already included within the appropriate media query.
 
 ##### Fine-grained gutter removal
+*(Note: unimplemented for the default media-queryless layout)*
 To remove gutters from a specific column extend these placeholders which have the following structure (the parts in square brackets are optional).
 
     %o-grid-no[-{left|right}]-gutter[-{S|M|L|XL}]

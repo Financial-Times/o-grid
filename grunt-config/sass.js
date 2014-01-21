@@ -1,11 +1,8 @@
 module.exports = function (grunt) {
   function constructDemoPagesSassConfig () {
     var output = {};
-    require('../docs-generator/demo-types').map(function (type) {
-      if (type !== 'legacy') {
+    Object.keys(require('../docs-generator/demo-types')).map(function (type) {
         output['./docs/css/grid-' + type + '.css'] = './docs-generator/scss/bundles/' + type + '.scss';
-      }
-      
     });
 
     output['./docs/css/docs.css'] = ['./docs-generator/scss/docs.scss'];

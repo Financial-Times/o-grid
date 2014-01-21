@@ -380,7 +380,7 @@ html {
     clear: none;
   }
 
-  [data-o-grid-colspan~="s0"], [data-o-grid-colspan~="s1"], [data-o-grid-colspan~="s2"], [data-o-grid-colspan~="s3"], [data-o-grid-colspan~="s4"], [data-o-grid-colspan~="s5"], [data-o-grid-colspan~="s6"], [data-o-grid-colspan~="s7"], [data-o-grid-colspan~="s8"], [data-o-grid-colspan~="s9"], [data-o-grid-colspan~="s10"], [data-o-grid-colspan~="s11"], [data-o-grid-colspan~="s12"] {
+  [data-o-grid-colspan~="S0"], [data-o-grid-colspan~="S1"], [data-o-grid-colspan~="S2"], [data-o-grid-colspan~="S3"], [data-o-grid-colspan~="S4"], [data-o-grid-colspan~="S5"], [data-o-grid-colspan~="S6"], [data-o-grid-colspan~="S7"], [data-o-grid-colspan~="S8"], [data-o-grid-colspan~="S9"], [data-o-grid-colspan~="S10"], [data-o-grid-colspan~="S11"], [data-o-grid-colspan~="S12"] {
     width: auto;
   }
 

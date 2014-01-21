@@ -1,4 +1,5 @@
 module.exports = {
+	"silent": "By default the grid should output no styles and all blocks extend to full page width",
 	"default": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported",
 	"device-width-mq": "Demonstrates the behaviour of a page using the default installation of o-grid (responding to device, not window, width",
 	"width-mq": "Responsive grid that responds to window rather than device width (mainly to make development easier)",

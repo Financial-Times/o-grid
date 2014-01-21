@@ -46,17 +46,6 @@ html {
   padding-right: 0.5%;
 }
 
-.o-grid-row-compact > [data-o-grid-colspan] {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.o-grid-row.o-grid-row-compact,
-.o-grid-row .o-grid-row.o-grid-row-compact {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 [data-o-grid-colspan~="hide"], [data-o-grid-colspan~="0"] {
   display: none;
 }
@@ -167,22 +156,191 @@ html {
   width: 99%;
 }
 
-.o-grid-no-gutter,
-.o-grid-no-left-gutter {
-  padding-left: 0;
-}
-.o-grid-no-gutter > .o-grid-row,
-.o-grid-no-left-gutter > .o-grid-row {
-  margin-left: 0;
+/* Styles for presenting the grid. Not part of the grid code. */
+/**
+
+
+**/
+/* 
+	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
+	output a string or to wrap some style rules in a selector
+*/
+.header {
+  margin: 0 0 20px 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
 }
 
-.o-grid-no-gutter,
-.o-grid-no-right-gutter {
-  padding-right: 0;
+.header h1 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 28px;
 }
-.o-grid-no-gutter > .o-grid-row,
-.o-grid-no-right-gutter > .o-grid-row {
-  margin-right: 0;
+
+.header span {
+  font-weight: normal;
+  color: #bbb;
+}
+
+.docs {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.docs a {
+  color: #55a;
+}
+
+.docs h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.docs h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.docs h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.docs p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.docs li {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.docs code {
+  background-color: #ffe;
+  color: #885;
+}
+
+.examples {
+  opacity: 0.75;
+  background: white;
+  position: relative;
+}
+
+.underlay {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  height: 100%;
+}
+.underlay .o-grid-row,
+.underlay .col,
+.underlay .col > div {
+  height: 100%;
+}
+.underlay .col > div {
+  background: pink;
+}
+
+.example {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.dev-inner {
+  display: block;
+  margin-bottom: 10px;
+  min-height: 30px;
+  text-align: center;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 30px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  white-space: pre;
+  font-family: monospace;
+}
+
+[class*='error'] .dev-inner {
+  background-color: #faa;
+}
+
+.selected-stylesheet {
+  background: #aaf;
+}
+
+.o-grid-row {
+  background-color: #eee;
+  padding-bottom: 10px;
+}
+
+.dev-inner + .o-grid-row {
+  margin-top: 10px;
+}
+
+[class*="o-grid-col"] [class*="o-grid-col"] .dev-inner {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 400px) {
+  .header .mode:after {
+    content: "small layout";
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 800px) {
+  .header .mode:after {
+    content: "medium layout";
+  }
+}
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+  .header .mode:after {
+    content: "large layout";
+  }
+}
+.o-useragent-ie7 .header .mode:after, .o-useragent-ie8 .header .mode:after {
+  content: "large layout";
+}
+
+@media screen and (min-width: 1201px) {
+  .header .mode:after {
+    content: "extra large layout";
+  }
+}
+.comment {
+  display: none;
+}
+
+.stylesheet-default .comment.default {
+  display: block;
+}
+
+.stylesheet-device-width-mq .comment.device-width-mq {
+  display: block;
+}
+
+.stylesheet-width-mq .comment.width-mq {
+  display: block;
+}
+
+.stylesheet-non-fluid .comment.non-fluid {
+  display: block;
+}
+
+.stylesheet-resized .comment.resized {
+  display: block;
+}
+
+.stylesheet-disabled .comment.disabled {
+  display: block;
+}
+
+.stylesheet-always-fixed .comment.always-fixed {
+  display: block;
 }
 
 /* Override fixed defaults for responsive grid */
@@ -231,21 +389,21 @@ html {
     width: auto;
   }
 
-  .o-grid-no-gutter,
-  .o-grid-no-left-gutter {
+  .gut,
+  .gut-l {
     padding-left: 0;
   }
-  .o-grid-no-gutter > .o-grid-row,
-  .o-grid-no-left-gutter > .o-grid-row {
+  .gut > .o-grid-row,
+  .gut-l > .o-grid-row {
     margin-left: 0;
   }
 
-  .o-grid-no-gutter,
-  .o-grid-no-right-gutter {
+  .gut,
+  .gut-r {
     padding-right: 0;
   }
-  .o-grid-no-gutter > .o-grid-row,
-  .o-grid-no-right-gutter > .o-grid-row {
+  .gut > .o-grid-row,
+  .gut-r > .o-grid-row {
     margin-right: 0;
   }
 }
@@ -254,21 +412,21 @@ html {
     max-width: none;
   }
 
-  .o-grid-no-gutter,
-  .o-grid-no-left-gutter {
+  .gut,
+  .gut-l {
     padding-left: 0;
   }
-  .o-grid-no-gutter > .o-grid-row,
-  .o-grid-no-left-gutter > .o-grid-row {
+  .gut > .o-grid-row,
+  .gut-l > .o-grid-row {
     margin-left: 0;
   }
 
-  .o-grid-no-gutter,
-  .o-grid-no-right-gutter {
+  .gut,
+  .gut-r {
     padding-right: 0;
   }
-  .o-grid-no-gutter > .o-grid-row,
-  .o-grid-no-right-gutter > .o-grid-row {
+  .gut > .o-grid-row,
+  .gut-r > .o-grid-row {
     margin-right: 0;
   }
 
@@ -327,9 +485,27 @@ html {
     width: 100%;
   }
 }
-@media screen and (max-device-width: 400px) {
+@media screen and (max-width: 400px) {
   .o-grid-row, .o-grid-page {
     max-width: none;
+  }
+
+  .gut-S,
+  .gut-l-S {
+    padding-left: 0;
+  }
+  .gut-S > .o-grid-row,
+  .gut-l-S > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .gut-S,
+  .gut-r-S {
+    padding-right: 0;
+  }
+  .gut-S > .o-grid-row,
+  .gut-r-S > .o-grid-row {
+    margin-right: 0;
   }
 
   [data-o-grid-colspan~="Shide"], [data-o-grid-colspan~="S0"] {
@@ -394,9 +570,27 @@ html {
     width: 100%;
   }
 }
-@media screen and (min-device-width: 401px) and (max-device-width: 800px) {
+@media screen and (min-width: 401px) and (max-width: 800px) {
   .o-grid-row, .o-grid-page {
     max-width: none;
+  }
+
+  .gut-M,
+  .gut-l-M {
+    padding-left: 0;
+  }
+  .gut-M > .o-grid-row,
+  .gut-l-M > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .gut-M,
+  .gut-r-M {
+    padding-right: 0;
+  }
+  .gut-M > .o-grid-row,
+  .gut-r-M > .o-grid-row {
+    margin-right: 0;
   }
 
   [data-o-grid-colspan~="Mhide"], [data-o-grid-colspan~="M0"] {
@@ -461,9 +655,27 @@ html {
     width: 100%;
   }
 }
-@media screen and (min-device-width: 801px) and (max-device-width: 1200px) {
+@media screen and (min-width: 801px) and (max-width: 1200px) {
   .o-grid-row, .o-grid-page {
     max-width: none;
+  }
+
+  .gut-L,
+  .gut-l-L {
+    padding-left: 0;
+  }
+  .gut-L > .o-grid-row,
+  .gut-l-L > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .gut-L,
+  .gut-r-L {
+    padding-right: 0;
+  }
+  .gut-L > .o-grid-row,
+  .gut-r-L > .o-grid-row {
+    margin-right: 0;
   }
 
   [data-o-grid-colspan~="Lhide"], [data-o-grid-colspan~="L0"] {
@@ -534,6 +746,26 @@ html {
 .o-useragent-ie7 .o-grid-row, .o-useragent-ie7 .o-grid-page, .o-useragent-ie8 .o-grid-row, .o-useragent-ie8 .o-grid-page {
   max-width: none;
 }
+.o-useragent-ie7 .gut-L,
+.o-useragent-ie7 .gut-l-L, .o-useragent-ie8 .gut-L,
+.o-useragent-ie8 .gut-l-L {
+  padding-left: 0;
+}
+.o-useragent-ie7 .gut-L > .o-grid-row,
+.o-useragent-ie7 .gut-l-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
+.o-useragent-ie8 .gut-l-L > .o-grid-row {
+  margin-left: 0;
+}
+.o-useragent-ie7 .gut-L,
+.o-useragent-ie7 .gut-r-L, .o-useragent-ie8 .gut-L,
+.o-useragent-ie8 .gut-r-L {
+  padding-right: 0;
+}
+.o-useragent-ie7 .gut-L > .o-grid-row,
+.o-useragent-ie7 .gut-r-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
+.o-useragent-ie8 .gut-r-L > .o-grid-row {
+  margin-right: 0;
+}
 .o-useragent-ie7 [data-o-grid-colspan~="Lhide"], .o-useragent-ie7 [data-o-grid-colspan~="L0"], .o-useragent-ie8 [data-o-grid-colspan~="Lhide"], .o-useragent-ie8 [data-o-grid-colspan~="L0"] {
   display: none;
 }
@@ -582,9 +814,27 @@ html {
   width: 100%;
 }
 
-@media screen and (min-device-width: 1201px) {
+@media screen and (min-width: 1201px) {
   .o-grid-row, .o-grid-page {
-    max-width: none;
+    max-width: 1160px;
+  }
+
+  .gut-XL,
+  .gut-l-XL {
+    padding-left: 0;
+  }
+  .gut-XL > .o-grid-row,
+  .gut-l-XL > .o-grid-row {
+    margin-left: 0;
+  }
+
+  .gut-XL,
+  .gut-r-XL {
+    padding-right: 0;
+  }
+  .gut-XL > .o-grid-row,
+  .gut-r-XL > .o-grid-row {
+    margin-right: 0;
   }
 
   [data-o-grid-colspan~="XLhide"], [data-o-grid-colspan~="XL0"] {
@@ -721,23 +971,43 @@ html {
 .o-useragent-ie7 [data-o-grid-colspan~="S12"], .o-useragent-ie8 [data-o-grid-colspan~="S12"] {
   clear: none;
 }
-.o-useragent-ie7 .o-grid-no-gutter,
-.o-useragent-ie7 .o-grid-no-left-gutter, .o-useragent-ie8 .o-grid-no-gutter,
-.o-useragent-ie8 .o-grid-no-left-gutter {
+.o-useragent-ie7 .gut-L,
+.o-useragent-ie7 .gut-l-L, .o-useragent-ie8 .gut-L,
+.o-useragent-ie8 .gut-l-L {
   padding-left: 0;
 }
-.o-useragent-ie7 .o-grid-no-gutter > .o-grid-row,
-.o-useragent-ie7 .o-grid-no-left-gutter > .o-grid-row, .o-useragent-ie8 .o-grid-no-gutter > .o-grid-row,
-.o-useragent-ie8 .o-grid-no-left-gutter > .o-grid-row {
+.o-useragent-ie7 .gut-L > .o-grid-row,
+.o-useragent-ie7 .gut-l-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
+.o-useragent-ie8 .gut-l-L > .o-grid-row {
   margin-left: 0;
 }
-.o-useragent-ie7 .o-grid-no-gutter,
-.o-useragent-ie7 .o-grid-no-right-gutter, .o-useragent-ie8 .o-grid-no-gutter,
-.o-useragent-ie8 .o-grid-no-right-gutter {
+.o-useragent-ie7 .gut-L,
+.o-useragent-ie7 .gut-r-L, .o-useragent-ie8 .gut-L,
+.o-useragent-ie8 .gut-r-L {
   padding-right: 0;
 }
-.o-useragent-ie7 .o-grid-no-gutter > .o-grid-row,
-.o-useragent-ie7 .o-grid-no-right-gutter > .o-grid-row, .o-useragent-ie8 .o-grid-no-gutter > .o-grid-row,
-.o-useragent-ie8 .o-grid-no-right-gutter > .o-grid-row {
+.o-useragent-ie7 .gut-L > .o-grid-row,
+.o-useragent-ie7 .gut-r-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
+.o-useragent-ie8 .gut-r-L > .o-grid-row {
+  margin-right: 0;
+}
+.o-useragent-ie7 .gut,
+.o-useragent-ie7 .gut-l, .o-useragent-ie8 .gut,
+.o-useragent-ie8 .gut-l {
+  padding-left: 0;
+}
+.o-useragent-ie7 .gut > .o-grid-row,
+.o-useragent-ie7 .gut-l > .o-grid-row, .o-useragent-ie8 .gut > .o-grid-row,
+.o-useragent-ie8 .gut-l > .o-grid-row {
+  margin-left: 0;
+}
+.o-useragent-ie7 .gut,
+.o-useragent-ie7 .gut-r, .o-useragent-ie8 .gut,
+.o-useragent-ie8 .gut-r {
+  padding-right: 0;
+}
+.o-useragent-ie7 .gut > .o-grid-row,
+.o-useragent-ie7 .gut-r > .o-grid-row, .o-useragent-ie8 .gut > .o-grid-row,
+.o-useragent-ie8 .gut-r > .o-grid-row {
   margin-right: 0;
 }

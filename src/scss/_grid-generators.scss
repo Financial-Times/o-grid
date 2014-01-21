@@ -8,7 +8,7 @@
 
 	@include oGridRespondTo($layout-size) {
 		
-		@if ($o-grid-is-fluid and not ($layout-size == xl)) {
+		@if ($o-grid-is-fluid and not ($layout-size == XL)) {
 			@include oGridClass(row page) {
 				max-width: none;
 			}
@@ -28,7 +28,7 @@
 //
 // Defines styles for column widths for a given layout size
 //
-// @param $layout-size {string} name of layout size (s, m , l, xl)
+// @param $layout-size {string} name of layout size (S, M , L, XL)
 //
 @mixin oGridColumnWidths($layout-size, $column-count, $default: false) {
 

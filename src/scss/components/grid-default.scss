@@ -52,9 +52,12 @@
 		padding-right: $o-grid-default-half-gutter;
 	}
 
-	@include oGridCompactStyles();
+
 	@include oGridColumnWidths(default, 12, true);
 	@include oGridColumnWidths(S, 12, true);
-	@include oGridGutterOverrides(S);
-	@include oGridGutterOverrides(default);
+
+	// Gutter overrides unimplemented for default layout as relies on box-sizing
+	// @include oGridCompactStyles();
+	// @include oGridGutterOverrides(S, true);
+	// @include oGridGutterOverrides(default, true);
 }

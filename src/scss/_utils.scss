@@ -33,7 +33,7 @@
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
 @mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
-	@if ($include-unwrapped or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
+	@if ($include-unwrapped or $o-grid-is-fixed-desktop or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
 		@content;
 	}
 	@if ($o-grid-fixed-layout-selector) {

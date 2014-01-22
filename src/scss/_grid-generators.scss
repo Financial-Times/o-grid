@@ -138,9 +138,11 @@
 }
 
 @mixin oGridCompactStyles ($wrapped: false) {
-	.o-grid-row-compact > #{oGridColumnSelector()} {
-		padding-left: 0;
-		padding-right: 0;
+	.o-grid-row-compact {
+		&> #{oGridColumnSelector()} {
+			padding-left: 0;
+			padding-right: 0;
+		}
 	}
 
 	@if ($wrapped) {

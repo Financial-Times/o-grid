@@ -238,7 +238,7 @@ If your entire page is to be laid out using the grid add the class `o-grid-page`
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 By default `o-grid` outputs no styles (unless fetched using the origami build service) and therefore your product will either have to
-* set `$o-grid-is-silent: true;` to output the entire set of styles and selectors
+* set `$o-grid-is-silent: false;` to output the entire set of styles and selectors
 * `@extend` the grid's placeholder classes to apply grid styles to yuour page
 
 ### Including grid-based components in an existing, non-grid page

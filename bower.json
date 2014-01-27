@@ -9,7 +9,7 @@
         "src/scss/bundles"
     ],
     "dependencies": {
-        "o-useragent": "http://git.svc.ft.com:9080/git/origami/o-useragent.git#>=0.2.0"
+        "o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0"
     }
 }
 

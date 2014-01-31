@@ -99,6 +99,10 @@
 		@include oGridColumnWidths(L, 12);
 	}
 	
+	body {
+		min-width: $o-grid-large-max-width;
+	}
+	
 	@include oGridClass(row page) {
 		width: $o-grid-large-max-width;
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug

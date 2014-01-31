@@ -221,6 +221,15 @@ More than one layout can be passed in at once (enabling applying the same styles
             }
         }
 
+* `oGridTargetAtFixedLayout()`  
+This applies styles only when the large screen fixed layout (typically used as the ie7/ie8 fallback) is active
+        
+        @include oGridTargetAtFixedLayout() {
+            .o-header {
+                position: static;
+            }
+        }
+
 #### Variables
 All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but *must not* be over-written at the component/module level.
 

@@ -487,6 +487,15 @@
       }
   }</code></pre>
       </li>
+      <li>
+        <p><code>oGridTargetAtFixedLayout()</code>
+          <br>This applies styles only when the large screen fixed layout (typically used as the ie7/ie8 fallback) is active</p>
+        <pre><code>  @include oGridTargetAtFixedLayout() {
+      .o-header {
+          position: static;
+      }
+  }</code></pre>
+      </li>
     </ul>
     <h4 id="variables">Variables</h4>
     <p>All the variables used by the grid (see src/scss/_variables.scss) can be used in your own sass stylesheets but <em>must not</em> be over-written at the component/module level.</p>

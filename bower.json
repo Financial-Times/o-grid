@@ -1,15 +1,15 @@
 {
 	"name": "o-grid",
-    "ignore": [
-    	"docs-generator",
-    	"docs",
-    	"Gruntfile.js",
-        "package.json",
-    	".jshintrc",
-        "src/scss/bundles"
-    ],
-    "dependencies": {
-        "o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0"
-    }
+	"ignore": [
+		"docs-generator",
+		"docs",
+		"Gruntfile.js",
+		"package.json",
+		".jshintrc",
+		"src/scss/bundles"
+	],
+	"dependencies": {
+		"o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0"
+	}
 }
 

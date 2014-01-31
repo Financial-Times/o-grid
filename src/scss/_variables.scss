@@ -30,7 +30,7 @@ $o-grid-is-silent: true !default;
 $o-grid-is-responsive: true !default;
 $o-grid-is-fluid: true !default;
 $o-grid-is-fixed-desktop: false !default;
-$o-grid-fixed-layout-useragents: ie7 ie8;	
+$o-grid-fixed-layout-useragents: ie7 ie8 !default;	
 $o-grid-fixed-layout-selector: null !default;
 $o-grid-mq-type: device-width !default;
 //$o-grid-fixed-size: $o-grid-large !default;

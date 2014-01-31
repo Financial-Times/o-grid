@@ -976,6 +976,9 @@ html {
   display: block;
   width: 100%;
 }
+.o-useragent-ie7 body, .o-useragent-ie8 body {
+  min-width: 960px;
+}
 .o-useragent-ie7 .o-grid-row, .o-useragent-ie7 .o-grid-page, .o-useragent-ie8 .o-grid-row, .o-useragent-ie8 .o-grid-page {
   width: 960px;
   max-width: none;

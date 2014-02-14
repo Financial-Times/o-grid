@@ -164,7 +164,7 @@ To remove gutters from all columns in a row use the class `o-grid-row-compact`  
 [Placeholder classes](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders) can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. All class selectors have a placeholder class equivalent and these *must* always be used instead of classes when extending e.g. 
     
     .main {
-        @extend %o-grid-row
+        @extend %o-grid-row;
         // not @extend .o-grid-row
     }
 
@@ -172,12 +172,12 @@ Within modules favour applying the default classes to your html, and only use `@
 
 ##### Placeholders for columns
 
-Placeholders for column selectors are of the format `%o-grid-[{S|M|L|XL}]{0-12|hide}` e.g.
+Placeholders for column selectors are of the format `%o-grid-colspan-[{S|M|L|XL}]{0-12|hide}` e.g.
         
     .aside {
-        @extend %o-grid
-        @extend %o-grid-4
-        @extend %o-grid-s12
+        @extend %o-grid-col !optional; // required in order to have the base column styles
+        @extend %o-grid-colspan-4 !optional;
+        @extend %o-grid-colspan-S12 !optional;
     }
 
 There is no need to use these inside a media query - the placeholder classes are already included within the appropriate media query.

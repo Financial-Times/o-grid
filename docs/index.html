@@ -431,16 +431,16 @@
     <p><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders">Placeholder classes</a> can be extended in your sass and enable styling of elements according to the grid without having to add classes to the html. All class selectors
       have a placeholder class equivalent and these <em>must</em> always be used instead of classes when extending e.g.</p>
     <pre><code>.main {
-    @extend %o-grid-row
+    @extend %o-grid-row;
     // not @extend .o-grid-row
 }</code></pre>
     <p>Within modules favour applying the default classes to your html, and only use <code>@extend</code> for cases where significant simplification of code is achieved.</p>
     <h5 id="placeholders-for-columns">Placeholders for columns</h5>
-    <p>Placeholders for column selectors are of the format <code>%o-grid-[{S|M|L|XL}]{0-12|hide}</code> e.g.</p>
+    <p>Placeholders for column selectors are of the format <code>%o-grid-colspan-[{S|M|L|XL}]{0-12|hide}</code> e.g.</p>
     <pre><code>.aside {
-    @extend %o-grid
-    @extend %o-grid-4
-    @extend %o-grid-s12
+    @extend %o-grid-col !optional; // required in order to have the base column styles
+    @extend %o-grid-colspan-4 !optional;
+    @extend %o-grid-colspan-S12 !optional;
 }</code></pre>
     <p>There is no need to use these inside a media query - the placeholder classes are already included within the appropriate media query.</p>
     <h5 id="fine-grained-gutter-removal">Fine-grained gutter removal</h5>

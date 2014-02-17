@@ -8,7 +8,7 @@ It supports all browsers with support for *css media queries*, with two sizes of
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
-[Report a bug](https://github.com/Financial-Times/o-grid-issues/issues)
+[Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
 ### Grid dimensions
 
@@ -42,7 +42,7 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
 
 1. Run the following in your project's root directory
    
-        bower install o-grid=http://git.svc.ft.com:9080/git/origami/o-grid.git
+        bower install o-grid=https://github.com/Financial-Times/o-grid.git
     
     (If your project doesn't already contain a bower.json file you will need to create one first with the content `{"name": "your-project-name"}`)
 
@@ -52,23 +52,14 @@ In order to view the demos you will need to [install o-grid locally](#local-setu
         // For modules, and most products, this should be removed in production
         $o-grid-mq-type: width; 
         
-        @import "o-grid/main.scss";  
+        @import "o-grid/main";  
   Make sure that `o-grid` is in your sass include path (see the [origami docs](http://financial-times.github.io/ft-origami/docs/syntax/scss/) for more details). For products you can also simply use the [build service](http://financial-times.github.io/ft-origami/docs/developer-guide/build-service/)
 
 For other steps only relevant to product/page development see the [Product developers guide](#product-developers-guide)
 
 ###For designers
 
-**TODO** change to use buildservice
-
-1. From terminal run the following commands (you will need to have [bower](http://bower.io/) already installed)
-
-        cd /Users/{your username}/the/directory/your/protoype/is/in
-        bower install http://git.svc.ft.com:9080/git/origami/o-grid.git
-
-2. Include the responsive grid css file in your html prototype's `<head>` directly
-
-        <link rel='stylesheet' href='bower_components/o-grid/docs/css/grid-responsive.css' /> 
+Shortly the origami buildservice will come online, giving designers the ability to download o-grid (and other modules') styles. If you need to use o-grid before then ask a front-end developer if they can help get you set up. Or contact [Rhys Evans](mailto:rhys.evans@ft.com).
 
 
 ### For testers

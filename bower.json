@@ -1,9 +1,9 @@
 {
 	"name": "o-grid",
 	"ignore": [
+		"demo-src",
 		"Gruntfile.js",
-		"package.json",
-		"src/scss/bundles"
+		"package.json"
 	],
 	"dependencies": {
 		"o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0"

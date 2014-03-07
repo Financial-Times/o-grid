@@ -1,4 +1,4 @@
 module.exports = {
-  before: ['./docs', './tmp'],
+  before: ['./demo', './tmp'],
   after: ['./tmp']
 };

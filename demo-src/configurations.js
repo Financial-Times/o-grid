@@ -7,4 +7,4 @@ module.exports = {
 	"resized": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved",
 	"disabled": "Responsive grid with the extra large layout disabled",
 	"always-fixed": "Fixed grid at 960px across all browsers and devices"
-}
+};

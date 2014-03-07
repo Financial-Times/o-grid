@@ -1,5 +1,5 @@
 {		
-    "description": "Grid for component/page layout",
+    "description": "Grid for responsive layouts",
     "origamiType": "module",
     "origamiVersion": 1,
     "support": "rhys.evans@ft.com",	
@@ -7,5 +7,5 @@
     "browserFeatures": {	
     	"required": ["css-boxsizing"]
 	},
-    "demos": ["docs/demos.html"]
+    "demos": ["demos"]
 }

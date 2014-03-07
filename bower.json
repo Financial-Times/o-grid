@@ -1,11 +1,8 @@
 {
 	"name": "o-grid",
 	"ignore": [
-		"docs-generator",
-		"docs",
 		"Gruntfile.js",
 		"package.json",
-		".jshintrc",
 		"src/scss/bundles"
 	],
 	"dependencies": {

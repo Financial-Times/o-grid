@@ -10,22 +10,11 @@ module.exports = function(grunt) {
         }
     });
 
-
-  grunt.registerTask('docs', 'Generating static documentation files', function () {
-    var handlebars = require('handlebars');
-
-    grunt.file.expand('./docs-generator/partials/*.hbs').forEach(function(path) {
-        handlebars.registerPartial(path.split('/').pop().split('.').shift(), grunt.file.read(path, {encoding: 'utf8'}));
-    });
-    grunt.task.run(['template', 'markdown', 'prettify:docs', 'sass', 'finalDocsCleanup', 'browserify']);
-  });
-
-  grunt.registerTask('finalDocsCleanup', function () {
-    grunt.file.copy('./docs-generator/js/jquery.toc.min.js', './docs/js/jquery.toc.min.js');
-    grunt.file.copy('./bower_components/o-useragent/polyfills/boxsizing.htc', './docs/polyfills/boxsizing.htc');
+  grunt.registerTask('copy-boxsizing', function () {
+      grunt.file.copy('./bower_components/o-useragent/polyfills/boxsizing.htc', './demos/polyfills/boxsizing.htc');
   });
 
 
-  grunt.registerTask('default', ['clean:before', 'jshint', 'docs', 'clean:after']);
+  grunt.registerTask('default', ['origami-demo', 'sass', 'copy-boxsizing']);//, 'clean:after']);
 
 };

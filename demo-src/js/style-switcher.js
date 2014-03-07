@@ -1,4 +1,4 @@
-var demoTypes = require('../demo-types.js');
+var demoTypes = require('../configurations.js');
 
 var breakpoints = [600, 1000, 1400];
 
@@ -9,7 +9,7 @@ function getLayout () {
 }
 
 function styleSwitcher () {
-    var stylesheet = document.getElementById("styles"),
+    var stylesheet = document.querySelector("link[rel='stylesheet']"),
         html = document.documentElement,
         buttonContainer = document.getElementById("styleSwitcher"),
         tmp = document.createDocumentFragment(),

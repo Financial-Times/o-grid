@@ -21,13 +21,13 @@ function styleSwitcher () {
         button.title = demoTypes[type];
         button.addEventListener('click', function () {
             stylesheet.href = 'css/grid-' + type + '.css';
-            setTimeout(test, 1);
             var prev = document.querySelector('.selected-stylesheet');
             if (prev) {
                 prev.className = '';
             }
             this.className = 'selected-stylesheet';
-            subheading.innerHTML = this.title;
+
+            subheading && (subheading.innerHTML = this.title);
             html.className = html.className.replace(/stylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
 
         });
@@ -36,7 +36,7 @@ function styleSwitcher () {
             setTimeout(test, 1);
             button.className = 'selected-stylesheet';
             html.className += ' stylesheet-' + type;
-            subheading.innerHTML = button.title;
+            subheading && (subheading.innerHTML = button.title);
         }
         tmp.appendChild(button);
         
@@ -105,9 +105,11 @@ function test () {
 }
 
 var runTests = function () {
+    setTimeout(test, 1);
     window.onresize = test;
 };
 
-
-runTests();
+if (document.querySelector('h1').textContent.indexOf('Test') === 0) {
+    runTests();
+}
 styleSwitcher();

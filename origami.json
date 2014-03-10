@@ -7,5 +7,5 @@
     "browserFeatures": {	
     	"required": ["css-boxsizing"]
 	},
-    "demos": ["demos"]
+    "demos": ["demos/layout.html"]
 }

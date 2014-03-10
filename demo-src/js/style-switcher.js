@@ -33,7 +33,6 @@ function styleSwitcher () {
         });
         if (!tmp.childNodes.length) {
             stylesheet.href = 'css/grid-' + type + '.css';
-            setTimeout(test, 1);
             button.className = 'selected-stylesheet';
             html.className += ' stylesheet-' + type;
             subheading && (subheading.innerHTML = button.title);

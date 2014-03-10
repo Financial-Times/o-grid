@@ -363,6 +363,18 @@ html {
   display: block;
 }
 
+[data-o-grid-colspan~="S0"], [data-o-grid-colspan~="Shide"] {
+  display: block;
+}
+
+[data-o-grid-colspan~="S12"] {
+  clear: none;
+}
+
+[data-o-grid-colspan~="S0"], [data-o-grid-colspan~="S1"], [data-o-grid-colspan~="S2"], [data-o-grid-colspan~="S3"], [data-o-grid-colspan~="S4"], [data-o-grid-colspan~="S5"], [data-o-grid-colspan~="S6"], [data-o-grid-colspan~="S7"], [data-o-grid-colspan~="S8"], [data-o-grid-colspan~="S9"], [data-o-grid-colspan~="S10"], [data-o-grid-colspan~="S11"], [data-o-grid-colspan~="S12"] {
+  width: auto;
+}
+
 .o-grid-row .o-grid-row, .o-grid-box .o-grid-row {
   margin-left: -5px;
   margin-right: -5px;

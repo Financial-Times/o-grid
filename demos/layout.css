@@ -3,18 +3,6 @@ body {
   padding: 0;
   overflow: hidden; }
 
-/**
-
-
-**/
-/*
-	This mixin allows ie7 and 8 to be targeted using either
-	* specific classes for each of ie7 and ie8
-	* 'less than' classes targeting ie versions less than a given version e.g. lt-ie9 & lt-ie8
-*/
-/* 
-	Deprecates support for ie7 or 8, making sure that both browser specific and lt- selectors are removed
-*/
 /* 
 	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
 	output a string or to wrap some style rules in a selector
@@ -137,18 +125,6 @@ html {
   width: 98%; }
 
 /* Styles for presenting the grid. Not part of the grid code. */
-/**
-
-
-**/
-/*
-	This mixin allows ie7 and 8 to be targeted using either
-	* specific classes for each of ie7 and ie8
-	* 'less than' classes targeting ie versions less than a given version e.g. lt-ie9 & lt-ie8
-*/
-/* 
-	Deprecates support for ie7 or 8, making sure that both browser specific and lt- selectors are removed
-*/
 /* 
 	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
 	output a string or to wrap some style rules in a selector
@@ -262,9 +238,6 @@ html {
 @media screen and (min-width: 1001px) and (max-width: 1400px) {
   .header .mode:after {
     content: "large layout"; } }
-.o-useragent-ie7 .header .mode:after, .o-useragent-ie8 .header .mode:after {
-  content: "large layout"; }
-
 @media screen and (min-width: 1401px) {
   .header .mode:after {
     content: "extra large layout"; } }

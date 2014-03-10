@@ -6,7 +6,7 @@
 		"package.json"
 	],
 	"dependencies": {
-		"o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0"
+		"o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0 <1"
 	}
 }
 

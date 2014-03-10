@@ -1,15 +1,3 @@
-/**
-
-
-**/
-/*
-	This mixin allows ie7 and 8 to be targeted using either
-	* specific classes for each of ie7 and ie8
-	* 'less than' classes targeting ie versions less than a given version e.g. lt-ie9 & lt-ie8
-*/
-/* 
-	Deprecates support for ie7 or 8, making sure that both browser specific and lt- selectors are removed
-*/
 /* 
 	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
 	output a string or to wrap some style rules in a selector
@@ -165,18 +153,6 @@ html {
 }
 
 /* Styles for presenting the grid. Not part of the grid code. */
-/**
-
-
-**/
-/*
-	This mixin allows ie7 and 8 to be targeted using either
-	* specific classes for each of ie7 and ie8
-	* 'less than' classes targeting ie versions less than a given version e.g. lt-ie9 & lt-ie8
-*/
-/* 
-	Deprecates support for ie7 or 8, making sure that both browser specific and lt- selectors are removed
-*/
 /* 
 	Note: The identically named mixins and functions below is not a mistake; it means they can be used to either 
 	output a string or to wrap some style rules in a selector
@@ -319,10 +295,6 @@ html {
   }
 }
 .header .mode:after {
-  content: "large layout";
-}
-
-.o-useragent-ie7 .header .mode:after, .o-useragent-ie8 .header .mode:after {
   content: "large layout";
 }
 
@@ -564,171 +536,5 @@ body {
 }
 .gut > .o-grid-row,
 .gut-r > .o-grid-row {
-  margin-right: 0;
-}
-
-.o-useragent-ie7, .o-useragent-ie8 {
-  /* ensures d12 and d0 can be over-ridden by styles for L layout */
-}
-.o-useragent-ie7 .o-grid-row .o-grid-row, .o-useragent-ie7 .o-grid-box .o-grid-row, .o-useragent-ie8 .o-grid-row .o-grid-row, .o-useragent-ie8 .o-grid-box .o-grid-row {
-  margin-left: -5px;
-  margin-right: -5px;
-  width: auto;
-}
-.o-useragent-ie7 [data-o-grid-colspan], .o-useragent-ie8 [data-o-grid-colspan] {
-  float: left;
-  padding-left: 5px;
-  padding-right: 5px;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  *behavior: url(/o-useragent/polyfills/boxsizing.htc);
-}
-.o-useragent-ie7 .o-grid-row-compact > [data-o-grid-colspan], .o-useragent-ie8 .o-grid-row-compact > [data-o-grid-colspan] {
-  padding-left: 0;
-  padding-right: 0;
-}
-.o-useragent-ie7 .o-grid-row.o-grid-row-compact,
-.o-useragent-ie7 .o-grid-row .o-grid-row.o-grid-row-compact, .o-useragent-ie8 .o-grid-row.o-grid-row-compact,
-.o-useragent-ie8 .o-grid-row .o-grid-row.o-grid-row-compact {
-  margin-left: 0;
-  margin-right: 0;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="hide"], .o-useragent-ie7 [data-o-grid-colspan~="0"], .o-useragent-ie8 [data-o-grid-colspan~="hide"], .o-useragent-ie8 [data-o-grid-colspan~="0"] {
-  display: none;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="1"], .o-useragent-ie8 [data-o-grid-colspan~="1"] {
-  width: 8.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="2"], .o-useragent-ie8 [data-o-grid-colspan~="2"] {
-  width: 16.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="3"], .o-useragent-ie8 [data-o-grid-colspan~="3"] {
-  width: 25%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="4"], .o-useragent-ie8 [data-o-grid-colspan~="4"] {
-  width: 33.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="5"], .o-useragent-ie8 [data-o-grid-colspan~="5"] {
-  width: 41.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="6"], .o-useragent-ie8 [data-o-grid-colspan~="6"] {
-  width: 50%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="7"], .o-useragent-ie8 [data-o-grid-colspan~="7"] {
-  width: 58.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="8"], .o-useragent-ie8 [data-o-grid-colspan~="8"] {
-  width: 66.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="9"], .o-useragent-ie8 [data-o-grid-colspan~="9"] {
-  width: 75%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="10"], .o-useragent-ie8 [data-o-grid-colspan~="10"] {
-  width: 83.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="11"], .o-useragent-ie8 [data-o-grid-colspan~="11"] {
-  width: 91.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="12"], .o-useragent-ie8 [data-o-grid-colspan~="12"] {
-  float: none;
-  clear: both;
-  display: block;
-  width: 100%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="Lhide"], .o-useragent-ie7 [data-o-grid-colspan~="L0"], .o-useragent-ie8 [data-o-grid-colspan~="Lhide"], .o-useragent-ie8 [data-o-grid-colspan~="L0"] {
-  display: none;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L1"], .o-useragent-ie8 [data-o-grid-colspan~="L1"] {
-  width: 8.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L2"], .o-useragent-ie8 [data-o-grid-colspan~="L2"] {
-  width: 16.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L3"], .o-useragent-ie8 [data-o-grid-colspan~="L3"] {
-  width: 25%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L4"], .o-useragent-ie8 [data-o-grid-colspan~="L4"] {
-  width: 33.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L5"], .o-useragent-ie8 [data-o-grid-colspan~="L5"] {
-  width: 41.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L6"], .o-useragent-ie8 [data-o-grid-colspan~="L6"] {
-  width: 50%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L7"], .o-useragent-ie8 [data-o-grid-colspan~="L7"] {
-  width: 58.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L8"], .o-useragent-ie8 [data-o-grid-colspan~="L8"] {
-  width: 66.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L9"], .o-useragent-ie8 [data-o-grid-colspan~="L9"] {
-  width: 75%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L10"], .o-useragent-ie8 [data-o-grid-colspan~="L10"] {
-  width: 83.33333%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L11"], .o-useragent-ie8 [data-o-grid-colspan~="L11"] {
-  width: 91.66667%;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L1"], .o-useragent-ie7 [data-o-grid-colspan~="L2"], .o-useragent-ie7 [data-o-grid-colspan~="L3"], .o-useragent-ie7 [data-o-grid-colspan~="L4"], .o-useragent-ie7 [data-o-grid-colspan~="L5"], .o-useragent-ie7 [data-o-grid-colspan~="L6"], .o-useragent-ie7 [data-o-grid-colspan~="L7"], .o-useragent-ie7 [data-o-grid-colspan~="L8"], .o-useragent-ie7 [data-o-grid-colspan~="L9"], .o-useragent-ie7 [data-o-grid-colspan~="L10"], .o-useragent-ie7 [data-o-grid-colspan~="L11"], .o-useragent-ie8 [data-o-grid-colspan~="L1"], .o-useragent-ie8 [data-o-grid-colspan~="L2"], .o-useragent-ie8 [data-o-grid-colspan~="L3"], .o-useragent-ie8 [data-o-grid-colspan~="L4"], .o-useragent-ie8 [data-o-grid-colspan~="L5"], .o-useragent-ie8 [data-o-grid-colspan~="L6"], .o-useragent-ie8 [data-o-grid-colspan~="L7"], .o-useragent-ie8 [data-o-grid-colspan~="L8"], .o-useragent-ie8 [data-o-grid-colspan~="L9"], .o-useragent-ie8 [data-o-grid-colspan~="L10"], .o-useragent-ie8 [data-o-grid-colspan~="L11"] {
-  float: left;
-  clear: none;
-  display: block;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="L12"], .o-useragent-ie8 [data-o-grid-colspan~="L12"] {
-  float: none;
-  clear: both;
-  display: block;
-  width: 100%;
-}
-.o-useragent-ie7 body, .o-useragent-ie8 body {
-  min-width: 960px;
-}
-.o-useragent-ie7 .o-grid-row, .o-useragent-ie7 .o-grid-page, .o-useragent-ie8 .o-grid-row, .o-useragent-ie8 .o-grid-page {
-  width: 960px;
-  max-width: none;
-}
-.o-useragent-ie7 [data-o-grid-colspan~="S12"], .o-useragent-ie8 [data-o-grid-colspan~="S12"] {
-  clear: none;
-}
-.o-useragent-ie7 .gut-L,
-.o-useragent-ie7 .gut-l-L, .o-useragent-ie8 .gut-L,
-.o-useragent-ie8 .gut-l-L {
-  padding-left: 0;
-}
-.o-useragent-ie7 .gut-L > .o-grid-row,
-.o-useragent-ie7 .gut-l-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
-.o-useragent-ie8 .gut-l-L > .o-grid-row {
-  margin-left: 0;
-}
-.o-useragent-ie7 .gut-L,
-.o-useragent-ie7 .gut-r-L, .o-useragent-ie8 .gut-L,
-.o-useragent-ie8 .gut-r-L {
-  padding-right: 0;
-}
-.o-useragent-ie7 .gut-L > .o-grid-row,
-.o-useragent-ie7 .gut-r-L > .o-grid-row, .o-useragent-ie8 .gut-L > .o-grid-row,
-.o-useragent-ie8 .gut-r-L > .o-grid-row {
-  margin-right: 0;
-}
-.o-useragent-ie7 .gut,
-.o-useragent-ie7 .gut-l, .o-useragent-ie8 .gut,
-.o-useragent-ie8 .gut-l {
-  padding-left: 0;
-}
-.o-useragent-ie7 .gut > .o-grid-row,
-.o-useragent-ie7 .gut-l > .o-grid-row, .o-useragent-ie8 .gut > .o-grid-row,
-.o-useragent-ie8 .gut-l > .o-grid-row {
-  margin-left: 0;
-}
-.o-useragent-ie7 .gut,
-.o-useragent-ie7 .gut-r, .o-useragent-ie8 .gut,
-.o-useragent-ie8 .gut-r {
-  padding-right: 0;
-}
-.o-useragent-ie7 .gut > .o-grid-row,
-.o-useragent-ie7 .gut-r > .o-grid-row, .o-useragent-ie8 .gut > .o-grid-row,
-.o-useragent-ie8 .gut-r > .o-grid-row {
   margin-right: 0;
 }

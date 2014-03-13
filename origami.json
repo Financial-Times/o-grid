@@ -7,5 +7,20 @@
     "browserFeatures": {	
     	"required": ["css-boxsizing"]
 	},
-    "demos": ["demos/layout.html"]
+    "demos": [
+        "demos/silent.html",
+        "demos/default.html",
+        "demos/device-width-mq.html",
+        "demos/width-mq.html",
+        "demos/non-fluid.html",
+        "demos/resized.html",
+        "demos/xl-disabled.html",
+        "demos/always-fixed.html"
+    ]
 }
+
+
+
+
+
+

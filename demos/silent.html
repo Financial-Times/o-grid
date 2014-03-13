@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 7]>         <html class="no-js o-useragent-ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js o-useragent-ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>o-grid: silent demo</title>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <style>
+    body {
+        margin: 0;
+    }
+    .demo-message {
+        margin: 0 0 10px 0;
+        border-bottom: 1px solid #ddcc66;
+        padding: 3px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        background-color: #ffee88;
+        color: #333;
+    }
+    </style>
+    <link rel="stylesheet" href="/bundles/css?modules=o-grid&main=o-grid/demos/src/scss/silent.scss" />
+</head>
+<body>
+    
+    	<div class="header">
+		<h1>By default the grid should output no styles and all blocks extend to full page width</h1>
+	</div>
+	
+	<div class="o-grid-row docs">
+		<svg data-o-grid-colspan="2 S0" version='1.0' xmlns='http://www.w3.org/2000/svg' width='188' height='61' viewBox='0 0 188 61' preserveAspectRatio='xMidYMid meet'><g transform='translate(0,61) scale(0.1,-0.1)' fill='%233b3b3b' stroke='none'><path d='M40 580 c0 -5 7 -10 15 -10 8 0 24 -9 35 -20 19 -19 20 -33 20 -239 0 -234 -3 -251 -51 -251 -10 0 -19 -7 -19 -15 0 -13 21 -15 130 -15 109 0 130 2 130 15 0 9 -9 15 -24 15 -47 0 -56 22 -56 140 l0 109 48 -5 c62 -6 89 -21 101 -55 20 -57 31 -31 31 71 0 82 -3 100 -15 100 -8 0 -15 -9 -15 -19 0 -31 -38 -51 -98 -51 l-53 0 3 98 3 97 77 3 c102 4 138 -6 163 -46 32 -50 46 -41 44 28 l-2 60 -233 0 c-149 0 -234 -4 -234 -10z' /><path d='M540 568 c-1 -13 -3 -40 -6 -60 -4 -30 -2 -38 10 -38 8 0 21 12 28 27 17 36 52 53 111 53 l47 0 0 -229 c0 -249 -3 -261 -56 -261 -15 0 -24 -6 -24 -15 0 -13 22 -15 135 -15 113 0 135 2 135 15 0 9 -9 15 -24 15 -53 0 -56 12 -56 261 l0 229 54 0 c57 0 99 -23 111 -60 4 -11 13 -20 22 -20 13 0 14 9 9 53 -3 28 -6 55 -6 60 0 4 -110 7 -245 7 l-245 0 0 -22z' /><path d='M1405 577 c-27 -7 -57 -27 -92 -64 -29 -29 -61 -53 -72 -53 -21 0 -71 -53 -71 -75 0 -28 61 -85 89 -85 34 0 75 41 77 78 2 49 36 40 89 -23 l48 -56 32 31 33 32 -58 51 c-32 29 -59 60 -59 69 -1 26 39 48 86 48 35 0 43 3 43 19 0 14 -12 22 -44 30 -51 12 -47 13 -101 -2z' fill='%23787067' /><path d='M1693 575 c-40 -17 -67 -67 -60 -111 5 -31 0 -38 -141 -166 -80 -73 -155 -140 -165 -149 -41 -33 -11 -109 43 -109 22 0 53 29 176 165 143 158 151 165 187 165 75 0 117 42 117 117 l0 35 -40 -36 c-42 -37 -48 -40 -74 -30 -27 10 -18 48 19 84 31 30 33 35 18 42 -27 10 -45 9 -80 -7z' fill='%23525252' /><path d='M1601 243 c-17 -21 -30 -42 -28 -46 7 -23 125 -147 149 -157 45 -20 93 23 81 71 -3 10 -42 52 -88 93 l-83 76 -31 -37z' fill='%23787067' /></g></svg>
+		<h1 data-o-grid-colspan="10 S12"><span class="dev-inner">Your page's heading</span></h1>
+	</div>
+
+	<div class="o-grid-row docs">
+		<div data-o-grid-colspan="8 S12"> 
+			<p><span class="dev-inner">Main content area</span></p>
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="6 XL3 S12"><span class="dev-inner">Feature</span></div>
+				<div data-o-grid-colspan="6 XL3 S12"><span class="dev-inner">Feature</span></div>
+				<div data-o-grid-colspan="6 XL3 S12"><span class="dev-inner">Feature</span></div>
+				<div data-o-grid-colspan="6 XL3 S12"><span class="dev-inner">Feature</span></div>
+			</div>
+		</div>
+		<div data-o-grid-colspan="4 S12">
+			<span class="dev-inner">Side bar</span>
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="12 L6 XL6"><span class="dev-inner">submenu</span></div>
+				<div data-o-grid-colspan="12 L6 XL6"><span class="dev-inner">submenu</span></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="o-grid-row docs" data-o-grid-colspan="12"> 
+		<div class="o-grid-row">
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+			<div data-o-grid-colspan="S6 M4"><span class="dev-inner">Footer item</span></div>
+		</div>
+		<p><span class="dev-inner">Branding</span></p>
+			
+	</div>
+    <script src="style-switcher.js" />
+    <script src='http://registry.origami.ft.com/embedapi?autoload=resize'></script>
+</body>
+</html>

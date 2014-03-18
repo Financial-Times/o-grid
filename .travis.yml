@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "0.10"
+before_install:
+  - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+  - origami-build-tools install
+script:
+  - origami-build-tools test

@@ -1,12 +1,13 @@
 {
 	"name": "o-grid",
+    "main": ["main.scss"],
 	"ignore": [
 		"demo-src",
 		"Gruntfile.js",
 		"package.json"
 	],
 	"dependencies": {
-		"o-useragent": "https://github.com/Financial-Times/o-useragent.git#>=0.2.0 <1"
+		"o-useragent": "^0.4.0"
 	}
 }
 

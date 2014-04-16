@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.demo {
+    .demo-cell {
+        min-height: 40px;
+        background: rgba(0,0,0,0.1);
+        text-align: center;
+        padding-top: 10px;
+        overflow: hidden;
+    }
+    .demo-row {
+        border: 1px solid rgba(58, 97, 253, 0.49);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        .demo-row {
+            border: 1px solid rgba(253, 89, 58, 0.49);
+        }
+    }
+    [class*='error'] .cell {
+        background-color: #faa;
+    }
+    .selected-stylesheet {
+        background: #aaf;
+    }
+}
+
+
+
+
+/* Show the current media query layout mode */
+
+.demo-details .mode {
+    text-align:right;
+}
+.demo-details .mode:after {
+    font-weight: bold;
+}
+@include oGridRespondTo(S) {
+    .demo-details .mode:after {
+        content: "S";
+    }
+}
+@include oGridRespondTo(M) {
+    .demo-details .mode:after {
+        content: "M";
+    }
+}
+@include oGridRespondTo(L) {
+    .demo-details .mode:after {
+        content: "L";
+    }
+}
+@include oGridRespondTo(XL) {
+    .demo-details .mode:after {
+        content: "XL";
+    }
+}
+
+/* Show comments relevant to only particular demos */
+
+.comment {
+    display: none;
+}
+@each $type in default device-width-mq width-mq non-fluid resized disabled always-fixed {
+    #{'.stylesheet-#{$type}'} {
+        #{'.comment.#{$type}'} {
+            display: block;
+        }
+    }
+}

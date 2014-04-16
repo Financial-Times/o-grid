@@ -10,9 +10,9 @@ $o-grid-small-to-medium-break: 400px;
 $o-grid-medium-to-large-break: 800px;
 $o-grid-large-to-extra-large-break: 1200px;
 
-//gutters
+// Gutters
 $o-grid-responsive-half-gutter: 5px;
 $o-grid-default-half-gutter: 0.5%;
 $o-grid-fixed-half-gutter: 2px;
 
-@import "width-mq"; 
+@import '_common';

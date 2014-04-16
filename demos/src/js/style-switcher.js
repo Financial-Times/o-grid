@@ -1,15 +1,9 @@
-var demoTypes = require('../configurations.js');
 
-var breakpoints = [600, 1000, 1400];
 
-function getLayout () {
-    return document.documentElement.offsetWidth < 600 ? 'S' :
-        document.documentElement.offsetWidth < 1000 ? 'M' :
-        document.documentElement.offsetWidth < 1400 ? 'L' : 'XL';
-}
-
-function styleSwitcher () {
-    var stylesheet = document.querySelector("link[rel='stylesheet']"),
+// Self-contained stylesheet switcher
+(function styleSwitcher () {
+    var demoTypes = require('../configurations.js'),
+        stylesheet = document.querySelector("link[rel='stylesheet']"),
         html = document.documentElement,
         buttonContainer = document.getElementById("styleSwitcher"),
         tmp = document.createDocumentFragment(),
@@ -38,10 +32,17 @@ function styleSwitcher () {
             subheading && (subheading.innerHTML = button.title);
         }
         tmp.appendChild(button);
-        
+
     });
 
     buttonContainer.appendChild(tmp);
+}());
+
+
+function getLayout () {
+    return document.documentElement.offsetWidth < 600 ? 'S' :
+        document.documentElement.offsetWidth < 1000 ? 'M' :
+        document.documentElement.offsetWidth < 1400 ? 'L' : 'XL';
 }
 
 function getExpectedSpans (el) {
@@ -69,7 +70,7 @@ function getExpectedGutter (el, side) {
 
     if (gutter) {
         gutter = !/o-grid-row-compact/.test(el.parentNode.className);
-    } 
+    }
 
     return gutter;
 }
@@ -79,7 +80,7 @@ function highlightNotExpectedGutter (el) {
         expectedRight = getExpectedGutter(el, 'r'),
         actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0,
         actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
-  
+
     if (expectedLeft != actualLeft || expectedRight != actualRight) {
         /\berror-gutter\b/.test(el.className) || (el.className += ' error-gutter');
     } else {
@@ -90,7 +91,7 @@ function highlightNotExpectedGutter (el) {
 function highlightNotExpectedWidth (el) {
     var expectedPercentage = getExpectedSpans(el) * 100/12,
         actualPercentage = el.offsetWidth * 100 / el.parentNode.offsetWidth;
-  
+
     if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
          /\berror-width\b/.test(el.className) || (el.className += ' error-width');
     } else {
@@ -99,7 +100,7 @@ function highlightNotExpectedWidth (el) {
 }
 
 function test () {
-    Array.prototype.forEach.call(document.querySelectorAll('[class*="gut"]'), highlightNotExpectedGutter);
+    Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightNotExpectedGutter);
     Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightNotExpectedWidth);
 }
 
@@ -108,7 +109,4 @@ var runTests = function () {
     window.onresize = test;
 };
 
-if (document.querySelector('h1').textContent.indexOf('Test') === 0) {
-    runTests();
-}
-styleSwitcher();
+if (document.querySelector('.demo-test')) runTests();

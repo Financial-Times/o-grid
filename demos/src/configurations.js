@@ -1,10 +1,9 @@
 module.exports = {
-	"silent": "By default the grid should output no styles and all blocks extend to full page width",
-	"default": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported",
-	"device-width-mq": "Demonstrates the behaviour of a page using the default installation of o-grid (responding to device, not window, width",
-	"width-mq": "Responsive grid that responds to window rather than device width (mainly to make development easier)",
-	"non-fluid": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid",
+	"silent": "In silent mode no classes are produced so grid classes will have no effect",
+	"unresponsive": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported",
+	"device-width-mq": "Respond to width of device, not width of viewport.  On desktop won't change appearance unless using useragent overrides in dev tools.",
+	"non-fluid": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)",
 	"resized": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved",
-	"xl-disabled": "Responsive grid with the extra large layout disabled",
-	"always-fixed": "Fixed grid at 960px across all browsers and devices"
+	"xl-disabled": "Responsive grid with the extra large layout disabled. Should demonstrate responsive behaviour, but the XL breakpoint is disabled, so the widths should show in red",
+	"always-fixed": "Fixed grid at 960px across all browsers and devices.  Should always be fixed at the large layout"
 };

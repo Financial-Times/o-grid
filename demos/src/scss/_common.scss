@@ -1,0 +1,34 @@
+
+$o-grid-is-silent: false;
+
+@import "../../../main.scss";
+
+
+/* Add gutter classes (not available as concrete classes in module source, probably should be) */
+
+$o-grid-test-sizes: S M L XL;
+
+@each $size in $o-grid-test-sizes {
+	.demo-no-gutter-#{$size} {
+		@extend %o-grid-no-gutter-#{$size} !optional;
+	}
+	.demo-no-left-gutter-#{$size} {
+		@extend %o-grid-no-left-gutter-#{$size} !optional;
+	}
+	.demo-no-right-gutter-#{$size} {
+		@extend %o-grid-no-right-gutter-#{$size} !optional;
+	}
+}
+
+.demo-no-gutter {
+	@extend %o-grid-no-gutter !optional;
+}
+.demo-no-left-gutter {
+	@extend %o-grid-no-left-gutter !optional;
+}
+.demo-no-right-gutter {
+	@extend %o-grid-no-right-gutter !optional;
+}
+
+
+@import "_demos";

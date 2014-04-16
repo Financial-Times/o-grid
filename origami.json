@@ -12,9 +12,8 @@
     "demos": [
         "/demos/test.html",
         "/demos/silent.html",
-        "/demos/default.html",
+        "/demos/unresponsive.html",
         "/demos/device-width-mq.html",
-        "/demos/width-mq.html",
         "/demos/non-fluid.html",
         "/demos/resized.html",
         "/demos/xl-disabled.html",

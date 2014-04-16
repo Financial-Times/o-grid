@@ -30,9 +30,9 @@ $o-grid-is-silent: true !default;
 $o-grid-is-responsive: true !default;
 $o-grid-is-fluid: true !default;
 $o-grid-is-fixed-desktop: false !default;
-$o-grid-fixed-layout-useragents: ie7 ie8 !default;	
+$o-grid-fixed-layout-useragents: ie7 ie8 !default;
 $o-grid-fixed-layout-selector: null !default;
-$o-grid-mq-type: device-width !default;
+$o-grid-mq-type: width !default;
 //$o-grid-fixed-size: $o-grid-large !default;
 
 // -------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ $o-grid-assets-path: $o-grid-name !default;
 // !!! DO NOT CHANGE UNLESS EITHER:
 //  a) MAKING FUNDAMENTAL CHANGES TO HOW THE SASS IS STRUCTURED
 //  b) ADDING EXTRA LAYOUT SIZES (Although technically possible, it's highly
-//     inadvisable to do so as components will not typically define styles for 
+//     inadvisable to do so as components will not typically define styles for
 //     your new layout)
 // -------------------------------------------------------------------------------------
 $_o-grid-max-widths: $o-grid-small-max-width $o-grid-medium-max-width $o-grid-large-max-width $o-grid-extra-large-max-width;

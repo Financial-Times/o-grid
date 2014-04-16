@@ -1,3 +1,4 @@
 $o-grid-is-fixed-desktop: true;
+$o-grid-mq-type: device-width;
 
-@import "width-mq";
+@import "_common";

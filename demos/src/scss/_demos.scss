@@ -5,17 +5,17 @@ body {
 .demo {
     .demo-cell {
         min-height: 40px;
-        background: rgba(0,0,0,0.1);
+        background: rgba(255,255,255,0.5);
         text-align: center;
         padding-top: 10px;
         overflow: hidden;
     }
     .demo-row {
-        border: 1px solid rgba(58, 97, 253, 0.49);
+        background: #BDCAFF;
         margin-top: 10px;
         margin-bottom: 10px;
         .demo-row {
-            border: 1px solid rgba(253, 89, 58, 0.49);
+            background: #FFA898;
         }
     }
     [class*='error'] .cell {

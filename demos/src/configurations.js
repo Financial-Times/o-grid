@@ -1,5 +1,5 @@
 module.exports = {
-	"silent": "In silent mode no classes are produced so grid classes will have no effect",
+	"default": "Grid with all default settings",
 	"unresponsive": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported",
 	"device-width-mq": "Respond to width of device, not width of viewport.  On desktop won't change appearance unless using useragent overrides in dev tools.",
 	"non-fluid": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)",

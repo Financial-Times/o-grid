@@ -10,14 +10,31 @@
         ]
     },
     "demos": [
-        "/demos/test.html",
-        "/demos/silent.html",
-        "/demos/unresponsive.html",
-        "/demos/device-width-mq.html",
-        "/demos/non-fluid.html",
-        "/demos/resized.html",
-        "/demos/xl-disabled.html",
-        "/demos/always-fixed.html"
+        "/demos/default.html",
+        {
+            "path": "/demos/unresponsive.html",
+            "expanded": false
+        },
+        {
+            "path": "/demos/device-width-mq.html",
+            "expanded": false
+        },
+        {
+            "path": "/demos/non-fluid.html",
+            "expanded": false
+        },
+        {
+            "path": "/demos/resized.html",
+            "expanded": false
+        },
+        {
+            "path": "/demos/xl-disabled.html",
+            "expanded": false
+        },
+        {
+            "path": "/demos/always-fixed.html",
+            "expanded": false
+        },
     ]
 }
 

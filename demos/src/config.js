@@ -3,6 +3,7 @@ var configurations = require('./configurations'),
         test: {
             data: 'demos/src/configurations.js',
             js: 'demos/src/js/style-switcher.js',
+            sass: 'demos/src/scss/default.scss',
             template: 'demos/src/test.mustache'
         }
     };

@@ -30,7 +30,9 @@ Top level grid rows are a fixed 960px width
 For screen widths above 1400px, large desktop  
 Top level grid rows are a fixed 1360px width
 
-For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns
+All pixel sizes are CSS pixels, not physical pixels. To see which layout sizes will show on a particular device, you must take into account the device's pixel density.
+
+For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns.
 
 ### [Demos](demos.html)
 

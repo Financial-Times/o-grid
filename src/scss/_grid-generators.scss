@@ -55,7 +55,7 @@
 	}
 	
 	@if (not $default and $layout-size != default) {
-		/* ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout */
+		// ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout
 		#{$aggregated-selector} {
 			float: left;
 			clear: none;

@@ -10,6 +10,9 @@ It supports all browsers with support for *css media queries*, with two sizes of
 
 [Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
+# Browser support
+This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+
 ### Grid dimensions
 
 Four layout sizes are defined:

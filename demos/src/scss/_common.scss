@@ -3,8 +3,7 @@ $o-grid-is-silent: false;
 
 @import "../../../main.scss";
 
-
-/* Add gutter classes (not available as concrete classes in module source, probably should be) */
+/* Add gutter classes for test page (not available as concrete classes in module source, probably should be) */
 
 $o-grid-test-sizes: S M L XL;
 
@@ -29,6 +28,4 @@ $o-grid-test-sizes: S M L XL;
 .demo-no-right-gutter {
 	@extend %o-grid-no-right-gutter !optional;
 }
-
-
 @import "_demos";

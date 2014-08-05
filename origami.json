@@ -34,6 +34,10 @@
         {
             "path": "/demos/always-fixed.html",
             "expanded": false
+        },
+        {
+            "path": "/demos/test.html",
+            "expanded": false
         }
     ]
 }

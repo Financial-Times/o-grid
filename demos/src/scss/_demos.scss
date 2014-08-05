@@ -18,8 +18,8 @@ body {
             background: #FFA898;
         }
     }
-    [class*='error'] .cell {
-        background-color: #faa;
+    [class*='error'] .demo-cell {
+        background-color: red;
     }
     .selected-stylesheet {
         background: #aaf;

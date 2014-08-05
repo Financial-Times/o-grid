@@ -24,6 +24,7 @@
             subheading && (subheading.innerHTML = this.title);
             html.className = html.className.replace(/stylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
 
+            runTests();
         });
         if (!tmp.childNodes.length) {
             stylesheet.href = type + '.css';
@@ -32,6 +33,7 @@
             subheading && (subheading.innerHTML = button.title);
         }
         tmp.appendChild(button);
+
 
     });
 
@@ -64,9 +66,9 @@ function getExpectedSpans (el) {
 
 function getExpectedGutter (el, side) {
     var layout = getLayout();
-
-    var rules = el.className,
-        gutter = !(new RegExp('(^|\\\s)gut(-' + side + '|-' + layout + '|-' + side + '-' + layout + '|$|\\\s)', 'g').test(rules));
+    var sides = {l:'left', r:'right'};
+    var pattern = new RegExp('demo-no(-' + sides[side] + ')?-gutter(-' + layout + ')?');
+    var gutter = !pattern.test(el.className);
 
     if (gutter) {
         gutter = !/o-grid-row-compact/.test(el.parentNode.className);
@@ -83,6 +85,7 @@ function highlightNotExpectedGutter (el) {
 
     if (expectedLeft != actualLeft || expectedRight != actualRight) {
         /\berror-gutter\b/.test(el.className) || (el.className += ' error-gutter');
+        console.error('Gutter error', el, expectedLeft, actualLeft, expectedRight, actualRight);
     } else {
         el.className = el.className.replace(/\berror-gutter\b/g, '');
     }
@@ -94,6 +97,7 @@ function highlightNotExpectedWidth (el) {
 
     if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
          /\berror-width\b/.test(el.className) || (el.className += ' error-width');
+        console.error('Width error', el, expectedPercentage, actualPercentage);
     } else {
         el.className = el.className.replace(/\berror-width\b/g, '');
     }

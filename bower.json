@@ -7,7 +7,7 @@
 		"package.json"
 	],
 	"dependencies": {
-		"o-useragent": ">=0.5.0 <2"
+		"o-useragent": ">=0.5.0 <3"
 	}
 }
 

@@ -25,7 +25,7 @@
 
 	@if($selector) {
 		#{$selector} { @content }
- 	} 
+ 	}
 }
 
 //
@@ -39,12 +39,12 @@
 	@if ($o-grid-fixed-layout-selector) {
 		#{$o-grid-fixed-layout-selector} {
 			@content;
-		}		
+		}
 	} @else if ($o-grid-fixed-layout-useragents) {
 		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
 			@content;
-		}	
-	} 
+		}
+	}
 }
 
 //
@@ -63,14 +63,14 @@
 	}
 }
 
-// 
+//
 // Adds cross-browser box-sizing styles
 //
 @mixin oGridBoxSizing($value, $polyfill: false) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
 	@if ($polyfill) {
-		@include oUseragentIe7BoxSizing();		
+		@warn "Including box-sizing polyfill as part of o-grid is deprecated, instead, use polyfill.webservices.ft.com (oGridBoxSizing() was @included with $polyfill:true)";
 	}
 }
 

@@ -7,7 +7,7 @@
 @mixin oGridDefineLayout ($layout-size, $max-width) {
 
 	@include oGridRespondTo($layout-size) {
-		
+
 		@if ($o-grid-is-fluid and not ($layout-size == XL)) {
 			@include oGridClass(row page) {
 				max-width: none;
@@ -37,7 +37,7 @@
 	}
 
 
-	$aggregated-selector: null;			
+	$aggregated-selector: null;
 	$column-count-minus-one: $column-count - 1;
 
 	@for $colspan from 1 through $column-count-minus-one {
@@ -48,24 +48,24 @@
 			} @else {
 				width: oGridColumnWidth($colspan, $column-count);
 			}
-			
+
 		}
-		
+
 		$aggregated-selector: append($aggregated-selector, oGridColumnSelector($layout-size, $colspan), comma);
 	}
-	
+
 	@if (not $default and $layout-size != default) {
 		// ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout
 		#{$aggregated-selector} {
 			float: left;
 			clear: none;
-			display: block;	
+			display: block;
 		}
 	}
 	@include oGridColumnSelector($layout-size, $column-count) {
 	    float: none;
 	    clear: both;
-	    display: block;	
+	    display: block;
 		@if ($default) {
 			width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
 		} @else {
@@ -87,31 +87,31 @@
 		float: left;
 		padding-left: $o-grid-fixed-half-gutter;
 		padding-right: $o-grid-fixed-half-gutter;
-		@include oGridBoxSizing(border-box, true);
+		@include oGridBoxSizing(border-box);
 	}
 
 	@include oGridCompactStyles(false);
 
 	@include oGridColumnWidths(default, 12);
-	
+
 	// if the grid is responsive then the respondTo mixin adds the following styles, but if not we need to do it here
 	@if ($o-grid-is-fixed-desktop) {
 		@include oGridColumnWidths(L, 12);
 	}
-	
+
 	body {
 		min-width: $o-grid-large-max-width;
 	}
-	
+
 	@include oGridClass(row page) {
 		width: $o-grid-large-max-width;
 		max-width: none; // must be 'none' rather than $o-grid-large-max-width in order to avoid a very obscure ie7 bug
 	}
-	
+
 	@include oGridColumnSelector(S, 12) {
 		clear: none;
 	}
-	
+
 	@include oGridGutterOverrides(L);
 	@include oGridGutterOverrides(default);
 }
@@ -127,13 +127,13 @@
 	    clear: none;
 	}
 
-	$aggregated-selector: null;			
+	$aggregated-selector: null;
 
 	@for $colWidth from 0 through 12 {
 
 		// generates a comma separated selector for each of the column widths from 1 to 11
 		$aggregated-selector: append($aggregated-selector, oGridColumnSelector(S, $colWidth), comma);
-		
+
 	}
 
 	@include oGridWrapInSelector($aggregated-selector) {
@@ -152,9 +152,9 @@
 	@if ($wrapped) {
 		@include oGridTargetAtFixedLayout(true) {
 			@include oGridSilenceableCompactMargins();
-		}	
+		}
 	} @else {
-		@include oGridSilenceableCompactMargins();	
+		@include oGridSilenceableCompactMargins();
 	}
 
 

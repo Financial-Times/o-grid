@@ -1,6 +1,6 @@
 @if ($o-grid-is-fixed-desktop) {
-	$o-grid-fixed-layout-selector: null;
-	$o-grid-fixed-layout-useragents: null;
+	$o-grid-fixed-layout-selector: null !global;
+	$o-grid-fixed-layout-useragents: null !global;
 }
 
 @if ($o-grid-fixed-layout-selector) {
@@ -34,7 +34,7 @@
 
 @if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {
 	@include oGridClass(row page)  {
-		max-width: $o-grid-small-max-width; 
+		max-width: $o-grid-small-max-width;
 		min-width: $o-grid-min-width;
 	}
 
@@ -45,7 +45,7 @@
 		max-width: none; // needed for .grid-box .grid-row
 		min-width: 0;
 	}
-	
+
 	@include oGridColumnSelector() {
 		float: left;
 		padding-left: $o-grid-default-half-gutter;

@@ -31,42 +31,29 @@ body {
 
 /* Show the current media query layout mode */
 
-.demo-details .mode {
+.demo-mode {
     text-align:right;
 }
-.demo-details .mode:after {
+.demo-mode:after {
     font-weight: bold;
 }
 @include oGridRespondTo(S) {
-    .demo-details .mode:after {
+    .demo-mode:after {
         content: "S";
     }
 }
 @include oGridRespondTo(M) {
-    .demo-details .mode:after {
+    .demo-mode:after {
         content: "M";
     }
 }
 @include oGridRespondTo(L) {
-    .demo-details .mode:after {
+    .demo-mode:after {
         content: "L";
     }
 }
 @include oGridRespondTo(XL) {
-    .demo-details .mode:after {
+    .demo-mode:after {
         content: "XL";
-    }
-}
-
-/* Show comments relevant to only particular demos */
-
-.comment {
-    display: none;
-}
-@each $type in default device-width-mq width-mq non-fluid resized disabled always-fixed {
-    #{'.stylesheet-#{$type}'} {
-        #{'.comment.#{$type}'} {
-            display: block;
-        }
     }
 }

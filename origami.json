@@ -10,35 +10,45 @@
         ]
     },
     "demos": [
-        "/demos/default.html",
+        {
+            "path": "/demos/test.html",
+            "expanded": true,
+            "description": ""
+        },
+        {
+            "path": "/demos/default.html",
+            "expanded": true,
+            "description": "Grid with all default settings"
+        },
         {
             "path": "/demos/unresponsive.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported"
         },
         {
             "path": "/demos/device-width-mq.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Respond to width of device, not width of viewport.  On desktop won't change appearance unless using useragent overrides in dev tools."
         },
         {
             "path": "/demos/non-fluid.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)"
         },
         {
             "path": "/demos/resized.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved"
         },
         {
             "path": "/demos/xl-disabled.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Responsive grid with the extra large layout disabled. Should demonstrate responsive behaviour, but the XL breakpoint is disabled, so the widths should show in red"
         },
         {
             "path": "/demos/always-fixed.html",
-            "expanded": false
-        },
-        {
-            "path": "/demos/test.html",
-            "expanded": false
+            "expanded": true,
+            "description": "Fixed grid at 960px across all browsers and devices.  Should always be fixed at the large layout"
         }
     ]
 }
-

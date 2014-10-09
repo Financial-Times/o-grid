@@ -30,17 +30,14 @@ $o-grid-is-silent: true !default;
 $o-grid-is-responsive: true !default;
 $o-grid-is-fluid: true !default;
 $o-grid-is-fixed-desktop: false !default;
-$o-grid-fixed-layout-useragents: ie7 ie8 !default;
+$o-grid-fixed-layout-useragents: ie8 !default;
 $o-grid-fixed-layout-selector: null !default;
 $o-grid-mq-type: width !default;
-//$o-grid-fixed-size: $o-grid-large !default;
 
 // -------------------------------------------------------------------------------------
 // PATHS
 // -------------------------------------------------------------------------------------
 $o-grid-name: o-grid;
-$o-grid-version: null !default;
-
 
 // -------------------------------------------------------------------------------------
 // STRUCTURAL VARIABLES

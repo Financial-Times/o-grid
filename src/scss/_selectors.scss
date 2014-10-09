@@ -54,9 +54,9 @@
 // Generates both silent placeholders and, if $o-grid-is-silent == false, concrete selectors for a given layout size and list of column widths
 // If no $layout-size is specified the default selector for a column with no width specified is outputted
 //
-// oGridColumnSelector() => [class*="o-grid-col"], %o-grid-col
-// oGridColumnSelector(s, 0 1) => [class*="|s0|"], [class*="|s1|"], %o-grid-s0, %o-grid-s1
-// oGridClass(default, 8) => [class*="|8|"], %o-grid-8
+// oGridColumnSelector() => [data-o-grid-colspan], %o-grid-col
+// oGridColumnSelector(s, 0 1) => [data-o-grid-colspan~="|s0|"], [data-o-grid-colspan~="|s1|"], %o-grid-s0, %o-grid-s1
+// oGridClass(default, 8) => [data-o-grid-colspan~="|8|"], %o-grid-8
 //
 @function oGridColumnSelector ($layout-size: null, $colspans: null) {
 

@@ -66,12 +66,9 @@
 //
 // Adds cross-browser box-sizing styles
 //
-@mixin oGridBoxSizing($value, $polyfill: false) {
+@mixin oGridBoxSizing($value) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	@if ($polyfill) {
-		@warn "Including box-sizing polyfill as part of o-grid is deprecated, instead, use polyfill.webservices.ft.com (oGridBoxSizing() was @included with $polyfill:true)";
-	}
 }
 
 //

@@ -253,12 +253,10 @@ By default `o-grid` outputs no styles (unless fetched using the origami build se
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
 ### Supporting legacy browsers
-By default, any browser that doesn't support media queries will be served the small layout. This can be over-ridden so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
+By default, any browser that doesn't support media queries will be served the small layout. This can be over-ridden so the large layout is shown instead. The default for triggering this large fixed layout is ie8 on desktop, but this is configurable using one of two variables
 
-* `$o-grid-fixed-layout-useragents: ie7 ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
+* `$o-grid-fixed-layout-useragents: ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
 * `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will override the useragent targeting
-
-For ie7 the `boxsizing.htc` polyfil provided by [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD) is also needed. See [o-assets](http://git.svc.ft.com/tree/origami%2Fo-assets.git/HEAD) for details of how to configure the path to this file.
 
 ### Things you *can* do (but in most cases probably shouldn't)
 The grid is easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid's main.scss file. A few notable uses are as follows:

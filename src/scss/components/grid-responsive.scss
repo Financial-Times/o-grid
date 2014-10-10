@@ -1,4 +1,4 @@
-@if ($o-grid-is-responsive and not $o-grid-is-fixed-desktop) {
+@if ($o-grid-is-responsive and not $o-grid-is-fixed-large) {
 	/* Override fixed defaults for responsive grid */
 	@media screen {
 

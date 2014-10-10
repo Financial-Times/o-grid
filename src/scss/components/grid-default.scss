@@ -1,10 +1,10 @@
-@if ($o-grid-is-fixed-desktop) {
-	$o-grid-fixed-layout-selector: null !global;
-	$o-grid-fixed-layout-useragents: null !global;
+@if ($o-grid-is-fixed-large) {
+	$o-grid-selector-fixed-large: null !global;
+	$o-grid-useragents-fixed-large: null !global;
 }
 
-@if ($o-grid-fixed-layout-selector) {
-	$o-grid-fixed-layout-useragents: null;
+@if ($o-grid-selector-fixed-large) {
+	$o-grid-useragents-fixed-large: null;
 }
 
 @if (not $o-grid-is-silent) {
@@ -32,7 +32,7 @@
 	}
 }
 
-@if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {
+@if (not($o-grid-is-fixed-large and not $o-grid-is-responsive)) {
 	@include oGridClass(row page)  {
 		max-width: $o-grid-small-max-width;
 		min-width: $o-grid-min-width;

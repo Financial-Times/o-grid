@@ -33,15 +33,15 @@
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
 @mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
-	@if ($include-unwrapped or $o-grid-is-fixed-desktop or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
+	@if ($include-unwrapped or $o-grid-is-fixed-large or (not $o-grid-selector-fixed-large and not $o-grid-useragents-fixed-large)) {
 		@content;
 	}
-	@if ($o-grid-fixed-layout-selector) {
-		#{$o-grid-fixed-layout-selector} {
+	@if ($o-grid-selector-fixed-large) {
+		#{$o-grid-selector-fixed-large} {
 			@content;
 		}
-	} @else if ($o-grid-fixed-layout-useragents) {
-		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
+	} @else if ($o-grid-useragents-fixed-large) {
+		@include oUseragentTarget ($o-grid-useragents-fixed-large) {
 			@content;
 		}
 	}
@@ -66,9 +66,13 @@
 //
 // Adds cross-browser box-sizing styles
 //
-@mixin oGridBoxSizing($value) {
+@mixin oGridBoxSizing($value, $usepolyfill: false) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
+
+	@if $usepolyfill {
+		@warn "o-grid no longer provides a polyfill for boxsizing in ie7";
+	}
 }
 
 //

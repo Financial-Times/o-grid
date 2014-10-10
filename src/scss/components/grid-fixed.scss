@@ -1,6 +1,6 @@
-@if ($o-grid-is-responsive or $o-grid-is-fixed-desktop) {
+@if ($o-grid-is-responsive or $o-grid-is-fixed-large) {
     
-    @if ($o-grid-is-fixed-desktop) {
+    @if ($o-grid-is-fixed-large) {
         @include oGridOverrideDefaultGrid();
 	}
 

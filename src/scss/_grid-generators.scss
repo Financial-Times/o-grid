@@ -95,7 +95,7 @@
 	@include oGridColumnWidths(default, 12);
 
 	// if the grid is responsive then the respondTo mixin adds the following styles, but if not we need to do it here
-	@if ($o-grid-is-fixed-desktop) {
+	@if ($o-grid-is-fixed-large) {
 		@include oGridColumnWidths(L, 12);
 	}
 

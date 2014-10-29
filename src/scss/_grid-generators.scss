@@ -8,14 +8,12 @@
 
 	@include oGridRespondTo($layout-size) {
 
-		@if ($o-grid-is-fluid and not ($layout-size == XL)) {
+		@if ($max-width) {
 			@include oGridClass(row page) {
-				max-width: none;
-			}
-		} @else {
-			@if ($max-width) {
-				@include oGridClass(row page) {
+				@if ($o-grid-is-fluid and not ($layout-size == XL)) {
 					max-width: $max-width;
+				} @else {
+					width: $max-width;
 				}
 			}
 		}

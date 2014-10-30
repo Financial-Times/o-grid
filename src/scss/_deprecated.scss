@@ -1,0 +1,19 @@
+// Breakpoints
+$o-grid-small-to-medium-break: null !default;
+$o-grid-medium-to-large-break: null !default;
+$o-grid-large-to-extra-large-break: null !default;
+
+@if $o-grid-small-to-medium-break {
+	@warn "$o-grid-small-to-medium-break is deprecated, use $o-grid-small-max-width instead";
+	$o-grid-small-max-width: $o-grid-small-to-medium-break !global;
+}
+
+@if $o-grid-medium-to-large-break {
+	@warn "$o-grid-medium-to-large-break is deprecated, use $o-grid-medium-max-width instead";
+	$o-grid-medium-max-width: $o-grid-medium-to-large-break !global;
+}
+
+@if $o-grid-large-to-extra-large-break {
+	@warn "$o-grid-large-to-extra-large-break is deprecated, use $o-grid-large-max-width instead";
+	$o-grid-large-max-width: $o-grid-large-to-extra-large-break !global;
+}

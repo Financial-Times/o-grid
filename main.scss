@@ -1,1 +1,14 @@
-@import "src/scss/main";
+@import "o-useragent/main";
+
+@import "src/scss/_deprecated";
+@import "src/scss/_variables";
+@import "src/scss/_utils";
+@import "src/scss/_selectors";
+@import "src/scss/_grid-generators";
+
+
+@import "src/scss/components/grid-default";
+@import "src/scss/components/grid-responsive";
+@import "src/scss/components/grid-fixed";
+
+

@@ -18,11 +18,6 @@ $o-grid-medium-max-width: 780px !default;
 $o-grid-large-max-width: 960px !default;
 $o-grid-extra-large-max-width: 1360px !default;
 
-// Breakpoints
-$o-grid-small-to-medium-break: 600px !default;
-$o-grid-medium-to-large-break: 1000px !default;
-$o-grid-large-to-extra-large-break: 1400px !default;
-
 // -------------------------------------------------------------------------------------
 // Responsive behaviour configuration
 // -------------------------------------------------------------------------------------
@@ -34,13 +29,6 @@ $o-grid-fixed-layout-useragents: ie7 ie8 !default;
 $o-grid-fixed-layout-selector: null !default;
 $o-grid-mq-type: width !default;
 //$o-grid-fixed-size: $o-grid-large !default;
-
-// -------------------------------------------------------------------------------------
-// PATHS
-// -------------------------------------------------------------------------------------
-$o-grid-name: o-grid;
-$o-grid-version: null !default;
-
 
 // -------------------------------------------------------------------------------------
 // STRUCTURAL VARIABLES

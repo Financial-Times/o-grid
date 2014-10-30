@@ -10,7 +10,7 @@
 
 		@if ($max-width) {
 			@include oGridClass(row page) {
-				@if ($o-grid-is-fluid and not ($layout-size == XL)) {
+				@if ($o-grid-is-fluid) {
 					max-width: $max-width;
 				} @else {
 					width: $max-width;

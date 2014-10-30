@@ -81,13 +81,13 @@
 
 	@each $layout-size in $layout-sizes {
 		@if $layout-size == S {
-			@include oGridMaxMinMediaQuery(null, $o-grid-small-to-medium-break) { @content; }
+			@include oGridMaxMinMediaQuery(null, $o-grid-small-max-width) { @content; }
 		} @else if $layout-size == M {
-			@include oGridMaxMinMediaQuery($o-grid-small-to-medium-break, $o-grid-medium-to-large-break) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-small-max-width, $o-grid-medium-max-width) { @content; }
 		} @else if $layout-size == L {
-			@include oGridMaxMinMediaQuery($o-grid-medium-to-large-break, $o-grid-large-to-extra-large-break) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-medium-max-width, $o-grid-large-max-width) { @content; }
 		} @else if $layout-size == XL {
-			@include oGridMaxMinMediaQuery($o-grid-large-to-extra-large-break, null) { @content; }
+			@include oGridMaxMinMediaQuery($o-grid-large-max-width, null) { @content; }
 		} @else {
 			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
 		}

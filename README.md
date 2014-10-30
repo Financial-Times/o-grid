@@ -37,16 +37,6 @@ All pixel sizes are CSS pixels, not physical pixels. To see which layout sizes w
 
 For each of these the available horizontal width is separated into 12 columns. In addition, for nested grids the parent box's width is divided into 12 columns.
 
-## Installation
-
-Include the following in your app's styles
-
-        // makes the grid respond to window rather than device width, so useful for development. 
-        // For modules, and most products, this should be removed in production
-        $o-grid-mq-type: width; 
-        
-        @import "o-grid/main";  
-
 ## General use
 
 ### Base classes
@@ -178,7 +168,7 @@ More than one layout can be passed in at once (enabling applying the same styles
         }
 
 * `oGridTargetAtFixedLayout()`  
-This applies to styles only when the large screen fixed layout (typically used as the ie7/ie8 fallback) is active
+This applies styles only when the large screen fixed layout (typically used as the ie7/ie8 fallback) is active
         
         @include oGridTargetAtFixedLayout() {
             .o-header {
@@ -213,7 +203,7 @@ By default `o-grid` outputs no styles (unless fetched using the origami build se
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
 ### Supporting legacy browsers
-By default, any browser that doesn't support media queries will be served the small layout. This can be overwritten so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
+By default, any browser that doesn't support media queries will be served the small layout. This can be overridden so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
 
 * `$o-grid-fixed-layout-useragents: ie7 ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
 * `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will override the useragent targeting
@@ -234,10 +224,10 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 
 
 #### Resizing the grid
-By overwriting the values of any of the `$...width`, `$...break` or `$...gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
+By overwriting the values of any of the `$...width` or `$...gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required
 
 #### Disabling larger layouts
-By setting the value of a breakpoint (`$o-grid-small-to-medium-break`, `$o-grid-medium-to-large-break` or `$o-grid-large-to-extra-large-break`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-to-large-break: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-to-extra-large-break: false;`.*
+By setting the value of a breakpoint (`$o-grid-small-max-width`, `$o-grid-medium-max-width` or `$o-grid-large-max-width`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-max-width: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-max-width: false;`.*
 
 ## Developing o-grid
 

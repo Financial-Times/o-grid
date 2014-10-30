@@ -1,9 +1,5 @@
 // -------------------------------------------------------------------------------------
 //  DIMENSIONS
-//
-//  Do not change without sign-off on design and updating README.md
-//  If you need to use different values for these simply include different variable names
-//  in a .scss file included before this one
 // -------------------------------------------------------------------------------------
 
 // Gutters
@@ -14,8 +10,8 @@ $o-grid-fixed-half-gutter: 5px !default;
 // Page widths
 $o-grid-min-width: 240px !default;
 $o-grid-small-max-width: 600px !default;
-$o-grid-medium-max-width: 780px !default;
-$o-grid-large-max-width: 960px !default;
+$o-grid-medium-max-width: 800px !default;
+$o-grid-large-max-width: 1100px !default;
 $o-grid-extra-large-max-width: 1360px !default;
 
 // -------------------------------------------------------------------------------------

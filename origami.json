@@ -2,7 +2,7 @@
     "description": "Grid for responsive layouts",
     "origamiType": "module",
     "origamiVersion": 1,
-    "support": "rhys.evans@ft.com",
+    "support": "https://github.com/Financial-Times/o-grid/issues",
     "supportStatus": "active",
     "browserFeatures": {
         "required": [
@@ -10,11 +10,6 @@
         ]
     },
     "demos": [
-        {
-            "path": "/demos/test.html",
-            "expanded": true,
-            "description": ""
-        },
         {
             "path": "/demos/default.html",
             "expanded": true,

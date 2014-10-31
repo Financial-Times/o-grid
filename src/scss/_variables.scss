@@ -36,25 +36,3 @@ $o-grid-mq-type: width !default;
 // -------------------------------------------------------------------------------------
 $_o-grid-max-widths: $o-grid-small-max-width $o-grid-medium-max-width $o-grid-large-max-width $o-grid-extra-large-max-width;
 $_o-grid-layout-shorthands: S M L XL;
-
-// ---------------------------
-// DEPRECATED - remove in v3
-// ---------------------------
-
-$o-grid-fixed-layout-useragents: $o-grid-useragents-fixed-large !default;
-
-@if $o-grid-fixed-layout-useragents != $o-grid-useragents-fixed-large {
-    @warn "$o-grid-fixed-layout-useragents is deprecated. Use $o-grid-useragents-fixed-large instead";
-}
-
-$o-grid-fixed-layout-selector: $o-grid-selector-fixed-large !default;
-
-@if $o-grid-fixed-layout-selector != $o-grid-selector-fixed-large {
-    @warn "$o-grid-fixed-layout-selector is deprecated. Use $o-grid-selector-fixed-large instead";
-}
-
-$o-grid-is-fixed-desktop: $o-grid-is-fixed-large !default;
-
-@if $o-grid-is-fixed-desktop != $o-grid-is-fixed-large {
-    @warn "$o-grid-is-fixed-desktop is deprecated. Use $o-grid-is-fixed-large instead";
-}

@@ -2,7 +2,7 @@
 
 // Self-contained stylesheet switcher
 (function styleSwitcher () {
-    var demoTypes = require('../configurations.js'),
+    var demoTypes = require('../configurations.json'),
         stylesheet = document.querySelector("link[rel='stylesheet']"),
         html = document.documentElement,
         buttonContainer = document.getElementById("styleSwitcher"),

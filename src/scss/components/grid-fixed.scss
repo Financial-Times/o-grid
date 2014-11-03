@@ -4,8 +4,8 @@
         @include oGridOverrideDefaultGrid();
 	}
 
-    @include oGridTargetAtFixedLayout () {
-		@include oGridFixedGridStyles ();
+    @include oGridTargetAtFixedLayout() {
+		@include oGridFixedGridStyles();
 	}
 
 }

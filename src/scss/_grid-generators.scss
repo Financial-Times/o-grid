@@ -148,7 +148,7 @@
 	}
 
 	@if ($wrapped) {
-		@include oGridTargetAtFixedLayout(true) {
+		@include oGridTargetAtFixedLarge(true) {
 			@include oGridSilenceableCompactMargins();
 		}
 	} @else {

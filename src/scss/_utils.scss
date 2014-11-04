@@ -31,7 +31,7 @@
 // Wraps a bundle of styles in the selector used to trigger the fixed large screen layout
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
-@mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
+@mixin oGridTargetAtFixedLarge ($include-unwrapped: false) {
 	@if ($include-unwrapped or $o-grid-is-fixed-large or not ($o-grid-selector-fixed-large or $o-grid-useragents-fixed-large)) {
 		@content;
 	}
@@ -90,12 +90,12 @@
 			@include oGridMinMaxMediaQuery($o-grid-large-max-width, null) { @content; }
 		} @else {
 			// We need to set a minimum width because @media screen works in IE7 
-			// and we hide CSS that we don't want in <IE9 in media queries
-			@include oGridMinMaxMediaQuery($o-grid-min-width, null, true) { @content; }
+			// and we hide CSS that we don't want in IE6-IE8 in media queries
+			@include oGridMinMaxMediaQuery(0, null, true) { @content; }
 		}
 
 		@if $layout-size == L {
-			@include oGridTargetAtFixedLayout() { @content; }
+			@include oGridTargetAtFixedLarge() { @content; }
 		}
 	}
 }

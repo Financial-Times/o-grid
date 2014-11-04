@@ -1,9 +1,5 @@
 @if ($o-grid-is-responsive or $o-grid-is-fixed-large) {
 
-	@if ($o-grid-is-fixed-large) {
-		@include oGridOverrideDefaultGrid();
-	}
-
 	@include oGridTargetAtFixedLarge() {
 		@include oGridFixedGridStyles();
 	}

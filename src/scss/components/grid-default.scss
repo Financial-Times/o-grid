@@ -45,7 +45,7 @@
 
 	// We need to set a minimum width because @media screen works in IE7 
 	// and we hide CSS that we don't want in IE6-IE8 in media queries
-	@media screen and (min-width: $0) {
+	@media screen and (min-width: 0) {
 		@include oGridColumnWidths(default, 12, true);
 		@include oGridColumnWidths(S, 12, true);
 	}

@@ -21,11 +21,6 @@
             "description": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported"
         },
         {
-            "path": "/demos/device-width-mq.html",
-            "expanded": false,
-            "description": "Respond to width of device, not width of viewport.  On desktop won't change appearance unless using useragent overrides in dev tools."
-        },
-        {
             "path": "/demos/non-fluid.html",
             "expanded": false,
             "description": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)"

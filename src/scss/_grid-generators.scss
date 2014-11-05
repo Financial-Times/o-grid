@@ -4,7 +4,7 @@
 // @param $layout-size {string} name of layout size (s, m , l, xl)
 // @param $maxWidth {number} maximum width of a row at this layout size
 //
-@mixin oGridDefineLayout ($layout-size, $max-width) {
+@mixin oGridDefineLayout($layout-size, $max-width) {
 
 	@include oGridRespondTo($layout-size) {
 
@@ -53,7 +53,7 @@
 	}
 
 	@if (not $default and $layout-size != default) {
-		// ensures d12 and d0 can be over-ridden by styles for #{$layout-size} layout
+		// ensures that for a case like 0 M8, M8 will have display: block instead of display: none
 		#{$aggregated-selector} {
 			float: left;
 			clear: none;
@@ -93,7 +93,7 @@
 	@include oGridColumnWidths(default, 12);
 
 	// if the grid is responsive then the respondTo mixin adds the following styles, but if not we need to do it here
-	@if ($o-grid-is-fixed-desktop) {
+	@if ($o-grid-is-fixed-large) {
 		@include oGridColumnWidths(L, 12);
 	}
 
@@ -114,31 +114,6 @@
 	@include oGridGutterOverrides(default);
 }
 
-
-
-@mixin oGridOverrideDefaultGrid () {
-	@include oGridColumnSelector(S, 0 hide) {
-	    display: block;
-	}
-
-	@include oGridColumnSelector(S, 12) {
-	    clear: none;
-	}
-
-	$aggregated-selector: null;
-
-	@for $colWidth from 0 through 12 {
-
-		// generates a comma separated selector for each of the column widths from 1 to 11
-		$aggregated-selector: append($aggregated-selector, oGridColumnSelector(S, $colWidth), comma);
-
-	}
-
-	@include oGridWrapInSelector($aggregated-selector) {
-		width: auto;
-	}
-}
-
 @mixin oGridCompactStyles ($wrapped: false) {
 	.o-grid-row-compact {
 		&> #{oGridColumnSelector()} {
@@ -148,7 +123,7 @@
 	}
 
 	@if ($wrapped) {
-		@include oGridTargetAtFixedLayout(true) {
+		@include oGridTargetAtFixedLarge(true) {
 			@include oGridSilenceableCompactMargins();
 		}
 	} @else {

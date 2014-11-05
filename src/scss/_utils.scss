@@ -12,7 +12,6 @@
 	@return (oGridColumnWidth($colspan, $total-cols) - ($half-gutter-width * 2));
 }
 
-
 //
 // Wraps a bundle of styles in a given selector
 // If a $selector is not provided the styles are printed out unaltered
@@ -32,16 +31,16 @@
 // Wraps a bundle of styles in the selector used to trigger the fixed large screen layout
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
-@mixin oGridTargetAtFixedLayout ($include-unwrapped: false) {
-	@if ($include-unwrapped or $o-grid-is-fixed-desktop or (not $o-grid-fixed-layout-selector and not $o-grid-fixed-layout-useragents)) {
+@mixin oGridTargetAtFixedLarge ($include-unwrapped: false) {
+	@if ($include-unwrapped or $o-grid-is-fixed-large or not ($o-grid-selector-fixed-large or $o-grid-useragents-fixed-large)) {
 		@content;
 	}
-	@if ($o-grid-fixed-layout-selector) {
-		#{$o-grid-fixed-layout-selector} {
+	@if ($o-grid-selector-fixed-large) {
+		#{$o-grid-selector-fixed-large} {
 			@content;
 		}
-	} @else if ($o-grid-fixed-layout-useragents) {
-		@include oUseragentTarget ($o-grid-fixed-layout-useragents) {
+	} @else if ($o-grid-useragents-fixed-large) {
+		@include oUseragentTarget ($o-grid-useragents-fixed-large) {
 			@content;
 		}
 	}
@@ -51,7 +50,7 @@
 // Writes a media query selector for given maximum and minimum screen widths
 // If $force is set to true, then if $min and $max are undefined it will write out the styles wrapped in @media screen, otherwise writes nothing
 //
-@mixin oGridMaxMinMediaQuery($min, $max, $force:false) {
+@mixin oGridMinMaxMediaQuery($min, $max, $force:false) {
 	@if ($min and $max) {
 		@media screen and (min-#{$o-grid-mq-type}:$min+1) and (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($min) {
@@ -66,11 +65,12 @@
 //
 // Adds cross-browser box-sizing styles
 //
-@mixin oGridBoxSizing($value, $polyfill: false) {
+@mixin oGridBoxSizing($value, $usepolyfill: false) {
 	-moz-box-sizing: $value;
 	box-sizing: $value;
-	@if ($polyfill) {
-		@warn "Including box-sizing polyfill as part of o-grid is deprecated, instead, use polyfill.webservices.ft.com (oGridBoxSizing() was @included with $polyfill:true)";
+
+	@if $usepolyfill {
+		@warn "o-grid no longer provides a polyfill for boxsizing in ie7";
 	}
 }
 
@@ -81,19 +81,21 @@
 
 	@each $layout-size in $layout-sizes {
 		@if $layout-size == S {
-			@include oGridMaxMinMediaQuery(null, $o-grid-small-max-width) { @content; }
+			@include oGridMinMaxMediaQuery(null, $o-grid-small-max-width) { @content; }
 		} @else if $layout-size == M {
-			@include oGridMaxMinMediaQuery($o-grid-small-max-width, $o-grid-medium-max-width) { @content; }
+			@include oGridMinMaxMediaQuery($o-grid-small-max-width, $o-grid-medium-max-width) { @content; }
 		} @else if $layout-size == L {
-			@include oGridMaxMinMediaQuery($o-grid-medium-max-width, $o-grid-large-max-width) { @content; }
+			@include oGridMinMaxMediaQuery($o-grid-medium-max-width, $o-grid-large-max-width) { @content; }
 		} @else if $layout-size == XL {
-			@include oGridMaxMinMediaQuery($o-grid-large-max-width, null) { @content; }
+			@include oGridMinMaxMediaQuery($o-grid-large-max-width, null) { @content; }
 		} @else {
-			@include oGridMaxMinMediaQuery(null, null, true) { @content; }
+			// We need to set a minimum width because @media screen works in IE7 
+			// and we hide CSS that we don't want in IE6-IE8 in media queries
+			@include oGridMinMaxMediaQuery(0, null, true) { @content; }
 		}
 
 		@if $layout-size == L {
-			@include oGridTargetAtFixedLayout() { @content; }
+			@include oGridTargetAtFixedLarge() { @content; }
 		}
 	}
 }

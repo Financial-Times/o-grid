@@ -1,18 +1,10 @@
-@if ($o-grid-is-fixed-desktop) {
-	$o-grid-fixed-layout-selector: null !global;
-	$o-grid-fixed-layout-useragents: null !global;
+@if ($o-grid-is-fixed-large) {
+	$o-grid-selector-fixed-large: null !global;
+	$o-grid-useragents-fixed-large: null !global;
 }
 
-@if ($o-grid-fixed-layout-selector) {
-	$o-grid-fixed-layout-useragents: null;
-}
-
-@if (not $o-grid-is-silent) {
-	html {
-		-webkit-text-size-adjust: 100%;
-		-ms-text-size-adjust: 100%;
-		text-size-adjust: 100%;
-	}
+@if ($o-grid-selector-fixed-large) {
+	$o-grid-useragents-fixed-large: null;
 }
 
 @include oGridClass(row box page) {
@@ -32,7 +24,7 @@
 	}
 }
 
-@if (not($o-grid-is-fixed-desktop and not $o-grid-is-responsive)) {
+@if (not $o-grid-is-fixed-large and $o-grid-is-responsive) {
 	@include oGridClass(row page)  {
 		max-width: $o-grid-small-max-width;
 		min-width: $o-grid-min-width;
@@ -47,17 +39,14 @@
 	}
 
 	@include oGridColumnSelector() {
-		float: left;
 		padding-left: $o-grid-default-half-gutter;
 		padding-right: $o-grid-default-half-gutter;
 	}
 
-
-	@include oGridColumnWidths(default, 12, true);
-	@include oGridColumnWidths(S, 12, true);
-
-	// Gutter overrides unimplemented for default layout as relies on box-sizing
-	// @include oGridCompactStyles();
-	// @include oGridGutterOverrides(S, true);
-	// @include oGridGutterOverrides(default, true);
+	// We need to set a minimum width because @media screen works in IE7 
+	// and we hide CSS that we don't want in IE6-IE8 in media queries
+	@media screen and (min-width: 0) {
+		@include oGridColumnWidths(default, 12, true);
+		@include oGridColumnWidths(S, 12, true);
+	}
 }

@@ -1,3 +1,26 @@
+// ---------------------------
+// DEPRECATED - remove in v3
+// ---------------------------
+
+$o-grid-fixed-layout-useragents: null !default;
+$o-grid-fixed-layout-selector: null !default;
+$o-grid-is-fixed-desktop: null !default;
+
+@if $o-grid-fixed-layout-useragents {
+	@warn "$o-grid-fixed-layout-useragents is deprecated, use $o-grid-useragents-fixed-large instead";
+	$o-grid-useragents-fixed-large: $o-grid-fixed-layout-useragents !global;
+}
+
+@if $o-grid-fixed-layout-selector {
+	@warn "$o-grid-fixed-layout-selector is deprecated, use $o-grid-selector-fixed-large instead";
+	$o-grid-selector-fixed-large: $o-grid-fixed-layout-selector !global;
+}
+
+@if $o-grid-is-fixed-desktop {
+	@warn "$o-grid-is-fixed-desktop is deprecated, use $o-grid-is-fixed-large instead";
+	$o-grid-is-fixed-large: $o-grid-is-fixed-desktop !global;
+}
+
 // Breakpoints
 $o-grid-small-to-medium-break: null !default;
 $o-grid-medium-to-large-break: null !default;

@@ -168,7 +168,7 @@ More than one layout can be passed in at once (enabling applying the same styles
         }
 
 * `oGridTargetAtFixedLayout()`  
-This applies styles only when the large screen fixed layout (typically used as the ie7/ie8 fallback) is active
+This applies styles only when the large screen fixed layout (typically used as the ie8 fallback) is active
         
         @include oGridTargetAtFixedLayout() {
             .o-header {
@@ -203,12 +203,10 @@ By default `o-grid` outputs no styles (unless fetched using the origami build se
 2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
 
 ### Supporting legacy browsers
-By default, any browser that doesn't support media queries will be served the small layout. This can be overridden so the large layout is shown instead. The default for triggering this large fixed layout is ie7/8 on desktop, but this is configurable using one of two variables
+By default, any browser that doesn't support media queries will be served the small layout. This can be overridden so the large layout is shown instead. The default for triggering this large fixed layout is ie8 on desktop, but this is configurable using one of two variables
 
-* `$o-grid-fixed-layout-useragents: ie7 ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
-* `$o-grid-fixed-layout-selector: null !default` - css selector. If specified will override the useragent targeting
-
-For ie7 the `boxsizing.htc` polyfil provided by [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD) is also needed. See [o-assets](http://git.svc.ft.com/tree/origami%2Fo-assets.git/HEAD) for details of how to configure the path to this file.
+* `$o-grid-useragents-fixed-large: ie8 !default` - useragent names compatible with [o-useragent](http://git.svc.ft.com/tree/origami%2Fo-useragent.git/HEAD)
+* `$o-grid-selector-fixed-large: null !default` - css selector. If specified will override the useragent targeting
 
 ### Things you *can* do (but in most cases probably shouldn't)
 The grid is easy to configure by overwriting the default values of many of the sass variables. To do so simply specify a value for the given variable before you include o-grid's main.scss file. A few notable uses are as follows:
@@ -218,8 +216,8 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 
 * `$o-grid-is-responsive`: \[true\] If set to false only the default is used. This greatly reduces the stylesheet file size and should be used for mobile only products
 * `$o-grid-is-fluid`: \[true\] Switches between fully fluid and snapped grid layouts
-* `$o-grid-is-fixed-desktop`: \[false\] Forces the site to always use the large layout
-* `$o-grid-fixed-layout-selector`: \[null\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie7/8
+* `$o-grid-is-fixed-large`: \[false\] Forces the site to always use the large layout
+* `$o-grid-selector-fixed-large`: \[null\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie8
 * `$o-grid-mq-type` : \[device-width\] By default only responds to device rather than window width. To change this set this variable to `width`
 
 

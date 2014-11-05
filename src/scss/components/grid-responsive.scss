@@ -1,11 +1,13 @@
-@if ($o-grid-is-responsive and not $o-grid-is-fixed-desktop) {
+@if ($o-grid-is-responsive and not $o-grid-is-fixed-large) {
 	/* Override fixed defaults for responsive grid */
-	@media screen {
+
+	// We need to set a minimum width because @media screen works in IE7 
+	// and we hide CSS that we don't want in <IE9 in media queries
+	@media screen and (min-width: $o-grid-min-width) {
 
 		@include oGridClass((row row, box row), true) {
 			margin-left: -$o-grid-responsive-half-gutter;
 			margin-right: -$o-grid-responsive-half-gutter;
-			width: auto;
 		}
 
 		@include oGridColumnSelector() {
@@ -16,7 +18,6 @@
 		}
 
 		@include oGridCompactStyles(true);
-		@include oGridOverrideDefaultGrid();
 		@include oGridGutterOverrides(default);
 	}
 

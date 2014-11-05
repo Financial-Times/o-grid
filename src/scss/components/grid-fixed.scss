@@ -1,12 +1,7 @@
-@if ($o-grid-is-responsive or $o-grid-is-fixed-desktop) {
-    
-    @if ($o-grid-is-fixed-desktop) {
-        @include oGridOverrideDefaultGrid();
-	}
+@if ($o-grid-is-responsive or $o-grid-is-fixed-large) {
 
-    @include oGridTargetAtFixedLayout () {
-		@include oGridFixedGridStyles ();
+	@include oGridTargetAtFixedLarge() {
+		@include oGridFixedGridStyles();
 	}
 
 }
-

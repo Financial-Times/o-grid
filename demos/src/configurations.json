@@ -1,7 +1,6 @@
 {
 	"default": "Grid with all default settings",
 	"unresponsive": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported",
-	"device-width-mq": "Respond to width of device, not width of viewport.  On desktop won't change appearance unless using useragent overrides in dev tools.",
 	"non-fluid": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)",
 	"resized": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved",
 	"xl-disabled": "Responsive grid with the extra large layout disabled. Should demonstrate responsive behaviour, but the XL breakpoint is disabled, so the widths should show in red",

@@ -218,8 +218,6 @@ The following flags can be used to change the responsive behaviour *\[defaults i
 * `$o-grid-is-fluid`: \[true\] Switches between fully fluid and snapped grid layouts
 * `$o-grid-is-fixed-large`: \[false\] Forces the site to always use the large layout
 * `$o-grid-selector-fixed-large`: \[null\] Can be set to any class/selector so that the layout can be enabled for criteria other than the browser being ie8
-* `$o-grid-mq-type` : \[device-width\] By default only responds to device rather than window width. To change this set this variable to `width`
-
 
 #### Resizing the grid
 By overwriting the values of any of the `$...width` or `$...gutter` variables the width and spacing of the grid at any of the layout sizes can be decreased or increased as required

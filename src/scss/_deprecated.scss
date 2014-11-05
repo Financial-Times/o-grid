@@ -40,3 +40,12 @@ $o-grid-large-to-extra-large-break: null !default;
 	@warn "$o-grid-large-to-extra-large-break is deprecated, use $o-grid-large-max-width instead";
 	$o-grid-large-max-width: $o-grid-large-to-extra-large-break !global;
 }
+
+// Media query feature
+$o-grid-mq-type: null !default;
+
+@if $o-grid-mq-type {
+	@warn "$o-grid-mq-type is deprecated, rendering surface width will be used";
+} @else {
+	$o-grid-mq-type: width !global;
+}

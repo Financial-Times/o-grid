@@ -56,9 +56,11 @@
 	} @else if ($min) {
 		@media screen and (min-#{$o-grid-mq-type}:$min+1) { @content; }
 	} @else if ($max) {
-		@media screen and  (max-#{$o-grid-mq-type}:$max) { @content; }
+		@media screen and (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($force) {
-		@media screen { @content; }
+		// We need to set a minimum width because @media screen works in IE7 
+		// and we hide CSS that we don't want in IE6-IE8 in media queries
+		@media screen and (min-width: 1px) { @content; }
 	}
 }
 
@@ -89,9 +91,7 @@
 		} @else if $layout-size == XL {
 			@include oGridMinMaxMediaQuery($o-grid-large-max-width, null) { @content; }
 		} @else {
-			// We need to set a minimum width because @media screen works in IE7 
-			// and we hide CSS that we don't want in IE6-IE8 in media queries
-			@include oGridMinMaxMediaQuery(0, null, true) { @content; }
+			@include oGridMinMaxMediaQuery(null, null, true) { @content; }
 		}
 
 		@if $layout-size == L {

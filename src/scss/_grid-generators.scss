@@ -114,6 +114,29 @@
 	@include oGridGutterOverrides(default);
 }
 
+@mixin oGridOverrideDefaultGrid () {
+	@include oGridColumnSelector(S, 0 hide) {
+	    display: block;
+	}
+
+	@include oGridColumnSelector(S, 12) {
+	    clear: none;
+	}
+
+	$aggregated-selector: null;
+
+	@for $colWidth from 0 through 12 {
+
+		// generates a comma separated selector for each of the column widths from 1 to 11
+		$aggregated-selector: append($aggregated-selector, oGridColumnSelector(S, $colWidth), comma);
+
+	}
+
+	@include oGridWrapInSelector($aggregated-selector) {
+		width: auto;
+	}
+}
+
 @mixin oGridCompactStyles ($wrapped: false) {
 	.o-grid-row-compact {
 		&> #{oGridColumnSelector()} {

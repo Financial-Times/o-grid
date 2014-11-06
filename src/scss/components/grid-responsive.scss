@@ -4,19 +4,6 @@
 	// We need to set a minimum width because @media screen works in IE7 
 	// and we hide CSS that we don't want in <IE9 in media queries
 	@media screen and (min-width: 1px) {
-
-		@include oGridClass((row row, box row), true) {
-			margin-left: -$o-grid-responsive-half-gutter;
-			margin-right: -$o-grid-responsive-half-gutter;
-		}
-
-		@include oGridColumnSelector() {
-			float: left;
-			padding-left: $o-grid-responsive-half-gutter;
-			padding-right: $o-grid-responsive-half-gutter;
-			@include oGridBoxSizing(border-box);
-		}
-
 		@include oGridCompactStyles(true);
 		@include oGridOverrideDefaultGrid();
 		@include oGridGutterOverrides(default);

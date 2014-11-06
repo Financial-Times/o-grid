@@ -31,16 +31,16 @@
 	}
 
 	@include oGridClass((row row, box row), true) {
-		margin-left: -$o-grid-default-half-gutter;
-		margin-right: -$o-grid-default-half-gutter;
+		margin-left: -($o-grid-default-gutter / 2);
+		margin-right: -($o-grid-default-gutter / 2);
 		width: auto;
 		max-width: none; // needed for .grid-box .grid-row
 		min-width: 0;
 	}
 
 	@include oGridColumnSelector() {
-		padding-left: $o-grid-default-half-gutter;
-		padding-right: $o-grid-default-half-gutter;
+		padding-left: $o-grid-default-gutter / 2;
+		padding-right: $o-grid-default-gutter / 2;
 	}
 
 	// We need to set a minimum width because @media screen works in IE7 

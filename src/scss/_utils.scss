@@ -8,8 +8,8 @@
 //
 // Calculates column width as a percentage of the total space available, but subtracting the gutter
 //
-@function oGridColumnWidthMinusGutter($colspan, $total-cols: 12, $half-gutter-width: null) {
-	@return (oGridColumnWidth($colspan, $total-cols) - ($half-gutter-width * 2));
+@function oGridColumnWidthMinusGutter($colspan, $total-cols: 12, $gutter-width: 1%) {
+	@return (oGridColumnWidth($colspan, $total-cols) - ($gutter-width * 2));
 }
 
 //

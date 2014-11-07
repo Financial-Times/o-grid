@@ -49,3 +49,25 @@ $o-grid-mq-type: null !default;
 } @else {
 	$o-grid-mq-type: width !global;
 }
+
+// Gutters
+
+$o-grid-responsive-half-gutter: null !default;
+$o-grid-default-half-gutter: null !default;
+$o-grid-fixed-half-gutter: null !default;
+
+@if $o-grid-responsive-half-gutter {
+	@warn "$o-grid-responsive-half-gutter is deprecated, use $o-grid-default-gutter instead";
+	$o-grid-default-gutter: $o-grid-responsive-half-gutter !global;
+}
+
+@if $o-grid-default-half-gutter {
+	@warn "$o-grid-default-half-gutter is deprecated";
+} @else {
+	$o-grid-default-half-gutter: 1% !global;
+}
+
+@if $o-grid-fixed-half-gutter {
+	@warn "$o-grid-fixed-half-gutter is deprecated, use $o-grid-small-gutter instead";
+	$o-grid-small-gutter: $o-grid-fixed-half-gutter !global;
+}

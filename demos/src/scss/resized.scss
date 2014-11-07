@@ -6,8 +6,7 @@ $o-grid-large-max-width: 760px;
 $o-grid-extra-large-max-width: 1160px;
 
 // Gutters
-$o-grid-responsive-half-gutter: 5px;
-$o-grid-default-half-gutter: 0.5%;
-$o-grid-fixed-half-gutter: 2px;
+$o-grid-default-gutter: 5px;
+$o-grid-small-gutter: 2px;
 
 @import '_common';

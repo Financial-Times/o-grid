@@ -8,6 +8,23 @@
 
 	@include oGridRespondTo($layout-size) {
 
+		$gutter-width: $o-grid-default-gutter;
+		@if ($layout-size == S) {
+			$gutter-width: $o-grid-small-gutter;
+		}
+
+		@include oGridClass((row row, box row), true) {
+			margin-left: -($gutter-width / 2);
+			margin-right: -($gutter-width / 2);
+		}
+
+		@include oGridColumnSelector() {
+			float: left;
+			padding-left: $gutter-width / 2;
+			padding-right: $gutter-width / 2;
+			@include oGridBoxSizing(border-box);
+		}
+
 		@if ($max-width) {
 			@include oGridClass(row page) {
 				@if ($o-grid-is-fluid) {
@@ -33,7 +50,6 @@
 	@include oGridColumnSelector($layout-size, hide 0) {
 		display: none;
 	}
-
 
 	$aggregated-selector: null;
 	$column-count-minus-one: $column-count - 1;
@@ -72,19 +88,17 @@
 	}
 }
 
-
-
 @mixin oGridFixedGridStyles () {
 	@include oGridClass((row row, box row), true) {
-		margin-left: -$o-grid-fixed-half-gutter;
-		margin-right: -$o-grid-fixed-half-gutter;
+		margin-left: -$o-grid-small-gutter;
+		margin-right: -$o-grid-small-gutter;
 		width: auto;
 	}
 
 	@include oGridColumnSelector() {
 		float: left;
-		padding-left: $o-grid-fixed-half-gutter;
-		padding-right: $o-grid-fixed-half-gutter;
+		padding-left: $o-grid-small-gutter;
+		padding-right: $o-grid-small-gutter;
 		@include oGridBoxSizing(border-box);
 	}
 

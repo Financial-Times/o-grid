@@ -8,20 +8,20 @@
 
 	@include oGridRespondTo($layout-size) {
 
-		$gutter-size: $o-grid-default-gutter;
+		$gutter-width: $o-grid-default-gutter;
 		@if ($layout-size == S) {
-			$gutter-size: $o-grid-small-gutter;
+			$gutter-width: $o-grid-small-gutter;
 		}
 
 		@include oGridClass((row row, box row), true) {
-			margin-left: -($gutter-size / 2);
-			margin-right: -($gutter-size / 2);
+			margin-left: -($gutter-width / 2);
+			margin-right: -($gutter-width / 2);
 		}
 
 		@include oGridColumnSelector() {
 			float: left;
-			padding-left: $gutter-size / 2;
-			padding-right: $gutter-size / 2;
+			padding-left: $gutter-width / 2;
+			padding-right: $gutter-width / 2;
 			@include oGridBoxSizing(border-box);
 		}
 

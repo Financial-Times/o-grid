@@ -131,23 +131,29 @@ There is no need to use these inside a media query - the placeholder classes are
 
 ##### Fine-grained gutter removal
 *(Note: unimplemented for the default media-queryless layout)*
-To remove gutters from a specific column extend these placeholders which have the following structure (the parts in square brackets are optional).
+To remove gutters from a specific column include these mixins passing the layout size. If you don't pass a parameter, it will be applied to the default layout size.
 
-    %o-grid-no[-{left|right}]-gutter[-{S|M|L|XL}]
+    @include oGridRemoveGutters({S|M|L|XL});
+    @include oGridRemoveGuttersLeft({S|M|L|XL});
+    @include oGridRemoveGuttersRight({S|M|L|XL});
 
 e.g. 
 
         // no left gutter at large and extra large layouts. No gutter at all at small size
         .my-component {
-            @extend %o-grid-no-left-gutter-L;
-            @extend %o-grid-no-left-gutter-XL;
-            @extend %o-grid-no-gutter-S;
+            @include oGridRemoveGuttersLeft(L);
+            @include oGridRemoveGuttersRight(XL);
+            @include oGridRemoveGutters(S);
         }
 
         //No gutter at any size
         .my-other-component {
-            @extend %o-grid-no-gutter;
-        }  
+            @include oGridRemoveGutters();
+        }
+
+If silent mode is turned off, you can also do this by applying classes to your columns that have the following structure (the parts in square brackets are optional):
+
+    .o-grid-remove-gutters[--{left|right}][--{S|M|L|XL}]
 
 #### Mixins
 * `oGridRespondTo($layoutSize)`  
@@ -225,7 +231,3 @@ By overwriting the values of any of the `$...width` or `$...gutter` variables th
 #### Disabling larger layouts
 By setting the value of a breakpoint (`$o-grid-small-max-width`, `$o-grid-medium-max-width` or `$o-grid-large-max-width`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-max-width: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-max-width: false;`.*
 
-## Developing o-grid
-
-### TDD
-The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid's classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.

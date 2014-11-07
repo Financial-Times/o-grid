@@ -1,0 +1,59 @@
+@mixin oGridRemoveGuttersLeft($layout-size: default) {
+	@include oGridRespondTo($layout-size) {
+		padding-left: 0;
+
+		& > .o-grid-row {
+			margin-left: 0;
+		}
+	}
+}
+
+@mixin oGridRemoveGuttersRight($layout-size: default) {
+	@include oGridRespondTo($layout-size) {
+		padding-right: 0;
+
+		& > .o-grid-row {
+			margin-right: 0;
+		}
+	}
+}
+
+@mixin oGridRemoveGutters($layout-size: default) {
+	@include oGridRemoveGuttersLeft($layout-size);
+	@include oGridRemoveGuttersRight($layout-size);
+}
+
+//
+// Adds placeholder classes to enable overriding of gutters at a given layout size
+//
+@mixin oGridGutterOverrides($layout-size) {
+	$suffix: -$layout-size;
+	@if ($layout-size == default) {
+		$suffix: "";
+	}
+
+	%o-grid-no-gutter#{$suffix},
+	%o-grid-no-left-gutter#{$suffix} {
+		@include oGridRemoveGuttersLeft($layout-size);
+	}
+
+	%o-grid-no-gutter#{$suffix},
+	%o-grid-no-right-gutter#{$suffix} {
+		@include oGridRemoveGuttersRight($layout-size);
+	}
+
+	@if (not $o-grid-is-silent) {
+		@if ($suffix != "") {
+			$suffix: --$layout-size;
+		}
+		[data-o-grid-colspan].o-grid-remove-gutters#{$suffix},
+		[data-o-grid-colspan].o-grid-remove-gutters--left#{$suffix} {
+			@include oGridRemoveGuttersLeft($layout-size);
+		}
+
+		[data-o-grid-colspan].o-grid-remove-gutters#{$suffix},
+		[data-o-grid-colspan].o-grid-remove-gutters--right#{$suffix} {
+			@include oGridRemoveGuttersRight($layout-size);
+		}
+	}
+}

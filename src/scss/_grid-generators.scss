@@ -34,9 +34,10 @@
 				}
 			}
 		}
-		@include oGridGutterOverrides($layout-size);
 		@include oGridColumnWidths($layout-size, 12);
 	}
+
+	@include oGridGutterOverrides($layout-size);
 }
 
 
@@ -166,8 +167,6 @@
 	} @else {
 		@include oGridSilenceableCompactMargins();
 	}
-
-
 }
 
 @mixin oGridSilenceableCompactMargins() {

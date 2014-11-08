@@ -1,4 +1,4 @@
-
+var local = false;
 
 // Self-contained stylesheet switcher
 (function styleSwitcher () {
@@ -10,11 +10,12 @@
         subheading = document.getElementById("subheading");
 
     Object.keys(demoTypes).forEach(function (type) {
-        var button  = document.createElement('button');
+        var button  = document.createElement('button'),
+            stylePath = local ? type + '.css' : 'scss/' + type + '.scss';
         button.innerHTML = type;
         button.title = demoTypes[type];
         button.addEventListener('click', function () {
-            stylesheet.href = type + '.css';
+            stylesheet.href = stylePath;
             var prev = document.querySelector('.selected-stylesheet');
             if (prev) {
                 prev.className = '';
@@ -22,12 +23,12 @@
             this.className = 'selected-stylesheet';
 
             subheading && (subheading.innerHTML = this.title);
-            html.className = html.className.replace(/stylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
+            html.className = html.className.replace(/\sstylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
 
             runTests();
         });
         if (!tmp.childNodes.length) {
-            stylesheet.href = type + '.css';
+            stylesheet.href = stylePath;
             button.className = 'selected-stylesheet';
             html.className += ' stylesheet-' + type;
             subheading && (subheading.innerHTML = button.title);
@@ -66,20 +67,28 @@ function getExpectedSpans (el) {
 
 function getExpectedGutter (el, side) {
     var layout = getLayout();
-    var sides = {l:'left', r:'right'};
-    var pattern = new RegExp('demo-no(-' + sides[side] + ')?-gutter(-' + layout + ')?');
-    var gutter = !pattern.test(el.className);
 
-    if (gutter) {
-        gutter = !/o-grid-row-compact/.test(el.parentNode.className);
+    var gutterClassName = 'o-grid-remove-gutters';
+    var specificGutterClassName = gutterClassName + '--' + side + '--' + layout;
+    var layoutGutterClassName = gutterClassName + '--' + layout;
+    var sideGutterClassName = gutterClassName + '--' + side;
+    var compactClassName = 'o-grid-row-compact';
+    
+    if (el.classList.contains(gutterClassName) ||
+        el.classList.contains(specificGutterClassName) ||
+        el.classList.contains(layoutGutterClassName) ||
+        el.classList.contains(sideGutterClassName) ||
+        el.parentNode.classList.contains(compactClassName)) {
+
+        return false;
     }
 
-    return gutter;
+    return true;
 }
 
 function highlightNotExpectedGutter (el) {
-    var expectedLeft = getExpectedGutter(el, 'l'),
-        expectedRight = getExpectedGutter(el, 'r'),
+    var expectedLeft = getExpectedGutter(el, 'left'),
+        expectedRight = getExpectedGutter(el, 'right'),
         actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0,
         actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
 

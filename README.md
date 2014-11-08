@@ -131,23 +131,29 @@ There is no need to use these inside a media query - the placeholder classes are
 
 ##### Fine-grained gutter removal
 *(Note: unimplemented for the default media-queryless layout)*
-To remove gutters from a specific column extend these placeholders which have the following structure (the parts in square brackets are optional).
+To remove gutters from a specific column include these mixins passing the layout size. If you don't pass a parameter, it will be applied to the default layout size.
 
-    %o-grid-no[-{left|right}]-gutter[-{S|M|L|XL}]
+    @include oGridRemoveGutters({S|M|L|XL});
+    @include oGridRemoveGuttersLeft({S|M|L|XL});
+    @include oGridRemoveGuttersRight({S|M|L|XL});
 
 e.g. 
 
         // no left gutter at large and extra large layouts. No gutter at all at small size
         .my-component {
-            @extend %o-grid-no-left-gutter-L;
-            @extend %o-grid-no-left-gutter-XL;
-            @extend %o-grid-no-gutter-S;
+            @include oGridRemoveGuttersLeft(L);
+            @include oGridRemoveGuttersRight(XL);
+            @include oGridRemoveGutters(S);
         }
 
         //No gutter at any size
         .my-other-component {
-            @extend %o-grid-no-gutter;
-        }  
+            @include oGridRemoveGutters();
+        }
+
+If silent mode is turned off, you can also do this by applying classes to your columns that have the following structure (the parts in square brackets are optional):
+
+    .o-grid-remove-gutters[--{left|right}][--{S|M|L|XL}]
 
 #### Mixins
 * `oGridRespondTo($layoutSize)`  
@@ -188,19 +194,7 @@ Widths are specified in percentages, which will not work for fixed or absolute p
 ## Product developers guide
 
 ### Laying out pages with the grid
-If your entire page is to be laid out using the grid add the class `o-grid-page` to the `body` / wrapper and then build up the layout using nested rows and columns. The html head *must* include the following metatag (or equivalent) to disable user scaling:
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-By default `o-grid` outputs no styles (unless fetched using the origami build service) and therefore your product will either have to
-* set `$o-grid-is-silent: false;` to output the entire set of styles and selectors
-* `@extend` the grid's placeholder classes to apply grid styles to yuour page
-
-### Including grid-based components in an existing, non-grid page
-
-1. Wrap the entire component in an element with the class `o-grid-box` to ensure the module is laid out correctly. 
-
-2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
+The `o-grid-page` and `o-grid-box` classes are now deprecated and will be removed in next major release.
 
 ### Supporting legacy browsers
 By default, any browser that doesn't support media queries will be served the small layout. This can be overridden so the large layout is shown instead. The default for triggering this large fixed layout is ie8 on desktop, but this is configurable using one of two variables
@@ -225,7 +219,3 @@ By overwriting the values of any of the `$...width` or `$...gutter` variables th
 #### Disabling larger layouts
 By setting the value of a breakpoint (`$o-grid-small-max-width`, `$o-grid-medium-max-width` or `$o-grid-large-max-width`) to `false` the breakpoint is disabled, and its styles will not be included. *This only works when disabling a breakpoint **and** all those larger than it so, e.g. `$o-grid-medium-max-width: false;` will have unexpected efects on your layout unless you also specify `$o-grid-large-max-width: false;`.*
 
-## Developing o-grid
-
-### TDD
-The demo pages (docs/grid-{grid-type}.html) are intended to perform a similar role to unit tests i.e. they contain examples which cover all significant variants of applying the grid's classes. Therefore a TDD/BDD approach can be taken to fixing bugs/adding functionality by first adding a representative failing example to these pages and afterwards writing the code to fix it.

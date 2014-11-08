@@ -2,7 +2,7 @@
 	@include oGridRespondTo($layout-size) {
 		padding-left: 0;
 
-		& > .o-grid-row {
+		.o-grid-row {
 			margin-left: 0;
 		}
 	}
@@ -12,7 +12,7 @@
 	@include oGridRespondTo($layout-size) {
 		padding-right: 0;
 
-		& > .o-grid-row {
+		.o-grid-row {
 			margin-right: 0;
 		}
 	}

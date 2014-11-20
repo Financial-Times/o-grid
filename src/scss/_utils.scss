@@ -17,7 +17,7 @@
 // If a $selector is not provided the styles are printed out unaltered
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
-@mixin oGridWrapInSelector ($selector:null, $include-unwrapped: false) {
+@mixin oGridWrapInSelector($selector:null, $include-unwrapped: false) {
 	@if (not $selector or $include-unwrapped) {
 		@content;
 	}
@@ -31,7 +31,7 @@
 // Wraps a bundle of styles in the selector used to trigger the fixed large screen layout
 // If $include-unwrapped is true then a copy of the unaltered styles is printed in addition to the wrapped styles
 //
-@mixin oGridTargetAtFixedLarge ($include-unwrapped: false) {
+@mixin oGridTargetAtFixedLarge($include-unwrapped: false) {
 	@if ($include-unwrapped or $o-grid-is-fixed-large or not ($o-grid-selector-fixed-large or $o-grid-useragents-fixed-large)) {
 		@content;
 	}
@@ -79,7 +79,7 @@
 //
 // Wraps the given styles in a media query that target a given layout size (S, M , L, XL)
 //
-@mixin oGridRespondTo ($layout-sizes) {
+@mixin oGridRespondTo($layout-sizes) {
 
 	@each $layout-size in $layout-sizes {
 		@if $layout-size == S {

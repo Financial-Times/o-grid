@@ -37,7 +37,7 @@
 		@include oGridColumnWidths($layout-size, 12);
 	}
 
-	@include oGridGutterOverrides($layout-size);
+	@include _oGridGutterOverrides($layout-size);
 }
 
 
@@ -89,7 +89,7 @@
 	}
 }
 
-@mixin oGridFixedGridStyles () {
+@mixin oGridFixedGridStyles() {
 	@include oGridClass((row row, box row), true) {
 		margin-left: -$o-grid-small-gutter;
 		margin-right: -$o-grid-small-gutter;
@@ -125,8 +125,8 @@
 		clear: none;
 	}
 
-	@include oGridGutterOverrides(L);
-	@include oGridGutterOverrides(default);
+	@include _oGridGutterOverrides(L);
+	@include _oGridGutterOverrides(default);
 }
 
 @mixin oGridOverrideDefaultGrid () {
@@ -152,7 +152,7 @@
 	}
 }
 
-@mixin oGridCompactStyles ($wrapped: false) {
+@mixin oGridCompactStyles($wrapped: false) {
 	.o-grid-row-compact {
 		&> #{oGridColumnSelector()} {
 			padding-left: 0;

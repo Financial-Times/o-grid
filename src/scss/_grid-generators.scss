@@ -78,9 +78,9 @@
 		}
 	}
 	@include oGridColumnSelector($layout-size, $column-count) {
-	    float: none;
-	    clear: both;
-	    display: block;
+		float: none;
+		clear: both;
+		display: block;
 		@if ($default) {
 			width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
 		} @else {
@@ -131,11 +131,11 @@
 
 @mixin oGridOverrideDefaultGrid () {
 	@include oGridColumnSelector(S, 0 hide) {
-	    display: block;
+		display: block;
 	}
 
 	@include oGridColumnSelector(S, 12) {
-	    clear: none;
+		clear: none;
 	}
 
 	$aggregated-selector: null;

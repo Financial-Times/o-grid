@@ -1,7 +1,7 @@
 @if ($o-grid-is-responsive and not $o-grid-is-fixed-large) {
 	/* Override fixed defaults for responsive grid */
 
-	// We need to set a minimum width because @media screen works in IE7 
+	// We need to set a minimum width because @media screen works in IE7
 	// and we hide CSS that we don't want in <IE9 in media queries
 	@media screen and (min-width: 1px) {
 		@include oGridCompactStyles(true);

@@ -19,12 +19,12 @@
 //
 @mixin oGridWrapInSelector ($selector:null, $include-unwrapped: false) {
 	@if (not $selector or $include-unwrapped) {
-		@content
+		@content;
 	}
 
 	@if($selector) {
-		#{$selector} { @content }
- 	}
+		#{$selector} { @content; }
+	}
 }
 
 //
@@ -58,7 +58,7 @@
 	} @else if ($max) {
 		@media screen and (max-#{$o-grid-mq-type}:$max) { @content; }
 	} @else if ($force) {
-		// We need to set a minimum width because @media screen works in IE7 
+		// We need to set a minimum width because @media screen works in IE7
 		// and we hide CSS that we don't want in IE6-IE8 in media queries
 		@media screen and (min-width: 1px) { @content; }
 	}

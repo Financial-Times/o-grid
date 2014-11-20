@@ -1,59 +1,57 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .demo {
-    .demo-cell {
-        min-height: 30px;
-        background: rgba(255,255,255,0.5);
-        text-align: center;
-        padding-top: 10px;
-        overflow: hidden;
-    }
-    .demo-row {
-        background: #BDCAFF;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        .demo-row {
-            background: #FFA898;
-        }
-    }
-    [class*='error'] .demo-cell {
-        background-color: red;
-    }
-    .selected-stylesheet {
-        background: #aaf;
-    }
+	.demo-cell {
+		min-height: 30px;
+		background: rgba(255, 255, 255, 0.5);
+		text-align: center;
+		padding-top: 10px;
+		overflow: hidden;
+	}
+	.demo-row {
+		background: #bdcaff;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		.demo-row {
+			background: #ffa898;
+		}
+	}
+	[class*='error'] .demo-cell {
+		background-color: red;
+	}
+	.selected-stylesheet {
+		background: #aaaaff;
+	}
 }
-
-
 
 
 /* Show the current media query layout mode */
 
 .demo-mode {
-    text-align:right;
+	text-align: right;
 }
 .demo-mode:after {
-    font-weight: bold;
+	font-weight: bold;
 }
 @include oGridRespondTo(S) {
-    .demo-mode:after {
-        content: "S";
-    }
+	.demo-mode:after {
+		content: "S";
+	}
 }
 @include oGridRespondTo(M) {
-    .demo-mode:after {
-        content: "M";
-    }
+	.demo-mode:after {
+		content: "M";
+	}
 }
 @include oGridRespondTo(L) {
-    .demo-mode:after {
-        content: "L";
-    }
+	.demo-mode:after {
+		content: "L";
+	}
 }
 @include oGridRespondTo(XL) {
-    .demo-mode:after {
-        content: "XL";
-    }
+	.demo-mode:after {
+		content: "XL";
+	}
 }

@@ -194,19 +194,7 @@ Widths are specified in percentages, which will not work for fixed or absolute p
 ## Product developers guide
 
 ### Laying out pages with the grid
-If your entire page is to be laid out using the grid add the class `o-grid-page` to the `body` / wrapper and then build up the layout using nested rows and columns. The html head *must* include the following metatag (or equivalent) to disable user scaling:
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-By default `o-grid` outputs no styles (unless fetched using the origami build service) and therefore your product will either have to
-* set `$o-grid-is-silent: false;` to output the entire set of styles and selectors
-* `@extend` the grid's placeholder classes to apply grid styles to yuour page
-
-### Including grid-based components in an existing, non-grid page
-
-1. Wrap the entire component in an element with the class `o-grid-box` to ensure the module is laid out correctly. 
-
-2. See the section below on *Things you can do (but in most cases probably shouldn't)* to make the grid's behaviour conform to the behaviour of the rest of the page's styles e.g. if your page isn't at all responsive you'll want to set `$o-grid-is-responsive: false` to prevent the component behaving in a responsive manner
+The `o-grid-page` and `o-grid-box` classes are now deprecated and will be removed in next major release.
 
 ### Supporting legacy browsers
 By default, any browser that doesn't support media queries will be served the small layout. This can be overridden so the large layout is shown instead. The default for triggering this large fixed layout is ie8 on desktop, but this is configurable using one of two variables

@@ -37,7 +37,7 @@
 		@include oGridColumnWidths($layout-size, 12);
 	}
 
-	@include oGridGutterOverrides($layout-size);
+	@include _oGridGutterOverrides($layout-size);
 }
 
 
@@ -78,9 +78,9 @@
 		}
 	}
 	@include oGridColumnSelector($layout-size, $column-count) {
-	    float: none;
-	    clear: both;
-	    display: block;
+		float: none;
+		clear: both;
+		display: block;
 		@if ($default) {
 			width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
 		} @else {
@@ -89,7 +89,7 @@
 	}
 }
 
-@mixin oGridFixedGridStyles () {
+@mixin oGridFixedGridStyles() {
 	@include oGridClass((row row, box row), true) {
 		margin-left: -$o-grid-small-gutter;
 		margin-right: -$o-grid-small-gutter;
@@ -125,17 +125,17 @@
 		clear: none;
 	}
 
-	@include oGridGutterOverrides(L);
-	@include oGridGutterOverrides(default);
+	@include _oGridGutterOverrides(L);
+	@include _oGridGutterOverrides(default);
 }
 
 @mixin oGridOverrideDefaultGrid () {
 	@include oGridColumnSelector(S, 0 hide) {
-	    display: block;
+		display: block;
 	}
 
 	@include oGridColumnSelector(S, 12) {
-	    clear: none;
+		clear: none;
 	}
 
 	$aggregated-selector: null;
@@ -152,7 +152,7 @@
 	}
 }
 
-@mixin oGridCompactStyles ($wrapped: false) {
+@mixin oGridCompactStyles($wrapped: false) {
 	.o-grid-row-compact {
 		&> #{oGridColumnSelector()} {
 			padding-left: 0;

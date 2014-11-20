@@ -1,5 +1,5 @@
-var configurations = require('./configurations.json'),
-	demos = [];
+var configurations = require('./configurations.json');
+var demos = [];
 
 Object.keys(configurations).forEach(function(key) {
 	demos.push({

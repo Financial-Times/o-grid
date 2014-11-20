@@ -9,9 +9,9 @@
 // oGridClass(row col) => .o-grid-row, %o-grid-row, .o-grid-col, %o-grid-col
 // oGridClass((row col, box), true) => .o-grid-row .o-grid-col, %o-grid-row %o-grid-col, .o-grid-box, %o-grid-box
 //
-@function oGridClass ($classes, $compound: false) {
-	$aggregated-selector: ();	
-	
+@function oGridClass($classes, $compound: false) {
+	$aggregated-selector: ();
+
 	@each $class in $classes {
 
 		@if ($compound) {
@@ -19,18 +19,18 @@
 			$silent-compound-selector: null;
 			@each $part in $class {
 				$silent-compound-selector: append($silent-compound-selector, #{'%o-grid-#{$part}'});
-		    }
-		    $aggregated-selector: append($aggregated-selector, $silent-compound-selector, comma);
+			}
+			$aggregated-selector: append($aggregated-selector, $silent-compound-selector, comma);
 			@if (not $o-grid-is-silent) {
 				@each $part in $class {
 					$loud-compound-selector: append($loud-compound-selector, #{'.o-grid-#{$part}'});
 				}
 				$aggregated-selector: append($aggregated-selector, $loud-compound-selector, comma);
-			}				
+			}
 		} @else {
 
 			$aggregated-selector: append($aggregated-selector, #{'%o-grid-#{$class}'}, comma);
-		  
+
 			@if (not $o-grid-is-silent) {
 				$aggregated-selector: append($aggregated-selector, #{'.o-grid-#{$class}'}, comma);
 			}
@@ -43,9 +43,9 @@
 //
 // Same as above but is immediately used to wrap some styles in the generated selector
 //
-@mixin oGridClass ($classes, $compound: false) {
-	@include oGridWrapInSelector(oGridClass($classes, $compound)) { 
-		@content 
+@mixin oGridClass($classes, $compound: false) {
+	@include oGridWrapInSelector(oGridClass($classes, $compound)) {
+		@content;
 	}
 }
 
@@ -58,7 +58,7 @@
 // oGridColumnSelector(s, 0 1) => [data-o-grid-colspan~="|s0|"], [data-o-grid-colspan~="|s1|"], %o-grid-s0, %o-grid-s1
 // oGridClass(default, 8) => [data-o-grid-colspan~="|8|"], %o-grid-8
 //
-@function oGridColumnSelector ($layout-size: null, $colspans: null) {
+@function oGridColumnSelector($layout-size: null, $colspans: null) {
 
 	$selector: null;
 
@@ -67,23 +67,21 @@
 			$selector: append($selector, #{'[data-o-grid-colspan]'}, comma);
 		}
 		$selector: append($selector, #{'%o-grid-col'}, comma);
-		
 	} @else {
 		$prefix: $layout-size;
 
 		@if ($layout-size == default) {
 			$prefix: "";
-		} 
+		}
 
 		@each $colspan in $colspans {
-
 			@if (not $o-grid-is-silent) {
 				$selector: append($selector, #{'[data-o-grid-colspan~="#{$prefix}#{$colspan}"]'}, comma);
 			}
 			$selector: append($selector, #{'%o-grid-colspan-#{$prefix}#{$colspan}'}, comma);
-		}		
-	} 
-	
+		}
+	}
+
 	@return $selector;
 }
 
@@ -91,8 +89,8 @@
 //
 // Same as above but is immediately used to wrap some styles in the generated selector
 //
-@mixin oGridColumnSelector ($layout-size: null, $colspan: null) {
-	@include oGridWrapInSelector(oGridColumnSelector($layout-size, $colspan)) { 
-		@content 
+@mixin oGridColumnSelector($layout-size: null, $colspan: null) {
+	@include oGridWrapInSelector(oGridColumnSelector($layout-size, $colspan)) {
+		@content;
 	}
 }

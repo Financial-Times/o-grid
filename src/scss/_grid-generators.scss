@@ -19,10 +19,8 @@
 		}
 
 		@include oGridColumnSelector() {
-			float: left;
 			padding-left: $gutter-width / 2;
 			padding-right: $gutter-width / 2;
-			@include oGridBoxSizing(border-box);
 		}
 
 		@if ($max-width) {
@@ -59,7 +57,7 @@
 
 		@include oGridColumnSelector($layout-size, $colspan) {
 			@if ($default) {
-				width: oGridColumnWidthMinusGutter($colspan, $column-count, $o-grid-default-half-gutter);
+				width: oGridColumnWidthMinusGutter($colspan, $column-count);
 			} @else {
 				width: oGridColumnWidth($colspan, $column-count);
 			}
@@ -82,7 +80,7 @@
 		clear: both;
 		display: block;
 		@if ($default) {
-			width: oGridColumnWidthMinusGutter($column-count, $column-count, $o-grid-default-half-gutter);
+			width: oGridColumnWidthMinusGutter($column-count, $column-count);
 		} @else {
 			width: 100%;
 		}

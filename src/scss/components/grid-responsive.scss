@@ -4,6 +4,11 @@
 	// We need to set a minimum width because @media screen works in IE7
 	// and we hide CSS that we don't want in <IE9 in media queries
 	@media screen and (min-width: 1px) {
+		@include oGridColumnSelector() {
+			float: left;
+			@include oGridBoxSizing(border-box);
+		}
+
 		@include oGridCompactStyles(true);
 		@include oGridOverrideDefaultGrid();
 	}

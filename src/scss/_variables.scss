@@ -1,36 +1,74 @@
-// -------------------------------------------------------------------------------------
-//  DIMENSIONS
-// -------------------------------------------------------------------------------------
-
-// Gutters
-$o-grid-default-gutter: 10px !default;
-$o-grid-small-gutter: 10px !default;
-
-// Page widths
-$o-grid-min-width: 240px !default;
-$o-grid-small-max-width: 600px !default;
-$o-grid-medium-max-width: 800px !default;
-$o-grid-large-max-width: 1100px !default;
-$o-grid-extra-large-max-width: 1360px !default;
+////
+/// @group o-grid
+/// @link http://registry.origami.ft.com/components/o-grid
+////
 
 // -------------------------------------------------------------------------------------
 // Responsive behaviour configuration
 // -------------------------------------------------------------------------------------
+
+/// Silent mode
+///
+/// @type Boolean
+///
+/// @link http://origami.ft.com/docs/syntax/scss/#silent-styles “Silent” styles in Origami's documentation
 $o-grid-is-silent: true !default;
-$o-grid-is-responsive: true !default;
+
+/// Turn fluid grid on or off
+///
+/// @type Boolean
 $o-grid-is-fluid: true !default;
-$o-grid-useragents-fixed-large: ie8 !default;
-$o-grid-selector-fixed-large: null !default;
-$o-grid-is-fixed-large: false !default;
+
+/// Layout to default to when the grid has a fixed width (not fluid)
+///
+/// @type String - One of $o-grid-layouts
+$o-grid-fixed-layout: 'M' !default;
+
+/// Turn the enhanced experience on / off
+///
+/// When set to `false`, the core experience will be displayed
+/// (useful for debugging purposes)
+///
+/// @type Boolean - set to false to view the core experience only
+$o-grid-enable-enhanced-experience: true !default;
+
 
 // -------------------------------------------------------------------------------------
-// STRUCTURAL VARIABLES
-//
-// !!! DO NOT CHANGE UNLESS EITHER:
-//  a) MAKING FUNDAMENTAL CHANGES TO HOW THE SASS IS STRUCTURED
-//  b) ADDING EXTRA LAYOUT SIZES (Although technically possible, it's highly
-//     inadvisable to do so as components will not typically define styles for
-//     your new layout)
+// Grid settings and dimensions
 // -------------------------------------------------------------------------------------
-$_o-grid-max-widths: $o-grid-small-max-width $o-grid-medium-max-width $o-grid-large-max-width $o-grid-extra-large-max-width;
-$_o-grid-layout-shorthands: S M L XL;
+
+/// Number of columns
+///
+/// @type Number (unitless)
+$o-grid-columns: 12 !default;
+
+/// Gutter size in pixels
+///
+/// @type Number
+$o-grid-gutter: 10px !default;
+
+/// Minimum width in pixels
+///
+/// @type Number
+$o-grid-min-width: 240px !default;
+
+/// Layouts (name: max-container-width)
+///
+/// @type Map
+$o-grid-layouts: (
+	S: 600px,
+	M: 800px,
+	L: 1100px,
+	XL: 1360px
+) !default;
+
+/// Layout names
+///
+/// @access private
+/// @type List
+$_o-grid-layout-names: map-keys($o-grid-layouts) !default;
+
+@if $o-grid-is-silent == false {
+	// Debug information:
+	/* Layout names Loaded #{$_o-grid-layout-names} */
+}

@@ -15,7 +15,7 @@ body {
 		margin-top: 10px;
 		margin-bottom: 10px;
 		.demo-row {
-			background: #ffa898;
+			background: #dc73ff;
 		}
 	}
 	[class*='error'] .demo-cell {
@@ -35,23 +35,11 @@ body {
 .demo-mode:after {
 	font-weight: bold;
 }
-@include oGridRespondTo(S) {
-	.demo-mode:after {
-		content: "S";
-	}
-}
-@include oGridRespondTo(M) {
-	.demo-mode:after {
-		content: "M";
-	}
-}
-@include oGridRespondTo(L) {
-	.demo-mode:after {
-		content: "L";
-	}
-}
-@include oGridRespondTo(XL) {
-	.demo-mode:after {
-		content: "XL";
+
+@each $layout-name in map-keys($o-grid-layouts) {
+	@include oGridRespondTo($layout-name) {
+		.demo-mode:after {
+			content: "#{$layout-name}";
+		}
 	}
 }

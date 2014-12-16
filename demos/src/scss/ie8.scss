@@ -1,0 +1,14 @@
+$o-grid-is-fluid: false;
+$o-grid-fixed-layout: 'M';
+
+@import "_common";
+
+@include oGridTargetModernBrowsers {
+	.o-grid-row {
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+
+		.o-grid-row {
+			width: auto;
+		}
+	}
+}

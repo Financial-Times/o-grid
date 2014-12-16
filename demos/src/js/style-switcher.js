@@ -1,4 +1,10 @@
+/*global $*/
+/*jshint devel:true*/
+'use strict';
+
+var getCurrentLayout = require('../../../main').getCurrentLayout;
 var local = true;
+var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
 // Self-contained stylesheet switcher
 (function styleSwitcher () {
@@ -35,38 +41,39 @@ var local = true;
 		}
 		tmp.appendChild(button);
 
-
 	});
 
 	buttonContainer.appendChild(tmp);
 }());
 
-
-function getLayout () {
-	return window.matchMedia('(max-width: 599px)').matches ? 'S' :
-		window.matchMedia('(max-width: 799px)').matches ? 'M' :
-		window.matchMedia('(max-width: 1099px)').matches ? 'L' : 'XL';
-}
-
 function getExpectedSpans (el) {
-	var layout = getLayout();
+	if (document.documentElement.className.contains('core-experience')) {
+		return 12;
+	}
+
+	var layout = getCurrentLayout();
 
 	var rules = el.dataset.oGridColspan;
 	var spans;
-	rules.replace(new RegExp('(?:^|\\\s)' + layout + '(\\\d{1,2})', 'g'), function ($0, $1) {
+	rules.replace(new RegExp('(?:^|\\s)' + layout + '(\\d{1,2})', 'g'), function ($0, $1) {
 		spans = $1;
 	});
 
-	if (typeof spans == 'undefined') {
+	if (typeof spans === 'undefined') {
 		rules.replace(/(?:^|\s)(\d{1,2})/g, function ($0, $1) {
 			spans = $1;
 		});
 	}
+
 	return spans;
 }
 
 function getExpectedGutter (el, side) {
-	var layout = getLayout();
+	if (document.documentElement.className.contains('core-experience')) {
+		return true; // Core experience always has gutters
+	}
+
+	var layout = getCurrentLayout();
 
 	var gutterClassName = 'o-grid-remove-gutters';
 	var specificGutterClassName = gutterClassName + '--' + side + '--' + layout;
@@ -92,9 +99,9 @@ function highlightNotExpectedGutter (el) {
 	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
 	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
 
-	if (expectedLeft != actualLeft || expectedRight != actualRight) {
+	if (expectedLeft !== actualLeft || expectedRight !== actualRight) {
 		/\berror-gutter\b/.test(el.className) || (el.className += ' error-gutter');
-		console.error('Gutter error', el, expectedLeft, actualLeft, expectedRight, actualRight);
+		console.error('Gutter error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
 	} else {
 		el.className = el.className.replace(/\berror-gutter\b/g, '');
 	}
@@ -103,12 +110,21 @@ function highlightNotExpectedGutter (el) {
 function highlightNotExpectedWidth (el) {
 	var outerMargins = 10;
 
+	if (document.documentElement.className.contains('resized')) {
+		outerMargins = resizedOuterMarginWidth;
+	}
+
+	if ($(el).parents('.o-grid-row--compact').length > 0) {
+		outerMargins = 0;
+	}
+
+	if (document.documentElement.className.contains('core-experience')) {
+		outerMargins = 10; // Restore default margins if column is in a compact row
+	}
+
 	// If the element is in a nested row,
 	// then there are no outer margins
 	if ($(el).parents('.o-grid-row').parents('.o-grid-row').length > 0) {
-		outerMargins = 0;
-	}
-	if ($(el).parents('.o-grid-row--compact').length > 0) {
 		outerMargins = 0;
 	}
 
@@ -129,7 +145,7 @@ function test () {
 }
 
 var runTests = function () {
-	setTimeout(test, 1);
+	setTimeout(test, 200);
 	window.onresize = test;
 };
 

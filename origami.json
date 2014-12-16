@@ -16,29 +16,19 @@
             "description": "Grid with all default settings"
         },
         {
-            "path": "/demos/unresponsive.html",
-            "expanded": false,
-            "description": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported"
-        },
-        {
-            "path": "/demos/non-fluid.html",
-            "expanded": false,
-            "description": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)"
-        },
-        {
             "path": "/demos/resized.html",
             "expanded": false,
-            "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved"
-        },
-        {
-            "path": "/demos/xl-disabled.html",
-            "expanded": false,
-            "description": "Responsive grid with the extra large layout disabled. Should demonstrate responsive behaviour, but the XL breakpoint is disabled, so the widths should show in red"
+            "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved"
         },
         {
             "path": "/demos/always-fixed.html",
             "expanded": false,
-            "description": "Fixed grid at 960px across all browsers and devices.  Should always be fixed at the large layout"
+            "description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
+        },
+        {
+            "path": "/demos/core-experience.html",
+            "expanded": false,
+            "description": "Forced core experience, where all columns stack on top of each other"
         },
         {
             "path": "/demos/test.html",

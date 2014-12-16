@@ -15,22 +15,20 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 
 ### Grid dimensions
 
-Four layout sizes are defined:
+#### General settings
 
-* **Small**  
-For screen widths less than 600px wide, including pretty much all mobiles  
-Top level grid rows are fluid, ranging from 240px to 600px in width
+* Minimum width: 240px
+* Maximum width: 1330px
+* Gutter width: 10px
+* Number of columns: 12
 
-* **Medium**  
-For screen widths between 600px and 800px, small tablets and tablets in portrait mode  
+#### Layouts:
 
-* **Large**  
-For screen widths between 800px and 1100px, larger tablets and desktop  
-
-* **Extra Large**  
-For screen widths above 1360px, large desktop
-
-The available horizontal width is separated into 12 columns.
+* **Extra-Small (XS)** 240px to 370px
+* **Small (S)** 370px to 610px
+* **Medium (M)** 610px to 850px
+* **Large (L)** 850px to 1090px
+* **Extra Large (XL)** 1090px and up
 
 ## General use
 
@@ -52,13 +50,14 @@ So, for example
 ```
 
 ### Specifying column widths
+
 The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually.
 
 * {0-12} - specifies the number of columns to span by default
-* S{0-12} - specifies the number of columns to span at the small layout
-* M{0-12} - specifies the number of columns to span at the medium layout
-* L{0-12} - specifies the number of columns to span at the large layout
-* XL{0-12} - specifies the number of columns to span at the extra large layout
+* S{0-12} - specifies the number of columns to span at the small layout and up
+* M{0-12} - specifies the number of columns to span at the medium layout and up
+* L{0-12} - specifies the number of columns to span at the large layout and up
+* XL{0-12} - specifies the number of columns to span at the extra large layout and up
 
 In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicit rule is not defined.
 
@@ -67,54 +66,42 @@ In general prefer to set the default for larger layouts and override for smaller
 A full width column for all sizes except large screens, where it takes up 9 columns
 
 ```html
-    <div data-o-grid-colspan="12 XL9"></div>
+<div data-o-grid-colspan="12 XL9"></div>
 ```
 
-A half width column for all sizes except small screens, where it takes up full width
+A half width column that becomes full-width on medium screens and up
 
 ```html
-    <div data-o-grid-colspan="6 S12"></div>
+<div data-o-grid-colspan="one-half M12"></div>
 ```
 
 A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
 
 ```html
-<div data-o-grid-colspan="S4 M3 L2 XL1"></div>
+<div data-o-grid-colspan="4 M3 L2 XL1"></div>
 ```
 
-A column which has width:auto except on small screens, where it takes up half the available width
+A column which has width: auto on extra-small screens, and then takes half the available space on medium screens and up
 
 ```html
-<div data-o-grid-colspan="S6"></div>
+<div data-o-grid-colspan="M6"></div>
 ```
 
 ### Utilities
-
-#### Shorthand for single column layout
-To avoid having to use the following inefficient markup
-
-```html
-<div class="o-grid-row">
-	<div data-o-grid-colspan="12"></div>
-</div>
-```
-
-The following markup can be used instead
-
-```html
-<div class="o-grid-row" data-o-grid-colspan="12"></div>
-```
 
 #### Hiding elements
 
 e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
 #### Compact, gutterless rows
-*(Note: unimplemented for the default media-queryless layout)*
+
 To remove gutters from all columns in a row use the class `o-grid-row--compact`  e.g.
 
 ```html
-<div class="o-grid-row o-grid-row--compact"></div>
+<div class="o-grid-row o-grid-row--compact">
+	<div data-o-grid-colspan="6">Look 'ma, no gutters</div>
+	<div data-o-grid-colspan="6">Look 'pa, no gutters here either</div>
+</div>
 ```
 
 ##### Fine-grained gutter removal
@@ -134,7 +121,6 @@ Remove gutters with these helper classes:
 
 <!-- Remove left gutters for the large layout -->
 <div class="o-grid-row o-grid-remove-gutters--left--L"></div>
-
 ```
 
 ```css
@@ -156,15 +142,15 @@ Example:
 	// Remove gutters for all layouts
 	@include oGridRemoveGutters();
 
-	// Remove left gutter at Large layout size
+	// Remove left gutter at Large layout size and up
 	@include oGridRespondTo(L) {
 		@include oGridRemoveGutters('left');
 	}
-	// Remove right gutter at eXtra Large layout size
+	// Remove right gutter at eXtra Large layout size and up
 	@include oGridRespondTo(XL) {
 		@include oGridRemoveGutters('right');
 	}
-	// Remove left and right gutters at Small layout size
+	// Remove left and right gutters at Small layout size and up
 	@include oGridRespondTo(S) {
 		@include oGridRemoveGutters();
 	}
@@ -172,8 +158,10 @@ Example:
 ```
 
 
-#### Mixins
-* `oGridRespondTo($layoutSize)`  
+#### Responsive layout helper
+
+`oGridRespondTo($layout-name)`
+
 To create styles that respond to the same breakpoints as the grid, this Sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `S`, `M`, `L` or `XL` depending on which layout size the style should apply to e.g.
 
 ```scss
@@ -182,23 +170,19 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 		font-size: 0.5em;
 	}
 }
-```
-
-More than one layout can be passed in at once (enabling applying the same styles to e.g. both extra large and large layouts).
-
-```scss
-@include oGridRespondTo(L XL) {
-	.o-example-module .item-subheading {
-		font-size: 0.5em;
+.o-example-module .item-subheading {
+	@include oGridRespondTo(XL) {
+		color: red;
 	}
 }
 ```
+
+It relies on [sass-mq](http://git.io/sass-mq) to output mobile-first media queries.
 
 #### Variables
 All the variables used by the grid (see `src/scss/_variables.scss`) can be used in your own sass stylesheets but *must not* be overwritten at the component/module level.
 
 ```scss
-// src/scss/_variables.scss
 // -------------------------------------------------------------------------------------
 // Responsive behaviour configuration
 // -------------------------------------------------------------------------------------
@@ -218,6 +202,9 @@ $o-grid-fixed-layout: 'M' !default;
 /// (useful for debugging purposes)
 $o-grid-enable-enhanced-experience: true !default;
 
+/// Show the currently active breakpoint and output loaded settings
+$o-grid-debug-mode: false !default;
+
 
 // -------------------------------------------------------------------------------------
 // Grid settings and dimensions
@@ -226,18 +213,21 @@ $o-grid-enable-enhanced-experience: true !default;
 /// Number of columns
 $o-grid-columns: 12 !default;
 
-/// Gutter size in pixels
+/// Gutter size, in pixels
 $o-grid-gutter: 10px !default;
 
-/// Minimum width in pixels
+/// Minimum width, in pixels
 $o-grid-min-width: 240px !default;
 
-/// Layouts (name: max-container-width)
+/// Maximum width, in pixels
+$o-grid-max-width: 1330px !default;
+
+/// Layouts
 $o-grid-layouts: (
-	S: 600px,
-	M: 800px,
-	L: 1100px,
-	XL: 1360px
+	S:  370px,  // ≥20px columns
+	M:  610px,  // ≥40px columns
+	L:  850px,  // ≥60px columns
+	XL: 1090px  // ≥80px columns
 ) !default;
 ```
 

@@ -32,6 +32,12 @@ $o-grid-fixed-layout: 'M' !default;
 /// @type Boolean - set to false to view the core experience only
 $o-grid-enable-enhanced-experience: true !default;
 
+/// Show the currently active breakpoint and output loaded settings
+/// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
+///
+/// @type Boolean - set to false to view the core experience only
+$o-grid-debug-mode: false !default;
+
 
 // -------------------------------------------------------------------------------------
 // Grid settings and dimensions
@@ -42,24 +48,29 @@ $o-grid-enable-enhanced-experience: true !default;
 /// @type Number (unitless)
 $o-grid-columns: 12 !default;
 
-/// Gutter size in pixels
+/// Gutter size, in pixels
 ///
 /// @type Number
 $o-grid-gutter: 10px !default;
 
-/// Minimum width in pixels
+/// Minimum width, in pixels
 ///
 /// @type Number
 $o-grid-min-width: 240px !default;
 
-/// Layouts (name: max-container-width)
+/// Maximum width, in pixels
+///
+/// @type Number
+$o-grid-max-width: 1330px !default;
+
+/// Layouts
 ///
 /// @type Map
 $o-grid-layouts: (
-	S: 600px,
-	M: 800px,
-	L: 1100px,
-	XL: 1360px
+	S:  370px,  // ≥20px columns
+	M:  610px,  // ≥40px columns
+	L:  850px,  // ≥60px columns
+	XL: 1090px  // ≥80px columns
 ) !default;
 
 /// Layout names
@@ -67,8 +78,3 @@ $o-grid-layouts: (
 /// @access private
 /// @type List
 $_o-grid-layout-names: map-keys($o-grid-layouts) !default;
-
-@if $o-grid-is-silent == false {
-	// Debug information:
-	/* Layout names Loaded #{$_o-grid-layout-names} */
-}

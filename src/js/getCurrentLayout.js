@@ -2,7 +2,7 @@
 
 /**
  * Detect IE 8 through injected conditional comments:
- * no UA detection, no need for cond. compilation / jscript check
+ * no UA detection, no need for conditional compilation or JS check
  */
 function isIE8() {
 	var b = document.createElement('B');

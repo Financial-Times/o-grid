@@ -8,6 +8,8 @@
 /// @requires {Variable} $o-grid-layouts
 @mixin oGridDebugInfo($layouts: $o-grid-layouts) {
 	$debug-layouts: '';
+
+	// In Sass 3.4, we should use \a for linebreaks instead of a multiline string
 	$linebreak: '
 ' + ' * ';
 

@@ -5,6 +5,6 @@
     "main.js"
   ],
   "dependencies": {
-    "sass-mq": "sass-mq#^3.1.0-beta.1"
+    "sass-mq": "sass-mq#^3.1.0"
   }
 }

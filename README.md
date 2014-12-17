@@ -63,10 +63,10 @@ In general prefer to set the default for larger layouts and override for smaller
 
 ### Examples
 
-A full width column for all sizes except large screens, where it takes up 9 columns
+A full width column for all sizes except large screens and up, where it takes up 9 columns
 
 ```html
-<div data-o-grid-colspan="12 XL9"></div>
+<div data-o-grid-colspan="L9"></div>
 ```
 
 A half width column that becomes full-width on medium screens and up

@@ -34,8 +34,8 @@
 ///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
 ///
 /// @requires {Variable} $_o-grid-layout-names
-@mixin oGridSurfaceCurrentLayout($element: head) {
-	#{$element}:after {
+@mixin oGridSurfaceCurrentLayout {
+	head:after {
 		content: 'XS'; // By default, we're exposing the XS layout (from 0 to S)
 		// Hide content visually
 		border: 0;

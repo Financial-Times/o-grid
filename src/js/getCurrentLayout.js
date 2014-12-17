@@ -18,14 +18,13 @@ function isIE8() {
 
 /**
  * Get the currently displayed layout, from $o-grid-layouts in _variables.scss
+ * works in tandem with the oGridSurfaceCurrentLayout mixin
+ * In IE8, always return the M layout
  */
-module.exports = function(IE8fixedLayout, element) {
-	IE8fixedLayout = IE8fixedLayout || 'M';
-
+module.exports = function() {
 	if (isIE8()) {
-		return IE8fixedLayout;
+		return 'M';
 	}
 
-	element = element || 'head';
-	return window.getComputedStyle(document.querySelector(element), ':after').getPropertyValue('content');
+	return window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content');
 };

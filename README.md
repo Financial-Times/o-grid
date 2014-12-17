@@ -24,7 +24,7 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 
 #### Layouts:
 
-* **Extra-Small (XS)** 240px to 370px
+* **Extra-Small (no layout name)** 240px to 370px
 * **Small (S)** 370px to 610px
 * **Medium (M)** 610px to 850px
 * **Large (L)** 850px to 1090px

@@ -36,6 +36,9 @@
 }
 
 /// Apply styles at a given layout size
+/// Wrapper for the Sass MQ mq() mixin
+///
+/// @link https://git.io/sass-mq sass-mq documentation
 ///
 /// @example
 ///  // Turn the color of an element red at medium layout size and up
@@ -44,16 +47,30 @@
 ///  		color: red;
 ///  	}
 ///  }
+///  // Turn the color of an element blue until medium layout
+///  element {
+///  	@include oGridRespondTo($until: M) {
+///  		color: blue;
+///  	}
+///  }
+///  // Turn the color of an element green from small layout until medium layout
+///  element {
+///  	@include oGridRespondTo($from: S, $until: M) {
+///  		color: green;
+///  	}
+///  }
 ///
-/// @param {String} layout-names - one of $o-grid-layouts
+/// @param {String} from - one of $o-grid-layouts
+/// @param {String} until - one of $o-grid-layouts
 ///
 /// @requires {Mixin} mq
 /// @requires {Variable} $o-grid-layouts
 /// @requires {Variable} $o-grid-is-fluid
 /// @requires {Variable} $o-grid-fixed-layout
-@mixin oGridRespondTo($layout-name) {
+@mixin oGridRespondTo($from: false, $until: false) {
 	@include mq(
-		$from: $layout-name,
+		$from: $from,
+		$until: $until,
 		$responsive: $o-grid-is-fluid,
 		$breakpoints: $o-grid-layouts,
 		$static-breakpoint: $o-grid-fixed-layout

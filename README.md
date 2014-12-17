@@ -150,8 +150,8 @@ Example:
 	@include oGridRespondTo(XL) {
 		@include oGridRemoveGutters('right');
 	}
-	// Remove left and right gutters at Small layout size and up
-	@include oGridRespondTo(S) {
+	// Remove left and right gutters until medium layout size
+	@include oGridRespondTo($until: M) {
 		@include oGridRemoveGutters();
 	}
 }
@@ -160,7 +160,7 @@ Example:
 
 #### Responsive layout helper
 
-`oGridRespondTo($layout-name)`
+`oGridRespondTo($from, $until)`
 
 To create styles that respond to the same breakpoints as the grid, this Sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `S`, `M`, `L` or `XL` depending on which layout size the style should apply to e.g.
 
@@ -175,11 +175,17 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 		color: red;
 	}
 }
+.o-example-module .item-subheading {
+	@include oGridRespondTo($until: L) {
+		width: auto;
+	}
+}
 ```
 
 It relies on [sass-mq](http://git.io/sass-mq) to output mobile-first media queries.
 
 #### Variables
+
 All the variables used by the grid (see `src/scss/_variables.scss`) can be used in your own sass stylesheets but *must not* be overwritten at the component/module level.
 
 ```scss
@@ -234,4 +240,5 @@ $o-grid-layouts: (
 ### Gotchas
 
 #### Fixed/Absolute positioning
+
 Widths are specified in percentages, which will not work for fixed or absolute positioned elements (The grid can however be used to layout elements within an absolute/fixed position container). If you need to support fixed/absolutely position elements, or have developed your own solution, please leave a comment on the [GitHub issue](https://github.com/Financial-Times/o-grid-issues/issues/9).

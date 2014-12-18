@@ -7,19 +7,9 @@
 /// @param {Map} $layouts - Map of layouts
 /// @requires {Variable} $o-grid-layouts
 @mixin oGridDebugInfo($layouts: $o-grid-layouts) {
-	$debug-layouts: '';
-
-	// In Sass 3.4, we should use \a for linebreaks instead of a multiline string
-	$linebreak: '
-' + ' * ';
-
-	@each $layout in $layouts {
-		$debug-layouts: $debug-layouts + $layout + $linebreak;
-	}
-
 	/*! DEBUG
 	 * Layouts:
-	 * #{$debug-layouts}
+	 * #{inspect($layouts)}
 	 */
 }
 

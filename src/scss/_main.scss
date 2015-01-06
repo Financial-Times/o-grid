@@ -385,7 +385,12 @@
 				width: auto;
 			}
 		}
-		@include oGridModifiersForLayout($o-grid-fixed-layout);
+
+		// Output grid modifiers for layouts up to the fixed layout displayed by IE8
+		$last-layout-index: index($_o-grid-layout-names, $o-grid-fixed-layout);
+		@for $i from 1 through $last-layout-index {
+			@include oGridModifiersForLayout(nth($_o-grid-layout-names, $i));
+		}
 	}
 
 	// In browsers that support @media queries,

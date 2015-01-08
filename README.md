@@ -193,48 +193,53 @@ All the variables used by the grid (see `src/scss/_variables.scss`) can be used 
 // Responsive behaviour configuration
 // -------------------------------------------------------------------------------------
 
-/// Silent mode
-$o-grid-is-silent: true !default;
+// Silent mode
+$o-grid-is-silent: true;
 
-/// Turn fluid grid on or off
-$o-grid-is-fluid: true !default;
+// Mode: fluid (default), snappy (snaps between layouts), fixed
+$o-grid-mode: 'fluid';
 
-/// Layout to default to when the grid has a fixed width (not fluid)
-$o-grid-fixed-layout: 'M' !default;
+// Layout to default to when the grid has a fixed width
+$o-grid-fixed-layout: 'L';
 
-/// Turn the enhanced experience on / off
-///
-/// When set to `false`, the core experience will be displayed
-/// (useful for debugging purposes)
-$o-grid-enable-enhanced-experience: true !default;
+// When the grid start snapping between fixed-width layouts
+// in the case where a row has the `o-grid-row--snappy` class
+// or the grid mode is 'snappy'.
+$o-grid-start-snappy-mode-at: 'M' !default;
 
-/// Show the currently active breakpoint and output loaded settings
-$o-grid-debug-mode: false !default;
+// Turn the enhanced experience on / off
+//
+// When set to `false`, the core experience will be displayed
+// (useful for debugging purposes)
+$o-grid-enable-enhanced-experience: true;
+
+// Show the currently active breakpoint and output loaded settings
+$o-grid-debug-mode: false;
 
 
 // -------------------------------------------------------------------------------------
 // Grid settings and dimensions
 // -------------------------------------------------------------------------------------
 
-/// Number of columns
-$o-grid-columns: 12 !default;
+// Number of columns
+$o-grid-columns: 12;
 
-/// Gutter size, in pixels
-$o-grid-gutter: 10px !default;
+// Gutter size, in pixels
+$o-grid-gutter: 10px;
 
-/// Minimum width, in pixels
-$o-grid-min-width: 240px !default;
+// Minimum width, in pixels
+$o-grid-min-width: 240px;
 
-/// Maximum width, in pixels
-$o-grid-max-width: 1330px !default;
+// Maximum width, in pixels
+$o-grid-max-width: 1330px;
 
-/// Layouts
+// Layouts
 $o-grid-layouts: (
-	S:  370px,  // ≥20px columns
-	M:  610px,  // ≥40px columns
-	L:  850px,  // ≥60px columns
-	XL: 1090px  // ≥80px columns
-) !default;
+	S:  490px,
+	M:  730px,
+	L:  970px,
+	XL: 1210px
+);
 ```
 
 ### Gotchas

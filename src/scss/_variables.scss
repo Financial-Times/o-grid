@@ -14,15 +14,15 @@
 /// @link http://origami.ft.com/docs/syntax/scss/#silent-styles “Silent” styles in Origami's documentation
 $o-grid-is-silent: true !default;
 
-/// Turn fluid grid on or off
+/// Grid mode
 ///
-/// @type Boolean
-$o-grid-is-fluid: true !default;
+/// @type String - one of fluid (default), snappy, fixed
+$o-grid-mode: 'fluid' !default;
 
 /// Layout to default to when the grid has a fixed width (not fluid)
 ///
 /// @type String - One of $o-grid-layouts
-$o-grid-fixed-layout: 'M' !default;
+$o-grid-fixed-layout: 'L' !default;
 
 /// Turn the enhanced experience on / off
 ///
@@ -58,19 +58,35 @@ $o-grid-gutter: 10px !default;
 /// @type Number
 $o-grid-min-width: 240px !default;
 
-/// Maximum width, in pixels
+/// When the grid start snapping between fixed-width layouts
+/// in the case where a row has the `o-grid-row--snappy` class
 ///
-/// @type Number
-$o-grid-max-width: 1330px !default;
+/// @type String
+$o-grid-start-snappy-mode-at: 'M' !default;
+
+/// Combined width of columns, gutters and outer margins
+/// for a specific column width
+///
+/// @param {Number} column-width - desired width of a grid column
+///
+/// @access private
+@function _oGridWidth($column-width) {
+	$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
+	$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
+	@return ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
+}
+
 
 /// Layouts
+/// Each layout is calculated following a specific column width,
+/// in order to base breakpoints on the structure of the grid itself
 ///
 /// @type Map
 $o-grid-layouts: (
-	S:  370px,  // ≥20px columns
-	M:  610px,  // ≥40px columns
-	L:  850px,  // ≥60px columns
-	XL: 1090px  // ≥80px columns
+	S:  _oGridWidth($column-width: 30px), // 490px
+	M:  _oGridWidth($column-width: 50px), // 730px
+	L:  _oGridWidth($column-width: 70px), // 970px
+	XL: _oGridWidth($column-width: 90px)  // 1210px
 ) !default;
 
 /// Layout names
@@ -78,3 +94,15 @@ $o-grid-layouts: (
 /// @access private
 /// @type List
 $_o-grid-layout-names: map-keys($o-grid-layouts) !default;
+
+// When snappy mode is enabled, force $o-grid-max-width to the largest layout width
+// instead of the default $o-grid-max-width
+@if $o-grid-mode == 'snappy' {
+	$last-layout-index: index($_o-grid-layout-names, $o-grid-fixed-layout);
+	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, $last-layout-index)) !global;
+}
+
+/// Maximum grid width
+///
+/// @type Number
+$o-grid-max-width: _oGridWidth($column-width: 100px) !default; // 1330px

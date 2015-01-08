@@ -65,13 +65,15 @@
 ///
 /// @requires {Mixin} mq
 /// @requires {Variable} $o-grid-layouts
-/// @requires {Variable} $o-grid-is-fluid
+/// @requires {Variable} $o-grid-mode
 /// @requires {Variable} $o-grid-fixed-layout
 @mixin oGridRespondTo($from: false, $until: false) {
+	$grid-is-responsive: $o-grid-mode != 'fixed';
+
 	@include mq(
 		$from: $from,
 		$until: $until,
-		$responsive: $o-grid-is-fluid,
+		$responsive: $grid-is-responsive,
 		$breakpoints: $o-grid-layouts,
 		$static-breakpoint: $o-grid-fixed-layout
 	) {
@@ -180,7 +182,18 @@
 /// Base row styles
 ///
 /// @param {String} $experience (null)
-@mixin oGridRow($experience: null) {
+/// @param {String} $grid-mode ($o-grid-mode)
+///
+/// @require {Variable} $o-grid-mode
+/// @require {Variable} $o-grid-start-snappy-mode-at
+/// @require {Variable} $o-grid-gutter
+/// @require {Variable} $o-grid-enable-enhanced-experience
+/// @require {Variable} $o-grid-fixed-layout
+/// @require {Variable} $o-grid-min-width
+/// @require {Variable} $_o-grid-layout-names
+/// @require {Function} oGridGetMaxWidthForLayout
+/// @require {Mixin} oGridRespondTo
+@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode) {
 	// We build a core experience
 	@if $experience == 'core' or $experience == null {
 		clear: both;
@@ -205,13 +218,33 @@
 			clear: both;
 		}
 	}
+	// Then we can build a better experience by overriding some defaults:
 	@if $o-grid-enable-enhanced-experience {
-		// Then we can build a better experience by overriding some defaults:
 		@if $experience == 'enhanced' or $experience == null {
-			@if $o-grid-is-fluid {
-				max-width: $o-grid-max-width;
-			} @else {
+			@if $grid-mode == 'fixed' {
+				// If the grid isn't fluid, we set it to a certain width
 				width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+			} @else {
+				max-width: $o-grid-max-width;
+
+				// Snappy mode modifiers
+				@each $layout-name in $_o-grid-layout-names {
+					@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
+						@include oGridRespondTo($layout-name) {
+							// If the grid mode is snappy, all rows should be snappy
+							@if $grid-mode == 'snappy' {
+								max-width: map-get($o-grid-layouts, $layout-name);
+							} @else {
+								// If the grid mode isn't set to snappy, then a modifier can help
+								// making a row snappy or all rows in o-grid-snappy snappy
+								&--snappy,
+								.o-grid-snappy & {
+									max-width: map-get($o-grid-layouts, $layout-name);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -220,7 +253,7 @@
 /// Columns and rows base structure
 ///
 /// @param {String} $experience (null)
-@mixin oGridLayout($experience: null) {
+@mixin oGridLayout($experience: null, $grid-mode: $o-grid-mode) {
 	@if $experience == 'core' or $experience == null {
 		// Basic layout styles
 		.o-grid-row {
@@ -245,17 +278,13 @@
 	@if $o-grid-enable-enhanced-experience {
 		@if $experience == 'enhanced' or $experience == null {
 			.o-grid-row {
-				@include oGridRow('enhanced');
+				@include oGridRow('enhanced', $grid-mode);
 
-				@if $o-grid-is-fluid == false {
-					// Restore fluidity of nested rows
-					.o-grid-row {
-						width: auto;
-					}
+				// Restore fluidity of nested rows
+				.o-grid-row {
+					width: auto;
 				}
 			}
-
-
 
 			[data-o-grid-colspan] {
 				@include oGridColumn('enhanced');
@@ -369,7 +398,7 @@
 
 	// Serve the enhanced layout to both IE 8 and modern browsers
 	@include oGridTargetIE8 {
-		@include oGridLayout('enhanced');
+		@include oGridLayout('enhanced', $grid-mode: 'fixed');
 	}
 	@include oGridTargetModernBrowsers {
 		@include oGridLayout('enhanced');

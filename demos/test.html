@@ -55,6 +55,31 @@
 		<div data-o-grid-colspan="12"><div class="demo-cell">12</div></div>
 	</div>
 
+	<h2>Snappy rows</h2>
+
+	<div class="o-grid-snappy">
+		<div class="o-grid-row demo-row">
+			<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of full-width row</div></div>
+		</div>
+		<div class="o-grid-row demo-row">
+			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
+			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
+		</div>
+		<div class="o-grid-row demo-row">
+			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of solo row</div></div>
+		</div>
+	</div>
+	<div class="o-grid-row o-grid-snappy demo-row">
+		<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to the full-width row itself</div></div>
+	</div>
+	<div class="o-grid-row o-grid-snappy demo-row">
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to the row itself</div></div>
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to the row itself</div></div>
+	</div>
+	<div class="o-grid-row o-grid-snappy demo-row">
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to the solo row itself</div></div>
+	</div>
+
 	<h2>Overridability of default and layout specific styles by other layouts</h2>
 
 	<div class="o-grid-row demo-row">
@@ -162,9 +187,8 @@
 			<div class="demo-cell">no gutters (applied globally)</div>
 		</div>
 	</div>
-
 	<div class="o-grid-row demo-row o-grid-row--compact">
-		<div data-o-grid-colspan="6"><div class="demo-cell">no gutter (applied using o-grid-row--compact)</div></div>
+		<div data-o-grid-colspan="6"><div class="demo-cell">no gutters (applied using o-grid-row--compact)</div></div>
 	</div>
 </div>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

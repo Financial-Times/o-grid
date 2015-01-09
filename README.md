@@ -3,14 +3,14 @@
 ## About
 
 o-grid defines a 12 column responsive, nestable grid system for laying out HTML pages and modules.
-It supports all browsers with support for *CSS @media queries*, with two sizes of fixed-width fallback for browsers that don't support them (specifically IE 7/8).
+It supports all browsers with support for *CSS @media queries*, with fixed-width fallback for older browsers.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
 [Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
-# Browser support
+## Browser support
 This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
 
 ### Grid dimensions
@@ -24,11 +24,11 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 
 #### Layouts:
 
-* **Extra small (no layout name)** 240px to 370px
-* **Small (S)** 370px to 610px
-* **Medium (M)** 610px to 850px
-* **Large (L)** 850px to 1090px
-* **Extra large (XL)** 1090px and up
+* **Extra small (no layout name)** 240px - 489px
+* **Small (S)** 490px - 729px
+* **Medium (M)** 730px - 969px
+* **Large (L)** 970px to 1209px
+* **Extra large (XL)** 1210px
 
 ## General use
 
@@ -53,17 +53,19 @@ So, for example
 
 The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually.
 
-* {0-12} - specifies the number of columns to span by default
-* S{0-12} - specifies the number of columns to span at the small layout and up
-* M{0-12} - specifies the number of columns to span at the medium layout and up
-* L{0-12} - specifies the number of columns to span at the large layout and up
-* XL{0-12} - specifies the number of columns to span at the extra large layout and up
+```html
+<div data-o-grid-colspan="{values}"></div>
+```
 
-In general prefer to set the default for larger layouts and override for smaller ones as this means your module will probably display better if the grid is ever updated to allow additional larger layouts. If no default value is specified the element will simply take `width:auto` at any layout for which an explicit rule is not defined.
+* `{0-12}` - number of columns to span by default
+* `S{0-12}` - number of columns to span at the small layout and up
+* `M{0-12}` - number of columns to span at the medium layout and up
+* `L{0-12}` - number of columns to span at the large layout and up
+* `XL{0-12}` - number of columns to span at the extra large layout and up
 
 ### Examples
 
-A full width column for all sizes except large screens and up, where it takes up 9 columns
+A full width column for all sizes except large screens and up, where it spans on 9 columns:
 
 ```html
 <div data-o-grid-colspan="L9"></div>
@@ -93,9 +95,26 @@ A column which has width: auto on extra-small screens, and then takes half the a
 
 e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
+#### Snappy mode
+
+In fluid mode (see `$o-grid-mode`), a set of rows may snap between fixed layouts as the viewport gets larger:
+
+```html
+<!-- Make one row snappy -->
+<div class="o-grid-row o-grid-snappy"></div>
+
+<!--Make multiple rows snappy -->
+<div class="o-grid-snappy">
+	<div class="o-grid-row"></div>
+	<div class="o-grid-row"></div>
+	<div class="o-grid-row"></div>
+	<div class="o-grid-row"></div>
+</div>
+```
+
 #### Compact, gutterless rows
 
-To remove gutters from all columns in a row use the class `o-grid-row--compact`  e.g.
+To remove gutters from all columns in a row use the class `o-grid-row--compact`, e.g.
 
 ```html
 <div class="o-grid-row o-grid-row--compact">
@@ -229,9 +248,6 @@ $o-grid-gutter: 10px;
 
 // Minimum width, in pixels
 $o-grid-min-width: 240px;
-
-// Maximum width, in pixels
-$o-grid-max-width: 1330px;
 
 // Layouts
 $o-grid-layouts: (

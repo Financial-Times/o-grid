@@ -7,7 +7,7 @@ var local = true;
 var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
 // Self-contained stylesheet switcher
-(function styleSwitcher () {
+(function styleSwitcher() {
 	var demoTypes = require('../configurations.json');
 	var stylesheet = document.querySelector("link[rel='stylesheet']");
 	var html = document.documentElement;
@@ -46,8 +46,13 @@ var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 	buttonContainer.appendChild(tmp);
 }());
 
-function getExpectedSpans (el) {
+function getExpectedSpans(el) {
+	// In core experience, a column is either full-width or hidden
 	if (document.documentElement.className.contains('core-experience')) {
+		// Check if data-o-grid-colspan="0…" or data-o-grid-colspan="hide…"
+		if (/\b0|hide\b/.test(el.dataset.oGridColspan)) {
+			return 0;
+		}
 		return 12;
 	}
 
@@ -68,7 +73,7 @@ function getExpectedSpans (el) {
 	return spans;
 }
 
-function getExpectedGutter (el, side) {
+function getExpectedGutter(el, side) {
 	if (document.documentElement.className.contains('core-experience')) {
 		return true; // Core experience always has gutters
 	}
@@ -86,14 +91,13 @@ function getExpectedGutter (el, side) {
 		el.classList.contains(layoutGutterClassName) ||
 		el.classList.contains(sideGutterClassName) ||
 		el.parentNode.classList.contains(compactClassName)) {
-
 		return false;
 	}
 
 	return true;
 }
 
-function highlightNotExpectedGutter (el) {
+function highlightNotExpectedGutter(el) {
 	var expectedLeft = getExpectedGutter(el, 'left');
 	var expectedRight = getExpectedGutter(el, 'right');
 	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
@@ -107,7 +111,7 @@ function highlightNotExpectedGutter (el) {
 	}
 }
 
-function highlightNotExpectedWidth (el) {
+function highlightNotExpectedWidth(el) {
 	var outerMargins = 10;
 
 	if (document.documentElement.className.contains('resized')) {
@@ -139,7 +143,7 @@ function highlightNotExpectedWidth (el) {
 	}
 }
 
-function test () {
+function test() {
 	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightNotExpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightNotExpectedWidth);
 }

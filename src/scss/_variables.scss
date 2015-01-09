@@ -15,6 +15,10 @@
 $o-grid-is-silent: true !default;
 
 /// Grid mode
+/// - fluid: full width until $o-grid-max-width (default: 1210px)
+/// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
+///           and then snaps into a larger fixed layout at each breakpoint
+/// - fixed: always fixed-width with the layout defined by $o-grid-fixed-layout (default: L)
 ///
 /// @type String - one of fluid (default), snappy, fixed
 $o-grid-mode: 'fluid' !default;
@@ -23,6 +27,12 @@ $o-grid-mode: 'fluid' !default;
 ///
 /// @type String - One of $o-grid-layouts
 $o-grid-fixed-layout: 'L' !default;
+
+/// When the grid start snapping between fixed-width layouts
+/// in the case where a row has the `o-grid-row--snappy` class
+///
+/// @type String
+$o-grid-start-snappy-mode-at: 'M' !default;
 
 /// Turn the enhanced experience on / off
 ///
@@ -58,26 +68,25 @@ $o-grid-gutter: 10px !default;
 /// @type Number
 $o-grid-min-width: 240px !default;
 
-/// When the grid start snapping between fixed-width layouts
-/// in the case where a row has the `o-grid-row--snappy` class
-///
-/// @type String
-$o-grid-start-snappy-mode-at: 'M' !default;
-
-/// Combined width of columns, gutters and outer margins
+/// Full width of the grid: combined width of columns, gutters and outer margins
 /// for a specific column width
+///
+/// @access private
 ///
 /// @param {Number} column-width - desired width of a grid column
 ///
-/// @access private
+/// @requires $o-grid-columns
+/// @requires $o-grid-gutter
+///
+/// @returns {Number} width of the grid, in pixels
 @function _oGridWidth($column-width) {
 	$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
 	$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
 	@return ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
 }
 
-
 /// Layouts
+///
 /// Each layout is calculated following a specific column width,
 /// in order to base breakpoints on the structure of the grid itself
 ///
@@ -98,11 +107,12 @@ $_o-grid-layout-names: map-keys($o-grid-layouts) !default;
 // When snappy mode is enabled, force $o-grid-max-width to the largest layout width
 // instead of the default $o-grid-max-width
 @if $o-grid-mode == 'snappy' {
-	$last-layout-index: index($_o-grid-layout-names, $o-grid-fixed-layout);
-	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, $last-layout-index)) !global;
+	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
 }
 
 /// Maximum grid width
+/// Defaults to the largest layout width
 ///
+/// @access private
 /// @type Number
-$o-grid-max-width: _oGridWidth($column-width: 100px) !default; // 1330px
+$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));

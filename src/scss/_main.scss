@@ -14,7 +14,7 @@
 @function oGridGetMaxWidthForLayout($layout-name) {
 	$index: index($_o-grid-layout-names, $layout-name);
 	@if $index == length($_o-grid-layout-names) {
-		@return $o-grid-max-width;
+		@return $_o-grid-max-width;
 	}
 	$next-layout: nth($_o-grid-layout-names, $index + 1);
 	@return map-get($o-grid-layouts, $next-layout);
@@ -30,6 +30,7 @@
 /// @param {Number} $total-cols ($o-grid-columns) - Number of columns in the grid
 ///
 /// @requires $o-grid-columns
+///
 /// @returns {Number} width of the element in the grid, in percents
 @function oGridColumnWidth($colspan, $total-cols: $o-grid-columns) {
 	@return percentage($colspan / $total-cols);
@@ -63,10 +64,10 @@
 /// @param {String} from - one of $o-grid-layouts
 /// @param {String} until - one of $o-grid-layouts
 ///
+/// @requires $o-grid-fixed-layout
+/// @requires $o-grid-layouts
+/// @requires $o-grid-mode
 /// @requires {Mixin} mq
-/// @requires {Variable} $o-grid-layouts
-/// @requires {Variable} $o-grid-mode
-/// @requires {Variable} $o-grid-fixed-layout
 @mixin oGridRespondTo($from: false, $until: false) {
 	$grid-is-responsive: $o-grid-mode != 'fixed';
 
@@ -108,8 +109,8 @@
 ///
 /// @param {String} $layout-name (null)
 ///
-/// @requires {Function} oGridColumnWidth
-/// @requires {Variable} $o-grid-columns
+/// @requires $o-grid-columns
+/// @requires oGridColumnWidth
 @mixin oGridHumanFriendlyPortions($layout-name: null) {
 	[data-o-grid-colspan~="#{$layout-name}hide"],
 	[data-o-grid-colspan~="#{$layout-name}0"] {
@@ -184,17 +185,17 @@
 /// @param {String} $experience (null)
 /// @param {String} $grid-mode ($o-grid-mode)
 ///
-/// @require {Variable} $o-grid-mode
-/// @require {Variable} $o-grid-start-snappy-mode-at
-/// @require {Variable} $o-grid-gutter
-/// @require {Variable} $o-grid-enable-enhanced-experience
-/// @require {Variable} $o-grid-fixed-layout
-/// @require {Variable} $o-grid-min-width
-/// @require {Variable} $_o-grid-layout-names
-/// @require {Function} oGridGetMaxWidthForLayout
-/// @require {Mixin} oGridRespondTo
+/// @requires $o-grid-enable-enhanced-experience
+/// @requires $o-grid-fixed-layout
+/// @requires $o-grid-gutter
+/// @requires $o-grid-min-width
+/// @requires $o-grid-mode
+/// @requires $o-grid-start-snappy-mode-at
+/// @requires $_o-grid-layout-names
+/// @requires oGridGetMaxWidthForLayout
+/// @requires {Mixin} oGridRespondTo
 @mixin oGridRow($experience: null, $grid-mode: $o-grid-mode) {
-	// We build a core experience
+	// We build a core experience (usually: for browsers that don't cut the mustard)…
 	@if $experience == 'core' or $experience == null {
 		clear: both;
 		min-width: $o-grid-min-width;
@@ -218,27 +219,26 @@
 			clear: both;
 		}
 	}
-	// Then we can build a better experience by overriding some defaults:
+
+	// …and then build a better experience on top of it for modern browsers:
 	@if $o-grid-enable-enhanced-experience {
 		@if $experience == 'enhanced' or $experience == null {
 			@if $grid-mode == 'fixed' {
 				// If the grid isn't fluid, we set it to a certain width
 				width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
 			} @else {
-				max-width: $o-grid-max-width;
+				max-width: $_o-grid-max-width;
 
-				// Snappy mode modifiers
 				@each $layout-name in $_o-grid-layout-names {
 					@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
 						@include oGridRespondTo($layout-name) {
 							// If the grid mode is snappy, all rows should be snappy
 							@if $grid-mode == 'snappy' {
 								max-width: map-get($o-grid-layouts, $layout-name);
-							} @else {
-								// If the grid mode isn't set to snappy, then a modifier can help
-								// making a row snappy or all rows in o-grid-snappy snappy
-								&--snappy,
-								.o-grid-snappy & {
+							}
+							@if $grid-mode == 'fluid' {
+								// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
+								@at-root .o-grid-snappy {
 									max-width: map-get($o-grid-layouts, $layout-name);
 								}
 							}
@@ -257,7 +257,7 @@
 	@if $experience == 'core' or $experience == null {
 		// Basic layout styles
 		.o-grid-row {
-			@include oGridRow('core');
+			@include oGridRow($experience: 'core');
 
 			// Substract gutter space from nested rows
 			.o-grid-row {
@@ -270,7 +270,7 @@
 			}
 		}
 		[data-o-grid-colspan] {
-			@include oGridColumn('core');
+			@include oGridColumn($experience: 'core');
 		}
 		// one-half, one-third, three-quarters…
 		@include oGridHumanFriendlyPortions;
@@ -278,7 +278,7 @@
 	@if $o-grid-enable-enhanced-experience {
 		@if $experience == 'enhanced' or $experience == null {
 			.o-grid-row {
-				@include oGridRow('enhanced', $grid-mode);
+				@include oGridRow($experience: 'enhanced', $grid-mode: $grid-mode);
 
 				// Restore fluidity of nested rows
 				.o-grid-row {
@@ -286,8 +286,16 @@
 				}
 			}
 
+			// If the grid is fluid, use this class to enable snappy mode on a set of rows
+			@if $grid-mode == 'fluid' {
+				.o-grid-snappy {
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+
 			[data-o-grid-colspan] {
-				@include oGridColumn('enhanced');
+				@include oGridColumn($experience: 'enhanced');
 			}
 			@for $colspan from 1 through $o-grid-columns {
 				[data-o-grid-colspan~="#{$colspan}"] {
@@ -318,6 +326,7 @@
 }
 
 /// Remove gutters from a column and re-align its child rows
+///
 /// @param {String} $side (null) - left, right
 @mixin oGridRemoveGutters($side: null) {
 	@if $o-grid-enable-enhanced-experience {
@@ -346,9 +355,9 @@
 ///
 /// @param {String} $layout-name - One of $o-grid-layouts
 ///
-/// @requires {Function} oGridColumnWidth
+/// @requires $o-grid-columns
+/// @requires oGridColumnWidth
 /// @requires {Mixin} oGridRemoveGutters
-/// @requires {Variable} o-grid-columns
 @mixin oGridModifiersForLayout($layout-name) {
 	@if $o-grid-enable-enhanced-experience {
 		@include oGridHumanFriendlyPortions($layout-name);
@@ -387,21 +396,20 @@
 /// - modern browsers (fluid layout, with columns)
 ///
 /// @requires {Mixin} oGridLayout
+/// @requires {Mixin} oGridModifiersForLayout
 /// @requires {Mixin} oGridRemoveGutters
+/// @requires {Mixin} oGridRespondTo
 /// @requires {Mixin} oGridTargetIE8
 /// @requires {Mixin} oGridTargetModernBrowsers
-/// @requires {Mixin} oGridRemoveGutters
-/// @requires {Mixin} oGridModifiersForLayout
-/// @requires {Mixin} oGridRespondTo
 @mixin oGridGenerate {
-	@include oGridLayout('core');
+	@include oGridLayout($experience: 'core');
 
 	// Serve the enhanced layout to both IE 8 and modern browsers
 	@include oGridTargetIE8 {
-		@include oGridLayout('enhanced', $grid-mode: 'fixed');
+		@include oGridLayout($experience: 'enhanced', $grid-mode: 'fixed');
 	}
 	@include oGridTargetModernBrowsers {
-		@include oGridLayout('enhanced');
+		@include oGridLayout($experience: 'enhanced');
 	}
 
 	// For IE 8, output grid helper classes and data- attributes

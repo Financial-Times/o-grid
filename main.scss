@@ -7,10 +7,10 @@
 @import 'sass-mq/mq';
 @import 'src/scss/main';
 
-/// Output debug information about the currently loaded layouts
+/// Output debug information about the currently loaded layouts.
 ///
 /// @param {Map} $layouts - Map of layouts
-/// @requires {Variable} $o-grid-layouts
+/// @requires $o-grid-layouts
 @mixin oGridDebugInfo($layouts: $o-grid-layouts) {
 	/*! DEBUG
 	 * Layouts:
@@ -23,14 +23,17 @@
 	@include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
 }
 
-/// Surface the layout currently displayed to make it readable in JS
-/// In IE 8, assume it is $o-grid-fixed-layout
+/// Surface the layout currently displayed to make it readable in JS.
+///
+/// In IE 8, assume it is `$o-grid-fixed-layout`.
+///
+/// **n.b.:** Only works when silent mode is off.
 ///
 /// @example js
 ///  var getCurrentLayout = require('o-grid/src/js/getCurrentLayout');
 ///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
 ///
-/// @requires {Variable} $_o-grid-layout-names
+/// @requires $_o-grid-layout-names
 @mixin oGridSurfaceCurrentLayout {
 	head:after {
 		content: 'XS'; // By default, we're exposing the XS layout (from 0 to S)

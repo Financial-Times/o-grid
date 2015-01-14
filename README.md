@@ -18,7 +18,7 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 #### General settings
 
 * Minimum width: 240px
-* Maximum width: 1330px
+* Maximum width: 1210px
 * Gutter width: 10px
 * Number of columns: 12
 

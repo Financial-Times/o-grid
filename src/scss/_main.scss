@@ -184,6 +184,7 @@
 ///
 /// @param {String} $experience (null)
 /// @param {String} $grid-mode ($o-grid-mode)
+/// @param {String} $selector ('.o-grid-row')
 ///
 /// @requires $o-grid-enable-enhanced-experience
 /// @requires $o-grid-fixed-layout
@@ -194,7 +195,7 @@
 /// @requires $_o-grid-layout-names
 /// @requires oGridGetMaxWidthForLayout
 /// @requires {Mixin} oGridRespondTo
-@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode) {
+@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: '.o-grid-row') {
 	// We build a core experience (usually: for browsers that don't cut the mustard)…
 	@if $experience == 'core' or $experience == null {
 		clear: both;
@@ -217,6 +218,16 @@
 		}
 		&:after {
 			clear: both;
+		}
+
+		// Substract gutter space from nested rows
+		#{unquote($selector)} {
+			min-width: 0;
+			max-width: none;
+			margin-left: -$o-grid-gutter / 2;
+			margin-right: -$o-grid-gutter / 2;
+			padding-left: 0;
+			padding-right: 0;
 		}
 	}
 
@@ -258,16 +269,6 @@
 		// Basic layout styles
 		.o-grid-row {
 			@include oGridRow($experience: 'core');
-
-			// Substract gutter space from nested rows
-			.o-grid-row {
-				min-width: 0;
-				max-width: none;
-				margin-left: -$o-grid-gutter / 2;
-				margin-right: -$o-grid-gutter / 2;
-				padding-left: 0;
-				padding-right: 0;
-			}
 		}
 		[data-o-grid-colspan] {
 			@include oGridColumn($experience: 'core');

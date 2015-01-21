@@ -27,7 +27,7 @@
 ///  .4-out-of-6 { width: oGridColumnWidth(4, 6); } // 66.66667%
 ///
 /// @param {Number} $colspan - Number of columns the element spans over
-/// @param {Number} $total-cols ($o-grid-columns) - Number of columns in the grid
+/// @param {Number} $total-cols [$o-grid-columns] - Number of columns in the grid
 ///
 /// @requires $o-grid-columns
 ///
@@ -107,7 +107,7 @@
 /// - one-quarter
 /// - three-quarters
 ///
-/// @param {String} $layout-name (null)
+/// @param {String} $layout-name [null]
 ///
 /// @requires $o-grid-columns
 /// @requires oGridColumnWidth
@@ -166,7 +166,7 @@
 
 /// Base column styles for the enhanced experience
 ///
-/// @param {String} $experience (null)
+/// @param {String} $experience [null]
 @mixin oGridColumn($experience: null) {
 	@if $experience == 'core' or $experience == null {
 		padding-left: $o-grid-gutter / 2;
@@ -182,9 +182,9 @@
 
 /// Base row styles
 ///
-/// @param {String} $experience (null)
-/// @param {String} $grid-mode ($o-grid-mode)
-/// @param {String} $selector ('.o-grid-row')
+/// @param {String} $experience [null]
+/// @param {String} $grid-mode [$o-grid-mode]
+/// @param {String} $selector [null] - e.g. '.o-grid-row'
 ///
 /// @requires $o-grid-enable-enhanced-experience
 /// @requires $o-grid-fixed-layout
@@ -195,7 +195,7 @@
 /// @requires $_o-grid-layout-names
 /// @requires oGridGetMaxWidthForLayout
 /// @requires {Mixin} oGridRespondTo
-@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: '.o-grid-row') {
+@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: null) {
 	// We build a core experience (usually: for browsers that don't cut the mustard)…
 	@if $experience == 'core' or $experience == null {
 		clear: both;
@@ -220,20 +220,26 @@
 			clear: both;
 		}
 
-		// Substract gutter space from nested rows
-		#{unquote($selector)} {
-			min-width: 0;
-			max-width: none;
-			margin-left: -$o-grid-gutter / 2;
-			margin-right: -$o-grid-gutter / 2;
-			padding-left: 0;
-			padding-right: 0;
+		// Nested rows overrides
+		@if $selector {
+			// Substract outer gutter space from nested rows
+			// and restore fluidity
+			#{unquote($selector)} {
+				width: auto;
+				min-width: 0;
+				max-width: none;
+				margin-left: -$o-grid-gutter / 2;
+				margin-right: -$o-grid-gutter / 2;
+				padding-left: 0;
+				padding-right: 0;
+			}
 		}
 	}
 
 	// …and then build a better experience on top of it for modern browsers:
 	@if $o-grid-enable-enhanced-experience {
 		@if $experience == 'enhanced' or $experience == null {
+
 			@if $grid-mode == 'fixed' {
 				// If the grid isn't fluid, we set it to a certain width
 				width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
@@ -259,16 +265,17 @@
 			}
 		}
 	}
+
 }
 
 /// Columns and rows base structure
 ///
-/// @param {String} $experience (null)
+/// @param {String} $experience [null]
 @mixin oGridLayout($experience: null, $grid-mode: $o-grid-mode) {
 	@if $experience == 'core' or $experience == null {
 		// Basic layout styles
 		.o-grid-row {
-			@include oGridRow($experience: 'core');
+			@include oGridRow($experience: 'core', $selector: '.o-grid-row');
 		}
 		[data-o-grid-colspan] {
 			@include oGridColumn($experience: 'core');
@@ -280,11 +287,6 @@
 		@if $experience == 'enhanced' or $experience == null {
 			.o-grid-row {
 				@include oGridRow($experience: 'enhanced', $grid-mode: $grid-mode);
-
-				// Restore fluidity of nested rows
-				.o-grid-row {
-					width: auto;
-				}
 			}
 
 			// If the grid is fluid, use this class to enable snappy mode on a set of rows
@@ -328,7 +330,7 @@
 
 /// Remove gutters from a column and re-align its child rows
 ///
-/// @param {String} $side (null) - left, right
+/// @param {String} $side [null] - left, right
 @mixin oGridRemoveGutters($side: null) {
 	@if $o-grid-enable-enhanced-experience {
 		@if $side == null or $side == 'left' {

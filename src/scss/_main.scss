@@ -11,9 +11,11 @@
 /// @param {String} $size - one of $layouts
 @function oGridGetMaxWidthForLayout($layout-name) {
 	$index: index($_o-grid-layout-names, $layout-name);
+
 	@if $index == length($_o-grid-layout-names) {
 		@return $_o-grid-max-width;
 	}
+
 	$next-layout: nth($_o-grid-layout-names, $index + 1);
 	@return map-get($o-grid-layouts, $next-layout);
 }
@@ -22,24 +24,37 @@
 ///
 /// @example
 ///  .one-half   { width: oGridColumnWidth(1/2); } // 50%
+///  .one-half   { width: oGridColumnWidth(one-half); } // 50%
 ///  .sidebar    { width: oGridColumnWidth(5); } // 41.66667%
 ///  .two-thirds { width: oGridColumnWidth(2/3); } // 66.66667%
 ///  .4-out-of-6 { width: oGridColumnWidth(4, 6); } // 66.66667%
 ///
-/// @param {Number} $colspan - Number of columns the element spans over
+/// @param {Number | String} $span - Number of columns the element spans over
 /// @param {Number} $total-cols [$o-grid-columns] - Number of columns in the grid
 ///
 /// @returns {Number} width of the element in the grid, in percents
-@function oGridColumnWidth($colspan, $total-cols: $o-grid-columns) {
-	@if $colspan >= 1 {
-		// A number of columns is supplied: converting it into a fraction
-		// of the total number of columns
-		@return percentage($colspan / $total-cols);
+@function oGridColumnWidth($span, $total-cols: $o-grid-columns) {
+	// Match the HTML helper API with human-friendly numbers
+	@if $span == 'one-half'       { $span: 1/2; }
+	@if $span == 'one-quarter'    { $span: 1/4; }
+	@if $span == 'one-third'      { $span: 1/3; }
+	@if $span == 'two-thirds'     { $span: 2/3; }
+	@if $span == 'three-quarters' { $span: 3/4; }
+
+	@if $span == 'full-width' {
+		@return 100%;
 	} @else {
-		// A fraction (1/2) or a number (0.5) is supplied:
-		// converting it into a percentage
-		@return percentage($colspan);
+		@if $span >= 1 {
+			// A number of columns is supplied: converting it into a fraction
+			// of the total number of columns
+			@return percentage($span / $total-cols);
+		} @else {
+			// A fraction (1/2) or a number (0.5) is supplied:
+			// converting it into a percentage
+			@return percentage($span);
+		}
 	}
+
 }
 
 /// Apply styles at a given layout size
@@ -85,15 +100,22 @@
 
 /// Target styles at IE 8 only
 @mixin oGridTargetIE8 {
-	@media \0screen {
+	@if 'inline' == $o-grid-ie8-rules {
+		@media \0screen {
+			@content;
+		}
+	}
+	@if 'only' == $o-grid-ie8-rules {
 		@content;
 	}
 }
 
 /// Target styles at modern browsers that support @media queries properly
 @mixin oGridTargetModernBrowsers {
-	@media only screen {
-		@content;
+	@if not ('only' == $o-grid-ie8-rules) {
+		@media only screen {
+			@content;
+		}
 	}
 }
 
@@ -102,7 +124,7 @@
 ///
 /// - hide
 /// - full-width
-/// - one-half / two-quarters
+/// - one-half
 /// - one-third
 /// - two-thirds
 /// - one-quarter
@@ -115,65 +137,113 @@
 		display: none;
 	}
 	@if $o-grid-enable-enhanced-experience {
-		[data-o-grid-colspan~="#{$layout-name}full-width"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			// Naturally span across all available horizontal space
-			width: auto;
-		}
-		[data-o-grid-colspan~="#{$layout-name}one-half"],
-		[data-o-grid-colspan~="#{$layout-name}two-quarters"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			width: percentage(1 / 2);
-		}
-		[data-o-grid-colspan~="#{$layout-name}one-third"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			width: percentage(1 / 3);
-		}
-		[data-o-grid-colspan~="#{$layout-name}two-thirds"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			width: percentage(2 / 3);
-		}
-		[data-o-grid-colspan~="#{$layout-name}one-quarter"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			width: percentage(1 / 4);
-		}
-		[data-o-grid-colspan~="#{$layout-name}three-quarters"] {
-			// Restore visibility from `display: none`
-			// if `data-o-grid-colspan` was set to `0` or `hide`
-			display: block;
-
-			width: percentage(3 / 4);
+		@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
+			[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
+				// Restore visibility from `display: none`
+				// if `data-o-grid-colspan` was set to `0` or `hide`
+				display: block;
+				width: oGridColumnWidth($human-friendly-name);
+			}
 		}
 	}
 }
 
 /// Base column styles for the enhanced experience
 ///
+/// @example scss
+///   el { @include oGridColumn; }
+///   el { @include oGridColumn(4); }
+///   el { @include oGridColumn(1/2); }
+///   el { @include oGridColumn((default: 12, M: 8, L: hide)); }
+///
+/// @param {Number | Map} $layouts [null]
 /// @param {String} $experience [null]
-@mixin oGridColumn($experience: null) {
-	@if $experience == 'core' or $experience == null {
+@mixin oGridColumn($span: null, $experience: null) {
+	@if $experience == 'core' {
 		padding-left: $o-grid-gutter / 2;
 		padding-right: $o-grid-gutter / 2;
 	}
 	@if $o-grid-enable-enhanced-experience {
-		@if $experience == 'enhanced' or $experience == null {
+		@if $experience == 'enhanced' {
 			float: left;
 			box-sizing: border-box;
+		}
+	}
+	@if $experience == null {
+		@include oGridColumn($experience: 'core');
+
+		@include oGridTargetIE8 {
+			@include oGridColumn($experience: 'enhanced');
+		}
+		@include oGridTargetModernBrowsers {
+			@include oGridColumn($experience: 'enhanced');
+		}
+	}
+	@if $span {
+		@include oGridColumnWidth($span);
+	}
+}
+
+/// Cross browser column widths across layouts
+///
+/// @param {Number | Map} $span
+@mixin oGridColumnWidth($span) {
+	// Special case: the column is hidden by default
+	@if $span == 'hide' {
+		display: none;
+	} @else {
+		// $span is a number or a keyword, so we're outputting the default width for that column
+		@if type-of($span) == number or type-of($span) == string {
+			@include oGridTargetIE8 {
+				width: oGridColumnWidth($span);
+			}
+			@include oGridTargetModernBrowsers {
+				width: oGridColumnWidth($span);
+			}
+		}
+	}
+
+	// $span is a map, we're looping through all of the layouts
+	@if type-of($span) == map {
+		@each $layout-name, $layout-span in $span {
+			@if $layout-name == 'default' {
+				@if $layout-span == 'hide' {
+					display: none;
+				} @else {
+					@include oGridTargetIE8 {
+						display: block;
+						width: oGridColumnWidth($layout-span);
+					}
+					@include oGridTargetModernBrowsers {
+						display: block;
+						width: oGridColumnWidth($layout-span);
+					}
+				}
+			} @else {
+				@if $layout-span == 'hide' {
+					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout
+					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
+						@include oGridTargetIE8 {
+							display: none;
+						}
+					}
+					@include oGridRespondTo($layout-name) {
+						display: none;
+					}
+				} @else {
+					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout
+					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
+						@include oGridTargetIE8 {
+							display: block;
+							width: oGridColumnWidth($layout-span);
+						}
+					}
+					@include oGridRespondTo($layout-name) {
+						display: block;
+						width: oGridColumnWidth($layout-span);
+					}
+				}
+			}
 		}
 	}
 }
@@ -185,7 +255,7 @@
 /// @param {String} $selector [null] - e.g. '.o-grid-row'
 @mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: null) {
 	// We build a core experience (usually: for browsers that don't cut the mustard)…
-	@if $experience == 'core' or $experience == null {
+	@if $experience == 'core' {
 		clear: both;
 		min-width: $o-grid-min-width;
 		// Older browsers get a fixed-width layout
@@ -226,7 +296,7 @@
 
 	// …and then build a better experience on top of it for modern browsers:
 	@if $o-grid-enable-enhanced-experience {
-		@if $experience == 'enhanced' or $experience == null {
+		@if $experience == 'enhanced' {
 
 			@if $grid-mode == 'fixed' {
 				// If the grid isn't fluid, we set it to a certain width
@@ -254,6 +324,16 @@
 		}
 	}
 
+	@if $experience == null {
+		@include oGridRow($experience: 'core', $grid-mode: $grid-mode, $selector: $selector);
+
+		@include oGridTargetIE8 {
+			@include oGridRow($experience: 'enhanced', $grid-mode: 'fixed', $selector: $selector);
+		}
+		@include oGridTargetModernBrowsers {
+			@include oGridRow($experience: 'enhanced', $grid-mode: $grid-mode, $selector: $selector);
+		}
+	}
 }
 
 /// Columns and rows base structure

@@ -75,9 +75,6 @@ $o-grid-min-width: 240px !default;
 ///
 /// @param {Number} column-width - desired width of a grid column
 ///
-/// @requires $o-grid-columns
-/// @requires $o-grid-gutter
-///
 /// @returns {Number} width of the grid, in pixels
 @function _oGridWidth($column-width) {
 	$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;

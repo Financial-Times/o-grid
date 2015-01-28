@@ -10,7 +10,6 @@
 /// Output debug information about the currently loaded layouts.
 ///
 /// @param {Map} $layouts - Map of layouts
-/// @requires $o-grid-layouts
 @mixin oGridDebugInfo($layouts: $o-grid-layouts) {
 	/*! DEBUG
 	 * Layouts:
@@ -32,8 +31,6 @@
 /// @example js
 ///  var getCurrentLayout = require('o-grid/src/js/getCurrentLayout');
 ///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
-///
-/// @requires $_o-grid-layout-names
 @mixin oGridSurfaceCurrentLayout {
 	head:after {
 		content: 'XS'; // By default, we're exposing the XS layout (from 0 to S)

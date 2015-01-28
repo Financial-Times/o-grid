@@ -9,8 +9,6 @@
 ///  .my-large-container { width: oGridGetMaxWidthForLayout(L); }
 ///
 /// @param {String} $size - one of $layouts
-///
-/// @requires $o-grid-layouts
 @function oGridGetMaxWidthForLayout($layout-name) {
 	$index: index($_o-grid-layout-names, $layout-name);
 	@if $index == length($_o-grid-layout-names) {
@@ -28,8 +26,6 @@
 ///
 /// @param {Number} $colspan - Number of columns the element spans over
 /// @param {Number} $total-cols [$o-grid-columns] - Number of columns in the grid
-///
-/// @requires $o-grid-columns
 ///
 /// @returns {Number} width of the element in the grid, in percents
 @function oGridColumnWidth($colspan, $total-cols: $o-grid-columns) {
@@ -63,11 +59,6 @@
 ///
 /// @param {String} from - one of $o-grid-layouts
 /// @param {String} until - one of $o-grid-layouts
-///
-/// @requires $o-grid-fixed-layout
-/// @requires $o-grid-layouts
-/// @requires $o-grid-mode
-/// @requires {Mixin} mq
 @mixin oGridRespondTo($from: false, $until: false) {
 	$grid-is-responsive: $o-grid-mode != 'fixed';
 
@@ -108,9 +99,6 @@
 /// - three-quarters
 ///
 /// @param {String} $layout-name [null]
-///
-/// @requires $o-grid-columns
-/// @requires oGridColumnWidth
 @mixin oGridHumanFriendlyPortions($layout-name: null) {
 	[data-o-grid-colspan~="#{$layout-name}hide"],
 	[data-o-grid-colspan~="#{$layout-name}0"] {
@@ -185,16 +173,6 @@
 /// @param {String} $experience [null]
 /// @param {String} $grid-mode [$o-grid-mode]
 /// @param {String} $selector [null] - e.g. '.o-grid-row'
-///
-/// @requires $o-grid-enable-enhanced-experience
-/// @requires $o-grid-fixed-layout
-/// @requires $o-grid-gutter
-/// @requires $o-grid-min-width
-/// @requires $o-grid-mode
-/// @requires $o-grid-start-snappy-mode-at
-/// @requires $_o-grid-layout-names
-/// @requires oGridGetMaxWidthForLayout
-/// @requires {Mixin} oGridRespondTo
 @mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: null) {
 	// We build a core experience (usually: for browsers that don't cut the mustard)…
 	@if $experience == 'core' or $experience == null {
@@ -357,10 +335,6 @@
 ///  .o-grid-remove-gutters--S { … }
 ///
 /// @param {String} $layout-name - One of $o-grid-layouts
-///
-/// @requires $o-grid-columns
-/// @requires oGridColumnWidth
-/// @requires {Mixin} oGridRemoveGutters
 @mixin oGridModifiersForLayout($layout-name) {
 	@if $o-grid-enable-enhanced-experience {
 		@include oGridHumanFriendlyPortions($layout-name);
@@ -397,13 +371,6 @@
 /// - older browsers (no columns, @media query support)
 /// - IE 8 (fixed layout, with columns)
 /// - modern browsers (fluid layout, with columns)
-///
-/// @requires {Mixin} oGridLayout
-/// @requires {Mixin} oGridModifiersForLayout
-/// @requires {Mixin} oGridRemoveGutters
-/// @requires {Mixin} oGridRespondTo
-/// @requires {Mixin} oGridTargetIE8
-/// @requires {Mixin} oGridTargetModernBrowsers
 @mixin oGridGenerate {
 	@include oGridLayout($experience: 'core');
 

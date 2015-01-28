@@ -58,4 +58,7 @@
 @if $o-grid-is-silent == false {
 	@include oGridSurfaceCurrentLayout;
 	@include oGridGenerate;
+
+	// Turn silent mode back on to avoid outputting the grid twice
+	$o-grid-is-silent: true;
 }

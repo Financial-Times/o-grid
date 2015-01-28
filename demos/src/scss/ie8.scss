@@ -1,7 +1,8 @@
 $o-grid-mode: 'fixed';
 $o-grid-fixed-layout: 'M';
+$o-grid-ie8-rules: 'only';
 
-@import "_common";
+@import "common";
 
 @include oGridTargetModernBrowsers {
 	.o-grid-row {

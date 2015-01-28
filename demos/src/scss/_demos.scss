@@ -14,7 +14,9 @@ body {
 		// Transparent background color in IE8
 		$rgba: rgba(#ffffff, 0.5);
 		$ie-hex-str: ie-hex-str($rgba);
+		// scss-lint:disable DuplicateProperty
 		background-color: $rgba;
+		// scss-lint:enable DuplicateProperty
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
 	}
 	.demo-row {

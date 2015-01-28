@@ -21,7 +21,9 @@
 /// % width of an element in the grid
 ///
 /// @example
-///  .sidebar { width: oGridColumnWidth(5); } // 41.66667%
+///  .one-half   { width: oGridColumnWidth(1/2); } // 50%
+///  .sidebar    { width: oGridColumnWidth(5); } // 41.66667%
+///  .two-thirds { width: oGridColumnWidth(2/3); } // 66.66667%
 ///  .4-out-of-6 { width: oGridColumnWidth(4, 6); } // 66.66667%
 ///
 /// @param {Number} $colspan - Number of columns the element spans over
@@ -29,7 +31,15 @@
 ///
 /// @returns {Number} width of the element in the grid, in percents
 @function oGridColumnWidth($colspan, $total-cols: $o-grid-columns) {
-	@return percentage($colspan / $total-cols);
+	@if $colspan >= 1 {
+		// A number of columns is supplied: converting it into a fraction
+		// of the total number of columns
+		@return percentage($colspan / $total-cols);
+	} @else {
+		// A fraction (1/2) or a number (0.5) is supplied:
+		// converting it into a percentage
+		@return percentage($colspan);
+	}
 }
 
 /// Apply styles at a given layout size

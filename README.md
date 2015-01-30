@@ -179,7 +179,11 @@ Example:
 
 #### Responsive layout helper
 
-`oGridRespondTo($from, $until)`
+```scss
+@include oGridRespondTo($from, $until) {
+	// Styles
+}
+```
 
 To create styles that respond to the same breakpoints as the grid, this Sass mixin can be used to wrap the styles in the appropriate media query. It should be passed `S`, `M`, `L` or `XL` depending on which layout size the style should apply to e.g.
 
@@ -201,7 +205,19 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 }
 ```
 
-It relies on [sass-mq](http://git.io/sass-mq) to output mobile-first media queries.
+It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
+
+#### *Unstyle* a row or a column
+
+```scss
+.un-rowify {
+	@include oGridResetRow;
+}
+
+.de-columnify {
+	@include oGridResetColumn;
+}
+```
 
 #### Variables
 
@@ -234,6 +250,14 @@ $o-grid-enable-enhanced-experience: true;
 
 // Show the currently active breakpoint and output loaded settings
 $o-grid-debug-mode: false;
+
+/// Output IE 8-specific rules?
+/// - false: no IE8 support at all
+/// - 'only': serve code compatible with IE8 only
+/// - 'inline' (default): serve IE8 specific code alongside modern browsers code
+///
+/// @type Bool | String
+$o-grid-ie8-rules: 'inline' !default;
 
 
 // -------------------------------------------------------------------------------------

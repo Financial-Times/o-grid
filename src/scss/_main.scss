@@ -54,7 +54,6 @@
 			@return percentage($span);
 		}
 	}
-
 }
 
 /// Apply styles at a given layout size
@@ -87,6 +86,9 @@
 @mixin oGridRespondTo($from: false, $until: false) {
 	$grid-is-responsive: $o-grid-mode != 'fixed';
 
+	$original-scope: $_o-grid-scope;
+	$_o-grid-scope: 'respondTo' !global;
+
 	@include mq(
 		$from: $from,
 		$until: $until,
@@ -96,25 +98,38 @@
 	) {
 		@content;
 	}
+
+	// Restore previously set scope
+	$_o-grid-scope: $original-scope !global;
 }
 
-/// Target styles at IE 8 only
+/// Target styles at Internet Explorer 8 only
 @mixin oGridTargetIE8 {
-	@if 'inline' == $o-grid-ie8-rules {
-		@media \0screen {
+	// Users may target styles at IE8, but only in the global scope,
+	// but it shouldn't output any code inside of a oGridRespondTo call
+	@if 'global' == $_o-grid-scope {
+		@if 'inline' == $o-grid-ie8-rules {
+			@media \0screen {
+				@content;
+			}
+		}
+		@if 'only' == $o-grid-ie8-rules {
 			@content;
 		}
-	}
-	@if 'only' == $o-grid-ie8-rules {
-		@content;
 	}
 }
 
 /// Target styles at modern browsers that support @media queries properly
 @mixin oGridTargetModernBrowsers {
-	@if not ('only' == $o-grid-ie8-rules) {
-		@media only screen {
-			@content;
+	/// Output code as-is if called inside of a media query,
+	/// since it will target modern browsers already
+	@if $_o-grid-scope == 'respondTo' {
+		@content;
+	} @else {
+		@if not ('only' == $o-grid-ie8-rules) {
+			@media only screen {
+				@content;
+			}
 		}
 	}
 }

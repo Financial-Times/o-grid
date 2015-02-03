@@ -121,3 +121,9 @@ $_o-grid-layout-names: map-keys($o-grid-layouts) !default;
 /// @access private
 /// @type Number
 $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
+
+/// Current scope
+///
+/// @access private
+/// @type String
+$_o-grid-scope: 'global';

@@ -1,5 +1,8 @@
 $o-grid-is-silent: false;
 $o-grid-debug-mode: true;
 
+// Un-comment this line to test the core experience on a modern browser
+// $o-grid-enable-enhanced-experience: false;
+
 @import "../../../main";
 @import "demos";

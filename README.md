@@ -95,6 +95,10 @@ A column which has width: auto on extra-small screens, and then takes half the a
 
 e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
 
+#### Centering a column
+
+e.g. `data-o-grid-colspan="center Luncenter"` will `center` the column and `uncenter` it at Large (L) layout size.
+
 #### Snappy mode
 
 In fluid mode (see `$o-grid-mode`), a set of rows may snap between fixed layouts as the viewport gets larger:

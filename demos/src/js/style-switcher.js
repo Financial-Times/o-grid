@@ -1,11 +1,50 @@
 /*global $*/
-/*jshint devel:true*/
+/*jshint devel:true, freeze:false*/
 'use strict';
 
+var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
 var local = true;
+var defaultGutter = 10;
 var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
+// ============================================================================
+// Polyfills
+
+// https://cdn.polyfill.io/v1/polyfill.js?features=String.prototype.contains
+String.prototype.includes = function (string, index) {
+	if (typeof string === 'object' && string instanceof RegExp) throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
+	return this.indexOf(string, index) !== -1;
+};
+
+if (![].includes) {
+	Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+		var O = Object(this);
+		var len = parseInt(O.length) || 0;
+		if (len === 0) {
+			return false;
+		}
+		var n = parseInt(arguments[1]) || 0;
+		var k;
+		if (n >= 0) {
+			k = n;
+		} else {
+			k = len + n;
+			if (k < 0) {k = 0;}
+		}
+		var currentElement;
+		while (k < len) {
+			currentElement = O[k];
+			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
+				return true;
+			}
+			k++;
+		}
+		return false;
+	};
+}
+
+// ============================================================================
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
 	var demoTypes = require('../configurations.json');
@@ -48,7 +87,7 @@ var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
 function getExpectedSpans(el) {
 	// In core experience, a column is either full-width or hidden
-	if (document.documentElement.className.contains('core-experience')) {
+	if (document.documentElement.className.includes('core-experience')) {
 		// Check if data-o-grid-colspan="0…" or data-o-grid-colspan="hide…"
 		if (/\b0|hide\b/.test(el.dataset.oGridColspan)) {
 			return 0;
@@ -74,7 +113,7 @@ function getExpectedSpans(el) {
 }
 
 function getExpectedGutter(el, side) {
-	if (document.documentElement.className.contains('core-experience')) {
+	if (document.documentElement.className.includes('core-experience')) {
 		return true; // Core experience always has gutters
 	}
 
@@ -97,7 +136,7 @@ function getExpectedGutter(el, side) {
 	return true;
 }
 
-function highlightNotExpectedGutter(el) {
+function highlightUnexpectedGutter(el) {
 	var expectedLeft = getExpectedGutter(el, 'left');
 	var expectedRight = getExpectedGutter(el, 'right');
 	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
@@ -111,10 +150,51 @@ function highlightNotExpectedGutter(el) {
 	}
 }
 
-function highlightNotExpectedWidth(el) {
+
+function getExpectedMargin(el, side) {
+	if (document.documentElement.className.includes('core-experience')) {
+		return 0; // Core experience never has margins
+	}
+
+	var layout = getCurrentLayout();
+
+	var centerModifier = 'center';
+	var layoutCenterModifier = layout + 'center';
+	var layoutUncenterModifier = layout + 'uncenter';
+	var modifiers = el.dataset.oGridColspan.split(' ');
+
+	// Uncentered
+	if (modifiers.includes(layoutUncenterModifier)) {
+		return 0;
+	}
+
+	// Centered
+	if (modifiers.includes(centerModifier) || modifiers.includes(layoutCenterModifier)) {
+		// half of the remaining space left by the column
+		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).getPropertyValue('width'), 10) - parseInt(getComputedStyle(el, null).getPropertyValue('width'), 10) - defaultGutter);
+	}
+
+	return 0;
+}
+
+function highlightUnexpectedMargin(el) {
+	var expectedLeft = getExpectedMargin(el, 'left');
+	var expectedRight = getExpectedMargin(el, 'right');
+	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('margin-right'), 10);
+	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('margin-left'), 10);
+
+	// We verify if margins are "almost equal" because of rounding errors
+	if (almostEqual(expectedLeft, actualLeft, 0.5, 0.5) && almostEqual(expectedRight, actualRight, 0.5, 0.5)) {
+		el.className = el.className.replace(/\berror-margin\b/g, '');
+	} else {
+		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
+		console.error('Margin error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
+	}
+}
+function highlightUnexpectedWidth(el) {
 	var outerMargins = 10;
 
-	if (document.documentElement.className.contains('resized')) {
+	if (document.documentElement.className.includes('resized')) {
 		outerMargins = resizedOuterMarginWidth;
 	}
 
@@ -122,7 +202,7 @@ function highlightNotExpectedWidth(el) {
 		outerMargins = 0;
 	}
 
-	if (document.documentElement.className.contains('core-experience')) {
+	if (document.documentElement.className.includes('core-experience')) {
 		outerMargins = 10; // Restore default margins if column is in a compact row
 	}
 
@@ -144,8 +224,9 @@ function highlightNotExpectedWidth(el) {
 }
 
 function test() {
-	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightNotExpectedGutter);
-	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightNotExpectedWidth);
+	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
+	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
+	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);
 }
 
 var runTests = function () {

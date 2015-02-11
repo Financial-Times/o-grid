@@ -20,26 +20,20 @@
 	@return map-get($o-grid-layouts, $next-layout);
 }
 
-/// Alias for the oGridColSpan function
-/// @deprecated
-@function oGridColumnWidth($span, $total-cols: $o-grid-columns) {
-	@return oGridColSpan($span, $total-cols: $o-grid-columns);
-}
-
 /// % width of an element in the grid
 ///
 /// @example
-///  .one-half   { width: oGridColSpan(1/2); }      // 50%
-///  .other-half { width: oGridColSpan(one-half); } // 50%
-///  .sidebar    { width: oGridColSpan(5); }        // 41.66667%
-///  .two-thirds { width: oGridColSpan(2/3); }      // 66.66667%
-///  .4-out-of-6 { width: oGridColSpan(4, 6); }     // 66.66667%
+///  .one-half   { width: oGridColspan(1/2); }      // 50%
+///  .other-half { width: oGridColspan(one-half); } // 50%
+///  .sidebar    { width: oGridColspan(5); }        // 41.66667%
+///  .two-thirds { width: oGridColspan(2/3); }      // 66.66667%
+///  .4-out-of-6 { width: oGridColspan(4, 6); }     // 66.66667%
 ///
 /// @param {Number | String} $span - Number of columns the element spans over
 /// @param {Number} $total-cols [$o-grid-columns] - Number of columns in the grid
 ///
 /// @returns {Number} width of the element in the grid, in percents
-@function oGridColSpan($span, $total-cols: $o-grid-columns) {
+@function oGridColspan($span, $total-cols: $o-grid-columns) {
 	// Match the HTML helper API with human-friendly numbers
 	@if $span == 'one-half'       { $span: 1/2; }
 	@if $span == 'one-quarter'    { $span: 1/4; }
@@ -62,10 +56,18 @@
 	}
 }
 
+/// Alias for the oGridColspan function
+///
+/// @deprecated
+@function oGridColumnWidth($span, $total-cols: $o-grid-columns) {
+	@warn 'oGridColumnWidth() is deprecated, please use oGridColspan() instead';
+	@return oGridColspan($span, $total-cols: $o-grid-columns);
+}
+
 /// Apply styles at a given layout size
 /// Wrapper for the Sass MQ mq() mixin
 ///
-/// @link https://git.io/sass-mq sass-mq documentation
+/// @link https://git.io/sass-mq Sass MQ documentation
 ///
 /// @example
 ///  // Turn the color of an element red at medium layout size and up
@@ -140,6 +142,25 @@
 	}
 }
 
+/// Wrapper to output cross-browser code
+///
+/// @example scss
+/// .element {
+///   // Core experience rules (IE <= 7…)
+///
+/// 	@include oGridRules {
+/// 		// Enhanced experience rules
+/// 	}
+/// }
+@mixin oGridRules {
+	@include oGridTargetIE8 {
+		@content;
+	}
+	@include oGridTargetModernBrowsers {
+		@content;
+	}
+}
+
 
 /// Human friendly names for portions and centering:
 ///
@@ -161,23 +182,39 @@
 	[data-o-grid-colspan~="#{$layout-name}0"] {
 		display: none;
 	}
-	[data-o-grid-colspan~="#{$layout-name}center"] {
-		@include oGridCenterColumn;
-	}
-	// Only output "uncenter" modifier with a layout (e.g. XLuncenter)
-	@if $layout-name != null {
-		[data-o-grid-colspan~="#{$layout-name}uncenter"] {
-			@include oGridUncenterColumn;
-		}
-	}
 
 	@if $o-grid-enable-enhanced-experience {
+		// Center and un-center
+		[data-o-grid-colspan~="#{$layout-name}center"] {
+			@include oGridCenter;
+		}
+		// Only output "uncenter" modifier with a layout (e.g. XLuncenter)
+		@if $layout-name != null {
+			[data-o-grid-colspan~="#{$layout-name}uncenter"] {
+				@include oGridUncenter;
+			}
+		}
+
+		// Pull, push, offset
+		@for $colspan from 0 through ($o-grid-columns - 1) {
+			[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
+				@include oGridPush($colspan);
+			}
+			[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
+				@include oGridPull($colspan);
+			}
+			[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
+				@include oGridOffset($colspan);
+			}
+		}
+
+		// Portions
 		@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 			[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
 				// Restore visibility from `display: none`
 				// if `data-o-grid-colspan` was set to `0` or `hide`
 				display: block;
-				width: oGridColSpan($human-friendly-name);
+				width: oGridColspan($human-friendly-name);
 			}
 		}
 	}
@@ -195,6 +232,7 @@
 /// @param {String} $experience [null]
 @mixin oGridColumn($span: null, $experience: null) {
 	@if $experience == 'core' {
+		position: relative; // Required for push and pull
 		padding-left: $o-grid-gutter / 2;
 		padding-right: $o-grid-gutter / 2;
 	}
@@ -207,41 +245,27 @@
 	@if $experience == null {
 		@include oGridColumn($experience: 'core');
 
-		@include oGridTargetIE8 {
-			@include oGridColumn($experience: 'enhanced');
-		}
-		@include oGridTargetModernBrowsers {
+		@include oGridRules {
 			@include oGridColumn($experience: 'enhanced');
 		}
 	}
 	@if $span {
-		@include oGridColSpan($span);
+		@include oGridColspan($span);
 	}
-}
-
-
-/// Alias for the oGridColSpan mixin
-/// @deprecated
-@mixin oGridColumnWidth($span) {
-	@warn 'oGridColumnWidth() is deprecated, please use oGridColSpan() instead';
-	@include oGridColSpan($span);
 }
 
 /// Cross browser column widths across layouts
 ///
 /// @param {Number | Map} $span
-@mixin oGridColSpan($span) {
+@mixin oGridColspan($span) {
 	// Special case: the column is hidden by default
 	@if $span == 'hide' {
 		display: none;
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			@include oGridTargetIE8 {
-				width: oGridColSpan($span);
-			}
-			@include oGridTargetModernBrowsers {
-				width: oGridColSpan($span);
+			@include oGridRules {
+				width: oGridColspan($span);
 			}
 		}
 	}
@@ -253,13 +277,9 @@
 				@if $layout-span == 'hide' {
 					display: none;
 				} @else {
-					@include oGridTargetIE8 {
+					@include oGridRules {
 						display: block;
-						width: oGridColSpan($layout-span);
-					}
-					@include oGridTargetModernBrowsers {
-						display: block;
-						width: oGridColSpan($layout-span);
+						width: oGridColspan($layout-span);
 					}
 				}
 			} @else {
@@ -278,17 +298,25 @@
 					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
 						@include oGridTargetIE8 {
 							display: block;
-							width: oGridColSpan($layout-span);
+							width: oGridColspan($layout-span);
 						}
 					}
 					@include oGridRespondTo($layout-name) {
 						display: block;
-						width: oGridColSpan($layout-span);
+						width: oGridColspan($layout-span);
 					}
 				}
 			}
 		}
 	}
+}
+
+/// Alias for the oGridColspan mixin
+///
+/// @deprecated
+@mixin oGridColumnWidth($span) {
+	@warn 'oGridColumnWidth() is deprecated, please use oGridColspan() instead';
+	@include oGridColspan($span);
 }
 
 /// Base row styles
@@ -382,14 +410,14 @@
 }
 
 /// Center column
-@mixin oGridCenterColumn {
+@mixin oGridCenter {
 	margin-left: auto;
 	margin-right: auto;
 	float: none;
 }
 
 /// Uncenter column
-@mixin oGridUncenterColumn {
+@mixin oGridUncenter {
 	margin-left: 0;
 	margin-right: 0;
 	float: left;
@@ -401,6 +429,29 @@
 	padding-right: 0;
 	float: none;
 	width: auto;
+}
+
+/// Reorder visually: pull
+///
+/// @param {Number} $columns
+@mixin oGridPull($columns) {
+	right: oGridColspan($columns);
+	left: auto;
+}
+
+/// Reorder visually: push
+///
+/// @param {Number} $columns
+@mixin oGridPush($columns) {
+	left: oGridColspan($columns);
+	right: auto;
+}
+
+/// Offset: add space before a column
+///
+/// @param {Number} $columns
+@mixin oGridOffset($columns) {
+	margin-left: oGridColspan($columns);
 }
 
 /// Remove row styles
@@ -463,13 +514,14 @@
 			[data-o-grid-colspan] {
 				@include oGridColumn($experience: 'enhanced');
 
+				// Prevent whitespace between the last column and the right edge of the layout
 				+ [data-o-grid-colspan]:last-child {
 					float: right;
 				}
 			}
 			@for $colspan from 1 through $o-grid-columns {
 				[data-o-grid-colspan~="#{$colspan}"] {
-					width: oGridColSpan($colspan, $o-grid-columns);
+					width: oGridColspan($colspan, $o-grid-columns);
 				}
 			}
 			// Compact, gutterless row of columns
@@ -540,7 +592,7 @@
 				display: block;
 
 				// Apply width in %
-				width: oGridColSpan($colspan, $o-grid-columns);
+				width: oGridColspan($colspan, $o-grid-columns);
 			}
 		}
 

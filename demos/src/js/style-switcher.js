@@ -112,6 +112,40 @@ function getExpectedSpans(el) {
 	return spans;
 }
 
+// Get offset, pull, push
+function getExpectedModifier(el, modifier) {
+	// In core experience, a column is never, pulled, pushed nor has an offset
+	if (document.documentElement.className.includes('core-experience')) {
+		return 0;
+	}
+
+	var rules = el.dataset.oGridColspan;
+	var re = new RegExp(modifier, "g");
+
+	if (!re.test(rules)) {
+		return 0;
+	}
+
+	var layout = getCurrentLayout();
+
+	var modifiedBy;
+	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
+		modifiedBy = $1;
+	});
+
+	if (typeof modifiedBy === 'undefined') {
+		rules.replace(new RegExp('(?:^|\\s)' + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
+			modifiedBy = $1;
+		});
+	}
+
+	if (typeof modifiedBy === 'undefined') {
+		return 0;
+	}
+
+	return modifiedBy / 12 * (parseInt(getComputedStyle(el.parentNode, null).getPropertyValue('width'), 10) - defaultGutter);
+}
+
 function getExpectedGutter(el, side) {
 	if (document.documentElement.className.includes('core-experience')) {
 		return true; // Core experience always has gutters
@@ -163,6 +197,12 @@ function getExpectedMargin(el, side) {
 	var layoutUncenterModifier = layout + 'uncenter';
 	var modifiers = el.dataset.oGridColspan.split(' ');
 
+	if (el.dataset.oGridColspan.includes('offset')) {
+		if (side === 'left') {
+			return getExpectedModifier(el, 'offset');
+		}
+	}
+
 	// Uncentered
 	if (modifiers.includes(layoutUncenterModifier)) {
 		return 0;
@@ -184,13 +224,32 @@ function highlightUnexpectedMargin(el) {
 	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('margin-left'), 10);
 
 	// We verify if margins are "almost equal" because of rounding errors
-	if (almostEqual(expectedLeft, actualLeft, 0.5, 0.5) && almostEqual(expectedRight, actualRight, 0.5, 0.5)) {
+	if (almostEqual(expectedLeft, actualLeft, 1, 1) && almostEqual(expectedRight, actualRight, 1, 1)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
 		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
 		console.error('Margin error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
 	}
 }
+
+function highlightUnexpectedPosition(el) {
+	var expectedPush = getExpectedModifier(el, 'push');
+	var expectedPull = getExpectedModifier(el, 'pull');
+	var actualPush = getComputedStyle(el, null).getPropertyValue('left');
+	var actualPull = getComputedStyle(el, null).getPropertyValue('right');
+	actualPush = (actualPush === 'auto' ? 0 : parseInt(actualPush, 10));
+	actualPull = (actualPull === 'auto' ? 0 : parseInt(actualPull, 10));
+
+
+	// We verify if positions are "almost equal" because of rounding errors
+	if (almostEqual(expectedPush, actualPush, 1, 1) && almostEqual(expectedPull, actualPull, 1, 1)) {
+		el.className = el.className.replace(/\berror-position\b/g, '');
+	} else {
+		/\berror-position\b/.test(el.className) || (el.className += ' error-position');
+		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush  + ' (actual) ',  'Pull: ' + expectedPull + ' (expected) ' + actualPull  + ' (actual) ');
+	}
+}
+
 function highlightUnexpectedWidth(el) {
 	var outerMargins = 10;
 
@@ -223,10 +282,13 @@ function highlightUnexpectedWidth(el) {
 	}
 }
 
+
+
 function test() {
 	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);
+	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedPosition);
 }
 
 var runTests = function () {

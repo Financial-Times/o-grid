@@ -99,6 +99,60 @@ e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium 
 
 e.g. `data-o-grid-colspan="center Luncenter"` will `center` the column and `uncenter` it at Large (L) layout size.
 
+```html
+<div data-o-grid-colspan="center Luncenter"></div>
+```
+
+```scss
+.my-column {
+	@include oGridCenter;
+
+	@include oGridRespondTo(L) {
+		@include oGridUncenter;
+	}
+}
+```
+
+#### Push and pull columns
+
+```html
+<div data-o-grid-colspan="8 push4"></div>
+<div data-o-grid-colspan="4 pull8"></div>
+
+<div data-o-grid-colspan="L8 Lpush4"></div>
+<div data-o-grid-colspan="L4 Lpull8"></div>
+```
+
+```scss
+
+// Content is first in the source
+.content {
+	width: oGridColspan(8);
+	@include oGridPush(4); // outputs left: -33.333333333%;
+}
+
+// Sidebar comes second in the source but appears first on the left
+.sidebar {
+	width: oGridColspan(4);
+	@include oGridPull(8); // outputs right: -66.666666667%;
+}
+```
+
+#### Add space before a column
+
+```html
+<div data-o-grid-colspan="8 offset4"></div>
+
+<div data-o-grid-colspan="L8 Loffset4"></div>
+```
+
+```scss
+.my-element {
+	width: oGridColspan(8);
+	@include oGridOffset(4); // outputs margin-left: 33.333333333%;
+}
+```
+
 #### Snappy mode
 
 In fluid mode (see `$o-grid-mode`), a set of rows may snap between fixed layouts as the viewport gets larger:
@@ -211,6 +265,37 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
 
+#### Serve layout rules to modern browsers and IE 8 only
+
+Typically, you'd want older browsers to show no layout at all,
+only stacked full-width columns.
+
+To serve layout rules to IE 8 and modern browsers only, scope them inside
+the `oGridRules` helper:
+
+```scss
+@include oGridRules { // Prevents from serving layout in the core experience
+	el {
+		width: oGridColspan(8);
+	}
+}
+```
+
+Outputs:
+
+```scss
+@media \0screen { // IE8 only
+	el {
+		width: 66.666666667%;
+	}
+}
+@media screen only { // Modern browsers only
+	el {
+		width: 66.666666667%;
+	}
+}
+```
+
 #### *Unstyle* a row or a column
 
 ```scss
@@ -225,35 +310,53 @@ It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media quer
 
 #### Variables
 
-All the variables used by the grid (see `src/scss/_variables.scss`) can be used in your own sass stylesheets but *must not* be overwritten at the component/module level.
+All the variables used by the grid (see `src/scss/_variables.scss`) can be used in your own Sass stylesheets but *must not* be overwritten at the component/module level.
 
 ```scss
-// -------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Responsive behaviour configuration
-// -------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-// Silent mode
-$o-grid-is-silent: true;
+/// Silent mode
+///
+/// @type Bool
+///
+/// @link http://origami.ft.com/docs/syntax/scss/#silent-styles “Silent” styles in Origami's documentation
+$o-grid-is-silent: true !default;
 
-// Mode: fluid (default), snappy (snaps between layouts), fixed
-$o-grid-mode: 'fluid';
+/// Grid mode
+/// - fluid: full width until $o-grid-max-width (default: 1210px)
+/// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
+///           and then snaps into a larger fixed layout at each breakpoint
+/// - fixed: always fixed-width with the layout defined by $o-grid-fixed-layout (default: L)
+///
+/// @type String - one of fluid (default), snappy, fixed
+$o-grid-mode: 'fluid' !default;
 
-// Layout to default to when the grid has a fixed width
-$o-grid-fixed-layout: 'L';
+/// Layout to default to when the grid has a fixed width (not fluid)
+///
+/// @type String - One of $o-grid-layouts
+$o-grid-fixed-layout: 'L' !default;
 
-// When the grid start snapping between fixed-width layouts
-// in the case where a row has the `o-grid-row--snappy` class
-// or the grid mode is 'snappy'.
+/// When the grid start snapping between fixed-width layouts
+/// in the case where a row has the `o-grid-row--snappy` class
+///
+/// @type String
 $o-grid-start-snappy-mode-at: 'M' !default;
 
-// Turn the enhanced experience on / off
-//
-// When set to `false`, the core experience will be displayed
-// (useful for debugging purposes)
-$o-grid-enable-enhanced-experience: true;
+/// Turn the enhanced experience on / off
+///
+/// When set to `false`, the core experience will be displayed
+/// (useful for debugging purposes)
+///
+/// @type Bool - set to false to view the core experience only
+$o-grid-enable-enhanced-experience: true !default;
 
-// Show the currently active breakpoint and output loaded settings
-$o-grid-debug-mode: false;
+/// Show the currently active breakpoint and output loaded settings
+/// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
+///
+/// @type Bool
+$o-grid-debug-mode: false !default;
 
 /// Output IE 8-specific rules?
 /// - false: no IE8 support at all
@@ -264,26 +367,77 @@ $o-grid-debug-mode: false;
 $o-grid-ie8-rules: 'inline' !default;
 
 
-// -------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Grid settings and dimensions
-// -------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-// Number of columns
-$o-grid-columns: 12;
+/// Number of columns
+///
+/// @type Number (unitless)
+$o-grid-columns: 12 !default;
 
-// Gutter size, in pixels
-$o-grid-gutter: 10px;
+/// Gutter size, in pixels
+///
+/// @type Number
+$o-grid-gutter: 10px !default;
 
-// Minimum width, in pixels
-$o-grid-min-width: 240px;
+/// Minimum width, in pixels
+///
+/// @type Number
+$o-grid-min-width: 240px !default;
 
-// Layouts
+/// Full width of the grid: combined width of columns, gutters and outer margins
+/// for a specific column width
+///
+/// @access private
+///
+/// @param {Number} column-width - desired width of a grid column
+///
+/// @returns {Number} width of the grid, in pixels
+@function _oGridWidth($column-width) {
+	$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
+	$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
+	@return ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
+}
+
+/// Layouts
+///
+/// Each layout is calculated following a specific column width,
+/// in order to base breakpoints on the structure of the grid itself
+///
+/// @type Map
 $o-grid-layouts: (
-	S:  490px,
-	M:  730px,
-	L:  970px,
-	XL: 1210px
-);
+	S:  _oGridWidth($column-width: 30px), // 490px
+	M:  _oGridWidth($column-width: 50px), // 730px
+	L:  _oGridWidth($column-width: 70px), // 970px
+	XL: _oGridWidth($column-width: 90px)  // 1210px
+) !default;
+
+/// Layout names
+///
+/// @access private
+/// @type List
+$_o-grid-layout-names: map-keys($o-grid-layouts) !default;
+
+// When snappy mode is enabled, force $o-grid-max-width to the largest layout width
+// instead of the default $o-grid-max-width
+@if $o-grid-mode == 'snappy' {
+	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
+}
+
+/// Maximum grid width
+/// Defaults to the largest layout width
+///
+/// @access private
+/// @type Number
+$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
+
+/// Current scope
+///
+/// @access private
+/// @type String
+$_o-grid-scope: 'global';
+
 ```
 
 ### Gotchas

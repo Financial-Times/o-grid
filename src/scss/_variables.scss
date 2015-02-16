@@ -14,6 +14,13 @@
 /// @link http://origami.ft.com/docs/syntax/scss/#silent-styles “Silent” styles in Origami's documentation
 $o-grid-is-silent: true !default;
 
+/// Import once
+/// - Guarantees the grid styles will only be outputted once no matter how many times the grid is unsilenced
+/// @type Bool
+$o-grid-output-once: false !default;
+
+$_o-grid-outputted: false !default;
+
 /// Grid mode
 /// - fluid: full width until $o-grid-max-width (default: 1210px)
 /// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),

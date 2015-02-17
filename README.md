@@ -11,7 +11,9 @@ It supports browsers with support for *CSS @media queries* and *box-sizing*.
 [Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
 ## Browser support
-This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+
+Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/box-sizing-polyfill) to support give better support to IE < 8.
 
 ### Grid dimensions
 

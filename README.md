@@ -316,14 +316,6 @@ $o-grid-fixed-layout: 'L' !default;
 /// @type String
 $o-grid-start-snappy-mode-at: 'M' !default;
 
-/// Turn the enhanced experience on / off
-///
-/// When set to `false`, the core experience will be displayed
-/// (useful for debugging purposes)
-///
-/// @type Bool - set to false to view the core experience only
-$o-grid-enable-enhanced-experience: true !default;
-
 /// Show the currently active breakpoint and output loaded settings
 /// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
 ///
@@ -410,6 +402,19 @@ $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
 /// @type String
 $_o-grid-scope: 'global';
 
+```
+
+### JavaScript Helper
+
+#### `getCurrentLayout()`
+
+Returns the name of the layout currently displayed.
+
+```js
+var oGrid = require('o-grid/main');
+
+console.log(oGrid.getCurrentLayout());
+// > XS, S, M, L, XL
 ```
 
 ### Gotchas

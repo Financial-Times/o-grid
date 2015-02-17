@@ -265,36 +265,6 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
 
-#### Serve layout rules to modern browsers and IE 8 only
-
-Typically, you'd want older browsers to show no layout at all,
-only stacked full-width columns.
-
-To serve layout rules to IE 8 and modern browsers only, scope them inside
-the `oGridRules` helper:
-
-```scss
-@include oGridRules { // Prevents from serving layout in the core experience
-	el {
-		width: oGridColspan(8);
-	}
-}
-```
-
-Outputs:
-
-```scss
-@media \0screen { // IE8 only
-	el {
-		width: 66.666666667%;
-	}
-}
-@media screen only { // Modern browsers only
-	el {
-		width: 66.666666667%;
-	}
-}
-```
 
 #### *Unstyle* a row or a column
 

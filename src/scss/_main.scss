@@ -142,25 +142,6 @@
 	}
 }
 
-/// Wrapper to output cross-browser code
-///
-/// @example scss
-/// .element {
-///   // Core experience rules (IE <= 7…)
-///
-/// 	@include oGridRules {
-/// 		// Enhanced experience rules
-/// 	}
-/// }
-@mixin oGridRules {
-	@include oGridTargetIE8 {
-		@content;
-	}
-	@include oGridTargetModernBrowsers {
-		@content;
-	}
-}
-
 
 /// Human friendly names for portions and centering:
 ///
@@ -245,7 +226,10 @@
 	@if $experience == null {
 		@include oGridColumn($experience: 'core');
 
-		@include oGridRules {
+		@include oGridTargetIE8 {
+			@include oGridColumn($experience: 'enhanced');
+		}
+		@include oGridTargetModernBrowsers {
 			@include oGridColumn($experience: 'enhanced');
 		}
 	}
@@ -264,7 +248,10 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			@include oGridRules {
+			@include oGridTargetIE8 {
+				width: oGridColspan($span);
+			}
+			@include oGridTargetModernBrowsers {
 				width: oGridColspan($span);
 			}
 		}
@@ -277,7 +264,11 @@
 				@if $layout-span == 'hide' {
 					display: none;
 				} @else {
-					@include oGridRules {
+					@include oGridTargetIE8 {
+						display: block;
+						width: oGridColspan($layout-span);
+					}
+					@include oGridTargetModernBrowsers {
 						display: block;
 						width: oGridColspan($layout-span);
 					}

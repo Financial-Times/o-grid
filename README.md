@@ -430,6 +430,20 @@ console.log(oGrid.getCurrentLayout());
 // > XS, S, M, L, XL
 ```
 
+
+### Grid Bookmarklet
+
+1. Create a new Bookmark with this URL:
+	```js
+	javascript:(function(){var s=document.createElement("script");s.src="http://www.kaelig.fr/grid-displayer/bookmarklet.js";document.head.appendChild(s);})();
+	```
+
+2. Load a website
+3. Click the bookmarklet (the overlay should appear)
+4. Check the alignment of the layout with the grid
+
+![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
+
 ### Gotchas
 
 #### Fixed/Absolute positioning

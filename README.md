@@ -59,6 +59,8 @@ The grid is divided into 12 columns and column instances can span any number of 
 <div data-o-grid-colspan="{values}"></div>
 ```
 
+#### Using numbers
+
 * `{0-12}` - number of columns to span by default
 * `S{0-12}` - number of columns to span at the small layout and up
 * `M{0-12}` - number of columns to span at the medium layout and up
@@ -67,11 +69,12 @@ The grid is divided into 12 columns and column instances can span any number of 
 
 e.g. `<div data-o-grid-colspan="6 L8"></div>`
 
-<a name="keywords"></a>Keywords:
+#### Using keywords<a name="keywords"></a>
 
-* one-half
-* one-third, two-thirds
-* one-quarter, three-quarters
+* `hide`
+* `one-half`
+* `one-third`, `two-thirds`
+* `one-quarter`, `three-quarters`
 
 e.g. `<div data-o-grid-colspan="one-half Ltwo-thirds"></div>`
 

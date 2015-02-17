@@ -1,9 +1,8 @@
 $o-grid-mode: 'fixed';
-$o-grid-fixed-layout: 'M';
 $o-grid-ie8-rules: 'only';
 
 @import "common";
 
 .demo:before {
-	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout}, $o-grid-mode: #{$o-grid-mode}, $o-grid-ie8-rules: #{$o-grid-ie8-rules}';
+	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout} (default), $o-grid-mode: #{$o-grid-mode}, $o-grid-ie8-rules: #{$o-grid-ie8-rules}';
 }

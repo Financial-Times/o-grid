@@ -36,4 +36,11 @@ body {
 	h2 {
 		@include oGridRow;
 	}
+	// Display configuration information
+	&:before {
+		display: block;
+		text-align: center;
+		font-family: monaco, monospace;
+		padding-top: 4px;
+	}
 }

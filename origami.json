@@ -31,11 +31,6 @@
             "description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
         },
         {
-            "path": "/demos/core-experience.html",
-            "expanded": false,
-            "description": "Forced core experience, where all columns stack on top of each other"
-        },
-        {
             "path": "/demos/ie8.html",
             "expanded": false,
             "description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"

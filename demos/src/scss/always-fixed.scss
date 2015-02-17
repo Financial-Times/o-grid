@@ -2,3 +2,7 @@ $o-grid-mode: 'fixed';
 $o-grid-fixed-layout: 'S';
 
 @import "common";
+
+.demo:before {
+	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout}, $o-grid-mode: #{$o-grid-mode}';
+}

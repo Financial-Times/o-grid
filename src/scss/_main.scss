@@ -9,15 +9,27 @@
 ///  .my-large-container { width: oGridGetMaxWidthForLayout(L); }
 ///
 /// @param {String} $size - one of $layouts
-@function oGridGetMaxWidthForLayout($layout-name) {
+/// @param {String} $grid-mode [$o-grid-mode]
+@function oGridGetMaxWidthForLayout($layout-name, $grid-mode: $o-grid-mode) {
+	$grid-is-responsive: $grid-mode != 'fixed';
+
 	$index: index($_o-grid-layout-names, $layout-name);
 
+	// Largest layout: return its width directly
 	@if $index == length($_o-grid-layout-names) {
 		@return $_o-grid-max-width;
 	}
 
-	$next-layout: nth($_o-grid-layout-names, $index + 1);
-	@return map-get($o-grid-layouts, $next-layout);
+	// Smaller layouts:
+	@if $grid-is-responsive {
+		// - The grid is responsive (fluid or snappy):
+		//   return the next larger layout width
+		$next-layout: nth($_o-grid-layout-names, $index + 1);
+		@return map-get($o-grid-layouts, $next-layout);
+	} @else {
+		// - The grid is fixed, return the current layout width
+		@return map-get($o-grid-layouts, $layout-name);
+	}
 }
 
 /// % width of an element in the grid
@@ -321,7 +333,7 @@
 
 	// Serve a fixed-width layout to IE8
 	@include oGridTargetIE8 {
-		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
 	}
 
 	// Nested rows overrides
@@ -341,7 +353,7 @@
 
 	@if $grid-mode == 'fixed' {
 		// If the grid isn't fluid, we set it to a certain width
-		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
 	} @else {
 		max-width: $_o-grid-max-width;
 
@@ -560,8 +572,8 @@
 	@include oGridTargetIE8 {
 		// Output grid modifiers for layouts up to the fixed layout displayed by IE8
 		$last-layout-index: index($_o-grid-layout-names, $o-grid-fixed-layout);
-		@for $i from 1 through $last-layout-index {
-			@include _oGridModifiersForLayout(nth($_o-grid-layout-names, $i));
+		@for $index from 1 through $last-layout-index {
+			@include _oGridModifiersForLayout(nth($_o-grid-layout-names, $index));
 		}
 	}
 

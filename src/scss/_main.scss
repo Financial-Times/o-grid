@@ -164,44 +164,42 @@
 		display: none;
 	}
 
-	@if $o-grid-enable-enhanced-experience {
-		// Center and un-center
-		[data-o-grid-colspan~="#{$layout-name}center"] {
-			@include oGridCenter;
+	// Center and un-center
+	[data-o-grid-colspan~="#{$layout-name}center"] {
+		@include oGridCenter;
+	}
+	// Only output "uncenter" modifier with a layout (e.g. XLuncenter)
+	@if $layout-name != null {
+		[data-o-grid-colspan~="#{$layout-name}uncenter"] {
+			@include oGridUncenter;
 		}
-		// Only output "uncenter" modifier with a layout (e.g. XLuncenter)
-		@if $layout-name != null {
-			[data-o-grid-colspan~="#{$layout-name}uncenter"] {
-				@include oGridUncenter;
-			}
-		}
+	}
 
-		// Pull, push, offset
-		@for $colspan from 0 through ($o-grid-columns - 1) {
-			[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
-				@include oGridPush($colspan);
-			}
-			[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
-				@include oGridPull($colspan);
-			}
-			[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
-				@include oGridOffset($colspan);
-			}
+	// Pull, push, offset
+	@for $colspan from 0 through ($o-grid-columns - 1) {
+		[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
+			@include oGridPush($colspan);
 		}
+		[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
+			@include oGridPull($colspan);
+		}
+		[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
+			@include oGridOffset($colspan);
+		}
+	}
 
-		// Portions
-		@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
-			[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
-				// Restore visibility from `display: none`
-				// if `data-o-grid-colspan` was set to `0` or `hide`
-				display: block;
-				width: oGridColspan($human-friendly-name);
-			}
+	// Portions
+	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
+		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
+			// Restore visibility from `display: none`
+			// if `data-o-grid-colspan` was set to `0` or `hide`
+			display: block;
+			width: oGridColspan($human-friendly-name);
 		}
 	}
 }
 
-/// Base column styles for the enhanced experience
+/// Base column styles
 ///
 /// @example scss
 ///   el { @include oGridColumn; }
@@ -210,29 +208,13 @@
 ///   el { @include oGridColumn((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $layouts [null]
-/// @param {String} $experience [null]
-@mixin oGridColumn($span: null, $experience: null) {
-	@if $experience == 'core' {
-		position: relative; // Required for push and pull
-		padding-left: $o-grid-gutter / 2;
-		padding-right: $o-grid-gutter / 2;
-	}
-	@if $o-grid-enable-enhanced-experience {
-		@if $experience == 'enhanced' {
-			float: left;
-			box-sizing: border-box;
-		}
-	}
-	@if $experience == null {
-		@include oGridColumn($experience: 'core');
+@mixin oGridColumn($span: null) {
+	position: relative; // Required for push and pull
+	padding-left: $o-grid-gutter / 2;
+	padding-right: $o-grid-gutter / 2;
+	float: left;
+	box-sizing: border-box;
 
-		@include oGridTargetIE8 {
-			@include oGridColumn($experience: 'enhanced');
-		}
-		@include oGridTargetModernBrowsers {
-			@include oGridColumn($experience: 'enhanced');
-		}
-	}
 	@if $span {
 		@include oGridColspan($span);
 	}
@@ -312,90 +294,74 @@
 
 /// Base row styles
 ///
-/// @param {String} $experience [null]
 /// @param {String} $grid-mode [$o-grid-mode]
 /// @param {String} $selector [null] - e.g. '.o-grid-row'
-@mixin oGridRow($experience: null, $grid-mode: $o-grid-mode, $selector: null) {
-	// We build a core experience (usually: for browsers that don't cut the mustard)…
-	@if $experience == 'core' {
+@mixin oGridRow($grid-mode: $o-grid-mode, $selector: null) {
+	clear: both;
+	min-width: $o-grid-min-width;
+	// Older browsers get a fixed-width layout
+	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+	padding-left: $o-grid-gutter / 2;
+	padding-right: $o-grid-gutter / 2;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+
+	// Clearfix
+	zoom: 1;
+
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+	}
+	&:after {
 		clear: both;
-		min-width: $o-grid-min-width;
-		// Older browsers get a fixed-width layout
-		max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-		padding-left: $o-grid-gutter / 2;
-		padding-right: $o-grid-gutter / 2;
-		box-sizing: border-box;
-		margin-left: auto;
-		margin-right: auto;
+	}
 
-		// Clearfix
-		zoom: 1;
+	// Serve a fixed-width layout to IE8
+	@include oGridTargetIE8 {
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+	}
 
-		&:before,
-		&:after {
-			content: ' ';
-			display: table;
-		}
-		&:after {
-			clear: both;
-		}
-
-		// Nested rows overrides
-		@if $selector {
-			// Substract outer gutter space from nested rows
-			// and restore fluidity
-			#{unquote($selector)} {
-				width: auto;
-				min-width: 0;
-				max-width: none;
-				margin-left: -$o-grid-gutter / 2;
-				margin-right: -$o-grid-gutter / 2;
-				padding-left: 0;
-				padding-right: 0;
-			}
+	// Nested rows overrides
+	@if $selector {
+		// Substract outer gutter space from nested rows
+		// and restore fluidity
+		#{unquote($selector)} {
+			width: auto;
+			min-width: 0;
+			max-width: none;
+			margin-left: -$o-grid-gutter / 2;
+			margin-right: -$o-grid-gutter / 2;
+			padding-left: 0;
+			padding-right: 0;
 		}
 	}
 
-	// …and then build a better experience on top of it for modern browsers:
-	@if $o-grid-enable-enhanced-experience {
-		@if $experience == 'enhanced' {
+	@if $grid-mode == 'fixed' {
+		// If the grid isn't fluid, we set it to a certain width
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+	} @else {
+		max-width: $_o-grid-max-width;
 
-			@if $grid-mode == 'fixed' {
-				// If the grid isn't fluid, we set it to a certain width
-				width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-			} @else {
-				max-width: $_o-grid-max-width;
-
-				@if 'global' == $_o-grid-scope {
-					@each $layout-name in $_o-grid-layout-names {
-						@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
-							@include oGridRespondTo($layout-name) {
-								// If the grid mode is snappy, all rows should be snappy
-								@if $grid-mode == 'snappy' {
-									max-width: map-get($o-grid-layouts, $layout-name);
-								}
-								@if $grid-mode == 'fluid' {
-									// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
-									@at-root .o-grid-snappy {
-										max-width: map-get($o-grid-layouts, $layout-name);
-									}
-								}
+		@if 'global' == $_o-grid-scope {
+			@each $layout-name in $_o-grid-layout-names {
+				@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
+					@include oGridRespondTo($layout-name) {
+						// If the grid mode is snappy, all rows should be snappy
+						@if $grid-mode == 'snappy' {
+							max-width: map-get($o-grid-layouts, $layout-name);
+						}
+						@if $grid-mode == 'fluid' {
+							// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
+							@at-root .o-grid-snappy {
+								max-width: map-get($o-grid-layouts, $layout-name);
 							}
 						}
 					}
 				}
 			}
-		}
-	}
-
-	@if $experience == null {
-		@include oGridRow($experience: 'core', $grid-mode: $grid-mode, $selector: $selector);
-
-		@include oGridTargetIE8 {
-			@include oGridRow($experience: 'enhanced', $grid-mode: 'fixed', $selector: $selector);
-		}
-		@include oGridTargetModernBrowsers {
-			@include oGridRow($experience: 'enhanced', $grid-mode: $grid-mode, $selector: $selector);
 		}
 	}
 }
@@ -475,90 +441,22 @@
 	}
 }
 
-/// Columns and rows base structure
-///
-/// @param {String} $experience [null]
-@mixin oGridLayout($experience: null, $grid-mode: $o-grid-mode) {
-	@if $experience == 'core' or $experience == null {
-		// Basic layout styles
-		.o-grid-row {
-			@include oGridRow($experience: 'core', $selector: '.o-grid-row');
-		}
-		[data-o-grid-colspan] {
-			@include oGridColumn($experience: 'core');
-		}
-	}
-	@if $o-grid-enable-enhanced-experience {
-		@if $experience == 'enhanced' or $experience == null {
-			.o-grid-row {
-				@include oGridRow($experience: 'enhanced', $grid-mode: $grid-mode);
-			}
-
-			// If the grid is fluid, use this class to enable snappy mode on a set of rows
-			@if $grid-mode == 'fluid' {
-				.o-grid-snappy {
-					margin-left: auto;
-					margin-right: auto;
-				}
-			}
-
-			[data-o-grid-colspan] {
-				@include oGridColumn($experience: 'enhanced');
-
-				// Prevent whitespace between the last column and the right edge of the layout
-				+ [data-o-grid-colspan]:last-child {
-					float: right;
-				}
-			}
-			@for $colspan from 1 through $o-grid-columns {
-				[data-o-grid-colspan~="#{$colspan}"] {
-					width: oGridColspan($colspan, $o-grid-columns);
-				}
-			}
-			// Compact, gutterless row of columns
-			.o-grid-row-compact, // Deprecated, here for retrocompatibility
-			.o-grid-row--compact {
-				&,
-				> [data-o-grid-colspan] {
-					@include oGridRemoveGutters;
-				}
-			}
-
-			// one-half, one-third, three-quarters, center, uncenter…
-			@include _oGridHumanFriendlyKeywords;
-
-			// Gutter helpers:
-			// Remove gutters on a row or a column, across all layouts
-			.o-grid-remove-gutters,
-			.o-grid-remove-gutters--left {
-				@include oGridRemoveGutters('left');
-			}
-			.o-grid-remove-gutters,
-			.o-grid-remove-gutters--right {
-				@include oGridRemoveGutters('right');
-			}
-		}
-	}
-}
-
 /// Remove gutters from a column and re-align its child rows
 ///
 /// @param {String} $side [null] - left, right
 @mixin oGridRemoveGutters($side: null) {
-	@if $o-grid-enable-enhanced-experience {
-		@if $side == null or $side == 'left' {
-			padding-left: 0;
+	@if $side == null or $side == 'left' {
+		padding-left: 0;
 
-			.o-grid-row {
-				margin-left: 0;
-			}
+		.o-grid-row {
+			margin-left: 0;
 		}
-		@if $side == null or $side == 'right' {
-			padding-right: 0;
+	}
+	@if $side == null or $side == 'right' {
+		padding-right: 0;
 
-			.o-grid-row {
-				margin-right: 0;
-			}
+		.o-grid-row {
+			margin-right: 0;
 		}
 	}
 }
@@ -573,33 +471,31 @@
 ///
 /// @param {String} $layout-name - One of $o-grid-layouts
 @mixin _oGridModifiersForLayout($layout-name) {
-	@if $o-grid-enable-enhanced-experience {
-		@include _oGridHumanFriendlyKeywords($layout-name);
+	@include _oGridHumanFriendlyKeywords($layout-name);
 
-		@for $colspan from 1 through $o-grid-columns {
-			[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
-				// Restore visibility from `display: none`
-				// if `data-o-grid-colspan` was set to `0` or `hide`
-				display: block;
+	@for $colspan from 1 through $o-grid-columns {
+		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
+			// Restore visibility from `display: none`
+			// if `data-o-grid-colspan` was set to `0` or `hide`
+			display: block;
 
-				// Apply width in %
-				width: oGridColspan($colspan, $o-grid-columns);
-			}
+			// Apply width in %
+			width: oGridColspan($colspan, $o-grid-columns);
 		}
+	}
 
-		// Gutter helpers:
-		// Remove gutters on a row or a column for a given layout
-		// Examples:
-		//  <div class="o-row o-grid-remove-gutters--S"></div>
-		//  <div data-o-grid-colspan="6" class="o-grid-remove-gutters--left--S"></div>
-		.o-grid-remove-gutters--#{$layout-name},
-		.o-grid-remove-gutters--left--#{$layout-name} {
-			@include oGridRemoveGutters('left');
-		}
-		.o-grid-remove-gutters--#{$layout-name},
-		.o-grid-remove-gutters--right--#{$layout-name} {
-			@include oGridRemoveGutters('right');
-		}
+	// Gutter helpers:
+	// Remove gutters on a row or a column for a given layout
+	// Examples:
+	//  <div class="o-row o-grid-remove-gutters--S"></div>
+	//  <div data-o-grid-colspan="6" class="o-grid-remove-gutters--left--S"></div>
+	.o-grid-remove-gutters--#{$layout-name},
+	.o-grid-remove-gutters--left--#{$layout-name} {
+		@include oGridRemoveGutters('left');
+	}
+	.o-grid-remove-gutters--#{$layout-name},
+	.o-grid-remove-gutters--right--#{$layout-name} {
+		@include oGridRemoveGutters('right');
 	}
 }
 
@@ -609,27 +505,59 @@
 /// - IE 8 (fixed layout, with columns)
 /// - modern browsers (fluid layout, with columns)
 @mixin oGridGenerate {
-	@include oGridLayout($experience: 'core');
-
-	// Serve the enhanced layout to both IE 8 and modern browsers
-	@include oGridTargetIE8 {
-		@include oGridLayout($experience: 'enhanced', $grid-mode: 'fixed');
+	// Basic layout styles
+	.o-grid-row {
+		@include oGridRow($o-grid-mode, $selector: '.o-grid-row');
 	}
-	@include oGridTargetModernBrowsers {
-		@include oGridLayout($experience: 'enhanced');
+	[data-o-grid-colspan] {
+		@include oGridColumn;
+
+		// Prevent whitespace between the last column and the right edge of the layout
+		+ [data-o-grid-colspan]:last-child {
+			float: right;
+		}
+	}
+
+	// If the grid is fluid, use this class to enable snappy mode on a set of rows
+	@if $o-grid-mode == 'fluid' {
+		.o-grid-snappy {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	@for $colspan from 1 through $o-grid-columns {
+		[data-o-grid-colspan~="#{$colspan}"] {
+			width: oGridColspan($colspan, $o-grid-columns);
+		}
+	}
+
+	// Compact, gutterless row of columns
+	.o-grid-row-compact, // Deprecated, here for retrocompatibility
+	.o-grid-row--compact {
+		&,
+		> [data-o-grid-colspan] {
+			@include oGridRemoveGutters;
+		}
+	}
+
+	// one-half, one-third, three-quarters, center, uncenter…
+	@include _oGridHumanFriendlyKeywords;
+
+	// Gutter helpers:
+	// Remove gutters on a row or a column, across all layouts
+	.o-grid-remove-gutters,
+	.o-grid-remove-gutters--left {
+		@include oGridRemoveGutters('left');
+	}
+	.o-grid-remove-gutters,
+	.o-grid-remove-gutters--right {
+		@include oGridRemoveGutters('right');
 	}
 
 	// For IE 8, output grid helper classes and data- attributes
 	// for the layout defined in $o-grid-fixed-layout
 	@include oGridTargetIE8 {
-		.o-grid-row {
-			width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-
-			.o-grid-row {
-				width: auto;
-			}
-		}
-
 		// Output grid modifiers for layouts up to the fixed layout displayed by IE8
 		$last-layout-index: index($_o-grid-layout-names, $o-grid-fixed-layout);
 		@for $i from 1 through $last-layout-index {

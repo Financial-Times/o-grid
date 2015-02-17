@@ -3,7 +3,7 @@
 ## About
 
 o-grid defines a 12 column responsive, nestable grid system for laying out HTML pages and modules.
-It supports all browsers with support for *CSS @media queries*, with fixed-width fallback for older browsers.
+It supports browsers with support for *CSS @media queries* and *box-sizing*.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
@@ -11,7 +11,7 @@ It supports all browsers with support for *CSS @media queries*, with fixed-width
 [Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
 ## Browser support
-This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
 
 ### Grid dimensions
 

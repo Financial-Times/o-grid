@@ -3,7 +3,7 @@
 ## About
 
 o-grid defines a 12 column responsive, nestable grid system for laying out HTML pages and modules.
-It supports all browsers with support for *CSS @media queries*, with fixed-width fallback for older browsers.
+It supports browsers with support for *CSS @media queries* and *box-sizing*.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
@@ -11,7 +11,9 @@ It supports all browsers with support for *CSS @media queries*, with fixed-width
 [Report a bug](https://github.com/Financial-Times/o-grid/issues)
 
 ## Browser support
-This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+
+Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/box-sizing-polyfill) to support give better support to IE < 8.
 
 ### Grid dimensions
 
@@ -265,36 +267,6 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
 
-#### Serve layout rules to modern browsers and IE 8 only
-
-Typically, you'd want older browsers to show no layout at all,
-only stacked full-width columns.
-
-To serve layout rules to IE 8 and modern browsers only, scope them inside
-the `oGridRules` helper:
-
-```scss
-@include oGridRules { // Prevents from serving layout in the core experience
-	el {
-		width: oGridColspan(8);
-	}
-}
-```
-
-Outputs:
-
-```scss
-@media \0screen { // IE8 only
-	el {
-		width: 66.666666667%;
-	}
-}
-@media screen only { // Modern browsers only
-	el {
-		width: 66.666666667%;
-	}
-}
-```
 
 #### *Unstyle* a row or a column
 

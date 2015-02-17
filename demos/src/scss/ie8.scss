@@ -1,15 +1,8 @@
 $o-grid-mode: 'fixed';
-$o-grid-fixed-layout: 'M';
 $o-grid-ie8-rules: 'only';
 
 @import "common";
 
-@include oGridTargetModernBrowsers {
-	.o-grid-row {
-		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-
-		.o-grid-row {
-			width: auto;
-		}
-	}
+.demo:before {
+	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout} (default), $o-grid-mode: #{$o-grid-mode}, $o-grid-ie8-rules: #{$o-grid-ie8-rules}';
 }

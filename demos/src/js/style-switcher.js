@@ -86,15 +86,6 @@ if (![].includes) {
 }());
 
 function getExpectedSpans(el) {
-	// In core experience, a column is either full-width or hidden
-	if (document.documentElement.className.includes('core-experience')) {
-		// Check if data-o-grid-colspan="0…" or data-o-grid-colspan="hide…"
-		if (/\b0|hide\b/.test(el.dataset.oGridColspan)) {
-			return 0;
-		}
-		return 12;
-	}
-
 	var layout = getCurrentLayout();
 
 	var rules = el.dataset.oGridColspan;
@@ -114,11 +105,6 @@ function getExpectedSpans(el) {
 
 // Get offset, pull, push
 function getExpectedModifier(el, modifier) {
-	// In core experience, a column is never, pulled, pushed nor has an offset
-	if (document.documentElement.className.includes('core-experience')) {
-		return 0;
-	}
-
 	var rules = el.dataset.oGridColspan;
 	var re = new RegExp(modifier, "g");
 
@@ -147,10 +133,6 @@ function getExpectedModifier(el, modifier) {
 }
 
 function getExpectedGutter(el, side) {
-	if (document.documentElement.className.includes('core-experience')) {
-		return true; // Core experience always has gutters
-	}
-
 	var layout = getCurrentLayout();
 
 	var gutterClassName = 'o-grid-remove-gutters';
@@ -186,10 +168,6 @@ function highlightUnexpectedGutter(el) {
 
 
 function getExpectedMargin(el, side) {
-	if (document.documentElement.className.includes('core-experience')) {
-		return 0; // Core experience never has margins
-	}
-
 	var layout = getCurrentLayout();
 
 	var centerModifier = 'center';
@@ -259,10 +237,6 @@ function highlightUnexpectedWidth(el) {
 
 	if ($(el).parents('.o-grid-row--compact').length > 0) {
 		outerMargins = 0;
-	}
-
-	if (document.documentElement.className.includes('core-experience')) {
-		outerMargins = 10; // Restore default margins if column is in a compact row
 	}
 
 	// If the element is in a nested row,

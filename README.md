@@ -65,6 +65,16 @@ The grid is divided into 12 columns and column instances can span any number of 
 * `L{0-12}` - number of columns to span at the large layout and up
 * `XL{0-12}` - number of columns to span at the extra large layout and up
 
+e.g. `<div data-o-grid-colspan="6 L8"></div>`
+
+<a name="keywords"></a>Keywords:
+
+* one-half
+* one-third, two-thirds
+* one-quarter, three-quarters
+
+e.g. `<div data-o-grid-colspan="one-half Ltwo-thirds"></div>`
+
 ### Examples
 
 A full width column for all sizes except large screens and up, where it spans on 9 columns:

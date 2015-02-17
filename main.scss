@@ -53,8 +53,14 @@
 }
 
 @if $o-grid-is-silent == false {
-	@include oGridSurfaceCurrentLayout;
-	@include oGridGenerate;
+
+	// only output if either not outputted already or multiple outputs are allowed
+	@if $o-grid-output-once == false || $_o-grid-outputted == false {
+		@include oGridSurfaceCurrentLayout;
+		@include oGridGenerate;
+		// keep track of whether the grid has already been outputted
+		$_o-grid-outputted: true;
+	}
 
 	// Turn silent mode back on to avoid outputting the grid twice
 	$o-grid-is-silent: true;

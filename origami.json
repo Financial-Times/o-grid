@@ -34,11 +34,6 @@
             "path": "/demos/ie8.html",
             "expanded": false,
             "description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
-        },
-        {
-            "path": "/demos/test.html",
-            "expanded": false,
-            "description": "test demo"
         }
     ]
 }

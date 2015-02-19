@@ -270,4 +270,6 @@ var runTests = function () {
 	window.onresize = test;
 };
 
-if (document.querySelector('.demo-test')) runTests();
+if (document.querySelector('.demo-test')) {
+	runTests();
+}

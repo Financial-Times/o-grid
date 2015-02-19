@@ -26,7 +26,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 
 #### Layouts:
 
-* **Default (no layout name)** 240px - 489px
+* **Default (no layout name)** 240px - …
 * **Small (S)** 490px - 729px
 * **Medium (M)** 730px - 969px
 * **Large (L)** 970px to 1209px

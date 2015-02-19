@@ -26,7 +26,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 
 #### Layouts:
 
-* **Extra small (no layout name)** 240px - 489px
+* **Default (no layout name)** 240px - 489px
 * **Small (S)** 490px - 729px
 * **Medium (M)** 730px - 969px
 * **Large (L)** 970px to 1209px
@@ -427,7 +427,7 @@ Returns the name of the layout currently displayed.
 var oGrid = require('o-grid/main');
 
 console.log(oGrid.getCurrentLayout());
-// > XS, S, M, L, XL
+// > default, S, M, L, XL
 ```
 
 

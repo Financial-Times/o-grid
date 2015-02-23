@@ -1,12 +1,13 @@
-// Page widths
-$o-grid-min-width: 240px;
-$o-grid-small-max-width: 400px;
-$o-grid-medium-max-width: 450px;
-$o-grid-large-max-width: 760px;
-$o-grid-extra-large-max-width: 1160px;
+$o-grid-layouts: (
+	'S': 400px,
+	'M': 800px,
+	'L': 1000px
+);
 
-// Gutters
-$o-grid-default-gutter: 5px;
-$o-grid-small-gutter: 2px;
+$o-grid-gutter: 5px;
 
-@import '_common';
+@import 'common';
+
+.demo:before {
+	content: '$o-grid-gutter: #{$o-grid-gutter}, $o-grid-layouts: S: 400px, M: 800px, L: 1000px';
+}

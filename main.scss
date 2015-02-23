@@ -1,12 +1,61 @@
-@import "o-useragent/main";
+////
+/// @group o-grid
+/// @link http://registry.origami.ft.com/components/o-grid
+////
 
-@import "src/scss/_deprecated";
-@import "src/scss/_variables";
-@import "src/scss/_utils";
-@import "src/scss/_selectors";
-@import "src/scss/_gutters";
-@import "src/scss/_grid-generators";
+@import 'src/scss/variables';
+@import 'sass-mq/mq';
+@import 'src/scss/main';
 
-@import "src/scss/components/grid-default";
-@import "src/scss/components/grid-responsive";
-@import "src/scss/components/grid-fixed";
+/// Output debug information about the currently loaded layouts.
+///
+/// @param {Map} $layouts - Map of layouts
+@mixin oGridDebugInfo($layouts: $o-grid-layouts) {
+	/*! DEBUG
+	 * Layouts:
+	 * #{inspect($layouts)}
+	 */
+}
+
+@if $o-grid-debug-mode {
+	@include oGridDebugInfo;
+	@include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
+}
+
+/// Surface the layout currently displayed to make it readable in JS.
+///
+/// In IE 8, assume it is `$o-grid-fixed-layout`.
+///
+/// **n.b.:** Only works when silent mode is off.
+///
+/// @example js
+///  var getCurrentLayout = require('o-grid/src/js/getCurrentLayout');
+///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
+@mixin oGridSurfaceCurrentLayout {
+	head:after {
+		content: 'default'; // By default, we're exposing the XS layout (from 0 to S)
+		// Hide content visually
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+
+		@each $breakpoint in $_o-grid-layout-names {
+			@include oGridRespondTo($breakpoint) {
+				content: quote($breakpoint);
+			}
+		}
+	}
+}
+
+@if $o-grid-is-silent == false {
+	@include oGridSurfaceCurrentLayout;
+	@include oGridGenerate;
+
+	// Turn silent mode back on to avoid outputting the grid twice
+	$o-grid-is-silent: true;
+}

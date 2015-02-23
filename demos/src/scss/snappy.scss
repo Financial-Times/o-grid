@@ -1,0 +1,7 @@
+$o-grid-mode: 'snappy';
+
+@import "common";
+
+.demo:before {
+	content: '$o-grid-mode: #{$o-grid-mode}';
+}

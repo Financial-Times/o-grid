@@ -1,49 +1,39 @@
 {
-	"description": "Grid for responsive layouts",
-	"origamiType": "module",
-	"origamiVersion": 1,
-	"support": "https://github.com/Financial-Times/o-grid/issues",
-	"supportStatus": "active",
-	"browserFeatures": {
-		"required": [
-			"css-boxsizing"
-		]
-	},
-	"demos": [
-		{
-			"path": "/demos/default.html",
-			"expanded": true,
-			"description": "Grid with all default settings"
-		},
-		{
-			"path": "/demos/unresponsive.html",
-			"expanded": false,
-			"description": "Fluid grid with max width of 600px - mocks behaviour if media queries not supported"
-		},
-		{
-			"path": "/demos/non-fluid.html",
-			"expanded": false,
-			"description": "Demonstrates the behaviour of a page using a non-fluid version of the responsive grid.  Should have a jerky transition from one mq breakpoint to the next (i.e. each layout has a maximum width smaller than the next largest breakpoint)"
-		},
-		{
-			"path": "/demos/resized.html",
-			"expanded": false,
-			"description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1200px and gutters halved"
-		},
-		{
-			"path": "/demos/xl-disabled.html",
-			"expanded": false,
-			"description": "Responsive grid with the extra large layout disabled. Should demonstrate responsive behaviour, but the XL breakpoint is disabled, so the widths should show in red"
-		},
-		{
-			"path": "/demos/always-fixed.html",
-			"expanded": false,
-			"description": "Fixed grid at 960px across all browsers and devices.  Should always be fixed at the large layout"
-		},
-		{
-			"path": "/demos/test.html",
-			"expanded": false,
-			"description": "test demo"
-		}
-	]
+    "description": "Grid for responsive layouts",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "https://github.com/Financial-Times/o-grid/issues",
+    "supportStatus": "active",
+    "browserFeatures": {
+        "required": [
+            "css-boxsizing"
+        ]
+    },
+    "demos": [
+        {
+            "path": "/demos/default.html",
+            "expanded": true,
+            "description": "Grid with all default settings"
+        },
+        {
+            "path": "/demos/snappy.html",
+            "expanded": false,
+            "description": "Responsive grid that snaps between a larger fixed layout at each breakpoint"
+        },
+        {
+            "path": "/demos/resized.html",
+            "expanded": false,
+            "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved"
+        },
+        {
+            "path": "/demos/always-fixed.html",
+            "expanded": false,
+            "description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
+        },
+        {
+            "path": "/demos/ie8.html",
+            "expanded": false,
+            "description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
+        }
+    ]
 }

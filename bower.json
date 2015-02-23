@@ -1,7 +1,10 @@
 {
-	"name": "o-grid",
-	"main": ["main.scss"],
-	"dependencies": {
-		"o-useragent": ">=0.5.0 <3"
-	}
+  "name": "o-grid",
+  "main": [
+    "main.scss",
+    "main.js"
+  ],
+  "dependencies": {
+    "sass-mq": "sass-mq#^3.1.0"
+  }
 }

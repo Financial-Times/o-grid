@@ -4,18 +4,27 @@ body {
 
 .demo {
 	.demo-cell {
+		background-color: transparent;
+		zoom: 1;
 		min-height: 30px;
-		background: rgba(255, 255, 255, 0.5);
 		text-align: center;
 		padding-top: 10px;
 		overflow: hidden;
+
+		// Transparent background color in IE8
+		$rgba: rgba(#ffffff, 0.5);
+		$ie-hex-str: ie-hex-str($rgba);
+		// scss-lint:disable DuplicateProperty
+		background-color: $rgba;
+		// scss-lint:enable DuplicateProperty
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
 	}
 	.demo-row {
 		background: #bdcaff;
 		margin-top: 10px;
 		margin-bottom: 10px;
 		.demo-row {
-			background: #ffa898;
+			background: #dc73ff;
 		}
 	}
 	[class*='error'] .demo-cell {
@@ -24,34 +33,14 @@ body {
 	.selected-stylesheet {
 		background: #aaaaff;
 	}
-}
-
-
-/* Show the current media query layout mode */
-
-.demo-mode {
-	text-align: right;
-}
-.demo-mode:after {
-	font-weight: bold;
-}
-@include oGridRespondTo(S) {
-	.demo-mode:after {
-		content: "S";
+	h2 {
+		@include oGridRow;
 	}
-}
-@include oGridRespondTo(M) {
-	.demo-mode:after {
-		content: "M";
-	}
-}
-@include oGridRespondTo(L) {
-	.demo-mode:after {
-		content: "L";
-	}
-}
-@include oGridRespondTo(XL) {
-	.demo-mode:after {
-		content: "XL";
+	// Display configuration information
+	&:before {
+		display: block;
+		text-align: center;
+		font-family: monaco, monospace;
+		padding-top: 4px;
 	}
 }

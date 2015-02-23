@@ -1,3 +1,4 @@
+'use strict';
 var configurations = require('./configurations.json');
 var demos = [];
 
@@ -14,10 +15,10 @@ Object.keys(configurations).forEach(function(key) {
 demos.push({
 	name: 'test',
 	description: 'test demo',
-	data: 'demos/src/configurations.json',
-	js: 'demos/src/js/style-switcher.js',
 	sass: 'demos/src/scss/default.scss',
 	template: 'demos/src/test.mustache',
+	data: 'demos/src/configurations.json',
+	js: 'demos/src/js/style-switcher.js',
 	expanded: false
 });
 

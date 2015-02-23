@@ -356,3 +356,13 @@ console.log(oGrid.getCurrentLayout());
 4. Check the alignment of the layout with the grid
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
+
+====
+
+### How to upgrade from 2.x.x?
+
+- Layouts are now mobile first. It means that the `S` reads "S layout and up" (instead of "S layout only"). For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
+- Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead.
+- `<div class="o-grid-row" o-grid-colspan="12">` is deprecated (a row can't be a column at the same time). Use two elements instead
+- Search `oGridColumnWidth` and replace with `oGridColspan`
+- Search `o-grid-row-compact` and replace with `o-grid-row--compact`

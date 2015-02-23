@@ -1,4 +1,4 @@
-# o-grid
+# o-grid [![Build Status](https://travis-ci.org/Financial-Times/o-grid.svg?branch=master)](https://travis-ci.org/Financial-Times/o-grid)
 
 ## About
 
@@ -8,7 +8,7 @@ It supports browsers with support for *CSS @media queries* and *box-sizing*.
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
 
-[Report a bug](https://github.com/Financial-Times/o-grid/issues)
+[![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
 
 ## Browser support
 This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
@@ -435,7 +435,7 @@ console.log(oGrid.getCurrentLayout());
 
 1. Create a new Bookmark with this URL:
 	```js
-	javascript:(function(){var s=document.createElement("script");s.src="http://www.kaelig.fr/grid-displayer/bookmarklet.js";document.head.appendChild(s);})();
+	javascript:(function(){var s=document.createElement("script");s.src="https://rawgit.com/Financial-Times/o-grid/master/bookmarklet/bookmarklet.js";document.head.appendChild(s);})();
 	```
 
 2. Load a website

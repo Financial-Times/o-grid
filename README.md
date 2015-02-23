@@ -2,8 +2,9 @@
 
 ## About
 
-o-grid defines a 12 column responsive, nestable grid system for laying out HTML pages and modules.
-It supports browsers with support for *CSS @media queries* and *box-sizing*.
+o-grid defines a 12 column responsive, nestable grid system for laying out documents and modules.
+
+It works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
@@ -11,6 +12,7 @@ It supports browsers with support for *CSS @media queries* and *box-sizing*.
 [![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
 
 ## Browser support
+
 This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
 
 Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/box-sizing-polyfill) to support give better support to IE < 8.
@@ -34,29 +36,29 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 
 ## General use
 
-### Base classes
-Grid styles are typically applied to the html using two types declaration:
-
-* A `o-grid-row` class, added to the container element.  
-It forces that element to extend to the maximum width available (either the maximum width defined by the grid, or the parent element's width if using a nested grid)
-
-* A `data-o-grid-colspan` attribute, added to the element intended to conform to the grid's columns.  
-`data-o-grid-colspan=""` by itself floats an element to the left. Specific widths are specified by setting the value of the attribute (see below for more details)
-
-So, for example
+### Utility classes
 
 ```html
 <div class="o-grid-row">
-	<div data-o-grid-colspan="6">A div spanning 6 grid columns</div>
+	<!-- two divs, spanning a total of 12 columns -->
+	<div data-o-grid-colspan="8">A div, 8 columns wide</div>
+	<div data-o-grid-colspan="4">Another div, 4 columns wide</div>
 </div>
 ```
 
-### Specifying column widths
+### Responsive column widths
 
-The grid is divided into 12 columns and column instances can span any number of these 'grid-columns'. As the grid is responsive a different number of columns can be specified for each size of layout individually.
+A different number of columns can be specified for each size of layout individually:
 
 ```html
-<div data-o-grid-colspan="{values}"></div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6 L8">
+		Half by default, then 8 columns wide on Large layout and up
+	</div>
+	<div data-o-grid-colspan="6 L4">
+		Half by default, then 4 columns wide on Large layout and up
+	</div>
+</div>
 ```
 
 #### Using numbers
@@ -295,126 +297,37 @@ It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media quer
 
 #### Variables
 
-All the variables used by the grid (see `src/scss/_variables.scss`) can be used in your own Sass stylesheets but *must not* be overwritten at the component/module level.
+Some of the variables used by the grid (see [_variables.scss](https://github.com/Financial-Times/o-grid/blob/master/src/scss/_variables.scss)) can be used to customise the grid system.
+
+Here are the most useful ones:
 
 ```scss
-// ----------------------------------------------------------------------------
-// Responsive behaviour configuration
-// ----------------------------------------------------------------------------
+// Switch Silent mode off
+$o-grid-is-silent: false;
 
-/// Silent mode
-///
-/// @type Bool
-///
-/// @link http://origami.ft.com/docs/syntax/scss/#silent-styles “Silent” styles in Origami's documentation
-$o-grid-is-silent: true !default;
+// Show the currently active breakpoint and output loaded settings
+$o-grid-debug-mode: true;
 
-/// Grid mode
-/// - fluid: full width until $o-grid-max-width (default: 1210px)
-/// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
-///           and then snaps into a larger fixed layout at each breakpoint
-/// - fixed: always fixed-width with the layout defined by $o-grid-fixed-layout (default: L)
-///
-/// @type String - one of fluid (default), snappy, fixed
-$o-grid-mode: 'fluid' !default;
+// Gutter size, in pixels
+// Useful to use for spacing in product
+$o-grid-gutter: 10px;
 
-/// Layout to default to when the grid has a fixed width (not fluid)
-///
-/// @type String - One of $o-grid-layouts
-$o-grid-fixed-layout: 'L' !default;
+// Grid mode
+// - fluid: full width until $o-grid-max-width (default: 1210px)
+// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
+//           and then snaps into a larger fixed layout at each breakpoint
+//           (used by Next FT)
+// - fixed: always fixed-width with the layout defined by
+//          $o-grid-fixed-layout (default: L)
+$o-grid-mode: fluid (default), snappy, fixed;
 
-/// When the grid start snapping between fixed-width layouts
-/// in the case where a row has the `o-grid-row--snappy` class
-///
-/// @type String
-$o-grid-start-snappy-mode-at: 'M' !default;
-
-/// Show the currently active breakpoint and output loaded settings
-/// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
-///
-/// @type Bool
-$o-grid-debug-mode: false !default;
-
-/// Output IE 8-specific rules?
-/// - false: no IE8 support at all
-/// - 'only': serve code compatible with IE8 only
-/// - 'inline' (default): serve IE8 specific code alongside modern browsers code
-///
-/// @type Bool | String
-$o-grid-ie8-rules: 'inline' !default;
-
-
-// ----------------------------------------------------------------------------
-// Grid settings and dimensions
-// ----------------------------------------------------------------------------
-
-/// Number of columns
-///
-/// @type Number (unitless)
-$o-grid-columns: 12 !default;
-
-/// Gutter size, in pixels
-///
-/// @type Number
-$o-grid-gutter: 10px !default;
-
-/// Minimum width, in pixels
-///
-/// @type Number
-$o-grid-min-width: 240px !default;
-
-/// Full width of the grid: combined width of columns, gutters and outer margins
-/// for a specific column width
-///
-/// @access private
-///
-/// @param {Number} column-width - desired width of a grid column
-///
-/// @returns {Number} width of the grid, in pixels
-@function _oGridWidth($column-width) {
-	$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
-	$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
-	@return ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
-}
-
-/// Layouts
-///
-/// Each layout is calculated following a specific column width,
-/// in order to base breakpoints on the structure of the grid itself
-///
-/// @type Map
+// Default layouts
 $o-grid-layouts: (
-	S:  _oGridWidth($column-width: 30px), // 490px
-	M:  _oGridWidth($column-width: 50px), // 730px
-	L:  _oGridWidth($column-width: 70px), // 970px
-	XL: _oGridWidth($column-width: 90px)  // 1210px
-) !default;
-
-/// Layout names
-///
-/// @access private
-/// @type List
-$_o-grid-layout-names: map-keys($o-grid-layouts) !default;
-
-// When snappy mode is enabled, force $o-grid-max-width to the largest layout width
-// instead of the default $o-grid-max-width
-@if $o-grid-mode == 'snappy' {
-	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
-}
-
-/// Maximum grid width
-/// Defaults to the largest layout width
-///
-/// @access private
-/// @type Number
-$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
-
-/// Current scope
-///
-/// @access private
-/// @type String
-$_o-grid-scope: 'global';
-
+	S:  490px,
+	M:  730px,
+	L:  970px,
+	XL: 1210px
+);
 ```
 
 ### JavaScript Helper
@@ -443,9 +356,3 @@ console.log(oGrid.getCurrentLayout());
 4. Check the alignment of the layout with the grid
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
-
-### Gotchas
-
-#### Fixed/Absolute positioning
-
-Widths are specified in percentages, which will not work for fixed or absolute positioned elements (The grid can however be used to layout elements within an absolute/fixed position container). If you need to support fixed/absolutely position elements, or have developed your own solution, please leave a comment on the [GitHub issue](https://github.com/Financial-Times/o-grid-issues/issues/9).

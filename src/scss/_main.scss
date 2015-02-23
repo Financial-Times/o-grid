@@ -367,7 +367,8 @@
 						}
 						@if $grid-mode == 'fluid' {
 							// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
-							@at-root .o-grid-snappy {
+							.o-grid-snappy &,
+							&--snappy {
 								max-width: map-get($o-grid-layouts, $layout-name);
 							}
 						}

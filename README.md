@@ -176,7 +176,7 @@ In fluid mode (see `$o-grid-mode`), a set of rows may snap between fixed layouts
 
 ```html
 <!-- Make one row snappy -->
-<div class="o-grid-row o-grid-snappy"></div>
+<div class="o-grid-row o-grid-row--snappy"></div>
 
 <!--Make multiple rows snappy -->
 <div class="o-grid-snappy">

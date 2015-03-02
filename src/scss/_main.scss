@@ -307,8 +307,7 @@
 /// Base row styles
 ///
 /// @param {String} $grid-mode [$o-grid-mode]
-/// @param {String} $selector [null] - e.g. '.o-grid-row'
-@mixin oGridRow($grid-mode: $o-grid-mode, $selector: null) {
+@mixin oGridRow($grid-mode: $o-grid-mode) {
 	clear: both;
 	min-width: $o-grid-min-width;
 	// Older browsers get a fixed-width layout
@@ -337,18 +336,16 @@
 	}
 
 	// Nested rows overrides
-	@if $selector {
-		// Substract outer gutter space from nested rows
-		// and restore fluidity
-		#{unquote($selector)} {
-			width: auto;
-			min-width: 0;
-			max-width: none;
-			margin-left: -$o-grid-gutter / 2;
-			margin-right: -$o-grid-gutter / 2;
-			padding-left: 0;
-			padding-right: 0;
-		}
+	// Substract outer gutter space from nested rows
+	// and restore fluidity
+	.o-grid-row {
+		width: auto;
+		min-width: 0;
+		max-width: none;
+		margin-left: -$o-grid-gutter / 2;
+		margin-right: -$o-grid-gutter / 2;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	@if $grid-mode == 'fixed' {
@@ -425,9 +422,7 @@
 }
 
 /// Remove row styles
-///
-/// @param {String} $selector [null]
-@mixin oGridResetRow($selector: null) {
+@mixin oGridResetRow {
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 0;
@@ -446,11 +441,9 @@
 		clear: none;
 	}
 
-	@if $selector {
-		#{unquote($selector)} {
-			margin-left: 0;
-			margin-right: 0;
-		}
+	.o-grid-row {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 
@@ -520,7 +513,7 @@
 @mixin oGridGenerate {
 	// Basic layout styles
 	.o-grid-row {
-		@include oGridRow($o-grid-mode, $selector: '.o-grid-row');
+		@include oGridRow($o-grid-mode);
 	}
 	[data-o-grid-colspan] {
 		@include oGridColumn;

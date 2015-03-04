@@ -531,11 +531,6 @@
 	}
 	[data-o-grid-colspan] {
 		@include oGridColumn;
-
-		// Prevent whitespace between the last column and the right edge of the layout
-		+ [data-o-grid-colspan]:last-child {
-			float: right;
-		}
 	}
 
 	// If the grid is fluid, use this class to enable snappy mode on a set of rows

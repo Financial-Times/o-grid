@@ -4,7 +4,8 @@
  * Detect IE 8 through injected conditional comments:
  * no UA detection, no need for conditional compilation or JS check
  */
-function isIE8() {
+var isIE8 = (function() {
+
 	var b = document.createElement('B');
 	var docElem = document.documentElement;
 	var isIE;
@@ -14,7 +15,7 @@ function isIE8() {
 	isIE = !!document.getElementById('ie8test');
 	docElem.removeChild(b);
 	return isIE;
-}
+}());
 
 /**
  * Get the currently displayed layout, from $o-grid-layouts in _variables.scss
@@ -22,7 +23,7 @@ function isIE8() {
  * In IE 8, always return the L layout
  */
 module.exports = function() {
-	if (isIE8()) {
+	if (isIE8) {
 		return 'L';
 	}
 

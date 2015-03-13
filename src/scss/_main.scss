@@ -6,8 +6,8 @@
 /// Add a layout
 ///
 /// @example scss
-///  @include oGridAddLayout($layout-name: XS, $colum-width: 20px);
-///  @include oGridAddLayout($layout-name: P, $viewport-width: 500px);
+///  @include oGridAddLayout($layout-name: XS, $column-width: 20px);
+///  @include oGridAddLayout($layout-name: P, $layout-width: 500px);
 ///
 /// @param {String} $layout-name
 /// @param {String} $column-width [null]

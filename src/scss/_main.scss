@@ -3,6 +3,41 @@
 /// @link http://registry.origami.ft.com/components/o-grid
 ////
 
+/// Add a layout
+///
+/// @example scss
+///  @include oGridAddLayout($layout-name: XS, $colum-width: 20px);
+///  @include oGridAddLayout($layout-name: P, $viewport-width: 500px);
+///
+/// @param {String} $layout-name
+/// @param {String} $column-width [null]
+/// @param {String} $layout-width [null]
+@mixin oGridAddLayout($layout-name, $column-width: null, $layout-width: null) {
+	@if $column-width {
+		$layout-width: _oGridWidth($column-width);
+	}
+
+	$temp-layouts: ();
+
+	// Add the new layout in the correct position:
+	// (we want $o-grid-layouts to ordered from the smallest to the largest layout)
+	@for $index from 1 through length($o-grid-layouts) {
+		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
+		$current-layout-name: nth($_o-grid-layout-names, $index);
+		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
+
+		@if $previous-layout-width > $layout-width or $current-layout-width < $layout-width {
+			$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
+		} @else {
+			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
+			$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
+		}
+	}
+
+	$o-grid-layouts: $temp-layouts !global;
+	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
+}
+
 /// Get the max width of a layout
 ///
 /// @example

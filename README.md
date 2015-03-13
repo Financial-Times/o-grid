@@ -330,6 +330,34 @@ $o-grid-layouts: (
 );
 ```
 
+#### Adding a layout
+
+Products who need to add other breakpoints/layouts should use the helper `oGridAddLayout()`:
+
+```scss
+@import 'o-grid/main';
+
+// Add various layouts
+@include oGridAddLayout($layout-name: XS, $column-width: 20px);
+@include oGridAddLayout($layout-name: P, $column-width: 36px);
+@include oGridAddLayout($layout-name: D, $layout-width: 300px);
+
+// Layouts are now:
+//   A: 300px,
+//   XS: 370px,
+//   S: 490px,
+//   P: 562px,
+//   M: 730px,
+//   L: 970px,
+//   XL: 1210px
+
+// Surface the layout currently displayed to make it readable in JS
+@include oGridSurfaceCurrentLayout;
+
+// Generate grid helpers classes and data attributes
+@include oGridGenerate;
+```
+
 ### JavaScript Helper
 
 #### `getCurrentLayout()`

@@ -5,7 +5,6 @@
  * no UA detection, no need for conditional compilation or JS check
  */
 var isIE8 = (function() {
-
 	var b = document.createElement('B');
 	var docElem = document.documentElement;
 	var isIE;

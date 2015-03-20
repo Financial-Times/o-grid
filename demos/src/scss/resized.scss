@@ -8,6 +8,6 @@ $o-grid-gutter: 5px;
 
 @import 'common';
 
-.demo:before {
+body:after {
 	content: '$o-grid-gutter: #{$o-grid-gutter}, $o-grid-layouts: S: 400px, M: 800px, L: 1000px';
 }

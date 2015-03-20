@@ -1,46 +1,60 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
+body {
+	overflow-x: hidden;
+}
 
-.demo {
-	.demo-cell {
-		background-color: transparent;
-		zoom: 1;
-		min-height: 30px;
-		text-align: center;
-		padding-top: 10px;
-		overflow: hidden;
+// Display configuration information
+.test:after {
+	content: '';
+	background-color: #fcf8e3;
+	border-bottom: 1px solid #fbeed5;
+	border-left: 1px solid #fbeed5;
+	color: #c09853;
+	font: small-caption;
+	padding: 3px 6px;
+	pointer-events: none;
+	position: fixed;
+	right: 0;
+	top: 25px;
+	z-index: 100;
+}
 
-		// Transparent background color in IE8
-		$rgba: rgba(#ffffff, 0.5);
-		$ie-hex-str: ie-hex-str($rgba);
-		// scss-lint:disable DuplicateProperty
-		background-color: $rgba;
-		// scss-lint:enable DuplicateProperty
-		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+h2 {
+	@include oGridRow;
+}
+
+.demo-cell {
+	background-color: transparent;
+	zoom: 1;
+	min-height: 30px;
+	text-align: center;
+	padding-top: 10px;
+	overflow: hidden;
+
+	// Transparent background color in IE8
+	$rgba: rgba(#ffffff, 0.5);
+	$ie-hex-str: ie-hex-str($rgba);
+	// scss-lint:disable DuplicateProperty
+	background-color: $rgba;
+	// scss-lint:enable DuplicateProperty
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+}
+.o-grid-row {
+	background: #bdcaff;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	.o-grid-row {
+		background: #dc73ff;
 	}
-	.demo-row {
-		background: #bdcaff;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		.demo-row {
-			background: #dc73ff;
-		}
-	}
-	[class*='error'] .demo-cell {
-		background-color: red;
-	}
-	.selected-stylesheet {
-		background: #aaaaff;
-	}
-	h2 {
-		@include oGridRow;
-	}
-	// Display configuration information
-	&:before {
-		display: block;
-		text-align: center;
-		font-family: monaco, monospace;
-		padding-top: 4px;
-	}
+}
+
+[class*='error'] .demo-cell {
+	background-color: red;
+}
+
+.selected-stylesheet {
+	background: #aaaaff;
 }

@@ -27,6 +27,6 @@ module.exports = function() {
 		return 'L';
 	}
 
-	window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content').replace(/[^a-z]/gi, '');;
+	window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content').replace(/^('|")|('|")$/gi, '');;
 	
 };

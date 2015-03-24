@@ -27,6 +27,6 @@ module.exports = function() {
 		return 'L';
 	}
 
-	window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content').replace(/^('|")|('|")$/gi, '');;
+	return window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content').replace(/^('|")|('|")$/gi, '');;
 	
 };

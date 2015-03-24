@@ -319,7 +319,7 @@ $o-grid-gutter: 10px;
 //           (used by Next FT)
 // - fixed: always fixed-width with the layout defined by
 //          $o-grid-fixed-layout (default: L)
-$o-grid-mode: fluid (default), snappy, fixed;
+$o-grid-mode: fluid (default) | snappy | fixed;
 
 // Default layouts
 $o-grid-layouts: (
@@ -343,7 +343,7 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 @include oGridAddLayout($layout-name: D, $layout-width: 300px);
 
 // Layouts are now:
-//   A: 300px,
+//   D: 300px,
 //   XS: 370px,
 //   S: 490px,
 //   P: 562px,
@@ -368,7 +368,7 @@ Returns the name of the layout currently displayed.
 var oGrid = require('o-grid/main');
 
 console.log(oGrid.getCurrentLayout());
-// > default, S, M, L, XL
+// > default | S | M | L | XL
 ```
 
 

@@ -12,240 +12,239 @@
 	<script>(function(d) { d.className = d.className + ' demo-js'; })(document.documentElement);</script>
 	<link rel="stylesheet" href="/bundles/css?modules=o-grid:/demos/src/scss/default.scss" />
 </head>
-<body class="">
-<div class="demo demo-test">
-	<div id="styleSwitcher"></div>
+<body class="test">
+<div id="styleSwitcher"></div>
 
-	<h2>Default unresponsive columns</h2>
+<h2>Default unresponsive columns</h2>
 
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="5"><div class="demo-cell">5</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="7"><div class="demo-cell">7</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="8"><div class="demo-cell">8</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="9"><div class="demo-cell">9</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="10"><div class="demo-cell">10</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="11"><div class="demo-cell">11</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="12"><div class="demo-cell">12</div></div>
-	</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="3" style="width: 50%"><div class="demo-cell">3</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="5"><div class="demo-cell">5</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="7"><div class="demo-cell">7</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="8"><div class="demo-cell">8</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="9"><div class="demo-cell">9</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="10"><div class="demo-cell">10</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="11"><div class="demo-cell">11</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12"><div class="demo-cell">12</div></div>
+</div>
 
-	<h2>Snappy rows</h2>
+<h2>Snappy rows</h2>
 
-	<div class="o-grid-snappy">
-		<div class="o-grid-row demo-row">
-			<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of full-width row</div></div>
-		</div>
-		<div class="o-grid-row demo-row">
-			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
-			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
-		</div>
-		<div class="o-grid-row demo-row">
-			<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of solo row</div></div>
-		</div>
+<div class="o-grid-snappy">
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of full-width row</div></div>
 	</div>
-	<div class="o-grid-row o-grid-row--snappy demo-row">
-		<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the full-width row itself</div></div>
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent</div></div>
 	</div>
-	<div class="o-grid-row o-grid-row--snappy demo-row">
-		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the row itself</div></div>
-		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the row itself</div></div>
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-snappy</code> Applied to parent of solo row</div></div>
 	</div>
-	<div class="o-grid-row o-grid-row--snappy demo-row">
-		<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the solo row itself</div></div>
-	</div>
+</div>
+<div class="o-grid-row o-grid-row--snappy">
+	<div data-o-grid-colspan="12"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the full-width row itself</div></div>
+</div>
+<div class="o-grid-row o-grid-row--snappy">
+	<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the row itself</div></div>
+	<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the row itself</div></div>
+</div>
+<div class="o-grid-row o-grid-row--snappy">
+	<div data-o-grid-colspan="6"><div class="demo-cell"><code>.o-grid-row--snappy</code> Applied to the solo row itself</div></div>
+</div>
 
-	<h2>Overridability of default and layout specific styles by other layouts</h2>
+<h2>Overridability of default and layout specific styles by other layouts</h2>
 
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S0 M12 L11 XL10"><div class="demo-cell">S0 M12 L11 XL10</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S1 M0 L12 XL11"><div class="demo-cell">S1 M0 L12 XL11</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S2 M1 L0 XL12"><div class="demo-cell">S2 M1 L0 XL12</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S3 M2 L1 XL0"><div class="demo-cell">S3 M2 L1 XL0</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S4 M3 L2 XL1"><div class="demo-cell">S4 M3 L2 XL1</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S5 M4 L3 XL2"><div class="demo-cell">S5 M4 L3 XL2</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S6 M5 L4 XL3"><div class="demo-cell">S6 M5 L4 XL3</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S7 M6 L5 XL4"><div class="demo-cell">S7 M6 L5 XL4</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S8 M7 L6 XL5"><div class="demo-cell">S8 M7 L6 XL5</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S9 M8 L7 XL6"><div class="demo-cell">S9 M8 L7 XL6</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S10 M9 L8 XL7"><div class="demo-cell">S10 M9 L8 XL7</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S11 M10 L9 XL8"><div class="demo-cell">S11 M10 L9 XL8</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S12 M11 L10 XL9"><div class="demo-cell">S12 M11 L10 XL9</div></div>
-	</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S0 M12 L11 XL10"><div class="demo-cell">12 S0 M12 L11 XL10</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S1 M0 L12 XL11"><div class="demo-cell">12 S1 M0 L12 XL11</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S2 M1 L0 XL12"><div class="demo-cell">12 S2 M1 L0 XL12</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S3 M2 L1 XL0"><div class="demo-cell">12 S3 M2 L1 XL0</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S4 M3 L2 XL1"><div class="demo-cell">12 S4 M3 L2 XL1</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S5 M4 L3 XL2"><div class="demo-cell">12 S5 M4 L3 XL2</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S6 M5 L4 XL3"><div class="demo-cell">12 S6 M5 L4 XL3</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S7 M6 L5 XL4"><div class="demo-cell">12 S7 M6 L5 XL4</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S8 M7 L6 XL5"><div class="demo-cell">12 S8 M7 L6 XL5</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S9 M8 L7 XL6"><div class="demo-cell">12 S9 M8 L7 XL6</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S10 M9 L8 XL7"><div class="demo-cell">12 S10 M9 L8 XL7</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S11 M10 L9 XL8"><div class="demo-cell">12 S11 M10 L9 XL8</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S12 M11 L10 XL9"><div class="demo-cell">12 S12 M11 L10 XL9</div></div>
+</div>
 
-	<h2>Overriding of default width</h3>
+<h2>Overriding of default width</h2>
 
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="0 M12 L11 XL10"><div class="demo-cell">0 M12 L11 XL10</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="1 M6 L12 XL11"><div class="demo-cell">1 M6 L12 XL11</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="3 M2 L1 XL12"><div class="demo-cell">3 M2 L1 XL12</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="S3 M4"><div class="demo-cell">S3 M4</div></div>
-	</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="0 M12 L11 XL10"><div class="demo-cell">0 M12 L11 XL10</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="1 M6 L12 XL11"><div class="demo-cell">1 M6 L12 XL11</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="3 M2 L1 XL12"><div class="demo-cell">3 M2 L1 XL12</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12 S3 M4 L4 XL4"><div class="demo-cell">12 S3 M4 L4 XL4</div></div>
+</div>
 
-	<h2>Nested grids</h2>
+<h2>Nested grids</h2>
 
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="8 S12 M11 L10 XL9">
-			<div class="demo-cell">
-				8 S12 M11 L10 XL9
-				<div class="o-grid-row demo-row">
-					<div data-o-grid-colspan="8 S12 M11 L10 XL9"><div class="demo-cell">8 S12 M11 L10 XL9</div></div>
-				</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="8 S12 M11 L10 XL9">
+		<div class="demo-cell">
+			8 S12 M11 L10 XL9
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="8 S12 M11 L10 XL9"><div class="demo-cell">8 S12 M11 L10 XL9</div></div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<h2>Compact and gutterless columns</h2>
+<h2>Compact and gutterless columns</h2>
 
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6">
-			<div class="demo-cell">Normal gutters</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters--left--S o-grid-remove-gutters--left--M o-grid-remove-gutters--left--L o-grid-remove-gutters--left--XL">
-			<div class="demo-cell">no left gutter (applied for each layout individually)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters--right--S o-grid-remove-gutters--right--M o-grid-remove-gutters--right--L o-grid-remove-gutters--right--XL">
-			<div class="demo-cell">no right gutter (applied for each layout individually)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters--S o-grid-remove-gutters--M o-grid-remove-gutters--L o-grid-remove-gutters--XL">
-			<div class="demo-cell">no gutters (applied for each layout individually)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters--left">
-			<div class="demo-cell">no left gutter (applied globally)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters--right">
-			<div class="demo-cell">no right gutter (applied globally)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6" class="o-grid-remove-gutters">
-			<div class="demo-cell">no gutters (applied globally)</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row o-grid-row--compact">
-		<div data-o-grid-colspan="6"><div class="demo-cell">no gutters (applied using o-grid-row--compact)</div></div>
-	</div>
-
-	<h2>Keywords</h2>
-
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half">
-			<div class="demo-cell">one-half</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-third">
-			<div class="demo-cell">one-third</div>
-		</div>
-		<div data-o-grid-colspan="two-thirds">
-			<div class="demo-cell">two-thirds</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-quarter">
-			<div class="demo-cell">one-quarter</div>
-		</div>
-		<div data-o-grid-colspan="three-quarters">
-			<div class="demo-cell">three-quarters</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half Mone-third Lone-quarter">
-			<div class="demo-cell">one-half Mone-third Lone-quarter</div>
-		</div>
-		<div data-o-grid-colspan="one-half Mtwo-thirds Lthree-quarters">
-			<div class="demo-cell">one-half Mtwo-thirds Lthree-quarters</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="5 center L9 Luncenter XL6 XLcenter">
-			<div class="demo-cell">5 center L9 Luncenter XL6 XLcenter</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half Scenter Muncenter Lcenter XLuncenter">
-			<div class="demo-cell">one-half Scenter Muncenter Lcenter XLuncenter</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half offset3 push2">
-			<div class="demo-cell">one-half offset3 push2</div>
-		</div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half Spush5 Mpush0 Lpush4 L7 Loffset1 XLpush2 XL5 XLoffset1">
-			<div class="demo-cell">one-half Spush5 Mpush0 Lpush4 L7 Loffset1 XLpush2 XL5 XLoffset1</div>
-		</div>
-		<div data-o-grid-colspan="one-half Spull5 Mpull0 Lpull8 L4 XLpull2 XL5">
-			<div class="demo-cell">one-half Spull5 Mpull0 Lpull8 L4 XLpull2 XL5</div>
-		</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6">
+		<div class="demo-cell">Normal gutters</div>
 	</div>
 </div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters--left--S o-grid-remove-gutters--left--M o-grid-remove-gutters--left--L o-grid-remove-gutters--left--XL">
+		<div class="demo-cell">no left gutter (applied for each layout individually)</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters--right--S o-grid-remove-gutters--right--M o-grid-remove-gutters--right--L o-grid-remove-gutters--right--XL">
+		<div class="demo-cell">no right gutter (applied for each layout individually)</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters--S o-grid-remove-gutters--M o-grid-remove-gutters--L o-grid-remove-gutters--XL">
+		<div class="demo-cell">no gutters (applied for each layout individually)</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters--left">
+		<div class="demo-cell">no left gutter (applied globally)</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters--right">
+		<div class="demo-cell">no right gutter (applied globally)</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6" class="o-grid-remove-gutters">
+		<div class="demo-cell">no gutters (applied globally)</div>
+	</div>
+</div>
+<div class="o-grid-row o-grid-row--compact">
+	<div data-o-grid-colspan="6"><div class="demo-cell">no gutters (applied using o-grid-row--compact)</div></div>
+</div>
+
+<h2>Keywords</h2>
+
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half">
+		<div class="demo-cell">one-half</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-third">
+		<div class="demo-cell">one-third</div>
+	</div>
+	<div data-o-grid-colspan="two-thirds">
+		<div class="demo-cell">two-thirds</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-quarter">
+		<div class="demo-cell">one-quarter</div>
+	</div>
+	<div data-o-grid-colspan="three-quarters">
+		<div class="demo-cell">three-quarters</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half Mone-third Lone-quarter XLone-half">
+		<div class="demo-cell">one-half Mone-third Lone-quarter XLone-half</div>
+	</div>
+	<div data-o-grid-colspan="one-half Mtwo-thirds Lthree-quarters XLone-half">
+		<div class="demo-cell">one-half Mtwo-thirds Lthree-quarters XLone-half</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="5 center M6 L9 Luncenter XL6 XLcenter">
+		<div class="demo-cell">5 center M6 L9 Luncenter XL6 XLcenter</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half Scenter Muncenter Lcenter XLuncenter">
+		<div class="demo-cell">one-half Scenter Muncenter Lcenter XLuncenter</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half offset3 push2">
+		<div class="demo-cell">one-half offset3 push2</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half Spush5 Mpush0 Lpush4 L7 Loffset1 XLpush2 XL5 XLoffset1">
+		<div class="demo-cell">one-half Spush5 Mpush0 Lpush4 L7 Loffset1 XLpush2 XL5 XLoffset1</div>
+	</div>
+	<div data-o-grid-colspan="one-half Spull5 Mpull0 Lpull8 L4 XLpull2 XL5">
+		<div class="demo-cell">one-half Spull5 Mpull0 Lpull8 L4 XLpull2 XL5</div>
+	</div>
+</div>
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script src="/bundles/js?modules=o-grid:/demos/src/js/style-switcher.js"></script>

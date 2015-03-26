@@ -85,22 +85,49 @@ if (![].includes) {
 	buttonContainer.appendChild(tmp);
 }());
 
+function convertKeywordsToSpans(keyword) {
+	// If it's a number, return it directly
+	if (keyword * 1 >= 0) {
+		return keyword * 1;
+	}
+
+	switch (keyword) {
+		case 'hide':
+			return 0;
+		case 'one-half':
+			return 6;
+		case 'one-third':
+			return 4;
+		case 'two-thirds':
+			return 8;
+		case 'one-quarter':
+			return 3;
+		case 'three-quarters':
+			return 9;
+		case 'full-width':
+			return 12;
+	}
+}
+
 function getExpectedSpans(el) {
+	var span = null;
 	var layout = getCurrentLayout();
 
 	var rules = el.dataset.oGridColspan;
-	var spans;
-	rules.replace(new RegExp('(?:^|\\s)' + layout + '(\\d{1,2})', 'g'), function ($0, $1) {
-		spans = $1;
-	});
 
-	if (typeof spans === 'undefined') {
-		rules.replace(/(?:^|\s)(\d{1,2})/g, function ($0, $1) {
-			spans = $1;
-		});
+	var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+	span = rules.match(layoutAndKeyword);
+
+	if (span === null) {
+		var numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+		span = rules.match(numberOfColumns);
 	}
 
-	return spans;
+	if (span === null) {
+		return 12;
+	}
+
+	return convertKeywordsToSpans(span[1]);
 }
 
 // Get offset, pull, push
@@ -115,12 +142,12 @@ function getExpectedModifier(el, modifier) {
 	var layout = getCurrentLayout();
 
 	var modifiedBy;
-	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
+	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
 		modifiedBy = $1;
 	});
 
 	if (typeof modifiedBy === 'undefined') {
-		rules.replace(new RegExp('(?:^|\\s)' + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
+		rules.replace(new RegExp('(?:^|\\s)' + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
 			modifiedBy = $1;
 		});
 	}
@@ -231,7 +258,7 @@ function highlightUnexpectedPosition(el) {
 function highlightUnexpectedWidth(el) {
 	var outerMargins = 10;
 
-	if (document.documentElement.className.includes('resized')) {
+	if (document.documentElement.classList.contains('stylesheet-resized')) {
 		outerMargins = resizedOuterMarginWidth;
 	}
 
@@ -258,18 +285,29 @@ function highlightUnexpectedWidth(el) {
 
 
 
-function test() {
+function tests() {
+	console.log('Test suite: starting');
 	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedPosition);
+	console.log('Test suite: finished');
 }
 
-var runTests = function () {
-	setTimeout(test, 200);
-	window.onresize = test;
-};
+var resizeTimer = null;
 
-if (document.querySelector('.demo-test')) {
+function runTests() {
+	setTimeout(tests, 300);
+
+	window.onresize = function(e) {
+		if (resizeTimer !== null) {
+			clearTimeout(resizeTimer);
+		}
+
+		resizeTimer = setTimeout(tests, 300);
+	};
+}
+
+if (document.body.classList.contains('test')) {
 	runTests();
 }

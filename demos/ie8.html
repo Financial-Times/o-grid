@@ -12,125 +12,121 @@
 	<script>(function(d) { d.className = d.className + ' demo-js'; })(document.documentElement);</script>
 	<link rel="stylesheet" href="/bundles/css?modules=o-grid:/demos/src/scss/ie8.scss" />
 </head>
-<body class="">
-<div class="demo">
+<body class="demo">
+<!-- Constant column spans -->
+<div class="o-grid-row">
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+	<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
+	<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
+	<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
+	<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
+	<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
+	<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
+	<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="12"><div class="demo-cell">12</div></div>
+</div>
 
-	<!-- Constant column spans -->
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
-		<div data-o-grid-colspan="1"><div class="demo-cell">1</div></div>
+<!-- Responsive column spans -->
+<div class="o-grid-row">
+	<div data-o-grid-colspan="8 S12 M8">
+		<div class="demo-cell">
+			8 S12 M8
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
+				<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
+				<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
+				<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
+			</div>
+		</div>
 	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
-		<div data-o-grid-colspan="2"><div class="demo-cell">2</div></div>
+	<div data-o-grid-colspan="4 S12 M4">
+		<div class="demo-cell">
+			4 S12 M4
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="12 L7 XL6"><div class="demo-cell">12 L7 XL6</div></div>
+				<div data-o-grid-colspan="12 L5 XL6"><div class="demo-cell">12 L5 XL6</div></div>
+			</div>
+		</div>
 	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
-		<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
-		<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
-		<div data-o-grid-colspan="3"><div class="demo-cell">3</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
-		<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
-		<div data-o-grid-colspan="4"><div class="demo-cell">4</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
-		<div data-o-grid-colspan="6"><div class="demo-cell">6</div></div>
-	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="12"><div class="demo-cell">12</div></div>
-	</div>
+</div>
 
-	<!-- Responsive column spans -->
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="8 S12 M8">
-			<div class="demo-cell">
-				8 S12 M8
-				<div class="o-grid-row demo-row">
-					<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
-					<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
-					<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
-					<div data-o-grid-colspan="6 XL3 S12 M6"><div class="demo-cell">6 XL3 S12 M6</div></div>
-				</div>
-			</div>
-		</div>
-		<div data-o-grid-colspan="4 S12 M4">
-			<div class="demo-cell">
-				4 S12 M4
-				<div class="o-grid-row demo-row">
-					<div data-o-grid-colspan="12 L7 XL6"><div class="demo-cell">12 L7 XL6</div></div>
-					<div data-o-grid-colspan="12 L5 XL6"><div class="demo-cell">12 L5 XL6</div></div>
-				</div>
-			</div>
+<!-- Human friendly modifiers -->
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-half">
+		<div class="demo-cell">
+			one-half
 		</div>
 	</div>
-
-	<!-- Human friendly modifiers -->
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-half">
-			<div class="demo-cell">
-				one-half
-			</div>
-		</div>
-		<div data-o-grid-colspan="one-quarter">
-			<div class="demo-cell">
-				one-quarter
-			</div>
-		</div>
-		<div data-o-grid-colspan="one-quarter">
-			<div class="demo-cell">
-				one-quarter
-			</div>
+	<div data-o-grid-colspan="one-quarter">
+		<div class="demo-cell">
+			one-quarter
 		</div>
 	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-third">
-			<div class="demo-cell">
-				one-third
-			</div>
-		</div>
-		<div data-o-grid-colspan="two-thirds">
-			<div class="demo-cell">
-				two-thirds
-			</div>
+	<div data-o-grid-colspan="one-quarter">
+		<div class="demo-cell">
+			one-quarter
 		</div>
 	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-third push8">
-			<div class="demo-cell">
-				one-third push8 (first in source)
-			</div>
-		</div>
-		<div data-o-grid-colspan="two-thirds pull4">
-			<div class="demo-cell">
-				two-thirds pull4 (last in source)
-			</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-third">
+		<div class="demo-cell">
+			one-third
 		</div>
 	</div>
-	<div class="o-grid-row demo-row">
-		<div data-o-grid-colspan="one-third center">
-			<div class="demo-cell">
-				one-third center
-			</div>
+	<div data-o-grid-colspan="two-thirds">
+		<div class="demo-cell">
+			two-thirds
 		</div>
 	</div>
-
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-third push8">
+		<div class="demo-cell">
+			one-third push8 (first in source)
+		</div>
+	</div>
+	<div data-o-grid-colspan="two-thirds pull4">
+		<div class="demo-cell">
+			two-thirds pull4 (last in source)
+		</div>
+	</div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="one-third center">
+		<div class="demo-cell">
+			one-third center
+		</div>
+	</div>
 </div>
 
 

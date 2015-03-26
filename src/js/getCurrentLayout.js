@@ -5,7 +5,6 @@
  * no UA detection, no need for conditional compilation or JS check
  */
 var isIE8 = (function() {
-
 	var b = document.createElement('B');
 	var docElem = document.documentElement;
 	var isIE;
@@ -27,5 +26,5 @@ module.exports = function() {
 		return 'L';
 	}
 
-	return window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content');
+	return window.getComputedStyle(document.querySelector('head'), ':after').getPropertyValue('content').replace(/"/g, '').replace(/'/g, '');
 };

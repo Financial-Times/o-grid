@@ -32,7 +32,7 @@
 ///  var getCurrentLayout = require('o-grid/src/js/getCurrentLayout');
 ///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
 @mixin oGridSurfaceCurrentLayout {
-	body:after {
+	head:after {
 		content: 'default'; // By default, we're exposing the XS layout (from 0 to S)
 		// Hide content visually
 		border: 0;

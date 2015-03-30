@@ -26,5 +26,5 @@ module.exports = function() {
 		return 'L';
 	}
 
-	return window.getComputedStyle(document.head, ':after').getPropertyValue('content').replace(/"/g, '').replace(/'/g, '');
+	return window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content').replace(/"/g, '').replace(/'/g, '');
 };

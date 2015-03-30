@@ -8,6 +8,7 @@ var local = true;
 var defaultGutter = 10;
 var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
+
 // ============================================================================
 // Polyfills
 
@@ -113,7 +114,7 @@ function getExpectedSpans(el) {
 	var span = null;
 	var layout = getCurrentLayout();
 
-	var rules = el.dataset.oGridColspan;
+	var rules = $(el).data('oGridColspan') + "";
 
 	var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 	span = rules.match(layoutAndKeyword);
@@ -132,7 +133,7 @@ function getExpectedSpans(el) {
 
 // Get offset, pull, push
 function getExpectedModifier(el, modifier) {
-	var rules = el.dataset.oGridColspan;
+	var rules = $(el).data('oGridColspan');
 	var re = new RegExp(modifier, "g");
 
 	if (!re.test(rules)) {
@@ -200,9 +201,10 @@ function getExpectedMargin(el, side) {
 	var centerModifier = 'center';
 	var layoutCenterModifier = layout + 'center';
 	var layoutUncenterModifier = layout + 'uncenter';
-	var modifiers = el.dataset.oGridColspan.split(' ');
+	var colspan = $(el).data('oGridColspan') + '';
+	var modifiers = colspan.split(' ');
 
-	if (el.dataset.oGridColspan.includes('offset')) {
+	if (colspan.includes('offset')) {
 		if (side === 'left') {
 			return getExpectedModifier(el, 'offset');
 		}
@@ -287,6 +289,7 @@ function highlightUnexpectedWidth(el) {
 
 function tests() {
 	console.log('Test suite: starting');
+	console.log('Layout:' + getCurrentLayout());
 	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);

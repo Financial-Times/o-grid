@@ -289,7 +289,7 @@ function highlightUnexpectedWidth(el) {
 
 function tests() {
 	console.log('Test suite: starting');
-	console.log('Layout:' + getCurrentLayout());
+	console.log('Layout: ' + getCurrentLayout());
 	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);

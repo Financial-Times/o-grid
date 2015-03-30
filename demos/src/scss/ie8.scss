@@ -3,6 +3,6 @@ $o-grid-ie8-rules: 'only';
 
 @import "common";
 
-body:after {
+.test:after {
 	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout} (default), $o-grid-mode: #{$o-grid-mode}, $o-grid-ie8-rules: #{$o-grid-ie8-rules}';
 }

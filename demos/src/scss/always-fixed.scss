@@ -3,6 +3,6 @@ $o-grid-fixed-layout: 'S';
 
 @import "common";
 
-body:after {
+.test:after {
 	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout}, $o-grid-mode: #{$o-grid-mode}';
 }

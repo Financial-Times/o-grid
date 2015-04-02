@@ -1,8 +1,6 @@
 # o-grid [![Build Status](https://travis-ci.org/Financial-Times/o-grid.svg?branch=master)](https://travis-ci.org/Financial-Times/o-grid)
 
-o-grid defines a 12 column responsive, nestable grid system for laying out documents and modules.
-
-It works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.
+A 12 column responsive grid system for laying out documents, templates and modules.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  
   *Ron Perlman*
@@ -11,20 +9,20 @@ It works in browsers that support *CSS @media queries* and *box-sizing*, as well
 
 ## Browser support
 
-This module has been verified in Internet Explorer 8+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+o-grid works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.
 
 Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/box-sizing-polyfill) to support give better support to IE < 8.
 
-### Grid dimensions
+## Grid dimensions
 
-#### General settings
+### General settings
 
 * Minimum width: 240px
 * Maximum width: 1210px
 * Gutter width: 10px
 * Number of columns: 12
 
-#### Layouts:
+### Layouts:
 
 * **Default (no layout name)** 240px - …
 * **Small (S)** 490px - 729px
@@ -32,7 +30,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 * **Large (L)** 970px to 1209px
 * **Extra large (XL)** 1210px
 
-## General use
+## Quick start
 
 ### Utility classes
 
@@ -44,9 +42,9 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 </div>
 ```
 
-### Responsive column widths
+### Responsive columns
 
-A different number of columns can be specified for each size of layout individually:
+Set a number of columns per layout:
 
 ```html
 <div class="o-grid-row">
@@ -103,6 +101,8 @@ A column which has width: auto on extra-small screens, and then takes half the a
 ```html
 <div data-o-grid-colspan="M6"></div>
 ```
+
+## Advanced usage
 
 ### Utilities
 
@@ -196,7 +196,7 @@ To remove gutters from all columns in a row use the class `o-grid-row--compact`,
 </div>
 ```
 
-##### Fine-grained gutter removal
+#### Fine-grained gutter removal
 
 Remove gutters with these helper classes:
 
@@ -356,9 +356,9 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 @include oGridGenerate;
 ```
 
-### JavaScript Helper
+## JavaScript Helper
 
-#### `getCurrentLayout()`
+### `getCurrentLayout()`
 
 Returns the name of the layout currently displayed.
 
@@ -370,7 +370,7 @@ console.log(oGrid.getCurrentLayout());
 ```
 
 
-### Grid Bookmarklet
+## Grid Bookmarklet
 
 1. Create a new Bookmark with this URL:
 	```js
@@ -385,7 +385,7 @@ console.log(oGrid.getCurrentLayout());
 
 ====
 
-### How to upgrade from 2.x.x?
+## How to upgrade from 2.x.x?
 
 - Layouts are now mobile first. It means that the `S` reads "S layout and up" (instead of "S layout only"). For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
 - Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead.

@@ -1,7 +1,5 @@
 # o-grid [![Build Status](https://travis-ci.org/Financial-Times/o-grid.svg?branch=master)](https://travis-ci.org/Financial-Times/o-grid)
 
-## Overview
-
 o-grid defines a 12 column responsive, nestable grid system for laying out documents and modules.
 
 It works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.

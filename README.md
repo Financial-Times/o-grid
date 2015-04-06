@@ -22,7 +22,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 * Gutter width: 10px
 * Number of columns: 12
 
-### Layouts:
+### Layout sizes
 
 * **Default (no layout name)** 240px - …
 * **Small (S)** 490px - 729px
@@ -88,19 +88,19 @@ A full width column for all sizes except large screens and up, where it spans on
 <div data-o-grid-colspan="L9"></div>
 ```
 
-A half width column that becomes full-width on medium screens and up
+A half width column that becomes full-width on medium screens and up:
 
 ```html
 <div data-o-grid-colspan="one-half M12"></div>
 ```
 
-A column which gradually takes up a greater portion of horizontal space as the screen gets smaller
+A column which gradually takes up a greater portion of horizontal space as the screen gets smaller:
 
 ```html
 <div data-o-grid-colspan="4 M3 L2 XL1"></div>
 ```
 
-A column which has width: auto on extra-small screens, and then takes half the available space on medium screens and up
+A column which has `width: auto` on small screens, and then takes half the available space on medium screens and up:
 
 ```html
 <div data-o-grid-colspan="M6"></div>
@@ -386,7 +386,7 @@ console.log(oGrid.getCurrentLayout());
 
 2. Load a website
 3. Click the bookmarklet (the overlay should appear)
-4. Check the alignment of the layout with the grid
+4. Check the alignment of the layout on the grid
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
 
@@ -394,8 +394,8 @@ console.log(oGrid.getCurrentLayout());
 
 ## How to upgrade from 2.x.x?
 
-- Layouts are now mobile first. It means that the `S` reads "S layout and up" (instead of "S layout only"). For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
-- Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead.
+- Layouts are now mobile first. It means that the `S` reads "S layout and up" instead of "S layout only". For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
+- Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead
 - `<div class="o-grid-row" o-grid-colspan="12">` is deprecated (a row can't be a column at the same time). Use two elements instead
 - Search `oGridColumnWidth` and replace with `oGridColspan`
 - Search `o-grid-row-compact` and replace with `o-grid-row--compact`

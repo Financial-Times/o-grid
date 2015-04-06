@@ -65,7 +65,9 @@ Set a number of columns per layout:
 * `L{0-12}` - number of columns to span at the large layout and up
 * `XL{0-12}` - number of columns to span at the extra large layout and up
 
-e.g. `<div data-o-grid-colspan="6 L8"></div>`
+```html
+<div data-o-grid-colspan="6 L8"></div>
+```
 
 #### Using keywords<a name="keywords"></a>
 
@@ -74,7 +76,9 @@ e.g. `<div data-o-grid-colspan="6 L8"></div>`
 * `one-third`, `two-thirds`
 * `one-quarter`, `three-quarters`
 
-e.g. `<div data-o-grid-colspan="one-half Ltwo-thirds"></div>`
+```html
+<div data-o-grid-colspan="one-half Ltwo-thirds"></div>
+```
 
 ### Examples
 
@@ -108,15 +112,19 @@ A column which has width: auto on extra-small screens, and then takes half the a
 
 #### Hiding elements
 
-e.g. `data-o-grid-colspan="Mhide Shide"` will hide the given element for medium and small screen sizes even if the element isn't laid out as a column
+`hide` the column, show it again at Large (`L`) layout size, and hide it at the largest (`XL`) layout size:
+
+```html
+<div data-o-grid-colspan="hide L12 XLhide"></div>
+``` 
 
 #### Centering a column
 
-e.g. `data-o-grid-colspan="center Luncenter"` will `center` the column and `uncenter` it at Large (L) layout size.
+`center` the column and `uncenter` it at Large (`L`) layout size:
 
 ```html
 <div data-o-grid-colspan="center Luncenter"></div>
-```
+``` 
 
 ```scss
 .my-column {
@@ -248,7 +256,6 @@ Example:
 	}
 }
 ```
-
 
 #### Responsive layout helper
 

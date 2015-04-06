@@ -383,7 +383,7 @@ console.log(oGrid.getCurrentLayout());
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
 
-====
+----
 
 ## How to upgrade from 2.x.x?
 

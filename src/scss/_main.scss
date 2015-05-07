@@ -371,7 +371,7 @@
 	// Nested rows overrides
 	// Substract outer gutter space from nested rows
 	// and restore fluidity
-	@if (& + '' == '.o-grid-row') {
+	@if ((& + '') == '.o-grid-row') {
 		// Nested grid row: only reset grid rows
 		.o-grid-row {
 			@include oGridRowReset;

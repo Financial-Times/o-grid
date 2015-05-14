@@ -69,6 +69,10 @@ Set a number of columns per layout:
 <div data-o-grid-colspan="6 L8"></div>
 ```
 
+```scss
+div { @include oGridColumn((default: 6, L: 8)); }
+```
+
 #### Using keywords<a name="keywords"></a>
 
 * `hide`
@@ -80,12 +84,20 @@ Set a number of columns per layout:
 <div data-o-grid-colspan="one-half Ltwo-thirds"></div>
 ```
 
+```scss
+div { @include oGridColumn((default: one-half, L: two-thirds)); }
+```
+
 ### Examples
 
 A full width column for all sizes except large screens and up, where it spans on 9 columns:
 
 ```html
-<div data-o-grid-colspan="L9"></div>
+<div data-o-grid-colspan="full-width L9"></div>
+```
+
+```scss
+div { @include oGridColumn((default: full-width, L: 9)); }
 ```
 
 A half width column that becomes full-width on medium screens and up:
@@ -94,16 +106,28 @@ A half width column that becomes full-width on medium screens and up:
 <div data-o-grid-colspan="one-half M12"></div>
 ```
 
+```scss
+div { @include oGridColumn((default: one-half, M: 12)); }
+```
+
 A column which gradually takes up a greater portion of horizontal space as the screen gets smaller:
 
 ```html
 <div data-o-grid-colspan="4 M3 L2 XL1"></div>
 ```
 
+```scss
+div { @include oGridColumn((default: 4, M: 3, L: 2, XL: 1)); }
+```
+
 A column which has `width: auto` on small screens, and then takes half the available space on medium screens and up:
 
 ```html
 <div data-o-grid-colspan="M6"></div>
+```
+
+```scss
+div { @include oGridColumn((M: 6)); }
 ```
 
 ## Advanced usage
@@ -116,7 +140,11 @@ A column which has `width: auto` on small screens, and then takes half the avail
 
 ```html
 <div data-o-grid-colspan="hide L12 XLhide"></div>
-``` 
+```
+
+```scss
+div { @include oGridColumn((default: hide, L: 12, XL: hide)); }
+```
 
 #### Centering a column
 
@@ -141,25 +169,47 @@ A column which has `width: auto` on small screens, and then takes half the avail
 ```html
 <div data-o-grid-colspan="8 push4"></div>
 <div data-o-grid-colspan="4 pull8"></div>
-
-<div data-o-grid-colspan="L8 Lpush4"></div>
-<div data-o-grid-colspan="L4 Lpull8"></div>
 ```
 
 ```scss
-
 // Content is first in the source
 .content {
-	width: oGridColspan(8);
+	@include oGridColumn(8);
 	@include oGridPush(4); // outputs left: -33.333333333%;
 }
 
 // Sidebar comes second in the source but appears first on the left
 .sidebar {
-	width: oGridColspan(4);
+	@include oGridColumn(4);
 	@include oGridPull(8); // outputs right: -66.666666667%;
 }
 ```
+
+Responsively:
+```html
+<div data-o-grid-colspan="L8 Lpush4"></div>
+<div data-o-grid-colspan="L4 Lpull8"></div>
+```
+
+```scss
+// Content is first in the source
+.content {
+	@include oGridColumn((L: 8));
+	@include oGridRespondTo(L) {
+		@include oGridPush(4); // outputs left: -33.333333333%;
+	}
+}
+
+// Sidebar comes second in the source but appears first on the left
+.sidebar {
+	@include oGridColumn((L: 4));
+	@include oGridRespondTo(L) {
+		@include oGridPull(8); // outputs right: -66.666666667%;
+	}
+}
+```
+
+
 
 #### Add space before a column
 
@@ -170,9 +220,17 @@ A column which has `width: auto` on small screens, and then takes half the avail
 ```
 
 ```scss
-.my-element {
-	width: oGridColspan(8);
+div {
+	@include oGridColumn(8);
 	@include oGridOffset(4); // outputs margin-left: 33.333333333%;
+}
+
+div {
+	@include oGridColumn((L: 8));
+
+	@include oGridRespondTo(L) {
+		@include oGridOffset(4); // outputs margin-left: 33.333333333%;
+	}
 }
 ```
 
@@ -257,6 +315,85 @@ Example:
 }
 ```
 
+#### Responsive column helper
+
+For simplicity, examples below don't show the output code that brings support for Internet Explorer.
+
+##### Give column properties to an element
+
+```scss
+el { @include oGridColumn(); }
+```
+
+Outputs:
+
+```css
+el {
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+  box-sizing: border-box;
+}
+```
+
+##### Give a width to an element
+
+```scss
+el { @include oGridColumn($span: 4); }
+```
+
+Outputs:
+```css
+el {
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+  box-sizing: border-box;
+}
+@media only screen {
+  el {
+    width: 33.33333%;
+  }
+}
+```
+
+##### Responsive width for different layouts
+
+```scss
+el {
+	@include oGridColumn((
+		default: full-width,
+		M: 6
+	));
+}
+```
+
+Outputs:
+
+```css
+el {
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+  box-sizing: border-box;
+}
+@media only screen {
+  el {
+    display: block;
+    width: 100%;
+  }
+}
+@media (min-width: 45.625em) {
+  el {
+    display: block;
+    width: 50%;
+  }
+}
+```
+
 #### Responsive layout helper
 
 ```scss
@@ -286,7 +423,6 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 ```
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
-
 
 #### *Unstyle* a row or a column
 

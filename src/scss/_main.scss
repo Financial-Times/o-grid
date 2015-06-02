@@ -244,15 +244,18 @@
 	}
 }
 
-/// Base column styles
+/// Base column styles and responsive layout width
+///
+/// The difference between `oGridColumn($span)` and `oGridColspan($span)` is that
+/// `oGridColumn` also outputs the base column styles for positioning and spacing
 ///
 /// @example scss
-///   el { @include oGridColumn; }
+///   el { @include oGridColumn(); }
 ///   el { @include oGridColumn(4); }
 ///   el { @include oGridColumn(1/2); }
 ///   el { @include oGridColumn((default: 12, M: 8, L: hide)); }
 ///
-/// @param {Number | Map} $layouts [null]
+/// @param {Number | Map} $span [null]
 @mixin oGridColumn($span: null) {
 	position: relative; // Required for push and pull
 	padding-left: $o-grid-gutter / 2;
@@ -265,7 +268,14 @@
 	}
 }
 
+@
+
 /// Cross browser column widths across layouts
+///
+/// @example scss
+///   el { @include oGridColspan(4); }
+///   el { @include oGridColspan(1/2); }
+///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span
 @mixin oGridColspan($span) {

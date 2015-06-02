@@ -57,6 +57,21 @@ Set a number of columns per layout:
 </div>
 ```
 
+```scss
+div {
+	@include oGridRow();
+
+	> div {
+		// Half by default, then 8 columns wide on Large layout and up
+		@include oGridColumn((default: 6, L: 8));
+	}
+	> div + div {
+		// Half by default, then 4 columns wide on Large layout and up
+		@include oGridColumn((default: 6, L: 4));
+	}
+}
+```
+
 #### Using numbers
 
 * `{0-12}` - number of columns to span by default

@@ -550,3 +550,11 @@ console.log(oGrid.getCurrentLayout());
 - `<div class="o-grid-row" o-grid-colspan="12">` is deprecated (a row can't be a column at the same time). Use two elements instead
 - Search `oGridColumnWidth` and replace with `oGridColspan`
 - Search `o-grid-row-compact` and replace with `o-grid-row--compact`
+
+----
+
+## License
+
+Copyright (c) 2015 Financial Times Ltd. All rights reserved.
+
+This software is published under the [MIT licence](http://opensource.org/licenses/MIT).

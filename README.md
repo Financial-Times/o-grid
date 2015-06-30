@@ -27,7 +27,7 @@ bower install o-grid --save
 ```scss
 // your-app/main.scss
 $o-grid-is-silent: false;
-@include 'o-grid/main';
+@import 'o-grid/main';
 ```
 
 ```js

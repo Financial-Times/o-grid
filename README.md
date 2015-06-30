@@ -7,6 +7,34 @@ A 12 column responsive grid system for laying out documents, templates and modul
 
 [![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
 
+## Quick Start
+
+Using the [Origami Build Service](https://build.origami.ft.com/v1/):
+
+```html
+<head>
+	…
+	<link rel="stylesheet" href="https://build.origami.ft.com/bundles/css?modules=o-grid@^3.0.0" />
+</head>
+```
+
+Or, to install it manually:
+
+```sh
+bower install o-grid --save
+```
+
+```scss
+// your-app/main.scss
+$o-grid-is-silent: false;
+@include 'o-grid/main';
+```
+
+```js
+// your-app/main.js
+var getCurrentLayout = require('o-grid').getCurrentLayout;
+```
+
 ## Browser support
 
 o-grid works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.

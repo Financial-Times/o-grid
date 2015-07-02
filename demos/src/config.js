@@ -8,7 +8,7 @@ Object.keys(configurations).forEach(function(key) {
 		description: configurations[key],
 		sass: 'demos/src/scss/' + key + '.scss',
 		template: 'demos/src/layout.mustache',
-		bodyClasses: 'demo',
+		htmlClasses: 'demo',
 		expanded: (key === 'default')
 	});
 });
@@ -20,8 +20,9 @@ demos.push({
 	template: 'demos/src/test.mustache',
 	data: 'demos/src/configurations.json',
 	js: 'demos/src/js/style-switcher.js',
-	bodyClasses: 'test',
-	expanded: false
+	htmlClasses: 'test',
+	expanded: false,
+	dependencies: ["o-buttons@^2.0.0"]
 });
 
 module.exports = {

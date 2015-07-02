@@ -213,23 +213,11 @@
 	[data-o-grid-colspan~="#{$layout-name}center"] {
 		@include oGridCenter;
 	}
-	// Only output "uncenter" modifier with a layout (e.g. XLuncenter)
+	// Since writing [data-o-grid-colspan~="uncenter"] wouldn't make much sense
+	// we only allow "uncenter" combined with a layout (e.g. XLuncenter)
 	@if $layout-name != null {
 		[data-o-grid-colspan~="#{$layout-name}uncenter"] {
 			@include oGridUncenter;
-		}
-	}
-
-	// Pull, push, offset
-	@for $colspan from 0 through ($o-grid-columns - 1) {
-		[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
-			@include oGridPush($colspan);
-		}
-		[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
-			@include oGridPull($colspan);
-		}
-		[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
-			@include oGridOffset($colspan);
 		}
 	}
 
@@ -240,6 +228,25 @@
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
 			width: oGridColspan($human-friendly-name);
+		}
+	}
+}
+
+/// Shuffle columns around using pull, push and offset
+///
+/// @access private
+///
+/// @param {String} $layout-name [null]
+@mixin _oGridShuffleColumns($layout-name: null) {
+	@for $colspan from 0 through ($o-grid-columns - 1) {
+		[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
+			@include oGridPush($colspan);
+		}
+		[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
+			@include oGridPull($colspan);
+		}
+		[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
+			@include oGridOffset($colspan);
 		}
 	}
 }
@@ -533,6 +540,7 @@
 /// @param {String} $layout-name - One of $o-grid-layouts
 @mixin _oGridModifiersForLayout($layout-name) {
 	@include _oGridHumanFriendlyKeywords($layout-name);
+	@include _oGridShuffleColumns($layout-name);
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
@@ -599,6 +607,9 @@
 
 	// one-half, one-third, three-quarters, center, uncenter…
 	@include _oGridHumanFriendlyKeywords;
+
+	// pull, push, offset
+	@include _oGridShuffleColumns;
 
 	// Gutter helpers:
 	// Remove gutters on a row or a column, across all layouts

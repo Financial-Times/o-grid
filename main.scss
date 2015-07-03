@@ -24,16 +24,19 @@
 
 /// Surface the layout currently displayed to make it readable in JS.
 ///
-/// In IE 8, assume it is `$o-grid-fixed-layout`.
+/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
 ///
 /// **n.b.:** Only works when silent mode is off.
 ///
 /// @example js
-///  var getCurrentLayout = require('o-grid/src/js/getCurrentLayout');
-///  var currentLayout = getCurrentLayout; // One of $o-grid-layouts
+///  // your-app/main.js
+///  var getCurrentLayout = require('o-grid').getCurrentLayout;
+///
+///  // Return the current layout (e.g. default, S, M, L, XL)
+///  console.log(getCurrentLayout());
 @mixin oGridSurfaceCurrentLayout {
 	html:after {
-		content: 'default'; // By default, we're exposing the XS layout (from 0 to S)
+		content: 'default'; // Default layout. Typically from 0px to S
 		display: none;
 
 		@each $breakpoint in $_o-grid-layout-names {

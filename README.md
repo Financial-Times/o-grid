@@ -33,6 +33,9 @@ $o-grid-is-silent: false;
 ```js
 // your-app/main.js
 var getCurrentLayout = require('o-grid').getCurrentLayout;
+
+// Return the current layout (e.g. default, S, M, L, XL)
+console.log(getCurrentLayout());
 ```
 
 ## Browser support

@@ -12,7 +12,7 @@ body {
 }
 
 // Display configuration information
-.test:after {
+.test body:after {
 	content: '';
 	background-color: #fcf8e3;
 	border-bottom: 1px solid #fbeed5;

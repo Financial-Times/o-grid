@@ -1,12 +1,18 @@
-body {
-	font-family: Arial, Helvetica, sans-serif;
+html {
+	/* Set a font family on the whole document */
+	font-family: BentonSans, sans-serif;
+
+	/* Prevent navigation menus from creating
+	   extra space on sides of the page */
+	overflow-x: hidden;
 }
 body {
-	overflow-x: hidden;
+	/* Remove space around the document */
+	margin: 0;
 }
 
 // Display configuration information
-.test:after {
+.test body:after {
 	content: '';
 	background-color: #fcf8e3;
 	border-bottom: 1px solid #fbeed5;
@@ -28,10 +34,12 @@ h2 {
 .demo-cell {
 	background-color: transparent;
 	zoom: 1;
-	min-height: 30px;
+	min-height: 2em;
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 1rem;
 	overflow: hidden;
+	font-size: 1.3rem;
+	line-height: 1.2;
 
 	// Transparent background color in IE8
 	$rgba: rgba(#ffffff, 0.5);
@@ -42,19 +50,20 @@ h2 {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
 }
 .o-grid-row {
-	background: #bdcaff;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	background: #f6e9d8;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 
 	.o-grid-row {
-		background: #dc73ff;
+		background: #cec6b9;
 	}
 }
 
 [class*='error'] .demo-cell {
-	background-color: red;
+	background-color: #c00d00;
 }
 
-.selected-stylesheet {
-	background: #aaaaff;
+.demo-switcher {
+	margin: 1rem 0;
+	text-align: center;
 }

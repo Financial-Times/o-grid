@@ -1,1 +1,31 @@
 @import "common";
+
+[data-demo-highlight] {
+	display: inline-block;
+	transition: 0.2s all 0.25s ease-in-out;
+	opacity: 0.6;
+	transform: scale(0.75);
+}
+
+@mixin demo-highlight($from: false, $until: false) {
+	@include oGridRespondTo($from: $from, $until: $until) {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+[data-demo-highlight*="default"] {
+	@include demo-highlight($until: S);
+}
+[data-demo-highlight*="S"] {
+	@include demo-highlight(S, M);
+}
+[data-demo-highlight*="M"] {
+	@include demo-highlight(M, L);
+}
+[data-demo-highlight="L"],
+[data-demo-highlight*=" L"] {
+	@include demo-highlight(L, XL);
+}
+[data-demo-highlight*="XL"] {
+	@include demo-highlight(XL);
+}

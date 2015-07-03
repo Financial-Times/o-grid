@@ -49,24 +49,25 @@ if (![].includes) {
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
 	var demoTypes = require('../configurations.json');
-	var stylesheet = document.querySelector("link[rel='stylesheet']");
+	var stylesheet = document.querySelector("link[href*='default']");
 	var html = document.documentElement;
-	var buttonContainer = document.getElementById("styleSwitcher");
+	var buttonContainer = document.getElementById("js-demo-switcher");
 	var tmp = document.createDocumentFragment();
 	var subheading = document.getElementById("subheading");
 
 	Object.keys(demoTypes).forEach(function (type) {
 		var button  = document.createElement('button');
+		button.classList.add('o-buttons');
 		var stylePath = local ? type + '.css' : 'scss/' + type + '.scss';
 		button.innerHTML = type;
 		button.title = demoTypes[type];
 		button.addEventListener('click', function () {
 			stylesheet.href = stylePath;
-			var prev = document.querySelector('.selected-stylesheet');
+			var prev = document.querySelector('[aria-selected=true]');
 			if (prev) {
-				prev.className = '';
+				prev.setAttribute('aria-selected', 'false');
 			}
-			this.className = 'selected-stylesheet';
+			this.setAttribute('aria-selected', 'true');
 
 			subheading && (subheading.innerHTML = this.title);
 			html.className = html.className.replace(/\sstylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
@@ -75,7 +76,7 @@ if (![].includes) {
 		});
 		if (!tmp.childNodes.length) {
 			stylesheet.href = stylePath;
-			button.className = 'selected-stylesheet';
+			button.setAttribute('aria-selected', 'true');
 			html.className += ' stylesheet-' + type;
 			subheading && (subheading.innerHTML = button.title);
 		}
@@ -311,6 +312,6 @@ function runTests() {
 	};
 }
 
-if (document.body.classList.contains('test')) {
+if (document.documentElement.classList.contains('test')) {
 	runTests();
 }

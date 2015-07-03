@@ -312,6 +312,6 @@ function runTests() {
 	};
 }
 
-if (document.body.classList.contains('test')) {
+if (document.documentElement.classList.contains('test')) {
 	runTests();
 }

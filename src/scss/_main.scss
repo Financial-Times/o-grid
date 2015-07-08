@@ -106,7 +106,7 @@
 /// @deprecated
 @function oGridColumnWidth($span, $total-cols: $o-grid-columns) {
 	@warn 'oGridColumnWidth() is deprecated, please use oGridColspan() instead';
-	@return oGridColspan($span, $total-cols: $o-grid-columns);
+	@return oGridColspan($span, $total-cols: $total-cols);
 }
 
 /// Apply styles at a given layout size

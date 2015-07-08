@@ -2,6 +2,6 @@ $o-grid-mode: 'snappy';
 
 @import "common";
 
-.test:after {
+.test body:after {
 	content: '$o-grid-mode: #{$o-grid-mode}';
 }

@@ -227,7 +227,13 @@
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
+			min-width: oGridColspan($human-friendly-name);
+			max-width: oGridColspan($human-friendly-name);
 			width: oGridColspan($human-friendly-name);
+
+			@include oGridTargetIE8 {
+				min-width: 0;
+			}
 		}
 	}
 }
@@ -269,6 +275,7 @@
 	padding-right: $o-grid-gutter / 2;
 	float: left;
 	box-sizing: border-box;
+	flex: 1 1 0%;
 
 	@if $span {
 		@include oGridColspan($span);
@@ -290,12 +297,7 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			@include oGridTargetIE8 {
-				width: oGridColspan($span);
-			}
-			@include oGridTargetModernBrowsers {
-				width: oGridColspan($span);
-			}
+			width: oGridColspan($span);
 		}
 	}
 
@@ -306,13 +308,13 @@
 				@if $layout-span == 'hide' {
 					display: none;
 				} @else {
+					display: block;
+					min-width: oGridColspan($layout-span);
+					max-width: oGridColspan($layout-span);
+					width: oGridColspan($layout-span);
+
 					@include oGridTargetIE8 {
-						display: block;
-						width: oGridColspan($layout-span);
-					}
-					@include oGridTargetModernBrowsers {
-						display: block;
-						width: oGridColspan($layout-span);
+						min-width: 0;
 					}
 				}
 			} @else {
@@ -336,7 +338,6 @@
 					}
 					@include oGridRespondTo($layout-name) {
 						display: block;
-						width: oGridColspan($layout-span);
 					}
 				}
 			}
@@ -365,14 +366,18 @@
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
+	display: flex;
+	flex-wrap: wrap; // Note that this breaks in old Firefox
 
-	// Clearfix
+	// Clearfix for IE9 and below
 	zoom: 1;
 
 	&:before,
 	&:after {
+		// scss-lint:disable DuplicateProperty
 		content: ' ';
-		display: table;
+		display: none;
+		display: table\9; // Show only to IE<=9
 	}
 	&:after {
 		clear: both;
@@ -549,7 +554,13 @@
 			display: block;
 
 			// Apply width in %
-			width: oGridColspan($colspan, $o-grid-columns);
+			min-width: oGridColspan($colspan);
+			max-width: oGridColspan($colspan);
+			width: oGridColspan($colspan);
+
+			@include oGridTargetIE8 {
+				min-width: 0;
+			}
 		}
 	}
 
@@ -592,7 +603,13 @@
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
+			min-width: oGridColspan($colspan, $o-grid-columns);
+			max-width: oGridColspan($colspan, $o-grid-columns);
 			width: oGridColspan($colspan, $o-grid-columns);
+
+			@include oGridTargetIE8 {
+				min-width: 0;
+			}
 		}
 	}
 

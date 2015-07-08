@@ -31,7 +31,12 @@ h2 {
 	@include oGridRow;
 }
 
+[data-o-grid-colspan] {
+	display: flex;
+}
+
 .demo-cell {
+	flex-grow: 1;
 	background-color: transparent;
 	zoom: 1;
 	min-height: 2em;

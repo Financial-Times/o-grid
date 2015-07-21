@@ -67,3 +67,25 @@ h2 {
 	margin: 1rem 0;
 	text-align: center;
 }
+
+@include oGridRespondTo(L) {
+	.o-grid-row.flex {
+		display: flex;
+
+		// HACK Mozilla, unlike WebKit follows the flexbox standard to the letter
+		// which means relative margins and paddings on flexboxes are based on element
+		// height and not width. Since the width isn't set, that ends up being 0
+		@-moz-document url-prefix() {
+			padding-top: percentage($o-grid-gutter / 2);
+			padding-bottom: percentage($o-grid-gutter / 2);
+		}
+
+		[data-o-grid-colspan] {
+			display: flex;
+
+			.demo-cell {
+				width: 100%;
+			}
+		}
+	}
+}

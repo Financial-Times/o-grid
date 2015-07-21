@@ -5,8 +5,11 @@
 var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
 var local = true;
-var defaultGutter = 10;
-var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
+var defaultColumn = 90 / 1200;
+var defaultGutter = 10 / 1200;
+
+var resizedColumn = 80 / 1200;
+var resizedGutter = 20 / 1200;
 
 
 // ============================================================================
@@ -113,12 +116,21 @@ function convertKeywordsToSpans(keyword) {
 
 function getExpectedSpans(el) {
 	var span = null;
-	var layout = getCurrentLayout();
+	var layouts = ['XL', 'L', 'M', 'S'];
+	var allLayouts = [];
+
+	var idx = layouts.indexOf(getCurrentLayout())
+	if(idx > -1) {
+		allLayouts = layouts.slice(idx);
+	}
 
 	var rules = $(el).data('oGridColspan') + "";
 
-	var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
-	span = rules.match(layoutAndKeyword);
+	while (span === null && allLayouts.length > 0) {
+		var layout = allLayouts.shift();
+		var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+		span = rules.match(layoutAndKeyword);
+	}
 
 	if (span === null) {
 		var numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
@@ -259,28 +271,21 @@ function highlightUnexpectedPosition(el) {
 }
 
 function highlightUnexpectedWidth(el) {
-	var outerMargins = 10;
+	var gutter = defaultGutter;
+	var column = defaultColumn;
 
 	if (document.documentElement.classList.contains('stylesheet-resized')) {
-		outerMargins = resizedOuterMarginWidth;
+		gutter = resizedGutter;
+		column = resizedColumn;
 	}
 
-	if ($(el).parents('.o-grid-row--compact').length > 0) {
-		outerMargins = 0;
-	}
-
-	// If the element is in a nested row,
-	// then there are no outer margins
-	if ($(el).parents('.o-grid-row').parents('.o-grid-row').length > 0) {
-		outerMargins = 0;
-	}
-
-	var expectedPercentage = getExpectedSpans(el) * 100/12;
-	var actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth - outerMargins);
+	var expectedSpans = getExpectedSpans(el);
+	var expectedPercentage = 100 * expectedSpans * (column + gutter);
+	var actualPercentage = 100 * el.offsetWidth / (el.parentNode.offsetWidth);
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
 		/\berror-width\b/.test(el.className) || (el.className += ' error-width');
-		console.error('Width error', el.attributes['data-o-grid-colspan'], 'Expected: ' + expectedPercentage, 'Actual: ' + actualPercentage);
+		console.error('Width error', el.attributes['data-o-grid-colspan'], ", " + expectedSpans + ' spans. Expected: ' + expectedPercentage, 'Actual: ' + actualPercentage);
 	} else {
 		el.className = el.className.replace(/\berror-width\b/g, '');
 	}

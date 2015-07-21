@@ -2,7 +2,7 @@
 
 A 12 column responsive grid system for laying out documents, templates and modules.
 
-> Living off the grid and being kind of an outlaw brings a dangerous reality.  
+> Living off the grid and being kind of an outlaw brings a dangerous reality.
   *Ron Perlman*
 
 [![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
@@ -49,17 +49,18 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 ### General settings
 
 * Minimum width: 240px
-* Maximum width: 1210px
-* Gutter width: 10px
+* Maximum width: 1200px
+* Column width: 90px at 1200px (flexible)
+* Gutter width: 10px at 1200px (flexible)
 * Number of columns: 12
 
 ### Layout sizes
 
 * **Default (no layout name)** 240px - …
-* **Small (S)** 490px - 729px
-* **Medium (M)** 730px - 969px
-* **Large (L)** 970px to 1209px
-* **Extra large (XL)** 1210px
+* **Small (S)** 480px - 719px
+* **Medium (M)** 720px - 959px
+* **Large (L)** 960px to 1199px
+* **Extra large (XL)** 1200px
 
 ## Quick start
 
@@ -198,7 +199,7 @@ div { @include oGridColumn((default: hide, L: 12, XL: hide)); }
 
 ```html
 <div data-o-grid-colspan="center Luncenter"></div>
-``` 
+```
 
 ```scss
 .my-column {

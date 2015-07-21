@@ -5,7 +5,8 @@ $o-grid-layouts: (
 	'XL': 1200px,
 );
 
-$o-grid-gutter: 5 / 1200;
+$o-grid-column: 80 / 1200;
+$o-grid-gutter: 20 / 1200;
 
 @import 'common';
 

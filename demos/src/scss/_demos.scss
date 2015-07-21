@@ -29,6 +29,8 @@ body {
 
 h2 {
 	@include oGridRow;
+	margin-top: 1rem;
+	margin-bottom: 1rem
 }
 
 .demo-cell {
@@ -51,8 +53,6 @@ h2 {
 }
 .o-grid-row {
 	background: #f6e9d8;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
 
 	.o-grid-row {
 		background: #cec6b9;

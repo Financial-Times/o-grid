@@ -288,9 +288,8 @@
 @mixin oGridColumnMargins($total-cols: $o-grid-columns) {
 	$subgrid-ratio: $o-grid-columns / $total-cols;
 
-	// assymetry to prevent margins from collapsing
-	margin-top: 0;
-	margin-bottom: percentage($subgrid-ratio * $o-grid-gutter);
+	padding-top: percentage($subgrid-ratio * $o-grid-gutter / 2);
+	padding-bottom: percentage($subgrid-ratio * $o-grid-gutter / 2);
 
 	padding-right: percentage($subgrid-ratio * $o-grid-gutter / 2);
 	padding-left: percentage($subgrid-ratio * $o-grid-gutter / 2);
@@ -374,16 +373,10 @@
 }
 
 @mixin oGridRowMargins($total-cols: $o-grid-columns) {
-	$subgrid-ratio: ($o-grid-columns + 1) / ($total-cols + 1);
+	$subgrid-ratio: $o-grid-columns / $total-cols;
 
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 0;
-
-	padding-bottom: percentage($subgrid-ratio * $o-grid-gutter);
-
-	// swallow column bottom margin
-	margin-bottom: percentage($subgrid-ratio * -$o-grid-gutter);
 }
 
 /// Base row styles
@@ -400,15 +393,16 @@
 
 	// Clearfix
 	zoom: 1;
+	overflow: auto;
 
-	&:before,
-	&:after {
-		content: ' ';
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	// &:before,
+	// &:after {
+	// 	content: ' ';
+	// 	display: table;
+	// }
+	// &:after {
+	// 	clear: both;
+	// }
 
 	// Serve a fixed-width layout to IE8
 	@include oGridTargetIE8 {

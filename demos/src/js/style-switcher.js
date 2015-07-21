@@ -119,7 +119,7 @@ function getExpectedSpans(el) {
 	var layouts = ['XL', 'L', 'M', 'S'];
 	var allLayouts = [];
 
-	var idx = layouts.indexOf(getCurrentLayout())
+	var idx = layouts.indexOf(getCurrentLayout());
 	if(idx > -1) {
 		allLayouts = layouts.slice(idx);
 	}

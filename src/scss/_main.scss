@@ -14,7 +14,8 @@
 /// @param {String} $layout-width [null]
 @mixin oGridAddLayout($layout-name, $column-width: null, $layout-width: null) {
 	@if $column-width {
-		$layout-width: _oGridWidth($column-width);
+		@warn 'Defining a layout by column-width is deprecated, use $layout-width instead (would be 120 + 12*$column-width by default)';
+		@return;
 	}
 
 	$temp-layouts: ();

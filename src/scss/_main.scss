@@ -455,12 +455,14 @@
 }
 
 /// Reset row styles
-@mixin oGridRowReset {
+@mixin oGridRowReset($total-cols: $o-grid-columns) {
+	$subgrid-ratio: $o-grid-columns / $total-cols;
+
 	width: auto;
 	min-width: 0;
 	max-width: none;
-	margin-left: percentage(-$o-grid-gutter / 2);
-	margin-right: percentage(-$o-grid-gutter / 2);
+	margin-left: percentage($subgrid-ratio * -$o-grid-gutter / 2);
+	margin-right: percentage($subgrid-ratio * -$o-grid-gutter / 2);
 }
 
 /// Center column

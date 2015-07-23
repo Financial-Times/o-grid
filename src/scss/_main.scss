@@ -459,8 +459,8 @@
 	width: auto;
 	min-width: 0;
 	max-width: none;
-	margin-left: -$o-grid-gutter / 2;
-	margin-right: -$o-grid-gutter / 2;
+	margin-left: percentage(-$o-grid-gutter / 2);
+	margin-right: percentage(-$o-grid-gutter / 2);
 }
 
 /// Center column

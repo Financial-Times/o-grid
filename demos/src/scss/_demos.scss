@@ -31,12 +31,7 @@ h2 {
 	@include oGridRow;
 }
 
-[data-o-grid-colspan] {
-	display: flex;
-}
-
 .demo-cell {
-	flex-grow: 1;
 	background-color: transparent;
 	zoom: 1;
 	min-height: 2em;
@@ -61,6 +56,19 @@ h2 {
 
 	.o-grid-row {
 		background: #cec6b9;
+	}
+}
+
+// Showcase flexbox interactions
+// Note that this breaks cases such as:
+// <div data-o-grid-colspan="0">
+// <div data-o-grid-colspan="Lhide">
+// Because these rely on "display: none" to hide columns
+.demo-flex {
+	display: flex;
+
+	.demo-cell {
+		flex: 1 1 0%;
 	}
 }
 

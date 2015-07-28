@@ -122,6 +122,50 @@
 	<div data-o-grid-colspan="12 S3 M4 L4 XL4"><div class="demo-cell">12 S3 M4 L4 XL4</div></div>
 </div>
 
+<h2>Stacking behaviour</h2>
+
+<div class="o-grid-row">
+	<div data-o-grid-colspan="0 S12 M6"><div class="demo-cell">0 S12 M6</div></div>
+	<div data-o-grid-colspan="0 S12 M6"><div class="demo-cell">0 S12 M6</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="0 S12 M6 L4"><div class="demo-cell">0 S12 M6 L4</div></div>
+	<div data-o-grid-colspan="0 S12 M6 L4"><div class="demo-cell">0 S12 M6 L4</div></div>
+	<div data-o-grid-colspan="0 S12 M12 L4"><div class="demo-cell">0 S12 M12 L4</div></div>
+</div>
+<div class="o-grid-row">
+	<div data-o-grid-colspan="0 S12 M6"><div class="demo-cell">0 S12 M6</div></div>
+	<div data-o-grid-colspan="0 S12 M6"><div class="demo-cell">0 S12 M6</div></div>
+</div>
+
+<h2>Flexbox interaction</h2>
+
+<div class="o-grid-row flex">
+	<div data-o-grid-colspan="12 L4">
+		<div class="demo-cell">
+			4<br/>and a lots and lots and lots and lots of extra text to make the columns different heights
+			</div>
+		</div>
+	<div data-o-grid-colspan="12 L8"><div class="demo-cell">8</div></div>
+</div>
+<div class="o-grid-row flex">
+	<div data-o-grid-colspan="12 L4"><div class="demo-cell">4</div></div>
+	<div data-o-grid-colspan="12 L4">
+		<div class="demo-cell">
+			4<br/>and a lots and lots and lots and lots of extra text to make the columns different heights
+		</div>
+	</div>
+	<div data-o-grid-colspan="12 L4"><div class="demo-cell">4</div></div>
+</div>
+<div class="o-grid-row flex">
+	<div data-o-grid-colspan="12 L8"><div class="demo-cell">8</div></div>
+	<div data-o-grid-colspan="12 L4">
+		<div class="demo-cell">
+			4<br/>and a lots and lots and lots and lots of extra text to make the columns different heights
+		</div>
+	</div>
+</div>
+
 <h2>Nested grids</h2>
 
 <div class="o-grid-row">

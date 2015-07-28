@@ -14,7 +14,8 @@
 /// @param {String} $layout-width [null]
 @mixin oGridAddLayout($layout-name, $column-width: null, $layout-width: null) {
 	@if $column-width {
-		$layout-width: _oGridWidth($column-width);
+		@warn 'Defining a layout by column-width is deprecated, use $layout-width instead (would be 120 + 12*$column-width by default)';
+		$layout-width: 120px + 12*$column-width; // best guess
 	}
 
 	$temp-layouts: ();
@@ -89,16 +90,25 @@
 	@if $span == 'full-width' {
 		@return 100%;
 	} @else {
-		@if $span >= 1 {
-			// A number of columns is supplied: converting it into a fraction
-			// of the total number of columns
-			@return percentage($span / $total-cols);
-		} @else {
-			// A fraction (1/2) or a number (0.5) is supplied:
-			// converting it into a percentage
-			@return percentage($span);
-		}
+		@return oGridSpan($span, $total-cols, 0);
 	}
+}
+
+/// Private utility function for the calculation of spans
+@function oGridSpan($span, $total-cols, $gutters: 0) {
+	@if $span < 1 {
+		// A fraction (1/2) or a number (0.5) is supplied:
+		// converting it into a percentage
+		@if round($span * $total-cols) != ($span * $total-cols) {
+			@error "Colspan #{$span} doesn't result in an integer column number (= #{$span * $total-cols}).";
+		}
+
+		$span: $span * $total-cols;
+	}
+
+	// final width of the grid item
+	$subgrid-ratio: $o-grid-columns / $total-cols;
+	@return percentage($subgrid-ratio * ($span * $o-grid-column + ($span + $gutters) * $o-grid-gutter))
 }
 
 /// Alias for the oGridColspan function
@@ -263,16 +273,27 @@
 ///   el { @include oGridColumn((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span [null]
-@mixin oGridColumn($span: null) {
+@mixin oGridColumn($span: null, $total-cols: $o-grid-columns) {
 	position: relative; // Required for push and pull
-	padding-left: $o-grid-gutter / 2;
-	padding-right: $o-grid-gutter / 2;
 	float: left;
 	box-sizing: border-box;
+	min-height: 1px;
+
+	@include oGridColumnMargins($total-cols);
 
 	@if $span {
-		@include oGridColspan($span);
+		@include oGridColspan($span, $total-cols);
 	}
+}
+
+@mixin oGridColumnMargins($total-cols: $o-grid-columns) {
+	$subgrid-ratio: $o-grid-columns / $total-cols;
+
+	padding-top: percentage($subgrid-ratio * $o-grid-gutter / 2);
+	padding-bottom: percentage($subgrid-ratio * $o-grid-gutter / 2);
+
+	padding-right: percentage($subgrid-ratio * $o-grid-gutter / 2);
+	padding-left: percentage($subgrid-ratio * $o-grid-gutter / 2);
 }
 
 /// Cross browser column widths across layouts
@@ -283,7 +304,7 @@
 ///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span
-@mixin oGridColspan($span) {
+@mixin oGridColspan($span, $total-cols: $o-grid-columns) {
 	// Special case: the column is hidden by default
 	@if $span == 'hide' {
 		display: none;
@@ -291,10 +312,10 @@
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
 			@include oGridTargetIE8 {
-				width: oGridColspan($span);
+				width: oGridColspan($span, $total-cols);
 			}
 			@include oGridTargetModernBrowsers {
-				width: oGridColspan($span);
+				width: oGridColspan($span, $total-cols);
 			}
 		}
 	}
@@ -308,11 +329,11 @@
 				} @else {
 					@include oGridTargetIE8 {
 						display: block;
-						width: oGridColspan($layout-span);
+						width: oGridColspan($layout-span, $total-cols);
 					}
 					@include oGridTargetModernBrowsers {
 						display: block;
-						width: oGridColspan($layout-span);
+						width: oGridColspan($layout-span, $total-cols);
 					}
 				}
 			} @else {
@@ -331,12 +352,12 @@
 					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
 						@include oGridTargetIE8 {
 							display: block;
-							width: oGridColspan($layout-span);
+							width: oGridColspan($layout-span, $total-cols);
 						}
 					}
 					@include oGridRespondTo($layout-name) {
 						display: block;
-						width: oGridColspan($layout-span);
+						width: oGridColspan($layout-span, $total-cols);
 					}
 				}
 			}
@@ -352,19 +373,24 @@
 	@include oGridColspan($span);
 }
 
+@mixin oGridRowMargins($total-cols: $o-grid-columns) {
+	$subgrid-ratio: $o-grid-columns / $total-cols;
+
+	margin-right: auto;
+	margin-left: auto;
+}
+
 /// Base row styles
 ///
 /// @param {String} $grid-mode [$o-grid-mode]
-@mixin oGridRow($grid-mode: $o-grid-mode) {
+@mixin oGridRow($grid-mode: $o-grid-mode, $total-cols: $o-grid-columns) {
 	clear: both;
 	min-width: $o-grid-min-width;
 	// Older browsers get a fixed-width layout
 	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-	padding-left: $o-grid-gutter / 2;
-	padding-right: $o-grid-gutter / 2;
 	box-sizing: border-box;
-	margin-left: auto;
-	margin-right: auto;
+
+	@include oGridRowMargins($total-cols);
 
 	// Clearfix
 	zoom: 1;
@@ -428,14 +454,14 @@
 }
 
 /// Reset row styles
-@mixin oGridRowReset {
+@mixin oGridRowReset($total-cols: $o-grid-columns) {
+	$subgrid-ratio: $o-grid-columns / $total-cols;
+
 	width: auto;
 	min-width: 0;
 	max-width: none;
-	margin-left: -$o-grid-gutter / 2;
-	margin-right: -$o-grid-gutter / 2;
-	padding-left: 0;
-	padding-right: 0;
+	margin-left: percentage($subgrid-ratio * -$o-grid-gutter / 2);
+	margin-right: percentage($subgrid-ratio * -$o-grid-gutter / 2);
 }
 
 /// Center column
@@ -454,8 +480,12 @@
 
 /// Remove column styles
 @mixin oGridResetColumn {
-	padding-left: 0;
 	padding-right: 0;
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+
 	float: none;
 	width: auto;
 }
@@ -463,24 +493,24 @@
 /// Reorder visually: pull
 ///
 /// @param {Number} $columns
-@mixin oGridPull($columns) {
-	right: oGridColspan($columns);
+@mixin oGridPull($columns, $total-cols: $o-grid-columns) {
+	right: oGridColspan($columns, $total-cols);
 	left: auto;
 }
 
 /// Reorder visually: push
 ///
 /// @param {Number} $columns
-@mixin oGridPush($columns) {
-	left: oGridColspan($columns);
+@mixin oGridPush($columns, $total-cols: $o-grid-columns) {
+	left: oGridColspan($columns, $total-cols);
 	right: auto;
 }
 
 /// Offset: add space before a column
 ///
 /// @param {Number} $columns
-@mixin oGridOffset($columns) {
-	margin-left: oGridColspan($columns);
+@mixin oGridOffset($columns, $total-cols: $o-grid-columns) {
+	margin-left: oGridSpan($columns, $total-cols, 1);
 }
 
 /// Remove row styles
@@ -549,7 +579,7 @@
 			display: block;
 
 			// Apply width in %
-			width: oGridColspan($colspan, $o-grid-columns);
+			width: oGridColspan($colspan);
 		}
 	}
 

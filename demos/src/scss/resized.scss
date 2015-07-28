@@ -1,10 +1,12 @@
 $o-grid-layouts: (
 	'S': 400px,
 	'M': 800px,
-	'L': 1000px
+	'L': 1000px,
+	'XL': 1200px,
 );
 
-$o-grid-gutter: 5px;
+$o-grid-column: 80 / 1200;
+$o-grid-gutter: 20 / 1200;
 
 @import 'common';
 

@@ -2,8 +2,7 @@
 
 A 12 column responsive grid system for laying out documents, templates and modules.
 
-> Living off the grid and being kind of an outlaw brings a dangerous reality.
-  *Ron Perlman*
+> Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
 
 [![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
 

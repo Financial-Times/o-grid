@@ -394,16 +394,15 @@
 
 	// Clearfix
 	zoom: 1;
-	overflow: auto;
 
-	// &:before,
-	// &:after {
-	// 	content: ' ';
-	// 	display: table;
-	// }
-	// &:after {
-	// 	clear: both;
-	// }
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 
 	// Serve a fixed-width layout to IE8
 	@include oGridTargetIE8 {

@@ -14,7 +14,12 @@
 /// @param {String} $layout-width [null]
 @mixin oGridAddLayout($layout-name, $column-width: null, $layout-width: null) {
 	@if $column-width {
-		$layout-width: _oGridWidth($column-width);
+		@if unit($o-grid-gutter) == % {
+			@error "$o-grid-gutter is a percentage value (#{$o-grid-gutter}). Layouts can only be defined using column widths when gutters are in pixels.";
+		}
+		$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
+		$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
+		$layout-width: ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
 	}
 
 	$temp-layouts: ();

@@ -21,6 +21,11 @@
             "description": "Responsive grid that snaps between a larger fixed layout at each breakpoint"
         },
         {
+            "path": "/demos/fluid-gutters.html",
+            "expanded": false,
+            "description": "Responsive grid with fully fluid gutters"
+        },
+        {
             "path": "/demos/resized.html",
             "expanded": false,
             "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved"
@@ -34,6 +39,11 @@
             "path": "/demos/ie8.html",
             "expanded": false,
             "description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
+        },
+        {
+            "path": "/demos/test.html",
+            "expanded": false,
+            "description": "test demo"
         }
     ]
 }

@@ -2,8 +2,7 @@
 
 A 12 column responsive grid system for laying out documents, templates and modules.
 
-> Living off the grid and being kind of an outlaw brings a dangerous reality.  
-  *Ron Perlman*
+> Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
 
 [![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
 
@@ -198,7 +197,7 @@ div { @include oGridColumn((default: hide, L: 12, XL: hide)); }
 
 ```html
 <div data-o-grid-colspan="center Luncenter"></div>
-``` 
+```
 
 ```scss
 .my-column {
@@ -500,7 +499,7 @@ $o-grid-debug-mode: true;
 $o-grid-gutter: 10px;
 
 // Grid mode
-// - fluid: full width until $o-grid-max-width (default: 1210px)
+// - fluid: full width up to the largest layout's width
 // - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
 //           and then snaps into a larger fixed layout at each breakpoint
 //           (used by Next FT)

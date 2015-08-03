@@ -1,0 +1,37 @@
+// Add default layouts
+// a minimum of 2 layouts is required for o-grid to work
+$o-grid-layouts: (
+	Y: 800px,
+	Z: 1200px,
+);
+
+@import '../main';
+
+@include oGridAddLayout($layout-name: A, $column-width: 20px);
+
+@include oGridRespondTo(A) {
+	A {
+		max-width: oGridGetMaxWidthForLayout(A);
+	}
+}
+
+@include oGridAddLayout($layout-name: B, $layout-width: 365px);
+@include oGridRespondTo(B) {
+	B {
+		max-width: oGridGetMaxWidthForLayout(B);
+	}
+}
+
+$o-grid-gutter: 1%;
+@include oGridAddLayout($layout-name: C, $layout-width: 372px);
+@include oGridRespondTo(C) {
+	C {
+		max-width: oGridGetMaxWidthForLayout(C);
+	}
+}
+
+@include oGridRespondTo(Z) {
+	Z {
+		max-width: oGridGetMaxWidthForLayout(Z);
+	}
+}

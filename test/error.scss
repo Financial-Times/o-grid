@@ -1,0 +1,5 @@
+$o-grid-gutter: 1%;
+
+@import '../main';
+
+@include oGridAddLayout($layout-name: XS, $column-width: 20px);

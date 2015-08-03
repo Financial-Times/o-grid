@@ -6,5 +6,6 @@ before_install:
   - npm install -g origami-build-tools
   - obt install
 script:
+  - "test/travis.rb"
   - obt test
   - obt verify

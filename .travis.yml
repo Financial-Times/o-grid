@@ -5,6 +5,7 @@ node_js:
 before_install:
   - npm install -g origami-build-tools
   - obt install
+  - npm install -g node-sass # required for the tests
 script:
   - "test/travis.rb"
   - obt test

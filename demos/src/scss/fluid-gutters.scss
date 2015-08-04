@@ -1,4 +1,5 @@
 $o-grid-gutter: 1.705%;
+$o-grid-outer-margin: 0;
 
 $o-grid-layouts: (
 	S:  480px,
@@ -10,5 +11,5 @@ $o-grid-layouts: (
 @import 'common';
 
 .test body:after {
-	content: '$o-grid-gutter: #{$o-grid-gutter}, $o-grid-layouts: S:  480px, M:  720px, L:  960px, XL: 1200px,';
+	content: '$o-grid-gutter: #{$o-grid-gutter}, $o-grid-outer-margin: 0, $o-grid-layouts: S: 480px, M: 720px, L: 960px, XL: 1200px';
 }

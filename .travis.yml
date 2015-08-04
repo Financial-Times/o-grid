@@ -1,10 +1,12 @@
-language: node_js
+language: ruby
 sudo: false
 node_js:
   - "0.12.2"
 before_install:
   - npm install -g origami-build-tools
   - obt install
+  - npm install -g node-sass # required for the tests
 script:
+  - "test/travis.rb"
   - obt test
   - obt verify

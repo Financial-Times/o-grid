@@ -15,7 +15,7 @@
 $o-grid-is-silent: true !default;
 
 /// Grid mode
-/// - fluid: full width until $o-grid-max-width (default: 1210px)
+/// - fluid: full width up to the largest layout's width
 /// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
 ///           and then snaps into a larger fixed layout at each breakpoint
 /// - fixed: always fixed-width with the layout defined by $o-grid-fixed-layout (default: L)
@@ -58,7 +58,7 @@ $o-grid-ie8-rules: 'inline' !default;
 /// @type Number (unitless)
 $o-grid-columns: 12 !default;
 
-/// Gutter size, in pixels
+/// Gutter size
 ///
 /// @type Number
 $o-grid-gutter: 10px !default;
@@ -87,18 +87,18 @@ $o-grid-layouts: (
 /// @type List
 $_o-grid-layout-names: map-keys($o-grid-layouts) !default;
 
-// When snappy mode is enabled, force $o-grid-max-width to the largest layout width
-// instead of the default $o-grid-max-width
-@if $o-grid-mode == 'snappy' {
-	$o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
-}
-
 /// Maximum grid width
 /// Defaults to the largest layout width
 ///
 /// @access private
 /// @type Number
 $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
+
+// When snappy mode is enabled, force $_o-grid-max-width to the largest layout width
+// instead of the default $_o-grid-max-width
+@if $o-grid-mode == 'snappy' {
+	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
+}
 
 /// Current scope
 ///

@@ -36,9 +36,16 @@
 		}
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
 	}
-
 	$o-grid-layouts: $temp-layouts !global;
 	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
+
+	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
+
+	// When snappy mode is enabled, force $_o-grid-max-width to the largest layout width
+	// instead of the default $_o-grid-max-width
+	@if $o-grid-mode == 'snappy' {
+		$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
+	}
 }
 
 /// Get the max width of a layout

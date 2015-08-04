@@ -4,7 +4,7 @@
 
 var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
-var local = true;
+var local = /localhost/.test(document.URL);
 var defaultGutter = 10;
 var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
@@ -13,7 +13,7 @@ var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 // Polyfills
 
 // https://cdn.polyfill.io/v1/polyfill.js?features=String.prototype.contains
-String.prototype.includes = function (string, index) {
+String.prototype.includes = function(string, index) {
 	if (typeof string === 'object' && string instanceof RegExp) throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
 	return this.indexOf(string, index) !== -1;
 };
@@ -55,13 +55,13 @@ if (![].includes) {
 	var tmp = document.createDocumentFragment();
 	var subheading = document.getElementById("subheading");
 
-	Object.keys(demoTypes).forEach(function (type) {
+	Object.keys(demoTypes).forEach(function(type) {
 		var button  = document.createElement('button');
 		button.classList.add('o-buttons');
-		var stylePath = local ? type + '.css' : 'scss/' + type + '.scss';
+		var stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
 		button.innerHTML = type;
 		button.title = demoTypes[type];
-		button.addEventListener('click', function () {
+		button.addEventListener('click', function() {
 			stylesheet.href = stylePath;
 			var prev = document.querySelector('[aria-selected=true]');
 			if (prev) {
@@ -174,7 +174,7 @@ function getExpectedGutter(el, side) {
 		el.classList.contains(specificGutterClassName) ||
 		el.classList.contains(layoutGutterClassName) ||
 		el.classList.contains(sideGutterClassName) ||
-		el.parentNode.classList.contains(compactClassName)) {
+		(el.parentNode && el.parentNode.classList.contains(compactClassName))) {
 		return false;
 	}
 
@@ -291,7 +291,7 @@ function highlightUnexpectedWidth(el) {
 function tests() {
 	console.log('Test suite: starting');
 	console.log('Layout: ' + getCurrentLayout());
-	Array.prototype.forEach.call(document.querySelectorAll('[class*="gutter"]'), highlightUnexpectedGutter);
+	Array.prototype.forEach.call(document.querySelectorAll('[class*="remove-gutter"]'), highlightUnexpectedGutter);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedPosition);

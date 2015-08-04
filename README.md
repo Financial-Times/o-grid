@@ -558,7 +558,7 @@ $o-grid-debug-mode: true;
 
 ### `getCurrentLayout()`
 
-Returns the name of the layout currently displayed. This does **not** work in silent mode.
+Returns the name of the layout currently displayed.
 
 ```js
 var oGrid = require('o-grid/main');
@@ -566,6 +566,9 @@ var oGrid = require('o-grid/main');
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
 ```
+
+When using o-grid silent mode, make sure to surface the current layout to the JavaScript Helper
+by adding `@include oGridSurfaceCurrentLayout;` to your Sass file.
 
 ## Grid Bookmarklet
 

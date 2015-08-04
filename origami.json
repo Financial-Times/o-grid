@@ -23,7 +23,7 @@
         {
             "path": "/demos/fluid-gutters.html",
             "expanded": false,
-            "description": "Responsive grid with fully fluid gutters"
+            "description": "(Experimental) responsive grid with fully fluid gutters"
         },
         {
             "path": "/demos/resized.html",

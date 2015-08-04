@@ -548,7 +548,7 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 
 ### `getCurrentLayout()`
 
-Returns the name of the layout currently displayed.
+Returns the name of the layout currently displayed. This does **not** work in silent mode.
 
 ```js
 var oGrid = require('o-grid/main');
@@ -556,7 +556,6 @@ var oGrid = require('o-grid/main');
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
 ```
-
 
 ## Grid Bookmarklet
 

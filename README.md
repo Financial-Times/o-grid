@@ -544,6 +544,16 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 @include oGridGenerate;
 ```
 
+#### Debug mode
+
+Enable debug mode to see the currently active breakpoint in the top-right corner of the page. (Based on sass-mq's [show-breakpoints](https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint) feature.)
+
+```scss
+$o-grid-debug-mode: true;
+```
+
+![show-breakpoints demo](https://raw.githubusercontent.com/sass-mq/sass-mq/65b00c7be6dba7de24173cc445eec7aaca036ceb/show-breakpoints.gif)
+
 ## JavaScript Helper
 
 ### `getCurrentLayout()`

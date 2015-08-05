@@ -350,6 +350,8 @@
 					}
 					@include oGridRespondTo($layout-name) {
 						display: block;
+						min-width: oGridColspan($layout-span);
+						max-width: oGridColspan($layout-span);
 					}
 				}
 			}

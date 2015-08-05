@@ -477,6 +477,8 @@
 	padding-right: 0;
 	float: none;
 	width: auto;
+	min-width: 0;
+	max-width: none;
 }
 
 /// Reorder visually: pull

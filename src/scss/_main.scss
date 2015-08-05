@@ -309,7 +309,14 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
+			display: block;
+			min-width: oGridColspan($span);
+			max-width: oGridColspan($span);
 			width: oGridColspan($span);
+
+			@include oGridTargetIE8 {
+				min-width: 0;
+			}
 		}
 	}
 
@@ -317,18 +324,7 @@
 	@if type-of($span) == map {
 		@each $layout-name, $layout-span in $span {
 			@if $layout-name == 'default' {
-				@if $layout-span == 'hide' {
-					display: none;
-				} @else {
-					display: block;
-					min-width: oGridColspan($layout-span);
-					max-width: oGridColspan($layout-span);
-					width: oGridColspan($layout-span);
-
-					@include oGridTargetIE8 {
-						min-width: 0;
-					}
-				}
+				@include oGridColspan($layout-span);
 			} @else {
 				@if $layout-span == 'hide' {
 					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout

@@ -239,6 +239,7 @@
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
+			@include _oGridFixSafariWrap($human-friendly-name);
 			min-width: oGridColspan($human-friendly-name);
 			max-width: oGridColspan($human-friendly-name);
 			width: oGridColspan($human-friendly-name);
@@ -310,6 +311,7 @@
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
 			display: block;
+			@include _oGridFixSafariWrap($span);
 			min-width: oGridColspan($span);
 			max-width: oGridColspan($span);
 			width: oGridColspan($span);
@@ -346,6 +348,7 @@
 					}
 					@include oGridRespondTo($layout-name) {
 						display: block;
+						@include _oGridFixSafariWrap($layout-span);
 						min-width: oGridColspan($layout-span);
 						max-width: oGridColspan($layout-span);
 					}
@@ -475,6 +478,7 @@
 	width: auto;
 	min-width: 0;
 	max-width: none;
+	flex: none;
 }
 
 /// Reorder visually: pull
@@ -566,6 +570,7 @@
 			display: block;
 
 			// Apply width in %
+			@include _oGridFixSafariWrap($colspan);
 			min-width: oGridColspan($colspan);
 			max-width: oGridColspan($colspan);
 			width: oGridColspan($colspan);
@@ -591,6 +596,11 @@
 	}
 }
 
+/// Fix a bug in Safari where items wouldn't wrap properly
+/// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
+@mixin _oGridFixSafariWrap($args...) {
+	flex-basis: oGridColspan($args...);
+}
 
 /// Generate the grid with helper classes for:
 /// - older browsers (no columns, @media query support)
@@ -615,6 +625,7 @@
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
+			@include _oGridFixSafariWrap($colspan, $o-grid-columns);
 			min-width: oGridColspan($colspan, $o-grid-columns);
 			max-width: oGridColspan($colspan, $o-grid-columns);
 			width: oGridColspan($colspan, $o-grid-columns);

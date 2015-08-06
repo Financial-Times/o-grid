@@ -236,9 +236,13 @@
 	// Portions
 	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
+			// scss-lint:disable DeclarationOrder
+
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
+
+			// Define width in %
 			@include _oGridFixSafariWrap($human-friendly-name);
 			min-width: oGridColspan($human-friendly-name);
 			max-width: oGridColspan($human-friendly-name);
@@ -310,7 +314,13 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
+			// scss-lint:disable DeclarationOrder
+
+			// Restore visibility from `display: none`
+			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
+
+			// Define width in %
 			@include _oGridFixSafariWrap($span);
 			min-width: oGridColspan($span);
 			max-width: oGridColspan($span);
@@ -347,7 +357,13 @@
 						}
 					}
 					@include oGridRespondTo($layout-name) {
+						// scss-lint:disable DeclarationOrder
+
+						// Restore visibility from `display: none`
+						// if `data-o-grid-colspan` was set to `0` or `hide`
 						display: block;
+
+						// Define width in %
 						@include _oGridFixSafariWrap($layout-span);
 						min-width: oGridColspan($layout-span);
 						max-width: oGridColspan($layout-span);
@@ -565,6 +581,8 @@
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
+			// scss-lint:disable DeclarationOrder
+
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;

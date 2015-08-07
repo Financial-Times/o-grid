@@ -1,6 +1,5 @@
-'use strict';
-var configurations = require('./configurations.json');
-var demos = [];
+const configurations = require('./configurations.json');
+const demos = [];
 
 Object.keys(configurations).forEach(function(key) {
 	demos.push({
@@ -22,7 +21,7 @@ demos.push({
 	js: 'demos/src/js/style-switcher.js',
 	documentClasses: 'test',
 	expanded: false,
-	dependencies: ["o-buttons@^2.0.0"]
+	dependencies: ['o-buttons@^2.0.0']
 });
 
 module.exports = {

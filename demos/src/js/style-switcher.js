@@ -1,39 +1,37 @@
 /*global $*/
-/*jshint devel:true, freeze:false*/
-'use strict';
+/*eslint-disable no-extend-native, guard-for-in */
+const almostEqual = require('./almost-equal');
+const getCurrentLayout = require('../../../main').getCurrentLayout;
 
-var almostEqual = require('./almost-equal');
-var getCurrentLayout = require('../../../main').getCurrentLayout;
-var local = /localhost/.test(document.URL);
-var defaultGutter = 10;
-var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
-
+const local = /localhost/.test(document.URL);
+const defaultGutter = 10;
+const resizedOuterMarginWidth = 5; // Same as $o-grid-gutters in resized.scss
 
 // ============================================================================
 // Polyfills
 
 // https://cdn.polyfill.io/v1/polyfill.js?features=String.prototype.contains
 String.prototype.includes = function(string, index) {
-	if (typeof string === 'object' && string instanceof RegExp) throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
+	if (typeof string === 'object' && string instanceof RegExp) throw new TypeError('First argument to String.prototype.includes must not be a regular expression');
 	return this.indexOf(string, index) !== -1;
 };
 
 if (![].includes) {
 	Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
-		var O = Object(this);
-		var len = parseInt(O.length) || 0;
+		const O = Object(this);
+		const len = parseInt(O.length) || 0;
 		if (len === 0) {
 			return false;
 		}
-		var n = parseInt(arguments[1]) || 0;
-		var k;
+		const n = parseInt(arguments[1]) || 0;
+		let k;
 		if (n >= 0) {
 			k = n;
 		} else {
 			k = len + n;
 			if (k < 0) {k = 0;}
 		}
-		var currentElement;
+		let currentElement;
 		while (k < len) {
 			currentElement = O[k];
 			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
@@ -48,22 +46,22 @@ if (![].includes) {
 // ============================================================================
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
-	var demoTypes = require('../configurations.json');
-	var stylesheet = document.querySelector("link[href*='default']");
-	var html = document.documentElement;
-	var buttonContainer = document.getElementById("js-demo-switcher");
-	var tmp = document.createDocumentFragment();
-	var subheading = document.getElementById("subheading");
+	const demoTypes = require('../configurations.json');
+	const stylesheet = document.querySelector('link[href*="default"]');
+	const html = document.documentElement;
+	const buttonContainer = document.getElementById('js-demo-switcher');
+	const tmp = document.createDocumentFragment();
+	const subheading = document.getElementById('subheading');
 
-	Object.keys(demoTypes).forEach(function(type) {
-		var button  = document.createElement('button');
+	for (type in demoTypes) {
+		const button = document.createElement('button');
 		button.classList.add('o-buttons');
-		var stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
+		const stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
 		button.innerHTML = type;
 		button.title = demoTypes[type];
 		button.addEventListener('click', function() {
 			stylesheet.href = stylePath;
-			var prev = document.querySelector('[aria-selected=true]');
+			const prev = document.querySelector('[aria-selected=true]');
 			if (prev) {
 				prev.setAttribute('aria-selected', 'false');
 			}
@@ -82,7 +80,7 @@ if (![].includes) {
 		}
 		tmp.appendChild(button);
 
-	});
+	}
 
 	buttonContainer.appendChild(tmp);
 }());
@@ -112,16 +110,16 @@ function convertKeywordsToSpans(keyword) {
 }
 
 function getExpectedSpans(el) {
-	var span = null;
-	var layout = getCurrentLayout();
+	let span = null;
+	const layout = getCurrentLayout();
 
-	var rules = $(el).data('oGridColspan') + "";
+	const rules = $(el).data('oGridColspan') + '';
 
-	var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+	const layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 	span = rules.match(layoutAndKeyword);
 
 	if (span === null) {
-		var numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+		const numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 		span = rules.match(numberOfColumns);
 	}
 
@@ -134,16 +132,16 @@ function getExpectedSpans(el) {
 
 // Get offset, pull, push
 function getExpectedModifier(el, modifier) {
-	var rules = $(el).data('oGridColspan');
-	var re = new RegExp(modifier, "g");
+	const rules = $(el).data('oGridColspan');
+	const re = new RegExp(modifier, 'g');
 
 	if (!re.test(rules)) {
 		return 0;
 	}
 
-	var layout = getCurrentLayout();
+	const layout = getCurrentLayout();
 
-	var modifiedBy;
+	let modifiedBy;
 	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
 		modifiedBy = $1;
 	});
@@ -162,13 +160,13 @@ function getExpectedModifier(el, modifier) {
 }
 
 function getExpectedGutter(el, side) {
-	var layout = getCurrentLayout();
+	const layout = getCurrentLayout();
 
-	var gutterClassName = 'o-grid-remove-gutters';
-	var specificGutterClassName = gutterClassName + '--' + side + '--' + layout;
-	var layoutGutterClassName = gutterClassName + '--' + layout;
-	var sideGutterClassName = gutterClassName + '--' + side;
-	var compactClassName = 'o-grid-row--compact';
+	const gutterClassName = 'o-grid-remove-gutters';
+	const specificGutterClassName = gutterClassName + '--' + side + '--' + layout;
+	const layoutGutterClassName = gutterClassName + '--' + layout;
+	const sideGutterClassName = gutterClassName + '--' + side;
+	const compactClassName = 'o-grid-row--compact';
 
 	if (el.classList.contains(gutterClassName) ||
 		el.classList.contains(specificGutterClassName) ||
@@ -182,28 +180,27 @@ function getExpectedGutter(el, side) {
 }
 
 function highlightUnexpectedGutter(el) {
-	var expectedLeft = getExpectedGutter(el, 'left');
-	var expectedRight = getExpectedGutter(el, 'right');
-	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
-	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
+	const expectedLeft = getExpectedGutter(el, 'left');
+	const expectedRight = getExpectedGutter(el, 'right');
+	const actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
+	const actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
 
 	if (expectedLeft !== actualLeft || expectedRight !== actualRight) {
 		/\berror-gutter\b/.test(el.className) || (el.className += ' error-gutter');
-		console.error('Gutter error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
+		console.error('Gutter error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft + ' (actual) ', 'Right: ' + expectedRight + ' (expected) ' + actualRight + ' (actual) ');
 	} else {
 		el.className = el.className.replace(/\berror-gutter\b/g, '');
 	}
 }
 
-
 function getExpectedMargin(el, side) {
-	var layout = getCurrentLayout();
+	const layout = getCurrentLayout();
 
-	var centerModifier = 'center';
-	var layoutCenterModifier = layout + 'center';
-	var layoutUncenterModifier = layout + 'uncenter';
-	var colspan = $(el).data('oGridColspan') + '';
-	var modifiers = colspan.split(' ');
+	const centerModifier = 'center';
+	const layoutCenterModifier = layout + 'center';
+	const layoutUncenterModifier = layout + 'uncenter';
+	const colspan = $(el).data('oGridColspan') + '';
+	const modifiers = colspan.split(' ');
 
 	if (colspan.includes('offset')) {
 		if (side === 'left') {
@@ -226,41 +223,39 @@ function getExpectedMargin(el, side) {
 }
 
 function highlightUnexpectedMargin(el) {
-	var expectedLeft = getExpectedMargin(el, 'left');
-	var expectedRight = getExpectedMargin(el, 'right');
-	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('margin-right'), 10);
-	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('margin-left'), 10);
+	const expectedLeft = getExpectedMargin(el, 'left');
+	const expectedRight = getExpectedMargin(el, 'right');
+	const actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('margin-right'), 10);
+	const actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('margin-left'), 10);
 
 	// We verify if margins are "almost equal" because of rounding errors
 	if (almostEqual(expectedLeft, actualLeft, 1, 1) && almostEqual(expectedRight, actualRight, 1, 1)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
 		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
-		console.error('Margin error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
+		console.error('Margin error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft + ' (actual) ', 'Right: ' + expectedRight + ' (expected) ' + actualRight + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedPosition(el) {
-	var expectedPush = getExpectedModifier(el, 'push');
-	var expectedPull = getExpectedModifier(el, 'pull');
-	var actualPush = getComputedStyle(el, null).getPropertyValue('left');
-	var actualPull = getComputedStyle(el, null).getPropertyValue('right');
+	const expectedPush = getExpectedModifier(el, 'push');
+	const expectedPull = getExpectedModifier(el, 'pull');
+	let actualPush = getComputedStyle(el, null).getPropertyValue('left');
+	let actualPull = getComputedStyle(el, null).getPropertyValue('right');
 	actualPush = (actualPush === 'auto' ? 0 : parseInt(actualPush, 10));
 	actualPull = (actualPull === 'auto' ? 0 : parseInt(actualPull, 10));
-
 
 	// We verify if positions are "almost equal" because of rounding errors
 	if (almostEqual(expectedPush, actualPush, 1, 1) && almostEqual(expectedPull, actualPull, 1, 1)) {
 		el.className = el.className.replace(/\berror-position\b/g, '');
 	} else {
 		/\berror-position\b/.test(el.className) || (el.className += ' error-position');
-		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush  + ' (actual) ',  'Pull: ' + expectedPull + ' (expected) ' + actualPull  + ' (actual) ');
+		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush + ' (actual) ', 'Pull: ' + expectedPull + ' (expected) ' + actualPull + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedWidth(el) {
-	var outerMargins = 10;
-
+	let outerMargins = 10;
 	if (document.documentElement.classList.contains('stylesheet-resized')) {
 		outerMargins = resizedOuterMarginWidth;
 	}
@@ -275,8 +270,8 @@ function highlightUnexpectedWidth(el) {
 		outerMargins = 0;
 	}
 
-	var expectedPercentage = getExpectedSpans(el) * 100/12;
-	var actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth - outerMargins);
+	const expectedPercentage = getExpectedSpans(el) * 100/12;
+	const actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth - outerMargins);
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
 		/\berror-width\b/.test(el.className) || (el.className += ' error-width');
@@ -285,8 +280,6 @@ function highlightUnexpectedWidth(el) {
 		el.className = el.className.replace(/\berror-width\b/g, '');
 	}
 }
-
-
 
 function tests() {
 	console.log('Test suite: starting');
@@ -298,12 +291,12 @@ function tests() {
 	console.log('Test suite: finished');
 }
 
-var resizeTimer = null;
+let resizeTimer = null;
 
 function runTests() {
 	setTimeout(tests, 300);
 
-	window.onresize = function(e) {
+	window.onresize = function() {
 		if (resizeTimer !== null) {
 			clearTimeout(resizeTimer);
 		}

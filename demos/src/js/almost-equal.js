@@ -1,11 +1,10 @@
 // https://github.com/scijs/almost-equal
-"use strict";
 
-var abs = Math.abs;
-var min = Math.min;
+const abs = Math.abs;
+const min = Math.min;
 
-function almostEqual(a, b, absoluteError, relativeError) {
-	var d = abs(a - b);
+export default function almostEqual(a, b, absoluteError, relativeError) {
+	const d = abs(a - b);
 
 	if (d <= absoluteError) {
 		return true;
@@ -15,8 +14,3 @@ function almostEqual(a, b, absoluteError, relativeError) {
 	}
 	return a === b;
 }
-
-almostEqual.FLT_EPSILON = 1.19209290e-7;
-almostEqual.DBL_EPSILON = 2.2204460492503131e-16;
-
-module.exports = almostEqual;

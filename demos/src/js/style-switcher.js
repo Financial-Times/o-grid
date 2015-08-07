@@ -53,7 +53,7 @@ if (![].includes) {
 	const tmp = document.createDocumentFragment();
 	const subheading = document.getElementById('subheading');
 
-	for (type in demoTypes) {
+	for (const type in demoTypes) {
 		const button = document.createElement('button');
 		button.classList.add('o-buttons');
 		const stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
@@ -79,7 +79,6 @@ if (![].includes) {
 			subheading && (subheading.innerHTML = button.title);
 		}
 		tmp.appendChild(button);
-
 	}
 
 	buttonContainer.appendChild(tmp);

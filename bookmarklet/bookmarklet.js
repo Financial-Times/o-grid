@@ -1,7 +1,12 @@
+/*eslint-disable no-var, wrap-iife, no-multi-spaces, strict */
+
 // Thanks to Antoine Lefeuvre for the base of this bookmarklet
 // Modified for o-grid by the Financial Times
 // http://alefeuvre.github.io/foundation-grid-displayer/
-/*eslint-disable no-var, wrap-iife, no-multi-spaces, strict */
+//
+// DISCLAIMER: This module should be ES5 compatible
+// to be directly readable by browsers "as-is"
+
 (function() {
 	'use strict';
 	var startBookmarklet = function($) {

@@ -379,6 +379,7 @@ el {
   padding-right: 5px;
   float: left;
   box-sizing: border-box;
+  flex: 1 1 0%;
 }
 ```
 
@@ -396,10 +397,16 @@ el {
   padding-right: 5px;
   float: left;
   box-sizing: border-box;
+  flex: 1 1 0%;
+  display: block;
+  flex-basis: 33.33333%;
+  min-width: 33.33333%;
+  max-width: 33.33333%;
+  width: 33.33333%;
 }
-@media only screen {
+@media \0screen {
   el {
-    width: 33.33333%;
+    min-width: 0;
   }
 }
 ```
@@ -424,17 +431,26 @@ el {
   padding-right: 5px;
   float: left;
   box-sizing: border-box;
+  flex: 1 1 0%;
+  display: block;
+  flex-basis: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
 }
-@media only screen {
+@media \0screen {
   el {
+    min-width: 0;
     display: block;
-    width: 100%;
+    width: 50%;
   }
 }
 @media (min-width: 45.625em) {
   el {
     display: block;
-    width: 50%;
+    flex-basis: 50%;
+    min-width: 50%;
+    max-width: 50%;
   }
 }
 ```

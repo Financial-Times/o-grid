@@ -1,6 +1,6 @@
 # o-grid [![Build Status](https://travis-ci.org/Financial-Times/o-grid.svg?branch=master)](https://travis-ci.org/Financial-Times/o-grid)
 
-A 12 column responsive grid system for laying out documents, templates and modules.
+A 12 column responsive, flexbox-based grid system for laying out documents, templates and modules.
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
 

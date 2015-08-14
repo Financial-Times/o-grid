@@ -9,7 +9,7 @@ $o-grid-layouts: (
 
 @import '../main';
 
-@include oGridAddLayout($layout-name: A, $column-width: 20px);
+@include oGridAddLayout($layout-name: A, $gutter-width: 20px, $layout-width: 340px);
 
 @include oGridRespondTo(A) {
 	A {
@@ -24,7 +24,7 @@ $o-grid-layouts: (
 	}
 }
 
-$o-grid-gutter: 1%;
+$o-grid-gutters: (default: 1%);
 @include oGridAddLayout($layout-name: C, $layout-width: 372px);
 @include oGridRespondTo(C) {
 	C {

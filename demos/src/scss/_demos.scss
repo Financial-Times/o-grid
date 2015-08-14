@@ -27,10 +27,6 @@ body {
 	z-index: 100;
 }
 
-h2 {
-	@include oGridRow;
-}
-
 .demo-cell {
 	background-color: transparent;
 	zoom: 1;
@@ -48,6 +44,10 @@ h2 {
 	background-color: $rgba;
 	// scss-lint:enable DuplicateProperty
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+}
+
+.o-grid-container {
+	background: lighten(#f6e9d8, 8.5%);
 }
 .o-grid-row {
 	background: #f6e9d8;

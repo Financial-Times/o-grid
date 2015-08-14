@@ -6,37 +6,32 @@
 /// Add a layout
 ///
 /// @example scss
-///  @include oGridAddLayout($layout-name: XS, $column-width: 20px);
+///  @include oGridAddLayout($layout-name: L, $gutter-width: 20px);
 ///  @include oGridAddLayout($layout-name: P, $layout-width: 500px);
 ///
 /// @param {String} $layout-name
-/// @param {String} $column-width [null]
 /// @param {String} $layout-width [null]
-@mixin oGridAddLayout($layout-name, $column-width: null, $layout-width: null) {
-	@if $column-width {
-		@if unit($o-grid-gutter) == '%' {
-			@error "$o-grid-gutter is a percentage value (#{$o-grid-gutter}). Layouts can only be defined using column widths when gutters are in pixels.";
-		}
-		$gutters-combined-width: $o-grid-gutter * ($o-grid-columns - 1) + 0px;
-		$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
-		$layout-width: ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
-	}
-$
+@mixin oGridAddLayout($layout-name, $gutter-width: null, $layout-width: null) {
 	$temp-layouts: ();
+	$temp-gutters: ();
 
 	// Add the new layout in the correct position:
-	// (we want $o-grid-layouts to ordered from the smallest to the largest layout)
+	// (we want $o-grid-layouts and $o-grid-gutters to ordered from the smallest to the largest layout)
 	@for $index from 1 through length($o-grid-layouts) {
 		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
 		$current-layout-name: nth($_o-grid-layout-names, $index);
 		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
+		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
 
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
+			$temp-gutters: map-merge($temp-gutters, ($layout-name: $gutter-width));
 		}
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
+		$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
 	}
 	$o-grid-layouts: $temp-layouts !global;
+	$o-grid-gutters: $temp-gutters !global;
 	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
 
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
@@ -288,11 +283,19 @@ $
 /// @param {Number | Map} $span [null]
 @mixin oGridColumn($span: null) {
 	position: relative; // Required for push and pull
-	padding-left: $o-grid-gutter / 2;
-	padding-right: $o-grid-gutter / 2;
 	float: left;
 	box-sizing: border-box;
 	flex: 1 1 0%;
+
+	@each $layout-name in map-keys($o-grid-gutters) {
+		@if $layout-name == 'default' {
+			padding-left: map-get($o-grid-gutters, default);
+		} @else {
+			@include oGridRespondTo($layout-name) {
+				padding-left: map-get($o-grid-gutters, $layout-name);
+			}
+		}
+	}
 
 	@if $span {
 		@include oGridColspan($span);
@@ -374,63 +377,30 @@ $
 	}
 }
 
-/// Alias for the oGridColspan mixin
-///
-/// @deprecated
-@mixin oGridColumnWidth($span) {
-	@warn 'oGridColumnWidth() is deprecated, please use oGridColspan() instead';
-	@include oGridColspan($span);
-}
 
-/// Base row styles
-///
-/// @param {String} $grid-mode [$o-grid-mode]
-@mixin oGridRow($grid-mode: $o-grid-mode) {
-	clear: both;
-	min-width: $o-grid-min-width;
-	// Older browsers get a fixed-width layout
-	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-	padding-left: $o-grid-gutter / 2;
-	padding-right: $o-grid-gutter / 2;
+@mixin oGridContainer($grid-mode: $o-grid-mode) {
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
-	flex-wrap: wrap; // Note that this breaks in old Firefox
+	min-width: $o-grid-min-width;
+	// Older browsers get a fixed-width layout
+	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
 
-	// Clearfix for IE9 and below
-	zoom: 1;
-
-	&:before,
-	&:after {
-		// scss-lint:disable DuplicateProperty
-		content: ' ';
-		display: none;
-		display: table\9; // Show only to IE<=9
-	}
-	&:after {
-		clear: both;
+	@each $layout-name in map-keys($o-grid-gutters) {
+		@if $layout-name == 'default' {
+			padding-left: map-get($o-grid-gutters, default);
+			padding-right: map-get($o-grid-gutters, default);
+		} @else {
+			@include oGridRespondTo($layout-name) {
+				padding-left: map-get($o-grid-gutters, $layout-name);
+				padding-right: map-get($o-grid-gutters, $layout-name);
+			}
+		}
 	}
 
 	// Serve a fixed-width layout to IE8
 	@include oGridTargetIE8 {
 		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
-	}
-
-	// Nested rows overrides
-	// Substract outer gutter space from nested rows
-	// and restore fluidity
-	@if ((& + '') == '.o-grid-row') {
-		// Nested grid row: only reset grid rows
-		.o-grid-row {
-			@include oGridRowReset;
-		}
-	} @else {
-		// Nested custom class: reset nested custom classes *and* grid rows
-		& &,
-		.o-grid-row {
-			@include oGridRowReset;
-		}
 	}
 
 	@if $grid-mode == 'fixed' {
@@ -460,16 +430,38 @@ $
 		}
 	}
 }
+/// Base row styles
+///
+/// @param {String} $grid-mode [$o-grid-mode]
+@mixin oGridRow {
+	clear: both;
+	display: flex;
+	flex-wrap: wrap; // Note that this breaks in old Firefox
 
-/// Reset row styles
-@mixin oGridRowReset {
-	width: auto;
-	min-width: 0;
-	max-width: none;
-	margin-left: -$o-grid-gutter / 2;
-	margin-right: -$o-grid-gutter / 2;
-	padding-left: 0;
-	padding-right: 0;
+	@each $layout-name in map-keys($o-grid-gutters) {
+		@if $layout-name == 'default' {
+			margin-left: -1 * map-get($o-grid-gutters, default);
+		} @else {
+			@include oGridRespondTo($layout-name) {
+				margin-left: -1 * map-get($o-grid-gutters, $layout-name);
+			}
+		}
+	}
+
+	// Clearfix for IE9 and below
+	zoom: 1;
+
+	&:before,
+	&:after {
+		// scss-lint:disable DuplicateProperty
+		content: ' ';
+		display: none;
+		display: table\9; // Show only to IE<=9
+	}
+	&:after {
+		clear: both;
+	}
+
 }
 
 /// Center column
@@ -518,32 +510,6 @@ $
 /// @param {Number} $columns
 @mixin oGridOffset($columns) {
 	margin-left: oGridColspan($columns);
-}
-
-/// Remove row styles
-@mixin oGridResetRow {
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	padding-right: 0;
-	clear: none;
-	width: auto;
-	min-width: none;
-	max-width: none;
-
-	&:before,
-	&:after {
-		content: '';
-		display: none;
-	}
-	&:after {
-		clear: none;
-	}
-
-	.o-grid-row {
-		margin-left: 0;
-		margin-right: 0;
-	}
 }
 
 /// Remove gutters from a column and re-align its child rows
@@ -626,8 +592,11 @@ $
 /// - modern browsers (fluid layout, with columns)
 @mixin oGridGenerate {
 	// Basic layout styles
+	.o-grid-container {
+		@include oGridContainer($o-grid-mode);
+	}
 	.o-grid-row {
-		@include oGridRow($o-grid-mode);
+		@include oGridRow;
 	}
 	[data-o-grid-colspan] {
 		@include oGridColumn;

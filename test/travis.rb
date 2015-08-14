@@ -14,7 +14,7 @@ end
 FileUtils.mkdir_p "test/output"
 
 # Attempting to add a Layout with a width when gutters are defined
-# in percents (e.g. $o-grid-gutter: 1%;) should throw an error
+# in percents (e.g. $o-grid-gutters: 1%;) should throw an error
 stdout, stderr, status = Open3.capture3 "node-sass test/error.scss test/output/error.css --output-style compressed --include-path bower_components"
 puts "Test: adding a layout with columns when gutters are in % should throw an error…"
 raise "Adding a layout this way should fail to compile" if status.success?

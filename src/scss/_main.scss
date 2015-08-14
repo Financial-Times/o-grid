@@ -43,6 +43,25 @@
 	}
 }
 
+/// Get the gutter of a layout
+///
+/// @param {String} $layout-name - One of $o-grid-layouts
+@function oGridGutter($layout-name: default) {
+	@if map-has-key($o-grid-gutters, $layout-name) {
+		@return map-get($o-grid-gutters, $layout-name);
+	}
+
+	$layout-index: index($_o-grid-layout-names, $layout-name);
+
+	// The first layout (S) should get the default gutter
+	@if $layout-index == 1 {
+		@return oGridGutter();
+	}
+
+	$layout: nth($_o-grid-layout-names, $layout-index - 1);
+	@return oGridGutter($layout);
+}
+
 /// Get the max width of a layout
 ///
 /// @example

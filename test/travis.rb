@@ -17,7 +17,7 @@ FileUtils.mkdir_p "test/output"
 # in percents (e.g. $o-grid-gutters: 1%;) should throw an error
 stdout, stderr, status = Open3.capture3 "node-sass test/test.scss test/output/test.css --include-path bower_components"
 
-puts "Test: layouts can be overriden…"
+puts "Test: layouts can be overridden…"
 raise "Defined layout and sizes override the default ones" unless File.open("test/output/test.css").read.squish
   .include? "Initial layouts and sizes: (X: 800px, Z: 1200px)"
 raise "The list of layout names is updated accordingly" unless File.open("test/output/test.css").read.squish

@@ -17,37 +17,39 @@ FileUtils.mkdir_p "test/output"
 # in percents (e.g. $o-grid-gutters: 1%;) should throw an error
 stdout, stderr, status = Open3.capture3 "node-sass test/test.scss test/output/test.css --include-path bower_components"
 
+cssoutput = File.open("test/output/test.css").read.squish
+
 puts "Test: layouts can be overridden…"
-raise "Defined layout and sizes override the default ones" unless File.open("test/output/test.css").read.squish
+raise "Defined layout and sizes override the default ones" unless cssoutput
   .include? "Initial layouts and sizes: (X: 800px, Z: 1200px)"
-raise "The list of layout names is updated accordingly" unless File.open("test/output/test.css").read.squish
+raise "The list of layout names is updated accordingly" unless cssoutput
   .include? "Initial layout names: X, Z"
 puts "\e[32mPassed\e[0m"
 
 puts "Test: pruning non existant gutter widths, while keeping a default width…"
-raise "Gutter for layout M should have been removed" unless File.open("test/output/test.css").read.squish
+raise "Gutter for layout M should have been removed" unless cssoutput
   .include? "Gutter M exists: false"
-raise "There should be a default gutter" unless File.open("test/output/test.css").read.squish
+raise "There should be a default gutter" unless cssoutput
   .include? "Default gutter exists: true"
 puts "\e[32mPassed\e[0m"
 
 
 puts "Test: adding layouts in multiple ways and ordering them properly…"
-raise "All layouts should have been added in the correct order" unless File.open("test/output/test.css").read.squish
+raise "All layouts should have been added in the correct order" unless cssoutput
   .include? "A, B, C, X, Y, Z"
 puts "\e[32mPassed\e[0m"
 
 puts "Test: adding layouts in multiple ways with their max-width and gutter sizes…"
-raise "Layout (A)'s max width should be X's layout width, and inherit the default gutter" unless File.open("test/output/test.css").read.squish
+raise "Layout (A)'s max width should be X's layout width, and inherit the default gutter" unless cssoutput
   .include? "
   A {
   	max-width: 800px;
   	gutter: 10px".squish
-raise "Layout (B) should be added" unless File.open("test/output/test.css").read.squish
+raise "Layout (B) should be added" unless cssoutput
   .include? "B: 365px"
-raise "Gutter for Layout B should be added" unless File.open("test/output/test.css").read.squish
+raise "Gutter for Layout B should be added" unless cssoutput
   .include? "(default: 10px, B: 30px)"
-raise "Layout (B) properties should compile" unless File.open("test/output/test.css").read.squish
+raise "Layout (B) properties should compile" unless cssoutput
   .include? "
   @media (min-width: 22.8125em) {
 	  B {
@@ -56,7 +58,7 @@ raise "Layout (B) properties should compile" unless File.open("test/output/test.
 puts "\e[32mPassed\e[0m"
 
 puts "Test: max-width of the widest layout…"
-raise "Layout (Z) is the widest layout. It should have a max-width equivalent to its defined width" unless File.open("test/output/test.css").read.squish
+raise "Layout (Z) is the widest layout. It should have a max-width equivalent to its defined width" unless cssoutput
   .include? "
 	  Z {
 	    max-width: 1200px;".squish

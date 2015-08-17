@@ -21,7 +21,7 @@
 		$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
 		$layout-width: ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
 	}
-$
+
 	$temp-layouts: ();
 
 	// Add the new layout in the correct position:

@@ -21,7 +21,7 @@
 		$outer-margins-combined-width: $o-grid-gutter * 2 + 0px;
 		$layout-width: ($column-width * $o-grid-columns) + $gutters-combined-width + $outer-margins-combined-width;
 	}
-
+$
 	$temp-layouts: ();
 
 	// Add the new layout in the correct position:
@@ -53,7 +53,7 @@
 /// @example
 ///  .my-large-container { width: oGridGetMaxWidthForLayout(L); }
 ///
-/// @param {String} $size - one of $layouts
+/// @param {String} $layout-name - one of $o-grid-layouts
 /// @param {String} $grid-mode [$o-grid-mode]
 @function oGridGetMaxWidthForLayout($layout-name, $grid-mode: $o-grid-mode) {
 	$grid-is-responsive: $grid-mode != 'fixed';

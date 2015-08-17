@@ -1,6 +1,5 @@
-'use strict';
-var configurations = require('./configurations.json');
-var demos = [];
+const configurations = require('./configurations.json');
+const demos = [];
 
 Object.keys(configurations).forEach(function(key) {
 	demos.push({

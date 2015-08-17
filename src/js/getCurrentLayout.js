@@ -1,13 +1,11 @@
-"use strict";
-
 /**
  * Detect IE 8 through injected conditional comments:
  * no UA detection, no need for conditional compilation or JS check
  */
-var isIE8 = (function() {
-	var b = document.createElement('B');
-	var docElem = document.documentElement;
-	var isIE;
+const isIE8 = (function() {
+	const b = document.createElement('B');
+	const docElem = document.documentElement;
+	let isIE;
 
 	b.innerHTML = '<!--[if IE 8]><b id="ie8test"></b><![endif]-->';
 	docElem.appendChild(b);

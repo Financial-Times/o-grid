@@ -58,11 +58,6 @@ $o-grid-ie8-rules: 'inline' !default;
 /// @type Number (unitless)
 $o-grid-columns: 12 !default;
 
-/// Gutter size
-///
-/// @type Map
-$o-grid-gutters: (default: 10px, M: 20px) !default;
-
 /// Minimum width, in pixels
 ///
 /// @type Number
@@ -85,7 +80,23 @@ $o-grid-layouts: (
 ///
 /// @access private
 /// @type List
-$_o-grid-layout-names: map-keys($o-grid-layouts) !default;
+$_o-grid-layout-names: map-keys($o-grid-layouts);
+
+/// Gutter sizes
+///
+/// @type Map
+$o-grid-gutters: (
+	default: 10px,
+	M:       20px,
+) !default;
+
+// If layouts have changed but gutters haven't,
+// prune non-existant layouts.
+@each $layout-name, $gutter-size in $o-grid-gutters {
+	@if ($layout-name != 'default') and (not map-has-key($o-grid-layouts, $layout-name)) {
+		$o-grid-gutters: map-remove($o-grid-gutters, $layout-name);
+	}
+}
 
 /// Maximum grid width
 /// Defaults to the largest layout width

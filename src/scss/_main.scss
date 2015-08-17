@@ -53,7 +53,7 @@
 /// @example
 ///  .my-large-container { width: oGridGetMaxWidthForLayout(L); }
 ///
-/// @param {String} $size - one of $layouts
+/// @param {String} $layout-name - one of $o-grid-layouts
 /// @param {String} $grid-mode [$o-grid-mode]
 @function oGridGetMaxWidthForLayout($layout-name, $grid-mode: $o-grid-mode) {
 	$grid-is-responsive: $grid-mode != 'fixed';

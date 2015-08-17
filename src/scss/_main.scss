@@ -6,12 +6,12 @@
 /// Add a layout
 ///
 /// @example scss
-///  @include oGridAddLayout($layout-name: L, $gutter-width: 20px);
-///  @include oGridAddLayout($layout-name: P, $layout-width: 500px);
+///  @include oGridAddLayout($layout-name: P, $layout-width: 600px);
+///  @include oGridAddLayout($layout-name: XXL, $layout-width: 1600px, $gutter-width: 30px);
 ///
 /// @param {String} $layout-name
 /// @param {String} $layout-width [null]
-@mixin oGridAddLayout($layout-name, $gutter-width: null, $layout-width: null) {
+@mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null) {
 	$temp-layouts: ();
 	$temp-gutters: ();
 
@@ -21,18 +21,23 @@
 		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
 		$current-layout-name: nth($_o-grid-layout-names, $index);
 		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
+
 		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
 
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
 			$temp-gutters: map-merge($temp-gutters, ($layout-name: $gutter-width));
 		}
+
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
 		$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
 	}
 	$o-grid-layouts: $temp-layouts !global;
-	$o-grid-gutters: $temp-gutters !global;
 	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
+
+	@if $gutter-width {
+		$o-grid-gutters: map-merge($o-grid-gutters, $temp-gutters) !global;
+	}
 
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
 
@@ -398,6 +403,7 @@
 
 
 @mixin oGridContainer($grid-mode: $o-grid-mode) {
+	position: relative;
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
@@ -462,7 +468,7 @@
 			margin-left: -1 * map-get($o-grid-gutters, default);
 		} @else {
 			@include oGridRespondTo($layout-name) {
-				margin-left: -1 * map-get($o-grid-gutters, $layout-name);
+				margin-left: -1 * oGridGutter($layout-name);
 			}
 		}
 	}

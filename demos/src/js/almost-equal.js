@@ -1,11 +1,10 @@
 // https://github.com/scijs/almost-equal
-"use strict";
 
-var abs = Math.abs;
-var min = Math.min;
+const abs = Math.abs;
+const min = Math.min;
 
 function almostEqual(a, b, absoluteError, relativeError) {
-	var d = abs(a - b);
+	const d = abs(a - b);
 
 	if (d <= absoluteError) {
 		return true;

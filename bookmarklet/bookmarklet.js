@@ -2,13 +2,12 @@
 // Modified for o-grid by the Financial Times
 // http://alefeuvre.github.io/foundation-grid-displayer/
 (function() {
-	"use strict";
-	var startBookmarklet = function($) {
+	const startBookmarklet = function($) {
 
 		// Set bookmarklet framework
-		var scriptSrc  = $("script[src*='bookmarklet.js']").attr("src");
-		var framework = scriptSrc.split("?");
-		var gdFramework;
+		const scriptSrc = $("script[src*='bookmarklet.js']").attr("src");
+		const framework = scriptSrc.split("?");
+		let gdFramework;
 
 		if (framework.length > 1) {
 			gdFramework = framework[1];
@@ -17,20 +16,20 @@
 		}
 
 		// Close grid displayer
-		var removeGridDisplayer = function() {
+		const removeGridDisplayer = function() {
 			$("#grid-displayer-tools").remove();
 			$("#grid-displayer").remove();
-		},
+		};
 
 		// Build grid displayer
-		gdIsBuilt = false,
-		buildGridDisplayer = function(gridFramework) {
+		let gdIsBuilt = false;
+		const buildGridDisplayer = function(gridFramework) {
 
-			var $gdContainer = $("#grid-displayer .gd-container"),
-			$gdRow           = $("#grid-displayer .gd-row"),
-			$gdTools         = $("#grid-displayer-tools"),
-			colsHtml         = "",
-			gridNbcols       = parseInt($gdTools.find("#gdt-nbcols").val());
+			const $gdContainer = $("#grid-displayer .gd-container");
+			const $gdRow = $("#grid-displayer .gd-row");
+			const $gdTools = $("#grid-displayer-tools");
+			let colsHtml = "";
+			const gridNbcols = parseInt($gdTools.find("#gdt-nbcols").val());
 
 			if (gdIsBuilt) {
 				$gdContainer.removeClass().addClass("gd-container");
@@ -38,11 +37,11 @@
 				$gdTools.find(".framework-specific").hide();
 			}
 
-			for(var i = 0; i < gridNbcols; i++) {
+			for(let i = 0; i < gridNbcols; i++) {
 				colsHtml += "<div class=\"gd-column\">&nbsp;</div>";
 			}
 			$gdRow.append(colsHtml);
-			var $gdColumn = $gdRow.find(".gd-column");
+			const $gdColumn = $gdRow.find(".gd-column");
 
 			switch(gridFramework) {
 				case 'o3':
@@ -70,45 +69,44 @@
 				$("#grid-displayer").show();
 				gdIsBuilt = true;
 			}
-		},
+		};
 
 		// Setters
-		setGridColor = function(gridColor, gutterless) {
+		const setGridColor = function(gridColor, gutterless) {
 			$("#grid-displayer .gd-column").css("background-color", gridColor);
 			if (gutterless) {
 				$("#grid-displayer .gd-column").css("outline", "1px solid " + gridColor);
 			}
-		},
-		setGridOpacity = function(gridOpacity) {
+		};
+		const setGridOpacity = function(gridOpacity) {
 			$("#grid-displayer .gd-column").css("opacity", gridOpacity);
-		},
-		setGridGutters = function(gridGutterwidth) {
-			var borderWidth = parseInt(gridGutterwidth.replace( /^\D+/g, '')) / 2,
-			unit = gridGutterwidth.substr(gridGutterwidth.length - 2, 2);
+		};
+		const setGridGutters = function(gridGutterwidth) {
+			const borderWidth = parseInt(gridGutterwidth.replace( /^\D+/g, '')) / 2;
+			const unit = gridGutterwidth.substr(gridGutterwidth.length - 2, 2);
 			$("#grid-displayer .gd-column").css({"border-width": "0 " + borderWidth + unit, "border-style": "solid", "border-color": "#FFF", "padding": 0}); // Remove padding for small 12 column view - fluid display forces padded columns down
-		},
-		setGridZindex = function(gridZindex) {
+		};
+		const setGridZindex = function(gridZindex) {
 			$("#grid-displayer").css("z-index", gridZindex);
 		};
 
 		if ($("#grid-displayer").length) { // Close grid displayer when the bookmarklet is clicked for a second time
 			removeGridDisplayer();
 		} else {
-
 			// Default parameters
-			var gdNbcols      = 12,
-					gdGutterwidth = "10px",
-					gdColor       = "black",
-					gdOpacity     = "0.3",
-					gdZindex      = "999";
+			const gdNbcols = 12;
+			const gdGutterwidth = "10px";
+			const gdColor = "black";
+			const gdOpacity = "0.3";
+			const gdZindex = "999";
 
 			// Frameworks list
-			var origamis = [["o3", "Origami Grid v3"], ["so3", "Origami Grid v3 (snappy)"]];
-			var frameworks = origamis;
+			const origamis = [["o3", "Origami Grid v3"], ["so3", "Origami Grid v3 (snappy)"]];
+			const frameworks = origamis;
 
 			// HTML
-			var gridHtml = "<div id=\"grid-displayer\" style=\"display: none;\"><div class=\"gd-container\"><div class=\"gd-row\"></div></div></div>",
-			gridToolsHtml = "<div id=\"grid-displayer-tools\">";
+			const gridHtml = "<div id=\"grid-displayer\" style=\"display: none;\"><div class=\"gd-container\"><div class=\"gd-row\"></div></div></div>";
+			let gridToolsHtml = "<div id=\"grid-displayer-tools\">";
 			gridToolsHtml += "	<div class=\"gdt-field\"><select id=\"gdt-framework\">";
 			gridToolsHtml += "		<option>&darr; Choose your framework</option>";
 			$.each(frameworks, function(index, value) {
@@ -173,12 +171,12 @@
 
 	// Load jQuery from CDN if needed
 	if (!window.jQuery) {
-		var head = document.getElementsByTagName("head")[0],
-				jQueryScript = document.createElement("script");
-		jQueryScript.src  = "http://code.jquery.com/jquery-1.10.0.min.js";
+		const head = document.getElementsByTagName("head")[0];
+		const jQueryScript = document.createElement("script");
+		jQueryScript.src = "http://code.jquery.com/jquery-1.10.0.min.js";
 		jQueryScript.onload = function() { startBookmarklet(window.jQuery); };
 		head.appendChild(jQueryScript);
 	} else {
 		startBookmarklet(window.jQuery);
 	}
-})();
+}());

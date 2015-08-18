@@ -13,7 +13,7 @@
 /// @param {String} $layout-width [null]
 @mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null) {
 	$temp-layouts: ();
-	$temp-gutters: ();
+	$temp-gutters: (default: #{oGridGutter()});
 
 	// Add the new layout in the correct position:
 	// (we want $o-grid-layouts and $o-grid-gutters to ordered from the smallest to the largest layout)
@@ -30,22 +30,19 @@
 		}
 
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
-		$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
+
+		@if $current-gutter-width {
+		  $temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
+		}
 	}
 	$o-grid-layouts: $temp-layouts !global;
 	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
 
 	@if $gutter-width {
-		$o-grid-gutters: map-merge($o-grid-gutters, $temp-gutters) !global;
+		$o-grid-gutters: $temp-gutters !global;
 	}
 
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
-
-	// When snappy mode is enabled, force $_o-grid-max-width to the largest layout width
-	// instead of the default $_o-grid-max-width
-	@if $o-grid-mode == 'snappy' {
-		$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
-	}
 }
 
 /// Get the gutter of a layout
@@ -130,14 +127,6 @@
 			@return percentage($span);
 		}
 	}
-}
-
-/// Alias for the oGridColspan function
-///
-/// @deprecated
-@function oGridColumnWidth($span, $total-cols: $o-grid-columns) {
-	@warn 'oGridColumnWidth() is deprecated, please use oGridColspan() instead';
-	@return oGridColspan($span, $total-cols: $total-cols);
 }
 
 /// Apply styles at a given layout size

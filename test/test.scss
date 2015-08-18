@@ -1,4 +1,4 @@
-// scss-lint:disable SelectorFormat PropertySpelling
+// scss-lint:disable SelectorFormat DuplicateProperty
 
 @mixin test-debug {
 	/* Layouts: #{inspect($o-grid-layouts)} */
@@ -31,20 +31,21 @@ $o-grid-layouts: (
 
 @include oGridAddLayout($layout-name: A, $layout-width: 340px);
 @include test-debug();
-
 @include oGridRespondTo(A) {
 	A {
-		max-width: oGridGetMaxWidthForLayout(A);
-		gutter: oGridGutter(A);
+		content: 'Max-width A: #{oGridGetMaxWidthForLayout(A)}';
+		content: 'Gutter A: #{oGridGutter(A)}';
 	}
 }
 
-@include oGridAddLayout($layout-name: Y, $layout-width: 1100px);
+@include oGridAddLayout($layout-name: Y, $layout-width: 1100px, $gutter-width: 20px);
 @include test-debug();
 @include oGridRespondTo(Y) {
 	Y {
-		max-width: oGridGetMaxWidthForLayout(Y);
-		gutter: oGridGutter(Y);
+		content: 'Max-width Y: #{oGridGetMaxWidthForLayout(Y)}';
+		content: 'Gutter Y: #{oGridGutter(Y)}';
+		content: 'Gutter A in Y: #{oGridGutter(A)}';
+		content: 'Gutter Z: #{oGridGutter(Z)}';
 	}
 }
 
@@ -52,8 +53,7 @@ $o-grid-layouts: (
 @include test-debug();
 @include oGridRespondTo(B) {
 	B {
-		max-width: oGridGetMaxWidthForLayout(B);
-		gutter: oGridGutter(B);
+		content: 'Max-width B: #{oGridGetMaxWidthForLayout(B)}';
 	}
 }
 
@@ -69,7 +69,16 @@ $o-grid-gutters: (default: 20px);
 
 @include oGridRespondTo(Z) {
 	Z {
-		max-width: oGridGetMaxWidthForLayout(Z);
-		gutter: oGridGutter(Z);
+		content: 'Max-width Z: #{oGridGetMaxWidthForLayout(Z)}';
 	}
 }
+
+$colspans: ();
+
+@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
+	$colspans: map-merge($colspans, (#{$human-friendly-name}: oGridColspan($human-friendly-name)));
+}
+/**
+ * Human-friendly colspans: #{inspect($colspans)}
+ * Fraction colspan: #{inspect($colspans)}
+ */

@@ -1,9 +1,22 @@
 #!/usr/bin/env ruby
 # Encoding: utf-8
-# Inspired from http://www.skorks.com/2011/02/a-unit-testing-framework-in-44-lines-of-ruby/
+# Inspired by http://www.skorks.com/2011/02/a-unit-testing-framework-in-44-lines-of-ruby/
 require 'open3'
 
-$cssoutput = Open3.capture3("node-sass test/test.scss --include-path bower_components --stdout")[0]
+# Main include file: entry point of your module
+# Typically, the file you'd import in your application
+# e.g. @import 'your_module/my_file.scss';
+$main_include_file ||= "main.scss"
+
+# Where you'll write the Sass that will output the CSS
+# to be parsed by your test suite
+$test_file ||= "test/test.scss"
+
+# If tests fail, check the compiled CSS in this file
+# Ignore this file in versioning (e.g. add to .gitignore)
+$test_error_file ||= "test/error.css"
+
+$cssoutput = Open3.capture3("node-sass #{$test_file} --include-path bower_components --stdout")[0]
 
 module Kernel
   def describe(description, &block)
@@ -48,7 +61,7 @@ class Executor
     puts "\n#{@tests.keys.size} tests, #{@success_count} success, #{@failure_count} failure"
 
     if @failure_count > 0
-      stdout, stderr, status = Open3.capture3 "node-sass test/test.scss test/error.css --include-path bower_components"
+      stdout, stderr, status = Open3.capture3 "node-sass #{$test_file} #{$test_error_file} --include-path bower_components"
     end
   end
 end
@@ -58,9 +71,9 @@ class String
   def squish
     strip.gsub /\s+/, ' '
   end
-  # Load the grid and compile to CSS
+  # Load the module and compile to CSS
   def sass_to_css
-    Open3.pipeline_r(['echo', ["@import 'main';", self].join], ['node-sass --include-path bower_components']) do |output|
+    Open3.pipeline_r(['echo', ["@import '#{$main_include_file}';", self].join], ['node-sass --include-path bower_components']) do |output|
       output.read
     end
   end

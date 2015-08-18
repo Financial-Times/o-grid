@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # Encoding: utf-8
+
 require_relative 'test-framework'
 
 describe "Overriding layouts" do
@@ -55,6 +56,16 @@ describe "maximum width of a layout" do
   end
   it "should be its own width for the widest layout" do
     find "Z: 1200px" and find "Max-width Z: 1200px"
+  end
+end
+
+describe "resetting gutters to only a default" do
+  it "should give all layouts the same gutter" do
+    find "Gutter A after reset: 20px" and
+    find "Gutter B after reset: 20px" and
+    find "Gutter C after reset: 20px" and
+    find "Gutter X after reset: 20px" and
+    find "Gutter Y after reset: 20px"
   end
 end
 

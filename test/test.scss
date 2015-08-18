@@ -57,13 +57,18 @@ $o-grid-layouts: (
 	}
 }
 
+// Reset gutters to only a default
 $o-grid-gutters: (default: 20px);
 @include oGridAddLayout($layout-name: C, $layout-width: 372px);
 @include test-debug();
+
 @include oGridRespondTo(C) {
 	C {
-		max-width: oGridGetMaxWidthForLayout(C);
-		gutter: oGridGutter(C);
+		content: 'Gutter A after reset: #{oGridGutter(A)}';
+		content: 'Gutter B after reset: #{oGridGutter(B)}';
+		content: 'Gutter C after reset: #{oGridGutter(C)}';
+		content: 'Gutter X after reset: #{oGridGutter(X)}';
+		content: 'Gutter Y after reset: #{oGridGutter(Y)}';
 	}
 }
 
@@ -73,8 +78,8 @@ $o-grid-gutters: (default: 20px);
 	}
 }
 
+// Test the oGridColspan function
 $colspans: ();
-
 @each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 	$colspans: map-merge($colspans, (#{$human-friendly-name}: oGridColspan($human-friendly-name)));
 }

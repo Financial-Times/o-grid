@@ -32,7 +32,7 @@
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
 
 		@if $current-gutter-width {
-		  $temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
+			$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
 		}
 	}
 	$o-grid-layouts: $temp-layouts !global;

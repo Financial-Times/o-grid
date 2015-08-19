@@ -50,7 +50,7 @@ describe "Adding a layout *with* a gutter" do
   end
 end
 
-describe "maximum width of a layout" do
+describe "Maximum width of a layout" do
   it "should be equivalent to the following layout's width" do
     find "A: 340px, X: 800px" and find "Max-width A: 800px"
   end
@@ -59,7 +59,7 @@ describe "maximum width of a layout" do
   end
 end
 
-describe "resetting gutters to only a default" do
+describe "Resetting gutters to only a default" do
   it "should give all layouts the same gutter" do
     find "Gutter A after reset: 20px" and
     find "Gutter B after reset: 20px" and

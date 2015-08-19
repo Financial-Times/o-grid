@@ -49,15 +49,17 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 
 * Minimum width: 240px
 * Maximum width: 1210px
-* Gutter width: 10px
+* Gutter widths (space between columns):
+	* 10px on small screens
+	* 20px on larger screens
 * Number of columns: 12
 
 ### Layout sizes
 
 * **Default (no layout name)** 240px - …
 * **Small (S)** 490px - 729px
-* **Medium (M)** 730px - 969px
-* **Large (L)** 970px to 1209px
+* **Medium (M)** 730px - 979px
+* **Large (L)** 980px to 1209px
 * **Extra large (XL)** 1210px
 
 ## Quick start
@@ -281,18 +283,23 @@ div {
 
 #### Snappy mode
 
-In fluid mode (see `$o-grid-mode`), a set of rows may snap between fixed layouts as the viewport gets larger:
+The container size can snap between fixed-widths as the viewport gets larger:
 
 ```html
-<!-- Make one row snappy -->
-<div class="o-grid-row o-grid-row--snappy"></div>
+<!-- Make the whole document snappy -->
+<body class="o-grid-snappy">
+	<div class="o-grid-container">
+		<div class="o-grid-row">
+			…
+		</div>
+	</div>
+</body>
 
-<!--Make multiple rows snappy -->
-<div class="o-grid-snappy">
-	<div class="o-grid-row"></div>
-	<div class="o-grid-row"></div>
-	<div class="o-grid-row"></div>
-	<div class="o-grid-row"></div>
+<!-- Make a container snappy -->
+<div class="o-grid-container o-grid-container--snappy">
+	<div class="o-grid-row">
+		…
+	</div>
 </div>
 ```
 
@@ -457,9 +464,8 @@ $o-grid-is-silent: false;
 // Show the currently active breakpoint and output loaded settings
 $o-grid-debug-mode: true;
 
-// Gutter size, in pixels
-// Useful to use for spacing in product
-$o-grid-gutters: 10px;
+// Gutters (distance between 2 columns), in pixels
+$o-grid-gutters: (default: 10px, M: 20px);
 
 // Grid mode
 // - fluid: full width up to the largest layout's width
@@ -474,8 +480,8 @@ $o-grid-mode: fluid (default) | snappy | fixed;
 $o-grid-layouts: (
 	S:  490px,
 	M:  730px,
-	L:  970px,
-	XL: 1210px
+	L:  980px,
+	XL: 1210px,
 );
 ```
 
@@ -487,17 +493,22 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 @import 'o-grid/main';
 
 // Add various layouts
-@include oGridAddLayout($layout-name: XS, $column-width: 20px);
-@include oGridAddLayout($layout-name: P, $column-width: 36px);
-@include oGridAddLayout($layout-name: D, $layout-width: 300px);
+@include oGridAddLayout(
+	$layout-name: XS,
+	$layout-width: 360px
+);
+@include oGridAddLayout(
+	$layout-name: P,
+	$layout-width: 600px,
+	$gutter-width: 24px
+);
 
 // Layouts are now:
-//   D: 300px,
-//   XS: 370px,
+//   XS: 360px,
 //   S: 490px,
-//   P: 562px,
+//   P: 600px,
 //   M: 730px,
-//   L: 970px,
+//   L: 980px,
 //   XL: 1210px
 
 // Surface the layout currently displayed to make it readable in JS

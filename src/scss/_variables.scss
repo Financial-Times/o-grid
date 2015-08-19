@@ -70,10 +70,10 @@ $o-grid-min-width: 240px !default;
 ///
 /// @type Map
 $o-grid-layouts: (
-	S:  490px,  // column-width: 30px
-	M:  730px,  // column-width: 50px
-	L:  970px,  // column-width: 70px
-	XL: 1210px, // column-width: 90px
+	S:  490px,  // column-width: 30px, inner width: 470px
+	M:  730px,  // column-width: 40px, inner width: 690px
+	L:  980px,  // column-width: 60px, inner width: 940px
+	XL: 1210px, // column-width: 80px, inner width: 1170px
 ) !default;
 
 /// Layout names

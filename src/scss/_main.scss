@@ -478,6 +478,19 @@
 
 }
 
+/// Remove row styles
+@mixin oGridResetRow {
+	clear: none;
+	display: block;
+	flex-wrap: nowrap;
+	margin-left: 0;
+
+	&:before,
+	&:after {
+		display: none;
+	}
+}
+
 /// Center column
 @mixin oGridCenter {
 	margin-left: auto;
@@ -579,14 +592,6 @@
 	}
 	[data-o-grid-colspan] {
 		@include oGridColumn;
-	}
-
-	// If the grid is fluid, use this class to enable snappy mode on a set of rows
-	@if $o-grid-mode == 'fluid' {
-		.o-grid-snappy {
-			margin-left: auto;
-			margin-right: auto;
-		}
 	}
 
 	@for $colspan from 1 through $o-grid-columns {

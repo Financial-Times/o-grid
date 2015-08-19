@@ -4,8 +4,8 @@
 require 'open3'
 
 # Main include file: entry point of your module
-# Typically, the file you'd import in your application
-# e.g. @import 'your_module/my_file.scss';
+# Typically, the file you'd import in your application.
+# By default: `@import 'module/<main.scss>';
 $main_include_file ||= "main.scss"
 
 # Where you'll write the Sass that will output the CSS

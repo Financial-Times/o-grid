@@ -5,9 +5,14 @@
 var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
 var local = /localhost/.test(document.URL);
-var defaultGutter = 10;
-var resizedOuterMarginWidth = 5; // Same as $o-grid-gutter in resized.scss
 
+var gutters = {
+	"default": 10,
+	"S": 10,
+	"M": 20,
+	"L": 20,
+	"XL": 20,
+};
 
 // ============================================================================
 // Polyfills
@@ -144,6 +149,7 @@ function getExpectedModifier(el, modifier) {
 	var layout = getCurrentLayout();
 
 	var modifiedBy;
+
 	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
 		modifiedBy = $1;
 	});
@@ -158,45 +164,10 @@ function getExpectedModifier(el, modifier) {
 		return 0;
 	}
 
-	return modifiedBy / 12 * (parseInt(getComputedStyle(el.parentNode, null).getPropertyValue('width'), 10) - defaultGutter);
+	return modifiedBy / 12 * (parseInt(getComputedStyle(el.parentNode, null).width, 10));
 }
 
-function getExpectedGutter(el, side) {
-	var layout = getCurrentLayout();
-
-	var gutterClassName = 'o-grid-remove-gutters';
-	var specificGutterClassName = gutterClassName + '--' + side + '--' + layout;
-	var layoutGutterClassName = gutterClassName + '--' + layout;
-	var sideGutterClassName = gutterClassName + '--' + side;
-	var compactClassName = 'o-grid-row--compact';
-
-	if (el.classList.contains(gutterClassName) ||
-		el.classList.contains(specificGutterClassName) ||
-		el.classList.contains(layoutGutterClassName) ||
-		el.classList.contains(sideGutterClassName) ||
-		(el.parentNode && el.parentNode.classList.contains(compactClassName))) {
-		return false;
-	}
-
-	return true;
-}
-
-function highlightUnexpectedGutter(el) {
-	var expectedLeft = getExpectedGutter(el, 'left');
-	var expectedRight = getExpectedGutter(el, 'right');
-	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('padding-right'), 10) > 0;
-	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('padding-left'), 10) > 0;
-
-	if (expectedLeft !== actualLeft || expectedRight !== actualRight) {
-		/\berror-gutter\b/.test(el.className) || (el.className += ' error-gutter');
-		console.error('Gutter error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
-	} else {
-		el.className = el.className.replace(/\berror-gutter\b/g, '');
-	}
-}
-
-
-function getExpectedMargin(el, side) {
+function getExpectedMargin(el) {
 	var layout = getCurrentLayout();
 
 	var centerModifier = 'center';
@@ -205,10 +176,11 @@ function getExpectedMargin(el, side) {
 	var colspan = $(el).data('oGridColspan') + '';
 	var modifiers = colspan.split(' ');
 
+	// Offset
 	if (colspan.includes('offset')) {
-		if (side === 'left') {
-			return getExpectedModifier(el, 'offset');
-		}
+		var offset = getExpectedModifier(el, 'offset');
+
+		return offset;
 	}
 
 	// Uncentered
@@ -219,35 +191,33 @@ function getExpectedMargin(el, side) {
 	// Centered
 	if (modifiers.includes(centerModifier) || modifiers.includes(layoutCenterModifier)) {
 		// half of the remaining space left by the column
-		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).getPropertyValue('width'), 10) - parseInt(getComputedStyle(el, null).getPropertyValue('width'), 10) - defaultGutter);
+		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10) - gutters[getCurrentLayout()]);
 	}
 
 	return 0;
 }
 
 function highlightUnexpectedMargin(el) {
-	var expectedLeft = getExpectedMargin(el, 'left');
-	var expectedRight = getExpectedMargin(el, 'right');
-	var actualRight = parseInt(getComputedStyle(el, null).getPropertyValue('margin-right'), 10);
-	var actualLeft = parseInt(getComputedStyle(el, null).getPropertyValue('margin-left'), 10);
+	var expectedMarginLeft = getExpectedMargin(el);
+	var actualMarginLeft = parseInt(getComputedStyle(el, null).marginLeft, 10);
 
 	// We verify if margins are "almost equal" because of rounding errors
-	if (almostEqual(expectedLeft, actualLeft, 1, 1) && almostEqual(expectedRight, actualRight, 1, 1)) {
+	if (almostEqual(expectedMarginLeft, actualMarginLeft, 1, 1)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
 		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
-		console.error('Margin error', el, 'Left: ' + expectedLeft + ' (expected) ' + actualLeft  + ' (actual) ',  'Right: ' + expectedRight + ' (expected) ' + actualRight  + ' (actual) ');
+		console.error('Margin error', el, 'Left: ' + expectedMarginLeft + ' (expected) ' + actualMarginLeft  + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedPosition(el) {
 	var expectedPush = getExpectedModifier(el, 'push');
 	var expectedPull = getExpectedModifier(el, 'pull');
-	var actualPush = getComputedStyle(el, null).getPropertyValue('left');
-	var actualPull = getComputedStyle(el, null).getPropertyValue('right');
-	actualPush = (actualPush === 'auto' ? 0 : parseInt(actualPush, 10));
-	actualPull = (actualPull === 'auto' ? 0 : parseInt(actualPull, 10));
+	var actualPush = getComputedStyle(el, null).left;
+	var actualPull = getComputedStyle(el, null).right;
 
+	actualPush = (actualPush === 'auto') ? 0 : parseInt(actualPush, 10);
+	actualPull = (actualPull === 'auto') ? 0 : parseInt(actualPull, 10);
 
 	// We verify if positions are "almost equal" because of rounding errors
 	if (almostEqual(expectedPush, actualPush, 1, 1) && almostEqual(expectedPull, actualPull, 1, 1)) {
@@ -259,24 +229,8 @@ function highlightUnexpectedPosition(el) {
 }
 
 function highlightUnexpectedWidth(el) {
-	var outerMargins = 10;
-
-	if (document.documentElement.classList.contains('stylesheet-resized')) {
-		outerMargins = resizedOuterMarginWidth;
-	}
-
-	if ($(el).parents('.o-grid-row--compact').length > 0) {
-		outerMargins = 0;
-	}
-
-	// If the element is in a nested row,
-	// then there are no outer margins
-	if ($(el).parents('.o-grid-row').parents('.o-grid-row').length > 0) {
-		outerMargins = 0;
-	}
-
 	var expectedPercentage = getExpectedSpans(el) * 100/12;
-	var actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth - outerMargins);
+	var actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth);
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
 		/\berror-width\b/.test(el.className) || (el.className += ' error-width');
@@ -291,6 +245,8 @@ function highlightUnexpectedWidth(el) {
 function tests() {
 	console.log('Test suite: starting');
 	console.log('Layout: ' + getCurrentLayout());
+	console.log('Gutter width: ' + gutters[getCurrentLayout()]);
+
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedPosition);

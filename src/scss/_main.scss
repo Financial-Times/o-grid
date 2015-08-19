@@ -526,31 +526,10 @@
 	margin-left: oGridColspan($columns);
 }
 
-/// Remove gutters from a column and re-align its child rows
-///
-/// @param {String} $side [null] - left, right
-@mixin oGridRemoveGutters($side: null) {
-	@if $side == null or $side == 'left' {
-		padding-left: 0;
-
-		.o-grid-row {
-			margin-left: 0;
-		}
-	}
-	@if $side == null or $side == 'right' {
-		padding-right: 0;
-
-		.o-grid-row {
-			margin-right: 0;
-		}
-	}
-}
-
 /// Width and gutter removal modifiers for a given layout.
 ///
 /// @output
 ///  [data-o-grid-colspan~="S1"] { width: %; }
-///  .o-grid-remove-gutters--S { … }
 ///
 /// @access private
 ///
@@ -577,20 +556,6 @@
 				min-width: 0;
 			}
 		}
-	}
-
-	// Gutter helpers:
-	// Remove gutters on a row or a column for a given layout
-	// Examples:
-	//  <div class="o-row o-grid-remove-gutters--S"></div>
-	//  <div data-o-grid-colspan="6" class="o-grid-remove-gutters--left--S"></div>
-	.o-grid-remove-gutters--#{$layout-name},
-	.o-grid-remove-gutters--left--#{$layout-name} {
-		@include oGridRemoveGutters('left');
-	}
-	.o-grid-remove-gutters--#{$layout-name},
-	.o-grid-remove-gutters--right--#{$layout-name} {
-		@include oGridRemoveGutters('right');
 	}
 }
 
@@ -638,11 +603,12 @@
 	}
 
 	// Compact, gutterless row of columns
-	.o-grid-row-compact, // Deprecated, here for retrocompatibility
 	.o-grid-row--compact {
-		&,
+		& {
+			margin-left: 0;
+		}
 		> [data-o-grid-colspan] {
-			@include oGridRemoveGutters;
+			padding-left: 0;
 		}
 	}
 
@@ -651,17 +617,6 @@
 
 	// pull, push, offset
 	@include _oGridShuffleColumns;
-
-	// Gutter helpers:
-	// Remove gutters on a row or a column, across all layouts
-	.o-grid-remove-gutters,
-	.o-grid-remove-gutters--left {
-		@include oGridRemoveGutters('left');
-	}
-	.o-grid-remove-gutters,
-	.o-grid-remove-gutters--right {
-		@include oGridRemoveGutters('right');
-	}
 
 	// For IE 8, output grid helper classes and data- attributes
 	// for the layout defined in $o-grid-fixed-layout

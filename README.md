@@ -307,59 +307,6 @@ To remove gutters from all columns in a row use the class `o-grid-row--compact`,
 </div>
 ```
 
-#### Fine-grained gutter removal
-
-Remove gutters with these helper classes:
-
-```html
-<div class="o-grid-remove-gutters[--side][--layout]"></div>
-<!-- Remove gutters -->
-<div data-o-grid-colspan="one-half" class="o-grid-remove-gutters"></div>
-
-<!-- Remove right gutters -->
-<div class="o-grid-remove-gutters--right"></div>
-
-<!-- Remove gutters for the small layout -->
-<div data-o-grid-colspan="3" class="o-grid-remove-gutters--S"></div>
-
-<!-- Remove left gutters for the large layout -->
-<div class="o-grid-row o-grid-remove-gutters--left--L"></div>
-```
-
-```css
-.o-grid-remove-gutters[--{left|right}][--{S|M|L|XL}]
-```
-
-Or, in Sass files, remove gutters on a row or a column using these helpers:
-
-```scss
-oGridRemoveGutters(); // Remove gutters on both sides
-oGridRemoveGutters($side: 'left'); // Remove gutters on the left side
-oGridRemoveGutters('right'); // Remove gutters on the right (`$side` is optional)
-```
-
-Example:
-
-```scss
-.my-component {
-	// Remove gutters for all layouts
-	@include oGridRemoveGutters();
-
-	// Remove left gutter at Large layout size and up
-	@include oGridRespondTo(L) {
-		@include oGridRemoveGutters('left');
-	}
-	// Remove right gutter at eXtra Large layout size and up
-	@include oGridRespondTo(XL) {
-		@include oGridRemoveGutters('right');
-	}
-	// Remove left and right gutters until medium layout size
-	@include oGridRespondTo($until: M) {
-		@include oGridRemoveGutters();
-	}
-}
-```
-
 #### Responsive column helper
 
 For simplicity, examples below don't show the output code that brings support for Internet Explorer.

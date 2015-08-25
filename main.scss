@@ -36,12 +36,12 @@
 ///  console.log(getCurrentLayout());
 @mixin oGridSurfaceCurrentLayout {
 	html:after {
-		content: 'default'; // Default layout. Typically from 0px to S
+		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
 		display: none;
 
 		@each $breakpoint in $_o-grid-layout-names {
 			@include oGridRespondTo($breakpoint) {
-				content: quote($breakpoint);
+				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
 			}
 		}
 	}

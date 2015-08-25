@@ -31,10 +31,14 @@ $o-grid-is-silent: false;
 
 ```js
 // your-app/main.js
-var getCurrentLayout = require('o-grid').getCurrentLayout;
 
 // Return the current layout (e.g. default, S, M, L, XL)
+var getCurrentLayout = require('o-grid').getCurrentLayout;
 console.log(getCurrentLayout());
+
+// Return the current gutter (e.g. 10px, 20px)
+var getCurrentGutter = require('o-grid').getCurrentGutter;
+console.log(getCurrentGutter());
 ```
 
 ## Browser support
@@ -535,14 +539,27 @@ $o-grid-debug-mode: true;
 Returns the name of the layout currently displayed.
 
 ```js
-var oGrid = require('o-grid/main');
+var oGrid = require('o-grid');
 
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
 ```
 
-When using o-grid silent mode, make sure to surface the current layout to the JavaScript Helper
-by adding `@include oGridSurfaceCurrentLayout;` to your Sass file.
+
+### `getCurrentGutter()`
+
+Returns the width of the gutter currently displayed.
+
+```js
+var oGrid = require('o-grid');
+
+console.log(oGrid.getCurrentGutter());
+// > 10px | 20px
+```
+
+When using o-grid silent mode, make sure to surface the grid
+information to make it readable by the JavaScript Helper
+by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 
 ## Grid Bookmarklet
 
@@ -559,7 +576,13 @@ by adding `@include oGridSurfaceCurrentLayout;` to your Sass file.
 
 ----
 
-## How to upgrade from 2.x.x?
+## How to upgrade from v3.x.x to v4.x.x?
+
+TODO
+
+----
+
+## How to upgrade from v2.x.x to v3.x.x?
 
 - Layouts are now mobile first. It means that the `S` reads "S layout and up" instead of "S layout only". For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
 - Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead

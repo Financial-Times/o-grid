@@ -4,15 +4,8 @@
 
 var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
+var getCurrentGutter = require('../../../main').getCurrentGutter;
 var local = /localhost/.test(document.URL);
-
-var gutters = {
-	"default": 10,
-	"S": 10,
-	"M": 20,
-	"L": 20,
-	"XL": 20,
-};
 
 // ============================================================================
 // Polyfills
@@ -191,7 +184,7 @@ function getExpectedMargin(el) {
 	// Centered
 	if (modifiers.includes(centerModifier) || modifiers.includes(layoutCenterModifier)) {
 		// half of the remaining space left by the column
-		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10) - gutters[getCurrentLayout()]);
+		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10) - getCurrentGutter());
 	}
 
 	return 0;
@@ -245,7 +238,7 @@ function highlightUnexpectedWidth(el) {
 function tests() {
 	console.log('Test suite: starting');
 	console.log('Layout: ' + getCurrentLayout());
-	console.log('Gutter width: ' + gutters[getCurrentLayout()]);
+	console.log('Gutter width: ' + getCurrentGutter());
 
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedWidth);
 	Array.prototype.forEach.call(document.querySelectorAll('[data-o-grid-colspan]'), highlightUnexpectedMargin);

@@ -22,7 +22,7 @@
 		$current-layout-name: nth($_o-grid-layout-names, $index);
 		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
 
-		$current-gutter-width: oGridGutter($current-layout-name);
+		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
 
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));

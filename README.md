@@ -52,7 +52,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 ### General settings
 
 * Minimum width: 240px
-* Maximum width: 1210px
+* Maximum width: 1220px
 * Gutter widths (space between columns):
 	* 10px on small screens
 	* 20px on larger screens
@@ -60,21 +60,23 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 
 ### Layout sizes
 
-* **Default (no layout name)** 240px - …
-* **Small (S)** 490px - 729px
-* **Medium (M)** 730px - 979px
-* **Large (L)** 980px to 1209px
-* **Extra large (XL)** 1210px
+* **Default** 240px - …
+* **Small (S)** 490px - 739px
+* **Medium (M)** 740px - 979px
+* **Large (L)** 980px to 1219px
+* **Extra large (XL)** 1220px
 
 ## Quick start
 
 ### Utility classes
 
 ```html
-<div class="o-grid-row">
-	<!-- two divs, spanning a total of 12 columns -->
-	<div data-o-grid-colspan="8">A div, 8 columns wide</div>
-	<div data-o-grid-colspan="4">Another div, 4 columns wide</div>
+<div class="o-grid-container">
+	<div class="o-grid-row">
+		<!-- two divs, spanning a total of 12 columns -->
+		<div data-o-grid-colspan="8">A div, 8 columns wide</div>
+		<div data-o-grid-colspan="4">Another div, 4 columns wide</div>
+	</div>
 </div>
 ```
 
@@ -83,28 +85,34 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 Set a number of columns per layout:
 
 ```html
-<div class="o-grid-row">
-	<div data-o-grid-colspan="6 L8">
-		Half by default, then 8 columns wide on Large layout and up
-	</div>
-	<div data-o-grid-colspan="6 L4">
-		Half by default, then 4 columns wide on Large layout and up
+<div class="o-grid-container">
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="6 L8" class="first-column">
+			Half by default, then 8 columns wide on Large layout and up
+		</div>
+		<div data-o-grid-colspan="6 L4" class="second-column">
+			Half by default, then 4 columns wide on Large layout and up
+		</div>
 	</div>
 </div>
 ```
 
 ```scss
 div {
-	@include oGridRow();
+	@include oGridContainer();
 
 	> div {
-		// Half by default, then 8 columns wide on Large layout and up
-		@include oGridColumn((default: 6, L: 8));
+		@include oGridRow();
 	}
-	> div + div {
-		// Half by default, then 4 columns wide on Large layout and up
-		@include oGridColumn((default: 6, L: 4));
-	}
+}
+
+.first-column {
+	// Half by default, then 8 columns wide on Large layout and up
+	@include oGridColspan((default: 6, L: 8));
+}
+.second-column {
+	// Half by default, then 4 columns wide on Large layout and up
+	@include oGridColspan((default: 6, L: 4));
 }
 ```
 
@@ -121,7 +129,7 @@ div {
 ```
 
 ```scss
-div { @include oGridColumn((default: 6, L: 8)); }
+div { @include oGridColspan((default: 6, L: 8)); }
 ```
 
 #### Using keywords<a name="keywords"></a>
@@ -136,7 +144,7 @@ div { @include oGridColumn((default: 6, L: 8)); }
 ```
 
 ```scss
-div { @include oGridColumn((default: one-half, L: two-thirds)); }
+div { @include oGridColspan((default: one-half, L: two-thirds)); }
 ```
 
 ### Examples
@@ -148,7 +156,7 @@ A full width column for all sizes except large screens and up, where it spans on
 ```
 
 ```scss
-div { @include oGridColumn((default: full-width, L: 9)); }
+div { @include oGridColspan((default: full-width, L: 9)); }
 ```
 
 A half width column that becomes full-width on medium screens and up:
@@ -158,7 +166,7 @@ A half width column that becomes full-width on medium screens and up:
 ```
 
 ```scss
-div { @include oGridColumn((default: one-half, M: 12)); }
+div { @include oGridColspan((default: one-half, M: 12)); }
 ```
 
 A column which gradually takes up a greater portion of horizontal space as the screen gets smaller:
@@ -168,7 +176,7 @@ A column which gradually takes up a greater portion of horizontal space as the s
 ```
 
 ```scss
-div { @include oGridColumn((default: 4, M: 3, L: 2, XL: 1)); }
+div { @include oGridColspan((default: 4, M: 3, L: 2, XL: 1)); }
 ```
 
 A column which has `width: auto` on small screens, and then takes half the available space on medium screens and up:
@@ -178,7 +186,7 @@ A column which has `width: auto` on small screens, and then takes half the avail
 ```
 
 ```scss
-div { @include oGridColumn((M: 6)); }
+div { @include oGridColspan((M: 6)); }
 ```
 
 ## Advanced usage
@@ -194,7 +202,7 @@ div { @include oGridColumn((M: 6)); }
 ```
 
 ```scss
-div { @include oGridColumn((default: hide, L: 12, XL: hide)); }
+div { @include oGridColspan((default: hide, L: 12, XL: hide)); }
 ```
 
 #### Centering a column
@@ -225,13 +233,13 @@ div { @include oGridColumn((default: hide, L: 12, XL: hide)); }
 ```scss
 // Content is first in the source
 .content {
-	@include oGridColumn(8);
+	@include oGridColspan(8);
 	@include oGridPush(4); // outputs left: -33.333333333%;
 }
 
 // Sidebar comes second in the source but appears first on the left
 .sidebar {
-	@include oGridColumn(4);
+	@include oGridColspan(4);
 	@include oGridPull(8); // outputs right: -66.666666667%;
 }
 ```
@@ -245,7 +253,7 @@ Responsively:
 ```scss
 // Content is first in the source
 .content {
-	@include oGridColumn((L: 8));
+	@include oGridColspan((L: 8));
 	@include oGridRespondTo(L) {
 		@include oGridPush(4); // outputs left: -33.333333333%;
 	}
@@ -253,7 +261,7 @@ Responsively:
 
 // Sidebar comes second in the source but appears first on the left
 .sidebar {
-	@include oGridColumn((L: 4));
+	@include oGridColspan((L: 4));
 	@include oGridRespondTo(L) {
 		@include oGridPull(8); // outputs right: -66.666666667%;
 	}
@@ -272,12 +280,12 @@ Responsively:
 
 ```scss
 div {
-	@include oGridColumn(8);
+	@include oGridColspan(8);
 	@include oGridOffset(4); // outputs margin-left: 33.333333333%;
 }
 
 div {
-	@include oGridColumn((L: 8));
+	@include oGridColspan((L: 8));
 
 	@include oGridRespondTo(L) {
 		@include oGridOffset(4); // outputs margin-left: 33.333333333%;
@@ -307,9 +315,9 @@ The container size can snap between fixed-widths as the viewport gets larger:
 </div>
 ```
 
-#### Compact, gutterless rows
+#### Compact (gutterless) rows
 
-To remove gutters from all columns in a row use the class `o-grid-row--compact`, e.g.
+To remove gutters from all columns in a row, use the `o-grid-row--compact` class:
 
 ```html
 <div class="o-grid-row o-grid-row--compact">
@@ -325,7 +333,7 @@ For simplicity, examples below don't show the output code that brings support fo
 ##### Give column properties to an element
 
 ```scss
-el { @include oGridColumn(); }
+el { @include oGridColspan(); }
 ```
 
 Outputs:
@@ -344,7 +352,7 @@ el {
 ##### Give a width to an element
 
 ```scss
-el { @include oGridColumn($span: 4); }
+el { @include oGridColspan($span: 4); }
 ```
 
 Outputs:
@@ -373,7 +381,7 @@ el {
 
 ```scss
 el {
-	@include oGridColumn((
+	@include oGridColspan((
 		default: full-width,
 		M: 6
 	));
@@ -483,9 +491,9 @@ $o-grid-mode: fluid (default) | snappy | fixed;
 // Default layouts
 $o-grid-layouts: (
 	S:  490px,
-	M:  730px,
+	M:  740px,
 	L:  980px,
-	XL: 1210px,
+	XL: 1220px,
 );
 ```
 
@@ -511,9 +519,9 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 //   XS: 360px,
 //   S: 490px,
 //   P: 600px,
-//   M: 730px,
+//   M: 740px,
 //   L: 980px,
-//   XL: 1210px
+//   XL: 1220px
 
 // Surface the layout currently displayed to make it readable in JS
 @include oGridSurfaceCurrentLayout;
@@ -578,7 +586,9 @@ by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 
 ## How to upgrade from v3.x.x to v4.x.x?
 
-TODO
+- Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`
+- Search `oGridColumn` and replace with `oGridColspan`
+- The mixin `oGridColspan` from v3 outputs a bit more code. Use `oGridColspan($span, $width-only: true)` to only outputs widths. Note that with gzip this should not have any impact.
 
 ----
 

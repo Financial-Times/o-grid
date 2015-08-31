@@ -22,7 +22,7 @@
 		$current-layout-name: nth($_o-grid-layout-names, $index);
 		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
 
-		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
+		$current-gutter-width: oGridGutter($current-layout-name);
 
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
@@ -47,8 +47,13 @@
 
 /// Get the gutter of a layout
 ///
-/// @param {String} $layout-name - One of $o-grid-layouts
+/// @param {String|null|Boolean} $layout-name - One of $o-grid-layouts
 @function oGridGutter($layout-name: default) {
+	// Falsy values mean 'default'
+	@if not $layout-name {
+		$layout-name: default;
+	}
+
 	@if map-has-key($o-grid-gutters, $layout-name) {
 		@return map-get($o-grid-gutters, $layout-name);
 	}
@@ -255,10 +260,6 @@
 			min-width: oGridColspan($human-friendly-name);
 			max-width: oGridColspan($human-friendly-name);
 			width: oGridColspan($human-friendly-name);
-
-			@include oGridTargetIE8 {
-				min-width: 0;
-			}
 		}
 	}
 }
@@ -284,46 +285,65 @@
 
 /// Base column styles and responsive layout width
 ///
-/// The difference between `oGridColumn($span)` and `oGridColspan($span)` is that
-/// `oGridColumn` also outputs the base column styles for positioning and spacing
+/// @example scss Block has column styles
+///   el { @include oGridColspan(); }
 ///
-/// @example scss
-///   el { @include oGridColumn(); }
-///   el { @include oGridColumn(4); }
-///   el { @include oGridColumn(1/2); }
-///   el { @include oGridColumn((default: 12, M: 8, L: hide)); }
+/// @example scss 4-column wide block
+///   el { @include oGridColspan(4); }
+///
+/// @example scss Half-width block
+///   el { @include oGridColspan(1/2); }
+///
+/// @example scss Block is full-width by default, 8-column wide on Medium layouts and hidden on Large layouts
+///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span [null]
-@mixin oGridColumn($span: null) {
-	position: relative; // Required for push and pull
-	float: left;
-	box-sizing: border-box;
-	flex: 1 1 0%;
+@mixin oGridColspan($span: null, $width-only: false) {
+	@if not $width-only {
+		position: relative; // Required for push and pull
+		float: left;
+		box-sizing: border-box;
+		flex: 1 1 0%;
 
-	@each $layout-name in map-keys($o-grid-gutters) {
-		@if $layout-name == 'default' {
-			padding-left: map-get($o-grid-gutters, default);
+		@include oGridTargetIE8 {
+			// scss-lint:disable ImportantRule
+			min-width: 0 !important;
+		}
+
+		@if $o-grid-mode == 'fixed' {
+			padding-left: oGridGutter($o-grid-fixed-layout);
 		} @else {
-			@include oGridRespondTo($layout-name) {
-				padding-left: map-get($o-grid-gutters, $layout-name);
+			@each $layout-name in map-keys($o-grid-gutters) {
+				@if $layout-name == 'default' {
+					padding-left: oGridGutter();
+				} @else {
+					@include oGridRespondTo($layout-name) {
+						padding-left: oGridGutter($layout-name);
+					}
+				}
+			}
+
+			@include oGridTargetIE8 {
+				// Output grid modifiers for the fixed layout displayed by IE8
+				padding-left: oGridGutter($o-grid-fixed-layout);
 			}
 		}
 	}
-
 	@if $span {
-		@include oGridColspan($span);
+		@include _oGridColumnWidth($span);
 	}
 }
 
 /// Cross browser column widths across layouts
 ///
 /// @example scss
-///   el { @include oGridColspan(4); }
-///   el { @include oGridColspan(1/2); }
-///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
+///   el { @include _oGridColumnWidth(4); }
+///   el { @include _oGridColumnWidth(1/2); }
+///   el { @include _oGridColumnWidth(hide); }
+///   el { @include _oGridColumnWidth((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span
-@mixin oGridColspan($span) {
+@mixin _oGridColumnWidth($span) {
 	// Special case: the column is hidden by default
 	@if $span == 'hide' {
 		display: none;
@@ -340,11 +360,9 @@
 			@include _oGridFixSafariWrap($span);
 			min-width: oGridColspan($span);
 			max-width: oGridColspan($span);
-			width: oGridColspan($span);
 
-			@include oGridTargetIE8 {
-				min-width: 0;
-			}
+			// For IE8
+			width: oGridColspan($span);
 		}
 	}
 
@@ -352,7 +370,7 @@
 	@if type-of($span) == map {
 		@each $layout-name, $layout-span in $span {
 			@if $layout-name == 'default' {
-				@include oGridColspan($layout-span);
+				@include oGridColumnWidth($layout-span);
 			} @else {
 				@if $layout-span == 'hide' {
 					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout
@@ -365,13 +383,6 @@
 						display: none;
 					}
 				} @else {
-					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout
-					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
-						@include oGridTargetIE8 {
-							display: block;
-							width: oGridColspan($layout-span);
-						}
-					}
 					@include oGridRespondTo($layout-name) {
 						// scss-lint:disable DeclarationOrder
 
@@ -384,13 +395,22 @@
 						min-width: oGridColspan($layout-span);
 						max-width: oGridColspan($layout-span);
 					}
+					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout
+					@if index($_o-grid-layout-names, $layout-name) <= index($_o-grid-layout-names, $o-grid-fixed-layout) {
+						@include oGridTargetIE8 {
+							display: block;
+							width: oGridColspan($layout-span);
+						}
+					}
 				}
 			}
 		}
 	}
 }
 
-
+/// Grid container
+///
+/// @param {String} $grid-mode [$o-grid-mode]
 @mixin oGridContainer($grid-mode: $o-grid-mode) {
 	position: relative;
 	box-sizing: border-box;
@@ -402,12 +422,12 @@
 
 	@each $layout-name in map-keys($o-grid-gutters) {
 		@if $layout-name == 'default' {
-			padding-left: map-get($o-grid-gutters, default);
-			padding-right: map-get($o-grid-gutters, default);
+			padding-left: oGridGutter();
+			padding-right: oGridGutter();
 		} @else {
 			@include oGridRespondTo($layout-name) {
-				padding-left: map-get($o-grid-gutters, $layout-name);
-				padding-right: map-get($o-grid-gutters, $layout-name);
+				padding-left: oGridGutter($layout-name);
+				padding-right: oGridGutter($layout-name);
 			}
 		}
 	}
@@ -444,6 +464,7 @@
 		}
 	}
 }
+
 /// Base row styles
 ///
 /// @param {String} $grid-mode [$o-grid-mode]
@@ -452,13 +473,21 @@
 	display: flex;
 	flex-wrap: wrap; // Note that this breaks in old Firefox
 
-	@each $layout-name in map-keys($o-grid-gutters) {
-		@if $layout-name == 'default' {
-			margin-left: -1 * map-get($o-grid-gutters, default);
-		} @else {
-			@include oGridRespondTo($layout-name) {
-				margin-left: -1 * oGridGutter($layout-name);
+	@if $o-grid-mode == 'fixed' {
+		margin-left: -1 * oGridGutter($o-grid-fixed-layout);
+	} @else {
+		@each $layout-name in map-keys($o-grid-gutters) {
+			@if $layout-name == 'default' {
+				margin-left: -1 * oGridGutter();
+			} @else {
+				@include oGridRespondTo($layout-name) {
+					margin-left: -1 * oGridGutter($layout-name);
+				}
 			}
+		}
+
+		@include oGridTargetIE8 {
+			margin-left: -1 * oGridGutter($o-grid-fixed-layout);
 		}
 	}
 
@@ -564,10 +593,6 @@
 			min-width: oGridColspan($colspan);
 			max-width: oGridColspan($colspan);
 			width: oGridColspan($colspan);
-
-			@include oGridTargetIE8 {
-				min-width: 0;
-			}
 		}
 	}
 }
@@ -591,27 +616,19 @@
 		@include oGridRow;
 	}
 	[data-o-grid-colspan] {
-		@include oGridColumn;
+		@include oGridColspan();
 	}
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
-			@include _oGridFixSafariWrap($colspan, $o-grid-columns);
-			min-width: oGridColspan($colspan, $o-grid-columns);
-			max-width: oGridColspan($colspan, $o-grid-columns);
-			width: oGridColspan($colspan, $o-grid-columns);
-
-			@include oGridTargetIE8 {
-				min-width: 0;
-			}
+			@include oGridColspan($colspan, $width-only: true);
 		}
 	}
 
 	// Compact, gutterless row of columns
 	.o-grid-row--compact {
-		& {
-			margin-left: 0;
-		}
+		margin-left: 0;
+
 		> [data-o-grid-colspan] {
 			padding-left: 0;
 		}

@@ -5,7 +5,7 @@
 var almostEqual = require('./almost-equal');
 var getCurrentLayout = require('../../../main').getCurrentLayout;
 var getCurrentGutter = require('../../../main').getCurrentGutter;
-var local = /localhost/.test(document.URL);
+var local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================
 // Polyfills

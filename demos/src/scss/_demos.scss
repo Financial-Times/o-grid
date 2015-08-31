@@ -12,6 +12,9 @@ body {
 }
 
 // Display configuration information
+body:before {
+	font-family: inherit;
+}
 .test body:after {
 	content: '';
 	background-color: #fcf8e3;
@@ -25,6 +28,7 @@ body {
 	right: 0;
 	top: 25px;
 	z-index: 100;
+	font-family: sans-serif;
 }
 
 .demo-cell {

@@ -1,8 +1,8 @@
 $o-grid-mode: 'fixed';
-$o-grid-fixed-layout: 'S';
+$o-grid-fixed-layout: 'M';
 
 @import "common";
 
 .test body:after {
-	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout}, $o-grid-mode: #{$o-grid-mode}';
+	content: '$o-grid-fixed-layout: #{$o-grid-fixed-layout}, gutter: #{oGridGutter($o-grid-fixed-layout)}, $o-grid-mode: #{$o-grid-mode}';
 }

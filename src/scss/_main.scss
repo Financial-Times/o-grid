@@ -420,47 +420,49 @@
 	// Older browsers get a fixed-width layout
 	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
 
-	@each $layout-name in map-keys($o-grid-gutters) {
-		@if $layout-name == 'default' {
-			padding-left: oGridGutter();
-			padding-right: oGridGutter();
-		} @else {
-			@include oGridRespondTo($layout-name) {
-				padding-left: oGridGutter($layout-name);
-				padding-right: oGridGutter($layout-name);
-			}
-		}
-	}
-
-	// Serve a fixed-width layout to IE8
-	@include oGridTargetIE8 {
-		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
-	}
-
 	@if $grid-mode == 'fixed' {
 		// If the grid isn't fluid, we set it to a certain width
 		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
+		padding-left: oGridGutter($o-grid-fixed-layout);
+		padding-right: oGridGutter($o-grid-fixed-layout);
 	} @else {
 		max-width: $_o-grid-max-width;
 
-		@if 'global' == $_o-grid-scope {
-			@each $layout-name in $_o-grid-layout-names {
-				@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
-					@include oGridRespondTo($layout-name) {
-						// If the grid mode is snappy, all rows should be snappy
-						@if $grid-mode == 'snappy' {
+		@each $layout-name in map-keys($o-grid-gutters) {
+			@if $layout-name == 'default' {
+				padding-left: oGridGutter();
+				padding-right: oGridGutter();
+			} @else {
+				@include oGridRespondTo($layout-name) {
+					padding-left: oGridGutter($layout-name);
+					padding-right: oGridGutter($layout-name);
+				}
+			}
+		}
+
+		@each $layout-name in $_o-grid-layout-names {
+			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
+				@include oGridRespondTo($layout-name) {
+					// If the grid mode is snappy, all rows should be snappy
+					@if $grid-mode == 'snappy' {
+						max-width: map-get($o-grid-layouts, $layout-name);
+					}
+					@if $grid-mode == 'fluid' {
+						// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
+						.o-grid-snappy &,
+						&--snappy {
 							max-width: map-get($o-grid-layouts, $layout-name);
-						}
-						@if $grid-mode == 'fluid' {
-							// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
-							.o-grid-snappy &,
-							&--snappy {
-								max-width: map-get($o-grid-layouts, $layout-name);
-							}
 						}
 					}
 				}
 			}
+		}
+
+		// Serve a fixed-width layout to IE8
+		@include oGridTargetIE8 {
+			padding-left: oGridGutter($o-grid-fixed-layout);
+			padding-right: oGridGutter($o-grid-fixed-layout);
+			width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
 		}
 	}
 }

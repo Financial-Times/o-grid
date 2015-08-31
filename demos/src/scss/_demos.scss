@@ -1,10 +1,7 @@
 html {
 	/* Set a font family on the whole document */
 	font-family: BentonSans, sans-serif;
-
-	/* Prevent navigation menus from creating
-	   extra space on sides of the page */
-	overflow-x: hidden;
+	overflow-y: scroll;
 }
 body {
 	/* Remove space around the document */

@@ -4,16 +4,16 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
 
-[![Grid system](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)](https://rawgit.com/Financial-Times/o-grid/master/img/grid-system.png)
+[![Grid system](https://raw.githubusercontent.com/Financial-Times/o-grid/2166a6a8cc46354b2105a2c5c8f2a0dd4763379e/img/grid-system.png)](https://raw.githubusercontent.com/Financial-Times/o-grid/2166a6a8cc46354b2105a2c5c8f2a0dd4763379e/img/grid-system.png)
 
 ## Quick Start
 
-Using the [Origami Build Service](https://build.origami.ft.com/v1/):
+Using the [Origami Build Service](https://build.origami.ft.com/v2/):
 
 ```html
 <head>
 	…
-	<link rel="stylesheet" href="https://build.origami.ft.com/bundles/css?modules=o-grid@^3.0.0" />
+	<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-grid@^3.2.5" />
 </head>
 ```
 

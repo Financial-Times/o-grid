@@ -17,11 +17,19 @@ $test_file ||= "test/test.scss"
 $test_error_file ||= "test/error.css"
 
 $cssoutput = Open3.capture3("node-sass #{$test_file} --include-path bower_components --stdout")[0]
+$global_failure_count = 0
 
 module Kernel
   def describe(description, &block)
     tests = Dsl.new.parse(description, block)
     tests.execute
+  end
+  def error_summary
+    begin
+      raise RuntimeError, "\n\e[31m✖ A total of #{$global_failure_count} test(s) failed.\e[0m\n\e[2mCompare test/error.css and the tests in test/travis.rb to find the errors.\e[0m" unless $global_failure_count == 0
+    rescue RuntimeError => e
+      puts e.message
+    end
   end
 end
 class Object
@@ -49,16 +57,17 @@ class Executor
     @failure_count = 0
   end
   def execute
-    puts "\n#{@description}"
+    puts "\n\e[1m#{@description}\e[0m"
     @tests.each_pair do |name, block|
       result = self.instance_eval(&block)
       puts result ? "\e[32m✓ #{name} \e[0m" : "\e[31m✖ #{name} \e[0m"
       result ? @success_count += 1 : @failure_count += 1
+      result ? true : $global_failure_count += 1
     end
     summary
   end
   def summary
-    puts "\n#{@tests.keys.size} tests, #{@success_count} success, #{@failure_count} failure"
+    puts "#{@tests.keys.size} tests, #{@success_count} success, #{@failure_count} failure"
 
     if @failure_count > 0
       stdout, stderr, status = Open3.capture3 "node-sass #{$test_file} #{$test_error_file} --include-path bower_components"

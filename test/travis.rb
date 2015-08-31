@@ -83,3 +83,5 @@ describe "oGridColspan" do
     find "Human-friendly colspans: (full-width: 100%, one-half: 50%, one-third: 33.33333%, two-thirds: 66.66667%, one-quarter: 25%, three-quarters: 75%)"
   end
 end
+
+error_summary

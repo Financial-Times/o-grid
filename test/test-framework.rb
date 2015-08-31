@@ -24,13 +24,18 @@ module Kernel
     tests = Dsl.new.parse(description, block)
     tests.execute
   end
-  def error_summary
+  at_exit {
     begin
-      raise RuntimeError, "\n\e[31m✖ A total of #{$global_failure_count} test(s) failed.\e[0m\n\e[2mCompare test/error.css and the tests in test/travis.rb to find the errors.\e[0m" unless $global_failure_count == 0
-    rescue RuntimeError => e
+      if $global_failure_count > 0
+        raise StandardError, "\n\e[31m✖ A total of #{$global_failure_count} test(s) failed.\e[0m\n\e[2mCompare test/error.css and the tests in test/travis.rb to find the errors.\e[0m"
+      else
+        puts "\n\e[1m\e[32m✓ All tests passed!\e[0m\e[0m"
+      end
+    rescue StandardError => e
       puts e.message
+      exit 1
     end
-  end
+  }
 end
 class Object
   def should

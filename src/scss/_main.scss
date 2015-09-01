@@ -9,8 +9,9 @@
 ///  @include oGridAddLayout($layout-name: P, $layout-width: 600px);
 ///  @include oGridAddLayout($layout-name: XXL, $layout-width: 1600px, $gutter-width: 30px);
 ///
-/// @param {String} $layout-name
-/// @param {String} $layout-width [null]
+/// @param {String} $layout-name - Name of the layout (e.g. S)
+/// @param {Number} $layout-width - Layout width in px
+/// @param {Number} $gutter-width [null] - Gutter width in px
 @mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null) {
 	$temp-layouts: ();
 	$temp-gutters: (default: #{oGridGutter()});

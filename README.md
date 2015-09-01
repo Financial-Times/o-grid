@@ -512,7 +512,7 @@ $o-grid-debug-mode: true;
 
 // Gutter size, in pixels
 // Useful to use for spacing in product
-$o-grid-gutter: 10px;
+$o-grid-gutters: 10px;
 
 // Grid mode
 // - fluid: full width up to the largest layout's width

@@ -60,8 +60,8 @@ $o-grid-columns: 12 !default;
 
 /// Gutter size
 ///
-/// @type Number
-$o-grid-gutter: 10px !default;
+/// @type Map
+$o-grid-gutters: (default: 10px, M: 20px) !default;
 
 /// Minimum width, in pixels
 ///

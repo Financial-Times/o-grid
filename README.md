@@ -13,7 +13,8 @@ Using the [Origami Build Service](https://build.origami.ft.com/v2/):
 ```html
 <head>
 	…
-	<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-grid@^4.0.0" />
+	<link rel="stylesheet"
+	      href="https://build.origami.ft.com/v2/bundles/css?modules=o-grid@^4.0.0" />
 </head>
 ```
 

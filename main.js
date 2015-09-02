@@ -4,6 +4,7 @@
 /**
  * Detect IE 8 through injected conditional comments:
  * no UA detection, no need for conditional compilation or JS check
+ * @return {Bool} true if the browser is IE 8
  */
 var isIE8 = (function() {
 	var b = document.createElement('B');
@@ -17,30 +18,42 @@ var isIE8 = (function() {
 	return isIE;
 }());
 
-var getGridProperties = function() {
+
+/**
+ * Grab grid properties surfaced in html:after's content
+ * @return {Object} layout names and gutter widths
+ */
+function getGridProperties() {
 	var gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
 	// Firefox computes: "{\"foo\": \"bar\"}"
 	// We want readable JSON: {"foo": "bar"}
 	gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');
 	return JSON.parse(gridProperties);
-};
+}
 
-var getCurrentLayout = function() {
+/**
+ * Grab the current layout
+ * @return {String} Layout name
+ */
+function getCurrentLayout() {
 	if (isIE8) {
 		return 'L';
 	}
 
 	return getGridProperties().layout;
-};
+}
 
-var getCurrentGutter = function() {
+/**
+ * Grab the current space between columns
+ * @return {String} Gutter width in pixels
+ */
+function getCurrentGutter() {
 	if (isIE8) {
 		return '20px';
 	}
 
 	return getGridProperties().gutter;
-};
-
+}
 
 module.exports = {
 	getCurrentLayout: getCurrentLayout,

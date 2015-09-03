@@ -340,13 +340,18 @@ el { @include oGridColspan(); }
 Outputs:
 
 ```css
+// Fallbacks for Internet Explorer omitted in this example 
 el {
   position: relative;
-  padding-left: 5px;
-  padding-right: 5px;
   float: left;
   box-sizing: border-box;
   flex: 1 1 0%;
+  padding-left: 10px;
+}
+@media (min-width: 46.25em) {
+  el {
+    padding-left: 20px;
+  }
 }
 ```
 
@@ -357,23 +362,23 @@ el { @include oGridColspan($span: 4); }
 ```
 
 Outputs:
+
 ```css
 el {
   position: relative;
-  padding-left: 5px;
-  padding-right: 5px;
   float: left;
   box-sizing: border-box;
   flex: 1 1 0%;
+  padding-left: 10px;
   display: block;
   flex-basis: 33.33333%;
   min-width: 33.33333%;
   max-width: 33.33333%;
   width: 33.33333%;
 }
-@media \0screen {
+@media (min-width: 46.25em) {
   el {
-    min-width: 0;
+    padding-left: 20px;
   }
 }
 ```
@@ -394,30 +399,23 @@ Outputs:
 ```css
 el {
   position: relative;
-  padding-left: 5px;
-  padding-right: 5px;
   float: left;
   box-sizing: border-box;
   flex: 1 1 0%;
+  padding-left: 10px;
   display: block;
   flex-basis: 100%;
   min-width: 100%;
   max-width: 100%;
   width: 100%;
 }
-@media \0screen {
-  el {
-    min-width: 0;
-    display: block;
-    width: 50%;
-  }
-}
-@media (min-width: 45.625em) {
+@media (min-width: 46.25em) {
   el {
     display: block;
     flex-basis: 50%;
     min-width: 50%;
     max-width: 50%;
+    padding-left: 20px;
   }
 }
 ```
@@ -451,6 +449,32 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 ```
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
+
+#### Gutters
+
+```scss
+el {
+	margin-left: oGridGutter();
+
+	@include oGridRespondTo(L) {
+		margin-left: oGridGutter(L);
+	}
+}
+```
+
+Outputs:
+
+```css
+el {
+  margin-left: 10px;
+}
+
+@media (min-width: 61.25em) {
+  el {
+    margin-left: 20px;
+  }
+}
+```
 
 #### *Unstyle* a row or a column
 
@@ -541,7 +565,7 @@ $o-grid-debug-mode: true;
 
 ![show-breakpoints demo](https://raw.githubusercontent.com/sass-mq/sass-mq/65b00c7be6dba7de24173cc445eec7aaca036ceb/show-breakpoints.gif)
 
-## JavaScript Helper
+## JavaScript Helpers
 
 ### `getCurrentLayout()`
 
@@ -553,7 +577,6 @@ var oGrid = require('o-grid');
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
 ```
-
 
 ### `getCurrentGutter()`
 
@@ -587,9 +610,19 @@ by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 
 ## How to upgrade from v3.x.x to v4.x.x?
 
-- Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`
-- Search `oGridColumn` and replace with `oGridColspan`
+### Important Changes
+
+- Layout sizes have slightly changed (M, L and XL are 10px wider).
+- Gutter widths vary between layouts (default: 10px, M and above: 20px)
+
+### Markup/Sass changes
+
+- Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`.
+- Search `oGridColumn` and replace with `oGridColspan`.
 - The mixin `oGridColspan` from v3 outputs a bit more code. Use `oGridColspan($span, $width-only: true)` to only outputs widths. Note that with gzip this should not have any impact.
+- `$o-grid-gutter` becomes `$o-grid-gutters` (plural) and now contains a map
+- Change all `$o-grid-gutter` to `oGridGutter()`. e.g. `margin-left: $o-grid-gutter` becomes `margin-left: oGridGutter()`
+- A few helpers have been removed because they weren't used.
 
 ----
 

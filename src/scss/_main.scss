@@ -371,7 +371,7 @@
 	@if type-of($span) == map {
 		@each $layout-name, $layout-span in $span {
 			@if $layout-name == 'default' {
-				@include oGridColumnWidth($layout-span);
+				@include _oGridColumnWidth($layout-span);
 			} @else {
 				@if $layout-span == 'hide' {
 					// Target IE8 only if the layout is smaller than the maximum width of the fixed layout

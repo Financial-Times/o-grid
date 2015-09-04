@@ -1,3 +1,4 @@
+/*globals Origami*/
 // Thanks to Antoine Lefeuvre for the base of this bookmarklet
 // Modified for o-grid by the Financial Times
 // http://alefeuvre.github.io/foundation-grid-displayer/

@@ -14,7 +14,7 @@
 		if (framework.length > 1) {
 			gdFramework = framework[1];
 		} else {
-			gdFramework = "o3";
+			gdFramework = "o4";
 		}
 
 		$(window).on('resize', function() { setGridGutters(); });
@@ -48,12 +48,12 @@
 			var $gdColumn = $gdRow.find(".gd-column");
 
 			switch(gridFramework) {
-				case 'o3':
+				case 'o4':
 					$gdContainer.addClass("o-grid-container");
 					$gdRow.addClass("o-grid-row");
 					$gdColumn.attr("data-o-grid-colspan", "1");
 				break;
-				case 'so3':
+				case 'so4':
 					$gdContainer.addClass("o-grid-container o-grid-container--snappy");
 					$gdRow.addClass("o-grid-row");
 					$gdColumn.attr("data-o-grid-colspan", "1");
@@ -101,7 +101,7 @@
 			var gdZindex      = "999";
 
 			// Frameworks list
-			var origamis = [["o3", "Origami Grid v3"], ["so3", "Origami Grid v3 (snappy)"]];
+			var origamis = [["o4", "Origami Grid v4"], ["so4", "Origami Grid v4 (snappy)"]];
 			var frameworks = origamis;
 
 			// HTML

@@ -87,3 +87,11 @@ $colspans: ();
  * Human-friendly colspans: #{inspect($colspans)}
  * Fraction colspan: #{inspect($colspans)}
  */
+
+// Just checking this compiles
+el {
+	@include oGridColspan((
+		default: full-width,
+		M: 6
+	));
+}

@@ -16,6 +16,8 @@
 			gdFramework = "o3";
 		}
 
+		$(window).on('resize', function() { setGridGutters(); });
+
 		// Close grid displayer
 		var removeGridDisplayer = function() {
 			$("#grid-displayer-tools").remove();
@@ -46,19 +48,19 @@
 
 			switch(gridFramework) {
 				case 'o3':
-					$gdContainer.addClass("o-grid");
+					$gdContainer.addClass("o-grid-container");
 					$gdRow.addClass("o-grid-row");
 					$gdColumn.attr("data-o-grid-colspan", "1");
 				break;
 				case 'so3':
-					$gdContainer.addClass("o-grid o-grid-snappy");
+					$gdContainer.addClass("o-grid-container o-grid-container--snappy");
 					$gdRow.addClass("o-grid-row");
 					$gdColumn.attr("data-o-grid-colspan", "1");
 				break;
 			}
 
 			$gdTools.css("display", "inline-block");
-			setGridGutters($gdTools.find("#gdt-gutterwidth").val());
+			setGridGutters();
 
 			setGridColor($gdTools.find("#gdt-color").val(), true);
 			setGridOpacity($gdTools.find("#gdt-opacity").val());
@@ -75,17 +77,13 @@
 		// Setters
 		setGridColor = function(gridColor, gutterless) {
 			$("#grid-displayer .gd-column").css("background-color", gridColor);
-			if (gutterless) {
-				$("#grid-displayer .gd-column").css("outline", "1px solid " + gridColor);
-			}
 		},
 		setGridOpacity = function(gridOpacity) {
 			$("#grid-displayer .gd-column").css("opacity", gridOpacity);
 		},
-		setGridGutters = function(gridGutterwidth) {
-			var borderWidth = parseInt(gridGutterwidth.replace( /^\D+/g, '')) / 2,
-			unit = gridGutterwidth.substr(gridGutterwidth.length - 2, 2);
-			$("#grid-displayer .gd-column").css({"border-width": "0 " + borderWidth + unit, "border-style": "solid", "border-color": "#FFF", "padding": 0}); // Remove padding for small 12 column view - fluid display forces padded columns down
+		setGridGutters = function() {
+			var gutter = Origami['o-grid'].getCurrentGutter();
+			$("#grid-displayer .gd-column").css({"border-width": "0 0 0 " + gutter, "border-style": "solid", "border-color": "#FFF", "padding": 0});
 		},
 		setGridZindex = function(gridZindex) {
 			$("#grid-displayer").css("z-index", gridZindex);
@@ -96,11 +94,10 @@
 		} else {
 
 			// Default parameters
-			var gdNbcols      = 12,
-					gdGutterwidth = "10px",
-					gdColor       = "black",
-					gdOpacity     = "0.3",
-					gdZindex      = "999";
+			var gdNbcols      = 12;
+			var gdColor       = "black";
+			var gdOpacity     = "0.3";
+			var gdZindex      = "999";
 
 			// Frameworks list
 			var origamis = [["o3", "Origami Grid v3"], ["so3", "Origami Grid v3 (snappy)"]];
@@ -121,7 +118,6 @@
 			gridToolsHtml += "	<div id=\"gdt-options\" class=\"gdt-field\">";
 			gridToolsHtml += "	  <div><label for=\"gdt-color\">Columns colour</label><input type=\"text\" id=\"gdt-color\" value=\"" + gdColor + "\" /></div>";
 			gridToolsHtml += "		<div><label for=\"gdt-opacity\">Opacity</label><input type=\"text\" id=\"gdt-opacity\" value=\"" + gdOpacity + "\" /></div>";
-			gridToolsHtml += "		<div class=\"framework-specific gutterless\"><label for=\"gdt-gutterwidth\">Gutter width</label><input type=\"text\" id=\"gdt-gutterwidth\" value=\"" + gdGutterwidth + "\" /></div>";
 			gridToolsHtml += "		<div class=\"framework-specific twb\"><label for=\"gdt-nbcols\">Nb cols</label><input type=\"text\" id=\"gdt-nbcols\" value=\"" + gdNbcols + "\" /></div>";
 			gridToolsHtml += "		<div><label for=\"gdt-zindex\">z-index</label><input type=\"text\" id=\"gdt-zindex\" value=\"" + gdZindex + "\" /></div>";
 			gridToolsHtml += "	</div>";
@@ -133,7 +129,7 @@
 
 			// A version of the grid might already be loaded, so we load it only if needed
 			if ($('.o-grid-row').length === 0) {
-				$("head").append("<link rel='stylesheet' href='http://build.origami.ft.com/bundles/css?modules=o-grid@^3.0.3' />");
+				$("head").append("<link rel='stylesheet' href='http://build.origami.ft.com/bundles/css?modules=o-grid@^4.0.0' />");
 			}
 
 			$("body").prepend(gridHtml).prepend(gridToolsHtml);
@@ -158,9 +154,6 @@
 			$("#grid-displayer-tools #gdt-opacity").change(function() {
 				setGridOpacity($(this).val());
 			});
-			$("#grid-displayer-tools #gdt-gutterwidth").change(function() {
-				setGridGutters($(this).val());
-			});
 			$("#grid-displayer-tools #gdt-zindex").change(function() {
 				setGridZindex($(this).val());
 			});
@@ -171,14 +164,21 @@
 		}
 	};
 
+	var head = document.getElementsByTagName("head")[0];
+	var gridScript = document.createElement("script");
+	gridScript.src = "http://build.origami.ft.com/bundles/js?modules=o-grid@^4.0.0-beta.6";
+	gridScript.onload = init();
+	head.appendChild(gridScript);
+
 	// Load jQuery from CDN if needed
-	if (!window.jQuery) {
-		var head = document.getElementsByTagName("head")[0],
-				jQueryScript = document.createElement("script");
-		jQueryScript.src  = "http://code.jquery.com/jquery-1.10.0.min.js";
-		jQueryScript.onload = function() { startBookmarklet(window.jQuery); };
-		head.appendChild(jQueryScript);
-	} else {
-		startBookmarklet(window.jQuery);
+	function init() {
+		if (!window.jQuery) {
+			var jQueryScript = document.createElement("script");
+			jQueryScript.src  = "http://code.jquery.com/jquery-1.10.0.min.js";
+			jQueryScript.onload = function() { startBookmarklet(window.jQuery); };
+			head.appendChild(jQueryScript);
+		} else {
+			startBookmarklet(window.jQuery);
+		}
 	}
-})();
+}());

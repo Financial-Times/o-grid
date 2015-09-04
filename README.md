@@ -597,7 +597,7 @@ by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 
 1. Create a new Bookmark with this URL:
 	```js
-	javascript:(function(){var s=document.createElement("script");s.src="https://rawgit.com/Financial-Times/o-grid/master/bookmarklet/bookmarklet.js";document.head.appendChild(s);})();
+	javascript:(function(){var s=document.createElement("script");s.src="https://rawgit.com/Financial-Times/o-grid/master/bookmarklet/bookmarklet.js";document.head.appendChild(s);}());
 	```
 
 2. Load a website
@@ -623,16 +623,6 @@ by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 - `$o-grid-gutter` becomes `$o-grid-gutters` (plural) and now contains a map
 - Change all `$o-grid-gutter` to `oGridGutter()`. e.g. `margin-left: $o-grid-gutter` becomes `margin-left: oGridGutter()`
 - A few helpers have been removed because they weren't used.
-
-----
-
-## How to upgrade from v2.x.x to v3.x.x?
-
-- Layouts are now mobile first. It means that the `S` reads "S layout and up" instead of "S layout only". For example, the equivalent of `<div data-o-grid-colspan="6 S12 M12">` (old) is `<div data-o-grid-colspan="6 S12 L6">` (new)
-- Placeholder selector `@extend %o-grid-…` are deprecated. Use the equivalent mixins instead
-- `<div class="o-grid-row" o-grid-colspan="12">` is deprecated (a row can't be a column at the same time). Use two elements instead
-- Search `oGridColumnWidth` and replace with `oGridColspan`
-- Search `o-grid-row-compact` and replace with `o-grid-row--compact`
 
 ----
 

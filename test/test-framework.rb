@@ -17,6 +17,7 @@ $test_file ||= "test/test.scss"
 $test_error_file ||= "test/error.css"
 
 $cssoutput = Open3.capture3("node-sass #{$test_file} --include-path bower_components --stdout")[0]
+puts "Running node-sass #{$test_file} --include-path bower_components --stdout"
 $global_failure_count = 0
 
 module Kernel

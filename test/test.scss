@@ -8,6 +8,7 @@
 
 // Add default layouts
 // a minimum of 2 layouts is required for o-grid to work
+$o-grid-fixed-layout: Z;
 $o-grid-layouts: (
 	X: 800px,
 	Z: 1200px,
@@ -92,6 +93,6 @@ $colspans: ();
 el {
 	@include oGridColspan((
 		default: full-width,
-		M: 6
+		Z: 6
 	));
 }

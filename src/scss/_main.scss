@@ -510,7 +510,17 @@
 	&:after {
 		clear: both;
 	}
+}
 
+/// Remove gutters from columns in a row
+///
+/// @param {string} column child selector
+@mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
+	margin-left: 0;
+
+	> #{unquote($column-selector)} {
+		padding-left: 0;
+	}
 }
 
 /// Remove row styles

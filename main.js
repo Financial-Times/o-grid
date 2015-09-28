@@ -1,15 +1,14 @@
 /*global module*/
-'use strict';
 
 /**
  * Detect IE 8 through injected conditional comments:
  * no UA detection, no need for conditional compilation or JS check
  * @return {Bool} true if the browser is IE 8
  */
-var isIE8 = (function() {
-	var b = document.createElement('B');
-	var docElem = document.documentElement;
-	var isIE;
+const isIE8 = (function() {
+	const b = document.createElement('B');
+	const docElem = document.documentElement;
+	let isIE;
 
 	b.innerHTML = '<!--[if IE 8]><b id="ie8test"></b><![endif]-->';
 	docElem.appendChild(b);
@@ -18,13 +17,12 @@ var isIE8 = (function() {
 	return isIE;
 }());
 
-
 /**
  * Grab grid properties surfaced in html:after's content
  * @return {Object} layout names and gutter widths
  */
 function getGridProperties() {
-	var gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
+	let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
 	// Firefox computes: "{\"foo\": \"bar\"}"
 	// We want readable JSON: {"foo": "bar"}
 	gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');

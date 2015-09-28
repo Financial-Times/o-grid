@@ -1,11 +1,10 @@
 /*global $*/
-/*jshint devel:true, freeze:false*/
-'use strict';
+/*eslint no-extend-native: 0 */
 
-var almostEqual = require('./almost-equal');
-var getCurrentLayout = require('../../../main').getCurrentLayout;
-var getCurrentGutter = require('../../../main').getCurrentGutter;
-var local = /localhost|0\.0\.0\.0/.test(document.URL);
+const almostEqual = require('./almost-equal');
+const getCurrentLayout = require('../../../main').getCurrentLayout;
+const getCurrentGutter = require('../../../main').getCurrentGutter;
+const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================
 // Polyfills
@@ -18,20 +17,20 @@ String.prototype.includes = function(string, index) {
 
 if (![].includes) {
 	Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
-		var O = Object(this);
-		var len = parseInt(O.length) || 0;
+		const O = Object(this);
+		const len = parseInt(O.length) || 0;
 		if (len === 0) {
 			return false;
 		}
-		var n = parseInt(arguments[1]) || 0;
-		var k;
+		const n = parseInt(arguments[1]) || 0;
+		let k;
 		if (n >= 0) {
 			k = n;
 		} else {
 			k = len + n;
 			if (k < 0) {k = 0;}
 		}
-		var currentElement;
+		let currentElement;
 		while (k < len) {
 			currentElement = O[k];
 			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
@@ -46,22 +45,22 @@ if (![].includes) {
 // ============================================================================
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
-	var demoTypes = require('../configurations.json');
-	var stylesheet = document.querySelector("link[href*='default']");
-	var html = document.documentElement;
-	var buttonContainer = document.getElementById("js-demo-switcher");
-	var tmp = document.createDocumentFragment();
-	var subheading = document.getElementById("subheading");
+	const demoTypes = require('../configurations.json');
+	const stylesheet = document.querySelector("link[href*='default']");
+	const html = document.documentElement;
+	const buttonContainer = document.getElementById("js-demo-switcher");
+	const tmp = document.createDocumentFragment();
+	const subheading = document.getElementById("subheading");
 
 	Object.keys(demoTypes).forEach(function(type) {
-		var button  = document.createElement('button');
+		const button = document.createElement('button');
 		button.classList.add('o-buttons');
-		var stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
+		const stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
 		button.innerHTML = type;
 		button.title = demoTypes[type];
 		button.addEventListener('click', function() {
 			stylesheet.href = stylePath;
-			var prev = document.querySelector('[aria-selected=true]');
+			const prev = document.querySelector('[aria-selected=true]');
 			if (prev) {
 				prev.setAttribute('aria-selected', 'false');
 			}
@@ -110,16 +109,16 @@ function convertKeywordsToSpans(keyword) {
 }
 
 function getExpectedSpans(el) {
-	var span = null;
-	var layout = getCurrentLayout();
+	let span = null;
+	const layout = getCurrentLayout();
 
-	var rules = $(el).data('oGridColspan') + "";
+	const rules = $(el).data('oGridColspan') + "";
 
-	var layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+	const layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 	span = rules.match(layoutAndKeyword);
 
 	if (span === null) {
-		var numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
+		const numberOfColumns = new RegExp('\\b(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 		span = rules.match(numberOfColumns);
 	}
 
@@ -132,16 +131,16 @@ function getExpectedSpans(el) {
 
 // Get offset, pull, push
 function getExpectedModifier(el, modifier) {
-	var rules = $(el).data('oGridColspan');
-	var re = new RegExp(modifier, "g");
+	const rules = $(el).data('oGridColspan');
+	const re = new RegExp(modifier, "g");
 
 	if (!re.test(rules)) {
 		return 0;
 	}
 
-	var layout = getCurrentLayout();
+	const layout = getCurrentLayout();
 
-	var modifiedBy;
+	let modifiedBy;
 
 	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
 		modifiedBy = $1;
@@ -161,17 +160,17 @@ function getExpectedModifier(el, modifier) {
 }
 
 function getExpectedMargin(el) {
-	var layout = getCurrentLayout();
+	const layout = getCurrentLayout();
 
-	var centerModifier = 'center';
-	var layoutCenterModifier = layout + 'center';
-	var layoutUncenterModifier = layout + 'uncenter';
-	var colspan = $(el).data('oGridColspan') + '';
-	var modifiers = colspan.split(' ');
+	const centerModifier = 'center';
+	const layoutCenterModifier = layout + 'center';
+	const layoutUncenterModifier = layout + 'uncenter';
+	const colspan = $(el).data('oGridColspan') + '';
+	const modifiers = colspan.split(' ');
 
 	// Offset
 	if (colspan.includes('offset')) {
-		var offset = getExpectedModifier(el, 'offset');
+		const offset = getExpectedModifier(el, 'offset');
 
 		return offset;
 	}
@@ -191,23 +190,23 @@ function getExpectedMargin(el) {
 }
 
 function highlightUnexpectedMargin(el) {
-	var expectedMarginLeft = getExpectedMargin(el);
-	var actualMarginLeft = parseInt(getComputedStyle(el, null).marginLeft, 10);
+	const expectedMarginLeft = getExpectedMargin(el);
+	const actualMarginLeft = parseInt(getComputedStyle(el, null).marginLeft, 10);
 
 	// We verify if margins are "almost equal" because of rounding errors
 	if (almostEqual(expectedMarginLeft, actualMarginLeft, 1, 1)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
 		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
-		console.error('Margin error', el, 'Left: ' + expectedMarginLeft + ' (expected) ' + actualMarginLeft  + ' (actual) ');
+		console.error('Margin error', el, 'Left: ' + expectedMarginLeft + ' (expected) ' + actualMarginLeft + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedPosition(el) {
-	var expectedPush = getExpectedModifier(el, 'push');
-	var expectedPull = getExpectedModifier(el, 'pull');
-	var actualPush = getComputedStyle(el, null).left;
-	var actualPull = getComputedStyle(el, null).right;
+	const expectedPush = getExpectedModifier(el, 'push');
+	const expectedPull = getExpectedModifier(el, 'pull');
+	let actualPush = getComputedStyle(el, null).left;
+	let actualPull = getComputedStyle(el, null).right;
 
 	actualPush = (actualPush === 'auto') ? 0 : parseInt(actualPush, 10);
 	actualPull = (actualPull === 'auto') ? 0 : parseInt(actualPull, 10);
@@ -217,13 +216,13 @@ function highlightUnexpectedPosition(el) {
 		el.className = el.className.replace(/\berror-position\b/g, '');
 	} else {
 		/\berror-position\b/.test(el.className) || (el.className += ' error-position');
-		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush  + ' (actual) ',  'Pull: ' + expectedPull + ' (expected) ' + actualPull  + ' (actual) ');
+		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush + ' (actual) ', 'Pull: ' + expectedPull + ' (expected) ' + actualPull + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedWidth(el) {
-	var expectedPercentage = getExpectedSpans(el) * 100/12;
-	var actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth);
+	const expectedPercentage = getExpectedSpans(el) * 100/12;
+	const actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth);
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
 		/\berror-width\b/.test(el.className) || (el.className += ' error-width');
@@ -246,12 +245,12 @@ function tests() {
 	console.log('Test suite: finished');
 }
 
-var resizeTimer = null;
+let resizeTimer = null;
 
 function runTests() {
 	setTimeout(tests, 300);
 
-	window.onresize = function(e) {
+	window.onresize = function() {
 		if (resizeTimer !== null) {
 			clearTimeout(resizeTimer);
 		}

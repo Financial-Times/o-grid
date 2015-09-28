@@ -30,18 +30,21 @@
 ///
 /// @example js
 ///  // your-app/main.js
-///  var getCurrentLayout = require('o-grid').getCurrentLayout;
-///
 ///  // Return the current layout (e.g. default, S, M, L, XL)
+///  var getCurrentLayout = require('o-grid').getCurrentLayout;
 ///  console.log(getCurrentLayout());
+///
+///  // Return the current gutter (e.g. 10px, 20px)
+///  var getCurrentGutter = require('o-grid').getCurrentGutter;
+///  console.log(getCurrentGutter());
 @mixin oGridSurfaceCurrentLayout {
 	html:after {
-		content: 'default'; // Default layout. Typically from 0px to S
+		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
 		display: none;
 
 		@each $breakpoint in $_o-grid-layout-names {
 			@include oGridRespondTo($breakpoint) {
-				content: quote($breakpoint);
+				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
 			}
 		}
 	}

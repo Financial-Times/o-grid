@@ -1,10 +1,7 @@
 html {
 	/* Set a font family on the whole document */
 	font-family: BentonSans, sans-serif;
-
-	/* Prevent navigation menus from creating
-	   extra space on sides of the page */
-	overflow-x: hidden;
+	overflow-y: scroll;
 }
 body {
 	/* Remove space around the document */
@@ -12,6 +9,9 @@ body {
 }
 
 // Display configuration information
+body:before {
+	font-family: inherit;
+}
 .test body:after {
 	content: '';
 	background-color: #fcf8e3;
@@ -25,10 +25,7 @@ body {
 	right: 0;
 	top: 25px;
 	z-index: 100;
-}
-
-h2 {
-	@include oGridRow;
+	font-family: sans-serif;
 }
 
 .demo-cell {
@@ -48,6 +45,10 @@ h2 {
 	background-color: $rgba;
 	// scss-lint:enable DuplicateProperty
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+}
+
+.o-grid-container {
+	background: lighten(#f6e9d8, 8.5%);
 }
 .o-grid-row {
 	background: #f6e9d8;

@@ -1,33 +1,85 @@
 #!/usr/bin/env ruby
 # Encoding: utf-8
-require 'fileutils'
-require 'open3'
 
-# squish method borrowed from Rails that removes newlines and extra spaces
-class String
-	def squish
-		strip.gsub /\s+/, ' '
-	end
+require_relative 'test-framework'
+
+describe "Overriding layouts" do
+  it "should replace the default layouts with the new ones" do
+    find "Initial layouts and sizes: (X: 800px, Z: 1200px)"
+  end
+  it "should update the list of layout names" do
+    find "Initial layout names: X, Z"
+  end
+  it "should remove gutter for layout M" do
+    find "Gutter M exists: false"
+  end
+  it "should always keep a default gutter width" do
+    find "Default gutter exists: true"
+  end
 end
 
-# Prepare build test folder
-FileUtils.mkdir_p "test/output"
+describe "Adding layouts in different ways" do
+  it "should order them from the narrowest to the widest" do
+    find "Layout names: A, B, C, X, Y, Z" and
+    find "Layouts: (A: 340px, B: 365px, C: 372px, X: 800px, Y: 1100px, Z: 1200px)"
+  end
+  it "should order gutters from the narrowest to the widest layout" do
+    find "Gutters: (default: 10px, Y: 20px)" and
+    find "Gutters: (default: 10px, B: 30px, Y: 20px)"
+  end
+end
 
-# Attempting to add a Layout with a width when gutters are defined
-# in percents (e.g. $o-grid-gutter: 1%;) should throw an error
-stdout, stderr, status = Open3.capture3 "node-sass test/error.scss test/output/error.css --output-style compressed --include-path bower_components"
-puts "Test: adding a layout with columns when gutters are in % should throw an error…"
-raise "Adding a layout this way should fail to compile" if status.success?
-raise "Adding a layout this way should throw a useful error message" unless (stderr.squish.include? "Layouts can only be defined using column widths")
-puts "\e[32mPassed\e[0m"
-stdout, stderr, status = Open3.capture3 "node-sass test/success.scss test/output/success.css --output-style compressed --include-path bower_components"
-puts "Test: adding layouts in multiple ways and show their max-width…"
-raise "Layout (A) should compile when added with a column width" unless File.open("test/output/success.css").read.squish.include? "@media (min-width: 23.125em){A{max-width:800px"
-raise "Layout (B) should compile when added with a layout-width" unless File.open("test/output/success.css").read.squish.include? "@media (min-width: 22.8125em){B{max-width:370px"
-raise "Layout (C) should compile when added with a layout-width and percentage-based gutters" unless File.open("test/output/success.css").read.squish.include? "@media (min-width: 23.25em){C{max-width:800px"
-raise "Layout (Z) should compile when added as a default layout in $o-grid-layouts" unless File.open("test/output/success.css").read.squish.include? "@media (min-width: 75em){Z{max-width:1200px"
-puts "\e[32mPassed\e[0m"
+describe "Adding a layout *without* a gutter" do
+  it "should add that layout" do
+    find "Layout names: A,"
+  end
+  it "should make that layout inherit from the previous' layout gutter" do
+    find "Gutter A: 10px"
+  end
+end
 
-File.delete('test/output/success.css')
+describe "Adding a layout *with* a gutter" do
+  it "should be assigned this gutter" do
+    find "Gutter Y: 20px"
+  end
+  it "should impact wider layouts's gutters" do
+    find "Gutter Z: 20px"
+  end
+  it "should not change narrower layouts's gutters" do
+    find "Gutter A in Y: 10px"
+  end
+end
 
-FileUtils.rmdir "test/output"
+describe "Maximum width of a layout" do
+  it "should be equivalent to the following layout's width" do
+    find "A: 340px, X: 800px" and find "Max-width A: 800px"
+  end
+  it "should be its own width for the widest layout" do
+    find "Z: 1200px" and find "Max-width Z: 1200px"
+  end
+end
+
+describe "Resetting gutters to only a default" do
+  it "should give all layouts the same gutter" do
+    find "Gutter A after reset: 20px" and
+    find "Gutter B after reset: 20px" and
+    find "Gutter C after reset: 20px" and
+    find "Gutter X after reset: 20px" and
+    find "Gutter Y after reset: 20px"
+  end
+end
+
+describe "oGridColspan" do
+  it "should return a percentage value when passed number of columns" do
+    find "width: 50%", "div { width: oGridColspan($span: 6); }".sass_to_css
+  end
+  it "should accept a custom number of columns" do
+    find "width: 50%", "div { width: oGridColspan($span: 1, $total-cols: 2); }".sass_to_css
+  end
+  it "should return a percentage value when passed a fraction" do
+    find "width: 50%", "div { width: oGridColspan(1/2); }".sass_to_css
+  end
+  it "should return percentage values for each of the human-friendly keywords" do
+    find "Human-friendly colspans: (full-width: 100%, one-half: 50%, one-third: 33.33333%, two-thirds: 66.66667%, one-quarter: 25%, three-quarters: 75%)"
+  end
+end

@@ -60,6 +60,10 @@ $o-grid-layouts: (
 
 // Reset gutters to only a default
 $o-grid-gutters: (default: 20px);
+
+// Reset outer margins to only a default
+$o-grid-outer-margins: (default: 24px);
+
 @include oGridAddLayout($layout-name: C, $layout-width: 372px);
 @include test-debug();
 
@@ -70,6 +74,12 @@ $o-grid-gutters: (default: 20px);
 		content: 'Gutter C after reset: #{oGridGutter(C)}';
 		content: 'Gutter X after reset: #{oGridGutter(X)}';
 		content: 'Gutter Y after reset: #{oGridGutter(Y)}';
+
+		content: 'Outer margin A after reset: #{oGridOuterMargin(A)}';
+		content: 'Outer margin B after reset: #{oGridOuterMargin(B)}';
+		content: 'Outer margin C after reset: #{oGridOuterMargin(C)}';
+		content: 'Outer margin X after reset: #{oGridOuterMargin(X)}';
+		content: 'Outer margin Y after reset: #{oGridOuterMargin(Y)}';
 	}
 }
 

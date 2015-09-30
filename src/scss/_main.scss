@@ -50,11 +50,6 @@
 ///
 /// @param {String|null|Boolean} $layout-name - One of $o-grid-layouts
 @function oGridGutter($layout-name: default) {
-	// Falsy values mean 'default'
-	@if not $layout-name {
-		$layout-name: default;
-	}
-
 	// This layout was assigned a gutter directly
 	@if map-get($o-grid-gutters, $layout-name) {
 		@return map-get($o-grid-gutters, $layout-name);

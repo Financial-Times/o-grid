@@ -1,0 +1,98 @@
+// scss-lint:disable SelectorFormat DuplicateProperty
+
+@mixin test-debug {
+	/* Layouts: #{inspect($o-grid-layouts)} */
+	/* Layout names: #{inspect($_o-grid-layout-names)} */
+	/* Gutters: #{inspect($o-grid-gutters)} */
+}
+
+// Add default layouts
+// a minimum of 2 layouts is required for o-grid to work
+$o-grid-fixed-layout: Z;
+$o-grid-layouts: (
+	X: 800px,
+	Z: 1200px,
+);
+
+@import '../main';
+
+/**
+ * Initial layouts and sizes: #{inspect($o-grid-layouts)}
+ * Initial layout names: #{inspect($_o-grid-layout-names)}
+ */
+
+/**
+ * Gutter for layout M should be removed since there's no M layout anymore:
+ * Gutter M exists: #{map-has-key($o-grid-gutters, M)} // Should return false
+ */
+
+/**
+ * Default gutter exists: #{map-has-key($o-grid-gutters, default)}
+ */
+
+@include oGridAddLayout($layout-name: A, $layout-width: 340px);
+@include test-debug();
+@include oGridRespondTo(A) {
+	A {
+		content: 'Max-width A: #{oGridGetMaxWidthForLayout(A)}';
+		content: 'Gutter A: #{oGridGutter(A)}';
+	}
+}
+
+@include oGridAddLayout($layout-name: Y, $layout-width: 1100px, $gutter-width: 20px);
+@include test-debug();
+@include oGridRespondTo(Y) {
+	Y {
+		content: 'Max-width Y: #{oGridGetMaxWidthForLayout(Y)}';
+		content: 'Gutter Y: #{oGridGutter(Y)}';
+		content: 'Gutter A in Y: #{oGridGutter(A)}';
+		content: 'Gutter Z: #{oGridGutter(Z)}';
+	}
+}
+
+@include oGridAddLayout($layout-name: B, $layout-width: 365px, $gutter-width: 30px);
+@include test-debug();
+@include oGridRespondTo(B) {
+	B {
+		content: 'Max-width B: #{oGridGetMaxWidthForLayout(B)}';
+	}
+}
+
+// Reset gutters to only a default
+$o-grid-gutters: (default: 20px);
+@include oGridAddLayout($layout-name: C, $layout-width: 372px);
+@include test-debug();
+
+@include oGridRespondTo(C) {
+	C {
+		content: 'Gutter A after reset: #{oGridGutter(A)}';
+		content: 'Gutter B after reset: #{oGridGutter(B)}';
+		content: 'Gutter C after reset: #{oGridGutter(C)}';
+		content: 'Gutter X after reset: #{oGridGutter(X)}';
+		content: 'Gutter Y after reset: #{oGridGutter(Y)}';
+	}
+}
+
+@include oGridRespondTo(Z) {
+	Z {
+		content: 'Max-width Z: #{oGridGetMaxWidthForLayout(Z)}';
+	}
+}
+
+// Test the oGridColspan function
+$colspans: ();
+@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
+	$colspans: map-merge($colspans, (#{$human-friendly-name}: oGridColspan($human-friendly-name)));
+}
+/**
+ * Human-friendly colspans: #{inspect($colspans)}
+ * Fraction colspan: #{inspect($colspans)}
+ */
+
+// Just checking this compiles
+el {
+	@include oGridColspan((
+		default: full-width,
+		Z: 6
+	));
+}

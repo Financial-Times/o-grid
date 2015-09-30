@@ -53,7 +53,7 @@ function getCurrentGutter() {
 	return getGridProperties().gutter;
 }
 
-module.exports = {
+export default {
 	getCurrentLayout: getCurrentLayout,
 	getCurrentGutter: getCurrentGutter
 };

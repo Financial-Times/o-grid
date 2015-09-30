@@ -17,7 +17,7 @@
 	$temp-gutters: (default: #{oGridGutter()});
 
 	// Add the new layout in the correct position:
-	// (we want $o-grid-layouts and $o-grid-gutters to ordered from the smallest to the largest layout)
+	// (we want $o-grid-layouts and $o-grid-gutters to be ordered from the smallest to the largest layout)
 	@for $index from 1 through length($o-grid-layouts) {
 		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
 		$current-layout-name: nth($_o-grid-layout-names, $index);
@@ -505,7 +505,17 @@
 	&:after {
 		clear: both;
 	}
+}
 
+/// Remove gutters from columns in a row
+///
+/// @param {string} column child selector
+@mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
+	margin-left: 0;
+
+	> #{unquote($column-selector)} {
+		padding-left: 0;
+	}
 }
 
 /// Remove row styles

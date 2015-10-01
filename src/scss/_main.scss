@@ -16,7 +16,7 @@
 @mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null, $outer-margin-width: null) {
 	$temp-layouts: ();
 	$temp-gutters: (default: #{oGridGutter()});
-	$temp-outer-margins: (default: #{oGridGutter()});
+	$temp-outer-margins: (default: #{oGridOuterMargin()});
 
 	// Add the new layout in the correct position:
 	// (we want $o-grid-layouts and $o-grid-gutters and $o-grid-outer-margins to be ordered from the smallest to the largest layout)

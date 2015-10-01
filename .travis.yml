@@ -1,9 +1,9 @@
 language: ruby
 sudo: false
 node_js:
-  - "0.12.2"
+  - "4"
 before_install:
-  - npm install -g origami-build-tools
+  - npm install -g Financial-Times/origami-build-tools#node12
   - obt install
   - npm install -g node-sass # required for the tests
 script:

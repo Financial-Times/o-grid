@@ -44,7 +44,7 @@
 
 		@each $breakpoint in $_o-grid-layout-names {
 			@include oGridRespondTo($breakpoint) {
-				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
+				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '", "outerMargin": "' + oGridOuterMargin($breakpoint) + '" }';
 			}
 		}
 	}

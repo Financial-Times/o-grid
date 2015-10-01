@@ -28,8 +28,8 @@ describe "Adding layouts in different ways" do
     find "Gutters: (default: 10px, B: 30px, Y: 20px)"
   end
   it "should order outer margins from the narrowest to the widest layout" do
-    find "Outer Gutters: (default: 10px, Y: 30px)" and
-    find "Outer Gutters: (default: 10px, B: 15px, Y: 30px)"
+    find "Outer margins: (default: 10px, Y: 30px)" and
+    find "Outer margins: (default: 10px, B: 15px, Y: 30px)"
   end
 end
 
@@ -65,10 +65,10 @@ end
 
 describe "Adding a layout *with* an outer margin" do
   it "should be assigned this outer margin" do
-    find "Gutter Y: 30px"
+    find "Outer margin Y: 30px"
   end
   it "should impact wider layouts's outer margins" do
-    find "Gutter Z: 30px"
+    find "Outer margin Z: 30px"
   end
   it "should not change narrower layouts's outer margins" do
     find "Outer margin A in Y: 10px"

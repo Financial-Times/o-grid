@@ -4,6 +4,7 @@
 	/* Layouts: #{inspect($o-grid-layouts)} */
 	/* Layout names: #{inspect($_o-grid-layout-names)} */
 	/* Gutters: #{inspect($o-grid-gutters)} */
+	/* Outer margins: #{inspect($o-grid-outer-margins)} */
 }
 
 // Add default layouts
@@ -30,16 +31,26 @@ $o-grid-layouts: (
  * Default gutter exists: #{map-has-key($o-grid-gutters, default)}
  */
 
+/**
+ * Outer margin for layout M should be removed since there's no M layout anymore:
+ * Outer margin M exists: #{map-has-key($o-grid-outer-margins, M)} // Should return false
+ */
+
+/**
+ * Default outer margin exists: #{map-has-key($o-grid-outer-margins, default)}
+ */
+
 @include oGridAddLayout($layout-name: A, $layout-width: 340px);
 @include test-debug();
 @include oGridRespondTo(A) {
 	A {
 		content: 'Max-width A: #{oGridGetMaxWidthForLayout(A)}';
 		content: 'Gutter A: #{oGridGutter(A)}';
+		content: 'Outer margin A: #{oGridOuterMargin(A)}';
 	}
 }
 
-@include oGridAddLayout($layout-name: Y, $layout-width: 1100px, $gutter-width: 20px);
+@include oGridAddLayout($layout-name: Y, $layout-width: 1100px, $gutter-width: 20px, $outer-margin-width: 30px);
 @include test-debug();
 @include oGridRespondTo(Y) {
 	Y {
@@ -47,10 +58,13 @@ $o-grid-layouts: (
 		content: 'Gutter Y: #{oGridGutter(Y)}';
 		content: 'Gutter A in Y: #{oGridGutter(A)}';
 		content: 'Gutter Z: #{oGridGutter(Z)}';
+		content: 'Outer margin Y: #{oGridOuterMargin(Y)}';
+		content: 'Outer margin A in Y: #{oGridOuterMargin(A)}';
+		content: 'Outer margin Z: #{oGridOuterMargin(Z)}';
 	}
 }
 
-@include oGridAddLayout($layout-name: B, $layout-width: 365px, $gutter-width: 30px);
+@include oGridAddLayout($layout-name: B, $layout-width: 365px, $gutter-width: 30px, $outer-margin-width: 15px);
 @include test-debug();
 @include oGridRespondTo(B) {
 	B {

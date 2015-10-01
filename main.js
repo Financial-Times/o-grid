@@ -55,7 +55,16 @@ function getCurrentGutter() {
 	return getGridProperties().gutter;
 }
 
+function getCurrentOuterMargin() {
+	if (isIE8) {
+		return '20px';
+	}
+
+	return getGridProperties().outerMargin;
+}
+
 module.exports = {
 	getCurrentLayout: getCurrentLayout,
-	getCurrentGutter: getCurrentGutter
+	getCurrentGutter: getCurrentGutter,
+	getCurrentOuterMargin: getCurrentOuterMargin
 };

@@ -90,11 +90,27 @@ $o-grid-gutters: (
 	M:       20px,
 ) !default;
 
+/// Outer margin sizes
+///
+/// @type Map
+$o-grid-outer-margins: (
+	default: 10px,
+	M: 20px
+) !default;
+
 // If layouts have changed but gutters haven't,
 // prune non-existant layouts.
 @each $layout-name, $gutter-size in $o-grid-gutters {
 	@if ($layout-name != 'default') and (not map-has-key($o-grid-layouts, $layout-name)) {
 		$o-grid-gutters: map-remove($o-grid-gutters, $layout-name);
+	}
+}
+
+// If layouts have changed but outer margins haven't,
+// prune non-existant layouts.
+@each $layout-name, $outer-margin-size in $o-grid-outer-margins {
+	@if ($layout-name != 'default') and (not map-has-key($o-grid-layouts, $layout-name)) {
+		$o-grid-outer-margins: map-remove($o-grid-outer-margins, $layout-name);
 	}
 }
 

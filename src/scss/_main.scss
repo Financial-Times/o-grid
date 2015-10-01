@@ -12,22 +12,26 @@
 /// @param {String} $layout-name - Name of the layout (e.g. S)
 /// @param {Number} $layout-width - Layout width in px
 /// @param {Number} $gutter-width [null] - Gutter width in px
-@mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null) {
+/// @param {Number} $outer-margin-width [null] - Outer margin width in px
+@mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null, $outer-margin-width: null) {
 	$temp-layouts: ();
 	$temp-gutters: (default: #{oGridGutter()});
+	$temp-outer-margins: (default: #{oGridGutter()});
 
 	// Add the new layout in the correct position:
-	// (we want $o-grid-layouts and $o-grid-gutters to ordered from the smallest to the largest layout)
+	// (we want $o-grid-layouts and $o-grid-gutters and $o-grid-outer-margins to be ordered from the smallest to the largest layout)
 	@for $index from 1 through length($o-grid-layouts) {
 		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
 		$current-layout-name: nth($_o-grid-layout-names, $index);
 		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
 
 		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
+		$current-outer-margin-width: map-get($o-grid-outer-margins, $current-layout-name);
 
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
 			$temp-gutters: map-merge($temp-gutters, ($layout-name: $gutter-width));
+			$temp-outer-margins: map-merge($temp-outer-margins, ($layout-name: $outer-margin-width));
 		}
 
 		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
@@ -35,12 +39,20 @@
 		@if $current-gutter-width {
 			$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
 		}
+
+		@if $current-outer-margin-width {
+			$temp-outer-margins: map-merge($temp-outer-margins, ($current-layout-name: $current-outer-margin-width));
+		}
 	}
 	$o-grid-layouts: $temp-layouts !global;
 	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
 
 	@if $gutter-width {
 		$o-grid-gutters: $temp-gutters !global;
+	}
+
+	@if $outer-margin-width {
+		$o-grid-outer-margins: $temp-outer-margins !global;
 	}
 
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
@@ -71,6 +83,33 @@
 	// No gutter found for this layout, let's try again with a smaller one
 	$layout: nth($_o-grid-layout-names, $layout-index - 1);
 	@return oGridGutter($layout);
+}
+
+/// Get the outer margin of a layout
+///
+/// @param {String|null|Boolean} $layout-name - One of $o-grid-layouts
+@function oGridOuterMargin($layout-name: default) {
+	// Falsy values mean 'default'
+	@if not $layout-name {
+		$layout-name: default;
+	}
+
+	// This layout was assigned a gutter directly
+	@if map-get($o-grid-outer-margins, $layout-name) {
+		@return map-get($o-grid-outer-margins, $layout-name);
+	}
+
+	// Checking the position of the layout in the list of layouts
+	$layout-index: index($_o-grid-layout-names, $layout-name);
+
+	// The first layout (S) should get the default outer margin
+	@if $layout-index == 1 {
+		@return oGridOuterMargin();
+	}
+
+	// No gutter found for this layout, let's try again with a smaller one
+	$layout: nth($_o-grid-layout-names, $layout-index - 1);
+	@return oGridOuterMargin($layout);
 }
 
 /// Get the max width of a layout

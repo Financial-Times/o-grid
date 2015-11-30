@@ -302,10 +302,7 @@
 		position: relative; // Required for push and pull
 		float: left;
 		box-sizing: border-box;
-		/*autoprefixer: off*/
-		-ms-flex: 1 1 0%;
 		flex: 1 1 0%;
-		/*autoprefixer: on*/
 
 		@include oGridTargetIE8 {
 			// scss-lint:disable ImportantRule
@@ -474,12 +471,13 @@
 /// @param {String} $grid-mode [$o-grid-mode]
 @mixin oGridRow {
 	clear: both;
+	// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
 	/*autoprefixer: off*/
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  /*autoprefixer: on*/
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	/*autoprefixer: on*/
+	flex-wrap: wrap; // Note that this breaks in old Firefox
 
 	@if $o-grid-mode == 'fixed' {
 		margin-left: -1 * oGridGutter($o-grid-fixed-layout);
@@ -529,10 +527,7 @@
 @mixin oGridResetRow {
 	clear: none;
 	display: block;
-	/*autoprefixer: off */
-	-ms-flex-wrap: nowrap;
 	flex-wrap: nowrap;
-	/*autoprefixer: on */
 	margin-left: 0;
 
 	&:before,
@@ -563,10 +558,7 @@
 	width: auto;
 	min-width: 0;
 	max-width: none;
-	/*autoprefixer: off */
-	-ms-flex: none;
 	flex: none;
-	/*autoprefixer: on */
 }
 
 /// Reorder visually: pull
@@ -624,10 +616,7 @@
 /// Fix a bug in Safari where items wouldn't wrap properly
 /// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
 @mixin _oGridFixSafariWrap($args...) {
-	/*autoprefixer: off*/
-  -ms-flex-preferred-size: oGridColspan($args...);
-  flex-basis: oGridColspan($args...);
-	/*autoprefixer: on*/
+	flex-basis: oGridColspan($args...);
 }
 
 /// Generate the grid with helper classes for:

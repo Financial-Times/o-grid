@@ -471,13 +471,16 @@
 /// @param {String} $grid-mode [$o-grid-mode]
 @mixin oGridRow {
 	clear: both;
-	// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
-	/*autoprefixer: off*/
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	/*autoprefixer: on*/
 	flex-wrap: wrap; // Note that this breaks in old Firefox
+
+	& {
+		// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
+		// NOTE - needs to be in its own block, as the autoprefixer: off comment applies to the whole block
+		/*autoprefixer: off*/
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+	}
 
 	@if $o-grid-mode == 'fixed' {
 		margin-left: -1 * oGridGutter($o-grid-fixed-layout);

@@ -505,10 +505,17 @@
 
 	&:before,
 	&:after {
-		// scss-lint:disable DuplicateProperty
-		content: ' ';
-		display: none;
-		display: table\9; // Show only to IE<=9
+		content: '';
+		display: table;
+		//we only want display: table (and therefore the clear:both) to apply if flexbox is not supported
+		& {
+			// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
+			// NOTE - needs to be in its own block, as the autoprefixer: off comment applies to the whole block
+			/*autoprefixer: off*/
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+		}
 	}
 	&:after {
 		clear: both;

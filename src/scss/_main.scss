@@ -480,6 +480,9 @@
 		display: -webkit-flex;
 		display: -ms-flexbox;
 		display: flex;
+		@media print {
+			display: inherit;
+		}
 	}
 
 	@if $o-grid-mode == 'fixed' {

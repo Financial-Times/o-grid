@@ -22,11 +22,15 @@ const isIE8 = (function() {
  * @return {Object} layout names and gutter widths
  */
 function getGridProperties() {
-	let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
-	// Firefox computes: "{\"foo\": \"bar\"}"
-	// We want readable JSON: {"foo": "bar"}
-	gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');
-	return JSON.parse(gridProperties);
+	try {
+		let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
+		// Firefox computes: "{\"foo\": \"bar\"}"
+		// We want readable JSON: {"foo": "bar"}
+		gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');
+		return JSON.parse(gridProperties);
+	} catch (e) {
+		return {};
+	}
 }
 
 /**

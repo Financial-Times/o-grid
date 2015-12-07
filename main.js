@@ -22,11 +22,17 @@ const isIE8 = (function() {
  * @return {Object} layout names and gutter widths
  */
 function getGridProperties() {
-	let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
-	// Firefox computes: "{\"foo\": \"bar\"}"
-	// We want readable JSON: {"foo": "bar"}
-	gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');
-	return JSON.parse(gridProperties);
+	// Contained in a try/catch as it should not error if o-grid styles are not (deliberately or accidentally) loaded
+	// e.g. o-tracking will always try to read this property, but the page is not obliged to use o-grid for layout
+	try {
+		let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
+		// Firefox computes: "{\"foo\": \"bar\"}"
+		// We want readable JSON: {"foo": "bar"}
+		gridProperties = gridProperties.replace(/'/g, '').replace(/\\/g, '').replace(/^"/, '').replace(/"$/, '');
+		return JSON.parse(gridProperties);
+	} catch (e) {
+		return {};
+	}
 }
 
 /**

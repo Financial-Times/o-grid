@@ -22,6 +22,8 @@ const isIE8 = (function() {
  * @return {Object} layout names and gutter widths
  */
 function getGridProperties() {
+	// Contained in a try/catch as it should not error if o-grid styles are not (deliberately or accidentally) loaded
+	// e.g. o-tracking will always try to read this property, but the page is not obliged to use o-grid for layout
 	try {
 		let gridProperties = window.getComputedStyle(document.documentElement, ':after').getPropertyValue('content');
 		// Firefox computes: "{\"foo\": \"bar\"}"

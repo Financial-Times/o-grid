@@ -450,6 +450,8 @@ To create styles that respond to the same breakpoints as the grid, this Sass mix
 
 It relies on [Sass MQ](http://git.io/sass-mq) to output mobile-first @media queries.
 
+`$from` is inclusive but `$until` is *exclusive* – e.g. `@include oGridRespondTo(S, L)` matches the breakpoints `S` and `M`, but not `L`.
+
 #### Gutters
 
 ```scss

@@ -130,7 +130,7 @@
 
 			// A version of the grid might already be loaded, so we load it only if needed
 			if ($('.o-grid-row').length === 0) {
-				$("head").append("<link rel='stylesheet' href='http://build.origami.ft.com/bundles/css?modules=o-grid@^4.0.0' />");
+				$("head").append("<link rel='stylesheet' href='http://build.origami.ft.com/v2/bundles/css?modules=o-grid@^4.0.0' />");
 			}
 
 			$("body").prepend(gridHtml).prepend(gridToolsHtml);
@@ -167,7 +167,7 @@
 
 	var head = document.getElementsByTagName("head")[0];
 	var gridScript = document.createElement("script");
-	gridScript.src = "http://build.origami.ft.com/bundles/js?modules=o-grid@^4.0.0";
+	gridScript.src = "http://build.origami.ft.com/v2/bundles/js?modules=o-grid@^4.0.0";
 	gridScript.onload = init();
 	head.appendChild(gridScript);
 

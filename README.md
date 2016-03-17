@@ -1,4 +1,4 @@
-# o-grid [![Build Status](https://travis-ci.org/Financial-Times/o-grid.svg?branch=master)](https://travis-ci.org/Financial-Times/o-grid)
+# o-grid [![Build Status](https://circleci.com/gh/Financial-Times/o-grid.png?style=shield&circle-token=a0c7fe6f37aa937651724d1650814e45ab2662a5)](https://circleci.com/gh/Financial-Times/o-grid)
 
 A 12 column responsive, flexbox-based grid system for laying out documents, templates and modules.
 
@@ -340,7 +340,7 @@ el { @include oGridColspan(); }
 Outputs:
 
 ```css
-// Fallbacks for Internet Explorer omitted in this example 
+// Fallbacks for Internet Explorer omitted in this example
 el {
   position: relative;
   float: left;

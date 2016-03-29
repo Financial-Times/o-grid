@@ -1,44 +1,61 @@
 {
-    "description": "Grid for responsive layouts",
-    "origamiType": "module",
-    "origamiVersion": 1,
-    "support": "https://github.com/Financial-Times/o-grid/issues",
-    "supportStatus": "active",
-    "browserFeatures": {
-        "required": [
-            "css-boxsizing"
-        ]
-    },
-    "demos": [
-        {
-            "path": "/demos/default.html",
-            "expanded": true,
-            "description": "Grid with all default settings"
-        },
-        {
-            "path": "/demos/snappy.html",
-            "expanded": false,
-            "description": "Responsive grid that snaps between a larger fixed layout at each breakpoint"
-        },
-        {
-            "path": "/demos/resized.html",
-            "expanded": false,
-            "description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved"
-        },
-        {
-            "path": "/demos/always-fixed.html",
-            "expanded": false,
-            "description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
-        },
-        {
-            "path": "/demos/ie8.html",
-            "expanded": false,
-            "description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
-        },
-        {
-            "path": "/demos/test.html",
-            "expanded": false,
-            "description": "test demo"
-        }
-    ]
+	"description": "Grid for responsive layouts",
+	"origamiType": "module",
+	"origamiVersion": 1,
+	"support": "https://github.com/Financial-Times/o-grid/issues",
+	"supportStatus": "active",
+	"browserFeatures": {
+		"required": [
+		"css-boxsizing"
+		]
+	},
+	"ci": {
+		"circle": "https://circleci.com/api/v1/project/Financial-Times/o-grid"
+	},
+	"demosDefaults": {
+		"template": "demos/src/layout.mustache"
+	},
+	"demos": [
+		{
+			"name": "default",
+			"sass": "demos/src/scss/default.scss",
+			"expanded": true,
+			"description": "Grid with all default settings"
+		},
+		{
+			"name": "snappy",
+			"sass": "demos/src/scss/snappy.scss",
+			"expanded": false,
+			"description": "Responsive grid that snaps between a larger fixed layout at each breakpoint"
+		},
+		{
+			"name": "resized",
+			"sass": "demos/src/scss/resized.scss",
+			"expanded": false,
+			"description": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved"
+		},
+		{
+			"name": "always-fixed",
+			"sass": "demos/src/scss/always-fixed.scss",
+			"expanded": false,
+			"description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
+		},
+		{
+			"name": "ie8",
+			"sass": "demos/src/scss/ie8.scss",
+			"expanded": false,
+			"description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
+		},
+		{
+			"name": "test",
+			"template": "demos/src/test.mustache",
+			"js": "demos/src/js/style-switcher.js",
+			"sass": "demos/src/scss/default.scss",
+			"expanded": false,
+			"description": "test demo",
+			"data": "demos/src/configurations.json",
+			"documentClasses": "test",
+			"dependencies": ["o-buttons@2.0.0"]
+		}
+	]
 }

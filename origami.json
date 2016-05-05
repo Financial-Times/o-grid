@@ -55,7 +55,7 @@
 			"description": "test demo",
 			"data": "demos/src/configurations.json",
 			"documentClasses": "test",
-			"dependencies": ["o-buttons@2.0.0"]
+			"dependencies": ["o-buttons@^3.0.0"]
 		}
 	]
 }

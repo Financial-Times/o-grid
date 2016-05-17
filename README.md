@@ -500,6 +500,12 @@ Here are the most useful ones:
 // Switch Silent mode off
 $o-grid-is-silent: false;
 
+// Disable outputting offset, push and pull selectors
+$o-grid-offset-selectors: true;
+
+// Disable outputting human-friendly selectors
+$o-grid-human-friendly-selectors: true;
+
 // Show the currently active breakpoint and output loaded settings
 $o-grid-debug-mode: true;
 

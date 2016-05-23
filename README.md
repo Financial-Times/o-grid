@@ -515,6 +515,12 @@ $o-grid-gutters: (default: 10px, M: 20px);
 //          $o-grid-fixed-layout (default: L)
 $o-grid-mode: fluid (default) | snappy | fixed;
 
+// Grid ie8 rules
+// - inline: output ie8 selectors alongside modern browser selectors in the same stylesheet
+// - only: only output ie8 selectors
+// - none: output no ie8 selectors
+$o-grid-ie8-rules: inline (default) | only | none;
+
 // Default layouts
 $o-grid-layouts: (
 	S:  490px,

@@ -464,6 +464,11 @@
 			width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
 		}
 	}
+
+	&--bleed {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 /// Base row styles
@@ -529,15 +534,7 @@
 ///
 /// @param {string} column child selector
 @mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
-	@each $layout-name in map-keys($o-grid-gutters) {
-		@if $layout-name == 'default' {
-			margin-right: -1 * oGridGutter();
-		} @else {
-			@include oGridRespondTo($layout-name) {
-				margin-right: -1 * oGridGutter($layout-name);
-			}
-		}
-	}
+	margin-left: 0;
 
 	> #{unquote($column-selector)} {
 		padding-left: 0;
@@ -664,15 +661,7 @@
 
 	// Compact, gutterless row of columns
 	.o-grid-row--compact {
-		@each $layout-name in map-keys($o-grid-gutters) {
-			@if $layout-name == 'default' {
-				margin-right: -1 * oGridGutter();
-			} @else {
-				@include oGridRespondTo($layout-name) {
-					margin-right: -1 * oGridGutter($layout-name);
-				}
-			}
-		}
+		margin-left: 0;
 
 		> [data-o-grid-colspan] {
 			padding-left: 0;

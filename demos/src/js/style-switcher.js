@@ -183,7 +183,7 @@ function getExpectedMargin(el) {
 	// Centered
 	if (modifiers.includes(centerModifier) || modifiers.includes(layoutCenterModifier)) {
 		// half of the remaining space left by the column
-		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10) - parseInt(getCurrentGutter(), 10));
+		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10));
 	}
 
 	return 0;

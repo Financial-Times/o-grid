@@ -183,7 +183,7 @@ function getExpectedMargin(el) {
 	// Centered
 	if (modifiers.includes(centerModifier) || modifiers.includes(layoutCenterModifier)) {
 		// half of the remaining space left by the column
-		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10) - getCurrentGutter());
+		return 0.5 * (parseInt(getComputedStyle(el.parentNode, null).width, 10) - parseInt(getComputedStyle(el, null).width, 10));
 	}
 
 	return 0;
@@ -194,7 +194,7 @@ function highlightUnexpectedMargin(el) {
 	const actualMarginLeft = parseInt(getComputedStyle(el, null).marginLeft, 10);
 
 	// We verify if margins are "almost equal" because of rounding errors
-	if (almostEqual(expectedMarginLeft, actualMarginLeft, 1, 1)) {
+	if (almostEqual(expectedMarginLeft, actualMarginLeft, 1, 0.01)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
 		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
@@ -212,7 +212,7 @@ function highlightUnexpectedPosition(el) {
 	actualPull = (actualPull === 'auto') ? 0 : parseInt(actualPull, 10);
 
 	// We verify if positions are "almost equal" because of rounding errors
-	if (almostEqual(expectedPush, actualPush, 1, 1) && almostEqual(expectedPull, actualPull, 1, 1)) {
+	if (almostEqual(expectedPush, actualPush, 1, 0.01) && almostEqual(expectedPull, actualPull, 1, 0.01)) {
 		el.className = el.className.replace(/\berror-position\b/g, '');
 	} else {
 		/\berror-position\b/.test(el.className) || (el.className += ' error-position');

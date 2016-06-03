@@ -228,8 +228,7 @@
 ///
 /// @param {String} $layout-name [null]
 @mixin _oGridHumanFriendlyKeywords($layout-name: null) {
-	[data-o-grid-colspan~="#{$layout-name}hide"],
-	[data-o-grid-colspan~="#{$layout-name}0"] {
+	[data-o-grid-colspan~="#{$layout-name}hide"] {
 		display: none;
 	}
 
@@ -620,8 +619,17 @@
 ///
 /// @param {String} $layout-name - One of $o-grid-layouts
 @mixin _oGridModifiersForLayout($layout-name) {
-	@include _oGridHumanFriendlyKeywords($layout-name);
-	@include _oGridShuffleColumns($layout-name);
+	@if $o-grid-human-friendly-selectors == true {
+		@include _oGridHumanFriendlyKeywords($layout-name);
+	}
+
+	@if $o-grid-shuffle-selectors == true {
+		@include _oGridShuffleColumns($layout-name);
+	}
+
+	[data-o-grid-colspan~="#{$layout-name}0"] {
+		display: none;
+	}
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
@@ -666,6 +674,10 @@
 		@include oGridColspan();
 	}
 
+
+	[data-o-grid-colspan~="0"] {
+		display: none;
+	}
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
 			@include oGridColspan($colspan, $width-only: true);
@@ -681,11 +693,15 @@
 		}
 	}
 
-	// one-half, one-third, three-quarters, center, uncenter…
-	@include _oGridHumanFriendlyKeywords;
+	@if $o-grid-human-friendly-selectors == true {
+		// one-half, one-third, three-quarters, center, uncenter…
+		@include _oGridHumanFriendlyKeywords;
+	}
 
-	// pull, push, offset
-	@include _oGridShuffleColumns;
+	@if $o-grid-shuffle-selectors == true {
+		// pull, push, offset
+		@include _oGridShuffleColumns;
+	}
 
 	// For IE 8, output grid helper classes and data- attributes
 	// for the layout defined in $o-grid-fixed-layout

@@ -610,7 +610,7 @@
 		@include _oGridHumanFriendlyKeywords($layout-name);
 	}
 
-	@if $o-grid-offset-selectors == true {
+	@if $o-grid-shuffle-selectors == true {
 		@include _oGridShuffleColumns($layout-name);
 	}
 
@@ -673,7 +673,7 @@
 		@include _oGridHumanFriendlyKeywords;
 	}
 
-	@if $o-grid-offset-selectors == true {
+	@if $o-grid-shuffle-selectors == true {
 		// pull, push, offset
 		@include _oGridShuffleColumns;
 	}

@@ -501,7 +501,7 @@ Here are the most useful ones:
 $o-grid-is-silent: false;
 
 // Disable outputting offset, push and pull selectors
-$o-grid-offset-selectors: true;
+$o-grid-shuffle-selectors: true;
 
 // Disable outputting human-friendly selectors
 $o-grid-human-friendly-selectors: true;

@@ -318,12 +318,25 @@ The container size can snap between fixed-widths as the viewport gets larger:
 
 #### Compact (gutterless) rows
 
-To remove gutters from all columns in a row, use the `o-grid-row--compact` class:
+To remove gutters from in between columns in a row, use the `o-grid-row--compact` class:
 
 ```html
 <div class="o-grid-row o-grid-row--compact">
 	<div data-o-grid-colspan="6">Look 'ma, no gutters</div>
 	<div data-o-grid-colspan="6">Look 'pa, no gutters here either</div>
+</div>
+```
+
+#### Full bleed container
+
+To remove gutters from the left and right sides of the grid container, use the `o-grid-container--bleed` class.  Note that it is not possible to remove the outer gutters for an individual row, instead you need to start a new container.
+
+```html
+<div class="o-grid-container o-grid-container--bleed">
+	<div class="o-grid-row o-grid-row--compact">
+		<div data-o-grid-colspan="6">Look 'ma, no gutters</div>
+		<div data-o-grid-colspan="6">Look 'pa, no gutters here either</div>
+	</div>
 </div>
 ```
 
@@ -520,6 +533,12 @@ $o-grid-gutters: (default: 10px, M: 20px);
 // - fixed: always fixed-width with the layout defined by
 //          $o-grid-fixed-layout (default: L)
 $o-grid-mode: fluid (default) | snappy | fixed;
+
+// Grid ie8 rules
+// - inline: output ie8 selectors alongside modern browser selectors in the same stylesheet
+// - only: only output ie8 selectors
+// - none: output no ie8 selectors
+$o-grid-ie8-rules: inline (default) | only | none;
 
 // Default layouts
 $o-grid-layouts: (

@@ -228,8 +228,7 @@
 ///
 /// @param {String} $layout-name [null]
 @mixin _oGridHumanFriendlyKeywords($layout-name: null) {
-	[data-o-grid-colspan~="#{$layout-name}hide"],
-	[data-o-grid-colspan~="#{$layout-name}0"] {
+	[data-o-grid-colspan~="#{$layout-name}hide"] {
 		display: none;
 	}
 
@@ -614,6 +613,10 @@
 		@include _oGridShuffleColumns($layout-name);
 	}
 
+	[data-o-grid-colspan~="#{$layout-name}0"] {
+		display: none;
+	}
+
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
 			// scss-lint:disable DeclarationOrder
@@ -653,6 +656,10 @@
 		@include oGridColspan();
 	}
 
+
+	[data-o-grid-colspan~="0"] {
+		display: none;
+	}
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
 			@include oGridColspan($colspan, $width-only: true);

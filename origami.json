@@ -1,6 +1,7 @@
 {
 	"description": "Grid for responsive layouts",
 	"origamiType": "module",
+	"origamiCategory": "primitives",
 	"origamiVersion": 1,
 	"support": "https://github.com/Financial-Times/o-grid/issues",
 	"supportStatus": "active",

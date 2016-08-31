@@ -485,17 +485,10 @@
 @mixin oGridRow {
 	clear: both;
 	flex-wrap: wrap; // Note that this breaks in old Firefox
+	display: flex;
 
-	& {
-		// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
-		// NOTE - needs to be in its own block, as the autoprefixer: off comment applies to the whole block
-		/*autoprefixer: off*/
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
-		@media print {
-			display: inherit;
-		}
+	@media print {
+		display: inherit;
 	}
 
 	@if $o-grid-mode == 'fixed' {
@@ -523,15 +516,7 @@
 	&:after {
 		content: '';
 		display: table;
-		//we only want display: table (and therefore the clear:both) to apply if flexbox is not supported
-		& {
-			// Prevents autoprefixer from outputting display: -webkit-box;, which is buggy
-			// NOTE - needs to be in its own block, as the autoprefixer: off comment applies to the whole block
-			/*autoprefixer: off*/
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-		}
+		display: flex;
 	}
 	&:after {
 		clear: both;

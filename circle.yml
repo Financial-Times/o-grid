@@ -1,8 +1,8 @@
 machine:
   node:
-    version: 4.2.2
+    version: 6
   post:
-    - npm install -g Financial-Times/origami-build-tools#node4
+    - npm install -g origami-build-tools
 dependencies:
   override:
     - obt install

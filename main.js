@@ -83,12 +83,13 @@ function getCurrentGutter() {
 function addBreakpointListeners() {
 	try {
 		// Create a map containing all breakpoints exposed via html:before
-		const breakpoints = new Map(Object.entries(getGridBreakpoints().layouts));
+		const layouts = getGridBreakpoints().layouts;
+		const breakpoints = new Map(Object.keys(layouts).map(key => [key, layouts[key]]));
 		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
 
 		// Generate media queries for each
 		breakpoints.forEach((width, size) => {
-			const queries = Array();
+			const queries = [];
 			if (size === 'S') {
 				queries.push(`(max-width: ${ width })`);
 				queries.push(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`);
@@ -109,7 +110,7 @@ function addBreakpointListeners() {
 						}
 					}));
 				}
-			}
+			};
 
 			// Create a new listener for each layout
 			queries.forEach(mq => {

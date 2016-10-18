@@ -50,8 +50,31 @@
 	}
 }
 
+@mixin oGridSurfaceLayoutSizes {
+	html:before {
+		$breakpoints: ();
+		$combined: unquote("");
+
+		@each $layout, $size in $o-grid-layouts {
+			$breakpoints: append($breakpoints, '"#{$layout}": "#{$size}"');
+		}
+
+		@for $i from 1 through length($breakpoints) {
+			@if $i < length($breakpoints) {
+				$combined: $combined + nth($breakpoints, $i) + ", ";
+			} @else {
+				$combined: $combined + nth($breakpoints, $i);
+			}
+		}
+
+		display: none;
+		content: '{ "layouts": { #{$combined} } }';
+	}
+}
+
 @if $o-grid-is-silent == false {
 	@include oGridSurfaceCurrentLayout;
+	@include oGridSurfaceLayoutSizes;
 	@include oGridGenerate;
 
 	// Turn silent mode back on to avoid outputting the grid twice

@@ -59,11 +59,11 @@
 			$breakpoints: append($breakpoints, '"#{$layout}": "#{$size}"');
 		}
 
-		@for $i from 1 through length($breakpoints) {
-			@if $i < length($breakpoints) {
-				$combined: $combined + nth($breakpoints, $i) + ", ";
+		@for $ittr from 1 through length($breakpoints) {
+			@if $ittr < length($breakpoints) {
+				$combined: $combined + nth($breakpoints, $ittr) + ", ";
 			} @else {
-				$combined: $combined + nth($breakpoints, $i);
+				$combined: $combined + nth($breakpoints, $ittr);
 			}
 		}
 

@@ -637,7 +637,7 @@ by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 
 ### `addBreakpointListeners()`
 
-Configures a bunch of matchMedia queries that fire a `o-grid.layoutChange` event upon layout change.
+Configures a bunch of matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
 
 ```js
 var oGrid = require('o-grid');

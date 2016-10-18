@@ -61,5 +61,6 @@ function getCurrentGutter() {
 
 export default {
 	getCurrentLayout: getCurrentLayout,
-	getCurrentGutter: getCurrentGutter
+	getCurrentGutter: getCurrentGutter,
+	getGridProperties: getGridProperties,
 };

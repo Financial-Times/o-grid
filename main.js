@@ -80,10 +80,11 @@ function getCurrentGutter() {
  * This sets MediaQueryListeners on all the o-grid breakpoints
  * and fires a `o-grid.layoutChange` event on layout change.
  */
-function addBreakpointListeners() {
-	try {
-		// Create a map containing all breakpoints exposed via html:before
-		const layouts = getGridBreakpoints().layouts;
+function enableLayoutChangeEvents() {
+	// Create a map containing all breakpoints exposed via html:before
+	const gridLayouts = getGridBreakpoints();
+	if (gridLayouts.hasOwnProperty('layouts')) {
+		const layouts = gridLayouts.layouts;
 		const breakpoints = new Map(Object.keys(layouts).map(key => [key, layouts[key]]));
 		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
 
@@ -119,9 +120,8 @@ function addBreakpointListeners() {
 				handleMQChange(mql);
 			});
 		});
-	} catch (e) {
-		console.error(e);
-		return;
+	} else {
+		console.error('To enable grid layout change events, include oGridSurfaceLayoutSizes in your Sass');
 	}
 }
 
@@ -129,5 +129,5 @@ export default {
 	getCurrentLayout: getCurrentLayout,
 	getCurrentGutter: getCurrentGutter,
 	getGridBreakpoints: getGridBreakpoints,
-	addBreakpointListeners: addBreakpointListeners,
+	enableLayoutChangeEvents: enableLayoutChangeEvents,
 };

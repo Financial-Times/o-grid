@@ -635,9 +635,9 @@ When using o-grid silent mode, make sure to surface the grid
 information to make it readable by the JavaScript Helper
 by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 
-### `addBreakpointListeners()`
+### `enableLayoutChangeEvents()`
 
-Configures a bunch of matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
+Enable matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
 
 ```js
 var oGrid = require('o-grid');

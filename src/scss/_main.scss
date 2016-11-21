@@ -247,7 +247,7 @@
 	// Portions
 	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
-			// scss-lint:disable DeclarationOrder
+			// sass-lint:disable mixins-before-declarations
 
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
@@ -304,7 +304,7 @@
 		flex: 1 1 0%;
 
 		@include oGridTargetIE8 {
-			// scss-lint:disable ImportantRule
+			// sass-lint:disable no-important
 			min-width: 0 !important;
 		}
 
@@ -348,7 +348,7 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			// scss-lint:disable DeclarationOrder
+			// sass-lint:disable mixins-before-declarations
 
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
@@ -382,7 +382,7 @@
 					}
 				} @else {
 					@include oGridRespondTo($layout-name) {
-						// scss-lint:disable DeclarationOrder
+						// sass-lint:disable mixins-before-declarations
 
 						// Restore visibility from `display: none`
 						// if `data-o-grid-colspan` was set to `0` or `hide`
@@ -516,7 +516,7 @@
 	&:after {
 		content: '';
 		display: table;
-		display: flex;
+		display: flex; // sass-lint:disable-line no-duplicate-properties
 	}
 	&:after {
 		clear: both;
@@ -618,7 +618,7 @@
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
-			// scss-lint:disable DeclarationOrder
+			// sass-lint:disable mixins-before-declarations
 
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`

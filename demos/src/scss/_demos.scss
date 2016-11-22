@@ -41,14 +41,14 @@ body:before {
 	// Transparent background color in IE8
 	$rgba: rgba(#ffffff, 0.5);
 	$ie-hex-str: ie-hex-str($rgba);
-	// scss-lint:disable DuplicateProperty
+	// sass-lint:disable no-duplicate-properties
 	background-color: $rgba;
-	// scss-lint:enable DuplicateProperty
+	// sass-lint:enable no-duplicate-properties
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
 }
 
 .o-grid-container {
-	background: #EAE8DF;
+	background: #eae8df;
 }
 .o-grid-row {
 	margin-top: 1rem;

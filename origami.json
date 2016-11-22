@@ -7,7 +7,8 @@
 	"supportStatus": "active",
 	"browserFeatures": {
 		"required": [
-		"css-boxsizing"
+		"css-boxsizing",
+		"Map"
 		]
 	},
 	"ci": {

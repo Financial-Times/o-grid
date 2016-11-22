@@ -620,6 +620,35 @@ When using o-grid silent mode, make sure to surface the grid
 information to make it readable by the JavaScript Helper
 by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
 
+### `getGridBreakpoints()`
+
+Returns the sizes of all grid breakpoints available.
+
+```js
+var oGrid = require('o-grid');
+
+console.log(oGrid.getGridBreakpoints());
+// > { "layouts": { "S": "490px", "M": "740px", "L": "980px", "XL": "1220px" } }
+```
+
+When using o-grid silent mode, make sure to surface the grid
+information to make it readable by the JavaScript Helper
+by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
+
+### `enableLayoutChangeEvents()`
+
+Enable matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
+
+```js
+var oGrid = require('o-grid');
+
+oGrid.addBreakpointListeners();
+```
+
+When using o-grid silent mode, make sure to surface the grid
+information to make it readable by the JavaScript Helper
+by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
+
 ## Grid Bookmarklet
 
 1. Create a new Bookmark with this URL:

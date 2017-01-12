@@ -300,8 +300,13 @@
 	@if not $width-only {
 		position: relative; // Required for push and pull
 		float: left;
-		box-sizing: border-box;
 		flex: 1 1 0%;
+		// Turn autoprefixer off for the box-sizing rules
+		// in order to fix positioning on older browsers.
+		/*autoprefixer: off*/
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 
 		@include oGridTargetIE8 {
 			// sass-lint:disable no-important
@@ -412,12 +417,18 @@
 /// @param {Boolean} $bleed [false]
 @mixin oGridContainer($grid-mode: $o-grid-mode, $bleed: false) {
 	position: relative;
-	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
 	min-width: $o-grid-min-width;
 	// Older browsers get a fixed-width layout
 	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+
+	// Turn autoprefixer off for the box-sizing rules
+	// in order to fix positioning on older browsers.
+	/*autoprefixer: off*/
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 
 	@if $bleed {
 		padding-left: 0;

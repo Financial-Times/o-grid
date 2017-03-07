@@ -318,13 +318,29 @@ The container size can snap between fixed-widths as the viewport gets larger:
 
 #### Compact (gutterless) rows
 
-To remove gutters from in between columns in a row, use the `o-grid-row--compact` class:
+To remove gutters from in between columns in a row, use the `o-grid-row--compact` class or the `oGridRowCompact()` mixin:
 
 ```html
 <div class="o-grid-row o-grid-row--compact">
 	<div data-o-grid-colspan="6">Look 'ma, no gutters</div>
 	<div data-o-grid-colspan="6">Look 'pa, no gutters here either</div>
 </div>
+```
+
+
+```scss
+div {
+	@include oGridContainer();
+
+	> div {
+		@include oGridRow();
+		@include oGridRowCompact('.column');
+	}
+
+	.column {
+		@include oGridColspan((default: full-width, S: 3));
+	}
+}
 ```
 
 #### Full bleed container

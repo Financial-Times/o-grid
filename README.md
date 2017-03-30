@@ -689,7 +689,7 @@ by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 
 ### Markup/Sass changes
 
-- Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`.
+- Wrap `<div class="o-grid-container">` around any `<div class="o-grid-row">`.
 - Search `oGridColumn` and replace with `oGridColspan`.
 - The mixin `oGridColspan` from v3 outputs a bit more code. Use `oGridColspan($span, $width-only: true)` to only outputs widths. Note that with gzip this should not have any impact.
 - `$o-grid-gutter` becomes `$o-grid-gutters` (plural) and now contains a map

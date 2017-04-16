@@ -709,6 +709,8 @@
 		}
 	}
 
+	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
+
 	// In browsers that support @media queries,
 	// output grid helper classes and data- attributes for all layouts
 	@each $layout-name in $_o-grid-layout-names {

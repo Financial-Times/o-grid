@@ -27,6 +27,10 @@ describe "Adding layouts in different ways" do
     find "Gutters: (default: 10px, Y: 20px)" and
     find "Gutters: (default: 10px, B: 30px, Y: 20px)"
   end
+  it "should order outer margins from the narrowest to the widest layout" do
+    find "Outer Gutters: (default: 10px, Y: 30px)" and
+    find "Outer Gutters: (default: 10px, B: 15px, Y: 30px)"
+  end
 end
 
 describe "Adding a layout *without* a gutter" do
@@ -35,6 +39,15 @@ describe "Adding a layout *without* a gutter" do
   end
   it "should make that layout inherit from the previous' layout gutter" do
     find "Gutter A: 10px"
+  end
+end
+
+describe "Adding a layout *without* an outer margin" do
+  it "should add that layout" do
+    find "Layout names: A,"
+  end
+  it "should make that layout inherit from the previous' layout outer margin" do
+    find "Outer margin A: 10px"
   end
 end
 
@@ -47,6 +60,18 @@ describe "Adding a layout *with* a gutter" do
   end
   it "should not change narrower layouts's gutters" do
     find "Gutter A in Y: 10px"
+  end
+end
+
+describe "Adding a layout *with* an outer margin" do
+  it "should be assigned this outer margin" do
+    find "Gutter Y: 30px"
+  end
+  it "should impact wider layouts's outer margins" do
+    find "Gutter Z: 30px"
+  end
+  it "should not change narrower layouts's outer margins" do
+    find "Outer margin A in Y: 10px"
   end
 end
 
@@ -66,6 +91,16 @@ describe "Resetting gutters to only a default" do
     find "Gutter C after reset: 20px" and
     find "Gutter X after reset: 20px" and
     find "Gutter Y after reset: 20px"
+  end
+end
+
+describe "Resetting outer margin to only a default" do
+  it "should give all layouts the same outer margin" do
+    find "Outer margin A after reset: 24px" and
+    find "Outer margin B after reset: 24px" and
+    find "Outer margin C after reset: 24px" and
+    find "Outer margin X after reset: 24px" and
+    find "Outer margin Y after reset: 24px"
   end
 end
 

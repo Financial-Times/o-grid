@@ -56,7 +56,7 @@
 
 @mixin oGridSurfaceLayoutSizes {
 	html:before {
-		$combined: '{"layout": {';
+		$combined: '{"layouts": {';
 
 		$keys: map-keys($o-grid-layouts);
 

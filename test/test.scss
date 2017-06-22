@@ -8,10 +8,10 @@
 
 // Add default layouts
 // a minimum of 2 layouts is required for o-grid to work
-$o-grid-fixed-layout: Z;
+$o-grid-fixed-layout: z;
 $o-grid-layouts: (
-	X: 800px,
-	Z: 1200px,
+	x: 800px,
+	z: 1200px,
 );
 
 @import '../main';
@@ -30,52 +30,52 @@ $o-grid-layouts: (
  * Default gutter exists: #{map-has-key($o-grid-gutters, default)}
  */
 
-@include oGridAddLayout($layout-name: A, $layout-width: 340px);
+@include oGridAddLayout($layout-name: a, $layout-width: 340px);
 @include test-debug();
-@include oGridRespondTo(A) {
-	A {
-		content: 'Max-width A: #{oGridGetMaxWidthForLayout(A)}';
-		content: 'Gutter A: #{oGridGutter(A)}';
+@include oGridRespondTo(a) {
+	a {
+		content: 'Max-width a: #{oGridGetMaxWidthForLayout(a)}';
+		content: 'Gutter a: #{oGridGutter(a)}';
 	}
 }
 
-@include oGridAddLayout($layout-name: Y, $layout-width: 1100px, $gutter-width: 20px);
+@include oGridAddLayout($layout-name: y, $layout-width: 1100px, $gutter-width: 20px);
 @include test-debug();
-@include oGridRespondTo(Y) {
-	Y {
-		content: 'Max-width Y: #{oGridGetMaxWidthForLayout(Y)}';
-		content: 'Gutter Y: #{oGridGutter(Y)}';
-		content: 'Gutter A in Y: #{oGridGutter(A)}';
-		content: 'Gutter Z: #{oGridGutter(Z)}';
+@include oGridRespondTo(y) {
+	y {
+		content: 'Max-width y: #{oGridGetMaxWidthForLayout(y)}';
+		content: 'Gutter y: #{oGridGutter(y)}';
+		content: 'Gutter a in y: #{oGridGutter(a)}';
+		content: 'Gutter z: #{oGridGutter(z)}';
 	}
 }
 
-@include oGridAddLayout($layout-name: B, $layout-width: 365px, $gutter-width: 30px);
+@include oGridAddLayout($layout-name: b, $layout-width: 365px, $gutter-width: 30px);
 @include test-debug();
-@include oGridRespondTo(B) {
-	B {
-		content: 'Max-width B: #{oGridGetMaxWidthForLayout(B)}';
+@include oGridRespondTo(b) {
+	b {
+		content: 'Max-width b: #{oGridGetMaxWidthForLayout(b)}';
 	}
 }
 
 // Reset gutters to only a default
 $o-grid-gutters: (default: 20px);
-@include oGridAddLayout($layout-name: C, $layout-width: 372px);
+@include oGridAddLayout($layout-name: c, $layout-width: 372px);
 @include test-debug();
 
-@include oGridRespondTo(C) {
-	C {
-		content: 'Gutter A after reset: #{oGridGutter(A)}';
-		content: 'Gutter B after reset: #{oGridGutter(B)}';
-		content: 'Gutter C after reset: #{oGridGutter(C)}';
-		content: 'Gutter X after reset: #{oGridGutter(X)}';
-		content: 'Gutter Y after reset: #{oGridGutter(Y)}';
+@include oGridRespondTo(c) {
+	c {
+		content: 'Gutter a after reset: #{oGridGutter(a)}';
+		content: 'Gutter b after reset: #{oGridGutter(b)}';
+		content: 'Gutter c after reset: #{oGridGutter(c)}';
+		content: 'Gutter x after reset: #{oGridGutter(x)}';
+		content: 'Gutter y after reset: #{oGridGutter(y)}';
 	}
 }
 
-@include oGridRespondTo(Z) {
-	Z {
-		content: 'Max-width Z: #{oGridGetMaxWidthForLayout(Z)}';
+@include oGridRespondTo(z) {
+	z {
+		content: 'Max-width z: #{oGridGetMaxWidthForLayout(z)}';
 	}
 }
 
@@ -93,6 +93,6 @@ $colspans: ();
 el {
 	@include oGridColspan((
 		default: full-width,
-		Z: 6
+		z: 6
 	));
 }

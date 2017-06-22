@@ -50,25 +50,31 @@
 	}
 }
 
+@function _oGridQuoteString($value) {
+  @return '"#{$value}"';
+}
+
 @mixin oGridSurfaceLayoutSizes {
 	html:before {
-		$breakpoints: ();
-		$combined: unquote("");
+		$combined: '{"layout": {';
 
-		@each $layout, $size in $o-grid-layouts {
-			$breakpoints: append($breakpoints, '"#{$layout}": "#{$size}"');
-		}
+		$keys: map-keys($o-grid-layouts);
 
-		@for $ittr from 1 through length($breakpoints) {
-			@if $ittr < length($breakpoints) {
-				$combined: $combined + nth($breakpoints, $ittr) + ", ";
-			} @else {
-				$combined: $combined + nth($breakpoints, $ittr);
+		@for $ittr from 1 through length($keys) {
+			$key: nth($keys, $ittr);
+			$value: map-get($o-grid-layouts, $key);
+
+			$combined: $combined + _oGridQuoteString($key) + ': ' + _oGridQuoteString($value);
+
+			@if $ittr < length($keys) {
+				$combined: $combined + ", ";
 			}
 		}
 
+		$combined: $combined + '}}';
+
 		display: none;
-		content: '{ "layouts": { #{$combined} } }';
+		content: $combined;
 	}
 }
 

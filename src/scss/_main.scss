@@ -304,9 +304,11 @@
 		// Turn autoprefixer off for the box-sizing rules
 		// in order to fix positioning on older browsers.
 		/*autoprefixer: off*/
+		// sass-lint:disable no-vendor-prefixes
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
+		// sass-lint:enable no-vendor-prefixes
 
 		@include oGridTargetIE8 {
 			// sass-lint:disable no-important
@@ -426,9 +428,11 @@
 	// Turn autoprefixer off for the box-sizing rules
 	// in order to fix positioning on older browsers.
 	/*autoprefixer: off*/
+	// sass-lint:disable no-vendor-prefixes
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	// sass-lint:enable no-vendor-prefixes
 
 	@if $bleed {
 		padding-left: 0;

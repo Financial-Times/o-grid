@@ -10,30 +10,34 @@ const local = /localhost|0\.0\.0\.0/.test(document.URL);
 // Polyfills
 
 // https://cdn.polyfill.io/v1/polyfill.js?features=String.prototype.contains
-String.prototype.includes = function(string, index) {
-	if (typeof string === 'object' && string instanceof RegExp) throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
+String.prototype.includes = function (string, index) {
+	if (typeof string === 'object' && string instanceof RegExp) {
+		throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
+	}
 	return this.indexOf(string, index) !== -1;
 };
 
 if (![].includes) {
-	Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+	Array.prototype.includes = function (searchElement /*, fromIndex*/ ) {
 		const O = Object(this);
-		const len = parseInt(O.length) || 0;
+		const len = parseInt(O.length, 10) || 0;
 		if (len === 0) {
 			return false;
 		}
-		const n = parseInt(arguments[1]) || 0;
+		const n = parseInt(arguments[1], 10) || 0;
 		let k;
 		if (n >= 0) {
 			k = n;
 		} else {
 			k = len + n;
-			if (k < 0) {k = 0;}
+			if (k < 0) {
+				k = 0;
+			}
 		}
 		let currentElement;
 		while (k < len) {
 			currentElement = O[k];
-			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
+			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) { // eslint-disable-line no-self-compare
 				return true;
 			}
 			k++;
@@ -52,13 +56,13 @@ if (![].includes) {
 	const tmp = document.createDocumentFragment();
 	const subheading = document.getElementById("subheading");
 
-	Object.keys(demoTypes).forEach(function(type) {
+	Object.keys(demoTypes).forEach(function (type) {
 		const button = document.createElement('button');
 		button.classList.add('o-buttons');
 		const stylePath = local ? type + '.css' : '/bundles/css?modules=o-grid:/demos/src/scss/' + type + '.scss';
 		button.innerHTML = type;
 		button.title = demoTypes[type];
-		button.addEventListener('click', function() {
+		button.addEventListener('click', function () {
 			stylesheet.href = stylePath;
 			const prev = document.querySelector('[aria-selected=true]');
 			if (prev) {
@@ -66,7 +70,9 @@ if (![].includes) {
 			}
 			this.setAttribute('aria-selected', 'true');
 
-			subheading && (subheading.innerHTML = this.title);
+			if (subheading) {
+				subheading.innerHTML = this.title;
+			}
 			html.className = html.className.replace(/\sstylesheet-(\w|-)+/, '') + ' stylesheet-' + type;
 
 			runTests();
@@ -75,7 +81,9 @@ if (![].includes) {
 			stylesheet.href = stylePath;
 			button.setAttribute('aria-selected', 'true');
 			html.className += ' stylesheet-' + type;
-			subheading && (subheading.innerHTML = button.title);
+			if (subheading) {
+				subheading.innerHTML = button.title;
+			}
 		}
 		tmp.appendChild(button);
 
@@ -91,20 +99,22 @@ function convertKeywordsToSpans(keyword) {
 	}
 
 	switch (keyword) {
-		case 'hide':
-			return 0;
-		case 'one-half':
-			return 6;
-		case 'one-third':
-			return 4;
-		case 'two-thirds':
-			return 8;
-		case 'one-quarter':
-			return 3;
-		case 'three-quarters':
-			return 9;
-		case 'full-width':
-			return 12;
+	case 'hide':
+		return 0;
+	case 'one-half':
+		return 6;
+	case 'one-third':
+		return 4;
+	case 'two-thirds':
+		return 8;
+	case 'one-quarter':
+		return 3;
+	case 'three-quarters':
+		return 9;
+	case 'full-width':
+		return 12;
+	default:
+		throw new Error('This should never happen.');
 	}
 }
 
@@ -142,12 +152,12 @@ function getExpectedModifier(el, modifier) {
 
 	let modifiedBy;
 
-	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
+	rules.replace(new RegExp('(?:^|\\s)' + layout + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
 		modifiedBy = $1;
 	});
 
 	if (typeof modifiedBy === 'undefined') {
-		rules.replace(new RegExp('(?:^|\\s)' + modifier + '(\\d{1,2})', 'g'), function($0, $1) {
+		rules.replace(new RegExp('(?:^|\\s)' + modifier + '(\\d{1,2})', 'g'), function ($0, $1) {
 			modifiedBy = $1;
 		});
 	}
@@ -197,7 +207,9 @@ function highlightUnexpectedMargin(el) {
 	if (almostEqual(expectedMarginLeft, actualMarginLeft, 1, 0.01)) {
 		el.className = el.className.replace(/\berror-margin\b/g, '');
 	} else {
-		/\berror-margin\b/.test(el.className) || (el.className += ' error-margin');
+		if (!/\berror-margin\b/.test(el.className)) {
+			el.className += ' error-margin';
+		}
 		console.error('Margin error', el, 'Left: ' + expectedMarginLeft + ' (expected) ' + actualMarginLeft + ' (actual) ');
 	}
 }
@@ -215,17 +227,21 @@ function highlightUnexpectedPosition(el) {
 	if (almostEqual(expectedPush, actualPush, 1, 0.01) && almostEqual(expectedPull, actualPull, 1, 0.01)) {
 		el.className = el.className.replace(/\berror-position\b/g, '');
 	} else {
-		/\berror-position\b/.test(el.className) || (el.className += ' error-position');
+		if (!/\berror-position\b/.test(el.className)) {
+			el.className += ' error-position';
+		}
 		console.error('Position error', el, 'Push: ' + expectedPush + ' (expected) ' + actualPush + ' (actual) ', 'Pull: ' + expectedPull + ' (expected) ' + actualPull + ' (actual) ');
 	}
 }
 
 function highlightUnexpectedWidth(el) {
-	const expectedPercentage = getExpectedSpans(el) * 100/12;
+	const expectedPercentage = getExpectedSpans(el) * 100 / 12;
 	const actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth);
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
-		/\berror-width\b/.test(el.className) || (el.className += ' error-width');
+		if (!/\berror-width\b/.test(el.className)) {
+			el.className += ' error-width';
+		}
 		console.error('Width error', el.attributes['data-o-grid-colspan'], 'Expected: ' + expectedPercentage, 'Actual: ' + actualPercentage);
 	} else {
 		el.className = el.className.replace(/\berror-width\b/g, '');
@@ -250,7 +266,7 @@ let resizeTimer = null;
 function runTests() {
 	setTimeout(tests, 300);
 
-	window.onresize = function() {
+	window.onresize = function () {
 		if (resizeTimer !== null) {
 			clearTimeout(resizeTimer);
 		}

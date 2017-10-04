@@ -99,22 +99,22 @@ function convertKeywordsToSpans(keyword) {
 	}
 
 	switch (keyword) {
-	case 'hide':
-		return 0;
-	case 'one-half':
-		return 6;
-	case 'one-third':
-		return 4;
-	case 'two-thirds':
-		return 8;
-	case 'one-quarter':
-		return 3;
-	case 'three-quarters':
-		return 9;
-	case 'full-width':
-		return 12;
-	default:
-		throw new Error('This should never happen.');
+		case 'hide':
+			return 0;
+		case 'one-half':
+			return 6;
+		case 'one-third':
+			return 4;
+		case 'two-thirds':
+			return 8;
+		case 'one-quarter':
+			return 3;
+		case 'three-quarters':
+			return 9;
+		case 'full-width':
+			return 12;
+		default:
+			throw new Error('This should never happen.');
 	}
 }
 

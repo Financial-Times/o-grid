@@ -11,8 +11,9 @@
 	"supportStatus": "active",
 	"browserFeatures": {
 		"required": [
-		"css-boxsizing",
-		"Map"
+			"css-boxsizing",
+			"Map",
+			"Array.prototype.includes"
 		]
 	},
 	"ci": {

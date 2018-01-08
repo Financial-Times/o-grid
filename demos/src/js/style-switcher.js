@@ -7,46 +7,6 @@ const getCurrentGutter = require('../../../main').getCurrentGutter;
 const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================
-// Polyfills
-
-// https://cdn.polyfill.io/v1/polyfill.js?features=String.prototype.contains
-String.prototype.includes = function (string, index) {
-	if (typeof string === 'object' && string instanceof RegExp) {
-		throw new TypeError("First argument to String.prototype.includes must not be a regular expression");
-	}
-	return this.indexOf(string, index) !== -1;
-};
-
-if (![].includes) {
-	Array.prototype.includes = function (searchElement /*, fromIndex*/ ) {
-		const O = Object(this);
-		const len = parseInt(O.length, 10) || 0;
-		if (len === 0) {
-			return false;
-		}
-		const n = parseInt(arguments[1], 10) || 0;
-		let k;
-		if (n >= 0) {
-			k = n;
-		} else {
-			k = len + n;
-			if (k < 0) {
-				k = 0;
-			}
-		}
-		let currentElement;
-		while (k < len) {
-			currentElement = O[k];
-			if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) { // eslint-disable-line no-self-compare
-				return true;
-			}
-			k++;
-		}
-		return false;
-	};
-}
-
-// ============================================================================
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
 	const demoTypes = require('../configurations.json');

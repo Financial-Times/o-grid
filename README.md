@@ -21,11 +21,11 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 		- [Responsive width for different layouts](#responsive-width-for-different-layouts)
 		- [Responsive layout helper](#responsive-layout-helper)
 		- [Gutters](#gutters)
-		- [Unstyle a row or a coliuumn](#unstyle-a-row-or-a-column)
+		- [Unstyle a row or a column](#unstyle-a-row-or-a-column)
 		- [Variables](#variables)
 		- [Adding a layout](#adding-a-layout)
 		- [Debug mode](#debug-mode)
-	- [Javascript Helpers](#javascript-helpers)
+	- [JavaScript Helpers](#javascript-helpers)
 	- [Grid Bookmarklet](#grid-bookmarklet)
 - [Migration Guide](#migration-guide)
 - [Contact](#contact)
@@ -34,7 +34,7 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 [![Grid system](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)
 
 ## Usage
-This component is a collection of Sass styles to build a 12 column grid system, with a few Javascript helpers.
+This component is a collection of Sass styles to build a 12 column grid system, with a few JavaScript helpers.
 
 
 ## Quick Start

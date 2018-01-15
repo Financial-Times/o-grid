@@ -4,7 +4,38 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 
 > Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
 
+- [Usage](#usage)
+	- [Quick Start](#quick-start)
+	- [Browser Support](#browser-support)
+	- [Grid Dimensions](#grid-dimensions)
+	- [Markup](#markup)
+	- [Advanced Usage](#advanced-usage)
+		- [Hiding elements](#hiding-elements)
+		- [Centering a column](#centering-a-column)
+		- [Push and pull columns](#push-and-pull-columns)
+		- [Add space before a column](#add-space-before-a-column)
+		- [Snappy Mode](#snappy-mode)
+		- [Compact (gutterless) rows](#compact-gutterless-rows)
+		- [Full Bleed Container](#full-bleed-container)
+		- [Responsive column helper](#responsive-column-helper)
+		- [Responsive width for different layouts](#responsive-width-for-different-layouts)
+		- [Responsive layout helper](#responsive-layout-helper)
+		- [Gutters](#gutters)
+		- [Unstyle a row or a column](#unstyle-a-row-or-a-column)
+		- [Variables](#variables)
+		- [Adding a layout](#adding-a-layout)
+		- [Debug mode](#debug-mode)
+	- [JavaScript Helpers](#javascript-helpers)
+	- [Grid Bookmarklet](#grid-bookmarklet)
+- [Migration Guide](#migration-guide)
+- [Contact](#contact)
+- [License](#license)
+
 [![Grid system](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)
+
+## Usage
+This component is a collection of Sass styles to build a 12 column grid system, with a few JavaScript helpers.
+
 
 ## Quick Start
 
@@ -67,7 +98,7 @@ Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/bo
 * **Large (L)** 980px to 1219px
 * **Extra large (XL)** 1220px
 
-## Quick start
+## Markup
 
 ### Utility classes
 
@@ -678,16 +709,16 @@ by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
 
-----
+## Migration Guide
 
-## How to upgrade from v3.x.x to v4.x.x?
+### Upgrading from v3.x.x to v4.x.x
 
-### Important Changes
+#### Important Changes
 
 - Layout sizes have slightly changed (M, L and XL are 10px wider).
 - Gutter widths vary between layouts (default: 10px, M and above: 20px)
 
-### Markup/Sass changes
+#### Markup/Sass changes
 
 - Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`.
 - Search `oGridColumn` and replace with `oGridColspan`.
@@ -695,6 +726,12 @@ by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 - `$o-grid-gutter` becomes `$o-grid-gutters` (plural) and now contains a map
 - Change all `$o-grid-gutter` to `oGridGutter()`. e.g. `margin-left: $o-grid-gutter` becomes `margin-left: oGridGutter()`
 - A few helpers have been removed because they weren't used.
+
+----
+
+## Contact
+
+If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/o-subs-card/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).		 If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/o-subs-card/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).
 
 ----
 

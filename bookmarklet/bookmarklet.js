@@ -175,7 +175,7 @@
 	function init() {
 		if (!window.jQuery) {
 			var jQueryScript = document.createElement("script");
-			jQueryScript.src  = "http://code.jquery.com/jquery-1.10.0.min.js";
+			jQueryScript.src  = "https://code.jquery.com/jquery-3.3.0.min.js";
 			jQueryScript.onload = function() { startBookmarklet(window.jQuery); };
 			head.appendChild(jQueryScript);
 		} else {

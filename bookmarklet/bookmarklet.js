@@ -167,7 +167,7 @@
 
 	var head = document.getElementsByTagName("head")[0];
 	var gridScript = document.createElement("script");
-	gridScript.src = "https://build-origami.ft.com/v2/bundles/js?modules=o-grid@^4.0.0";
+	gridScript.src = "https://www.ft.com/__origami/service/build/v2/bundles/js?modules=o-grid@^4.0.0";
 	gridScript.onload = init();
 	head.appendChild(gridScript);
 

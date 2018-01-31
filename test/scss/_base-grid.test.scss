@@ -15,6 +15,7 @@
 			};
 		};
 	};
+	
 	@include describe('mixin: oGridSurfaceCurrentLayout') {
 		@include test('sass mixin complies correctly to display layout sizes in use') {
 			@include assert() {

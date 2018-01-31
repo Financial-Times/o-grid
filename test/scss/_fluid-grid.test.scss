@@ -203,6 +203,129 @@
 		};
 	}
 
+	@include describe('mixin: oGridContainer') {
+		@include test('sass mixin compiles correctly for regular container') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-container {
+						@include oGridContainer;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-container {
+						position: relative;
+						margin-left: auto;
+						margin-right: auto;
+						min-width: 240px;
+						max-width: 1220px;
+						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
+						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						padding-left: 10px;
+						padding-right: 10px;
+					}
+
+					@media (min-width: 46.25em) {
+						.test-container {
+							padding-left: 20px;
+							padding-right: 20px;
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 740px;
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 980px;
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 1220px;
+						}
+					}
+
+					@media \0screen {
+						.test-container {
+							padding-left: 20px;
+							padding-right: 20px;
+							width: 980px;
+						}
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin compiles correctly for bleed container') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-container {
+						@include oGridContainer($bleed: true);
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-container {
+						position: relative;
+						margin-left: auto;
+						margin-right: auto;
+						min-width: 240px;
+						max-width: 1220px;
+						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
+						padding-left: 0;
+						padding-right: 0;
+						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+					}
+
+					@media (min-width: 46.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 740px;
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 980px;
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 1220px;
+						}
+					}
+
+					@media \0screen {
+						.test-container {
+							width: 980px;
+						}
+					};
+				};
+			};
+		};
+	};
+
 	@include describe('mixin: oGridRespondTo') {
 		@include test('sass mixin complies correct media query for <S') {
 			@include assert() {

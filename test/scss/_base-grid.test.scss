@@ -209,7 +209,7 @@
 	};
 
 	@include describe('mixin: oGridUncenter') {
-		@include test('sass mixin compiles correctly to uncenter column styles')  {
+		@include test('sass mixin compiles correctly to uncenter column ')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-uncenter {
@@ -284,6 +284,24 @@
 					.test-pull {
 						left: 25%;
 						right: auto;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPush') {
+		@include test('add space before a column') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-offset {
+					 	@include oGridOffset(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-offset {
+						margin-left: 25%;
 					}
 				};
 			};

@@ -162,6 +162,32 @@
 		};
 	};
 
+	@include describe('mixin: oGridResetRow') {
+		@include test('sass mixin compiles correctly to remove gutters')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-compact {
+						@include oGridResetRow;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-compact {
+						clear: none;
+						display: block;
+						flex-wrap: nowrap;
+						margin-left: 0;
+					}
+
+					.test-compact:before,
+					.test-compact:after {
+						display: none;
+					};
+				};
+			};
+		};
+	};
+
 	@include describe('mixin: oGridPull') {
 		@include test('pull grid to right by # of column') {
 			@include assert()  {

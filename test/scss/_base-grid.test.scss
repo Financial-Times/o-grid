@@ -166,22 +166,42 @@
 		@include test('sass mixin compiles correctly to remove gutters')  {
 			@include assert() {
 				@include output($selector: false)  {
-					.test-compact {
+					.test-reset {
 						@include oGridResetRow;
 					};
 				};
 
 				@include expect($selector: false) {
-					.test-compact {
+					.test-reset {
 						clear: none;
 						display: block;
 						flex-wrap: nowrap;
 						margin-left: 0;
 					}
 
-					.test-compact:before,
-					.test-compact:after {
+					.test-reset:before,
+					.test-reset:after {
 						display: none;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridCenter') {
+		@include test('sass mixin compiles correctly to remove gutters')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-center {
+						@include oGridCenter;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-center {
+						margin-left: auto;
+						margin-right: auto;
+						float: none;
 					};
 				};
 			};

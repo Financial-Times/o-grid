@@ -67,15 +67,17 @@ $inspect: true;
 						float: left;
 						flex: 1 1 0%;
 						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
 						-webkit-box-sizing: border-box;
 						-moz-box-sizing: border-box;
 						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
 						padding-left: 10px;
 					}
 
 					@media \0screen {
 						.test-colspan {
-							min-width: 0 !important;
+							min-width: 0 !important; // sass-lint:disable-line no-important
 						}
 					}
 
@@ -192,8 +194,10 @@ $inspect: true;
 					.test-row:before,
 					.test-row:after {
 						content: '';
+						// sass-lint:disable no-duplicate-properties
 						display: table;
 						display: flex;
+						// sass-lint:enable no-duplicate-properties
 					}
 
 					.test-row:after {
@@ -208,7 +212,7 @@ $inspect: true;
 		@include test('sass mixin complies correct media query for <S') {
 			@include assert() {
 				@include output {
-					@include oGridRespondTo($until:S) {
+					@include oGridRespondTo($until: S) {
 						background: peachpuff;
 					};
 				};
@@ -398,8 +402,10 @@ $o-grid-mode: 'fixed';
 					.test-row:before,
 					.test-row:after {
 						content: '';
+						// sass-lint:disable no-duplicate-properties
 						display: table;
 						display: flex;
+						// sass-lint:disable no-duplicate-properties
 					}
 
 					.test-row:after {
@@ -425,15 +431,17 @@ $o-grid-mode: 'fixed';
 						float: left;
 						flex: 1 1 0%;
 						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
 						-webkit-box-sizing: border-box;
 						-moz-box-sizing: border-box;
 						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
 						padding-left: 20px;
 					}
 
 					@media \0screen {
 						.test-colspan {
-							min-width: 0 !important;
+							min-width: 0 !important; // sass-lint:disable-line no-important
 						}
 					}
 				};

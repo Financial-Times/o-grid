@@ -1,34 +1,4 @@
 @include describe('oGrid — fluid') {
-	@include describe('function: oGridColspan') {
-		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
-			@include assert-equal(oGridColspan(1/2), (50%));
-			@include assert-equal(oGridColspan(1/4), (25%));
-			@include assert-equal(round(oGridColspan(1/3)), round((33.33333%)));
-			@include assert-equal(round(oGridColspan(2/3)), round((66.66667%)));
-			@include assert-equal(round(oGridColspan(1)), round((8.33333%)));
-			@include assert-equal(round(oGridColspan(2)), round((16.66667%)));
-			@include assert-equal(oGridColspan(3), (25%));
-			@include assert-equal(round(oGridColspan(4)), round((33.33333%)));
-			@include assert-equal(round(oGridColspan(5)), round((41.66667%)));
-			@include assert-equal(oGridColspan(6), (50%));
-			@include assert-equal(round(oGridColspan(7)), round((58.33333%)));
-			@include assert-equal(round(oGridColspan(8)), round((66.66667%)));
-			@include assert-equal(oGridColspan(9), (75%));
-			@include assert-equal(round(oGridColspan(10)), round((83.33333%)));
-			@include assert-equal(round(oGridColspan(11)), round((91.666673%)));
-			@include assert-equal(oGridColspan(12), (100%));
-		};
-	};
-
-	@include describe('function: oGridGutter') {
-		@include it('should return the default gutter') {
-			@include assert-equal(oGridGutter(), (10px));
-		};
-		@include it('should return the gutter for M<') {
-			@include assert-equal(oGridGutter(M), (20px));
-		};
-	};
-
 	@include describe('function: oGridGetMaxWidthForLayout') {
 		@include it('gets the max width for S') {
 			@include assert-equal(oGridGetMaxWidthForLayout(S), (740px));
@@ -44,285 +14,6 @@
 
 		@include it('gets the max width for XL') {
 			@include assert-equal(oGridGetMaxWidthForLayout(XL), (1220px));
-		};
-	};
-
-	@include describe('mixin: oGridColspan') {
-		@include test('sass mixin complies base column styles') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-colspan {
-						@include oGridColspan();
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-colspan {
-						position: relative;
-						float: left;
-						flex: 1 1 0%;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
-						padding-left: 10px;
-					}
-
-					@media \0screen {
-						.test-colspan {
-							min-width: 0 !important; // sass-lint:disable-line no-important
-						}
-					}
-
-					@media (min-width: 46.25em) {
-						.test-colspan {
-							padding-left: 20px;
-						}
-					}
-
-					@media \0screen {
-						.test-colspan {
-							padding-left: 20px;
-						}
-					}
-				};
-			};
-		};
-
-		@include test('sass mixin complies for a column span of 3 and width only') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-colspan {
-						@include oGridColspan($span: 3, $width-only: true);
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-colspan {
-						display: block;
-						flex-basis: 25%;
-						min-width: 25%;
-						max-width: 25%;
-						width: 25%;
-					}
-				};
-			};
-		};
-	};
-
-	@include describe('mixin: oGridPull') {
-		@include test('pull grid to right by # of column') {
-			@include assert()  {
-				@include output($selector: false) {
-					.test-pull {
-					 	@include oGridPull(3);
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-pull {
-						right: 25%;
-						left: auto;
-					}
-				};
-			};
-		};
-	};
-
-	@include describe('mixin: oGridPush') {
-		@include test('push grid to left by # of columns') {
-			@include assert()  {
-				@include output($selector: false) {
-					.test-pull {
-					 	@include oGridPush(3);
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-pull {
-						left: 25%;
-						right: auto;
-					}
-				};
-			};
-		};
-	};
-
-	@include describe('mixin: oGridRow') {
-		@include test('sass mixin complies correctly') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-row {
-						@include oGridRow();
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-row {
-						clear: both;
-						flex-wrap: wrap;
-						display: flex;
-						margin-left: -10px;
-						zoom: 1;
-					}
-
-					@media print {
-						.test-row {
-							display: inherit;
-						}
-					}
-
-					@media (min-width: 46.25em) {
-						.test-row  {
-							margin-left: -20px;
-						}
-					}
-
-					@media \0screen {
-						.test-row {
-							margin-left: -20px;
-						}
-					}
-
-					.test-row:before,
-					.test-row:after {
-						content: '';
-						// sass-lint:disable no-duplicate-properties
-						display: table;
-						display: flex;
-						// sass-lint:enable no-duplicate-properties
-					}
-
-					.test-row:after {
-						clear: both;
-					}
-				};
-			};
-		};
-	}
-
-	@include describe('mixin: oGridContainer') {
-		@include test('sass mixin compiles correctly for regular container') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-container {
-						@include oGridContainer;
-					};
-				};
-
-				@include expect($selector: false) {
-					.test-container {
-						position: relative;
-						margin-left: auto;
-						margin-right: auto;
-						min-width: 240px;
-						max-width: 1220px;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
-						padding-left: 10px;
-						padding-right: 10px;
-					}
-
-					@media (min-width: 46.25em) {
-						.test-container {
-							padding-left: 20px;
-							padding-right: 20px;
-						}
-					}
-
-					@media (min-width: 46.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 740px;
-						}
-					}
-
-					@media (min-width: 61.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 980px;
-						}
-					}
-
-					@media (min-width: 76.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 1220px;
-						}
-					}
-
-					@media \0screen {
-						.test-container {
-							padding-left: 20px;
-							padding-right: 20px;
-							width: 980px;
-						}
-					};
-				};
-			};
-		};
-
-		@include test('sass mixin compiles correctly for bleed container') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-container {
-						@include oGridContainer($bleed: true);
-					};
-				};
-
-				@include expect($selector: false) {
-					.test-container {
-						position: relative;
-						margin-left: auto;
-						margin-right: auto;
-						min-width: 240px;
-						max-width: 1220px;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
-						padding-left: 0;
-						padding-right: 0;
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
-					}
-
-					@media (min-width: 46.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 740px;
-						}
-					}
-
-					@media (min-width: 61.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 980px;
-						}
-					}
-
-					@media (min-width: 76.25em) {
-						.o-grid-snappy .test-container,
-						.test-container--snappy {
-							max-width: 1220px;
-						}
-					}
-
-					@media \0screen {
-						.test-container {
-							width: 980px;
-						}
-					};
-				};
-			};
 		};
 	};
 
@@ -471,4 +162,245 @@
 			};
 		};
 	};
+
+	@include describe('mixin: oGridColspan') {
+		@include test('sass mixin complies base column styles') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-colspan {
+						@include oGridColspan();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-colspan {
+						position: relative;
+						float: left;
+						flex: 1 1 0%;
+						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
+						padding-left: 10px;
+					}
+
+					@media \0screen {
+						.test-colspan {
+							min-width: 0 !important; // sass-lint:disable-line no-important
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.test-colspan {
+							padding-left: 20px;
+						}
+					}
+
+					@media \0screen {
+						.test-colspan {
+							padding-left: 20px;
+						}
+					}
+				};
+			};
+		};
+
+		@include test('sass mixin complies for a column span of 3 and width only') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-colspan {
+						@include oGridColspan($span: 3, $width-only: true);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-colspan {
+						display: block;
+						flex-basis: 25%;
+						min-width: 25%;
+						max-width: 25%;
+						width: 25%;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridContainer') {
+		@include test('sass mixin compiles correctly for regular container') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-container {
+						@include oGridContainer;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-container {
+						position: relative;
+						margin-left: auto;
+						margin-right: auto;
+						min-width: 240px;
+						max-width: 1220px;
+						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
+						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						padding-left: 10px;
+						padding-right: 10px;
+					}
+
+					@media (min-width: 46.25em) {
+						.test-container {
+							padding-left: 20px;
+							padding-right: 20px;
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 740px;
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 980px;
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 1220px;
+						}
+					}
+
+					@media \0screen {
+						.test-container {
+							padding-left: 20px;
+							padding-right: 20px;
+							width: 980px;
+						}
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin compiles correctly for bleed container') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-container {
+						@include oGridContainer($bleed: true);
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-container {
+						position: relative;
+						margin-left: auto;
+						margin-right: auto;
+						min-width: 240px;
+						max-width: 1220px;
+						/*autoprefixer: off*/
+						// sass-lint:disable no-vendor-prefixes
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						// sass-lint:enable no-vendor-prefixes
+						padding-left: 0;
+						padding-right: 0;
+						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+					}
+
+					@media (min-width: 46.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 740px;
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 980px;
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						.o-grid-snappy .test-container,
+						.test-container--snappy {
+							max-width: 1220px;
+						}
+					}
+
+					@media \0screen {
+						.test-container {
+							width: 980px;
+						}
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridRow') {
+		@include test('sass mixin complies correctly') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-row {
+						@include oGridRow();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-row {
+						clear: both;
+						flex-wrap: wrap;
+						display: flex;
+						margin-left: -10px;
+						zoom: 1;
+					}
+
+					@media print {
+						.test-row {
+							display: inherit;
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.test-row  {
+							margin-left: -20px;
+						}
+					}
+
+					@media \0screen {
+						.test-row {
+							margin-left: -20px;
+						}
+					}
+
+					.test-row:before,
+					.test-row:after {
+						content: '';
+						// sass-lint:disable no-duplicate-properties
+						display: table;
+						display: flex;
+						// sass-lint:enable no-duplicate-properties
+					}
+
+					.test-row:after {
+						clear: both;
+					}
+				};
+			};
+		};
+	}
 };

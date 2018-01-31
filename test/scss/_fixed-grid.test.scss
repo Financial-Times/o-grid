@@ -19,47 +19,6 @@ $o-grid-mode: 'fixed';
 		};
 	};
 
-	@include describe('mixin: oGridRow') {
-		@include test('sass mixin complies correctly') {
-			@include assert() {
-				@include output($selector: false) {
-					.test-row {
-						@include oGridRow();
-					}
-				};
-
-				@include expect($selector: false) {
-					.test-row {
-						clear: both;
-						flex-wrap: wrap;
-						display: flex;
-						margin-left: -20px;
-						zoom: 1;
-					}
-
-					@media print {
-						.test-row {
-							display: inherit;
-						}
-					}
-
-					.test-row:before,
-					.test-row:after {
-						content: '';
-						// sass-lint:disable no-duplicate-properties
-						display: table;
-						display: flex;
-						// sass-lint:disable no-duplicate-properties
-					}
-
-					.test-row:after {
-						clear: both;
-					}
-				};
-			};
-		};
-	};
-
 	@include describe('mixin: oGridColspan') {
 		@include test('sass mixin complies base column styles') {
 			@include assert() {
@@ -147,6 +106,47 @@ $o-grid-mode: 'fixed';
 						padding-left: 0;
 						padding-right: 0;
 						width: 980px; // sass-lint:disable-line no-duplicate-properties
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridRow') {
+		@include test('sass mixin complies correctly') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-row {
+						@include oGridRow();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-row {
+						clear: both;
+						flex-wrap: wrap;
+						display: flex;
+						margin-left: -20px;
+						zoom: 1;
+					}
+
+					@media print {
+						.test-row {
+							display: inherit;
+						}
+					}
+
+					.test-row:before,
+					.test-row:after {
+						content: '';
+						// sass-lint:disable no-duplicate-properties
+						display: table;
+						display: flex;
+						// sass-lint:disable no-duplicate-properties
+					}
+
+					.test-row:after {
+						clear: both;
 					}
 				};
 			};

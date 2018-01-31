@@ -163,7 +163,7 @@
 	};
 
 	@include describe('mixin: oGridResetRow') {
-		@include test('sass mixin compiles correctly to remove gutters')  {
+		@include test('sass mixin compiles correctly to reset row styles')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-reset {
@@ -189,7 +189,7 @@
 	};
 
 	@include describe('mixin: oGridCenter') {
-		@include test('sass mixin compiles correctly to remove gutters')  {
+		@include test('sass mixin compiles correctly to center column')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-center {
@@ -203,6 +203,50 @@
 						margin-right: auto;
 						float: none;
 					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridUncenter') {
+		@include test('sass mixin compiles correctly to uncenter column styles')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-uncenter {
+						@include oGridUncenter;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-uncenter {
+						margin-left: 0;
+						margin-right: 0;
+						float: left;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridResetColumn') {
+		@include test('sass mixin compiles correctly to remove column styles')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-reset-column {
+						@include oGridResetColumn;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-reset-column {
+						padding-left: 0;
+						padding-right: 0;
+						float: none;
+						width: auto;
+						min-width: 0;
+						max-width: none;
+						flex: none;
+					}
 				};
 			};
 		};

@@ -2,9 +2,8 @@
 
 @import '../main';
 
-// $inspect: true;
-//unit test example
-@include describe('oGrid') {
+$inspect: true;
+@include describe('oGrid - fluid') {
 	@include describe('oGridColspan') {
 		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
 			@include assert-equal(oGridColspan(1/2), (50%));
@@ -26,7 +25,58 @@
 		};
 	};
 
-	//integration test example
+	@include describe('oGridRow') {
+		@include test('sass mixin complies correctly') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-row {
+						@include oGridRow();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-row {
+						clear: both;
+						flex-wrap: wrap;
+						display: flex;
+						margin-left: -10px;
+						zoom: 1;
+					}
+
+					@media print {
+						.test-row {
+							display: inherit;
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.test-row  {
+							margin-left: -20px;
+						}
+					}
+
+					@media \0screen {
+						.test-row {
+							margin-left: -20px;
+						}
+					}
+
+					.test-row:before,
+					.test-row:after {
+						content: '';
+						display: table;
+						display: flex;
+					}
+
+					.test-row:after {
+						clear: both;
+					}
+				};
+			};
+		};
+	}
+
+	//
 	@include describe('oGridRespondTo') {
 		@include test('sass mixin complies correct media query for <S') {
 			@include assert() {
@@ -171,6 +221,47 @@
 				};
 			};
 		};
+	};
+};
 
+$o-grid-mode: 'fixed';
+@include describe('oGrid - fixed') {
+	@include describe('oGridRow') {
+		@include test('sass mixin complies correctly') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-row {
+						@include oGridRow();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-row {
+						clear: both;
+						flex-wrap: wrap;
+						display: flex;
+						margin-left: -20px;
+						zoom: 1;
+					}
+
+					@media print {
+						.test-row {
+							display: inherit;
+						}
+					}
+
+					.test-row:before,
+					.test-row:after {
+						content: '';
+						display: table;
+						display: flex;
+					}
+
+					.test-row:after {
+						clear: both;
+					}
+				};
+			};
+		};
 	};
 };

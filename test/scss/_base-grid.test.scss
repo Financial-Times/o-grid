@@ -1,0 +1,111 @@
+@include describe ('oGrid — base') {
+	@include describe('mixin: oGridSurfaceLayoutSizes') {
+		@include test('sass mixin complies correctly to display layout sizes') {
+			@include assert() {
+				@include output($selector: false) {
+					@include oGridSurfaceLayoutSizes;
+				};
+
+				@include expect($selector: false) {
+					html:before {
+						display: none;
+						content: '{"layouts": {"S": "490px", "M": "740px", "L": "980px", "XL": "1220px"}}';
+					}
+				};
+			};
+		};
+	};
+	@include describe('mixin: oGridSurfaceCurrentLayout') {
+		@include test('sass mixin complies correctly to display layout sizes in use') {
+			@include assert() {
+				@include output {
+					@include oGridSurfaceCurrentLayout;
+				};
+
+				@include expect {
+					html:after {
+						content: '{ "layout": "default", "gutter": "10px" }';
+						display: none;
+					}
+
+					@media (min-width: 30.625em) {
+						html:after {
+							content: '{ "layout": "S", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						html:after {
+							content: '{ "layout": "M", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						html:after {
+							content: '{ "layout": "L", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						html:after {
+							content: '{ "layout": "XL", "gutter": "20px" }';
+						}
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridAddLayout') {
+		@include test('sass mixin complies correctly with new layout') {
+			@include assert() {
+				@include output {
+					@include oGridAddLayout(
+						$layout-name: XXS,
+						$layout-width: 128px
+					);
+					@include oGridSurfaceCurrentLayout;
+				};
+
+				@include expect {
+					html:after {
+						content: '{ "layout": "default", "gutter": "10px" }';
+						display: none;
+					}
+
+					@media (min-width: 8em) {
+						html:after {
+							content: '{ "layout": "XXS", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 30.625em) {
+						html:after {
+							content: '{ "layout": "S", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						html:after {
+							content: '{ "layout": "M", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						html:after {
+							content: '{ "layout": "L", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						html:after {
+							content: '{ "layout": "XL", "gutter": "20px" }';
+						}
+					}
+				};
+			};
+		};
+
+
+	};
+};

@@ -1,4 +1,4 @@
-@include describe('oGrid - fluid') {
+@include describe('oGrid — fluid') {
 	@include describe('function: oGridColspan') {
 		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
 			@include assert-equal(oGridColspan(1/2), (50%));

@@ -4,7 +4,7 @@
 
 $inspect: true;
 @include describe('oGrid - fluid') {
-	@include describe('oGridColspan') {
+	@include describe('function: oGridColspan') {
 		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
 			@include assert-equal(oGridColspan(1/2), (50%));
 			@include assert-equal(oGridColspan(1/4), (25%));
@@ -25,7 +25,135 @@ $inspect: true;
 		};
 	};
 
-	@include describe('oGridRow') {
+	@include describe('function: oGridGutter') {
+		@include it('should return the default gutter') {
+			@include assert-equal(oGridGutter(), (10px));
+		};
+		@include it('should return the gutter for M<') {
+			@include assert-equal(oGridGutter(M), (20px));
+		};
+	};
+
+	@include describe('function: oGridGetMaxWidthForLayout') {
+		@include it('gets the max width for S') {
+			@include assert-equal(oGridGetMaxWidthForLayout(S), (740px));
+		};
+
+		@include it('gets the max width for M') {
+			@include assert-equal(oGridGetMaxWidthForLayout(M), (980px));
+		};
+
+		@include it('gets the max width for L') {
+			@include assert-equal(oGridGetMaxWidthForLayout(L), (1220px));
+		};
+
+		@include it('gets the max width for XL') {
+			@include assert-equal(oGridGetMaxWidthForLayout(XL), (1220px));
+		};
+	};
+
+	@include describe('mixin: oGridColspan') {
+		@include test('sass mixin complies base column styles') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-colspan {
+						@include oGridColspan();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-colspan {
+						position: relative;
+						float: left;
+						flex: 1 1 0%;
+						/*autoprefixer: off*/
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						padding-left: 10px;
+					}
+
+					@media \0screen {
+						.test-colspan {
+							min-width: 0 !important;
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						.test-colspan {
+							padding-left: 20px;
+						}
+					}
+
+					@media \0screen {
+						.test-colspan {
+							padding-left: 20px;
+						}
+					}
+				};
+			};
+		};
+
+		@include test('sass mixin complies for a column span of 3 and width only') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-colspan {
+						@include oGridColspan($span: 3, $width-only: true);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-colspan {
+						display: block;
+						flex-basis: 25%;
+						min-width: 25%;
+						max-width: 25%;
+						width: 25%;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPull') {
+		@include test('pull grid to right by # of column') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-pull {
+					 	@include oGridPull(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-pull {
+						right: 25%;
+						left: auto;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPush') {
+		@include test('push grid to left by # of columns') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-pull {
+					 	@include oGridPush(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-pull {
+						left: 25%;
+						right: auto;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridRow') {
 		@include test('sass mixin complies correctly') {
 			@include assert() {
 				@include output($selector: false) {
@@ -76,8 +204,7 @@ $inspect: true;
 		};
 	}
 
-	//
-	@include describe('oGridRespondTo') {
+	@include describe('mixin: oGridRespondTo') {
 		@include test('sass mixin complies correct media query for <S') {
 			@include assert() {
 				@include output {
@@ -226,7 +353,25 @@ $inspect: true;
 
 $o-grid-mode: 'fixed';
 @include describe('oGrid - fixed') {
-	@include describe('oGridRow') {
+	@include describe('function: oGridGetMaxWidthForLayout') {
+		@include it('gets the max width for S') {
+			@include assert-equal(oGridGetMaxWidthForLayout(S), (490px));
+		};
+
+		@include it('gets the max width for M') {
+			@include assert-equal(oGridGetMaxWidthForLayout(M), (740px));
+		};
+
+		@include it('gets the max width for L') {
+			@include assert-equal(oGridGetMaxWidthForLayout(L), (980px));
+		};
+
+		@include it('gets the max width for XL') {
+			@include assert-equal(oGridGetMaxWidthForLayout(XL), (1220px));
+		};
+	};
+
+	@include describe('mixin: oGridRow') {
 		@include test('sass mixin complies correctly') {
 			@include assert() {
 				@include output($selector: false) {
@@ -259,6 +404,37 @@ $o-grid-mode: 'fixed';
 
 					.test-row:after {
 						clear: both;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridColspan') {
+		@include test('sass mixin complies base column styles') {
+			@include assert() {
+				@include output($selector: false) {
+					.test-colspan {
+						@include oGridColspan();
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-colspan {
+						position: relative;
+						float: left;
+						flex: 1 1 0%;
+						/*autoprefixer: off*/
+						-webkit-box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						box-sizing: border-box;
+						padding-left: 20px;
+					}
+
+					@media \0screen {
+						.test-colspan {
+							min-width: 0 !important;
+						}
 					}
 				};
 			};

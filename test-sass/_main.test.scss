@@ -28,24 +28,149 @@
 
 	//integration test example
 	@include describe('oGridRespondTo') {
-		@include test('sass mixin complies') {
-			@include assert('correct media query for S') {
+		@include test('sass mixin complies correct media query for <S') {
+			@include assert() {
 				@include output {
-					@include oGridRespondTo(S) {
-						.test {
-							background: hotpink;
-						};
+					@include oGridRespondTo($until:S) {
+						background: peachpuff;
 					};
 				};
 
 				@include expect {
-					@media(min-width: 20em) and (max-width: 46.24em) {
-						.test {
-							background: hotpink;
-						};
+					@media (max-width: 30.615em) {
+						background: peachpuff;
 					};
 				};
 			};
 		};
+
+		@include test('sass mixin complies correct media query for S<') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo(S) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 30.625em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query S< >M') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo($from: S, $until: M) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 30.625em) and (max-width: 46.24em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query S< >M') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo($from: S, $until: M) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 30.625em) and (max-width: 46.24em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query >M') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo($until: M) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (max-width: 46.24em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query M< >L') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo($from: M, $until: L) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 46.25em) and (max-width: 61.24em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query >L') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo(L) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 61.25em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query L< >XL') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo($from: L, $until: XL) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 61.25em) and (max-width: 76.24em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
+		@include test('sass mixin complies correct media query XL<') {
+			@include assert() {
+				@include output {
+					@include oGridRespondTo(XL) {
+						background: peachpuff;
+					};
+				};
+
+				@include expect {
+					@media (min-width: 76.25em) {
+						background: peachpuff;
+					};
+				};
+			};
+		};
+
 	};
 };

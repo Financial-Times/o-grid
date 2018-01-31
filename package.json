@@ -4,7 +4,8 @@
   "description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and modules.",
   "main": "main.js",
   "devDependencies": {
-    "mocha": "^5.0.0"
+    "mocha": "^5.0.0",
+    "sass-true": "^3.0.2"
   },
   "scripts": {
     "test": "mocha test/scss/"

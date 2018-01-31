@@ -7,6 +7,6 @@
     "mocha": "^5.0.0"
   },
   "scripts": {
-    "test": "mocha test-sass/"
+    "test": "mocha test/scss/"
   }
 }

@@ -5,7 +5,7 @@
     "main.js"
   ],
   "dependencies": {
-    "sass-mq": "sass-mq#^3.1.0"
+    "sass-mq": "^3.1.0"
   },
   "ignore" : []
 }

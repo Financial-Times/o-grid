@@ -6,5 +6,4 @@
 .idea
 build/
 docs/
-test/error.css
 npm-debug.log

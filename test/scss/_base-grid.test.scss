@@ -1,0 +1,310 @@
+@include describe ('oGrid — base') {
+	@include describe('mixin: oGridSurfaceLayoutSizes') {
+		@include test('sass mixin complies correctly to display layout sizes') {
+			@include assert() {
+				@include output($selector: false) {
+					@include oGridSurfaceLayoutSizes;
+				};
+
+				@include expect($selector: false) {
+					html:before {
+						display: none;
+						content: '{"layouts": {"S": "490px", "M": "740px", "L": "980px", "XL": "1220px"}}';
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridSurfaceCurrentLayout') {
+		@include test('sass mixin complies correctly to display layout sizes in use') {
+			@include assert() {
+				@include output {
+					@include oGridSurfaceCurrentLayout;
+				};
+
+				@include expect {
+					html:after {
+						content: '{ "layout": "default", "gutter": "10px" }';
+						display: none;
+					}
+
+					@media (min-width: 30.625em) {
+						html:after {
+							content: '{ "layout": "S", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						html:after {
+							content: '{ "layout": "M", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						html:after {
+							content: '{ "layout": "L", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						html:after {
+							content: '{ "layout": "XL", "gutter": "20px" }';
+						}
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridAddLayout') {
+		@include test('sass mixin complies correctly with new layout') {
+			@include assert() {
+				@include output {
+					@include oGridAddLayout(
+						$layout-name: XXS,
+						$layout-width: 128px
+					);
+					@include oGridSurfaceCurrentLayout;
+				};
+
+				@include expect {
+					html:after {
+						content: '{ "layout": "default", "gutter": "10px" }';
+						display: none;
+					}
+
+					@media (min-width: 8em) {
+						html:after {
+							content: '{ "layout": "XXS", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 30.625em) {
+						html:after {
+							content: '{ "layout": "S", "gutter": "10px" }';
+						}
+					}
+
+					@media (min-width: 46.25em) {
+						html:after {
+							content: '{ "layout": "M", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 61.25em) {
+						html:after {
+							content: '{ "layout": "L", "gutter": "20px" }';
+						}
+					}
+
+					@media (min-width: 76.25em) {
+						html:after {
+							content: '{ "layout": "XL", "gutter": "20px" }';
+						}
+					}
+				};
+			};
+		};
+
+
+	};
+
+	@include describe('function: oGridGutter') {
+		@include it('should return the default gutter') {
+			@include assert-equal(oGridGutter(), (10px));
+		};
+		@include it('should return the gutter for M<') {
+			@include assert-equal(oGridGutter(M), (20px));
+		};
+	};
+
+	@include describe('function: oGridColspan') {
+		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
+			@include assert-equal(oGridColspan(1/2), (50%));
+			@include assert-equal(oGridColspan(1/4), (25%));
+			@include assert-equal(round(oGridColspan(1/3)), round((33.33333%)));
+			@include assert-equal(round(oGridColspan(2/3)), round((66.66667%)));
+			@include assert-equal(round(oGridColspan(1)), round((8.33333%)));
+			@include assert-equal(round(oGridColspan(2)), round((16.66667%)));
+			@include assert-equal(oGridColspan(3), (25%));
+			@include assert-equal(round(oGridColspan(4)), round((33.33333%)));
+			@include assert-equal(round(oGridColspan(5)), round((41.66667%)));
+			@include assert-equal(oGridColspan(6), (50%));
+			@include assert-equal(round(oGridColspan(7)), round((58.33333%)));
+			@include assert-equal(round(oGridColspan(8)), round((66.66667%)));
+			@include assert-equal(oGridColspan(9), (75%));
+			@include assert-equal(round(oGridColspan(10)), round((83.33333%)));
+			@include assert-equal(round(oGridColspan(11)), round((91.666673%)));
+			@include assert-equal(oGridColspan(12), (100%));
+		};
+	};
+
+	@include describe('mixin: oGridRowCompact') {
+		@include test('sass mixin compiles correctly to remove gutters')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-compact {
+						@include oGridRowCompact;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-compact {
+						margin-left: 0;
+					}
+
+					.test-compact > [o-grid-colspan] {
+						padding-left: 0;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridResetRow') {
+		@include test('sass mixin compiles correctly to reset row styles')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-reset {
+						@include oGridResetRow;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-reset {
+						clear: none;
+						display: block;
+						flex-wrap: nowrap;
+						margin-left: 0;
+					}
+
+					.test-reset:before,
+					.test-reset:after {
+						display: none;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridCenter') {
+		@include test('sass mixin compiles correctly to center column')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-center {
+						@include oGridCenter;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-center {
+						margin-left: auto;
+						margin-right: auto;
+						float: none;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridUncenter') {
+		@include test('sass mixin compiles correctly to uncenter column ')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-uncenter {
+						@include oGridUncenter;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-uncenter {
+						margin-left: 0;
+						margin-right: 0;
+						float: left;
+					};
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridResetColumn') {
+		@include test('sass mixin compiles correctly to remove column styles')  {
+			@include assert() {
+				@include output($selector: false)  {
+					.test-reset-column {
+						@include oGridResetColumn;
+					};
+				};
+
+				@include expect($selector: false) {
+					.test-reset-column {
+						padding-left: 0;
+						padding-right: 0;
+						float: none;
+						width: auto;
+						min-width: 0;
+						max-width: none;
+						flex: none;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPull') {
+		@include test('pull grid to right by # of column') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-pull {
+					 	@include oGridPull(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-pull {
+						right: 25%;
+						left: auto;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPush') {
+		@include test('push grid to left by # of columns') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-pull {
+					 	@include oGridPush(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-pull {
+						left: 25%;
+						right: auto;
+					}
+				};
+			};
+		};
+	};
+
+	@include describe('mixin: oGridPush') {
+		@include test('add space before a column') {
+			@include assert()  {
+				@include output($selector: false) {
+					.test-offset {
+					 	@include oGridOffset(3);
+					}
+				};
+
+				@include expect($selector: false) {
+					.test-offset {
+						margin-left: 25%;
+					}
+				};
+			};
+		};
+	};
+};

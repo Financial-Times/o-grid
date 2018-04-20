@@ -311,8 +311,7 @@
 		// sass-lint:enable no-vendor-prefixes
 
 		@include oGridTargetIE8 {
-			// sass-lint:disable no-important
-			min-width: 0 !important;
+			min-width: 0 !important; // sass-lint:disable-line no-important
 		}
 
 		@if $o-grid-mode == 'fixed' {

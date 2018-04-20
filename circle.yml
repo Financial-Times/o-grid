@@ -13,4 +13,3 @@ test:
     - obt demo --demo-filter pa11y --suppress-errors
     - obt verify
     - obt test
-    - ./test/travis.rb

@@ -106,28 +106,28 @@ function enableLayoutChangeEvents() {
 			const mql = window.matchMedia(query);
 			mql.addListener(handleMQChange);
 			handleMQChange(mql);
-		}
+		};
 
 		// Generate media queries for each
 		breakpoints.forEach((width, size) => {
 			switch(size) {
 				case 'S':
-				setupQuery(`(max-width: ${ width })`, size)
-				setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`, size);
-				break;
+					setupQuery(`(max-width: ${ width })`, size);
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`, size);
+					break;
 				case 'M':
-				setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('L')) })`, size);
-				break;
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('L')) })`, size);
+					break;
 				case 'L':
-				setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('XL')) })`, size);
-				break;
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('XL')) })`, size);
+					break;
 				case 'XL':
-				setupQuery(`(min-width: ${ width })`, size);
-				break;
+					setupQuery(`(min-width: ${ width })`, size);
+					break;
 				case 'default':
 				default:
-				setupQuery(`(max-width: ${ width })`, size);
-				break;
+					setupQuery(`(max-width: ${ width })`, size);
+					break;
 			}
 		});
 	} else {

@@ -1,6 +1,4 @@
-const {
-  enableLayoutChangeEvents
-} = require('../../../main');
+const { enableLayoutChangeEvents } = require('../../../main');
 
 enableLayoutChangeEvents();
 

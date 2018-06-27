@@ -112,7 +112,6 @@ function enableLayoutChangeEvents() {
 		breakpoints.forEach((width, size) => {
 			switch(size) {
 				case 'S':
-					setupQuery(`(max-width: ${ width })`, size);
 					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`, size);
 					break;
 				case 'M':
@@ -126,7 +125,7 @@ function enableLayoutChangeEvents() {
 					break;
 				case 'default':
 				default:
-					setupQuery(`(max-width: ${ width })`, size);
+					setupQuery(`(max-width: ${ decr1(breakpoints.get('S')) })`, size);
 					break;
 			}
 		});

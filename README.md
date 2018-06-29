@@ -689,7 +689,7 @@ Enable matchMedia queries that fire an `o-grid.layoutChange` event upon layout c
 ```js
 var oGrid = require('o-grid');
 
-oGrid.addBreakpointListeners();
+oGrid.enableLayoutChangeEvents();
 ```
 
 When using o-grid silent mode, make sure to surface the grid

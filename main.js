@@ -85,23 +85,13 @@ function enableLayoutChangeEvents() {
 	const gridLayouts = getGridBreakpoints();
 	if (gridLayouts.hasOwnProperty('layouts')) {
 		const layouts = gridLayouts.layouts;
-		const breakpoints = new Map(Object.keys(layouts).map(key => [key, layouts[key]]));
+		const breakpoints = new Map([
+			...Object.keys(layouts).map(key => [key, layouts[key]]),
+			['default', '240px']
+		]);
 		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
 
-		// Generate media queries for each
-		breakpoints.forEach((width, size) => {
-			const queries = [];
-			if (size === 'S') {
-				queries.push(`(max-width: ${ width })`);
-				queries.push(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`);
-			} else if (size === 'M') {
-				queries.push(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('L')) })`);
-			} else if (size === 'L') {
-				queries.push(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('XL')) })`);
-			} else if (size === 'XL') {
-				queries.push(`(min-width: ${ width })`);
-			}
-
+		const setupQuery = (query, size) => {
 			// matchMedia listener handler: Dispatch `o-grid.layoutChange` event if a match
 			const handleMQChange = mql => {
 				if (mql.matches) {
@@ -113,12 +103,31 @@ function enableLayoutChangeEvents() {
 				}
 			};
 
-			// Create a new listener for each layout
-			queries.forEach(mq => {
-				const mql = window.matchMedia(mq);
-				mql.addListener(handleMQChange);
-				handleMQChange(mql);
-			});
+			const mql = window.matchMedia(query);
+			mql.addListener(handleMQChange);
+			handleMQChange(mql);
+		};
+
+		// Generate media queries for each
+		breakpoints.forEach((width, size) => {
+			switch(size) {
+				case 'S':
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`, size);
+					break;
+				case 'M':
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('L')) })`, size);
+					break;
+				case 'L':
+					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('XL')) })`, size);
+					break;
+				case 'XL':
+					setupQuery(`(min-width: ${ width })`, size);
+					break;
+				case 'default':
+				default:
+					setupQuery(`(max-width: ${ decr1(breakpoints.get('S')) })`, size);
+					break;
+			}
 		});
 	} else {
 		console.error('To enable grid layout change events, include oGridSurfaceLayoutSizes in your Sass');

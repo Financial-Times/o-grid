@@ -5,7 +5,7 @@
  * no UA detection, no need for conditional compilation or JS check
  * @return {Bool} true if the browser is IE 8
  */
-const isIE8 = (function() {
+function detectIE8() {
 	const b = document.createElement('B');
 	const docElem = document.documentElement;
 	let isIE;
@@ -15,6 +15,16 @@ const isIE8 = (function() {
 	isIE = !!document.getElementById('ie8test');
 	docElem.removeChild(b);
 	return isIE;
+}
+
+(function () {
+	let result;
+	return function isIE8() {
+		if (result === undefined) {
+			result = detectIE8();
+		}
+		return result;
+	};
 }());
 
 /**
@@ -57,7 +67,7 @@ function getGridFromDoc(position) {
  * @return {String} Layout name
  */
 function getCurrentLayout() {
-	if (isIE8) {
+	if (isIE8()) {
 		return 'L';
 	}
 
@@ -69,7 +79,7 @@ function getCurrentLayout() {
  * @return {String} Gutter width in pixels
  */
 function getCurrentGutter() {
-	if (isIE8) {
+	if (isIE8()) {
 		return '20px';
 	}
 

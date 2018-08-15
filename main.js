@@ -17,9 +17,9 @@ function detectIE8() {
 	return isIE;
 }
 
-(function () {
+const isIE8 = (function () {
 	let result;
-	return function isIE8() {
+	return function () {
 		if (result === undefined) {
 			result = detectIE8();
 		}

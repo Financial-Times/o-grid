@@ -696,6 +696,17 @@ When using o-grid silent mode, make sure to surface the grid
 information to make it readable by the JavaScript Helper
 by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
 
+
+### `setMinSupportedIeVersion(version)`
+
+By default, o-grid supports IE8. The feature detect for this can cause performance problems. By setting version to a number greater than 8 this can be avoided.
+
+```js
+var oGrid = require('o-grid');
+
+oGrid.setMinSupportedIeVersion(11);
+```
+
 ## Grid Bookmarklet
 
 1. Create a new Bookmark with this URL:

@@ -1,5 +1,7 @@
 /*global module*/
 
+let minSupportedIeVersion = 8;
+
 /**
  * Detect IE 8 through injected conditional comments:
  * no UA detection, no need for conditional compilation or JS check
@@ -18,8 +20,12 @@ function detectIE8() {
 }
 
 const isIE8 = (function () {
+
 	let result;
 	return function () {
+		if (minSupportedIeVersion > 8) {
+			return false;
+		}
 		if (result === undefined) {
 			result = detectIE8();
 		}
@@ -149,4 +155,7 @@ export default {
 	getCurrentGutter: getCurrentGutter,
 	getGridBreakpoints: getGridBreakpoints,
 	enableLayoutChangeEvents: enableLayoutChangeEvents,
+	setMinSupportedIeVersion: version => {
+		minSupportedIeVersion = version;
+	}
 };

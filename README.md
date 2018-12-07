@@ -1,4 +1,4 @@
-# o-grid [![Build Status](https://circleci.com/gh/Financial-Times/o-grid.png?style=shield&circle-token=a0c7fe6f37aa937651724d1650814e45ab2662a5)](https://circleci.com/gh/Financial-Times/o-grid)
+# o-grid [![Build Status](https://circleci.com/gh/Financial-Times/o-grid.png?style=shield&circle-token=a0c7fe6f37aa937651724d1650814e45ab2662a5)](https://circleci.com/gh/Financial-Times/o-grid) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
 A 12 column responsive, flexbox-based grid system for laying out documents, templates and modules.
 

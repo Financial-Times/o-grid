@@ -298,10 +298,10 @@
 /// @param {Number | Map} $span [null]
 @mixin oGridColspan($span: null, $width-only: false) {
 	@if not $width-only {
-		position: relative; // Required for push and pull
+		box-sizing: border-box;
 		float: left;
 		flex: 1 1 0%;
-		box-sizing: border-box;
+		position: relative; // Required for push and pull
 
 		@include oGridTargetIE8 {
 			min-width: 0 !important; // sass-lint:disable-line no-important

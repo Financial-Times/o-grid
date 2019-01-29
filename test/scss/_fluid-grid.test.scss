@@ -174,15 +174,10 @@
 
 				@include expect($selector: false) {
 					.test-colspan {
-						position: relative;
+						box-sizing: border-box;
 						float: left;
 						flex: 1 1 0%;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
+						position: relative;
 						padding-left: 10px;
 					}
 
@@ -239,17 +234,12 @@
 
 				@include expect($selector: false) {
 					.test-container {
-						position: relative;
+						box-sizing: border-box;
 						margin-left: auto;
 						margin-right: auto;
 						min-width: 240px;
 						max-width: 1220px;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
+						position: relative;
 						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
 						padding-left: 10px;
 						padding-right: 10px;
@@ -304,17 +294,12 @@
 
 				@include expect($selector: false) {
 					.test-container {
-						position: relative;
+						box-sizing: border-box;
 						margin-left: auto;
 						margin-right: auto;
 						min-width: 240px;
 						max-width: 1220px;
-						/*autoprefixer: off*/
-						// sass-lint:disable no-vendor-prefixes
-						-webkit-box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						box-sizing: border-box;
-						// sass-lint:enable no-vendor-prefixes
+						position: relative;
 						padding-left: 0;
 						padding-right: 0;
 						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties

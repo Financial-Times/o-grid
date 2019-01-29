@@ -298,17 +298,10 @@
 /// @param {Number | Map} $span [null]
 @mixin oGridColspan($span: null, $width-only: false) {
 	@if not $width-only {
-		position: relative; // Required for push and pull
+		box-sizing: border-box;
 		float: left;
 		flex: 1 1 0%;
-		// Turn autoprefixer off for the box-sizing rules
-		// in order to fix positioning on older browsers.
-		/*autoprefixer: off*/
-		// sass-lint:disable no-vendor-prefixes
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-		// sass-lint:enable no-vendor-prefixes
+		position: relative; // Required for push and pull
 
 		@include oGridTargetIE8 {
 			min-width: 0 !important; // sass-lint:disable-line no-important
@@ -417,21 +410,13 @@
 /// @param {String} $grid-mode [$o-grid-mode]
 /// @param {Boolean} $bleed [false]
 @mixin oGridContainer($grid-mode: $o-grid-mode, $bleed: false) {
-	position: relative;
+	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
 	min-width: $o-grid-min-width;
 	// Older browsers get a fixed-width layout
 	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
-
-	// Turn autoprefixer off for the box-sizing rules
-	// in order to fix positioning on older browsers.
-	/*autoprefixer: off*/
-	// sass-lint:disable no-vendor-prefixes
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	// sass-lint:enable no-vendor-prefixes
+	position: relative;
 
 	@if $bleed {
 		padding-left: 0;

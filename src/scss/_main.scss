@@ -301,14 +301,18 @@
 		position: relative; // Required for push and pull
 		float: left;
 		flex: 1 1 0%;
-		// Turn autoprefixer off for the box-sizing rules
-		// in order to fix positioning on older browsers.
-		/*autoprefixer: off*/
+
+		// Autoprefixer doesn't generate -moz-box-sizing, so we need to
+		// set the vendor prefixes and then ignore the property to be
+		// prefixed, in order to avoid overwrites—the order of the properties is
+		// reversed because otherwise autoprefixer doesn't kick in (╯°□°）╯︵ ┻━┻
+		// issue: https://github.com/Financial-Times/o-grid/issues/175
 		// sass-lint:disable no-vendor-prefixes
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
-		box-sizing: border-box;
 		// sass-lint:enable no-vendor-prefixes
+		/*autoprefixer: ignore-next*/
+		box-sizing: border-box;
 
 		@include oGridTargetIE8 {
 			min-width: 0 !important; // sass-lint:disable-line no-important
@@ -424,14 +428,17 @@
 	// Older browsers get a fixed-width layout
 	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
 
-	// Turn autoprefixer off for the box-sizing rules
-	// in order to fix positioning on older browsers.
-	/*autoprefixer: off*/
+	// Autoprefixer doesn't generate -moz-box-sizing, so we need to
+	// set the vendor prefixes and then ignore the property to be
+	// prefixed, in order to avoid overwrites—the order of the properties is
+	// reversed because otherwise autoprefixer doesn't kick in (╯°□°）╯︵ ┻━┻
+	// issue: https://github.com/Financial-Times/o-grid/issues/175
 	// sass-lint:disable no-vendor-prefixes
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 	// sass-lint:enable no-vendor-prefixes
+	/*autoprefixer: ignore-next*/
+	box-sizing: border-box;
 
 	@if $bleed {
 		padding-left: 0;

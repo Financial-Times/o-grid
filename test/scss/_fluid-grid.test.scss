@@ -177,12 +177,12 @@
 						position: relative;
 						float: left;
 						flex: 1 1 0%;
-						/*autoprefixer: off*/
 						// sass-lint:disable no-vendor-prefixes
 						-webkit-box-sizing: border-box;
 						-moz-box-sizing: border-box;
-						box-sizing: border-box;
 						// sass-lint:enable no-vendor-prefixes
+						/*autoprefixer: ignore-next*/
+						box-sizing: border-box;
 						padding-left: 10px;
 					}
 
@@ -244,12 +244,12 @@
 						margin-right: auto;
 						min-width: 240px;
 						max-width: 1220px;
-						/*autoprefixer: off*/
 						// sass-lint:disable no-vendor-prefixes
 						-webkit-box-sizing: border-box;
 						-moz-box-sizing: border-box;
-						box-sizing: border-box;
 						// sass-lint:enable no-vendor-prefixes
+						/*autoprefixer: ignore-next*/
+						box-sizing: border-box;
 						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
 						padding-left: 10px;
 						padding-right: 10px;
@@ -309,12 +309,12 @@
 						margin-right: auto;
 						min-width: 240px;
 						max-width: 1220px;
-						/*autoprefixer: off*/
 						// sass-lint:disable no-vendor-prefixes
 						-webkit-box-sizing: border-box;
 						-moz-box-sizing: border-box;
-						box-sizing: border-box;
 						// sass-lint:enable no-vendor-prefixes
+						/*autoprefixer: ignore-next*/
+						box-sizing: border-box;
 						padding-left: 0;
 						padding-right: 0;
 						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties

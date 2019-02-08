@@ -150,7 +150,7 @@ function enableLayoutChangeEvents() {
 	}
 }
 
-const setMinSupportedIeVersion: version => {
+const setMinSupportedIeVersion = version => {
 	minSupportedIeVersion = version;
 }
 

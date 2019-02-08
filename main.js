@@ -161,3 +161,11 @@ export {
 	getGridBreakpoints,
 	enableLayoutChangeEvents
 }
+
+export default {
+	setMinSupportedIeVersion,
+	getCurrentLayout,
+	getCurrentGutter,
+	getGridBreakpoints,
+	enableLayoutChangeEvents
+}

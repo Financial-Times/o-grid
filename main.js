@@ -150,12 +150,14 @@ function enableLayoutChangeEvents() {
 	}
 }
 
-export default {
-	getCurrentLayout: getCurrentLayout,
-	getCurrentGutter: getCurrentGutter,
-	getGridBreakpoints: getGridBreakpoints,
-	enableLayoutChangeEvents: enableLayoutChangeEvents,
-	setMinSupportedIeVersion: version => {
-		minSupportedIeVersion = version;
-	}
-};
+const setMinSupportedIeVersion: version => {
+	minSupportedIeVersion = version;
+}
+
+export {
+	setMinSupportedIeVersion,
+	getCurrentLayout,
+	getCurrentGutter,
+	getGridBreakpoints,
+	enableLayoutChangeEvents
+}

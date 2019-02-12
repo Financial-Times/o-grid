@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run: npx occ ${CIRCLE_TAG##v}
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > $HOME/.npmrc
-      - run: npm publish
+      - run: npm publish --access public 
 workflows:
   version: 2
   test:

@@ -152,7 +152,7 @@ function enableLayoutChangeEvents() {
 
 const setMinSupportedIeVersion = version => {
 	minSupportedIeVersion = version;
-}
+};
 
 export {
 	setMinSupportedIeVersion,
@@ -160,7 +160,7 @@ export {
 	getCurrentGutter,
 	getGridBreakpoints,
 	enableLayoutChangeEvents
-}
+};
 
 export default {
 	setMinSupportedIeVersion,
@@ -168,4 +168,4 @@ export default {
 	getCurrentGutter,
 	getGridBreakpoints,
 	enableLayoutChangeEvents
-}
+};

@@ -150,12 +150,18 @@ function enableLayoutChangeEvents() {
 	}
 }
 
+export getCurrentLayout;
+export getCurrentGutter;
+export getGridBreakpoints;
+export enableLayoutChangeEvents
+export const setMinSupportedIeVersion = version => {
+	minSupportedIeVersion = version;
+};
+
 export default {
-	getCurrentLayout: getCurrentLayout,
-	getCurrentGutter: getCurrentGutter,
-	getGridBreakpoints: getGridBreakpoints,
-	enableLayoutChangeEvents: enableLayoutChangeEvents,
-	setMinSupportedIeVersion: version => {
-		minSupportedIeVersion = version;
-	}
+	getCurrentLayout,
+	getCurrentGutter,
+	getGridBreakpoints,
+	enableLayoutChangeEvents,
+	setMinSupportedIeVersion
 };

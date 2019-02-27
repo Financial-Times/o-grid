@@ -150,12 +150,22 @@ function enableLayoutChangeEvents() {
 	}
 }
 
+const setMinSupportedIeVersion = version => {
+	minSupportedIeVersion = version;
+};
+
+export {
+	setMinSupportedIeVersion,
+	getCurrentLayout,
+	getCurrentGutter,
+	getGridBreakpoints,
+	enableLayoutChangeEvents
+};
+
 export default {
-	getCurrentLayout: getCurrentLayout,
-	getCurrentGutter: getCurrentGutter,
-	getGridBreakpoints: getGridBreakpoints,
-	enableLayoutChangeEvents: enableLayoutChangeEvents,
-	setMinSupportedIeVersion: version => {
-		minSupportedIeVersion = version;
-	}
+	setMinSupportedIeVersion,
+	getCurrentLayout,
+	getCurrentGutter,
+	getGridBreakpoints,
+	enableLayoutChangeEvents
 };

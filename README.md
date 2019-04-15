@@ -1,8 +1,6 @@
 # o-grid [![Build Status](https://circleci.com/gh/Financial-Times/o-grid.png?style=shield&circle-token=a0c7fe6f37aa937651724d1650814e45ab2662a5)](https://circleci.com/gh/Financial-Times/o-grid) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
-A 12 column responsive, flexbox-based grid system for laying out documents, templates and modules.
-
-> Living off the grid and being kind of an outlaw brings a dangerous reality.  *Ron Perlman*
+A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.
 
 - [Usage](#usage)
 	- [Quick Start](#quick-start)
@@ -35,7 +33,6 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 
 ## Usage
 This component is a collection of Sass styles to build a 12 column grid system, with a few JavaScript helpers.
-
 
 ## Quick Start
 

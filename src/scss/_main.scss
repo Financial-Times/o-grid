@@ -3,7 +3,8 @@
 /// @link http://registry.origami.ft.com/components/o-grid
 ////
 
-/// Add a layout
+/// Add a layout (breakpoint). This can be used to add a new breakpoint to a
+/// project, in addition to the default layouts (S, M, L, XL).
 ///
 /// @example scss
 ///  @include oGridAddLayout($layout-name: P, $layout-width: 600px);
@@ -46,9 +47,9 @@
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
 }
 
-/// Get the gutter of a layout
+/// Get the grid gutter at a given layout (breakpoint).
 ///
-/// @param {String|null|Boolean} $layout-name - One of $o-grid-layouts
+/// @param {String|null|Boolean} $layout-name [default] - One of $o-grid-layouts breakpoints e.g. S, M, L...
 @function oGridGutter($layout-name: default) {
 	// This layout was assigned a gutter directly
 	@if map-get($o-grid-gutters, $layout-name) {
@@ -68,7 +69,7 @@
 	@return oGridGutter($layout);
 }
 
-/// Get the max width of a layout
+/// Get the max width of a layout (breakpoint).
 ///
 /// @example
 ///  .my-large-container { width: oGridGetMaxWidthForLayout(L); }
@@ -133,10 +134,9 @@
 	}
 }
 
-/// Apply styles at a given layout size
-/// Wrapper for the Sass MQ mq() mixin
-///
-/// @link https://git.io/sass-mq Sass MQ documentation
+/// Apply styles at a given layout size (breakpoint) as the grid. It should be
+// passed one of $o-grid-layouts e.g. `S`, `M`, etc... depending on which layout
+// size the style should apply at.
 ///
 /// @example
 ///  // Turn the color of an element red at medium layout size and up
@@ -333,6 +333,8 @@
 
 /// Cross browser column widths across layouts
 ///
+/// @access private
+///
 /// @example scss
 ///   el { @include _oGridColumnWidth(4); }
 ///   el { @include _oGridColumnWidth(1/2); }
@@ -479,8 +481,6 @@
 }
 
 /// Base row styles
-///
-/// @param {String} $grid-mode [$o-grid-mode]
 @mixin oGridRow {
 	clear: both;
 	flex-wrap: wrap; // Note that this breaks in old Firefox
@@ -524,7 +524,7 @@
 
 /// Remove gutters from columns in a row
 ///
-/// @param {string} column child selector
+/// @param {string} $column-selector ["[o-grid-colspan]"] - CSS selector for row element
 @mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
 	margin-left: 0;
 
@@ -634,6 +634,7 @@
 
 /// Fix a bug in Safari where items wouldn't wrap properly
 /// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
+/// @access private
 @mixin _oGridFixSafariWrap($args...) {
 	flex-basis: oGridColspan($args...);
 }

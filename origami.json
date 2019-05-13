@@ -1,5 +1,6 @@
 {
-	"description": "Grid for responsive layouts",
+	"description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
+	"keywords": ["page", "grid", "layout", "columns", "rows"],
 	"origamiType": "module",
 	"origamiCategory": "primitives",
 	"origamiVersion": 1,

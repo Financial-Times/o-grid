@@ -1,38 +1,3 @@
-/*global module*/
-
-let minSupportedIeVersion = 8;
-
-/**
- * Detect IE 8 through injected conditional comments:
- * no UA detection, no need for conditional compilation or JS check
- * @return {Bool} true if the browser is IE 8
- */
-function detectIE8() {
-	const b = document.createElement('B');
-	const docElem = document.documentElement;
-	let isIE;
-
-	b.innerHTML = '<!--[if IE 8]><b id="ie8test"></b><![endif]-->';
-	docElem.appendChild(b);
-	isIE = !!document.getElementById('ie8test');
-	docElem.removeChild(b);
-	return isIE;
-}
-
-const isIE8 = (function () {
-
-	let result;
-	return function () {
-		if (minSupportedIeVersion > 8) {
-			return false;
-		}
-		if (result === undefined) {
-			result = detectIE8();
-		}
-		return result;
-	};
-}());
-
 /**
  * Grab grid properties
  * @return {Object} layout names and gutter widths
@@ -73,10 +38,6 @@ function getGridFromDoc(position) {
  * @return {String} Layout name
  */
 function getCurrentLayout() {
-	if (isIE8()) {
-		return 'L';
-	}
-
 	return getGridProperties().layout;
 }
 
@@ -85,10 +46,6 @@ function getCurrentLayout() {
  * @return {String} Gutter width in pixels
  */
 function getCurrentGutter() {
-	if (isIE8()) {
-		return '20px';
-	}
-
 	return getGridProperties().gutter;
 }
 
@@ -146,16 +103,11 @@ function enableLayoutChangeEvents() {
 			}
 		});
 	} else {
-		console.error('To enable grid layout change events, include oGridSurfaceLayoutSizes in your Sass');
+		console.error('To enable grid layout change events, include _oGridSurfaceLayoutSizes in your Sass');
 	}
 }
 
-const setMinSupportedIeVersion = version => {
-	minSupportedIeVersion = version;
-};
-
 export {
-	setMinSupportedIeVersion,
 	getCurrentLayout,
 	getCurrentGutter,
 	getGridBreakpoints,
@@ -163,7 +115,6 @@ export {
 };
 
 export default {
-	setMinSupportedIeVersion,
 	getCurrentLayout,
 	getCurrentGutter,
 	getGridBreakpoints,

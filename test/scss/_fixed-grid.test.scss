@@ -36,12 +36,6 @@ $o-grid-mode: 'fixed';
 						position: relative;
 						padding-left: 20px;
 					}
-
-					@media \0screen {
-						.test-colspan {
-							min-width: 0 !important; // sass-lint:disable-line no-important
-						}
-					}
 				};
 			};
 		};

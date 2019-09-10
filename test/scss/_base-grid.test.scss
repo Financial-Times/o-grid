@@ -1,113 +1,85 @@
 @include describe ('oGrid — base') {
-	@include describe('mixin: oGridSurfaceLayoutSizes') {
-		@include test('sass mixin complies correctly to display layout sizes') {
+
+	@include describe('mixin: oGrid') {
+
+		// Restore these tests if the True fix is merged:
+		// @include test('surfaces layout sizes by default')
+		// @include test('surfaces the current layout style by default')
+		// https://github.com/oddbird/true/pull/152
+
+		@include it('includes human friendly selectors by default') {
 			@include assert() {
-				@include output($selector: false) {
-					@include oGridSurfaceLayoutSizes;
+				@include output($selector: false)  {
+					@include oGrid();
 				};
 
-				@include expect($selector: false) {
-					html:before {
-						display: none;
-						content: '{"layouts": {"S": "490px", "M": "740px", "L": "980px", "XL": "1220px"}}';
+				@include contains($selector: false) {
+      				[data-o-grid-colspan~="full-width"] {
+      					display: block;
+      					flex-basis: 100%;
+      					min-width: 100%;
+      					max-width: 100%;
+      					width: 100%;
+      				}
+				};
+			};
+		};
+
+		@include it('includes shuffle selectors by default') {
+			@include assert() {
+				@include output($selector: false)  {
+					@include oGrid();
+				};
+
+				@include contains($selector: false) {
+					[data-o-grid-colspan~="push1"] {
+					left: 8.33333%;
+					right: auto;
 					}
 				};
 			};
 		};
-	};
 
-	@include describe('mixin: oGridSurfaceCurrentLayout') {
-		@include test('sass mixin complies correctly to display layout sizes in use') {
+		@include it('includes the bleed container modifier by default') {
 			@include assert() {
-				@include output {
-					@include oGridSurfaceCurrentLayout;
+				@include output($selector: false)  {
+					@include oGrid();
 				};
 
-				@include expect {
-					html:after {
-						content: '{ "layout": "default", "gutter": "10px" }';
-						display: none;
-					}
-
-					@media (min-width: 30.625em) {
-						html:after {
-							content: '{ "layout": "S", "gutter": "10px" }';
-						}
-					}
-
-					@media (min-width: 46.25em) {
-						html:after {
-							content: '{ "layout": "M", "gutter": "20px" }';
-						}
-					}
-
-					@media (min-width: 61.25em) {
-						html:after {
-							content: '{ "layout": "L", "gutter": "20px" }';
-						}
-					}
-
-					@media (min-width: 76.25em) {
-						html:after {
-							content: '{ "layout": "XL", "gutter": "20px" }';
-						}
+				@include contains($selector: false) {
+					.o-grid-container--bleed {
+						padding-left: 0;
+						padding-right: 0;
 					}
 				};
 			};
 		};
+
+		@include it('includes compact rows by default') {
+			@include assert() {
+				@include output($selector: false)  {
+					@include oGrid();
+				};
+
+				@include contains($selector: false) {
+					.o-grid-row--compact {
+						margin-left: 0;
+					}
+				};
+			};
+		};
+
 	};
 
 	@include describe('mixin: oGridAddLayout') {
-		@include test('sass mixin complies correctly with new layout') {
-			@include assert() {
-				@include output {
-					@include oGridAddLayout(
-						$layout-name: XXS,
-						$layout-width: 128px
-					);
-					@include oGridSurfaceCurrentLayout;
-				};
+		@include it('adds a new layout') {
+			@include oGridAddLayout(
+				$layout-name: XXS,
+				$layout-width: 128px
+			);
 
-				@include expect {
-					html:after {
-						content: '{ "layout": "default", "gutter": "10px" }';
-						display: none;
-					}
-
-					@media (min-width: 8em) {
-						html:after {
-							content: '{ "layout": "XXS", "gutter": "10px" }';
-						}
-					}
-
-					@media (min-width: 30.625em) {
-						html:after {
-							content: '{ "layout": "S", "gutter": "10px" }';
-						}
-					}
-
-					@media (min-width: 46.25em) {
-						html:after {
-							content: '{ "layout": "M", "gutter": "20px" }';
-						}
-					}
-
-					@media (min-width: 61.25em) {
-						html:after {
-							content: '{ "layout": "L", "gutter": "20px" }';
-						}
-					}
-
-					@media (min-width: 76.25em) {
-						html:after {
-							content: '{ "layout": "XL", "gutter": "20px" }';
-						}
-					}
-				};
-			};
+			@include assert-equal(map-get($o-grid-layouts, XXS), 128px);
 		};
-
-
 	};
 
 	@include describe('function: oGridGutter') {

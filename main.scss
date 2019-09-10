@@ -1,87 +1,150 @@
-////
-/// @group o-grid
-/// @link http://registry.origami.ft.com/components/o-grid
-////
-
-@import 'src/scss/variables';
 @import 'sass-mq/mq';
-@import 'src/scss/main';
+@import 'src/scss/variables';
+@import 'src/scss/functions';
+@import 'src/scss/mixins';
 
-/// Output debug information about the currently loaded layouts.
+/// Output o-grid styles. This mixin outputs all styles by default.
+/// Pass an options argument to include styles granularly, see the
+/// [README](https://registry.origami.ft.com/components/o-grid/readme) for more details.
 ///
-/// @param {Map} $layouts - Map of layouts
-@mixin oGridDebugInfo($layouts: $o-grid-layouts) {
-	/*! DEBUG
-	 * Layouts:
-	 * #{inspect($layouts)}
-	 */
-}
+/// @example <caption>Output all o-grid styles.</caption>
+/// 	@include oGrid();
+/// @example <caption>Output only basic grid styles.</caption>
+/// 	@include oGrid($opts: ());
+/// @example <caption>Output all o-grid styles except human friendly selectors.</caption>
+/// 	@include oGrid($opts: (
+/// 		'bleed': true,
+/// 		'shuffle-selectors': true,
+/// 		'surface': ('current-layout', 'layout-sizes'),
+/// 		'rows': ('compact')
+/// 	));
+/// @example <caption>Output all o-grid styles except the styles required to surface layouts to o-grid JS.</caption>
+/// 	@include oGrid($opts: (
+/// 		'bleed': true,
+/// 		'shuffle-selectors': true,
+/// 		'friendly-selectors': true,
+/// 		'surface': (),
+/// 		'rows': ('compact')
+/// 	));
+///
+/// @param {Map} $opts [('bleed': true, 'shuffle-selectors': true, 'friendly-selectors': true, 'surface': ('current-layout', 'layout-sizes'), 'rows': ('compact'))]
+@mixin oGrid($opts: (
+	'bleed': true,
+	'shuffle-selectors': true,
+	'friendly-selectors': true,
+	'surface': ('current-layout', 'layout-sizes'),
+	'rows': ('compact')
+)) {
+	// Bleed styles e.g. `o-grid-container--bleed`.
+	$bleed: map-get($opts, 'bleed');
+	// Human friendly selectors, e.g. `data-o-grid-colspan="one-half"`.
+	$friendly-selectors: map-get($opts, 'friendly-selectors');
+	// Offset, push, and pull selectors, e.g. `push4`.
+	$shuffle-selectors: map-get($opts, 'shuffle-selectors');
+	// Compact rows, e.g. `o-grid-row--compact`.
+	$rows: map-get($opts, 'rows');
+	$compact-rows: index($rows, 'compact');
+	// Surce layout details for JS.
+	$surface: map-get($opts, 'surface');
+	$curren-layout: index($surface, 'current-layout');
+	$layout-sizes: index($surface, 'layout-sizes');
 
-@if $o-grid-debug-mode {
-	@include oGridDebugInfo;
-	@include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
-}
+	// Surface layouts for JS on html:after, html:before.
+	@if($curren-layout) {
+		@include _oGridSurfaceCurrentLayout;
+	}
+	@if($layout-sizes) {
+		@include _oGridSurfaceLayoutSizes;
+	}
 
-/// Surface the layout currently displayed to make it readable in JS.
-///
-/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
-///
-/// **n.b.:** Only works when silent mode is off.
-///
-/// @example js
-///  // your-app/main.js
-///  // Return the current layout (e.g. default, S, M, L, XL)
-///  var getCurrentLayout = require('o-grid').getCurrentLayout;
-///  console.log(getCurrentLayout());
-///
-///  // Return the current gutter (e.g. 10px, 20px)
-///  var getCurrentGutter = require('o-grid').getCurrentGutter;
-///  console.log(getCurrentGutter());
-@mixin oGridSurfaceCurrentLayout {
-	html:after {
-		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
-		display: none;
+	// Grid container
+	.o-grid-container {
+		@include oGridContainer();
+	}
 
-		@each $breakpoint in $_o-grid-layout-names {
-			@include oGridRespondTo($breakpoint) {
-				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
+	@if($bleed) {
+		.o-grid-container--bleed {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	// Grid row
+	.o-grid-row {
+		@include oGridRow;
+	}
+
+	// Compact, gutterless row of columns
+	@if($compact-rows) {
+		.o-grid-row--compact {
+			margin-left: 0;
+
+			> [data-o-grid-colspan] {
+				padding-left: 0;
 			}
 		}
 	}
-}
 
-@function _oGridQuoteString($value) {
-  @return '"#{$value}"';
-}
+	// Grid columns
+	[data-o-grid-colspan] {
+		@include oGridColspan();
+	}
 
-@mixin oGridSurfaceLayoutSizes {
-	html:before {
-		$combined: '{"layouts": {';
+	[data-o-grid-colspan~="0"] {
+		display: none;
+	}
 
-		$keys: map-keys($o-grid-layouts);
+	@for $colspan from 1 through $o-grid-columns {
+		[data-o-grid-colspan~="#{$colspan}"] {
+			@include oGridColspan($colspan, $width-only: true);
+		}
+	}
 
-		@for $ittr from 1 through length($keys) {
-			$key: nth($keys, $ittr);
-			$value: map-get($o-grid-layouts, $key);
+	@if $friendly-selectors {
+		@include _oGridHumanFriendlyColumns; // one-half, one-third, center…
+	}
 
-			$combined: $combined + _oGridQuoteString($key) + ': ' + _oGridQuoteString($value);
+	@if $shuffle-selectors {
+		@include _oGridShuffleColumns; // pull, push, offset
+	}
 
-			@if $ittr < length($keys) {
-				$combined: $combined + ", ";
+	// Responsive columns
+	@each $layout-name in $_o-grid-layout-names {
+		@include oGridRespondTo($layout-name) {
+
+			@if $friendly-selectors {
+				@include _oGridHumanFriendlyColumns($layout-name);
+			}
+
+			@if $shuffle-selectors == true {
+				@include _oGridShuffleColumns($layout-name);
+			}
+
+			[data-o-grid-colspan~="#{$layout-name}0"] {
+				display: none;
+			}
+
+			@for $colspan from 1 through $o-grid-columns {
+				[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
+					// sass-lint:disable mixins-before-declarations
+
+					// Restore visibility from `display: none`
+					// if `data-o-grid-colspan` was set to `0` or `hide`
+					display: block;
+
+					// Apply width in %
+					@include _oGridFixSafariWrap($colspan);
+					min-width: oGridColspan($colspan);
+					max-width: oGridColspan($colspan);
+					width: oGridColspan($colspan);
+				}
 			}
 		}
-
-		$combined: $combined + '}}';
-
-		display: none;
-		content: $combined;
 	}
 }
 
 @if $o-grid-is-silent == false {
-	@include oGridSurfaceCurrentLayout;
-	@include oGridSurfaceLayoutSizes;
-	@include oGridGenerate;
+	@include oGrid();
 
 	// Turn silent mode back on to avoid outputting the grid twice
 	$o-grid-is-silent: true;

@@ -50,13 +50,6 @@
 			"description": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
 		},
 		{
-			"name": "ie8",
-			"title": "IE8 Grid",
-			"sass": "demos/src/scss/ie8.scss",
-			"hidden": true,
-			"description": "Forced IE 8 experience, where the width of the grid is fixed to be a M layout"
-		},
-		{
 			"name": "test",
 			"title": "Test Grid",
 			"template": "demos/src/test.mustache",

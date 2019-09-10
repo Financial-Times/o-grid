@@ -37,14 +37,6 @@ body:before {
 	overflow: hidden;
 	font-size: 1.3rem;
 	line-height: 1.2;
-
-	// Transparent background color in IE8
-	$rgba: rgba(#ffffff, 0.5);
-	$ie-hex-str: ie-hex-str($rgba);
-	// sass-lint:disable no-duplicate-properties
-	background-color: $rgba;
-	// sass-lint:enable no-duplicate-properties
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
 }
 
 .o-grid-container {

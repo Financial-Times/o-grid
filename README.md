@@ -2,37 +2,35 @@
 
 A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.
 
-- [Usage](#usage)
-	- [Quick Start](#quick-start)
-	- [Browser Support](#browser-support)
-	- [Grid Dimensions](#grid-dimensions)
-	- [Markup](#markup)
-	- [Advanced Usage](#advanced-usage)
-		- [Hiding elements](#hiding-elements)
-		- [Centering a column](#centering-a-column)
-		- [Push and pull columns](#push-and-pull-columns)
-		- [Add space before a column](#add-space-before-a-column)
-		- [Snappy Mode](#snappy-mode)
-		- [Compact (gutterless) rows](#compact-gutterless-rows)
-		- [Full Bleed Container](#full-bleed-container)
-		- [Responsive column helper](#responsive-column-helper)
-		- [Responsive width for different layouts](#responsive-width-for-different-layouts)
-		- [Responsive layout helper](#responsive-layout-helper)
-		- [Gutters](#gutters)
-		- [Unstyle a row or a column](#unstyle-a-row-or-a-column)
-		- [Variables](#variables)
-		- [Adding a layout](#adding-a-layout)
-		- [Debug mode](#debug-mode)
-	- [JavaScript Helpers](#javascript-helpers)
-	- [Grid Bookmarklet](#grid-bookmarklet)
+- [Quick Start](#quick-start)
+- [Grid Dimensions](#grid-dimensions)
+- [Markup](#markup)
+- [Sass](#sass)
+- [Advanced Usage](#advanced-usage)
+	- [Hiding elements](#hiding-elements)
+	- [Centering a column](#centering-a-column)
+	- [Push and pull columns](#push-and-pull-columns)
+	- [Add space before a column](#add-space-before-a-column)
+	- [Snappy Mode](#snappy-mode)
+	- [Compact (gutterless) rows](#compact-gutterless-rows)
+	- [Full Bleed Container](#full-bleed-container)
+	- [Responsive column helper](#responsive-column-helper)
+	- [Responsive width for different layouts](#responsive-width-for-different-layouts)
+	- [Responsive layout helper](#responsive-layout-helper)
+	- [Gutters](#gutters)
+	- [Unstyle a row or a column](#unstyle-a-row-or-a-column)
+	- [Variables](#variables)
+	- [Adding a layout](#adding-a-layout)
+	- [Debug mode](#debug-mode)
+- [JavaScript Helpers](#javascript-helpers)
+- [Grid Bookmarklet](#grid-bookmarklet)
 - [Migration Guide](#migration-guide)
 - [Contact](#contact)
 - [License](#license)
 
-[![Grid system](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)
-
-## Usage
 This component is a collection of Sass styles to build a 12 column grid system, with a few JavaScript helpers.
+
+[![Grid system](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)](https://raw.githubusercontent.com/Financial-Times/o-grid/master/img/grid-system.png)
 
 ## Quick Start
 
@@ -69,12 +67,6 @@ console.log(getCurrentLayout());
 var getCurrentGutter = require('o-grid').getCurrentGutter;
 console.log(getCurrentGutter());
 ```
-
-## Browser support
-
-o-grid works in browsers that support *CSS @media queries* and *box-sizing*, as well as Internet Explorer 8.
-
-Older browsers: you may use a [box-sizing polyfill](https://github.com/Schepp/box-sizing-polyfill) to support give better support to IE < 8.
 
 ## Grid dimensions
 
@@ -216,6 +208,28 @@ A column which has `width: auto` on small screens, and then takes half the avail
 
 ```scss
 div { @include oGridColspan((M: 6)); }
+```
+
+## Sass
+
+To include all styles call the `oGrid` mixin.
+
+```scss
+@include oGrid();
+```
+
+### Options
+
+`o-grid` css may be included granularly by passing options to the `oGrid` mixin.
+
+```scss
+@include oGrid($opts: (
+	'bleed': true, // The container modifier `o-grid-container--bleed`
+	'shuffle-selectors': true, // offset, push, and pull selectors such as `push4`
+	'friendly-selectors': true, // Human friendly selectors such as `data-o-grid-colspan="one-half"`
+	'surface': ('current-layout', 'layout-sizes'), // Styles to surface o-grid layout to JavaScript features
+	'rows': ('compact') // The row modifier `o-grid-row--compact`
+));
 ```
 
 ## Advanced usage
@@ -557,12 +571,6 @@ Here are the most useful ones:
 // Switch Silent mode off
 $o-grid-is-silent: false;
 
-// Disable outputting offset, push and pull selectors
-$o-grid-shuffle-selectors: true;
-
-// Disable outputting human-friendly selectors
-$o-grid-human-friendly-selectors: true;
-
 // Show the currently active breakpoint and output loaded settings
 $o-grid-debug-mode: true;
 
@@ -577,12 +585,6 @@ $o-grid-gutters: (default: 10px, M: 20px);
 // - fixed: always fixed-width with the layout defined by
 //          $o-grid-fixed-layout (default: L)
 $o-grid-mode: fluid (default) | snappy | fixed;
-
-// Grid ie8 rules
-// - inline: output ie8 selectors alongside modern browser selectors in the same stylesheet
-// - only: only output ie8 selectors
-// - none: output no ie8 selectors
-$o-grid-ie8-rules: inline (default) | only | none;
 
 // Default layouts
 $o-grid-layouts: (
@@ -619,11 +621,10 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 //   L: 980px,
 //   XL: 1220px
 
-// Surface the layout currently displayed to make it readable in JS
-@include oGridSurfaceCurrentLayout;
-
-// Generate grid helpers classes and data attributes
-@include oGridGenerate;
+// Include all o-grid styles, including:
+// - Surface the layout currently displayed to make it readable in JS
+// - Generate grid helpers classes and data attributes.
+@include oGrid();
 ```
 
 #### Debug mode
@@ -660,9 +661,7 @@ console.log(oGrid.getCurrentGutter());
 // > 10px | 20px
 ```
 
-When using o-grid silent mode, make sure to surface the grid
-information to make it readable by the JavaScript Helper
-by adding `@include oGridSurfaceCurrentLayout();` to your Sass file.
+If using [Sass](#sass), ensure the `surface` option includes `current-layout` so JavaScript can retrieve layout information from our CSS.
 
 ### `getGridBreakpoints()`
 
@@ -675,9 +674,7 @@ console.log(oGrid.getGridBreakpoints());
 // > { "layouts": { "S": "490px", "M": "740px", "L": "980px", "XL": "1220px" } }
 ```
 
-When using o-grid silent mode, make sure to surface the grid
-information to make it readable by the JavaScript Helper
-by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
+If using [Sass](#sass), ensure the `surface` option includes `layout-sizes` so JavaScript can retrieve layout information from our CSS.
 
 ### `enableLayoutChangeEvents()`
 
@@ -689,20 +686,7 @@ var oGrid = require('o-grid');
 oGrid.enableLayoutChangeEvents();
 ```
 
-When using o-grid silent mode, make sure to surface the grid
-information to make it readable by the JavaScript Helper
-by adding `@include oGridSurfaceLayoutSizes;` to your Sass file.
-
-
-### `setMinSupportedIeVersion(version)`
-
-By default, o-grid supports IE8. The feature detect for this can cause performance problems. By setting version to a number greater than 8 this can be avoided.
-
-```js
-var oGrid = require('o-grid');
-
-oGrid.setMinSupportedIeVersion(11);
-```
+If using [Sass](#sass), ensure the `surface` option includes `layout-sizes` so JavaScript can retrieve layout information from our CSS.
 
 ## Grid Bookmarklet
 

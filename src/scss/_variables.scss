@@ -1,8 +1,3 @@
-////
-/// @group o-grid
-/// @link http://registry.origami.ft.com/components/o-grid
-////
-
 // ----------------------------------------------------------------------------
 // Responsive behaviour configuration
 // ----------------------------------------------------------------------------
@@ -10,24 +5,7 @@
 /// Silent mode
 ///
 /// @type Bool
-///
-/// @link http://origami.ft.com/docs/syntax/scss/#silent-styles "Silent" styles in Origami's documentation
 $o-grid-is-silent: true !default;
-
-
-/// Offset, push and pull selectors
-///
-/// @type Bool
-///
-/// Toggle outputting offset, push and pull selectors
-$o-grid-shuffle-selectors: true !default;
-
-/// Human-friendly selectors
-///
-/// @type Bool
-///
-/// Toggle outputting offset, push and pull selectors
-$o-grid-human-friendly-selectors: true !default;
 
 
 /// Grid mode
@@ -49,21 +27,6 @@ $o-grid-fixed-layout: 'L' !default;
 ///
 /// @type String
 $o-grid-start-snappy-mode-at: 'M' !default;
-
-/// Show the currently active breakpoint and output loaded settings
-/// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
-///
-/// @type Bool
-$o-grid-debug-mode: false !default;
-
-/// Output IE 8-specific rules?
-/// - false: no IE8 support at all
-/// - 'only': serve code compatible with IE8 only
-/// - 'inline' (default): serve IE8 specific code alongside modern browsers code
-///
-/// @type Bool | String
-$o-grid-ie8-rules: 'inline' !default;
-
 
 // ----------------------------------------------------------------------------
 // Grid settings and dimensions
@@ -126,9 +89,3 @@ $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
 @if $o-grid-mode == 'snappy' {
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
 }
-
-/// Current scope
-///
-/// @access private
-/// @type String
-$_o-grid-scope: 'global';

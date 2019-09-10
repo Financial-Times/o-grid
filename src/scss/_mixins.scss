@@ -1,0 +1,500 @@
+/// Output debug information about the currently loaded layouts.
+///
+/// @param {Map} $layouts - Map of layouts
+@mixin oGridDebugInfo($layouts: $o-grid-layouts) {
+	/*! DEBUG
+	 * Layouts:
+	 * #{inspect($layouts)}
+	 */
+	 @include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
+}
+
+/// Add a layout (breakpoint). This can be used to add a new breakpoint to a
+/// project, in addition to the default layouts (S, M, L, XL).
+///
+/// @example scss
+///  @include oGridAddLayout($layout-name: P, $layout-width: 600px);
+///  @include oGridAddLayout($layout-name: XXL, $layout-width: 1600px, $gutter-width: 30px);
+///
+/// @param {String} $layout-name - Name of the layout (e.g. S)
+/// @param {Number} $layout-width - Layout width in px
+/// @param {Number} $gutter-width [null] - Gutter width in px
+@mixin oGridAddLayout($layout-name, $layout-width, $gutter-width: null) {
+	$temp-layouts: ();
+	$temp-gutters: (default: oGridGutter());
+
+	// Add the new layout in the correct position:
+	// (we want $o-grid-layouts and $o-grid-gutters to be ordered from the smallest to the largest layout)
+	@for $index from 1 through length($o-grid-layouts) {
+		$previous-layout-width: if($index == 1, 0, map-get($o-grid-layouts, nth($_o-grid-layout-names, $index - 1)));
+		$current-layout-name: nth($_o-grid-layout-names, $index);
+		$current-layout-width: map-get($o-grid-layouts, $current-layout-name);
+
+		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
+
+		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
+			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
+			$temp-gutters: map-merge($temp-gutters, ($layout-name: $gutter-width));
+		}
+
+		$temp-layouts: map-merge($temp-layouts, ($current-layout-name: $current-layout-width));
+
+		@if $current-gutter-width {
+			$temp-gutters: map-merge($temp-gutters, ($current-layout-name: $current-gutter-width));
+		}
+	}
+	$o-grid-layouts: $temp-layouts !global;
+	$_o-grid-layout-names: map-keys($o-grid-layouts) !global;
+
+	@if $gutter-width {
+		$o-grid-gutters: $temp-gutters !global;
+	}
+
+	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
+}
+
+/// Apply styles at a given layout size (breakpoint) as the grid. It should be
+// passed one of $o-grid-layouts e.g. `S`, `M`, etc... depending on which layout
+// size the style should apply at.
+///
+/// @example
+///  // Turn the color of an element red at medium layout size and up
+///  @include oGridRespondTo(M) {
+///  	element {
+///  		color: red;
+///  	}
+///  }
+///  // Turn the color of an element blue until medium layout
+///  element {
+///  	@include oGridRespondTo($until: M) {
+///  		color: blue;
+///  	}
+///  }
+///  // Turn the color of an element green from small layout until medium layout
+///  element {
+///  	@include oGridRespondTo($from: S, $until: M) {
+///  		color: green;
+///  	}
+///  }
+///
+/// @param {String} from - one of $o-grid-layouts
+/// @param {String} until - one of $o-grid-layouts
+@mixin oGridRespondTo($from: false, $until: false) {
+	$grid-is-responsive: $o-grid-mode != 'fixed';
+
+	@include mq(
+		$from: $from,
+		$until: $until,
+		$responsive: $grid-is-responsive,
+		$breakpoints: $o-grid-layouts,
+		$static-breakpoint: $o-grid-fixed-layout
+	) {
+		@content;
+	}
+}
+
+/// Base column styles and responsive layout width
+///
+/// @example scss Block has column styles
+///   el { @include oGridColspan(); }
+///
+/// @example scss 4-column wide block
+///   el { @include oGridColspan(4); }
+///
+/// @example scss Half-width block
+///   el { @include oGridColspan(1/2); }
+///
+/// @example scss Block is full-width by default, 8-column wide on Medium layouts and hidden on Large layouts
+///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
+///
+/// @param {Number | Map} $span [null]
+@mixin oGridColspan($span: null, $width-only: false) {
+	@if not $width-only {
+		box-sizing: border-box;
+		float: left;
+		flex: 1 1 0%;
+		position: relative; // Required for push and pull
+
+		@if $o-grid-mode == 'fixed' {
+			padding-left: oGridGutter($o-grid-fixed-layout);
+		} @else {
+			@each $layout-name in map-keys($o-grid-gutters) {
+				@if $layout-name == 'default' {
+					padding-left: oGridGutter();
+				} @else {
+					@include oGridRespondTo($layout-name) {
+						padding-left: oGridGutter($layout-name);
+					}
+				}
+			}
+		}
+	}
+	@if $span {
+		@include _oGridColumnWidth($span);
+	}
+}
+
+/// Grid container
+///
+/// @param {String} $grid-mode [$o-grid-mode]
+/// @param {Boolean} $bleed [false]
+@mixin oGridContainer($grid-mode: $o-grid-mode, $bleed: false) {
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: $o-grid-min-width;
+	// Older browsers get a fixed-width layout
+	max-width: oGridGetMaxWidthForLayout($o-grid-fixed-layout);
+	position: relative;
+
+	@if $bleed {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@if $grid-mode == 'fixed' {
+		// If the grid isn't fluid, we set it to a certain width
+		width: oGridGetMaxWidthForLayout($o-grid-fixed-layout, $grid-mode: 'fixed');
+		@if not $bleed {
+			padding-left: oGridGutter($o-grid-fixed-layout);
+			padding-right: oGridGutter($o-grid-fixed-layout);
+		}
+	} @else {
+		max-width: $_o-grid-max-width;
+
+		@each $layout-name in map-keys($o-grid-gutters) {
+			@if $layout-name == 'default' {
+				@if not $bleed {
+					padding-left: oGridGutter();
+					padding-right: oGridGutter();
+				}
+			} @else {
+				@include oGridRespondTo($layout-name) {
+					@if not $bleed {
+						padding-left: oGridGutter($layout-name);
+						padding-right: oGridGutter($layout-name);
+					}
+				}
+			}
+		}
+
+		@each $layout-name in $_o-grid-layout-names {
+			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
+				@include oGridRespondTo($layout-name) {
+					// If the grid mode is snappy, all rows should be snappy
+					@if $grid-mode == 'snappy' {
+						max-width: map-get($o-grid-layouts, $layout-name);
+					}
+					@if $grid-mode == 'fluid' {
+						// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
+						.o-grid-snappy &,
+						&--snappy {
+							max-width: map-get($o-grid-layouts, $layout-name);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/// Base row styles
+@mixin oGridRow {
+	clear: both;
+	flex-wrap: wrap; // Note that this breaks in old Firefox
+	display: flex;
+
+	@media print {
+		display: inherit;
+	}
+
+	@if $o-grid-mode == 'fixed' {
+		margin-left: -1 * oGridGutter($o-grid-fixed-layout);
+	} @else {
+		@each $layout-name in map-keys($o-grid-gutters) {
+			@if $layout-name == 'default' {
+				margin-left: -1 * oGridGutter();
+			} @else {
+				@include oGridRespondTo($layout-name) {
+					margin-left: -1 * oGridGutter($layout-name);
+				}
+			}
+		}
+	}
+
+	// Clearfix for IE9 and below
+	zoom: 1;
+
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+		display: flex; // sass-lint:disable-line no-duplicate-properties
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+/// Remove gutters from columns in a row
+///
+/// @param {string} $column-selector ["[o-grid-colspan]"] - CSS selector for row element
+@mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
+	margin-left: 0;
+
+	> #{unquote($column-selector)} {
+		padding-left: 0;
+	}
+}
+
+/// Remove row styles
+@mixin oGridResetRow {
+	clear: none;
+	display: block;
+	flex-wrap: nowrap;
+	margin-left: 0;
+
+	&:before,
+	&:after {
+		display: none;
+	}
+}
+
+/// Center column
+@mixin oGridCenter {
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
+}
+
+/// Uncenter column
+@mixin oGridUncenter {
+	margin-left: 0;
+	margin-right: 0;
+	float: left;
+}
+
+/// Remove column styles
+@mixin oGridResetColumn {
+	padding-left: 0;
+	padding-right: 0;
+	float: none;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	flex: none;
+}
+
+/// Reorder visually: pull
+///
+/// @param {Number} $columns
+@mixin oGridPull($columns) {
+	right: oGridColspan($columns);
+	left: auto;
+}
+
+/// Reorder visually: push
+///
+/// @param {Number} $columns
+@mixin oGridPush($columns) {
+	left: oGridColspan($columns);
+	right: auto;
+}
+
+/// Offset: add space before a column
+///
+/// @param {Number} $columns
+@mixin oGridOffset($columns) {
+	margin-left: oGridColspan($columns);
+}
+
+/// Fix a bug in Safari where items wouldn't wrap properly
+/// Remove when Safari 10 support is no longer required.
+/// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
+/// @access private
+@mixin _oGridFixSafariWrap($args...) {
+	flex-basis: oGridColspan($args...);
+}
+
+/// @access private
+@mixin _oGridSurfaceLayoutSizes {
+	html:before {
+		$combined: '{"layouts": {';
+
+		$keys: map-keys($o-grid-layouts);
+
+		@for $ittr from 1 through length($keys) {
+			$key: nth($keys, $ittr);
+			$value: map-get($o-grid-layouts, $key);
+
+			$combined: $combined + _oGridQuoteString($key) + ': ' + _oGridQuoteString($value);
+
+			@if $ittr < length($keys) {
+				$combined: $combined + ", ";
+			}
+		}
+
+		$combined: $combined + '}}';
+
+		display: none;
+		content: $combined;
+	}
+}
+
+/// Surface the layout currently displayed to make it readable in JS.
+///
+/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
+///
+/// **n.b.:** Only works when silent mode is off.
+///
+/// @example js
+///  // your-app/main.js
+///  // Return the current layout (e.g. default, S, M, L, XL)
+///  var getCurrentLayout = require('o-grid').getCurrentLayout;
+///  console.log(getCurrentLayout());
+///
+///  // Return the current gutter (e.g. 10px, 20px)
+///  var getCurrentGutter = require('o-grid').getCurrentGutter;
+///  console.log(getCurrentGutter());
+/// @access private
+@mixin _oGridSurfaceCurrentLayout {
+	html:after {
+		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
+		display: none;
+
+		@each $breakpoint in $_o-grid-layout-names {
+			@include oGridRespondTo($breakpoint) {
+				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
+			}
+		}
+	}
+}
+
+/// Human friendly names for portions and centering:
+///
+/// - hide
+/// - full-width
+/// - one-half
+/// - one-third
+/// - two-thirds
+/// - one-quarter
+/// - three-quarters
+/// - center
+/// - uncenter
+///
+/// @access private
+///
+/// @param {String} $layout-name [null]
+@mixin _oGridHumanFriendlyColumns($layout-name: null) {
+	[data-o-grid-colspan~="#{$layout-name}hide"] {
+		display: none;
+	}
+
+	// Center and un-center
+	[data-o-grid-colspan~="#{$layout-name}center"] {
+		@include oGridCenter;
+	}
+	// Since writing [data-o-grid-colspan~="uncenter"] wouldn't make much sense
+	// we only allow "uncenter" combined with a layout (e.g. XLuncenter)
+	@if $layout-name != null {
+		[data-o-grid-colspan~="#{$layout-name}uncenter"] {
+			@include oGridUncenter;
+		}
+	}
+
+	// Portions
+	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
+		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
+			// sass-lint:disable mixins-before-declarations
+
+			// Restore visibility from `display: none`
+			// if `data-o-grid-colspan` was set to `0` or `hide`
+			display: block;
+
+			// Define width in %
+			@include _oGridFixSafariWrap($human-friendly-name);
+			min-width: oGridColspan($human-friendly-name);
+			max-width: oGridColspan($human-friendly-name);
+			width: oGridColspan($human-friendly-name);
+		}
+	}
+}
+
+/// Shuffle columns around using pull, push and offset
+///
+/// @access private
+///
+/// @param {String} $layout-name [null]
+@mixin _oGridShuffleColumns($layout-name: null) {
+	@for $colspan from 0 through ($o-grid-columns - 1) {
+		[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
+			@include oGridPush($colspan);
+		}
+		[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
+			@include oGridPull($colspan);
+		}
+		[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
+			@include oGridOffset($colspan);
+		}
+	}
+}
+
+/// Cross browser column widths across layouts
+///
+/// @access private
+///
+/// @example scss
+///   el { @include _oGridColumnWidth(4); }
+///   el { @include _oGridColumnWidth(1/2); }
+///   el { @include _oGridColumnWidth(hide); }
+///   el { @include _oGridColumnWidth((default: 12, M: 8, L: hide)); }
+///
+/// @param {Number | Map} $span
+@mixin _oGridColumnWidth($span) {
+	// Special case: the column is hidden by default
+	@if $span == 'hide' {
+		display: none;
+	} @else {
+		// $span is a number or a keyword, so we're outputting the default width for that column
+		@if type-of($span) == number or type-of($span) == string {
+			// sass-lint:disable mixins-before-declarations
+
+			// Restore visibility from `display: none`
+			// if `data-o-grid-colspan` was set to `0` or `hide`
+			display: block;
+
+			// Define width in %
+			@include _oGridFixSafariWrap($span);
+			min-width: oGridColspan($span);
+			max-width: oGridColspan($span);
+		}
+	}
+
+	// $span is a map, we're looping through all of the layouts
+	@if type-of($span) == map {
+		@each $layout-name, $layout-span in $span {
+			@if $layout-name == 'default' {
+				@include _oGridColumnWidth($layout-span);
+			} @else {
+				@if $layout-span == 'hide' {
+					@include oGridRespondTo($layout-name) {
+						display: none;
+					}
+				} @else {
+					@include oGridRespondTo($layout-name) {
+						// sass-lint:disable mixins-before-declarations
+
+						// Restore visibility from `display: none`
+						// if `data-o-grid-colspan` was set to `0` or `hide`
+						display: block;
+
+						// Define width in %
+						@include _oGridFixSafariWrap($layout-span);
+						min-width: oGridColspan($layout-span);
+						max-width: oGridColspan($layout-span);
+					}
+				}
+			}
+		}
+	}
+}

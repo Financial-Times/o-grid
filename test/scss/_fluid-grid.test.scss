@@ -181,19 +181,7 @@
 						padding-left: 10px;
 					}
 
-					@media \0screen {
-						.test-colspan {
-							min-width: 0 !important; // sass-lint:disable-line no-important
-						}
-					}
-
 					@media (min-width: 46.25em) {
-						.test-colspan {
-							padding-left: 20px;
-						}
-					}
-
-					@media \0screen {
 						.test-colspan {
 							padding-left: 20px;
 						}
@@ -216,7 +204,6 @@
 						flex-basis: 25%;
 						min-width: 25%;
 						max-width: 25%;
-						width: 25%;
 					}
 				};
 			};
@@ -272,14 +259,6 @@
 							max-width: 1220px;
 						}
 					}
-
-					@media \0screen {
-						.test-container {
-							padding-left: 20px;
-							padding-right: 20px;
-							width: 980px;
-						}
-					};
 				};
 			};
 		};
@@ -325,12 +304,6 @@
 							max-width: 1220px;
 						}
 					}
-
-					@media \0screen {
-						.test-container {
-							width: 980px;
-						}
-					};
 				};
 			};
 		};
@@ -362,12 +335,6 @@
 
 					@media (min-width: 46.25em) {
 						.test-row  {
-							margin-left: -20px;
-						}
-					}
-
-					@media \0screen {
-						.test-row {
 							margin-left: -20px;
 						}
 					}

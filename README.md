@@ -717,25 +717,16 @@ oGrid.setMinSupportedIeVersion(11);
 
 ![ ](https://cloud.githubusercontent.com/assets/85783/6125746/732fe9c0-b111-11e4-88d2-5031493cfec0.png)
 
-## Migration Guide
 
-### Upgrading from v3.x.x to v4.x.x
+## Migration
 
-#### Important Changes
-
-- Layout sizes have slightly changed (M, L and XL are 10px wider).
-- Gutter widths vary between layouts (default: 10px, M and above: 20px)
-
-#### Markup/Sass changes
-
-- Wrap top-level `<div class="o-grid-row">` into `<div class="o-grid-container">`.
-- Search `oGridColumn` and replace with `oGridColspan`.
-- The mixin `oGridColspan` from v3 outputs a bit more code. Use `oGridColspan($span, $width-only: true)` to only outputs widths. Note that with gzip this should not have any impact.
-- `$o-grid-gutter` becomes `$o-grid-gutters` (plural) and now contains a map
-- Change all `$o-grid-gutter` to `oGridGutter()`. e.g. `margin-left: $o-grid-gutter` becomes `margin-left: oGridGutter()`
-- A few helpers have been removed because they weren't used.
-
-----
+State | Major Version | Last Minor Release | Migration guide |
+:---: | :---: | :---: | :---:
+✨ active | 5 | N/A  | [migrate to v5](MIGRATION.md#migrating-from-v4-to-v5) |
+⚠ maintained | 4 | 4.5  | [migrate to v4](MIGRATION.md#migrating-from-v3-to-v4) |
+╳ deprecated | 3 | 3.2 | - |
+╳ deprecated | 2 | 2.4 | - |
+╳ deprecated | 1 | 1.4 | - |
 
 ## Contact
 

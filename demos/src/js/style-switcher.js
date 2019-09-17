@@ -1,15 +1,14 @@
 /*global $*/
 /*eslint no-extend-native: 0 */
 
-const almostEqual = require('./almost-equal');
-const getCurrentLayout = require('../../../main').getCurrentLayout;
-const getCurrentGutter = require('../../../main').getCurrentGutter;
+import almostEqual from './almost-equal';
+import { getCurrentGutter, getCurrentLayout } from '../../../main';
+import demoTypes from '../configurations.json';
 const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================
 // Self-contained stylesheet switcher
 (function styleSwitcher() {
-	const demoTypes = require('../configurations.json');
 	const stylesheet = document.querySelector("link[href*='default']");
 	const html = document.documentElement;
 	const buttonContainer = document.getElementById("js-demo-switcher");

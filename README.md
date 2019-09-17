@@ -60,12 +60,14 @@ $o-grid-is-silent: false;
 // your-app/main.js
 
 // Return the current layout (e.g. default, S, M, L, XL)
-var getCurrentLayout = require('o-grid').getCurrentLayout;
-console.log(getCurrentLayout());
+import oGrid from 'o-grid';
+let currentLayout = oGrid.getCurrentLayout();
+console.log(currentLayout);
 
 // Return the current gutter (e.g. 10px, 20px)
-var getCurrentGutter = require('o-grid').getCurrentGutter;
-console.log(getCurrentGutter());
+import oGrid from 'o-grid';
+let currentGutter = oGrid.getCurrentGutter();
+console.log(currentGutter);
 ```
 
 ## Grid dimensions
@@ -644,7 +646,7 @@ $o-grid-debug-mode: true;
 Returns the name of the layout currently displayed.
 
 ```js
-var oGrid = require('o-grid');
+import oGrid from 'o-grid';
 
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
@@ -655,7 +657,7 @@ console.log(oGrid.getCurrentLayout());
 Returns the width of the gutter currently displayed.
 
 ```js
-var oGrid = require('o-grid');
+import oGrid from 'o-grid';
 
 console.log(oGrid.getCurrentGutter());
 // > 10px | 20px
@@ -668,7 +670,7 @@ If using [Sass](#sass), ensure the `surface` option includes `current-layout` so
 Returns the sizes of all grid breakpoints available.
 
 ```js
-var oGrid = require('o-grid');
+import oGrid from 'o-grid';
 
 console.log(oGrid.getGridBreakpoints());
 // > { "layouts": { "S": "490px", "M": "740px", "L": "980px", "XL": "1220px" } }
@@ -681,7 +683,7 @@ If using [Sass](#sass), ensure the `surface` option includes `layout-sizes` so J
 Enable matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
 
 ```js
-var oGrid = require('o-grid');
+import oGrid from 'o-grid';
 
 oGrid.enableLayoutChangeEvents();
 ```

@@ -96,19 +96,19 @@
 /// Base column styles and responsive layout width
 ///
 /// @example scss Block has column styles
-///   el { @include oGridColspan(); }
+///   el { @include oGridContentColspan(); }
 ///
 /// @example scss 4-column wide block
-///   el { @include oGridColspan(4); }
+///   el { @include oGridContentColspan(4); }
 ///
 /// @example scss Half-width block
-///   el { @include oGridColspan(1/2); }
+///   el { @include oGridContentColspan(1/2); }
 ///
 /// @example scss Block is full-width by default, 8-column wide on Medium layouts and hidden on Large layouts
-///   el { @include oGridColspan((default: 12, M: 8, L: hide)); }
+///   el { @include oGridContentColspan((default: 12, M: 8, L: hide)); }
 ///
 /// @param {Number | Map} $span [null]
-@mixin oGridColspan($span: null, $width-only: false) {
+@mixin oGridContentColspan($span: null, $width-only: false) {
 	@if not $width-only {
 		box-sizing: border-box;
 		float: left;
@@ -138,7 +138,7 @@
 ///
 /// @param {String} $grid-mode [$o-grid-mode]
 /// @param {Boolean} $bleed [false]
-@mixin oGridContainer($grid-mode: $o-grid-mode, $bleed: false) {
+@mixin oGridContentContainer($grid-mode: $o-grid-mode, $bleed: false) {
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
@@ -199,7 +199,7 @@
 }
 
 /// Base row styles
-@mixin oGridRow {
+@mixin oGridContentRow {
 	clear: both;
 	flex-wrap: wrap; // Note that this breaks in old Firefox
 	display: flex;
@@ -239,7 +239,7 @@
 /// Remove gutters from columns in a row
 ///
 /// @param {string} $column-selector ["[o-grid-colspan]"] - CSS selector for row element
-@mixin oGridRowCompact($column-selector: "[o-grid-colspan]") {
+@mixin oGridContentRowCompact($column-selector: "[o-grid-colspan]") {
 	margin-left: 0;
 
 	> #{unquote($column-selector)} {
@@ -248,7 +248,7 @@
 }
 
 /// Remove row styles
-@mixin oGridResetRow {
+@mixin oGridContentResetRow {
 	clear: none;
 	display: block;
 	flex-wrap: nowrap;
@@ -261,21 +261,21 @@
 }
 
 /// Center column
-@mixin oGridCenter {
+@mixin oGridContentCenter {
 	margin-left: auto;
 	margin-right: auto;
 	float: none;
 }
 
 /// Uncenter column
-@mixin oGridUncenter {
+@mixin oGridContentUncenter {
 	margin-left: 0;
 	margin-right: 0;
 	float: left;
 }
 
 /// Remove column styles
-@mixin oGridResetColumn {
+@mixin oGridContentResetColumn {
 	padding-left: 0;
 	padding-right: 0;
 	float: none;
@@ -288,32 +288,32 @@
 /// Reorder visually: pull
 ///
 /// @param {Number} $columns
-@mixin oGridPull($columns) {
-	right: oGridColspan($columns);
+@mixin oGridContentPull($columns) {
+	right: oGridContentColspan($columns);
 	left: auto;
 }
 
 /// Reorder visually: push
 ///
 /// @param {Number} $columns
-@mixin oGridPush($columns) {
-	left: oGridColspan($columns);
+@mixin oGridContentPush($columns) {
+	left: oGridContentColspan($columns);
 	right: auto;
 }
 
 /// Offset: add space before a column
 ///
 /// @param {Number} $columns
-@mixin oGridOffset($columns) {
-	margin-left: oGridColspan($columns);
+@mixin oGridContentOffset($columns) {
+	margin-left: oGridContentColspan($columns);
 }
 
 /// Fix a bug in Safari where items wouldn't wrap properly
 /// Remove when Safari 10 support is no longer required.
 /// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
 /// @access private
-@mixin _oGridFixSafariWrap($args...) {
-	flex-basis: oGridColspan($args...);
+@mixin _oGridContentFixSafariWrap($args...) {
+	flex-basis: oGridContentColspan($args...);
 }
 
 /// @access private
@@ -392,13 +392,13 @@
 
 	// Center and un-center
 	[data-o-grid-colspan~="#{$layout-name}center"] {
-		@include oGridCenter;
+		@include oGridContentCenter;
 	}
 	// Since writing [data-o-grid-colspan~="uncenter"] wouldn't make much sense
 	// we only allow "uncenter" combined with a layout (e.g. XLuncenter)
 	@if $layout-name != null {
 		[data-o-grid-colspan~="#{$layout-name}uncenter"] {
-			@include oGridUncenter;
+			@include oGridContentUncenter;
 		}
 	}
 
@@ -412,10 +412,10 @@
 			display: block;
 
 			// Define width in %
-			@include _oGridFixSafariWrap($human-friendly-name);
-			min-width: oGridColspan($human-friendly-name);
-			max-width: oGridColspan($human-friendly-name);
-			width: oGridColspan($human-friendly-name);
+			@include _oGridContentFixSafariWrap($human-friendly-name);
+			min-width: oGridContentColspan($human-friendly-name);
+			max-width: oGridContentColspan($human-friendly-name);
+			width: oGridContentColspan($human-friendly-name);
 		}
 	}
 }
@@ -428,13 +428,13 @@
 @mixin _oGridShuffleColumns($layout-name: null) {
 	@for $colspan from 0 through ($o-grid-columns - 1) {
 		[data-o-grid-colspan~="#{$layout-name}push#{$colspan}"] {
-			@include oGridPush($colspan);
+			@include oGridContentPush($colspan);
 		}
 		[data-o-grid-colspan~="#{$layout-name}pull#{$colspan}"] {
-			@include oGridPull($colspan);
+			@include oGridContentPull($colspan);
 		}
 		[data-o-grid-colspan~="#{$layout-name}offset#{$colspan}"] {
-			@include oGridOffset($colspan);
+			@include oGridContentOffset($colspan);
 		}
 	}
 }
@@ -464,9 +464,9 @@
 			display: block;
 
 			// Define width in %
-			@include _oGridFixSafariWrap($span);
-			min-width: oGridColspan($span);
-			max-width: oGridColspan($span);
+			@include _oGridContentFixSafariWrap($span);
+			min-width: oGridContentColspan($span);
+			max-width: oGridContentColspan($span);
 		}
 	}
 
@@ -489,9 +489,9 @@
 						display: block;
 
 						// Define width in %
-						@include _oGridFixSafariWrap($layout-span);
-						min-width: oGridColspan($layout-span);
-						max-width: oGridColspan($layout-span);
+						@include _oGridContentFixSafariWrap($layout-span);
+						min-width: oGridContentColspan($layout-span);
+						max-width: oGridContentColspan($layout-span);
 					}
 				}
 			}

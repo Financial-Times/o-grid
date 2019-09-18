@@ -59,7 +59,7 @@
 
 	// Grid container
 	.o-grid-container {
-		@include oGridContainer();
+		@include oGridContentContainer();
 	}
 
 	@if($bleed) {
@@ -71,7 +71,7 @@
 
 	// Grid row
 	.o-grid-row {
-		@include oGridRow;
+		@include oGridContentRow;
 	}
 
 	// Compact, gutterless row of columns
@@ -87,7 +87,7 @@
 
 	// Grid columns
 	[data-o-grid-colspan] {
-		@include oGridColspan();
+		@include oGridContentColspan();
 	}
 
 	[data-o-grid-colspan~="0"] {
@@ -96,7 +96,7 @@
 
 	@for $colspan from 1 through $o-grid-columns {
 		[data-o-grid-colspan~="#{$colspan}"] {
-			@include oGridColspan($colspan, $width-only: true);
+			@include oGridContentColspan($colspan, $width-only: true);
 		}
 	}
 
@@ -133,10 +133,10 @@
 					display: block;
 
 					// Apply width in %
-					@include _oGridFixSafariWrap($colspan);
-					min-width: oGridColspan($colspan);
-					max-width: oGridColspan($colspan);
-					width: oGridColspan($colspan);
+					@include _oGridContentFixSafariWrap($colspan);
+					min-width: oGridContentColspan($colspan);
+					max-width: oGridContentColspan($colspan);
+					width: oGridContentColspan($colspan);
 				}
 			}
 		}

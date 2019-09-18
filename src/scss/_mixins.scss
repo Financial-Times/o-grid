@@ -350,12 +350,14 @@
 /// @example js
 ///  // your-app/main.js
 ///  // Return the current layout (e.g. default, S, M, L, XL)
-///  var getCurrentLayout = require('o-grid').getCurrentLayout;
-///  console.log(getCurrentLayout());
+///  import oGrid from 'o-grid';
+///  let currentLayout = oGrid.getCurrentLayout();
+///  console.log(currentLayout);
 ///
 ///  // Return the current gutter (e.g. 10px, 20px)
-///  var getCurrentGutter = require('o-grid').getCurrentGutter;
-///  console.log(getCurrentGutter());
+///  import oGrid from 'o-grid';
+///  let currentGutter = oGrid.getCurrentGutter();
+///  console.log(currentGutter);
 /// @access private
 @mixin _oGridSurfaceCurrentLayout {
 	html:after {

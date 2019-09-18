@@ -1,4 +1,4 @@
-const { enableLayoutChangeEvents } = require('../../../main');
+import { enableLayoutChangeEvents } from '../../../main';
 
 enableLayoutChangeEvents();
 

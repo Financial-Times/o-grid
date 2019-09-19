@@ -12,7 +12,7 @@ jobs:
       - run: $HOME/.local/bin/obt verify
       - run: $HOME/.local/bin/obt test
       - run: git clean -fxd
-      - run: npx occ@0.14.3 --name="${CIRCLE_PROJECT_REPONAME}" 0.0.0
+      - run: npx occ 0.0.0
       - run: $HOME/.local/bin/obt install --ignore-bower
       - run: $HOME/.local/bin/obt test --ignore-bower
   publish_to_npm:
@@ -20,7 +20,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - run: npx occ@0.14.3 --name="${CIRCLE_PROJECT_REPONAME}" ${CIRCLE_TAG##v}
+      - run: npx occ ${CIRCLE_TAG##v}
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > $HOME/.npmrc
       - run: npm publish --access public 
 workflows:

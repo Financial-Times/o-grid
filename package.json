@@ -1,3 +1,8 @@
 {
-	"main": "main.js"
+	"main": "main.js",
+	"name": "o-grid",
+	"private": true,
+	"devDependencies": {
+		"origami-ci-tools": "^1.0.0"
+	}
 }

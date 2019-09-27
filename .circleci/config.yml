@@ -2,27 +2,18 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/node:10-browsers
+      - image: 'circleci/node:10-browsers'
     steps:
       - checkout
-      - run: npm config set prefix "$HOME/.local"
-      - run: npm i -g origami-build-tools@^7
-      - run: $HOME/.local/bin/obt install
-      - run: $HOME/.local/bin/obt demo --demo-filter pa11y --suppress-errors
-      - run: $HOME/.local/bin/obt verify
-      - run: $HOME/.local/bin/obt test
-      - run: git clean -fxd
-      - run: npx occ 0.0.0
-      - run: $HOME/.local/bin/obt install --ignore-bower
-      - run: $HOME/.local/bin/obt test --ignore-bower
+      - run: npm install --only=dev
+      - run: npx origami-ci branch
   publish_to_npm:
     docker:
-      - image: circleci/node:10
+      - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: npx occ ${CIRCLE_TAG##v}
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > $HOME/.npmrc
-      - run: npm publish --access public 
+      - run: npm install --only=dev
+      - run: npx origami-ci release
 workflows:
   version: 2
   test:

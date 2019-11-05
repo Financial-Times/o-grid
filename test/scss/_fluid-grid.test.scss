@@ -163,12 +163,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentColspan') {
+	@include describe('mixin: oGridColspan') {
 		@include test('sass mixin complies base column styles') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-colspan {
-						@include oGridContentColspan();
+						@include oGridColspan();
 					}
 				};
 
@@ -194,7 +194,7 @@
 			@include assert() {
 				@include output($selector: false) {
 					.test-colspan {
-						@include oGridContentColspan($span: 3, $width-only: true);
+						@include oGridColspan($span: 3, $width-only: true);
 					}
 				};
 
@@ -210,12 +210,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentContainer') {
+	@include describe('mixin: oGridContainer') {
 		@include test('sass mixin compiles correctly for regular container') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-container {
-						@include oGridContentContainer;
+						@include oGridContainer;
 					};
 				};
 
@@ -267,7 +267,7 @@
 			@include assert() {
 				@include output($selector: false) {
 					.test-container {
-						@include oGridContentContainer($bleed: true);
+						@include oGridContainer($bleed: true);
 					};
 				};
 
@@ -309,12 +309,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentRow') {
+	@include describe('mixin: oGridRow') {
 		@include test('sass mixin complies correctly') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-row {
-						@include oGridContentRow();
+						@include oGridRow();
 					}
 				};
 

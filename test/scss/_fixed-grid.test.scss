@@ -19,12 +19,12 @@ $o-grid-mode: 'fixed';
 		};
 	};
 
-	@include describe('mixin: oGridContentColspan') {
+	@include describe('mixin: oGridColspan') {
 		@include test('sass mixin complies base column styles') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-colspan {
-						@include oGridContentColspan();
+						@include oGridColspan();
 					}
 				};
 
@@ -41,12 +41,12 @@ $o-grid-mode: 'fixed';
 		};
 	};
 
-	@include describe('mixin: oGridContentContainer') {
+	@include describe('mixin: oGridContainer') {
 		@include test('sass mixin compiles correctly for regular container') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-container {
-						@include oGridContentContainer;
+						@include oGridContainer;
 					};
 				};
 
@@ -70,7 +70,7 @@ $o-grid-mode: 'fixed';
 			@include assert() {
 				@include output($selector: false) {
 					.test-container {
-						@include oGridContentContainer($bleed: true);
+						@include oGridContainer($bleed: true);
 					};
 				};
 
@@ -91,12 +91,12 @@ $o-grid-mode: 'fixed';
 		};
 	};
 
-	@include describe('mixin: oGridContentRow') {
+	@include describe('mixin: oGridRow') {
 		@include test('sass mixin complies correctly') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-row {
-						@include oGridContentRow();
+						@include oGridRow();
 					}
 				};
 

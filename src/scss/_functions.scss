@@ -52,17 +52,17 @@
 /// % width of an element in the grid
 ///
 /// @example
-///  .one-half   { width: oGridContentColspan(1/2); }      // 50%
-///  .other-half { width: oGridContentColspan(one-half); } // 50%
-///  .sidebar    { width: oGridContentColspan(5); }        // 41.66667%
-///  .two-thirds { width: oGridContentColspan(2/3); }      // 66.66667%
-///  .4-out-of-6 { width: oGridContentColspan(4, 6); }     // 66.66667%
+///  .one-half   { width: oGridColspan(1/2); }      // 50%
+///  .other-half { width: oGridColspan(one-half); } // 50%
+///  .sidebar    { width: oGridColspan(5); }        // 41.66667%
+///  .two-thirds { width: oGridColspan(2/3); }      // 66.66667%
+///  .4-out-of-6 { width: oGridColspan(4, 6); }     // 66.66667%
 ///
 /// @param {Number | String} $span - Number of columns the element spans over
 /// @param {Number} $total-cols [$o-grid-columns] - Number of columns in the grid
 ///
 /// @returns {Number} width of the element in the grid, in percents
-@function oGridContentColspan($span, $total-cols: $o-grid-columns) {
+@function oGridColspan($span, $total-cols: $o-grid-columns) {
 	// Match the HTML helper API with human-friendly numbers
 	@if $span == 'one-half'       { $span: 1/2; }
 	@if $span == 'one-quarter'    { $span: 1/4; }

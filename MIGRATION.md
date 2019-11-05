@@ -4,19 +4,6 @@
 
 ### Sass
 
-The following mixins have been renamed:
-
-- `oGridColspan` is now `oGridContentColspan`
-- `oGridContainer` is now `oGridContentContainer`
-- `oGridRow` is now `oGridContentRow`
-- `oGridResetRow` is now `oGridContentResetRow`
-- `oGridCenter` is now `oGridContentCenter`
-- `oGridUncenter` is now `oGridContentUncenter`
-- `oGridResetColumn` is now `oGridContentResetColumn`
-- `oGridPull` is now `oGridContentPull`
-- `oGridPush` is now `oGridContentPush`
-- `oGridOffset` is now `oGridContentOffset`
-
 IE8 is no longer supported, remove uses of:
 - `$o-grid-ie8-rules`
 - `oGridTargetIE8`

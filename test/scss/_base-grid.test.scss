@@ -91,33 +91,33 @@
 		};
 	};
 
-	@include describe('function: oGridContentColspan') {
+	@include describe('function: oGridColspan') {
 		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
-			@include assert-equal(oGridContentColspan(1/2), (50%));
-			@include assert-equal(oGridContentColspan(1/4), (25%));
-			@include assert-equal(round(oGridContentColspan(1/3)), round((33.33333%)));
-			@include assert-equal(round(oGridContentColspan(2/3)), round((66.66667%)));
-			@include assert-equal(round(oGridContentColspan(1)), round((8.33333%)));
-			@include assert-equal(round(oGridContentColspan(2)), round((16.66667%)));
-			@include assert-equal(oGridContentColspan(3), (25%));
-			@include assert-equal(round(oGridContentColspan(4)), round((33.33333%)));
-			@include assert-equal(round(oGridContentColspan(5)), round((41.66667%)));
-			@include assert-equal(oGridContentColspan(6), (50%));
-			@include assert-equal(round(oGridContentColspan(7)), round((58.33333%)));
-			@include assert-equal(round(oGridContentColspan(8)), round((66.66667%)));
-			@include assert-equal(oGridContentColspan(9), (75%));
-			@include assert-equal(round(oGridContentColspan(10)), round((83.33333%)));
-			@include assert-equal(round(oGridContentColspan(11)), round((91.666673%)));
-			@include assert-equal(oGridContentColspan(12), (100%));
+			@include assert-equal(oGridColspan(1/2), (50%));
+			@include assert-equal(oGridColspan(1/4), (25%));
+			@include assert-equal(round(oGridColspan(1/3)), round((33.33333%)));
+			@include assert-equal(round(oGridColspan(2/3)), round((66.66667%)));
+			@include assert-equal(round(oGridColspan(1)), round((8.33333%)));
+			@include assert-equal(round(oGridColspan(2)), round((16.66667%)));
+			@include assert-equal(oGridColspan(3), (25%));
+			@include assert-equal(round(oGridColspan(4)), round((33.33333%)));
+			@include assert-equal(round(oGridColspan(5)), round((41.66667%)));
+			@include assert-equal(oGridColspan(6), (50%));
+			@include assert-equal(round(oGridColspan(7)), round((58.33333%)));
+			@include assert-equal(round(oGridColspan(8)), round((66.66667%)));
+			@include assert-equal(oGridColspan(9), (75%));
+			@include assert-equal(round(oGridColspan(10)), round((83.33333%)));
+			@include assert-equal(round(oGridColspan(11)), round((91.666673%)));
+			@include assert-equal(oGridColspan(12), (100%));
 		};
 	};
 
-	@include describe('mixin: oGridContentRowCompact') {
+	@include describe('mixin: oGridRowCompact') {
 		@include test('sass mixin compiles correctly to remove gutters')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-compact {
-						@include oGridContentRowCompact;
+						@include oGridRowCompact;
 					};
 				};
 
@@ -134,12 +134,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentResetRow') {
+	@include describe('mixin: oGridResetRow') {
 		@include test('sass mixin compiles correctly to reset row styles')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-reset {
-						@include oGridContentResetRow;
+						@include oGridResetRow;
 					};
 				};
 
@@ -160,12 +160,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentCenter') {
+	@include describe('mixin: oGridCenter') {
 		@include test('sass mixin compiles correctly to center column')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-center {
-						@include oGridContentCenter;
+						@include oGridCenter;
 					};
 				};
 
@@ -180,12 +180,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentUncenter') {
+	@include describe('mixin: oGridUncenter') {
 		@include test('sass mixin compiles correctly to uncenter column ')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-uncenter {
-						@include oGridContentUncenter;
+						@include oGridUncenter;
 					};
 				};
 
@@ -200,12 +200,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentResetColumn') {
+	@include describe('mixin: oGridResetColumn') {
 		@include test('sass mixin compiles correctly to remove column styles')  {
 			@include assert() {
 				@include output($selector: false)  {
 					.test-reset-column {
-						@include oGridContentResetColumn;
+						@include oGridResetColumn;
 					};
 				};
 
@@ -224,12 +224,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentPull') {
+	@include describe('mixin: oGridPull') {
 		@include test('pull grid to right by # of column') {
 			@include assert()  {
 				@include output($selector: false) {
 					.test-pull {
-					 	@include oGridContentPull(3);
+					 	@include oGridPull(3);
 					}
 				};
 
@@ -243,12 +243,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentPush') {
+	@include describe('mixin: oGridPush') {
 		@include test('push grid to left by # of columns') {
 			@include assert()  {
 				@include output($selector: false) {
 					.test-pull {
-					 	@include oGridContentPush(3);
+					 	@include oGridPush(3);
 					}
 				};
 
@@ -262,12 +262,12 @@
 		};
 	};
 
-	@include describe('mixin: oGridContentPush') {
+	@include describe('mixin: oGridPush') {
 		@include test('add space before a column') {
 			@include assert()  {
 				@include output($selector: false) {
 					.test-offset {
-					 	@include oGridContentOffset(3);
+					 	@include oGridOffset(3);
 					}
 				};
 

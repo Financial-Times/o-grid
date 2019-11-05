@@ -122,20 +122,20 @@ Set a number of columns per layout:
 
 ```scss
 div {
-	@include oGridContentContainer();
+	@include oGridContainer();
 
 	> div {
-		@include oGridContentRow();
+		@include oGridRow();
 	}
 }
 
 .first-column {
 	// Half by default, then 8 columns wide on Large layout and up
-	@include oGridContentColspan((default: 6, L: 8));
+	@include oGridColspan((default: 6, L: 8));
 }
 .second-column {
 	// Half by default, then 4 columns wide on Large layout and up
-	@include oGridContentColspan((default: 6, L: 4));
+	@include oGridColspan((default: 6, L: 4));
 }
 ```
 
@@ -152,7 +152,7 @@ div {
 ```
 
 ```scss
-div { @include oGridContentColspan((default: 6, L: 8)); }
+div { @include oGridColspan((default: 6, L: 8)); }
 ```
 
 #### Using keywords<a name="keywords"></a>
@@ -167,7 +167,7 @@ div { @include oGridContentColspan((default: 6, L: 8)); }
 ```
 
 ```scss
-div { @include oGridContentColspan((default: one-half, L: two-thirds)); }
+div { @include oGridColspan((default: one-half, L: two-thirds)); }
 ```
 
 ### Examples
@@ -179,7 +179,7 @@ A full width column for all sizes except large screens and up, where it spans on
 ```
 
 ```scss
-div { @include oGridContentColspan((default: full-width, L: 9)); }
+div { @include oGridColspan((default: full-width, L: 9)); }
 ```
 
 A half width column that becomes full-width on medium screens and up:
@@ -189,7 +189,7 @@ A half width column that becomes full-width on medium screens and up:
 ```
 
 ```scss
-div { @include oGridContentColspan((default: one-half, M: 12)); }
+div { @include oGridColspan((default: one-half, M: 12)); }
 ```
 
 A column which gradually takes up a greater portion of horizontal space as the screen gets smaller:
@@ -199,7 +199,7 @@ A column which gradually takes up a greater portion of horizontal space as the s
 ```
 
 ```scss
-div { @include oGridContentColspan((default: 4, M: 3, L: 2, XL: 1)); }
+div { @include oGridColspan((default: 4, M: 3, L: 2, XL: 1)); }
 ```
 
 A column which has `width: auto` on small screens, and then takes half the available space on medium screens and up:
@@ -209,7 +209,7 @@ A column which has `width: auto` on small screens, and then takes half the avail
 ```
 
 ```scss
-div { @include oGridContentColspan((M: 6)); }
+div { @include oGridColspan((M: 6)); }
 ```
 
 ## Sass
@@ -247,7 +247,7 @@ To include all styles call the `oGrid` mixin.
 ```
 
 ```scss
-div { @include oGridContentColspan((default: hide, L: 12, XL: hide)); }
+div { @include oGridColspan((default: hide, L: 12, XL: hide)); }
 ```
 
 #### Centering a column
@@ -260,10 +260,10 @@ div { @include oGridContentColspan((default: hide, L: 12, XL: hide)); }
 
 ```scss
 .my-column {
-	@include oGridContentCenter;
+	@include oGridCenter;
 
 	@include oGridRespondTo(L) {
-		@include oGridContentUncenter;
+		@include oGridUncenter;
 	}
 }
 ```
@@ -278,14 +278,14 @@ div { @include oGridContentColspan((default: hide, L: 12, XL: hide)); }
 ```scss
 // Content is first in the source
 .content {
-	@include oGridContentColspan(8);
-	@include oGridContentPush(4); // outputs left: -33.333333333%;
+	@include oGridColspan(8);
+	@include oGridPush(4); // outputs left: -33.333333333%;
 }
 
 // Sidebar comes second in the source but appears first on the left
 .sidebar {
-	@include oGridContentColspan(4);
-	@include oGridContentPull(8); // outputs right: -66.666666667%;
+	@include oGridColspan(4);
+	@include oGridPull(8); // outputs right: -66.666666667%;
 }
 ```
 
@@ -298,17 +298,17 @@ Responsively:
 ```scss
 // Content is first in the source
 .content {
-	@include oGridContentColspan((L: 8));
+	@include oGridColspan((L: 8));
 	@include oGridRespondTo(L) {
-		@include oGridContentPush(4); // outputs left: -33.333333333%;
+		@include oGridPush(4); // outputs left: -33.333333333%;
 	}
 }
 
 // Sidebar comes second in the source but appears first on the left
 .sidebar {
-	@include oGridContentColspan((L: 4));
+	@include oGridColspan((L: 4));
 	@include oGridRespondTo(L) {
-		@include oGridContentPull(8); // outputs right: -66.666666667%;
+		@include oGridPull(8); // outputs right: -66.666666667%;
 	}
 }
 ```
@@ -325,15 +325,15 @@ Responsively:
 
 ```scss
 div {
-	@include oGridContentColspan(8);
-	@include oGridContentOffset(4); // outputs margin-left: 33.333333333%;
+	@include oGridColspan(8);
+	@include oGridOffset(4); // outputs margin-left: 33.333333333%;
 }
 
 div {
-	@include oGridContentColspan((L: 8));
+	@include oGridColspan((L: 8));
 
 	@include oGridRespondTo(L) {
-		@include oGridContentOffset(4); // outputs margin-left: 33.333333333%;
+		@include oGridOffset(4); // outputs margin-left: 33.333333333%;
 	}
 }
 ```
@@ -362,7 +362,7 @@ The container size can snap between fixed-widths as the viewport gets larger:
 
 #### Compact (gutterless) rows
 
-To remove gutters from in between columns in a row, use the `o-grid-row--compact` class or the `oGridContentRowCompact()` mixin:
+To remove gutters from in between columns in a row, use the `o-grid-row--compact` class or the `oGridRowCompact()` mixin:
 
 ```html
 <div class="o-grid-row o-grid-row--compact">
@@ -374,15 +374,15 @@ To remove gutters from in between columns in a row, use the `o-grid-row--compact
 
 ```scss
 div {
-	@include oGridContentContainer();
+	@include oGridContainer();
 
 	> div {
-		@include oGridContentRow();
-		@include oGridContentRowCompact('.column');
+		@include oGridRow();
+		@include oGridRowCompact('.column');
 	}
 
 	.column {
-		@include oGridContentColspan((default: full-width, S: 3));
+		@include oGridColspan((default: full-width, S: 3));
 	}
 }
 ```
@@ -407,7 +407,7 @@ For simplicity, examples below don't show the output code that brings support fo
 ##### Give column properties to an element
 
 ```scss
-el { @include oGridContentColspan(); }
+el { @include oGridColspan(); }
 ```
 
 Outputs:
@@ -431,7 +431,7 @@ el {
 ##### Give a width to an element
 
 ```scss
-el { @include oGridContentColspan($span: 4); }
+el { @include oGridColspan($span: 4); }
 ```
 
 Outputs:
@@ -460,7 +460,7 @@ el {
 
 ```scss
 el {
-	@include oGridContentColspan((
+	@include oGridColspan((
 		default: full-width,
 		M: 6
 	));
@@ -555,11 +555,11 @@ el {
 
 ```scss
 .un-rowify {
-	@include oGridContentResetRow;
+	@include oGridResetRow;
 }
 
 .de-columnify {
-	@include oGridContentResetColumn;
+	@include oGridResetColumn;
 }
 ```
 

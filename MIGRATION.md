@@ -11,7 +11,6 @@ IE8 is no longer supported, remove uses of:
 
 The following Sass mixins and variables have been removed. Replace them with a single call to `oGrid` with the relevant options. See [the README](./README.md) for more details:
 - `oGridGenerate`
-- `oGridSurfaceCurrentLayout`
 - `oGridSurfaceLayoutSizes`
 - `$o-grid-shuffle-selectors`
 - `$o-grid-human-friendly-selectors`
@@ -20,7 +19,6 @@ The following Sass mixins and variables have been removed. Replace them with a s
 -$o-grid-human-friendly-selectors: true;
 -$o-grid-shuffle-selectors: true;
 -@include oGridSurfaceLayoutSizes();
--@include oGridSurfaceCurrentLayout();
 -@include oGridGenerate();
 +@include oGrid($opts: (
 +	'bleed': true,

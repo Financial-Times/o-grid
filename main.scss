@@ -51,7 +51,7 @@
 
 	// Surface layouts for JS on html:after, html:before.
 	@if($current-layout) {
-		@include _oGridSurfaceCurrentLayout;
+		@include oGridSurfaceCurrentLayout;
 	}
 	@if($layout-sizes) {
 		@include _oGridSurfaceLayoutSizes;

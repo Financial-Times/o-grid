@@ -308,6 +308,36 @@
 	margin-left: oGridColspan($columns);
 }
 
+/// Surface the layout currently displayed to make it readable in JS.
+///
+/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
+///
+/// **n.b.:** Only works when silent mode is off.
+///
+/// @example js
+///  // your-app/main.js
+///  // Return the current layout (e.g. default, S, M, L, XL)
+///  import oGrid from 'o-grid';
+///  let currentLayout = oGrid.getCurrentLayout();
+///  console.log(currentLayout);
+///
+///  // Return the current gutter (e.g. 10px, 20px)
+///  import oGrid from 'o-grid';
+///  let currentGutter = oGrid.getCurrentGutter();
+///  console.log(currentGutter);
+@mixin oGridSurfaceCurrentLayout {
+	html:after {
+		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
+		display: none;
+
+		@each $breakpoint in $_o-grid-layout-names {
+			@include oGridRespondTo($breakpoint) {
+				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
+			}
+		}
+	}
+}
+
 /// Fix a bug in Safari where items wouldn't wrap properly
 /// Remove when Safari 10 support is no longer required.
 /// @link https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items
@@ -338,37 +368,6 @@
 
 		display: none;
 		content: $combined;
-	}
-}
-
-/// Surface the layout currently displayed to make it readable in JS.
-///
-/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
-///
-/// **n.b.:** Only works when silent mode is off.
-///
-/// @example js
-///  // your-app/main.js
-///  // Return the current layout (e.g. default, S, M, L, XL)
-///  import oGrid from 'o-grid';
-///  let currentLayout = oGrid.getCurrentLayout();
-///  console.log(currentLayout);
-///
-///  // Return the current gutter (e.g. 10px, 20px)
-///  import oGrid from 'o-grid';
-///  let currentGutter = oGrid.getCurrentGutter();
-///  console.log(currentGutter);
-/// @access private
-@mixin _oGridSurfaceCurrentLayout {
-	html:after {
-		content: '{ "layout": "default", "gutter": "' + oGridGutter() + '" }';
-		display: none;
-
-		@each $breakpoint in $_o-grid-layout-names {
-			@include oGridRespondTo($breakpoint) {
-				content: '{ "layout": "' + $breakpoint + '", "gutter": "' + oGridGutter($breakpoint) + '" }';
-			}
-		}
 	}
 }
 

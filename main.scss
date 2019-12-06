@@ -46,11 +46,11 @@
 	$compact-rows: index($rows, 'compact');
 	// Surce layout details for JS.
 	$surface: map-get($opts, 'surface');
-	$curren-layout: index($surface, 'current-layout');
+	$current-layout: index($surface, 'current-layout');
 	$layout-sizes: index($surface, 'layout-sizes');
 
 	// Surface layouts for JS on html:after, html:before.
-	@if($curren-layout) {
+	@if($current-layout) {
 		@include _oGridSurfaceCurrentLayout;
 	}
 	@if($layout-sizes) {

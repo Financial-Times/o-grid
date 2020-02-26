@@ -11,7 +11,6 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 	- [Centering a column](#centering-a-column)
 	- [Push and pull columns](#push-and-pull-columns)
 	- [Add space before a column](#add-space-before-a-column)
-	- [Snappy Mode](#snappy-mode)
 	- [Compact (gutterless) rows](#compact-gutterless-rows)
 	- [Full Bleed Container](#full-bleed-container)
 	- [Responsive column helper](#responsive-column-helper)
@@ -21,6 +20,7 @@ A 12 column responsive, flexbox-based grid system for laying out documents, temp
 	- [Unstyle a row or a column](#unstyle-a-row-or-a-column)
 	- [Variables](#variables)
 	- [Adding a layout](#adding-a-layout)
+	- [Snappy Mode](#snappy-mode)
 	- [Debug mode](#debug-mode)
 - [JavaScript Helpers](#javascript-helpers)
 - [Grid Bookmarklet](#grid-bookmarklet)
@@ -338,28 +338,6 @@ div {
 }
 ```
 
-#### Snappy mode
-
-The container size can snap between fixed-widths as the viewport gets larger:
-
-```html
-<!-- Make the whole document snappy -->
-<body class="o-grid-snappy">
-	<div class="o-grid-container">
-		<div class="o-grid-row">
-			…
-		</div>
-	</div>
-</body>
-
-<!-- Make a container snappy -->
-<div class="o-grid-container o-grid-container--snappy">
-	<div class="o-grid-row">
-		…
-	</div>
-</div>
-```
-
 #### Compact (gutterless) rows
 
 To remove gutters from in between columns in a row, use the `o-grid-row--compact` class or the `oGridRowCompact()` mixin:
@@ -581,7 +559,7 @@ $o-grid-gutters: (default: 10px, M: 20px);
 
 // Grid mode
 // - fluid: full width up to the largest layout's width
-// - snappy: fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
+// - snappy (deprecated): fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
 //           and then snaps into a larger fixed layout at each breakpoint
 //           (used by Next FT)
 // - fixed: always fixed-width with the layout defined by
@@ -627,6 +605,30 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 // - Surface the layout currently displayed to make it readable in JS
 // - Generate grid helpers classes and data attributes.
 @include oGrid();
+```
+
+#### Snappy mode
+
+**Snappy mode is deprecated and will be removed in the next major version. Please talk to the Origami team if you would like to continue using snappy mode.**
+
+The container size can snap between fixed-widths as the viewport gets larger:
+
+```html
+<!-- Make the whole document snappy -->
+<body class="o-grid-snappy">
+	<div class="o-grid-container">
+		<div class="o-grid-row">
+			…
+		</div>
+	</div>
+</body>
+
+<!-- Make a container snappy -->
+<div class="o-grid-container o-grid-container--snappy">
+	<div class="o-grid-row">
+		…
+	</div>
+</div>
 ```
 
 #### Debug mode

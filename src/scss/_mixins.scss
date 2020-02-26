@@ -182,7 +182,13 @@
 			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
 				@include oGridRespondTo($layout-name) {
 					// If the grid mode is snappy, all rows should be snappy
+					// @breaking remove snappy mode in the next major release
 					@if $grid-mode == 'snappy' {
+						@warn 'The "snappy" grid mode is deprecated and will be ' +
+						'removed in the next major version of o-grid. We ' +
+						'recommend using the "fluid" instead. Please contact ' +
+						'the Origami team if you would like to continue using ' +
+						'the snappy grid.';
 						max-width: map-get($o-grid-layouts, $layout-name);
 					}
 					@if $grid-mode == 'fluid' {

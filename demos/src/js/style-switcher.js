@@ -53,8 +53,8 @@ const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 function convertKeywordsToSpans(keyword) {
 	// If it's a number, return it directly
-	if (keyword * 1 >= 0) {
-		return keyword * 1;
+	if (Number(keyword) >= 0) {
+		return Number(keyword);
 	}
 
 	switch (keyword) {
@@ -81,7 +81,7 @@ function getExpectedSpans(el) {
 	let span = null;
 	const layout = getCurrentLayout();
 
-	const rules = $(el).data('oGridColspan') + "";
+	const rules = String($(el).data('oGridColspan'));
 
 	const layoutAndKeyword = new RegExp('\\b' + layout + '(1[0-2]|[0-9]|hide|one-half|one-third|two-thirds|one-quarter|three-quarters|full-width)\\b');
 	span = rules.match(layoutAndKeyword);
@@ -125,7 +125,7 @@ function getExpectedModifier(el, modifier) {
 		return 0;
 	}
 
-	return modifiedBy / 12 * (parseInt(getComputedStyle(el.parentNode, null).width, 10));
+	return modifiedBy / 12 * parseInt(getComputedStyle(el.parentNode, null).width, 10);
 }
 
 function getExpectedMargin(el) {
@@ -134,7 +134,7 @@ function getExpectedMargin(el) {
 	const centerModifier = 'center';
 	const layoutCenterModifier = layout + 'center';
 	const layoutUncenterModifier = layout + 'uncenter';
-	const colspan = $(el).data('oGridColspan') + '';
+	const colspan = String($(el).data('oGridColspan'));
 	const modifiers = colspan.split(' ');
 
 	// Offset
@@ -179,8 +179,8 @@ function highlightUnexpectedPosition(el) {
 	let actualPush = getComputedStyle(el, null).left;
 	let actualPull = getComputedStyle(el, null).right;
 
-	actualPush = (actualPush === 'auto') ? 0 : parseInt(actualPush, 10);
-	actualPull = (actualPull === 'auto') ? 0 : parseInt(actualPull, 10);
+	actualPush = actualPush === 'auto' ? 0 : parseInt(actualPush, 10);
+	actualPull = actualPull === 'auto' ? 0 : parseInt(actualPull, 10);
 
 	// We verify if positions are "almost equal" because of rounding errors
 	if (almostEqual(expectedPush, actualPush, 1, 0.01) && almostEqual(expectedPull, actualPull, 1, 0.01)) {
@@ -195,7 +195,7 @@ function highlightUnexpectedPosition(el) {
 
 function highlightUnexpectedWidth(el) {
 	const expectedPercentage = getExpectedSpans(el) * 100 / 12;
-	const actualPercentage = el.offsetWidth * 100 / (el.parentNode.offsetWidth);
+	const actualPercentage = el.offsetWidth * 100 / el.parentNode.offsetWidth;
 
 	if (expectedPercentage - actualPercentage > 1 || expectedPercentage - actualPercentage < -1) {
 		if (!/\berror-width\b/.test(el.className)) {

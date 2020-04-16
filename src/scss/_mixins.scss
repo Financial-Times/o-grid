@@ -316,10 +316,6 @@
 
 /// Surface the layout currently displayed to make it readable in JS.
 ///
-/// In IE 8, assume it is `$o-grid-fixed-layout` (`L`).
-///
-/// **n.b.:** Only works when silent mode is off.
-///
 /// @example js
 ///  // your-app/main.js
 ///  // Return the current layout (e.g. default, S, M, L, XL)
@@ -352,8 +348,17 @@
 	flex-basis: oGridColspan($args...);
 }
 
-/// @access private
-@mixin _oGridSurfaceLayoutSizes {
+/// Surface the projects layouts (breakpoints) to make it readable in JS.
+///
+/// @example js
+///  // your-app/main.js
+///  // Return the layouts (e.g. {"layouts": {"S": "490px","M": "740px","L": "980px","XL": "1220px"}})
+///  import oGrid from 'o-grid';
+///  let breakpoints = oGrid.getGridBreakpoints();
+///  console.log(breakpoints);
+///
+/// @access public
+@mixin oGridSurfaceLayoutSizes {
 	html:before {
 		$combined: '{"layouts": {';
 

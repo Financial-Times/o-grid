@@ -234,6 +234,19 @@ To include all styles call the `oGrid` mixin.
 ));
 ```
 
+If you would not like to use `o-grid` markup at all, the styles for the `surface` option may be included independently to enable JavaScript features:
+
+```scss
+// Surface current breakpoint and gutter size information to JavaScript.
+// Supports `getGridBreakpoints` and `enableLayoutChangeEvents`
+// JavaScript methods.
+@include oGridSurfaceLayoutSizes();
+
+// Surface grid breakpoints to JavaScript.
+// Supports the `getCurrentLayout` and `getCurrentGutter` JavaScript methods.
+@include oGridSurfaceCurrentLayout();
+```
+
 ## Advanced usage
 
 ### Utilities
@@ -654,6 +667,8 @@ console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
 ```
 
+CSS must be included so JavaScript can retrieve layout information. If using [Sass](#sass) and the `oGrid` mixin, ensure the `surface` [option](#options) includes `current-layout`; or include the `oGridSurfaceCurrentLayout` mixin if your project is not using any o-grid markup.
+
 ### `getCurrentGutter()`
 
 Returns the width of the gutter currently displayed.
@@ -665,7 +680,7 @@ console.log(oGrid.getCurrentGutter());
 // > 10px | 20px
 ```
 
-If using [Sass](#sass), ensure the `surface` option includes `current-layout` so JavaScript can retrieve layout information from our CSS.
+CSS must be included so JavaScript can retrieve layout information. If using [Sass](#sass) and the `oGrid` mixin, ensure the `surface` [option](#options) includes `current-layout`; or include the `oGridSurfaceCurrentLayout` mixin if your project is not using any o-grid markup.
 
 ### `getGridBreakpoints()`
 
@@ -678,7 +693,7 @@ console.log(oGrid.getGridBreakpoints());
 // > { "layouts": { "S": "490px", "M": "740px", "L": "980px", "XL": "1220px" } }
 ```
 
-If using [Sass](#sass), ensure the `surface` option includes `layout-sizes` so JavaScript can retrieve layout information from our CSS.
+CSS must be included so JavaScript can retrieve layout information. If using [Sass](#sass) and the `oGrid` mixin, ensure the `surface` [option](#options) includes `layout-sizes`; or include the `oGridSurfaceLayoutSizes` mixin if your project is not using any o-grid markup.
 
 ### `enableLayoutChangeEvents()`
 
@@ -690,7 +705,7 @@ import oGrid from 'o-grid';
 oGrid.enableLayoutChangeEvents();
 ```
 
-If using [Sass](#sass), ensure the `surface` option includes `layout-sizes` so JavaScript can retrieve layout information from our CSS.
+CSS must be included so JavaScript can retrieve layout information. If using [Sass](#sass) and the `oGrid` mixin, ensure the `surface` [option](#options) includes `layout-sizes`; or include the `oGridSurfaceLayoutSizes` mixin if your project is not using any o-grid markup.
 
 ## Grid Bookmarklet
 

@@ -1,5 +1,5 @@
 const missingDataMessage = 'Could not find layout information. ' +
-	'You may need to include o-grid css. See the README ' +
+	'You may need to include o-grid css. See the README (https://registry.origami.ft.com/components/o-grid/readme) ' +
 	'for more information.';
 
 /**

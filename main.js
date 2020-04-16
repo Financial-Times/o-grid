@@ -123,7 +123,7 @@ function enableLayoutChangeEvents() {
 			}
 		});
 	} else {
-		console.error('Could not enable grid layout change events. Include o-grid css. See the README for more details.');
+		console.error('Could not enable grid layout change events. Include o-grid css. See the README (https://registry.origami.ft.com/components/o-grid/readme) for more details.');
 	}
 }
 

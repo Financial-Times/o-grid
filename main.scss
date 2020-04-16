@@ -53,8 +53,9 @@
 	@if($current-layout) {
 		@include oGridSurfaceCurrentLayout;
 	}
+
 	@if($layout-sizes) {
-		@include _oGridSurfaceLayoutSizes;
+		@include oGridSurfaceLayoutSizes;
 	}
 
 	// Grid container

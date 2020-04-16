@@ -1,17 +1,31 @@
+const missingDataMessage = 'Could not find layout information. ' +
+	'You may need to include o-grid css. See the README ' +
+	'for more information.';
+
 /**
  * Grab grid properties
  * @return {Object} layout names and gutter widths
  */
 function getGridProperties() {
-	return getGridFromDoc('after');
+	const properties = getGridFromDoc('after');
+	if (Object.keys(properties).length === 0) {
+		console.warn(missingDataMessage);
+	}
+	return properties;
 }
 
 /**
- * Get all layout sizes
+ * Get all layout sizes.
+ * CSS must be included so JavaScript can retrieve layout information.
+ * See the README for more information.
  * @return {Object} layout names and sizes
  */
 function getGridBreakpoints() {
-	return getGridFromDoc('before');
+	const breakpoints = getGridFromDoc('before');
+	if (Object.keys(breakpoints).length === 0) {
+		console.warn(missingDataMessage);
+	}
+	return breakpoints;
 }
 
 /**
@@ -34,7 +48,9 @@ function getGridFromDoc(position) {
 }
 
 /**
- * Grab the current layout
+ * Grab the current layout.
+ * CSS must be included so JavaScript can retrieve layout information.
+ * See the README for more information.
  * @return {String} Layout name
  */
 function getCurrentLayout() {
@@ -42,7 +58,9 @@ function getCurrentLayout() {
 }
 
 /**
- * Grab the current space between columns
+ * Grab the current space between columns.
+ * CSS must be included so JavaScript can retrieve layout information.
+ * See the README for more information.
  * @return {String} Gutter width in pixels
  */
 function getCurrentGutter() {
@@ -52,6 +70,8 @@ function getCurrentGutter() {
 /**
  * This sets MediaQueryListeners on all the o-grid breakpoints
  * and fires a `o-grid.layoutChange` event on layout change.
+ * CSS must be included so JavaScript can retrieve layout information.
+ * See the README for more information.
  */
 function enableLayoutChangeEvents() {
 	// Create a map containing all breakpoints exposed via html:before
@@ -103,7 +123,7 @@ function enableLayoutChangeEvents() {
 			}
 		});
 	} else {
-		console.error('To enable grid layout change events, include _oGridSurfaceLayoutSizes in your Sass');
+		console.error('Could not enable grid layout change events. Include o-grid css. See the README for more details.');
 	}
 }
 

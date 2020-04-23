@@ -2,7 +2,7 @@
 	"description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
 	"keywords": ["page", "grid", "layout", "columns", "rows"],
 	"origamiType": "module",
-	"origamiCategory": "primitives",
+	"origamiCategory": "layouts",
 	"origamiVersion": 1,
 	"support": "https://github.com/Financial-Times/o-grid/issues",
 	"supportContact": {

@@ -1,0 +1,51 @@
+name: Percy
+on: 
+  pull_request:
+    types:
+      - labeled
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches: master
+jobs:
+  percy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - if: contains(github.event.pull_request.labels.*.name, 'percy') || endsWith(github.ref, '/master')
+      run: npx origami-build-tools install
+    - if: contains(github.event.pull_request.labels.*.name, 'percy') || endsWith(github.ref, '/master')
+      run: npx origami-build-tools demo
+    - if: contains(github.event.pull_request.labels.*.name, 'percy') || endsWith(github.ref, '/master')
+      name: Percy Test
+      uses: percy/snapshot-action@v0.1.0
+      with:
+        build-directory: "demos/local"
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+    - if: contains(github.event.pull_request.labels.*.name, 'percy')
+      uses: actions/github-script@0.9.0
+      with:
+        github-token: ${{secrets.ORIGAMI_FOX_ACCESS_TOKEN}}
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '👋 Percy has finished running the visual regression testing!'
+          })
+    - if: contains(github.event.pull_request.labels.*.name, 'percy')
+      uses: actions/github-script@0.9.0
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.removeLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['percy']
+          })

@@ -147,7 +147,7 @@
 		'recommend using the default "fluid" grid instead. ' +
 		'Please contact the Origami team if you would like to ' +
 		'continue using the snappy grid.';
-		$_o-grid-mode-deprecation-warning-output: true;
+		$_o-grid-mode-deprecation-warning-output: true !global;
 	}
 
 	box-sizing: border-box;

@@ -342,10 +342,8 @@
 					.test-row:before,
 					.test-row:after {
 						content: '';
-						// stylelint-disable declaration-block-no-duplicate-properties
 						display: table;
-						display: flex;
-						// stylelint-enable declaration-block-no-duplicate-properties
+						display: flex; // stylelint-disable-line declaration-block-no-duplicate-properties
 					}
 
 					.test-row:after {

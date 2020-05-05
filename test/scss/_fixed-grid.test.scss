@@ -118,10 +118,10 @@ $o-grid-mode: 'fixed';
 					.test-row:before,
 					.test-row:after {
 						content: '';
-						// sass-lint:disable no-duplicate-properties
+						// stylelint-disable declaration-block-no-duplicate-properties
 						display: table;
 						display: flex;
-						// sass-lint:disable no-duplicate-properties
+						// stylelint-enable declaration-block-no-duplicate-properties
 					}
 
 					.test-row:after {

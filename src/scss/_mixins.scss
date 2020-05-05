@@ -187,8 +187,8 @@
 						@warn 'The "snappy" grid mode is deprecated and will be ' +
 							'removed in the next major version of o-grid. We ' +
 							'recommend using the default "fluid" grid instead. ' +
-						'Please contact the Origami team if you would like to ' +
-						'continue using the snappy grid.';
+							'Please contact the Origami team if you would like to ' +
+							'continue using the snappy grid.';
 						max-width: map-get($o-grid-layouts, $layout-name);
 					}
 					@if $grid-mode == 'fluid' {
@@ -235,7 +235,7 @@
 	&:after {
 		content: '';
 		display: table;
-		display: flex; // sass-lint:disable-line no-duplicate-properties
+		display: flex; // stylelint-disable-line declaration-block-no-duplicate-properties
 	}
 	&:after {
 		clear: both;
@@ -469,14 +469,13 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			// sass-lint:disable mixins-before-declarations
 
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
 
 			// Define width in %
-			@include _oGridFixSafariWrap($span);
+			@include _oGridFixSafariWrap($span); //stylelint-disable-line order/order
 			min-width: oGridColspan($span);
 			max-width: oGridColspan($span);
 		}

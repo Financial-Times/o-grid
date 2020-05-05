@@ -227,7 +227,7 @@
 						min-width: 240px;
 						max-width: 1220px;
 						position: relative;
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						max-width: 1220px; // stylelint-disable-line declaration-block-no-duplicate-properties
 						padding-left: 10px;
 						padding-right: 10px;
 					}
@@ -281,7 +281,7 @@
 						position: relative;
 						padding-left: 0;
 						padding-right: 0;
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						max-width: 1220px; // stylelint-disable-line declaration-block-no-duplicate-properties
 					}
 
 					@media (min-width: 46.25em) {
@@ -342,10 +342,10 @@
 					.test-row:before,
 					.test-row:after {
 						content: '';
-						// sass-lint:disable no-duplicate-properties
+						// stylelint-disable declaration-block-no-duplicate-properties
 						display: table;
 						display: flex;
-						// sass-lint:enable no-duplicate-properties
+						// stylelint-enable declaration-block-no-duplicate-properties
 					}
 
 					.test-row:after {

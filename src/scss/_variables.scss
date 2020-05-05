@@ -89,3 +89,8 @@ $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
 @if $o-grid-mode == 'snappy' {
 	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
 }
+
+// Whether the deprecation warning for snappy mode has been output or not.
+/// @access private
+/// @type Boolean
+$_o-grid-mode-deprecation-warning-output: false !default;

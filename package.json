@@ -4,6 +4,6 @@
 	"private": true,
 	"devDependencies": {
 		"eslint-config-origami-component": "^2.0.1",
-		"origami-ci-tools": "^1.3.12"
+		"origami-ci-tools": "^2.0.0"
 	}
 }

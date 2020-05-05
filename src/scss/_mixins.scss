@@ -139,6 +139,17 @@
 /// @param {String} $grid-mode [$o-grid-mode]
 /// @param {Boolean} $bleed [false]
 @mixin oGridContainer($grid-mode: $o-grid-mode, $bleed: false) {
+	// If the grid mode is snappy, all rows should be snappy
+	// @breaking remove snappy mode in the next major release
+	@if $grid-mode == 'snappy' and not $_o-grid-mode-deprecation-warning-output {
+		@warn 'The "snappy" grid mode is deprecated and will be ' +
+		'removed in the next major version of o-grid. We ' +
+		'recommend using the default "fluid" grid instead. ' +
+		'Please contact the Origami team if you would like to ' +
+		'continue using the snappy grid.';
+		$_o-grid-mode-deprecation-warning-output: true;
+	}
+
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
@@ -181,14 +192,7 @@
 		@each $layout-name in $_o-grid-layout-names {
 			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
 				@include oGridRespondTo($layout-name) {
-					// If the grid mode is snappy, all rows should be snappy
-					// @breaking remove snappy mode in the next major release
 					@if $grid-mode == 'snappy' {
-						@warn 'The "snappy" grid mode is deprecated and will be ' +
-						'removed in the next major version of o-grid. We ' +
-						'recommend using the default "fluid" grid instead. ' +
-						'Please contact the Origami team if you would like to ' +
-						'continue using the snappy grid.';
 						max-width: map-get($o-grid-layouts, $layout-name);
 					}
 					@if $grid-mode == 'fluid' {

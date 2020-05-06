@@ -127,14 +127,12 @@
 
 			@for $colspan from 1 through $o-grid-columns {
 				[data-o-grid-colspan~="#{$layout-name}#{$colspan}"] {
-
-					// Apply width in %
-					@include _oGridFixSafariWrap($colspan);
-					// sass-lint:disable mixins-before-declarations
-
 					// Restore visibility from `display: none`
 					// if `data-o-grid-colspan` was set to `0` or `hide`
 					display: block;
+
+					// Apply width in %
+					@include _oGridFixSafariWrap($colspan); //stylelint-disable-line order/order
 					min-width: oGridColspan($colspan);
 					max-width: oGridColspan($colspan);
 					width: oGridColspan($colspan);

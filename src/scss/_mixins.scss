@@ -143,10 +143,10 @@
 	// @breaking remove snappy mode in the next major release
 	@if $grid-mode == 'snappy' and not $_o-grid-mode-deprecation-warning-output {
 		@warn 'The "snappy" grid mode is deprecated and will be ' +
-		'removed in the next major version of o-grid. We ' +
-		'recommend using the default "fluid" grid instead. ' +
-		'Please contact the Origami team if you would like to ' +
-		'continue using the snappy grid.';
+			'removed in the next major version of o-grid. We ' +
+			'recommend using the default "fluid" grid instead. ' +
+			'Please contact the Origami team if you would like to ' +
+			'continue using the snappy grid.';
 		$_o-grid-mode-deprecation-warning-output: true !global;
 	}
 
@@ -369,9 +369,6 @@
 /// @access public
 @mixin oGridSurfaceLayoutSizes {
 	html:before {
-
-		display: none;
-		content: $combined;
 		$combined: '{"layouts": {';
 
 		$keys: map-keys($o-grid-layouts);
@@ -388,6 +385,9 @@
 		}
 
 		$combined: $combined + '}}';
+
+		display: none;
+		content: $combined;
 	}
 }
 
@@ -426,14 +426,12 @@
 	// Portions
 	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
-
-			// Define width in %
-			@include _oGridFixSafariWrap($human-friendly-name);
-			// sass-lint:disable mixins-before-declarations
-
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
+
+			// Define width in %
+			@include _oGridFixSafariWrap($human-friendly-name); // stylelint-disable-line order/order
 			min-width: oGridColspan($human-friendly-name);
 			max-width: oGridColspan($human-friendly-name);
 			width: oGridColspan($human-friendly-name);
@@ -502,14 +500,11 @@
 					}
 				} @else {
 					@include oGridRespondTo($layout-name) {
-
-						// Define width in %
-						@include _oGridFixSafariWrap($layout-span);
-						// sass-lint:disable mixins-before-declarations
-
 						// Restore visibility from `display: none`
 						// if `data-o-grid-colspan` was set to `0` or `hide`
 						display: block;
+						// Define width in %
+						@include _oGridFixSafariWrap($layout-span); // stylelint-disable-line order/order
 						min-width: oGridColspan($layout-span);
 						max-width: oGridColspan($layout-span);
 					}

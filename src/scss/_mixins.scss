@@ -81,6 +81,7 @@
 /// @param {String} until - one of $o-grid-layouts
 @mixin oGridRespondTo($from: false, $until: false) {
 
+	$grid-is-responsive: $o-grid-mode != 'fixed';
 	@include mq(
 		$from: $from,
 		$until: $until,
@@ -90,7 +91,6 @@
 	) {
 		@content;
 	}
-	$grid-is-responsive: $o-grid-mode != 'fixed';
 }
 
 /// Base column styles and responsive layout width

@@ -211,9 +211,6 @@
 	flex-wrap: wrap; // Note that this breaks in old Firefox
 	display: flex;
 
-	// Clearfix for IE9 and below
-	zoom: 1;
-
 	@media print {
 		display: inherit;
 	}
@@ -231,6 +228,9 @@
 			}
 		}
 	}
+
+	// Clearfix for IE9 and below
+	zoom: 1;
 
 	&:before,
 	&:after {

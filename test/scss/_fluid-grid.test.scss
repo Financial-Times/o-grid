@@ -2,20 +2,20 @@
 	@include describe('function: oGridGetMaxWidthForLayout') {
 		@include it('gets the max width for S') {
 			@include assert-equal(oGridGetMaxWidthForLayout(S), (740px));
-		};
+		}
 
 		@include it('gets the max width for M') {
 			@include assert-equal(oGridGetMaxWidthForLayout(M), (980px));
-		};
+		}
 
 		@include it('gets the max width for L') {
 			@include assert-equal(oGridGetMaxWidthForLayout(L), (1220px));
-		};
+		}
 
 		@include it('gets the max width for XL') {
 			@include assert-equal(oGridGetMaxWidthForLayout(XL), (1220px));
-		};
-	};
+		}
+	}
 
 	@include describe('mixin: oGridRespondTo') {
 		@include test('sass mixin complies correct media query for <S') {
@@ -23,145 +23,145 @@
 				@include output {
 					@include oGridRespondTo($until: S) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (max-width: 30.615em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query for S<') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo(S) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 30.625em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query S< >M') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo($from: S, $until: M) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 30.625em) and (max-width: 46.24em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query S< >M') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo($from: S, $until: M) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 30.625em) and (max-width: 46.24em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query >M') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo($until: M) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (max-width: 46.24em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query M< >L') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo($from: M, $until: L) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 46.25em) and (max-width: 61.24em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query >L') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo(L) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 61.25em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query L< >XL') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo($from: L, $until: XL) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 61.25em) and (max-width: 76.24em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
+					}
+				}
+			}
+		}
 
 		@include test('sass mixin complies correct media query XL<') {
 			@include assert() {
 				@include output {
 					@include oGridRespondTo(XL) {
 						background: peachpuff;
-					};
-				};
+					}
+				}
 
 				@include expect {
 					@media (min-width: 76.25em) {
 						background: peachpuff;
-					};
-				};
-			};
-		};
-	};
+					}
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridColspan') {
 		@include test('sass mixin complies base column styles') {
@@ -170,7 +170,7 @@
 					.test-colspan {
 						@include oGridColspan();
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-colspan {
@@ -186,9 +186,9 @@
 							padding-left: 20px;
 						}
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 
 		@include test('sass mixin complies for a column span of 3 and width only') {
 			@include assert() {
@@ -196,7 +196,7 @@
 					.test-colspan {
 						@include oGridColspan($span: 3, $width-only: true);
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-colspan {
@@ -205,10 +205,10 @@
 						min-width: 25%;
 						max-width: 25%;
 					}
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridContainer') {
 		@include test('sass mixin compiles correctly for regular container') {
@@ -216,8 +216,8 @@
 				@include output($selector: false) {
 					.test-container {
 						@include oGridContainer;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-container {
@@ -227,7 +227,7 @@
 						min-width: 240px;
 						max-width: 1220px;
 						position: relative;
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						max-width: 1220px; // stylelint-disable-line declaration-block-no-duplicate-properties
 						padding-left: 10px;
 						padding-right: 10px;
 					}
@@ -259,17 +259,17 @@
 							max-width: 1220px;
 						}
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 
 		@include test('sass mixin compiles correctly for bleed container') {
 			@include assert() {
 				@include output($selector: false) {
 					.test-container {
 						@include oGridContainer($bleed: true);
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-container {
@@ -281,7 +281,7 @@
 						position: relative;
 						padding-left: 0;
 						padding-right: 0;
-						max-width: 1220px; // sass-lint:disable-line no-duplicate-properties
+						max-width: 1220px; // stylelint-disable-line declaration-block-no-duplicate-properties
 					}
 
 					@media (min-width: 46.25em) {
@@ -304,10 +304,10 @@
 							max-width: 1220px;
 						}
 					}
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridRow') {
 		@include test('sass mixin complies correctly') {
@@ -316,7 +316,7 @@
 					.test-row {
 						@include oGridRow();
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-row {
@@ -334,7 +334,7 @@
 					}
 
 					@media (min-width: 46.25em) {
-						.test-row  {
+						.test-row {
 							margin-left: -20px;
 						}
 					}
@@ -342,17 +342,15 @@
 					.test-row:before,
 					.test-row:after {
 						content: '';
-						// sass-lint:disable no-duplicate-properties
 						display: table;
-						display: flex;
-						// sass-lint:enable no-duplicate-properties
+						display: flex; // stylelint-disable-line declaration-block-no-duplicate-properties
 					}
 
 					.test-row:after {
 						clear: both;
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 	}
-};
+}

@@ -9,67 +9,67 @@
 
 		@include it('includes human friendly selectors by default') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					@include oGrid();
-				};
+				}
 
 				@include contains($selector: false) {
-      				[data-o-grid-colspan~="full-width"] {
-      					display: block;
-      					flex-basis: 100%;
-      					min-width: 100%;
-      					max-width: 100%;
-      					width: 100%;
-      				}
-				};
-			};
-		};
+					[data-o-grid-colspan~="full-width"] {
+						display: block;
+						flex-basis: 100%;
+						min-width: 100%;
+						max-width: 100%;
+						width: 100%;
+					}
+				}
+			}
+		}
 
 		@include it('includes shuffle selectors by default') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					@include oGrid();
-				};
+				}
 
 				@include contains($selector: false) {
 					[data-o-grid-colspan~="push1"] {
-					left: 8.33333%;
-					right: auto;
+						left: 8.33333%;
+						right: auto;
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 
 		@include it('includes the bleed container modifier by default') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					@include oGrid();
-				};
+				}
 
 				@include contains($selector: false) {
 					.o-grid-container--bleed {
 						padding-left: 0;
 						padding-right: 0;
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 
 		@include it('includes compact rows by default') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					@include oGrid();
-				};
+				}
 
 				@include contains($selector: false) {
 					.o-grid-row--compact {
 						margin-left: 0;
 					}
-				};
-			};
-		};
+				}
+			}
+		}
 
-	};
+	}
 
 	@include describe('mixin: oGridAddLayout') {
 		@include it('adds a new layout') {
@@ -79,17 +79,17 @@
 			);
 
 			@include assert-equal(map-get($o-grid-layouts, XXS), 128px);
-		};
-	};
+		}
+	}
 
 	@include describe('function: oGridGutter') {
 		@include it('should return the default gutter') {
 			@include assert-equal(oGridGutter(), (10px));
-		};
+		}
 		@include it('should return the gutter for M<') {
 			@include assert-equal(oGridGutter(M), (20px));
-		};
-	};
+		}
+	}
 
 	@include describe('function: oGridColspan') {
 		@include it('should return the number (%) of the width of the element in a 12 column grid (default)') {
@@ -109,17 +109,17 @@
 			@include assert-equal(round(oGridColspan(10)), round((83.33333%)));
 			@include assert-equal(round(oGridColspan(11)), round((91.666673%)));
 			@include assert-equal(oGridColspan(12), (100%));
-		};
-	};
+		}
+	}
 
 	@include describe('mixin: oGridRowCompact') {
-		@include test('sass mixin compiles correctly to remove gutters')  {
+		@include test('sass mixin compiles correctly to remove gutters') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					.test-compact {
 						@include oGridRowCompact;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-compact {
@@ -128,20 +128,20 @@
 
 					.test-compact > [o-grid-colspan] {
 						padding-left: 0;
-					};
-				};
-			};
-		};
-	};
+					}
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridResetRow') {
-		@include test('sass mixin compiles correctly to reset row styles')  {
+		@include test('sass mixin compiles correctly to reset row styles') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					.test-reset {
 						@include oGridResetRow;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-reset {
@@ -154,60 +154,60 @@
 					.test-reset:before,
 					.test-reset:after {
 						display: none;
-					};
-				};
-			};
-		};
-	};
+					}
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridCenter') {
-		@include test('sass mixin compiles correctly to center column')  {
+		@include test('sass mixin compiles correctly to center column') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					.test-center {
 						@include oGridCenter;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-center {
 						margin-left: auto;
 						margin-right: auto;
 						float: none;
-					};
-				};
-			};
-		};
-	};
+					}
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridUncenter') {
-		@include test('sass mixin compiles correctly to uncenter column ')  {
+		@include test('sass mixin compiles correctly to uncenter column ') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					.test-uncenter {
 						@include oGridUncenter;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-uncenter {
 						margin-left: 0;
 						margin-right: 0;
 						float: left;
-					};
-				};
-			};
-		};
-	};
+					}
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridResetColumn') {
-		@include test('sass mixin compiles correctly to remove column styles')  {
+		@include test('sass mixin compiles correctly to remove column styles') {
 			@include assert() {
-				@include output($selector: false)  {
+				@include output($selector: false) {
 					.test-reset-column {
 						@include oGridResetColumn;
-					};
-				};
+					}
+				}
 
 				@include expect($selector: false) {
 					.test-reset-column {
@@ -219,64 +219,64 @@
 						max-width: none;
 						flex: none;
 					}
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridPull') {
 		@include test('pull grid to right by # of column') {
-			@include assert()  {
+			@include assert() {
 				@include output($selector: false) {
 					.test-pull {
-					 	@include oGridPull(3);
+						@include oGridPull(3);
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-pull {
 						right: 25%;
 						left: auto;
 					}
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridPush') {
 		@include test('push grid to left by # of columns') {
-			@include assert()  {
+			@include assert() {
 				@include output($selector: false) {
 					.test-pull {
-					 	@include oGridPush(3);
+						@include oGridPush(3);
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-pull {
 						left: 25%;
 						right: auto;
 					}
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 
 	@include describe('mixin: oGridPush') {
 		@include test('add space before a column') {
-			@include assert()  {
+			@include assert() {
 				@include output($selector: false) {
 					.test-offset {
-					 	@include oGridOffset(3);
+						@include oGridOffset(3);
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-offset {
 						margin-left: 25%;
 					}
-				};
-			};
-		};
-	};
-};
+				}
+			}
+		}
+	}
+}

@@ -6,7 +6,7 @@
 	 * Layouts:
 	 * #{inspect($layouts)}
 	 */
-	 @include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
+	@include mq-show-breakpoints($_o-grid-layout-names, $o-grid-layouts);
 }
 
 /// Add a layout (breakpoint). This can be used to add a new breakpoint to a
@@ -80,8 +80,8 @@
 /// @param {String} from - one of $o-grid-layouts
 /// @param {String} until - one of $o-grid-layouts
 @mixin oGridRespondTo($from: false, $until: false) {
-	$grid-is-responsive: $o-grid-mode != 'fixed';
 
+	$grid-is-responsive: $o-grid-mode != 'fixed';
 	@include mq(
 		$from: $from,
 		$until: $until,
@@ -143,10 +143,10 @@
 	// @breaking remove snappy mode in the next major release
 	@if $grid-mode == 'snappy' and not $_o-grid-mode-deprecation-warning-output {
 		@warn 'The "snappy" grid mode is deprecated and will be ' +
-		'removed in the next major version of o-grid. We ' +
-		'recommend using the default "fluid" grid instead. ' +
-		'Please contact the Origami team if you would like to ' +
-		'continue using the snappy grid.';
+			'removed in the next major version of o-grid. We ' +
+			'recommend using the default "fluid" grid instead. ' +
+			'Please contact the Origami team if you would like to ' +
+			'continue using the snappy grid.';
 		$_o-grid-mode-deprecation-warning-output: true !global;
 	}
 
@@ -192,9 +192,6 @@
 		@each $layout-name in $_o-grid-layout-names {
 			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
 				@include oGridRespondTo($layout-name) {
-					@if $grid-mode == 'snappy' {
-						max-width: map-get($o-grid-layouts, $layout-name);
-					}
 					@if $grid-mode == 'fluid' {
 						// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
 						.o-grid-snappy &,
@@ -239,7 +236,7 @@
 	&:after {
 		content: '';
 		display: table;
-		display: flex; // sass-lint:disable-line no-duplicate-properties
+		display: flex; // stylelint-disable-line declaration-block-no-duplicate-properties
 	}
 	&:after {
 		clear: both;
@@ -421,14 +418,12 @@
 	// Portions
 	@each $human-friendly-name in (full-width, one-half, one-third, two-thirds, one-quarter, three-quarters) {
 		[data-o-grid-colspan~="#{$layout-name}#{$human-friendly-name}"] {
-			// sass-lint:disable mixins-before-declarations
-
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
 
 			// Define width in %
-			@include _oGridFixSafariWrap($human-friendly-name);
+			@include _oGridFixSafariWrap($human-friendly-name); // stylelint-disable-line order/order
 			min-width: oGridColspan($human-friendly-name);
 			max-width: oGridColspan($human-friendly-name);
 			width: oGridColspan($human-friendly-name);
@@ -473,14 +468,13 @@
 	} @else {
 		// $span is a number or a keyword, so we're outputting the default width for that column
 		@if type-of($span) == number or type-of($span) == string {
-			// sass-lint:disable mixins-before-declarations
 
 			// Restore visibility from `display: none`
 			// if `data-o-grid-colspan` was set to `0` or `hide`
 			display: block;
 
 			// Define width in %
-			@include _oGridFixSafariWrap($span);
+			@include _oGridFixSafariWrap($span); //stylelint-disable-line order/order
 			min-width: oGridColspan($span);
 			max-width: oGridColspan($span);
 		}
@@ -498,14 +492,11 @@
 					}
 				} @else {
 					@include oGridRespondTo($layout-name) {
-						// sass-lint:disable mixins-before-declarations
-
 						// Restore visibility from `display: none`
 						// if `data-o-grid-colspan` was set to `0` or `hide`
 						display: block;
-
 						// Define width in %
-						@include _oGridFixSafariWrap($layout-span);
+						@include _oGridFixSafariWrap($layout-span); // stylelint-disable-line order/order
 						min-width: oGridColspan($layout-span);
 						max-width: oGridColspan($layout-span);
 					}

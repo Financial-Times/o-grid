@@ -192,6 +192,9 @@
 		@each $layout-name in $_o-grid-layout-names {
 			@if index($_o-grid-layout-names, $layout-name) >= index($_o-grid-layout-names, $o-grid-start-snappy-mode-at) {
 				@include oGridRespondTo($layout-name) {
+					@if $grid-mode == 'snappy' {
+						max-width: map-get($o-grid-layouts, $layout-name);
+					}
 					@if $grid-mode == 'fluid' {
 						// If the grid mode is fluid, then use a class to make a row or a set of rows snappy
 						.o-grid-snappy &,

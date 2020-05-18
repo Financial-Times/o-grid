@@ -84,12 +84,6 @@ $o-grid-gutters: (
 /// @type Number
 $_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1));
 
-// When snappy mode is enabled, force $_o-grid-max-width to the largest layout width
-// instead of the default $_o-grid-max-width
-@if $o-grid-mode == 'snappy' {
-	$_o-grid-max-width: map-get($o-grid-layouts, nth($_o-grid-layout-names, -1)) !global;
-}
-
 // Whether the deprecation warning for snappy mode has been output or not.
 /// @access private
 /// @type Boolean

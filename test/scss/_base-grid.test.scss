@@ -14,7 +14,7 @@
 				}
 
 				@include contains($selector: false) {
-					[data-o-grid-colspan~="full-width"] {
+					[data-o-grid-colspan~=full-width] {
 						display: block;
 						flex-basis: 100%;
 						min-width: 100%;
@@ -32,8 +32,8 @@
 				}
 
 				@include contains($selector: false) {
-					[data-o-grid-colspan~="push1"] {
-						left: 8.33333%;
+					[data-o-grid-colspan~=push1] {
+						left: 8.3333333333%;
 						right: auto;
 					}
 				}

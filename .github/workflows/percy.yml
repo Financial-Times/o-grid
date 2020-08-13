@@ -7,7 +7,7 @@ on:
       - reopened
       - synchronize
   push:
-    branches: master
+    branches: $default-branch
 jobs:
   percy:
     runs-on: ubuntu-latest

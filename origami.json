@@ -17,9 +17,6 @@
 			"Array.prototype.includes"
 		]
 	},
-	"ci": {
-		"circle": "https://circleci.com/api/v1/project/Financial-Times/o-grid"
-	},
 	"demosDefaults": {
 		"template": "demos/src/layout.mustache",
 		"js": "demos/src/js/layout-change-events.js"

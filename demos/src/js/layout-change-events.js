@@ -1,4 +1,4 @@
-import { enableLayoutChangeEvents } from '../../../main';
+import { enableLayoutChangeEvents } from '../../../main.js';
 
 enableLayoutChangeEvents();
 

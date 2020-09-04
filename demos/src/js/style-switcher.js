@@ -1,9 +1,9 @@
 /*global $*/
 /*eslint no-extend-native: 0 */
 
-import almostEqual from './almost-equal';
-import { getCurrentGutter, getCurrentLayout } from '../../../main';
-import demoTypes from '../configurations.json';
+import almostEqual from './almost-equal.js';
+import { getCurrentGutter, getCurrentLayout } from '../../../main.js';
+import demoTypes from '../configurations.json.js';
 const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================

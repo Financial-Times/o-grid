@@ -3,7 +3,7 @@
 
 import almostEqual from './almost-equal.js';
 import { getCurrentGutter, getCurrentLayout } from '../../../main.js';
-import demoTypes from '../configurations.json.js';
+import demoTypes from '../configurations.json';
 const local = /localhost|0\.0\.0\.0/.test(document.URL);
 
 // ============================================================================

@@ -65,12 +65,12 @@ $o-grid-is-silent: false;
 // your-app/main.js
 
 // Return the current layout (e.g. default, S, M, L, XL)
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 let currentLayout = oGrid.getCurrentLayout();
 console.log(currentLayout);
 
 // Return the current gutter (e.g. 10px, 20px)
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 let currentGutter = oGrid.getCurrentGutter();
 console.log(currentGutter);
 ```
@@ -666,7 +666,7 @@ $o-grid-debug-mode: true;
 Returns the name of the layout currently displayed.
 
 ```js
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 
 console.log(oGrid.getCurrentLayout());
 // > default | S | M | L | XL
@@ -679,7 +679,7 @@ CSS must be included so JavaScript can retrieve layout information. If using [Sa
 Returns the width of the gutter currently displayed.
 
 ```js
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 
 console.log(oGrid.getCurrentGutter());
 // > 10px | 20px
@@ -692,7 +692,7 @@ CSS must be included so JavaScript can retrieve layout information. If using [Sa
 Returns the sizes of all grid breakpoints available.
 
 ```js
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 
 console.log(oGrid.getGridBreakpoints());
 // > { "layouts": { "S": "490px", "M": "740px", "L": "980px", "XL": "1220px" } }
@@ -705,7 +705,7 @@ CSS must be included so JavaScript can retrieve layout information. If using [Sa
 Enable matchMedia queries that fire an `o-grid.layoutChange` event upon layout change.
 
 ```js
-import oGrid from 'o-grid';
+import oGrid from '@financial-times/o-grid';
 
 oGrid.enableLayoutChangeEvents();
 ```

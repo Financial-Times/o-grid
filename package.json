@@ -1,11 +1,18 @@
 {
-	"main": "main.js",
-	"name": "o-grid",
-	"private": true,
-	"devDependencies": {
-		"eslint": "^7.9.0",
-		"eslint-config-origami-component": "^2.1.0",
-		"origami-ci-tools": "^2.1.0",
-		"stylelint-config-origami-component": "^1.0.4"
-	}
+    "main": "main.js",
+    "name": "o-grid",
+    "devDependencies": {
+        "eslint": "^7.9.0",
+        "eslint-config-origami-component": "^2.1.0",
+        "origami-ci-tools": "^2.1.0",
+        "stylelint-config-origami-component": "^1.0.4"
+    },
+    "peerDependencies": {
+        "sass-mq": "^5.0.0"
+    },
+    "description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
+    "publishConfig": {
+        "registry": "http://localhost:4873"
+    },
+    "version": "6.0.0-0"
 }

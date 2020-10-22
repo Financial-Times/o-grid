@@ -58,7 +58,7 @@ bower install o-grid --save
 ```scss
 // your-app/main.scss
 $o-grid-is-silent: false;
-@import 'o-grid/main';
+@import '@financial-times/o-grid/main';
 ```
 
 ```js
@@ -598,7 +598,7 @@ $o-grid-layouts: (
 Products who need to add other breakpoints/layouts should use the helper `oGridAddLayout()`:
 
 ```scss
-@import 'o-grid/main';
+@import '@financial-times/o-grid/main';
 
 // Add various layouts
 @include oGridAddLayout(

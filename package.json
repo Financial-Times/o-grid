@@ -1,5 +1,5 @@
 {
-    "main": "main.js",
+    "browser": "main.js",
     "name": "@financial-times/o-grid",
     "devDependencies": {
         "eslint": "^7.9.0",

@@ -3,7 +3,7 @@
 	"name": "o-grid",
 	"private": true,
 	"devDependencies": {
-		"eslint": "^7.12.0",
+		"eslint": "^7.12.1",
 		"eslint-config-origami-component": "^2.1.0",
 		"origami-ci-tools": "^2.1.1",
 		"stylelint-config-origami-component": "^1.0.4"

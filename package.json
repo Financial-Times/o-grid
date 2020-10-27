@@ -1,6 +1,8 @@
 {
-    "browser": "main.js",
     "name": "@financial-times/o-grid",
+    "version": "100.0.0-7",
+    "description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
+    "browser": "main.js",
     "devDependencies": {
         "eslint": "^7.9.0",
         "eslint-config-origami-component": "^2.1.0",
@@ -10,9 +12,7 @@
     "peerDependencies": {
         "sass-mq": "^5.0.0"
     },
-    "description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
     "publishConfig": {
         "registry": "http://localhost:4873"
-    },
-    "version": "100.0.0-7"
+    }
 }

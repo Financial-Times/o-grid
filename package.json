@@ -1,6 +1,6 @@
 {
     "name": "@financial-times/o-grid",
-    "version": "100.0.0-7",
+    "version": "100.0.0-8",
     "description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
     "license": "MIT",
     "type": "module",

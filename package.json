@@ -21,6 +21,6 @@
         "sass-mq": "^5.0.0"
     },
     "publishConfig": {
-        "registry": "http://localhost:4873"
+        "registry": "https://origami-npm-registry-prototype.herokuapp.com"
     }
 }

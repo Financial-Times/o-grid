@@ -4,7 +4,7 @@
 	"private": true,
 	"devDependencies": {
 		"eslint": "^7.19.0",
-		"eslint-config-origami-component": "^2.1.0",
+		"eslint-config-origami-component": "^2.1.1",
 		"origami-ci-tools": "^2.3.0",
 		"stylelint-config-origami-component": "^1.0.4"
 	}

@@ -577,9 +577,8 @@ $o-grid-gutters: (default: 10px, M: 20px);
 
 // Grid mode
 // - fluid: full width up to the largest layout's width
-// - snappy (deprecated): fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
+// - snappy  fluid width until the layout defined in $o-grid-start-snappy-mode-at (default: M),
 //           and then snaps into a larger fixed layout at each breakpoint
-//           (used by Next FT)
 // - fixed: always fixed-width with the layout defined by
 //          $o-grid-fixed-layout (default: L)
 $o-grid-mode: fluid (default) | snappy | fixed;
@@ -626,8 +625,6 @@ Products who need to add other breakpoints/layouts should use the helper `oGridA
 ```
 
 #### Snappy mode
-
-**Snappy mode is deprecated and will be removed in the next major version. Please talk to the Origami team if you would like to continue using snappy mode.**
 
 The container size can snap between fixed-widths as the viewport gets larger:
 

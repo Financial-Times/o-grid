@@ -30,10 +30,9 @@
 		},
 		{
 			"name": "snappy",
-			"title": "Deprecated: Snappy Grid",
+			"title": "Snappy Grid",
 			"sass": "demos/src/scss/snappy.scss",
-			"description": "Responsive grid that snaps between a larger fixed layout at each breakpoint",
-			"hidden": true
+			"description": "Responsive grid that snaps between a larger fixed layout at each breakpoint"
 		},
 		{
 			"name": "resized",

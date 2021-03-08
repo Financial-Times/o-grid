@@ -7,5 +7,9 @@
 		"eslint-config-origami-component": "^2.1.1",
 		"origami-ci-tools": "^2.4.1",
 		"stylelint-config-origami-component": "^1.0.4"
+	},
+	"scripts": {
+		"start": "npx serve ./demos/local",
+		"build": "npm_config_yes=true npx \"origami-build-tools@^10\" install && npm_config_yes=true npx \"origami-build-tools@^10\" demo"
 	}
 }

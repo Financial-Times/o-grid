@@ -1,15 +1,40 @@
 {
-	"main": "main.js",
-	"name": "o-grid",
-	"private": true,
+	"name": "@financial-times/o-grid",
+	"version": "0.0.0",
+	"description": "A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.",
+	"keywords": [
+		"page",
+		"grid",
+		"layout",
+		"columns",
+		"rows"
+	],
+	"homepage": "https://registry.origami.ft.com/components/o-grid",
+	"bugs": {
+		"url": "https://registry.origami.ft.com/components/o-grid"
+	},
+	"license": "MIT",
+	"type": "module",
+	"browser": "main.js",
+	"scripts": {
+		"start": "npx serve ./demos/local",
+		"build": "npm_config_yes=true npx \"origami-build-tools@prerelease\" install && npm_config_yes=true npx \"origami-build-tools@prerelease\" demo"
+	},
 	"devDependencies": {
 		"eslint": "^7.25.0",
 		"eslint-config-origami-component": "^2.1.1",
-		"origami-ci-tools": "^2.4.1",
+		"remark-preset-lint-origami-component": "^2.0.0-beta.2",
+		"stylelint": "^13.12.0",
 		"stylelint-config-origami-component": "^1.0.4"
 	},
-	"scripts": {
-		"start": "npx serve ./demos/local",
-		"build": "npm_config_yes=true npx \"origami-build-tools@^10\" install && npm_config_yes=true npx \"origami-build-tools@^10\" demo"
+	"peerDependencies": {
+		"sass-mq": "^5.0.1"
+	},
+	"engines": {
+		"npm": "^7"
+	},
+	"volta": {
+		"node": "14.16.1",
+		"npm": "7.10.0"
 	}
 }

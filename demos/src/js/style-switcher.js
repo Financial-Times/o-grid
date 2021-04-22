@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*global $*/
 /*eslint no-extend-native: 0 */
 

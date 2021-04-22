@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { enableLayoutChangeEvents } from '../../../main.js';
 
 enableLayoutChangeEvents();

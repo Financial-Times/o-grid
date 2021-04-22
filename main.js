@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const missingDataMessage = 'Could not find layout information. ' +
 	'You may need to include o-grid css. See the README (https://registry.origami.ft.com/components/o-grid/readme) ' +
 	'for more information.';
@@ -72,10 +73,12 @@ function getCurrentGutter() {
  * and fires a `o-grid.layoutChange` event on layout change.
  * CSS must be included so JavaScript can retrieve layout information.
  * See the README for more information.
+ * @returns {void}
  */
 function enableLayoutChangeEvents() {
 	// Create a map containing all breakpoints exposed via html:before
 	const gridLayouts = getGridBreakpoints();
+	// eslint-disable-next-line no-prototype-builtins
 	if (gridLayouts.hasOwnProperty('layouts')) {
 		const layouts = gridLayouts.layouts;
 		const breakpoints = [

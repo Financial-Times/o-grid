@@ -11,8 +11,5 @@ jobs:
     - run: npm install -g npm@^7
     - run: npm install -g origami-build-tools@prerelease
     - run: obt install
-      continue-on-error: true
     - run: obt verify
-      continue-on-error: true
     - run: obt test
-      continue-on-error: true

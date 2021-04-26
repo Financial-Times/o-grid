@@ -542,9 +542,6 @@ Some of the variables used by the grid (see [_variables.scss](https://github.com
 Here are the most useful ones:
 
 ```scss
-// Switch Silent mode off
-$o-grid-is-silent: false;
-
 // Show the currently active breakpoint and output loaded settings
 $o-grid-debug-mode: true;
 

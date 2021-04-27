@@ -3,10 +3,9 @@ node_modules
 demos/local
 build/
 demos/*.html
-package-lock.json
-.eslintrc.js
+.eslintrc.cjs
 .github
 .gitignore
-.remarkrc.js
-.stylelintrc.js
+.remarkrc.cjs
+.stylelintrc.cjs
 test

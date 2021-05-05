@@ -1,6 +1,0 @@
-{
-	"default": "Grid with all default settings",
-	"snappy": "Responsive grid that snaps between a larger fixed layout at each breakpoint",
-	"resized": "Responsive grid with breakpoints reallocated to 400px, 800px and 1000px and gutters halved",
-	"always-fixed": "Fixed grid at 610px across all browsers and devices.  Should always be fixed at the large layout"
-}

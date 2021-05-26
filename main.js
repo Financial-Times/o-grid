@@ -103,19 +103,19 @@ function enableLayoutChangeEvents() {
 		// Generate media queries for each
 		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
 		for (let index = 0; index < breakpoints.length; index++) {
-			const breakpoint = breakpoints[index];
+			const [layoutName, layoutWidth] = breakpoints[index];
 			const isLast = index === breakpoints.length - 1;
 			const isFirst = index === 0;
 			if (isFirst) {
-				setupQuery(`(max-width: ${breakpoint[1]})`, breakpoint[0]);
+				setupQuery(`(max-width: ${layoutWidth})`, layoutName);
 				continue;
 			}
 			if (isLast) {
-				setupQuery(`(min-width: ${breakpoint[1]})`, breakpoint[0]);
+				setupQuery(`(min-width: ${layoutWidth})`, layoutName);
 				continue;
 			}
-			const nextBreakpoint = breakpoints[index + 1];
-			setupQuery(`(min-width: ${breakpoint[1]}) and (max-width: ${decr1(nextBreakpoint[1])})`, breakpoint[0]);
+			const [,nextLayoutWidth] = breakpoints[index + 1];
+			setupQuery(`(min-width: ${layoutWidth}) and (max-width: ${decr1(nextLayoutWidth)})`, layoutName);
 		}
 	} else {
 		console.error('Could not enable grid layout change events. Include o-grid css. See the README (https://registry.origami.ft.com/components/o-grid/readme) for more details.');

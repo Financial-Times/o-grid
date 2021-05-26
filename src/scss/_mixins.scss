@@ -32,6 +32,7 @@
 
 		$current-gutter-width: map-get($o-grid-gutters, $current-layout-name);
 
+		// Assumes all layouts use the same unit e.g. px or rem (as does the JavaScript)
 		@if not ($previous-layout-width > $layout-width or $current-layout-width < $layout-width) {
 			$temp-layouts: map-merge($temp-layouts, ($layout-name: $layout-width));
 			$temp-gutters: map-merge($temp-gutters, ($layout-name: $gutter-width));

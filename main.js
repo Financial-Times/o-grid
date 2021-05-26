@@ -78,11 +78,10 @@ function enableLayoutChangeEvents() {
 	const gridLayouts = getGridBreakpoints();
 	if (gridLayouts.hasOwnProperty('layouts')) {
 		const layouts = gridLayouts.layouts;
-		const breakpoints = new Map([
-			...Object.keys(layouts).map(key => [key, layouts[key]]),
+		const breakpoints = [
+			...Object.entries(layouts),
 			['default', '240px']
-		]);
-		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
+		].sort((a, b) => parseFloat(a[1]) - parseFloat(b[1]));
 
 		const setupQuery = (query, size) => {
 			// matchMedia listener handler: Dispatch `o-grid.layoutChange` event if a match
@@ -102,26 +101,22 @@ function enableLayoutChangeEvents() {
 		};
 
 		// Generate media queries for each
-		breakpoints.forEach((width, size) => {
-			switch(size) {
-				case 'S':
-					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('M')) })`, size);
-					break;
-				case 'M':
-					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('L')) })`, size);
-					break;
-				case 'L':
-					setupQuery(`(min-width: ${ width }) and (max-width: ${ decr1(breakpoints.get('XL')) })`, size);
-					break;
-				case 'XL':
-					setupQuery(`(min-width: ${ width })`, size);
-					break;
-				case 'default':
-				default:
-					setupQuery(`(max-width: ${ decr1(breakpoints.get('S')) })`, size);
-					break;
+		const decr1 = val => `${Number(val.replace('px', '') - 1)}px`;
+		for (let index = 0; index < breakpoints.length; index++) {
+			const [layoutName, layoutWidth] = breakpoints[index];
+			const isLast = index === breakpoints.length - 1;
+			const isFirst = index === 0;
+			if (isFirst) {
+				setupQuery(`(max-width: ${layoutWidth})`, layoutName);
+				continue;
 			}
-		});
+			if (isLast) {
+				setupQuery(`(min-width: ${layoutWidth})`, layoutName);
+				continue;
+			}
+			const [,nextLayoutWidth] = breakpoints[index + 1];
+			setupQuery(`(min-width: ${layoutWidth}) and (max-width: ${decr1(nextLayoutWidth)})`, layoutName);
+		}
 	} else {
 		console.error('Could not enable grid layout change events. Include o-grid css. See the README (https://registry.origami.ft.com/components/o-grid/readme) for more details.');
 	}

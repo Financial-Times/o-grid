@@ -105,7 +105,7 @@ function enableLayoutChangeEvents() {
 		for (let index = 0; index < breakpoints.length; index++) {
 			const breakpoint = breakpoints[index];
 			const isLast = index === breakpoints.length - 1;
-			const isFirst = index === 0
+			const isFirst = index === 0;
 			if (isFirst) {
 				setupQuery(`(max-width: ${breakpoint[1]})`, breakpoint[0]);
 				continue;

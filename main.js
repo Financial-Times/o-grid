@@ -105,11 +105,6 @@ function enableLayoutChangeEvents() {
 		for (let index = 0; index < breakpoints.length; index++) {
 			const [layoutName, layoutWidth] = breakpoints[index];
 			const isLast = index === breakpoints.length - 1;
-			const isFirst = index === 0;
-			if (isFirst) {
-				setupQuery(`(max-width: ${layoutWidth})`, layoutName);
-				continue;
-			}
 			if (isLast) {
 				setupQuery(`(min-width: ${layoutWidth})`, layoutName);
 				continue;

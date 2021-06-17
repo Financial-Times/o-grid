@@ -18,7 +18,7 @@
 	"browser": "main.js",
 	"scripts": {
 		"start": "npx serve ./demos/local",
-		"build": "npm_config_yes=true npx \"origami-build-tools@prerelease\" install && npm_config_yes=true npx \"origami-build-tools@prerelease\" demo"
+		"build": "npm_config_yes=true npx \"origami-build-tools@v11\" install && npm_config_yes=true npx \"origami-build-tools@v11\" demo"
 	},
 	"devDependencies": {
 		"eslint": "^7.25.0",

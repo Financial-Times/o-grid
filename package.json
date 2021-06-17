@@ -21,10 +21,10 @@
 		"build": "npm_config_yes=true npx \"origami-build-tools@v11\" install && npm_config_yes=true npx \"origami-build-tools@v11\" demo"
 	},
 	"devDependencies": {
-		"eslint": "^7.25.0",
+		"eslint": "^7.28.0",
 		"eslint-config-origami-component": "^2.1.1",
-		"remark-preset-lint-origami-component": "^2.0.0-beta.2",
-		"stylelint": "^13.12.0",
+		"remark-preset-lint-origami-component": "^2.0.0",
+		"stylelint": "^13.13.1",
 		"stylelint-config-origami-component": "^1.0.4"
 	},
 	"peerDependencies": {

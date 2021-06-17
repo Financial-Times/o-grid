@@ -700,8 +700,9 @@ CSS must be included so JavaScript can retrieve layout information. If using [Sa
 
 State | Major Version | Last Minor Release | Migration guide |
 :---: | :---: | :---: | :---:
-✨ active | 5 | N/A  | [migrate to v5](MIGRATION.md#migrating-from-v4-to-v5) |
-⚠ maintained | 4 | 4.5  | [migrate to v4](MIGRATION.md#migrating-from-v3-to-v4) |
+✨ active | 6 | N/A  | [migrate to v5](MIGRATION.md#migrating-from-v5-to-v6) |
+⚠ maintained | 5 | N/A  | [migrate to v5](MIGRATION.md#migrating-from-v4-to-v5) |
+╳ deprecated | 4 | 4.5  | [migrate to v4](MIGRATION.md#migrating-from-v3-to-v4) |
 ╳ deprecated | 3 | 3.2 | - |
 ╳ deprecated | 2 | 2.4 | - |
 ╳ deprecated | 1 | 1.4 | - |

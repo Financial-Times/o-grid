@@ -1,5 +1,11 @@
 # o-grid
 
+***
+
+**This component has moved to the [Origami Component System](https://github.com/Financial-Times/origami).**
+
+***
+
 A 12 column responsive, flexbox-based grid system for laying out documents, templates and components.
 
 -   [Usage](#usage)

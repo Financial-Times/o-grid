@@ -2,7 +2,6 @@
 node_modules
 demos/local
 build/
-demos/*.html
 .eslintrc.cjs
 .github
 .gitignore
